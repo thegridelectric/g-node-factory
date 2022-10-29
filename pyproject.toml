@@ -21,6 +21,10 @@ Changelog = "https://github.com/thegridelectric/g-node-factory/releases"
 [tool.poetry.dependencies]
 python = ">=3.10, <4.0"
 click = ">=8.0.1"
+pydantic = "^1.10.2"
+python-dotenv = "^0.21.0"
+pendulum = "^2.1.2"
+pytz = "^2022.5"
 
 [tool.poetry.dev-dependencies]
 Pygments = ">=2.10.0"
