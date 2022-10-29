@@ -60,6 +60,9 @@ myst-parser = {version = ">=0.16.1"}
 [tool.poetry.scripts]
 g-node-factory = "gnf.__main__:main"
 
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.16.2"
+
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
 tests = ["tests", "*/tests"]

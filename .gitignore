@@ -10,3 +10,33 @@
 __pycache__/
 
 .DS_Store
+.vscode
+.ssotme
+.idea
+
+# scratch files and folders
+scratch.ipynb
+
+# Code generation airtable
+CodeGenerationTools/GridworksCore/SSoT/Airtable.xml
+CodeGenerationTools/GridworksCore/SassyMQ/
+.ssotme
+
+# Django stuff:
+*.log
+/src/gnf/django_related/settings.py
+python_code/django_related/settings.py
+*.sqlite3
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# algo related
+*.teal
+*.teal.tok
