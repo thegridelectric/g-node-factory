@@ -1,0 +1,29 @@
+ARG REMOTE_BASE=jessmillar/g-node-factory-base:latest
+###################################################################################################
+# app base
+###################################################################################################
+
+FROM $REMOTE_BASE AS app-base
+
+COPY python_code/ /code/
+RUN rm -f /code/django_related/sqlite3/*.sqlite3
+
+
+WORKDIR /code
+####################################################################################################
+# builder unit tester
+####################################################################################################
+
+FROM app-base AS unit-tester-image
+
+# run existing unit tests. If any fail then final stage (release) won't be reached.
+
+####################################################################################################
+# release
+####################################################################################################
+
+FROM app-base AS release-image
+ARG gridworks_dockerimg_id
+RUN echo $gridworks_dockerimg_id > /gridworks_dockerimg_id.txt
+
+ENTRYPOINT python demo.py
