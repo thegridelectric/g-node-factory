@@ -1,0 +1,6 @@
+# Redefining demand response
+
+Renewable energy is variable and not controllable. Electrical load (i.e. anything that uses electricity), in its current manifestation, is almost completely oblivious to the state of the electric grid and the
+availability of power. The electric grid needs to maintain a balance between generation and load at every time scale, and also geographically across the network of the grid. The grid needs an upgrade in its **balancing resources**.
+
+If we can identify electrical loads that have flexibility in when they use electrical energy, then they can become these next-generation balancing resources. In fact, there is already a mechanism in place (mostly) for making this work economically: the high voltage grid has time- and place- varying wholesale electricity markets which to first order do a very good job of reflecting the abundance (or lack thereof) of energy. In fact, there are starting to be a number of areas where wholesale prices are routinely driven negative typically due to a transmission constraint, and a lot of wind and/or solar behind that constraint. These places point to an emerging problem, and its a great problem to have: we are **ignoring abundance**.
