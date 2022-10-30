@@ -1,23 +1,145 @@
-"""basegnode.020 type"""
+"""basegnode.gt.020 type"""
 
 import json
+from enum import auto
+from typing import Dict
+from typing import List
 from typing import NamedTuple
 from typing import Optional
 
-from data_classes.base_g_node import BaseGNode
-from enums.core_g_node_role_map import CoreGNodeRole
-from enums.core_g_node_role_map import CoreGNodeRoleMap
-from enums.g_node_status_map import GNodeStatus
-from enums.g_node_status_map import GNodeStatusMap
+from fastapi_utils.enums import StrEnum
 
 import gnf.property_format as property_format
+from gnf.data_classes import BaseGNode
 from gnf.errors import SchemaError
 
 
-class Basegnode(NamedTuple):
-    Status: GNodeStatus  #
+class CoreGNodeRole100SchemaEnum:
+    enum_name: str = "core.g.node.role.100"
+    symbols: List[str] = [
+        "4502e355",
+        "d9823442",
+        "0f8872f7",
+        "d67e564e",
+        "6b58d301",
+        "86f21dd2",
+        "9521af06",
+    ]
+
+    @classmethod
+    def is_symbol(cls, candidate) -> bool:
+        if candidate in cls.symbols:
+            return True
+        return False
+
+
+class CoreGNodeRole100(StrEnum):
+    ConductorTopologyNode = auto()
+    AtomicTNode = auto()
+    TerminalAsset = auto()
+    InterconnectionComponent = auto()
+    Other = auto()
+    MarketMaker = auto()
+    AtomicMeteringNode = auto()
+
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]
+
+
+class CoreGNodeRoleMap:
+    @classmethod
+    def type_to_local(cls, symbol):
+        if not CoreGNodeRole100SchemaEnum.is_symbol(symbol):
+            raise SchemaError(f"{symbol} must belong to CoreGNodeRole100 symbols")
+        return cls.type_to_local_dict[symbol]
+
+    @classmethod
+    def local_to_type(cls, core_g_node_role):
+        if not isinstance(core_g_node_role, CoreGNodeRole100):
+            raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole100}")
+        return cls.local_to_type_dict[core_g_node_role]
+
+    type_to_local_dict: Dict[str, CoreGNodeRole100] = {
+        "4502e355": CoreGNodeRole100.ConductorTopologyNode,
+        "d9823442": CoreGNodeRole100.AtomicTNode,
+        "0f8872f7": CoreGNodeRole100.TerminalAsset,
+        "d67e564e": CoreGNodeRole100.InterconnectionComponent,
+        "6b58d301": CoreGNodeRole100.Other,
+        "86f21dd2": CoreGNodeRole100.MarketMaker,
+        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
+    }
+
+    local_to_type_dict: Dict[CoreGNodeRole100, str] = {
+        CoreGNodeRole100.ConductorTopologyNode: "4502e355",
+        CoreGNodeRole100.AtomicTNode: "d9823442",
+        CoreGNodeRole100.TerminalAsset: "0f8872f7",
+        CoreGNodeRole100.InterconnectionComponent: "d67e564e",
+        CoreGNodeRole100.Other: "6b58d301",
+        CoreGNodeRole100.MarketMaker: "86f21dd2",
+        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
+    }
+
+
+class GNodeStatus100SchemaEnum:
+    enum_name: str = "g.node.status.100"
+    symbols: List[str] = [
+        "839b38db",
+        "153d3475",
+        "8d92bebe",
+        "f5831e1d",
+    ]
+
+    @classmethod
+    def is_symbol(cls, candidate) -> bool:
+        if candidate in cls.symbols:
+            return True
+        return False
+
+
+class GNodeStatus100(StrEnum):
+    PermanentlyDeactivated = auto()
+    Pending = auto()
+    Active = auto()
+    Suspended = auto()
+
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]
+
+
+class GNodeStatusMap:
+    @classmethod
+    def type_to_local(cls, symbol):
+        if not GNodeStatus100SchemaEnum.is_symbol(symbol):
+            raise SchemaError(f"{symbol} must belong to GNodeStatus100 symbols")
+        return cls.type_to_local_dict[symbol]
+
+    @classmethod
+    def local_to_type(cls, g_node_status):
+        if not isinstance(g_node_status, GNodeStatus100):
+            raise SchemaError(f"{g_node_status} must be of type {GNodeStatus100}")
+        return cls.local_to_type_dict[g_node_status]
+
+    type_to_local_dict: Dict[str, GNodeStatus100] = {
+        "839b38db": GNodeStatus100.PermanentlyDeactivated,
+        "153d3475": GNodeStatus100.Pending,
+        "8d92bebe": GNodeStatus100.Active,
+        "f5831e1d": GNodeStatus100.Suspended,
+    }
+
+    local_to_type_dict: Dict[GNodeStatus100, str] = {
+        GNodeStatus100.PermanentlyDeactivated: "839b38db",
+        GNodeStatus100.Pending: "153d3475",
+        GNodeStatus100.Active: "8d92bebe",
+        GNodeStatus100.Suspended: "f5831e1d",
+    }
+
+
+class BasegnodeGt(NamedTuple):
+    Status: GNodeStatus100  #
     GNodeRegistryAddr: str  #
-    Role: CoreGNodeRole  #
+    Role: CoreGNodeRole100  #
     Alias: str  #
     GNodeId: int  #
     PrevAlias: Optional[str] = None
@@ -27,7 +149,7 @@ class Basegnode(NamedTuple):
     OwnerAddr: Optional[str] = None
     DaemonAddr: Optional[str] = None
     GpsPointId: Optional[str] = None
-    TypeName: str = "basegnode.020"
+    TypeName: str = "basegnode.gt.020"
 
     def as_type(self) -> str:
         return json.dumps(self.asdict())
@@ -35,9 +157,9 @@ class Basegnode(NamedTuple):
     def asdict(self):
         d = self._asdict()
         del d["Status"]
-        d["StatusGtEnumSymbol"] = GNodeStatusMap.local_to_gt(self.Status)
+        d["StatusGtEnumSymbol"] = GNodeStatusMap.local_to_type(self.Status)
         del d["Role"]
-        d["RoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_gt(self.Role)
+        d["RoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(self.Role)
         if d["PrevAlias"] is None:
             del d["PrevAlias"]
         if d["TradingRightsNftId"] is None:
@@ -56,8 +178,8 @@ class Basegnode(NamedTuple):
 
     def derived_errors(self) -> List[str]:
         errors = []
-        if not isinstance(self.Status, GNodeStatus):
-            errors.append(f"Status {self.Status} must have type {GNodeStatus}.")
+        if not isinstance(self.Status, GNodeStatus100):
+            errors.append(f"Status {self.Status} must have type {GNodeStatus100}.")
         if not isinstance(self.GNodeRegistryAddr, str):
             errors.append(
                 f"GNodeRegistryAddr {self.GNodeRegistryAddr} must have type str."
@@ -69,8 +191,8 @@ class Basegnode(NamedTuple):
                 f"GNodeRegistryAddr {self.GNodeRegistryAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
             )
-        if not isinstance(self.Role, CoreGNodeRole):
-            errors.append(f"Role {self.Role} must have type {CoreGNodeRole}.")
+        if not isinstance(self.Role, CoreGNodeRole100):
+            errors.append(f"Role {self.Role} must have type {CoreGNodeRole100}.")
         if self.PrevAlias:
             if not isinstance(self.PrevAlias, str):
                 errors.append(f"PrevAlias {self.PrevAlias} must have type str.")
@@ -156,9 +278,9 @@ class Basegnode(NamedTuple):
                     f"GpsPointId {self.GpsPointId}"
                     " must have format UuidCanonicalTextual: {e}"
                 )
-        if self.TypeName != "basegnode.020":
+        if self.TypeName != "basegnode.gt.020":
             errors.append(
-                f"Type requires TypeName of basegnode.020, not {self.TypeName}."
+                f"Type requires TypeName of basegnode.gt.020, not {self.TypeName}."
             )
 
         return errors
@@ -169,23 +291,23 @@ class Basegnode(NamedTuple):
         else:
             errors = self.derived_errors()
         if len(errors) > 0:
-            raise SchemaError(f"Errors making basegnode.020 for {self}: {errors}")
+            raise SchemaError(f"Errors making basegnode.gt.020 for {self}: {errors}")
 
     def __repr__(self):
-        return "Basegnode"
+        return "BasegnodeGt"
 
     def hand_coded_errors(self):
         return []
 
 
-class Basegnode_Maker:
-    type_name = "basegnode.020"
+class BasegnodeGt_Maker:
+    type_name = "basegnode.gt.020"
 
     def __init__(
         self,
-        status: GNodeStatus,
+        status: GNodeStatus100,
         g_node_registry_addr: str,
-        role: CoreGNodeRole,
+        role: CoreGNodeRole100,
         alias: str,
         g_node_id: int,
         prev_alias: Optional[str],
@@ -197,7 +319,7 @@ class Basegnode_Maker:
         gps_point_id: Optional[str],
     ):
 
-        gw_tuple = Basegnode(
+        gw_tuple = BasegnodeGt(
             Status=status,
             GNodeRegistryAddr=g_node_registry_addr,
             Role=role,
@@ -216,12 +338,12 @@ class Basegnode_Maker:
         self.tuple = gw_tuple
 
     @classmethod
-    def tuple_to_type(cls, tuple: Basegnode) -> str:
+    def tuple_to_type(cls, tuple: BasegnodeGt) -> str:
         tuple.check_for_errors()
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> Basegnode:
+    def type_to_tuple(cls, t: str) -> BasegnodeGt:
         try:
             d = json.loads(t)
         except TypeError:
@@ -231,7 +353,7 @@ class Basegnode_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> Basegnode:
+    def dict_to_tuple(cls, d: dict) -> BasegnodeGt:
         new_d = {}
         for key in d.keys():
             new_d[key] = d[key]
@@ -239,12 +361,12 @@ class Basegnode_Maker:
             raise SchemaError(f"dict {new_d} missing TypeName")
         if "StatusGtEnumSymbol" not in new_d.keys():
             raise SchemaError(f"dict {new_d} missing StatusGtEnumSymbol")
-        new_d["Status"] = GNodeStatusMap.gt_to_local(new_d["StatusGtEnumSymbol"])
+        new_d["Status"] = GNodeStatusMap.type_to_local(new_d["StatusGtEnumSymbol"])
         if "GNodeRegistryAddr" not in new_d.keys():
             raise SchemaError(f"dict {new_d} missing GNodeRegistryAddr")
         if "RoleGtEnumSymbol" not in new_d.keys():
             raise SchemaError(f"dict {new_d} missing RoleGtEnumSymbol")
-        new_d["Role"] = CoreGNodeRoleMap.gt_to_local(new_d["RoleGtEnumSymbol"])
+        new_d["Role"] = CoreGNodeRoleMap.type_to_local(new_d["RoleGtEnumSymbol"])
         if "PrevAlias" not in new_d.keys():
             new_d["PrevAlias"] = None
         if "TradingRightsNftId" not in new_d.keys():
@@ -264,7 +386,7 @@ class Basegnode_Maker:
         if "GpsPointId" not in new_d.keys():
             new_d["GpsPointId"] = None
 
-        gw_tuple = Basegnode(
+        gw_tuple = BasegnodeGt(
             TypeName=new_d["TypeName"],
             Status=new_d["Status"],
             GNodeRegistryAddr=new_d["GNodeRegistryAddr"],
@@ -284,7 +406,7 @@ class Basegnode_Maker:
         return gw_tuple
 
     @classmethod
-    def tuple_to_dc(cls, t: Basegnode) -> BaseGNode:
+    def tuple_to_dc(cls, t: BasegnodeGt) -> BaseGNode:
         s = {
             "g_node_registry_addr": t.GNodeRegistryAddr,
             "prev_alias": t.PrevAlias,
@@ -296,8 +418,8 @@ class Basegnode_Maker:
             "owner_addr": t.OwnerAddr,
             "daemon_addr": t.DaemonAddr,
             "gps_point_id": t.GpsPointId,
-            "status_gt_enum_symbol": GNodeStatusMap.local_to_gt(t.Status),
-            "role_gt_enum_symbol": CoreGNodeRoleMap.local_to_gt(t.Role),
+            "status_gt_enum_symbol": GNodeStatusMap.local_to_type(t.Status),
+            "role_gt_enum_symbol": CoreGNodeRoleMap.local_to_type(t.Role),
             #
         }
         if s["base_g_node_id"] in BaseGNode.by_id.keys():
@@ -307,10 +429,10 @@ class Basegnode_Maker:
         return dc
 
     @classmethod
-    def dc_to_tuple(cls, dc: BaseGNode) -> Basegnode:
+    def dc_to_tuple(cls, dc: BaseGNode) -> BasegnodeGt:
         if dc is None:
             return None
-        t = Basegnode(
+        t = BasegnodeGt(
             Status=dc.status,
             GNodeRegistryAddr=dc.g_node_registry_addr,
             Role=dc.role,

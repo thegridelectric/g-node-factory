@@ -1,6 +1,7 @@
 """create.tadeed.algo.010 type"""
 
 import json
+from typing import List
 from typing import NamedTuple
 
 import gnf.property_format as property_format

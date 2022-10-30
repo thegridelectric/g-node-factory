@@ -55,19 +55,21 @@
 <xsl:text>"""</xsl:text><xsl:value-of select="Alias"/><xsl:text> type"""
 
 import json
-from gnf.errors import SchemaError</xsl:text>
-<xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsList = 'true')])>0">
-<xsl:text>
-from typing import List</xsl:text>
-</xsl:if>
-<xsl:text>
+from gnf.errors import SchemaError
+
+from typing import List
 from typing import NamedTuple</xsl:text>
 
 <xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not (IsRequired = 'true')]) > 0">
 <xsl:text>
 from typing import Optional</xsl:text>
 </xsl:if>
-
+<xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsEnum = 'true')]) > 0">
+<xsl:text>
+from typing import Dict
+from enum import auto
+from fastapi_utils.enums import StrEnum</xsl:text>
+</xsl:if>
 <xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and ((normalize-space(SubTypeDataClass) != '') or (normalize-space(PrimitiveFormat) != ''))]) > 0">
 <xsl:text>
 import gnf.property_format as property_format</xsl:text>
@@ -88,49 +90,144 @@ from data_classes.components.</xsl:text>
 </xsl:if>
 <xsl:if test="not(IsComponent = 'true') and not(IsCac = 'true')">
 <xsl:text>
-from data_classes.</xsl:text>
-<xsl:value-of select="$python-data-class"/>
-<xsl:text> import </xsl:text><xsl:value-of select="DataClass"/>
+from gnf.data_classes import </xsl:text><xsl:value-of select="DataClass"/>
 </xsl:if>
 </xsl:if>
 
+
 <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-<xsl:if test="IsEnum = 'true'">
-<xsl:text>
-from enums.</xsl:text>
-<xsl:call-template name="python-case">
-    <xsl:with-param name="camel-case-text" select="translate(EnumLocalName,'.','_')"  />
-</xsl:call-template>
-<xsl:text>_map import (
-    </xsl:text>
-<xsl:call-template name="nt-case">
-    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
-</xsl:call-template>
-<xsl:text>,
-    </xsl:text>
-<xsl:call-template name="nt-case">
-    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
-</xsl:call-template>
-<xsl:text>Map,
-)</xsl:text>
-</xsl:if>
+
 
 <xsl:if test="(IsType = 'true') and ((IsList = 'true') or (normalize-space(SubTypeDataClass)=''))">
 <xsl:text>
-from schemata.</xsl:text>
+from gnf.schemata.</xsl:text>
 <xsl:call-template name="python-case">
-    <xsl:with-param name="camel-case-text" select="translate(SubMessageFormatAlias,'.','_')"  />
+    <xsl:with-param name="camel-case-text" select="translate(SubMessageFormatAliasRoot,'.','_')"  />
 </xsl:call-template>
-<xsl:text>.</xsl:text>
-<xsl:call-template name="python-case">
-    <xsl:with-param name="camel-case-text" select="translate(SubMessageFormatAlias,'.','_')"  />
-</xsl:call-template>
-<xsl:text>_maker import </xsl:text>
+<xsl:text> import </xsl:text>
 <xsl:call-template name="nt-case">
-    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
 </xsl:call-template>
 </xsl:if>
 </xsl:for-each>
+
+
+<xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='') and (Status='Active') and (count(TypesThatUse[text()=$schema-id])>0)]">
+<xsl:variable name="enum-alias" select="Alias" />
+<xsl:variable name="enum-name-style" select="PythonEnumNameStyle" />
+<xsl:variable name="enum-class-name">
+    <xsl:call-template name="nt-case">
+        <xsl:with-param name="mp-schema-text" select="Alias" />
+    </xsl:call-template>
+</xsl:variable>
+<xsl:variable name="local-class-name">
+    <xsl:call-template name="nt-case">
+        <xsl:with-param name="mp-schema-text" select="LocalName" />
+    </xsl:call-template>
+</xsl:variable>
+<xsl:variable name="enum-id" select="GtEnumId"/>
+
+<xsl:text>
+
+
+class </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum:
+    enum_name: str = "</xsl:text>
+    <xsl:value-of select="Alias"/>
+    <xsl:text>"
+    symbols: List[str] = [
+        </xsl:text>
+    <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:text>"</xsl:text><xsl:value-of select="Symbol"/><xsl:text>",
+        </xsl:text>
+</xsl:for-each>
+<xsl:text>
+    ]
+
+    @classmethod
+    def is_symbol(cls, candidate) -> bool:
+        if candidate in cls.symbols:
+            return True
+        return False
+
+
+class </xsl:text><xsl:value-of select="$enum-class-name"/>
+<xsl:text>(StrEnum):
+    </xsl:text>
+
+<xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+<xsl:if test="$enum-name-style = 'Upper'">
+    <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
+</xsl:if>
+<xsl:if test="$enum-name-style ='UpperPython'">
+    <xsl:value-of select="LocalValue"/>
+</xsl:if>
+
+<xsl:text> = auto()
+    </xsl:text>
+</xsl:for-each>
+    <xsl:text>
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]
+
+
+class </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>Map:
+    @classmethod
+    def type_to_local(cls, symbol):
+        if not </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum.is_symbol(symbol):
+            raise SchemaError(
+                f"{symbol} must belong to </xsl:text><xsl:value-of select="$enum-class-name"/>
+                <xsl:text> symbols"
+            )
+        return cls.type_to_local_dict[symbol]
+
+    @classmethod
+    def local_to_type(cls, </xsl:text>
+            <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>):
+        if not isinstance(</xsl:text><xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>, </xsl:text>
+        <xsl:value-of select="$enum-class-name"/><xsl:text>):
+            raise SchemaError(f"{</xsl:text>
+                <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>} must be of type {</xsl:text>
+                    <xsl:value-of select="$enum-class-name"/><xsl:text>}")
+        return cls.local_to_type_dict[</xsl:text>
+        <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>]
+
+    type_to_local_dict: Dict[str, </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>] = {</xsl:text>
+    <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+        <xsl:text>
+        "</xsl:text><xsl:value-of select="Symbol"/><xsl:text>": </xsl:text>
+        <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
+        <xsl:if test="$enum-name-style = 'Upper'">
+            <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
+        </xsl:if>
+        <xsl:if test="$enum-name-style ='UpperPython'">
+            <xsl:value-of select="LocalValue"/>
+        </xsl:if>
+    <xsl:text>,</xsl:text>
+    </xsl:for-each>
+    <xsl:text>
+    }
+
+    local_to_type_dict: Dict[</xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>, str] = {
+        </xsl:text>
+    <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
+    <xsl:if test="$enum-name-style = 'Upper'">
+        <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
+    </xsl:if>
+    <xsl:if test="$enum-name-style ='UpperPython'">
+        <xsl:value-of select="LocalValue"/>
+    </xsl:if>
+    <xsl:text>: "</xsl:text>
+    <xsl:value-of select="Symbol"/><xsl:text>",
+        </xsl:text>
+    </xsl:for-each>
+    <xsl:text>
+    }</xsl:text>
+
+
+</xsl:for-each>
+
 <xsl:text>
 
 
@@ -164,7 +261,7 @@ class </xsl:text>
     <xsl:if test = "(IsEnum = 'true') and not(IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>: </xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
 <xsl:text>  #
     </xsl:text>
@@ -174,7 +271,7 @@ class </xsl:text>
     <xsl:if test = "(IsEnum = 'true') and (IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>: List[</xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
 <xsl:text>]
     </xsl:text>
@@ -189,7 +286,7 @@ class </xsl:text>
     <xsl:if test="(IsType = 'true') and  (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>: </xsl:text>
         <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
         </xsl:call-template>
         <xsl:text>  #
     </xsl:text>
@@ -198,7 +295,7 @@ class </xsl:text>
     <xsl:if test="(IsType = 'true') and (IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>: List[</xsl:text>
         <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
         </xsl:call-template>
         <xsl:text>]
     </xsl:text>
@@ -255,7 +352,7 @@ class </xsl:text>
                         <xsl:with-param name="mp-schema-text" select="Value" />
         </xsl:call-template>
         <xsl:text>GtEnumSymbol"] = </xsl:text><xsl:value-of select="$local-enum-name"/>
-        <xsl:text>Map.local_to_gt(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>)</xsl:text>
+        <xsl:text>Map.local_to_type(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>)</xsl:text>
         </xsl:if>
 
 
@@ -272,7 +369,7 @@ class </xsl:text>
             <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
           </xsl:call-template><xsl:text>.append(</xsl:text>
-          <xsl:value-of select="$local-enum-name"/><xsl:text>Map.local_to_gt(elt))
+          <xsl:value-of select="$local-enum-name"/><xsl:text>Map.local_to_type(elt))
         d["</xsl:text><xsl:value-of select="Value"/>
         <xsl:text>"] = </xsl:text>
             <xsl:call-template name="python-case">
@@ -431,14 +528,14 @@ class </xsl:text>
         <xsl:text>
         if not isinstance(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>, </xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
         <xsl:text>):
             errors.append(
                 f"</xsl:text><xsl:value-of select="Value"/><xsl:text> {self.</xsl:text><xsl:value-of select="Value"/>
             <xsl:text>} must have type {</xsl:text>
                 <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
                 <xsl:text>}."
             )</xsl:text>
@@ -457,14 +554,14 @@ class </xsl:text>
             for elt in self.</xsl:text><xsl:value-of select="Value"/><xsl:text>:
                 if not isinstance(elt, </xsl:text>
                 <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                    <xsl:with-param name="mp-schema-text" select="EnumName" />
     </xsl:call-template>
         <xsl:text>):
                     errors.append(
                         f"elt {elt} of </xsl:text><xsl:value-of select="Value"/>
             <xsl:text> must have type </xsl:text>
                 <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
                 <xsl:text>."
                     )</xsl:text>
@@ -479,7 +576,8 @@ class </xsl:text>
             <xsl:value-of select="Value"/><xsl:text>Id} must have type str."
             )
         try:
-        property_format.check_is_uuid_canonical_textual(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>Id):
+            property_format.check_is_uuid_canonical_textual(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>Id)
+        except SchemaError as e:
             errors.append(
                 f"</xsl:text><xsl:value-of select="Value"/><xsl:text>Id {self.</xsl:text>
                 <xsl:value-of select="Value"/><xsl:text>Id}"
@@ -509,14 +607,14 @@ class </xsl:text>
         <xsl:text>
         if not isinstance(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>, </xsl:text>
         <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
         </xsl:call-template>
         <xsl:text>):
             errors.append(
                 f"</xsl:text><xsl:value-of select="Value"/><xsl:text> {self.</xsl:text>
             <xsl:value-of select="Value"/><xsl:text>} must have type</xsl:text>
             <xsl:call-template name="nt-case">
-                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
             </xsl:call-template>
             <xsl:text>."
             )</xsl:text>
@@ -534,14 +632,14 @@ class </xsl:text>
             for elt in self.</xsl:text><xsl:value-of select="Value"/><xsl:text>:
                 if not isinstance(elt, </xsl:text>
                 <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
     </xsl:call-template>
         <xsl:text>):
                     errors.append(
                         f"elt {elt} of </xsl:text><xsl:value-of select="Value"/>
             <xsl:text> must have type </xsl:text>
                 <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
         </xsl:call-template>
                 <xsl:text>."
                     )</xsl:text>
@@ -611,7 +709,7 @@ class </xsl:text>
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>: </xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template>
         </xsl:if>
 
@@ -622,7 +720,7 @@ class </xsl:text>
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>: List[</xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumName" />
         </xsl:call-template><xsl:text>]</xsl:text>
         </xsl:if>
 
@@ -641,7 +739,7 @@ class </xsl:text>
                 <xsl:with-param name="camel-case-text" select="Value"  />
             </xsl:call-template><xsl:text>: </xsl:text>
                 <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
                 </xsl:call-template>
         </xsl:if>
 
@@ -652,7 +750,7 @@ class </xsl:text>
             <xsl:with-param name="camel-case-text" select="Value"  />
             </xsl:call-template><xsl:text>: List[</xsl:text>
             <xsl:call-template name="nt-case">
-                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
             </xsl:call-template>
                 <xsl:text>]</xsl:text>
         </xsl:if>
@@ -765,7 +863,7 @@ class </xsl:text>
             <xsl:text>'] {new_d['</xsl:text><xsl:value-of select="Value"/>
             <xsl:text>']} must be a </xsl:text>
             <xsl:call-template name="nt-case">
-                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
             </xsl:call-template>
             <xsl:text>!")
         </xsl:text>
@@ -774,7 +872,7 @@ class </xsl:text>
         </xsl:call-template>
         <xsl:text> = </xsl:text>
         <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+            <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
         </xsl:call-template>
         <xsl:text>_Maker.dict_to_tuple(new_d["</xsl:text>
         <xsl:value-of select="Value"/>
@@ -824,7 +922,7 @@ class </xsl:text>
                     <xsl:text> must be "
                     "</xsl:text>
                     <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
                     </xsl:call-template>
                     <xsl:text> but not even a dict!"
                 )
@@ -835,7 +933,7 @@ class </xsl:text>
             <xsl:text>.append(
                 </xsl:text>
                 <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
+                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
                 </xsl:call-template>
                 <xsl:text>_Maker.dict_to_tuple(elt)
             )
@@ -866,7 +964,7 @@ class </xsl:text>
         <xsl:call-template name="nt-case">
             <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
         </xsl:call-template>
-        <xsl:text>Map.gt_to_local(new_d["</xsl:text>
+        <xsl:text>Map.type_to_local(new_d["</xsl:text>
         <xsl:call-template name="nt-case">
             <xsl:with-param name="mp-schema-text" select="Value" />
         </xsl:call-template><xsl:text>GtEnumSymbol"])</xsl:text>
@@ -897,7 +995,7 @@ class </xsl:text>
             <xsl:call-template name="nt-case">
             <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
         </xsl:call-template>
-            <xsl:text>Map.gt_to_local(elt))
+            <xsl:text>Map.type_to_local(elt))
         new_d["</xsl:text><xsl:value-of select="Value"/>
         <xsl:text>"] = </xsl:text>
         <xsl:call-template name="python-case">
@@ -967,7 +1065,7 @@ class </xsl:text>
             <xsl:call-template name="nt-case">
                 <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
             </xsl:call-template>
-            <xsl:text>Map.local_to_gt(t.</xsl:text>
+            <xsl:text>Map.local_to_type(t.</xsl:text>
             <xsl:call-template name="nt-case">
                 <xsl:with-param name="mp-schema-text" select="Value" />
             </xsl:call-template><xsl:text>),

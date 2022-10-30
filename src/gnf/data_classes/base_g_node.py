@@ -4,15 +4,13 @@ from typing import Dict
 from typing import List
 from typing import Optional
 
-import property_format
-from data_classes.gps_point import GpsPoint
-from data_classes.mixin import StreamlinedSerializerMixin
-from enums.core_g_node_role_map import CoreGNodeRole
-from enums.core_g_node_role_map import CoreGNodeRoleMap
-from enums.g_node_status_map import GNodeStatus
-from enums.g_node_status_map import GNodeStatusMap
-from errors import DcError
-from errors import SchemaError
+import gnf.property_format as property_format
+from gnf.data_classes.gps_point import GpsPoint
+from gnf.data_classes.mixin import StreamlinedSerializerMixin
+from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeStatus
+from gnf.errors import DcError
+from gnf.errors import SchemaError
 
 
 LOG_FORMAT = (
@@ -39,8 +37,8 @@ class BaseGNode(StreamlinedSerializerMixin):
         g_node_id: Optional[str] = None,
         alias: Optional[str] = None,
         prev_alias: Optional[str] = None,
-        status_value: Optional[str] = None,
-        role_value: Optional[str] = None,
+        status: Optional[GNodeStatus] = None,
+        role: Optional[CoreGNodeRole] = None,
         g_node_registry_addr: Optional[str] = None,
         ownership_deed_nft_id: Optional[int] = None,
         ownership_deed_validator_addr: Optional[str] = None,
@@ -52,8 +50,8 @@ class BaseGNode(StreamlinedSerializerMixin):
         self.g_node_id = g_node_id
         self.alias = alias
         self.prev_alias = prev_alias
-        self.status = GNodeStatusMap.type_to_local(status_value)
-        self.role = CoreGNodeRoleMap.type_to_local(role_value)
+        self.status = status
+        self.role = role
         self.g_node_registry_addr = g_node_registry_addr
         self.ownership_deed_nft_id = ownership_deed_nft_id
         self.ownership_deed_validator_addr = ownership_deed_validator_addr
@@ -65,7 +63,7 @@ class BaseGNode(StreamlinedSerializerMixin):
 
     def __repr__(self):
         rs = f"GNode Alias: {self.alias}, Role: {self.role.value}, Status: {self.status.value}"
-        if self.ownership_deed_nft_id and self.role == CoreGNodeRole.TERMINAL_ASSET:
+        if self.ownership_deed_nft_id and self.role == CoreGNodeRole.TerminalAsset:
             rs += f", TaDeedIdx: {self.ownership_deed_nft_id}"
         return rs
 
@@ -83,14 +81,14 @@ class BaseGNode(StreamlinedSerializerMixin):
 
     def is_copper(self) -> bool:
         """Returns true if role is not other"""
-        if self.role == CoreGNodeRole.OTHER:
+        if self.role == CoreGNodeRole.Other:
             return False
         return True
 
     @classmethod
     def active_g_nodes(cls) -> List["BaseGNode"]:
         g_nodes = list(BaseGNode.by_alias.values())
-        return list(filter(lambda x: x.status == GNodeStatus.ACTIVE, g_nodes))
+        return list(filter(lambda x: x.status == GNodeStatus.Active, g_nodes))
 
     @classmethod
     def parent_from_alias(cls, alias: str) -> Optional["BaseGNode"]:
@@ -184,8 +182,8 @@ class BaseGNode(StreamlinedSerializerMixin):
     @classmethod
     def _creation_axiom_3(cls, attributes):
         """Creation Axiom 3: Initial Status must be Pending"""
-        status = GNodeStatusMap.type_to_local(attributes["status_value"])
-        if status != GNodeStatus.PENDING:
+        status = attributes["status"]
+        if status != GNodeStatus.Pending:
             raise DcError(
                 f"Creation Axiom 3: Initial Status must be Pending. Got {status}"
             )
@@ -215,46 +213,46 @@ class BaseGNode(StreamlinedSerializerMixin):
             "remaining axioms all have to do with parent-child relationship"
             return
 
-        role = CoreGNodeRoleMap.type_to_local(attributes["role_value"])
-        status = GNodeStatusMap.type_to_local(attributes["status_value"])
+        role = attributes["role"]
+        status = attributes["status"]
 
         parent = cls.parent_from_alias(alias)
         if parent is None:
             raise DcError(f"Create Axiom 5: non-root {alias} must have Active parent!")
-        if parent.status is GNodeStatus.PERMANENTLY_DEACTIVATED and not (
-            status is GNodeStatus.PERMANENTLY_DEACTIVATED
+        if parent.status is GNodeStatus.PermanentlyDeactivated and not (
+            status is GNodeStatus.PermanentlyDeactivated
         ):
             raise DcError(
                 "Creation Axiom 5`: the parent of an PermanentlyDeactivated GNode must be PermanentlyDeactivated."
             )
 
-        if (role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE) or (
-            role is CoreGNodeRole.MARKET_MAKER
+        if (role is CoreGNodeRole.ConductorTopologyNode) or (
+            role is CoreGNodeRole.MarketMaker
         ):
             if not (
                 parent.is_root()
-                or (parent.role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE)
-                or (parent.role is CoreGNodeRole.MARKET_MAKER)
+                or (parent.role is CoreGNodeRole.ConductorTopologyNode)
+                or (parent.role is CoreGNodeRole.MarketMaker)
             ):
                 raise DcError(
                     f"Creation Axiom 5`: the parent of a {role} must be ConductorTopologyNode"
                     f" or MarketMaker, not {parent.role}"
                 )
-        if (role is CoreGNodeRole.ATOMIC_METERING_NODE) or (
-            role is CoreGNodeRole.ATOMIC_T_NODE
+        if (role is CoreGNodeRole.AtomicMeteringNode) or (
+            role is CoreGNodeRole.AtomicTNode
         ):
             if not (
-                (parent.role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE)
-                or (parent.role is CoreGNodeRole.MARKET_MAKER)
+                (parent.role is CoreGNodeRole.ConductorTopologyNode)
+                or (parent.role is CoreGNodeRole.MarketMaker)
             ):
                 raise DcError(
                     f"Creation Axiom 5 `: the parent of a {role} must be ConductorTopologyNode"
                     f" or MarketMaker, not {parent.role}"
                 )
-        if role is CoreGNodeRole.TERMINAL_ASSET:
+        if role is CoreGNodeRole.TerminalAsset:
             if not (
-                (parent.role is CoreGNodeRole.ATOMIC_METERING_NODE)
-                or (parent.role is CoreGNodeRole.ATOMIC_T_NODE)
+                (parent.role is CoreGNodeRole.AtomicMeteringNode)
+                or (parent.role is CoreGNodeRole.AtomicTNode)
             ):
                 raise DcError(
                     f"Joint Axiom `: the parent of a {role} must be AtomicMete PringNode"
@@ -397,36 +395,35 @@ class BaseGNode(StreamlinedSerializerMixin):
         - Active can only change to Suspended or PermanentlyDeactivated
         - Suspended can only change to Active or PermanentlyDeactivated
         - PermanentlyDeactivated cannot change."""
-        new_status_value = new_attributes["status_value"]
-        new_status = GNodeStatusMap.type_to_local(new_status_value)
-        if self.status is GNodeStatus.PENDING:
+        new_status = new_attributes["status"]
+        if self.status is GNodeStatus.Pending:
             if not (
-                (new_status is GNodeStatus.PENDING)
-                or (new_status is GNodeStatus.ACTIVE)
+                (new_status is GNodeStatus.Pending)
+                or (new_status is GNodeStatus.Active)
             ):
                 raise DcError(
                     f"Update Axiom 2: Pending can only change to Active, not {new_status}"
                 )
-        elif self.status is GNodeStatus.ACTIVE:
+        elif self.status is GNodeStatus.Active:
             if not (
-                (new_status is GNodeStatus.ACTIVE)
-                or (new_status is GNodeStatus.PERMANENTLY_DEACTIVATED)
-                or (new_status is GNodeStatus.SUSPENDED)
+                (new_status is GNodeStatus.Active)
+                or (new_status is GNodeStatus.PermanentlyDeactivated)
+                or (new_status is GNodeStatus.Suspended)
             ):
                 raise DcError(
                     f"Update Axiom 2: Active can only change to Suspended or PermanentlyDeactivated, not {new_status}"
                 )
-        elif self.status is GNodeStatus.SUSPENDED:
+        elif self.status is GNodeStatus.Suspended:
             if not (
-                (new_status is GNodeStatus.ACTIVE)
-                or (new_status is GNodeStatus.PERMANENTLY_DEACTIVATED)
-                or (new_status is GNodeStatus.SUSPENDED)
+                (new_status is GNodeStatus.Active)
+                or (new_status is GNodeStatus.PermanentlyDeactivated)
+                or (new_status is GNodeStatus.Suspended)
             ):
                 raise DcError(
                     f"Update Axiom 2: Suspended can only change to Active or PermanentlyDeactivated, not {new_status}"
                 )
-        elif self.status is GNodeStatus.PERMANENTLY_DEACTIVATED:
-            if not (new_status is GNodeStatus.PERMANENTLY_DEACTIVATED):
+        elif self.status is GNodeStatus.PermanentlyDeactivated:
+            if not (new_status is GNodeStatus.PermanentlyDeactivated):
                 raise DcError(
                     f"Update Axiom 3: Permanently Deactivated status cannot change. Got {new_status}"
                 )
@@ -441,8 +438,8 @@ class BaseGNode(StreamlinedSerializerMixin):
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
             - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode"""
         alias: str = attributes["alias"]
-        role = CoreGNodeRoleMap.type_to_local(attributes["role_value"])
-        status = GNodeStatusMap.type_to_local(attributes["status_value"])
+        role = attributes["role"]
+        status = attributes["status"]
         if len(alias.split(".")) == 1:
             is_root = True
         else:
@@ -452,16 +449,16 @@ class BaseGNode(StreamlinedSerializerMixin):
         # LOOKING UP AT PARENT
         if not is_root:
             parent = self.parent()
-            if parent is None and self.status != GNodeStatus.PERMANENTLY_DEACTIVATED:
+            if parent is None and self.status != GNodeStatus.PermanentlyDeactivated:
                 raise DcError(
                     f"Update Axiom 4: non-root {alias} with status {self.status} must have Active parent!"
                 )
 
         # LOOKING DOWN AT DESCENDANTS
-        if status != GNodeStatus.ACTIVE:
+        if status != GNodeStatus.Active:
             children_status_set = set(filter(lambda x: x.status, self.children()))
             if (
-                children_status_set != {GNodeStatus.PERMANENTLY_DEACTIVATED}
+                children_status_set != {GNodeStatus.PermanentlyDeactivated}
                 and children_status_set != set()
             ):
                 raise DcError(
@@ -470,33 +467,33 @@ class BaseGNode(StreamlinedSerializerMixin):
                 )
 
         if not is_root:
-            if (role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE) or (
-                role is CoreGNodeRole.MARKET_MAKER
+            if (role is CoreGNodeRole.ConductorTopologyNode) or (
+                role is CoreGNodeRole.MarketMaker
             ):
                 if not (
                     parent.is_root()
-                    or (parent.role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE)
-                    or (parent.role is CoreGNodeRole.MARKET_MAKER)
+                    or (parent.role is CoreGNodeRole.ConductorTopologyNode)
+                    or (parent.role is CoreGNodeRole.MarketMaker)
                 ):
                     raise DcError(
                         f"Update Axiom 4`: the parent of a {role} must be ConductorTopologyNode"
                         f" or MarketMaker, not {parent.role}"
                     )
-            if (role is CoreGNodeRole.ATOMIC_METERING_NODE) or (
-                role is CoreGNodeRole.ATOMIC_T_NODE
+            if (role is CoreGNodeRole.AtomicMeteringNode) or (
+                role is CoreGNodeRole.AtomicTNode
             ):
                 if not (
-                    (parent.role is CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE)
-                    or (parent.role is CoreGNodeRole.MARKET_MAKER)
+                    (parent.role is CoreGNodeRole.ConductorTopologyNode)
+                    or (parent.role is CoreGNodeRole.MarketMaker)
                 ):
                     raise DcError(
                         f"Update Axiom 4`: the parent of a {role} must be ConductorTopologyNode"
                         f" or MarketMaker, not {parent.role}"
                     )
-            if role is CoreGNodeRole.TERMINAL_ASSET:
+            if role is CoreGNodeRole.TerminalAsset:
                 if not (
-                    (parent.role is CoreGNodeRole.ATOMIC_METERING_NODE)
-                    or (parent.role is CoreGNodeRole.ATOMIC_T_NODE)
+                    (parent.role is CoreGNodeRole.AtomicMeteringNode)
+                    or (parent.role is CoreGNodeRole.AtomicTNode)
                 ):
                     raise DcError(
                         f"Update Axiom 4`: the parent of a {role} must be AtomicMete PringNode"

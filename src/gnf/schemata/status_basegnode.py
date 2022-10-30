@@ -4,15 +4,14 @@ import json
 from typing import List
 from typing import NamedTuple
 
-from schemata.basegnode_010.basegnode_010_maker import Basegnode010
-
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.schemata.basegnode_gt import BasegnodeGt
 
 
 class StatusBasegnode(NamedTuple):
     IncludeAllDescendants: bool  #
-    DescendantGNodeList: List[Basegnode010]
+    DescendantGNodeList: List[BasegnodeGt]
     FromGNodeAlias: str  #
     FromGNodeInstanceId: str  #
     TopGNodeId: str
@@ -44,9 +43,9 @@ class StatusBasegnode(NamedTuple):
             )
         else:
             for elt in self.DescendantGNodeList:
-                if not isinstance(elt, Basegnode010):
+                if not isinstance(elt, BasegnodeGt):
                     errors.append(
-                        f"elt {elt} of DescendantGNodeList must have type Basegnode010."
+                        f"elt {elt} of DescendantGNodeList must have type BasegnodeGt."
                     )
         if not isinstance(self.FromGNodeAlias, str):
             errors.append(f"FromGNodeAlias {self.FromGNodeAlias} must have type str.")
@@ -72,7 +71,7 @@ class StatusBasegnode(NamedTuple):
             errors.append(f"TopGNodeId {self.TopGNodeId} must have type str.")
         try:
             property_format.check_is_uuid_canonical_textual(self.TopGNodeId)
-        except:
+        except SchemaError as e:
             errors.append(
                 f"TopGNodeId {self.TopGNodeId}" " must have format UuidCanonicalTextual"
             )
@@ -115,7 +114,7 @@ class StatusBasegnode_Maker:
     def __init__(
         self,
         include_all_descendants: bool,
-        descendant_g_node_list: List[Basegnode010],
+        descendant_g_node_list: List[BasegnodeGt],
         from_g_node_alias: str,
         from_g_node_instance_id: str,
         top_g_node_id: str,
@@ -165,9 +164,9 @@ class StatusBasegnode_Maker:
             if not isinstance(elt, dict):
                 raise SchemaError(
                     f"elt {elt} of DescendantGNodeList must be "
-                    "Basegnode010 but not even a dict!"
+                    "BasegnodeGt but not even a dict!"
                 )
-            descendant_g_node_list.append(Basegnode010_Maker.dict_to_tuple(elt))
+            descendant_g_node_list.append(BasegnodeGt_Maker.dict_to_tuple(elt))
         new_d["DescendantGNodeList"] = descendant_g_node_list
         if "FromGNodeAlias" not in new_d.keys():
             raise SchemaError(f"dict {new_d} missing FromGNodeAlias")

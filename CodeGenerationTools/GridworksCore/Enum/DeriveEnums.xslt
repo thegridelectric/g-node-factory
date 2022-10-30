@@ -20,7 +20,6 @@
         <FileSet>
             <FileSetFiles>
                 <xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='' and Status='Active')]">
-                    <xsl:variable name="enum-alias" select="Alias" />
                     <xsl:variable name="enum-name-style" select="PythonEnumNameStyle" />
                     <xsl:variable name="class-name">
                         <xsl:call-template name="nt-case">
@@ -65,7 +64,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
 
 <xsl:text> = auto()
     </xsl:text>
-    </xsl:for-each>
+</xsl:for-each>
 
 
 

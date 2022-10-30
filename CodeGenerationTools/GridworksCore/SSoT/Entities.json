@@ -36,7 +36,8 @@
         "recCHqdjf2zGBNMhz",
         "rec3UK0uLi5lWoyyN",
         "recGjJoqWwEcoicHt",
-        "recsd3la7kaOFw8yq"
+        "recsd3la7kaOFw8yq",
+        "recUcGE6a9kjAbbwH"
       ],
       "TableGroup": "General",
       "ToName": "SchemaRoot"
@@ -65,7 +66,11 @@
         "recMSssL2kxCnxrbk",
         "recpacUftCWzOVnpl",
         "recPTmieJ09e2Pk7L",
-        "recUPomSILlYzlOnU"
+        "recUPomSILlYzlOnU",
+        "recijKzwR2ysi05Tw",
+        "recP01pcpn9IH4YWi",
+        "recR8GihKYocly4ws",
+        "recpwxT1wxgQieaK6"
       ],
       "TableGroup": "General",
       "ToName": "GtEnum"
@@ -88,7 +93,9 @@
         "rechfVmHPkwZ9j7OX",
         "recm07MG5sgXULksp",
         "recPKemt4onQT8ZFH",
-        "recFwntdOrnLF9aAo"
+        "recFwntdOrnLF9aAo",
+        "recggZTyU9XH8CgZn",
+        "rec1JSnlLmuGbFPfj"
       ],
       "TableGroup": "General",
       "ToName": "EnumSymbol"
@@ -158,7 +165,6 @@
         "recTrfSqyhJOoMyZz",
         "rec8IQhFtMhcgwgiQ",
         "rectEN0ix0Ew0fMt2",
-        "rec5wUoBaLCwCuTkm",
         "recHw8VYJB7thcpO0",
         "reczp0Uc8VMacKVug",
         "recIZO9tax85igsv5",
@@ -169,7 +175,9 @@
         "recSqk7UU9JhstlYZ",
         "recEhTAXh7hulalfX",
         "reckVS5ICRsxKUAXl",
-        "recbc8jQAARujKTzH"
+        "recbc8jQAARujKTzH",
+        "recjveOB9Y83Q7F1R",
+        "recwVu1tWOkY9F7eE"
       ],
       "TableGroup": "General",
       "ToName": "SchemaAttribute"
@@ -223,6 +231,46 @@
       ],
       "TableGroup": "General",
       "ToName": "PropertyFormat"
+    },
+    {
+      "ProjectTableId": "receOGjOF9E9Vdzes",
+      "AirtableName": "Protocols",
+      "CreatedAt": "2022-10-30T17:36:32",
+      "DisplayName": "Protocols",
+      "Name": "Protocol",
+      "PluralName": "Protocols",
+      "Project": "recIuUqkLn41mZ8TS",
+      "ProjectVersion": "recYfeHO0N6fC3sxJ",
+      "RowKey": "1715. Scada-develop-v2022.05.16.323366. Protocol",
+      "TableColumns": [
+        "recscYGbW4n76PZ8R",
+        "rec1wncaoPV1ULnh1",
+        "recfp14OnVUtyxayh",
+        "recqkmKMC6jeUoLgR"
+      ],
+      "TableGroup": "General",
+      "ToName": "Protocol"
+    },
+    {
+      "ProjectTableId": "recevnfBvpOqzbUaQ",
+      "AirtableName": "ProtocolTypes",
+      "CreatedAt": "2022-10-30T17:36:32",
+      "DisplayName": "ProtocolTypes",
+      "Name": "ProtocolType",
+      "PluralName": "ProtocolTypes",
+      "Project": "recIuUqkLn41mZ8TS",
+      "ProjectVersion": "recYfeHO0N6fC3sxJ",
+      "RowKey": "1715. Scada-develop-v2022.05.16.323366. ProtocolType",
+      "TableColumns": [
+        "recuUHBRNUo0NM0vs",
+        "recv1QO20vS0TAnaa",
+        "reclTgP4wS3QJkkMx",
+        "rec8Q6HYmsmkuRsNs",
+        "reccu5newyZkH4tOk",
+        "recd0EUQz4KUYZsdd"
+      ],
+      "TableGroup": "General",
+      "ToName": "ProtocolType"
     },
     {
       "ProjectTableId": "recjPdQx5Ci7EEX4h",

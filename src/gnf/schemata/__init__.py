@@ -1,7 +1,7 @@
 """ List of all the schema types """
 
-from gnf.schemata.basegnode import Basegnode
-from gnf.schemata.basegnode import Basegnode_Maker
+from gnf.schemata.basegnode_gt import BasegnodeGt
+from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
 from gnf.schemata.create_basegnode import CreateBasegnode
 from gnf.schemata.create_basegnode import CreateBasegnode_Maker
 from gnf.schemata.create_ctn_algo import CreateCtnAlgo
@@ -45,8 +45,8 @@ __all__ = [
     "CreateMarketmakerAlgo_Maker",
     "OptinTadeedAlgo",
     "OptinTadeedAlgo_Maker",
-    "Basegnode",
-    "Basegnode_Maker",
+    "BasegnodeGt",
+    "BasegnodeGt_Maker",
     "CreateCtnAlgo",
     "CreateCtnAlgo_Maker",
     "CreateTadeedAlgo",
