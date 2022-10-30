@@ -30,7 +30,7 @@
                 </xsl:variable>
 
                 <FileSetFile>
-                            <xsl:element name="RelativePath"><xsl:text>../../../../python_test/schemata/test_</xsl:text>
+                            <xsl:element name="RelativePath"><xsl:text>../../../../tests/schemata/test_</xsl:text>
                             <xsl:value-of select="translate($local-alias,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
 
                     <OverwriteMode>Never</OverwriteMode>
