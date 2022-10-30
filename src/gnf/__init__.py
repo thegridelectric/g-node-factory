@@ -5,7 +5,7 @@ import gnf.config as config
 import gnf.enums as enums
 import gnf.errors as errors
 import gnf.property_format as property_format
-from gnf.errors import SchemaError
+import gnf.utils as utils
 
 
 __all__ = [
@@ -15,5 +15,5 @@ __all__ = [
     "enums",
     "errors",
     "property_format",
-    "SchemaError",
+    "utils",
 ]

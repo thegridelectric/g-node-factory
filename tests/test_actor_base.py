@@ -5,10 +5,11 @@ import uuid
 
 import django
 import pika
-from config import DevGNodeRegistrySettings
-from config import GnfSettings
 from python_test.utils import wait_for
-from schemata.heartbeat_a_maker import HeartbeatA_Maker
+
+from gnf.config import DevGNodeRegistrySettings
+from gnf.config import GnfSettings
+from gnf.schemata.heartbeat_a_maker import HeartbeatA_Maker
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")

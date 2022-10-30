@@ -8,19 +8,19 @@ import traceback
 import uuid
 from abc import ABC
 from abc import abstractmethod
-from tkinter import ON
 from typing import Dict
 from typing import Optional
 
-import api_types
 import pendulum
 import pika
-import property_format
-import utils
-from config import GnfSettings
-from enums.registry_g_node_role_map import RegistryGNodeRole
-from errors import SchemaError
-from schemata.heartbeat_a_maker import HeartbeatA
+
+import gnf.api_types as api_types
+import gnf.property_format as property_format
+import gnf.utils as utils
+from gnf.config import GnfSettings
+from gnf.enums import RegistryGNodeRole
+from gnf.errors import SchemaError
+from gnf.schemata import HeartbeatA
 
 
 class RegistryGNodeRoleShortAlias(enum.Enum):
@@ -32,11 +32,11 @@ class RegistryGNodeRoleShortAlias(enum.Enum):
 
 
 RoleByShortAlias: Dict[RegistryGNodeRoleShortAlias, RegistryGNodeRole] = {
-    RegistryGNodeRoleShortAlias.GNF: RegistryGNodeRole.G_NODE_FACTORY,
-    RegistryGNodeRoleShortAlias.GNR: RegistryGNodeRole.G_NODE_REGISTRY,
-    RegistryGNodeRoleShortAlias.GW: RegistryGNodeRole.GRID_WORKS,
-    RegistryGNodeRoleShortAlias.WC: RegistryGNodeRole.WORLD_COORDINATOR,
-    RegistryGNodeRoleShortAlias.WIR: RegistryGNodeRole.WORLD_INSTANCE_REGISTRY,
+    RegistryGNodeRoleShortAlias.GNF: RegistryGNodeRole.GNodeFactory,
+    RegistryGNodeRoleShortAlias.GNR: RegistryGNodeRole.GNodeRegistry,
+    RegistryGNodeRoleShortAlias.GW: RegistryGNodeRole.GridWorks,
+    RegistryGNodeRoleShortAlias.WC: RegistryGNodeRole.WorldCoordinator,
+    RegistryGNodeRoleShortAlias.WIR: RegistryGNodeRole.WorldInstanceRegistry,
 }
 
 

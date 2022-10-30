@@ -5,8 +5,9 @@ from typing import Any
 from typing import Optional
 
 import pendulum
-import property_format
-from errors import SchemaError
+
+import gnf.property_format as property_format
+from gnf.errors import SchemaError
 
 
 DEFAULT_STEP_DURATION = 0.1
