@@ -1,12 +1,13 @@
 from typing import Optional
 
-import algo_utils
-import config
-import property_format
 from algosdk import encoding
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
-from errors import SchemaError
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.property_format as property_format
+from gnf import SchemaError
 
 
 def get_discoverer_account_with_admin(

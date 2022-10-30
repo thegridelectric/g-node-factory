@@ -4,7 +4,6 @@ from typing import Dict
 from typing import List
 from typing import Optional
 
-import algo_utils
 import api_utils
 import config
 import django
@@ -23,6 +22,8 @@ from enums.g_node_status_map import GNodeStatusMap
 from enums.registry_g_node_role_map import RegistryGNodeRole
 from errors import RegistryError
 from errors import SchemaError
+
+import gnf.algo_utils
 
 
 LOG_FORMAT = (
