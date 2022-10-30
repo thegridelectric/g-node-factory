@@ -1,26 +1,23 @@
 from typing import Dict
 from typing import List
 
-from schemata.create_ctn_algo_maker import CreateCtnAlgo_Maker
-from schemata.create_tadeed_algo_maker import CreateTadeedAlgo_Maker
-from schemata.create_tavalidatorcert_algo_maker import CreateTavalidatorcertAlgo_Maker
-from schemata.exchange_tadeed_algo_maker import ExchangeTadeedAlgo_Maker
-from schemata.heartbeat_a_maker import HeartbeatA_Maker
-from schemata.sample_payload_maker import SamplePayload_Maker
-from schemata.transfer_tavalidatorcert_algo_maker import (
-    TransferTavalidatorcertAlgo_Maker,
-)
+from gnf.schemata import CreateCtnAlgo_Maker
+from gnf.schemata import CreateTadeedAlgo_Maker
+from gnf.schemata import CreateTavalidatorcertAlgo_Maker
+from gnf.schemata import ExchangeTadeedAlgo_Maker
+from gnf.schemata import HeartbeatA_Maker
+from gnf.schemata import TransferTavalidatorcertAlgo_Maker
 
 
-TypeMakerByName: Dict[str, SamplePayload_Maker] = {}
+TypeMakerByName: Dict[str, HeartbeatA_Maker] = {}
 
-type_makers: List[SamplePayload_Maker] = [
+type_makers: List[HeartbeatA_Maker] = [
     CreateCtnAlgo_Maker,
     CreateTadeedAlgo_Maker,
     CreateTavalidatorcertAlgo_Maker,
     HeartbeatA_Maker,
     ExchangeTadeedAlgo_Maker,
-    SamplePayload_Maker,
+    HeartbeatA_Maker,
     TransferTavalidatorcertAlgo_Maker,
 ]
 

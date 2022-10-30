@@ -23,7 +23,7 @@ from enums.registry_g_node_role_map import RegistryGNodeRole
 from errors import RegistryError
 from errors import SchemaError
 
-import gnf.algo_utils
+import gnf.algo_utils as algo_utils
 
 
 LOG_FORMAT = (
@@ -33,23 +33,20 @@ LOG_FORMAT = (
 LOGGER = logging.getLogger(__name__)
 
 
-from schemata.create_discoverycert_algo import CreateDiscoverycertAlgo
-from schemata.create_tadeed_algo import CreateTadeedAlgo
-from schemata.create_tavalidatorcert_algo import CreateTavalidatorcertAlgo
-from schemata.create_terminalasset_algo import CreateTerminalassetAlgo
-from schemata.exchange_tadeed_algo_maker import ExchangeTadeedAlgo
-from schemata.exchange_tadeed_algo_maker import ExchangeTadeedAlgo_Maker
-from schemata.optin_tadeed_algo_maker import OptinTadeedAlgo
-from schemata.optin_tadeed_algo_maker import OptinTadeedAlgo_Maker
-
-# Messages received by Factory
-from schemata.sample_payload import SamplePayload
-
 # Messages sent by Factory
-from schemata.status_basegnode_maker import StatusBasegnode
-from schemata.transfer_discoverycert_algo import TransferDiscoverycertAlgo
-from schemata.transfer_tadeed_algo import TransferTadeedAlgo
-from schemata.transfer_tavalidatorcert_algo import TransferTavalidatorcertAlgo
+# Messages received by Factory
+from gnf.schemata import CreateDiscoverycertAlgo
+from gnf.schemata import CreateTadeedAlgo
+from gnf.schemata import CreateTavalidatorcertAlgo
+from gnf.schemata import CreateTerminalassetAlgo
+from gnf.schemata import ExchangeTadeedAlgo
+from gnf.schemata import ExchangeTadeedAlgo_Maker
+from gnf.schemata import HeartbeatA
+from gnf.schemata import OptinTadeedAlgo
+from gnf.schemata import OptinTadeedAlgo_Maker
+from gnf.schemata import TransferDiscoverycertAlgo
+from gnf.schemata import TransferTadeedAlgo
+from gnf.schemata import TransferTavalidatorcertAlgo
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_related.settings")
@@ -132,7 +129,7 @@ class GNodeFactoryDb:
                 )
                 return
             self.create_terminalasset_algo_received(payload)
-        elif payload.TypeName == SamplePayload.TypeName:
+        elif payload.TypeName == HeartbeatA.TypeName:
             self.sample_payload_received(payload)
 
     ##########################
@@ -451,11 +448,11 @@ class GNodeFactoryDb:
         # TODO: send StatusBasegnode update to relevant GNodeRegistry
         return atomic_metering_node
 
-    def sample_payload_received(self, payload: SamplePayload):
+    def sample_payload_received(self, payload: HeartbeatA):
         """Used for testing the rabbitmq actor base"""
-        if not isinstance(payload, SamplePayload):
-            raise SchemaError(f"payload must be SamplePayload, got {type(payload)}")
-        LOGGER.info(f"just received samplePayload {payload}")
+        if not isinstance(payload, HeartbeatA):
+            raise SchemaError(f"payload must be HeartbeatA, got {type(payload)}")
+        LOGGER.info(f"just received HeartbeatA {payload}")
 
     def create_tavalidatorcert_algo_received(
         self, payload: CreateTavalidatorcertAlgo
