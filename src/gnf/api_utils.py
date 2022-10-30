@@ -7,7 +7,7 @@ from algosdk.v2client.algod import AlgodClient
 import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.property_format as property_format
-from gnf import SchemaError
+from gnf.errors import SchemaError
 
 
 def get_discoverer_account_with_admin(
