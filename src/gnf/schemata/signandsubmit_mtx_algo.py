@@ -28,7 +28,7 @@ class SignandsubmitMtxAlgo(NamedTuple):
             errors.append(f"SignerAddress {self.SignerAddress} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.SignerAddress)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"SignerAddress {self.SignerAddress}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -37,7 +37,7 @@ class SignandsubmitMtxAlgo(NamedTuple):
             errors.append(f"Mtx {self.Mtx} must have type str.")
         try:
             property_format.check_is_algo_msg_pack_encoded(self.Mtx)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(f"Mtx {self.Mtx}" " must have format AlgoMsgPackEncoded: {e}")
         if not isinstance(self.Addresses, list):
             errors.append(f"Addresses {self.Addresses} must have type list.")
@@ -47,7 +47,7 @@ class SignandsubmitMtxAlgo(NamedTuple):
                     errors.append(f"elt {elt} of Addresses must have type str.")
                 try:
                     property_format.check_is_algo_address_string_format(elt)
-                except SchemaError as e:
+                except ValueError as e:
                     errors.append(
                         f"elt {elt} of Addresses must have format AlgoAddressStringFormat; {e}"
                     )

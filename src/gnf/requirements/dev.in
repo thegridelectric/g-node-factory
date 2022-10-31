@@ -1,8 +1,0 @@
--r base.in
-
-black
-coverage
-isort
-mypy
-pip-tools
-pytest

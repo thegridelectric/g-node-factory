@@ -2,8 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.signandsubmit_mtx_algo_maker import SignandsubmitMtxAlgo_Maker as Maker
+
+from gnf.errors import SchemaError
+from gnf.schemata import SignandsubmitMtxAlgo_Maker as Maker
 
 
 # def test_signandsubmit_mtx_algo_generated():

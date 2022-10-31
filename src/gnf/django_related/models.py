@@ -3,15 +3,15 @@
 import logging
 import time
 import uuid
-from typing import Optional
 
-from data_classes.base_g_node import BaseGNode
-from data_classes.gps_point import GpsPoint
 from django.db import models
-from enums.core_g_node_role_map import CoreGNodeRole
-from enums.g_node_status_map import GNodeStatus
-from errors import DcError
-from errors import RegistryError
+
+from gnf.data_classes import BaseGNode
+from gnf.data_classes import GpsPoint
+from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeStatus
+from gnf.errors import DcError
+from gnf.errors import RegistryError
 
 
 LOG_FORMAT = (

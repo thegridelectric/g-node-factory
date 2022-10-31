@@ -5,21 +5,21 @@ import uuid
 
 import django
 import pika
-from python_test.utils import wait_for
 
+from gnf.actor_base import OnReceiveMessageDiagnostic
+from gnf.actor_base import OnSendMessageDiagnostic
+from gnf.actor_base import RoutingKeyType
 from gnf.config import DevGNodeRegistrySettings
 from gnf.config import GnfSettings
-from gnf.schemata.heartbeat_a_maker import HeartbeatA_Maker
+from gnf.schemata import HeartbeatA_Maker
+
+from .utils import GNodeFactoryRabbitStubRecorder
+from .utils import GNodeRegistryStubRecorder
+from .utils import wait_for
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")
-django.setup()
-
-from actor_base import OnReceiveMessageDiagnostic
-from actor_base import OnSendMessageDiagnostic
-from actor_base import RoutingKeyType
-from python_test.utils import GNodeFactoryRabbitStubRecorder
-from python_test.utils import GNodeRegistryStubRecorder
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")
+# django.setup()
 
 
 # def test_actor_base():

@@ -1,21 +1,22 @@
-import algo_utils
 import algosdk
-import config
-import dev_utils.algo_setup
 import pytest
-from errors import AlgoError
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.errors import AlgoError
 
 
 def test_pay_account():
-    addr0: algo_utils.BasicAccount = dev_utils.algo_setup.get_gnf_admin_address()
-    addr1: algo_utils.BasicAccount = dev_utils.algo_setup.get_molly_metermaid_address()
+    addr0: algo_utils.BasicAccount = algo_setup.get_gnf_admin_address()
+    addr1: algo_utils.BasicAccount = algo_setup.get_molly_metermaid_address()
     addresses = [addr0, addr1]
     multi = algo_utils.MultisigAccount(version=1, threshold=2, addresses=addresses)
 
     initial_balance = algo_utils.micro_algos(multi.addr)
     # This is the test of payAccount working, called by devFundAccount which grabs
     # a genesis BasicAccount
-    r = dev_utils.algo_setup.dev_fund_account(
+    r = algo_setup.dev_fund_account(
         settings_algo=config.Algo(), to_addr=multi.addr, amt_in_micros=200_000
     )
     assert isinstance(r, algo_utils.PendingTxnResponse)

@@ -1,6 +1,7 @@
 """transfer.tadeed.algo.020 type"""
 
 import json
+from typing import List
 from typing import NamedTuple
 
 import gnf.property_format as property_format
@@ -31,7 +32,7 @@ class TransferTadeedAlgo(NamedTuple):
             )
         try:
             property_format.check_is_algo_msg_pack_encoded(self.FirstDeedTransferMtx)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"FirstDeedTransferMtx {self.FirstDeedTransferMtx}"
                 " must have format AlgoMsgPackEncoded: {e}"
@@ -44,7 +45,7 @@ class TransferTadeedAlgo(NamedTuple):
             )
         try:
             property_format.check_is_algo_address_string_format(self.DeedValidatorAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"DeedValidatorAddr {self.DeedValidatorAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -53,7 +54,7 @@ class TransferTadeedAlgo(NamedTuple):
             errors.append(f"TaDaemonAddr {self.TaDaemonAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.TaDaemonAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"TaDaemonAddr {self.TaDaemonAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -62,7 +63,7 @@ class TransferTadeedAlgo(NamedTuple):
             errors.append(f"TaOwnerAddr {self.TaOwnerAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.TaOwnerAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"TaOwnerAddr {self.TaOwnerAddr}"
                 " must have format AlgoAddressStringFormat: {e}"

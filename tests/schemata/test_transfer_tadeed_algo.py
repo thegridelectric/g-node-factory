@@ -1,17 +1,16 @@
 """Tests transfer.tadeed.algo.020 type"""
 import json
 
-import algo_utils
-import api_utils
-import config
-import dev_utils.algo_setup
 import pytest
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
-from errors import SchemaError
-from g_node_factory_db import GNodeFactoryDb
-from schemata.transfer_tadeed_algo_maker import TransferTadeedAlgo_Maker as Maker
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.errors import SchemaError
+from gnf.schemata import TransferTadeedAlgo_Maker as Maker
 
 
 def make_new_ta_deed(
@@ -100,9 +99,9 @@ def test_transfer_tadeed_algo_generated():
         addresses=[gnf_admin.addr, test_acct.addr],
     )
     min_algos = config.Algo().ta_deed_consideration_algos
-    dev_utils.algo_setup.dev_fund_to_min(ta_multi.addr, min_algos)
-    dev_utils.algo_setup.dev_fund_to_min(validator_multi.addr, 1)
-    dev_utils.algo_setup.dev_fund_to_min(test_acct.addr, 1)
+    algo_setup.dev_fund_to_min(ta_multi.addr, min_algos)
+    algo_setup.dev_fund_to_min(validator_multi.addr, 1)
+    algo_setup.dev_fund_to_min(test_acct.addr, 1)
     ta_deed_idx = make_new_ta_deed(client, test_acct, gnf_admin)
 
     opt_in_txn = transaction.AssetOptInTxn(

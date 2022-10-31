@@ -1,6 +1,7 @@
 """create.tadeed.algo.010 type"""
 
 import json
+from typing import List
 from typing import NamedTuple
 
 import gnf.property_format as property_format
@@ -25,7 +26,7 @@ class CreateTadeedAlgo(NamedTuple):
             errors.append(f"ValidatorAddr {self.ValidatorAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.ValidatorAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"ValidatorAddr {self.ValidatorAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -38,7 +39,7 @@ class CreateTadeedAlgo(NamedTuple):
             property_format.check_is_algo_msg_pack_encoded(
                 self.HalfSignedDeedCreationMtx
             )
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"HalfSignedDeedCreationMtx {self.HalfSignedDeedCreationMtx}"
                 " must have format AlgoMsgPackEncoded: {e}"

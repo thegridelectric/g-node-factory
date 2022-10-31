@@ -35,7 +35,7 @@ class CreateCtnAlgo(NamedTuple):
                     errors.append(f"elt {elt} of ChildAliasList must have type str.")
                 try:
                     property_format.check_is_lrd_alias_format(elt)
-                except SchemaError as e:
+                except ValueError as e:
                     errors.append(
                         f"elt {elt} of ChildAliasList must have format LrdAliasFormat; {e}"
                     )
@@ -43,7 +43,7 @@ class CreateCtnAlgo(NamedTuple):
             errors.append(f"FromGNodeAlias {self.FromGNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.FromGNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"FromGNodeAlias {self.FromGNodeAlias}"
                 " must have format LrdAliasFormat: {e}"
@@ -56,7 +56,7 @@ class CreateCtnAlgo(NamedTuple):
             errors.append(f"CtnGNodeAlias {self.CtnGNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.CtnGNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"CtnGNodeAlias {self.CtnGNodeAlias}"
                 " must have format LrdAliasFormat: {e}"
@@ -67,7 +67,7 @@ class CreateCtnAlgo(NamedTuple):
             )
         try:
             property_format.check_is_algo_address_string_format(self.GNodeRegistryAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeRegistryAddr {self.GNodeRegistryAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -78,7 +78,7 @@ class CreateCtnAlgo(NamedTuple):
             )
         try:
             property_format.check_is_uuid_canonical_textual(self.FromGNodeInstanceId)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"FromGNodeInstanceId {self.FromGNodeInstanceId}"
                 " must have format UuidCanonicalTextual: {e}"

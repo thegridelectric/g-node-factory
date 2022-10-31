@@ -1,7 +1,6 @@
 """ List of all the schema types """
-
-from gnf.schemata.basegnode import Basegnode
-from gnf.schemata.basegnode import Basegnode_Maker
+from gnf.schemata.basegnode_gt import BasegnodeGt
+from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
 from gnf.schemata.create_basegnode import CreateBasegnode
 from gnf.schemata.create_basegnode import CreateBasegnode_Maker
 from gnf.schemata.create_ctn_algo import CreateCtnAlgo
@@ -20,6 +19,8 @@ from gnf.schemata.create_terminalasset_algo import CreateTerminalassetAlgo
 from gnf.schemata.create_terminalasset_algo import CreateTerminalassetAlgo_Maker
 from gnf.schemata.exchange_tadeed_algo import ExchangeTadeedAlgo
 from gnf.schemata.exchange_tadeed_algo import ExchangeTadeedAlgo_Maker
+from gnf.schemata.heartbeat_a import HeartbeatA
+from gnf.schemata.heartbeat_a import HeartbeatA_Maker
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo_Maker
 from gnf.schemata.signandsubmit_mtx_algo import SignandsubmitMtxAlgo
@@ -35,6 +36,8 @@ from gnf.schemata.transfer_tavalidatorcert_algo import TransferTavalidatorcertAl
 
 
 __all__ = [
+    "HeartbeatA",
+    "HeartbeatA_Maker",
     "TransferTavalidatorcertAlgo",
     "TransferTavalidatorcertAlgo_Maker",
     "SignandsubmitMtxAlgo",
@@ -45,8 +48,8 @@ __all__ = [
     "CreateMarketmakerAlgo_Maker",
     "OptinTadeedAlgo",
     "OptinTadeedAlgo_Maker",
-    "Basegnode",
-    "Basegnode_Maker",
+    "BasegnodeGt",
+    "BasegnodeGt_Maker",
     "CreateCtnAlgo",
     "CreateCtnAlgo_Maker",
     "CreateTadeedAlgo",

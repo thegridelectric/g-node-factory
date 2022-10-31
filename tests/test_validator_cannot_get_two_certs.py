@@ -1,9 +1,12 @@
-import algo_utils
-import config
-import dev_utils.algo_setup
 from algosdk.v2client.algod import AlgodClient
-from dev_utils.dev_validator import DevValidator
-from g_node_factory_db import GNodeFactoryDb
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.dev_utils import DevValidator
+
+
+# from gnf import GNodeFactoryDb
 
 
 # TODO
@@ -12,7 +15,7 @@ from g_node_factory_db import GNodeFactoryDb
 #     gnfSettings = config.GnfSettings()
 
 #     client: AlgodClient = algo_utils.getAlgodClient(settingsAlgo)
-#     dev_utils.algo_setup.devFundAdminAndGraveyard(gnfSettings)
+#     algo_setup.devFundAdminAndGraveyard(gnfSettings)
 #     gnf = GNodeFactoryDb(gnfSettings)
 
 #     admin = gnf.adminAccount
@@ -38,7 +41,7 @@ from g_node_factory_db import GNodeFactoryDb
 #     # If Molly sends another CreateTavalidatorcertAlgo request,
 #     # gnf does not make a second cert
 
-#     dev_utils.algo_setup.devFundAccount(config.Algo(), molly.acct.addr, 100 * 10**6)
+#     algo_setup.devFundAccount(config.Algo(), molly.acct.addr, 100 * 10**6)
 #     payload2 = molly.generateCreateTavalidatorcertAlgo()
 #     certIdx2 = gnf.CreateTavalidatorcertAlgoReceived(payload2)
 

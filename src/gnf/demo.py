@@ -2,17 +2,18 @@ import logging
 import pprint
 import time
 
-import algo_utils
-import api_utils
-import config
-import dev_utils.algo_setup
-import load_dev_data
 from algosdk.v2client.algod import AlgodClient
-from data_classes.base_g_node import BaseGNode
-from dev_utils.dev_homeowner import DevHomeowner
-from dev_utils.dev_validator import DevValidator
-from g_node_factory_db import GNodeFactoryDb
-from python_ta_daemon import PythonTaDaemon
+
+import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+import gnf.load_dev_data as load_dev_data
+from gnf import PythonTaDaemon
+from gnf.data_classes import BaseGNode
+from gnf.dev_utils import DevHomeowner
+from gnf.dev_utils import DevValidator
+from gnf.g_node_factory_db import GNodeFactoryDb
 
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -66,13 +67,13 @@ time.sleep(SCRIPT_SLEEP_S)
 print(f"Start by funding the Gnf accounts")
 print("")
 print("")
-dev_utils.algo_setup.dev_fund_admin_and_graveyard(config.GnfSettings())
+algo_setup.dev_fund_admin_and_graveyard(config.GnfSettings())
 print("")
 print("")
 print(f"Now that these accounts are funded, starting the GNodeFactory")
 print("")
 print("")
-gnf = GNodeFactoryDb(config.GnfSettings())
+factory = GNodeFactoryDb(config.GnfSettings())
 
 
 if len(BaseGNode.by_alias) > 0:
@@ -80,8 +81,8 @@ if len(BaseGNode.by_alias) > 0:
 
 load_dev_data.main()
 # shorthand names for the relevant algo accounts
-graveyard = gnf.graveyard_account
-admin = gnf.admin_account
+graveyard = factory.graveyard_account
+admin = factory.admin_account
 
 holly = DevHomeowner(
     settings=config.HollyHomeownerSettings(),
@@ -248,7 +249,7 @@ print(
     "Assuming it is, the GNodeFactory then signs and submits the transaction and gets back the newly created cert_idx "
 )
 
-cert_idx = gnf.create_tavalidatorcert_algo_received(payload)
+cert_idx = factory.create_tavalidatorcert_algo_received(payload)
 
 
 print("")
@@ -303,7 +304,7 @@ payload = molly.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
 print("")
 print("")
 print(f"gnf.TransferTavalidatorcertAlgReceived(payload)")
-gnf.transfer_tavalidatorcert_algo_received(payload)
+factory.transfer_tavalidatorcert_algo_received(payload)
 print("")
 print("")
 
@@ -394,7 +395,7 @@ print(
 )
 print("and best-known grid topology information about this asset, tt signs and submits")
 
-atomic_metering_node = gnf.create_tadeed_algo_received(payload)
+atomic_metering_node = factory.create_tadeed_algo_received(payload)
 ta_deed_idx = atomic_metering_node.ownership_deed_nft_id
 print("")
 time.sleep(SCRIPT_SLEEP_S)
@@ -521,7 +522,7 @@ print(
     "Molly creates and sends a TransferTadeedAlgo message to the GNodeFactory. The GNodeFactory validates that"
 )
 print("everything is in order, co-signs the deed transfer and submits it to the chain.")
-terminal_asset = gnf.transfer_tadeed_algo_received(payload)
+terminal_asset = factory.transfer_tadeed_algo_received(payload)
 print("")
 print("")
 time.sleep(SCRIPT_SLEEP_S)
