@@ -1,16 +1,12 @@
 import logging
 
-import algo_utils
-import api_utils
-import config
-from algosdk.v2client.algod import AlgodClient
-from dev_utils.dev_homeowner import DevHomeowner
-from dev_utils.dev_validator import DevValidator
-from enums.core_g_node_role_100 import CoreGNodeRole
-from g_node_factory_db import GNodeFactoryDb
-from python_ta_daemon import PythonTaDaemon
-from schemata.create_discoverycert_algo_maker import CreateDiscoverycertAlgo_Maker
-from schemata.transfer_discoverycert_algo_maker import TransferDiscoverycertAlgo_Maker
+import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+from gnf.enums import CoreGNodeRole
+from gnf.g_node_factory_db import GNodeFactoryDb
+from gnf.python_ta_daemon import PythonTaDaemon
+from gnf.schemata import CreateDiscoverycertAlgo_Maker
 
 
 logging.basicConfig(level="INFO")
@@ -32,7 +28,7 @@ payload = CreateDiscoverycertAlgo_Maker(
     old_child_alias_list=config.AdaDiscovererSettings().original_child_alias_list,
     discoverer_addr=ada.addr,
     supporting_material_hash="supporting material",
-    core_g_node_role=CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE,
+    core_g_node_role=CoreGNodeRole.ConductorTopologyNode,
     micro_lon=config.AdaDiscovererSettings().micro_lon,
     micro_lat=config.AdaDiscovererSettings().micro_lat,
 ).tuple

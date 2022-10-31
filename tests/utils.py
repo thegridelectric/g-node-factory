@@ -3,15 +3,13 @@ from typing import Callable
 from typing import NamedTuple
 from typing import Optional
 
-from actor_base import ActorBase
-from actor_base import OnReceiveMessageDiagnostic
-from actor_base import OnSendMessageDiagnostic
-from config import DevGNodeRegistrySettings
-from config import GnfSettings
-from dev_utils.dev_gnr import DevGnr
-from enums.registry_g_node_role_map import RegistryGNodeRole
-from schemata.heartbeat_a import HeartbeatA
-from schemata.heartbeat_a_maker import HeartbeatA_Maker
+from gnf import ActorBase
+from gnf.actor_base import OnSendMessageDiagnostic
+from gnf.config import DevGNodeRegistrySettings
+from gnf.config import GnfSettings
+from gnf.enums import RegistryGNodeRole
+from gnf.schemata import HeartbeatA
+from gnf.schemata import HeartbeatA_Maker
 
 
 def wait_for(

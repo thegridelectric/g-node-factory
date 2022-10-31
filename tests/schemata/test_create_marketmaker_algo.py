@@ -2,8 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.create_marketmaker_algo_maker import CreateMarketmakerAlgo_Maker as Maker
+
+from gnf.errors import SchemaError
+from gnf.schemata import CreateMarketmakerAlgo_Maker as Maker
 
 
 def test_create_marketmaker_algo_generated():

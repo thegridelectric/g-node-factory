@@ -1,8 +1,9 @@
-import algo_utils
 import algosdk
-import config
-import dev_utils.algo_setup
 import pytest
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
 
 
 # def testSendMultipleTxns():
@@ -13,7 +14,7 @@ import pytest
 #     multi = algo_utils.MultisigAccount(version=1, threshold=1, addresses=addresses)
 #     msig = algosdk.future.transaction.Multisig(version=1, threshold=1, addresses=addresses)
 
-#     dev_utils.algo_setup.devFundAccount(
+#     algo_setup.devFundAccount(
 #         settingsAlgo=config.Algo(), toAddr=multi.addr, microAlgoAmount=1_000_000
 #     )
 #     #######################################################

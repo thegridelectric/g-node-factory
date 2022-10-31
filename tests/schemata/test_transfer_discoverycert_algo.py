@@ -2,10 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.transfer_discoverycert_algo_maker import (
-    TransferDiscoverycertAlgo_Maker as Maker,
-)
+
+from gnf.errors import SchemaError
+from gnf.schemata import TransferDiscoverycertAlgo_Maker as Maker
 
 
 def test_transfer_discoverycert_algo_generated():

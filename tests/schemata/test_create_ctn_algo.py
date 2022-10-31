@@ -2,8 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.create_ctn_algo_maker import CreateCtnAlgo_Maker as Maker
+
+from gnf.errors import SchemaError
+from gnf.schemata import CreateCtnAlgo_Maker as Maker
 
 
 def test_create_ctn_algo_generated():

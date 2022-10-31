@@ -3,8 +3,8 @@
 from typing import Dict
 from typing import Optional
 
-from data_classes.mixin import StreamlinedSerializerMixin
-from errors import DcError
+from gnf.data_classes.mixin import StreamlinedSerializerMixin
+from gnf.errors import DcError
 
 
 class GpsPoint(StreamlinedSerializerMixin):

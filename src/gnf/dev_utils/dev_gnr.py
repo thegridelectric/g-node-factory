@@ -1,25 +1,21 @@
 import logging
 from typing import Optional
 
-import algo_utils
-import config
-import dev_utils.algo_setup
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
-from enums.registry_g_node_role_map import RegistryGNodeRole
-from python_code.errors import SchemaError
-from schemata.create_basegnode_maker import CreateBasegnode
-from schemata.create_basegnode_maker import CreateBasegnode_Maker
-from schemata.create_ctn_algo_maker import CreateCtnAlgo
-from schemata.create_ctn_algo_maker import CreateCtnAlgo_Maker
 
-# Message types sent by GNodeRegistry
-from schemata.create_terminalasset_algo_maker import CreateTerminalassetAlgo
-from schemata.create_terminalasset_algo_maker import CreateTerminalassetAlgo_Maker
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.enums import RegistryGNodeRole
+from gnf.errors import SchemaError
 
 # Message types received by the GNodeRegistry
-from schemata.heartbeat_a import HeartbeatA
-from schemata.status_basegnode import StatusBasegnode
+# Message types sent by GNodeRegistry
+from gnf.schemata import CreateTerminalassetAlgo
+from gnf.schemata import CreateTerminalassetAlgo_Maker
+from gnf.schemata import HeartbeatA
+from gnf.schemata import StatusBasegnode
 
 
 LOGGER = logging.getLogger(__name__)
@@ -32,7 +28,7 @@ class DevGnr:
         self.g_node_instance_id = settings.g_node_instance_id
         self.algoClient: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
         self.acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
-            private_key=self.settings.acct_sk.get_secret_value()
+            private_key=self.settings.sk.get_secret_value()
         )
         self.mtxForCert: Optional[MultisigTransaction] = None
         self.seed_fund_own_account()
@@ -47,7 +43,7 @@ class DevGnr:
     ):
         """Routes inbound messages to correct method"""
         LOGGER.info(f"Got {payload} from {from_g_node_alias}")
-        if from_g_node_role_value != RegistryGNodeRole.G_NODE_FACTORY.value:
+        if from_g_node_role_value != RegistryGNodeRole.GNodeFactory.value:
             raise NotImplementedError
         if payload.TypeName == HeartbeatA.TypeName:
             self.heartbeat_a_received(payload, from_g_node_alias)
@@ -155,7 +151,7 @@ class DevGnr:
     def seed_fund_own_account(self):
         algos = 1
         if algo_utils.algos(self.acct.addr) < algos:
-            dev_utils.algo_setup.dev_fund_account(
+            algo_setup.dev_fund_account(
                 settings_algo=self.settings.algo,
                 to_addr=self.acct.addr,
                 amt_in_micros=10**6 * algos,
