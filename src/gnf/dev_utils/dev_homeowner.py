@@ -1,19 +1,19 @@
 import logging
-from typing import Optional
 
-import algo_utils
-import api_utils
-import config
-import dev_utils.algo_setup
-from algo_utils import BasicAccount
-from algo_utils import MultisigAccount
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 
+import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.algo_utils import BasicAccount
+from gnf.algo_utils import MultisigAccount
+
 # Schemata sent by homeowner
-from schemata.signandsubmit_mtx_algo_maker import SignandsubmitMtxAlgo
-from schemata.signandsubmit_mtx_algo_maker import SignandsubmitMtxAlgo_Maker
+from gnf.schemata import SignandsubmitMtxAlgo
+from gnf.schemata import SignandsubmitMtxAlgo_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -63,7 +63,7 @@ class DevHomeowner:
             SignandsubmitMtxAlgo:
         """
         required_algos = config.Algo().ta_deed_consideration_algos
-        dev_utils.algo_setup.dev_fund_to_min(self.ta_multi.addr, required_algos)
+        algo_setup.dev_fund_to_min(self.ta_multi.addr, required_algos)
         LOGGER.info(f"ta_multi funded with {required_algos} Algos")
 
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
@@ -100,7 +100,7 @@ class DevHomeowner:
     def seed_fund_own_account(self):
         algos = config.Algo().ta_deed_consideration_algos + 1
         if algo_utils.algos(self.acct.addr) < algos:
-            dev_utils.algo_setup.dev_fund_account(
+            algo_setup.dev_fund_account(
                 settings_algo=self.settings.algo,
                 to_addr=self.acct.addr,
                 amt_in_micros=10**6 * algos,

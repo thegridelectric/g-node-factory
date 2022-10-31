@@ -137,6 +137,7 @@ class </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum:
     symbols: List[str] = [
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:sort select="Index"/>
     <xsl:text>"</xsl:text><xsl:value-of select="Symbol"/><xsl:text>",
         </xsl:text>
 </xsl:for-each>
@@ -155,6 +156,7 @@ class </xsl:text><xsl:value-of select="$enum-class-name"/>
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+<xsl:sort select="Index"/>
 <xsl:if test="$enum-name-style = 'Upper'">
     <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
 </xsl:if>
@@ -194,6 +196,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>Map:
 
     type_to_local_dict: Dict[str, </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>] = {</xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:sort select="Index"/>
         <xsl:text>
         "</xsl:text><xsl:value-of select="Symbol"/><xsl:text>": </xsl:text>
         <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
@@ -211,6 +214,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>Map:
     local_to_type_dict: Dict[</xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>, str] = {
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:sort select="Index"/>
     <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
     <xsl:if test="$enum-name-style = 'Upper'">
         <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>

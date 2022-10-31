@@ -47,14 +47,10 @@ from fastapi_utils.enums import StrEnum
 
 class </xsl:text><xsl:value-of select="$local-class-name"/>
 <xsl:text>(StrEnum):
-
-    @classmethod
-    def values(cls):
-        return [elt.value for elt in cls]
-
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+<xsl:sort select="Index"/>
 <xsl:if test="$enum-name-style = 'Upper'">
     <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
 </xsl:if>
@@ -65,6 +61,13 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
 <xsl:text> = auto()
     </xsl:text>
 </xsl:for-each>
+<xsl:text>
+    @classmethod
+    def default(cls) -> "</xsl:text>
+    <xsl:value-of select="$local-class-name"/>
+    <xsl:text>":
+        return cls.</xsl:text><xsl:value-of select="DefaultEnumValue"/>
+
 
 
 

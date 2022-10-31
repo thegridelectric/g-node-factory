@@ -1012,8 +1012,8 @@
       <FiniteStringSetMembers>reclMrRIA4ISmRw6t</FiniteStringSetMembers>
       <FiniteStringSetMembers>recvNW0XMWSQSZEGn</FiniteStringSetMembers>
       <SchemaAttributes>recrjCdhTDEaBkdRF</SchemaAttributes>
-      <SchemaAttributes>reckbs9sgUNXrfwjV</SchemaAttributes>
       <SchemaAttributes>recEpIg7AB9Qr2dpX</SchemaAttributes>
+      <SchemaAttributes>recGSAil9ULCQw1S1</SchemaAttributes>
       <AliasRoot>core.g.node.role</AliasRoot>
       <SemanticEnd>100</SemanticEnd>
       <LocalName>core.g.node.role</LocalName>
@@ -1024,6 +1024,9 @@
       <TypesThatUse>reca1A5UXpnpmZdiH</TypesThatUse>
       <TypesThatUse>rec5bEVzI1k5qcXYg</TypesThatUse>
       <Alias>core.g.node.role.100</Alias>
+      <Default>reclMrRIA4ISmRw6t</Default>
+      <DefaultSymbol>00000000</DefaultSymbol>
+      <DefaultEnumValue>Other</DefaultEnumValue>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec6tWfTKE5P1Yoa0</GtEnumId>
@@ -1479,6 +1482,7 @@
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>4502e355</Symbol>
       <DisplayName>core.g.node.role.100__ConductorTopologyNode</DisplayName>
+      <Index>5</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>rec85EIYB2IE3sfFy</EnumSymbolId>
@@ -1661,6 +1665,7 @@
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d9823442</Symbol>
       <DisplayName>core.g.node.role.100__AtomicTNode</DisplayName>
+      <Index>3</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recF26uqkY2rHT7Xp</EnumSymbolId>
@@ -1839,6 +1844,7 @@
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>0f8872f7</Symbol>
       <DisplayName>core.g.node.role.100__TerminalAsset</DisplayName>
+      <Index>1</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recOEbA071k9xzfv3</EnumSymbolId>
@@ -1964,6 +1970,7 @@
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d67e564e</Symbol>
       <DisplayName>core.g.node.role.100__InterconnectionComponent</DisplayName>
+      <Index>6</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recT4WgGgNHq8EM8c</EnumSymbolId>
@@ -2155,7 +2162,7 @@ For GNodes with actors, a Status of active is required for any authorized actor 
 If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <DisplayName>g.node.status.100__Active</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrusbT3HInAXKvGz/reccbyMtvH1trII7S</EnumSymbol>
+    <EnumSymbol>itrf4Ssy9Kf6PbWT1/reccbyMtvH1trII7S</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recd0XHBcPJLkrg0B</EnumSymbolId>
       <createdTime>2022-07-15T17:12:45Z</createdTime>
@@ -2298,8 +2305,10 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <createdTime>2022-08-02T17:21:40Z</createdTime>
       <LocalValue>Other</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
-      <Symbol>6b58d301</Symbol>
+      <Symbol>00000000</Symbol>
       <DisplayName>core.g.node.role.100__Other</DisplayName>
+      <Index>0</Index>
+      <GtEnums>rec5HXPeyp3jic6FV</GtEnums>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reclVQqsN9eKLnIFs</EnumSymbolId>
@@ -2409,6 +2418,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>86f21dd2</Symbol>
       <DisplayName>core.g.node.role.100__MarketMaker</DisplayName>
+      <Index>4</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recob3YuE614ND3hl</EnumSymbolId>
@@ -2579,6 +2589,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>9521af06</Symbol>
       <DisplayName>core.g.node.role.100__AtomicMeteringNode</DisplayName>
+      <Index>2</Index>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recvW004kIKJFfD0A</EnumSymbolId>
@@ -2735,6 +2746,13 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <InGnfApi>true</InGnfApi>
       <InGnfSchemata>true</InGnfSchemata>
       <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>rec1azbo9KSuz3Jug</SchemaId>
+      <createdTime>2022-10-30T20:57:38Z</createdTime>
+      <Alias>.</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>1</IsCurrent>
     </Schema>
     <Schema>
       <SchemaId>rec1rqgLgJ60MilNn</SchemaId>
@@ -2902,7 +2920,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>rec0CcV18jeIt4AII</SchemaAttributes>
       <SchemaAttributes>recoyYXXZBRG1ipPM</SchemaAttributes>
       <SchemaAttributes>recVUltfFpgKkEKR0</SchemaAttributes>
-      <SchemaAttributes>reckbs9sgUNXrfwjV</SchemaAttributes>
+      <SchemaAttributes>recGSAil9ULCQw1S1</SchemaAttributes>
       <SemanticEnd>001</SemanticEnd>
       <SchemaRoot>recEfMvX9DPwXpcJ3</SchemaRoot>
       <Alias>create.discoverycert.algo.001</Alias>
@@ -5865,6 +5883,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recGSAil9ULCQw1S1</SchemaAttributeId>
+      <createdTime>2022-10-30T20:59:58Z</createdTime>
+      <IsEnum>true</IsEnum>
+      <IsType>false</IsType>
+      <Value>CoreGNodeRole</Value>
+      <Schema>rec5bEVzI1k5qcXYg</Schema>
+      <IsRequired>true</IsRequired>
+      <TestValue>"4502e355"</TestValue>
+      <Enum>rec5HXPeyp3jic6FV</Enum>
+      <EnumLocalName>core.g.node.role</EnumLocalName>
+      <EnumName>core.g.node.role.100</EnumName>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recGXMXqUz6rHqVzg</SchemaAttributeId>
       <createdTime>2022-06-07T10:23:56Z</createdTime>
       <Value>HwUid</Value>
@@ -5991,6 +6022,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
+    <SchemaAttribute>itrMibmROaeiGqzJ6/recHw5JOwPznxEWve</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recHyghQ3390tN8LF</SchemaAttributeId>
       <createdTime>2022-06-14T10:41:49Z</createdTime>
@@ -6000,7 +6032,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr3nzzfrn60wmYEK/recHyghQ3390tN8LF</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recIJFbNuY4X6wfQG</SchemaAttributeId>
       <createdTime>2022-06-07T09:30:40Z</createdTime>
@@ -7272,6 +7303,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
+    <SchemaAttribute>itrMibmROaeiGqzJ6/recZoRtISP4HaNWda</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recay2Tf4O4c9dgvH</SchemaAttributeId>
       <createdTime>2022-09-19T15:07:08Z</createdTime>
@@ -7279,7 +7311,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr3nzzfrn60wmYEK/recay2Tf4O4c9dgvH</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recazWVfmVGIXktTn</SchemaAttributeId>
       <createdTime>2022-06-18T17:00:33Z</createdTime>
@@ -8090,20 +8121,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>2</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>reckbs9sgUNXrfwjV</SchemaAttributeId>
-      <createdTime>2022-09-22T18:56:58Z</createdTime>
-      <Value>CoreGNodeRole</Value>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Enum>rec5HXPeyp3jic6FV</Enum>
-      <TestValue>"4502e355"</TestValue>
-      <Schema>rec5bEVzI1k5qcXYg</Schema>
-      <EnumLocalName>core.g.node.role</EnumLocalName>
-      <IsEnum>true</IsEnum>
-      <IsType>false</IsType>
-      <EnumName>core.g.node.role.100</EnumName>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recl1CjNX7CBI77Cf</SchemaAttributeId>
       <createdTime>2022-07-03T22:10:47Z</createdTime>
       <Value>ReportingPeriodS</Value>
@@ -8558,7 +8575,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricHeaterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>gt.electric.heater.cac</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itr3nzzfrn60wmYEK/recpqHev4KGlcd4q4</SchemaAttribute>
+    <SchemaAttribute>itrMibmROaeiGqzJ6/recpqHev4KGlcd4q4</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recpwKIE1g7BN8jGg</SchemaAttributeId>
       <createdTime>2022-09-30T19:13:23Z</createdTime>

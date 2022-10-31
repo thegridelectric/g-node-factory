@@ -21,7 +21,7 @@ class CoreGNodeRole100SchemaEnum:
         "d9823442",
         "0f8872f7",
         "d67e564e",
-        "6b58d301",
+        "00000000",
         "86f21dd2",
         "9521af06",
     ]
@@ -65,7 +65,7 @@ class CoreGNodeRoleMap:
         "d9823442": CoreGNodeRole100.AtomicTNode,
         "0f8872f7": CoreGNodeRole100.TerminalAsset,
         "d67e564e": CoreGNodeRole100.InterconnectionComponent,
-        "6b58d301": CoreGNodeRole100.Other,
+        "00000000": CoreGNodeRole100.Other,
         "86f21dd2": CoreGNodeRole100.MarketMaker,
         "9521af06": CoreGNodeRole100.AtomicMeteringNode,
     }
@@ -75,7 +75,7 @@ class CoreGNodeRoleMap:
         CoreGNodeRole100.AtomicTNode: "d9823442",
         CoreGNodeRole100.TerminalAsset: "0f8872f7",
         CoreGNodeRole100.InterconnectionComponent: "d67e564e",
-        CoreGNodeRole100.Other: "6b58d301",
+        CoreGNodeRole100.Other: "00000000",
         CoreGNodeRole100.MarketMaker: "86f21dd2",
         CoreGNodeRole100.AtomicMeteringNode: "9521af06",
     }

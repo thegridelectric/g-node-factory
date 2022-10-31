@@ -1,28 +1,26 @@
 import logging
 from typing import Optional
 
-import algo_utils
-import api_utils
-import config
-import dev_utils.algo_setup
-from algo_utils import BasicAccount
-from algo_utils import MultisigAccount
 from algosdk import encoding
 from algosdk.future import transaction
-from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
-from schemata.create_tadeed_algo_maker import CreateTadeedAlgo
-from schemata.create_tadeed_algo_maker import CreateTadeedAlgo_Maker
+
+import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
+from gnf.algo_utils import BasicAccount
+from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by validator
-from schemata.create_tavalidatorcert_algo_maker import CreateTavalidatorcertAlgo
-from schemata.create_tavalidatorcert_algo_maker import CreateTavalidatorcertAlgo_Maker
-from schemata.transfer_tadeed_algo_maker import TransferTadeedAlgo
-from schemata.transfer_tadeed_algo_maker import TransferTadeedAlgo_Maker
-from schemata.transfer_tavalidatorcert_algo_maker import TransferTavalidatorcertAlgo
-from schemata.transfer_tavalidatorcert_algo_maker import (
-    TransferTavalidatorcertAlgo_Maker,
-)
+from gnf.schemata import CreateTadeedAlgo
+from gnf.schemata import CreateTadeedAlgo_Maker
+from gnf.schemata import CreateTavalidatorcertAlgo
+from gnf.schemata import CreateTavalidatorcertAlgo_Maker
+from gnf.schemata import TransferTadeedAlgo
+from gnf.schemata import TransferTadeedAlgo_Maker
+from gnf.schemata import TransferTavalidatorcertAlgo
+from gnf.schemata import TransferTavalidatorcertAlgo_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -217,7 +215,7 @@ class DevValidator:
     def seed_fund_own_account(self):
         algos = config.Algo().gnf_validator_funding_threshold_algos + 1
         if algo_utils.algos(self.acct.addr) < algos:
-            dev_utils.algo_setup.dev_fund_account(
+            algo_setup.dev_fund_account(
                 settings_algo=self.settings.algo,
                 to_addr=self.acct.addr,
                 amt_in_micros=10**6 * algos,

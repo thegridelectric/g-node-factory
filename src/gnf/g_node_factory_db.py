@@ -1,29 +1,24 @@
 import logging
 import os
-from typing import Dict
-from typing import List
 from typing import Optional
 
-import api_utils
-import config
 import django
-from actor_base import ActorBase
-from algo_utils import BasicAccount
-from algo_utils import MultisigAccount
-from algo_utils import PendingTxnResponse
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
-from data_classes.base_g_node import BaseGNode
-from enums.core_g_node_role_map import CoreGNodeRole
-from enums.core_g_node_role_map import CoreGNodeRoleMap
-from enums.g_node_status_map import GNodeStatus
-from enums.g_node_status_map import GNodeStatusMap
-from enums.registry_g_node_role_map import RegistryGNodeRole
-from errors import RegistryError
-from errors import SchemaError
 
 import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+from gnf.algo_utils import BasicAccount
+from gnf.algo_utils import MultisigAccount
+from gnf.algo_utils import PendingTxnResponse
+from gnf.data_classes import BaseGNode
+from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeStatus
+from gnf.enums import RegistryGNodeRole
+from gnf.errors import RegistryError
+from gnf.errors import SchemaError
 
 
 LOG_FORMAT = (
@@ -51,8 +46,8 @@ from gnf.schemata import TransferTavalidatorcertAlgo
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_related.settings")
 django.setup()
-from django_related.models import BaseGNodeDb
-from django_related.models import GpsPointDb
+from gnf.django_related.models import BaseGNodeDb
+from gnf.django_related.models import GpsPointDb
 
 
 class GNodeFactoryDb:
@@ -119,7 +114,7 @@ class GNodeFactoryDb:
         payload: CreateTerminalassetAlgo,
     ):
         LOGGER.info(f"Got {payload} from {from_g_node_alias}")
-        if from_g_node_role_value != RegistryGNodeRole.G_NODE_REGISTRY.value:
+        if from_g_node_role_value != RegistryGNodeRole.GNodeRegistry.value:
             raise Exception(f"GNodeFactory only listens to GNodeRegistries")
         if payload.TypeName == CreateTadeedAlgo.TypeName:
             if payload.FromGNodeAlias != from_g_node_alias:
@@ -273,7 +268,7 @@ class GNodeFactoryDb:
         g_node.prev_alias = g_node.alias
         g_node.alias = new_alias
         g_node.save()
-        if g_node.dc.role == CoreGNodeRole.TERMINAL_ASSET:
+        if g_node.dc.role == CoreGNodeRole.TerminalAsset:
 
             new_ta_deed_idx = self.create_updated_ta_deed(g_node)
             payload_hack = self.generate_optin_tadeed_algo(
@@ -291,7 +286,7 @@ class GNodeFactoryDb:
         """Given a ctn alias and the list of the aliases of the gnodes that
         will become its children, creates a pending ctn."""
         ctn_alias = payload.GNodeAlias
-        if payload.CoreGNodeRole != CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE:
+        if payload.CoreGNodeRole != CoreGNodeRole.ConductorTopologyNode:
             raise Exception(
                 f"create_pending_ctn called for role {payload.CoreGNodeRole}!"
             )
@@ -304,10 +299,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ctn_alias,
-            "status_value": GNodeStatusMap.local_to_type(GNodeStatus.PENDING),
-            "role_value": CoreGNodeRoleMap.local_to_type(
-                CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE
-            ),
+            "status": GNodeStatus.Pending,
+            "role": CoreGNodeRole.ConductorTopologyNode,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "gps_point_id": gpsdb.gps_point_id,
         }
@@ -350,7 +343,7 @@ class GNodeFactoryDb:
         # TODO: create this and be ready to send it to discoverer, add  payload.SupportingMaterialHash
 
         role = payload.CoreGNodeRole
-        if role != CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE:
+        if role != CoreGNodeRole.ConductorTopologyNode:
             raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
         opt_in_payload = self.create_pending_ctn(payload)
         return opt_in_payload
@@ -362,10 +355,8 @@ class GNodeFactoryDb:
         parent_alias = ".".join(words[:-1])
         gn = {
             "alias": parent_alias,
-            "status_value": GNodeStatusMap.local_to_type(GNodeStatus.PENDING),
-            "role_value": CoreGNodeRoleMap.local_to_type(
-                CoreGNodeRole.ATOMIC_METERING_NODE
-            ),
+            "status": GNodeStatus.Pending,
+            "role": CoreGNodeRole.AtomicMeteringNode,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
         }
@@ -502,9 +493,9 @@ class GNodeFactoryDb:
         """
 
         ctn = BaseGNodeDb.objects.filter(alias=payload.GNodeAlias)[0]
-        if ctn.dc.role != CoreGNodeRole.CONDUCTOR_TOPOLOGY_NODE:
+        if ctn.dc.role != CoreGNodeRole.ConductorTopologyNode:
             raise Exception(f"Expected Ctn, got {ctn.dc.role}!")
-        ctn.status_value = GNodeStatusMap.local_to_type(GNodeStatus.ACTIVE)
+        ctn.status = GNodeStatus.Active
         ctn.save()
         LOGGER.info(f"Ctn is now Active: {ctn}")
         return ctn
@@ -547,9 +538,7 @@ class GNodeFactoryDb:
         atomic_metering_node = BaseGNodeDb.objects.filter(
             alias=atomic_metering_node_alias
         )[0]
-        atomic_metering_node.status_value = GNodeStatusMap.local_to_type(
-            GNodeStatus.ACTIVE
-        )
+        atomic_metering_node.status = GNodeStatus.Active
         atomic_metering_node.save()
 
         gpsdb: GpsPointDb = GpsPointDb(
@@ -559,8 +548,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ta_alias,
-            "status_value": GNodeStatusMap.local_to_type(GNodeStatus.PENDING),
-            "role_value": CoreGNodeRoleMap.local_to_type(CoreGNodeRole.TERMINAL_ASSET),
+            "status": GNodeStatus.Pending,
+            "role": CoreGNodeRole.TerminalAsset,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": asset_idx,
             "ownership_deed_validator_addr": payload.DeedValidatorAddr,
@@ -578,7 +567,7 @@ class GNodeFactoryDb:
             return None
         LOGGER.info(f"Pending TerminalAsset created: {terminal_asset}")
 
-        terminal_asset.status_value = GNodeStatusMap.local_to_type(GNodeStatus.ACTIVE)
+        terminal_asset.status = GNodeStatus.Active
         terminal_asset.save()
         LOGGER.info(f"TerminalAsset is now Active: {terminal_asset}")
         return terminal_asset

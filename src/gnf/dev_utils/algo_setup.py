@@ -2,23 +2,18 @@ import logging
 from random import choice
 from typing import List
 from typing import Optional
-from typing import Tuple
 
-import algo_utils
-import config
-from algo_utils import BasicAccount
-from algo_utils import PendingTxnResponse
-from algo_utils import get_kmd_client
-from algo_utils import pay_account
-from algosdk import encoding
-from algosdk.future import transaction
-from algosdk.future.transaction import Multisig
-from algosdk.future.transaction import MultisigTransaction
-from algosdk.future.transaction import wait_for_confirmation
 from algosdk.kmd import KMDClient
 from algosdk.v2client.algod import AlgodClient
-from config import GnfSettings
-from errors import AlgoError
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
+from gnf.algo_utils import BasicAccount
+from gnf.algo_utils import PendingTxnResponse
+from gnf.algo_utils import get_kmd_client
+from gnf.algo_utils import pay_account
+from gnf.config import GnfSettings
+from gnf.errors import AlgoError
 
 
 FUNDING_AMOUNT = 1_000_000
