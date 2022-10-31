@@ -25,8 +25,8 @@ CodeGenerationTools/GridworksCore/SassyMQ/
 # Django stuff:
 *.log
 /src/gnf/django_related/settings.py
-python_code/django_related/settings.py
-*.sqlite3
+/src/gnf/django_related/db.sqlite3
+
 
 # Environments
 .env
