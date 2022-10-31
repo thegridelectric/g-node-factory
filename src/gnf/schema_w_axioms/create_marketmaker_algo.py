@@ -1,4 +1,4 @@
-"""heartbeat.a.100 type"""
+"""create.marketmaker.algo.001 type"""
 
 import json
 from typing import List
@@ -7,8 +7,8 @@ from typing import NamedTuple
 from gnf.errors import SchemaError
 
 
-class HeartbeatA(NamedTuple):
-    TypeName: str = "heartbeat.a.100"
+class CreateMarketmakerAlgo(NamedTuple):
+    TypeName: str = "create.marketmaker.algo.001"
 
     def as_type(self) -> str:
         return json.dumps(self.asdict())
@@ -19,9 +19,9 @@ class HeartbeatA(NamedTuple):
 
     def derived_errors(self) -> List[str]:
         errors = []
-        if self.TypeName != "heartbeat.a.100":
+        if self.TypeName != "create.marketmaker.algo.001":
             errors.append(
-                f"Type requires TypeName of heartbeat.a.100, not {self.TypeName}."
+                f"Type requires TypeName of create.marketmaker.algo.001, not {self.TypeName}."
             )
 
         return errors
@@ -32,33 +32,35 @@ class HeartbeatA(NamedTuple):
         else:
             errors = self.derived_errors()
         if len(errors) > 0:
-            raise SchemaError(f"Errors making heartbeat.a.100 for {self}: {errors}")
+            raise SchemaError(
+                f"Errors making create.marketmaker.algo.001 for {self}: {errors}"
+            )
 
     def __repr__(self):
-        return "HeartbeatA"
+        return "CreateMarketmakerAlgo"
 
     def hand_coded_errors(self):
         return []
 
 
-class HeartbeatA_Maker:
-    type_name = "heartbeat.a.100"
+class CreateMarketmakerAlgo_Maker:
+    type_name = "create.marketmaker.algo.001"
 
     def __init__(self):
 
-        gw_tuple = HeartbeatA(
+        gw_tuple = CreateMarketmakerAlgo(
             #
         )
         gw_tuple.check_for_errors()
         self.tuple = gw_tuple
 
     @classmethod
-    def tuple_to_type(cls, tuple: HeartbeatA) -> str:
+    def tuple_to_type(cls, tuple: CreateMarketmakerAlgo) -> str:
         tuple.check_for_errors()
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> HeartbeatA:
+    def type_to_tuple(cls, t: str) -> CreateMarketmakerAlgo:
         try:
             d = json.loads(t)
         except TypeError:
@@ -68,14 +70,14 @@ class HeartbeatA_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> HeartbeatA:
+    def dict_to_tuple(cls, d: dict) -> CreateMarketmakerAlgo:
         new_d = {}
         for key in d.keys():
             new_d[key] = d[key]
         if "TypeName" not in new_d.keys():
             raise SchemaError(f"dict {new_d} missing TypeName")
 
-        gw_tuple = HeartbeatA(
+        gw_tuple = CreateMarketmakerAlgo(
             TypeName=new_d["TypeName"],
             #
         )

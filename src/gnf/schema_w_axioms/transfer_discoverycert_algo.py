@@ -26,7 +26,7 @@ class TransferDiscoverycertAlgo(NamedTuple):
             errors.append(f"GNodeAlias {self.GNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.GNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeAlias {self.GNodeAlias}" " must have format LrdAliasFormat: {e}"
             )
@@ -34,7 +34,7 @@ class TransferDiscoverycertAlgo(NamedTuple):
             errors.append(f"DiscovererAddr {self.DiscovererAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.DiscovererAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"DiscovererAddr {self.DiscovererAddr}"
                 " must have format AlgoAddressStringFormat: {e}"

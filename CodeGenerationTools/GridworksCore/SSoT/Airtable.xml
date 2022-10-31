@@ -60,6 +60,11 @@
       <PluralName>AppUsers</PluralName>
       <AirtableName>AppUsers</AirtableName>
     </Entity>
+    <Entity>
+      <Name>ProtocolEnum</Name>
+      <PluralName>ProtocolEnums</PluralName>
+      <AirtableName>ProtocolEnums</AirtableName>
+    </Entity>
   </Entities>
   <SchemaRoots>
     <SchemaRoot>
@@ -431,14 +436,15 @@
     <SchemaRoot>
       <SchemaRootId>recVNiapT0HIufahj</SchemaRootId>
       <createdTime>2022-06-20T12:49:53Z</createdTime>
-      <AliasRoot>gt.heartbeat.a</AliasRoot>
+      <AliasRoot>heartbeat.a</AliasRoot>
       <Status>Active</Status>
       <ProtocolType>Json</ProtocolType>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <SchemaRootscopy>recxNIfCRauFrb57o</SchemaRootscopy>
       <InGnfApi>true</InGnfApi>
-      <Alias>gt.heartbeat.a</Alias>
+      <Alias>heartbeat.a</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <InGnfSchemata>true</InGnfSchemata>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recWDAtZiKvWaXnRX</SchemaRootId>
@@ -1021,10 +1027,10 @@
       <Status>Active</Status>
       <BaseGridworksSchema>true</BaseGridworksSchema>
       <TypesThatUse>recDp8U1jLA9zeEx2</TypesThatUse>
-      <TypesThatUse>reca1A5UXpnpmZdiH</TypesThatUse>
       <TypesThatUse>rec5bEVzI1k5qcXYg</TypesThatUse>
-      <Alias>core.g.node.role.100</Alias>
       <Default>reclMrRIA4ISmRw6t</Default>
+      <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
+      <Alias>core.g.node.role.100</Alias>
       <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Other</DefaultEnumValue>
     </GtEnum>
@@ -1279,13 +1285,18 @@
       <FiniteStringSetMembers>rectW0RYQ9V3zy3cY</FiniteStringSetMembers>
       <FiniteStringSetMembers>recPY9T9Npi1jCIVV</FiniteStringSetMembers>
       <FiniteStringSetMembers>recEHVFmBtSGMPmxk</FiniteStringSetMembers>
+      <FiniteStringSetMembers>recWvHiwQvwKVnBgW</FiniteStringSetMembers>
       <AliasRoot>registry.g.node.role</AliasRoot>
       <SemanticEnd>100</SemanticEnd>
       <LocalName>registry.g.node.role</LocalName>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
       <Status>Active</Status>
       <BaseGridworksSchema>true</BaseGridworksSchema>
+      <Default>recWvHiwQvwKVnBgW</Default>
+      <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
       <Alias>registry.g.node.role.100</Alias>
+      <DefaultSymbol>00000000</DefaultSymbol>
+      <DefaultEnumValue>Unknown</DefaultEnumValue>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recomGYBJ9ldSsiNU</GtEnumId>
@@ -1332,6 +1343,7 @@
       <FiniteStringSetMembers>reccbyMtvH1trII7S</FiniteStringSetMembers>
       <FiniteStringSetMembers>recBxzAFmSdGMky9f</FiniteStringSetMembers>
       <FiniteStringSetMembers>recuDHqYzSnUGgaOA</FiniteStringSetMembers>
+      <FiniteStringSetMembers>recmkdghA4yolcvkz</FiniteStringSetMembers>
       <SchemaAttributes>reclRTU51xKZZawTG</SchemaAttributes>
       <SchemaAttributes>rec3Ip25a5UdscQKD</SchemaAttributes>
       <AliasRoot>g.node.status</AliasRoot>
@@ -1341,7 +1353,11 @@
       <Status>Active</Status>
       <BaseGridworksSchema>true</BaseGridworksSchema>
       <TypesThatUse>recDp8U1jLA9zeEx2</TypesThatUse>
+      <Default>recmkdghA4yolcvkz</Default>
+      <ProtocolEnums>rec8Ahq8RdNkgPzQN</ProtocolEnums>
       <Alias>g.node.status.100</Alias>
+      <DefaultSymbol>00000000</DefaultSymbol>
+      <DefaultEnumValue>Unknown</DefaultEnumValue>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recv25tG4mBjyVeMY</GtEnumId>
@@ -1434,6 +1450,7 @@
       <LocalValue>GNodeFactory</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>79503448</Symbol>
+      <Index>1</Index>
       <DisplayName>registry.g.node.role.100__GNodeFactory</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1481,8 +1498,8 @@
       <LocalValue>ConductorTopologyNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>4502e355</Symbol>
-      <DisplayName>core.g.node.role.100__ConductorTopologyNode</DisplayName>
       <Index>5</Index>
+      <DisplayName>core.g.node.role.100__ConductorTopologyNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>rec85EIYB2IE3sfFy</EnumSymbolId>
@@ -1595,6 +1612,7 @@
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>839b38db</Symbol>
       <Description>For passive GNodes, like TerminalAssets, this designation means no contracts may be entered into and no deed may be held for this GNode.  For active GNodes, no message may be sent from this GNode. Once a GNode is PermanentlyDeactivated it can have no other status in the future.</Description>
+      <Index>2</Index>
       <DisplayName>g.node.status.100__PermanentlyDeactivated</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1656,6 +1674,7 @@
       <LocalValue>WorldInstanceRegistry</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>baa537f6</Symbol>
+      <Index>3</Index>
       <DisplayName>registry.g.node.role.100__WorldInstanceRegistry</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1664,8 +1683,8 @@
       <LocalValue>AtomicTNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d9823442</Symbol>
-      <DisplayName>core.g.node.role.100__AtomicTNode</DisplayName>
       <Index>3</Index>
+      <DisplayName>core.g.node.role.100__AtomicTNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recF26uqkY2rHT7Xp</EnumSymbolId>
@@ -1843,8 +1862,8 @@
       <LocalValue>TerminalAsset</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>0f8872f7</Symbol>
-      <DisplayName>core.g.node.role.100__TerminalAsset</DisplayName>
       <Index>1</Index>
+      <DisplayName>core.g.node.role.100__TerminalAsset</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recOEbA071k9xzfv3</EnumSymbolId>
@@ -1903,6 +1922,7 @@
       <LocalValue>WorldCoordinator</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>06469a3c</Symbol>
+      <Index>4</Index>
       <DisplayName>registry.g.node.role.100__WorldCoordinator</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1969,8 +1989,8 @@
       <LocalValue>InterconnectionComponent</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d67e564e</Symbol>
-      <DisplayName>core.g.node.role.100__InterconnectionComponent</DisplayName>
       <Index>6</Index>
+      <DisplayName>core.g.node.role.100__InterconnectionComponent</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recT4WgGgNHq8EM8c</EnumSymbolId>
@@ -2021,12 +2041,23 @@
       <DisplayName>component.category.100__Load</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
+      <EnumSymbolId>recWvHiwQvwKVnBgW</EnumSymbolId>
+      <createdTime>2022-10-30T22:57:15Z</createdTime>
+      <LocalValue>Unknown</LocalValue>
+      <Enum>rechRk6DjahLATrOI</Enum>
+      <Symbol>00000000</Symbol>
+      <Index>0</Index>
+      <GtEnums>rechRk6DjahLATrOI</GtEnums>
+      <DisplayName>registry.g.node.role.100__Unknown</DisplayName>
+    </EnumSymbol>
+    <EnumSymbol>
       <EnumSymbolId>recX4LfgcX5340LCn</EnumSymbolId>
       <createdTime>2022-08-02T13:49:12Z</createdTime>
       <LocalValue>Pending</LocalValue>
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>153d3475</Symbol>
       <Description>The GNode has been proposed to the registry but is not yet active. The GNodeId and GNodeAlias are reserved at this point.</Description>
+      <Index>1</Index>
       <DisplayName>g.node.status.100__Pending</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2056,6 +2087,7 @@
       <LocalValue>GNodeRegistry</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>63a78529</Symbol>
+      <Index>2</Index>
       <DisplayName>registry.g.node.role.100__GNodeRegistry</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2149,20 +2181,21 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
+    <EnumSymbol>itrxFg9Po0iA7soen/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
       <LocalValue>Active</LocalValue>
       <Enum>recqx4EqT3OFtnxTG</Enum>
-      <Symbol>8d92bebe</Symbol>
+      <Symbol>a2cfc2f7</Symbol>
       <Description>For passive GNodes that represent physical objects, like TerminalAssets, a Status of active means there is evidence supporting the existence of the TerminalAsset. A GNodeStatus of active is required in order for any contract to be entered to that requires trading rights for and/or a deed for a passive GNode.
 
 For GNodes with actors, a Status of active is required for any authorized actor to send a message representing itself as that GNode.
 
 If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
+      <Index>0</Index>
       <DisplayName>g.node.status.100__Active</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrf4Ssy9Kf6PbWT1/reccbyMtvH1trII7S</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recd0XHBcPJLkrg0B</EnumSymbolId>
       <createdTime>2022-07-15T17:12:45Z</createdTime>
@@ -2306,9 +2339,9 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>Other</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>00000000</Symbol>
-      <DisplayName>core.g.node.role.100__Other</DisplayName>
       <Index>0</Index>
       <GtEnums>rec5HXPeyp3jic6FV</GtEnums>
+      <DisplayName>core.g.node.role.100__Other</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reclVQqsN9eKLnIFs</EnumSymbolId>
@@ -2341,6 +2374,16 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>rec6tWfTKE5P1Yoa0</Enum>
       <Symbol>7abc3adc</Symbol>
       <DisplayName>spaceheat.node.role.100__CirculatorPump</DisplayName>
+    </EnumSymbol>
+    <EnumSymbol>
+      <EnumSymbolId>recmkdghA4yolcvkz</EnumSymbolId>
+      <createdTime>2022-10-30T22:58:32Z</createdTime>
+      <LocalValue>Unknown</LocalValue>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <Symbol>00000000</Symbol>
+      <Description>Unknown GNode Status</Description>
+      <GtEnums>recqx4EqT3OFtnxTG</GtEnums>
+      <DisplayName>g.node.status.100__Unknown</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recmn8roOV3qQ6bN2</EnumSymbolId>
@@ -2417,8 +2460,8 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>MarketMaker</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>86f21dd2</Symbol>
-      <DisplayName>core.g.node.role.100__MarketMaker</DisplayName>
       <Index>4</Index>
+      <DisplayName>core.g.node.role.100__MarketMaker</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recob3YuE614ND3hl</EnumSymbolId>
@@ -2538,6 +2581,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>GridWorks</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>f0f14c88</Symbol>
+      <Index>5</Index>
       <DisplayName>registry.g.node.role.100__GridWorks</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2564,6 +2608,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>f5831e1d</Symbol>
       <Description>The GNode has been suspended due to missing NFTs</Description>
+      <Index>3</Index>
       <DisplayName>g.node.status.100__Suspended</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2588,8 +2633,8 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>AtomicMeteringNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>9521af06</Symbol>
-      <DisplayName>core.g.node.role.100__AtomicMeteringNode</DisplayName>
       <Index>2</Index>
+      <DisplayName>core.g.node.role.100__AtomicMeteringNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recvW004kIKJFfD0A</EnumSymbolId>
@@ -2921,6 +2966,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recoyYXXZBRG1ipPM</SchemaAttributes>
       <SchemaAttributes>recVUltfFpgKkEKR0</SchemaAttributes>
       <SchemaAttributes>recGSAil9ULCQw1S1</SchemaAttributes>
+      <Enums>rec5HXPeyp3jic6FV</Enums>
       <SemanticEnd>001</SemanticEnd>
       <SchemaRoot>recEfMvX9DPwXpcJ3</SchemaRoot>
       <Alias>create.discoverycert.algo.001</Alias>
@@ -2937,7 +2983,6 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <InGnfApi>true</InGnfApi>
       <InGnfSchemata>true</InGnfSchemata>
       <InGwProto />
-      <Enums>rec5HXPeyp3jic6FV</Enums>
     </Schema>
     <Schema>
       <SchemaId>rec70ndc2atifo8Ri</SchemaId>
@@ -3940,7 +3985,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <Schema>
       <SchemaId>reca1A5UXpnpmZdiH</SchemaId>
       <createdTime>2022-09-21T11:37:43Z</createdTime>
-      <Enums>rec5HXPeyp3jic6FV</Enums>
       <SemanticEnd>010</SemanticEnd>
       <SchemaRoot>recNShQmJ0F04UlrH</SchemaRoot>
       <Alias>create.basegnode.010</Alias>
@@ -4625,19 +4669,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-06-20T12:49:53Z</createdTime>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recVNiapT0HIufahj</SchemaRoot>
-      <Alias>gt.heartbeat.a.100</Alias>
+      <Alias>heartbeat.a.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.heartbeat.a</AliasRoot>
+      <AliasRoot>heartbeat.a</AliasRoot>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
       <InGnfApi>true</InGnfApi>
-      <InGnfSchemata />
+      <InGnfSchemata>true</InGnfSchemata>
       <InGwProto />
     </Schema>
     <Schema>
@@ -5885,14 +5929,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>recGSAil9ULCQw1S1</SchemaAttributeId>
       <createdTime>2022-10-30T20:59:58Z</createdTime>
+      <Value>CoreGNodeRole</Value>
+      <IsRequired>true</IsRequired>
+      <Enum>rec5HXPeyp3jic6FV</Enum>
+      <TestValue>"4502e355"</TestValue>
+      <Schema>rec5bEVzI1k5qcXYg</Schema>
+      <EnumLocalName>core.g.node.role</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <Value>CoreGNodeRole</Value>
-      <Schema>rec5bEVzI1k5qcXYg</Schema>
-      <IsRequired>true</IsRequired>
-      <TestValue>"4502e355"</TestValue>
-      <Enum>rec5HXPeyp3jic6FV</Enum>
-      <EnumLocalName>core.g.node.role</EnumLocalName>
       <EnumName>core.g.node.role.100</EnumName>
     </SchemaAttribute>
     <SchemaAttribute>
@@ -6022,7 +6066,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrMibmROaeiGqzJ6/recHw5JOwPznxEWve</SchemaAttribute>
+    <SchemaAttribute>itrgfqKrluvPmJsme/recHw5JOwPznxEWve</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recHyghQ3390tN8LF</SchemaAttributeId>
       <createdTime>2022-06-14T10:41:49Z</createdTime>
@@ -7303,7 +7347,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrMibmROaeiGqzJ6/recZoRtISP4HaNWda</SchemaAttribute>
+    <SchemaAttribute>itrgfqKrluvPmJsme/recZoRtISP4HaNWda</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recay2Tf4O4c9dgvH</SchemaAttributeId>
       <createdTime>2022-09-19T15:07:08Z</createdTime>
@@ -8575,7 +8619,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricHeaterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>gt.electric.heater.cac</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itrMibmROaeiGqzJ6/recpqHev4KGlcd4q4</SchemaAttribute>
+    <SchemaAttribute>itrgfqKrluvPmJsme/recpqHev4KGlcd4q4</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recpwKIE1g7BN8jGg</SchemaAttributeId>
       <createdTime>2022-09-30T19:13:23Z</createdTime>
@@ -10201,6 +10245,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolId>recXaQaXNNDyxIlT7</ProtocolId>
       <createdTime>2022-10-24T23:07:49Z</createdTime>
       <Name>gnf</Name>
+      <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
+      <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
+      <ProtocolEnums>rec8Ahq8RdNkgPzQN</ProtocolEnums>
     </Protocol>
   </Protocols>
   <ProtocolTypes>
@@ -10643,4 +10690,30 @@ characterized electrical device, using the meter described, at the location desc
       <fields />
     </AppUser>
   </AppUsers>
+  <ProtocolEnums>
+    <ProtocolEnum>
+      <ProtocolEnumId>rec8Ahq8RdNkgPzQN</ProtocolEnumId>
+      <createdTime>2022-10-31T18:31:02Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>g.node.status.100</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recX5VXrxWR81za5J</ProtocolEnumId>
+      <createdTime>2022-10-31T18:31:02Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Enum>rec5HXPeyp3jic6FV</Enum>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>core.g.node.role.100</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recr9TyWTi2Ct7iKH</ProtocolEnumId>
+      <createdTime>2022-10-31T18:31:02Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Enum>rechRk6DjahLATrOI</Enum>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>registry.g.node.role.100</EnumName>
+    </ProtocolEnum>
+  </ProtocolEnums>
 </Airtable>

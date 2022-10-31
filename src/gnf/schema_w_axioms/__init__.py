@@ -1,5 +1,4 @@
 """ List of all the schema types """
-
 from gnf.schemata.basegnode_gt import BasegnodeGt
 from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
 from gnf.schemata.create_basegnode import CreateBasegnode
@@ -37,6 +36,8 @@ from gnf.schemata.transfer_tavalidatorcert_algo import TransferTavalidatorcertAl
 
 
 __all__ = [
+    "HeartbeatA",
+    "HeartbeatA_Maker",
     "TransferTavalidatorcertAlgo",
     "TransferTavalidatorcertAlgo_Maker",
     "SignandsubmitMtxAlgo",
@@ -69,6 +70,4 @@ __all__ = [
     "TransferTadeedAlgo_Maker",
     "TransferDiscoverycertAlgo",
     "TransferDiscoverycertAlgo_Maker",
-    "HeartbeatA",
-    "HeartbeatA_Maker",
 ]

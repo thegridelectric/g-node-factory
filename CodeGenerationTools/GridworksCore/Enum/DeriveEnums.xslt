@@ -19,7 +19,9 @@
     <xsl:template match="/">
         <FileSet>
             <FileSetFiles>
-                <xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='' and Status='Active')]">
+                <xsl:for-each select="$airtable//ProtocolEnums/ProtocolEnum[(normalize-space(ProtocolName) ='gnf')]">
+                <xsl:variable name="enum-id" select="Enum"/>
+                <xsl:for-each select="$airtable//GtEnums/GtEnum[GtEnumId=$enum-id]">
                     <xsl:variable name="enum-name-style" select="PythonEnumNameStyle" />
                     <xsl:variable name="class-name">
                         <xsl:call-template name="nt-case">
@@ -31,7 +33,6 @@
                             <xsl:with-param name="mp-schema-text" select="LocalName" />
                         </xsl:call-template>
                     </xsl:variable>
-                    <xsl:variable name="enum-id" select="GtEnumId"/>
                     <FileSetFile>
                                 <xsl:element name="RelativePath"><xsl:text>../../../src/gnf/enums/</xsl:text>
                                 <xsl:value-of select="translate(AliasRoot,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
@@ -77,6 +78,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
 
                         </xsl:element>
                      </FileSetFile>
+                </xsl:for-each>
                 </xsl:for-each>
 
             </FileSetFiles>

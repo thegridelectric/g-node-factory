@@ -4,14 +4,15 @@ from fastapi_utils.enums import StrEnum
 
 
 class GNodeStatus(StrEnum):
-    PermanentlyDeactivated = auto()
-    Pending = auto()
+    Unknown = auto()
     Active = auto()
+    Pending = auto()
+    PermanentlyDeactivated = auto()
     Suspended = auto()
 
     @classmethod
     def default(cls) -> "GNodeStatus":
-        return cls.Active
+        return cls.Unknown
 
     @classmethod
     def values(cls):

@@ -17,13 +17,13 @@ from gnf.errors import SchemaError
 class CoreGNodeRole100SchemaEnum:
     enum_name: str = "core.g.node.role.100"
     symbols: List[str] = [
-        "00000000",
-        "0f8872f7",
-        "9521af06",
-        "d9823442",
-        "86f21dd2",
         "4502e355",
+        "d9823442",
+        "0f8872f7",
         "d67e564e",
+        "00000000",
+        "86f21dd2",
+        "9521af06",
     ]
 
     @classmethod
@@ -34,13 +34,13 @@ class CoreGNodeRole100SchemaEnum:
 
 
 class CoreGNodeRole100(StrEnum):
-    Other = auto()
-    TerminalAsset = auto()
-    AtomicMeteringNode = auto()
-    AtomicTNode = auto()
-    MarketMaker = auto()
     ConductorTopologyNode = auto()
+    AtomicTNode = auto()
+    TerminalAsset = auto()
     InterconnectionComponent = auto()
+    Other = auto()
+    MarketMaker = auto()
+    AtomicMeteringNode = auto()
 
     @classmethod
     def values(cls):
@@ -61,33 +61,32 @@ class CoreGNodeRoleMap:
         return cls.local_to_type_dict[core_g_node_role]
 
     type_to_local_dict: Dict[str, CoreGNodeRole100] = {
-        "00000000": CoreGNodeRole100.Other,
-        "0f8872f7": CoreGNodeRole100.TerminalAsset,
-        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
-        "d9823442": CoreGNodeRole100.AtomicTNode,
-        "86f21dd2": CoreGNodeRole100.MarketMaker,
         "4502e355": CoreGNodeRole100.ConductorTopologyNode,
+        "d9823442": CoreGNodeRole100.AtomicTNode,
+        "0f8872f7": CoreGNodeRole100.TerminalAsset,
         "d67e564e": CoreGNodeRole100.InterconnectionComponent,
+        "00000000": CoreGNodeRole100.Other,
+        "86f21dd2": CoreGNodeRole100.MarketMaker,
+        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
     }
 
     local_to_type_dict: Dict[CoreGNodeRole100, str] = {
-        CoreGNodeRole100.Other: "00000000",
-        CoreGNodeRole100.TerminalAsset: "0f8872f7",
-        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
-        CoreGNodeRole100.AtomicTNode: "d9823442",
-        CoreGNodeRole100.MarketMaker: "86f21dd2",
         CoreGNodeRole100.ConductorTopologyNode: "4502e355",
+        CoreGNodeRole100.AtomicTNode: "d9823442",
+        CoreGNodeRole100.TerminalAsset: "0f8872f7",
         CoreGNodeRole100.InterconnectionComponent: "d67e564e",
+        CoreGNodeRole100.Other: "00000000",
+        CoreGNodeRole100.MarketMaker: "86f21dd2",
+        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
     }
 
 
 class GNodeStatus100SchemaEnum:
     enum_name: str = "g.node.status.100"
     symbols: List[str] = [
-        "00000000",
-        "a2cfc2f7",
-        "153d3475",
         "839b38db",
+        "153d3475",
+        "8d92bebe",
         "f5831e1d",
     ]
 
@@ -99,10 +98,9 @@ class GNodeStatus100SchemaEnum:
 
 
 class GNodeStatus100(StrEnum):
-    Unknown = auto()
-    Active = auto()
-    Pending = auto()
     PermanentlyDeactivated = auto()
+    Pending = auto()
+    Active = auto()
     Suspended = auto()
 
     @classmethod
@@ -124,18 +122,16 @@ class GNodeStatusMap:
         return cls.local_to_type_dict[g_node_status]
 
     type_to_local_dict: Dict[str, GNodeStatus100] = {
-        "00000000": GNodeStatus100.Unknown,
-        "a2cfc2f7": GNodeStatus100.Active,
-        "153d3475": GNodeStatus100.Pending,
         "839b38db": GNodeStatus100.PermanentlyDeactivated,
+        "153d3475": GNodeStatus100.Pending,
+        "8d92bebe": GNodeStatus100.Active,
         "f5831e1d": GNodeStatus100.Suspended,
     }
 
     local_to_type_dict: Dict[GNodeStatus100, str] = {
-        GNodeStatus100.Unknown: "00000000",
-        GNodeStatus100.Active: "a2cfc2f7",
-        GNodeStatus100.Pending: "153d3475",
         GNodeStatus100.PermanentlyDeactivated: "839b38db",
+        GNodeStatus100.Pending: "153d3475",
+        GNodeStatus100.Active: "8d92bebe",
         GNodeStatus100.Suspended: "f5831e1d",
     }
 
@@ -190,7 +186,7 @@ class BasegnodeGt(NamedTuple):
             )
         try:
             property_format.check_is_algo_address_string_format(self.GNodeRegistryAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeRegistryAddr {self.GNodeRegistryAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -202,7 +198,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"PrevAlias {self.PrevAlias} must have type str.")
             try:
                 property_format.check_is_lrd_alias_format(self.PrevAlias)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"PrevAlias {self.PrevAlias}"
                     " must have format LrdAliasFormat: {e}"
@@ -221,7 +217,7 @@ class BasegnodeGt(NamedTuple):
                 property_format.check_is_algo_address_string_format(
                     self.OwnershipDeedValidatorAddr
                 )
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnershipDeedValidatorAddr {self.OwnershipDeedValidatorAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -230,13 +226,13 @@ class BasegnodeGt(NamedTuple):
             errors.append(f"Alias {self.Alias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.Alias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(f"Alias {self.Alias}" " must have format LrdAliasFormat: {e}")
         if not isinstance(self.GNodeId, int):
             errors.append(f"GNodeId {self.GNodeId} must have type int.")
         try:
             property_format.check_is_uuid_canonical_textual(self.GNodeId)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeId {self.GNodeId}" " must have format UuidCanonicalTextual: {e}"
             )
@@ -247,7 +243,7 @@ class BasegnodeGt(NamedTuple):
                 )
             try:
                 property_format.check_is_positive_integer(self.OwnershipDeedNftId)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnershipDeedNftId {self.OwnershipDeedNftId}"
                     " must have format PositiveInteger: {e}"
@@ -257,7 +253,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"OwnerAddr {self.OwnerAddr} must have type str.")
             try:
                 property_format.check_is_algo_address_string_format(self.OwnerAddr)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnerAddr {self.OwnerAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -267,7 +263,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"DaemonAddr {self.DaemonAddr} must have type str.")
             try:
                 property_format.check_is_algo_address_string_format(self.DaemonAddr)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"DaemonAddr {self.DaemonAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -277,7 +273,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"GpsPointId {self.GpsPointId} must have type str.")
             try:
                 property_format.check_is_uuid_canonical_textual(self.GpsPointId)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"GpsPointId {self.GpsPointId}"
                     " must have format UuidCanonicalTextual: {e}"

@@ -16,13 +16,13 @@ from gnf.errors import SchemaError
 class CoreGNodeRole100SchemaEnum:
     enum_name: str = "core.g.node.role.100"
     symbols: List[str] = [
-        "00000000",
-        "0f8872f7",
-        "9521af06",
-        "d9823442",
-        "86f21dd2",
         "4502e355",
+        "d9823442",
+        "0f8872f7",
         "d67e564e",
+        "00000000",
+        "86f21dd2",
+        "9521af06",
     ]
 
     @classmethod
@@ -33,13 +33,13 @@ class CoreGNodeRole100SchemaEnum:
 
 
 class CoreGNodeRole100(StrEnum):
-    Other = auto()
-    TerminalAsset = auto()
-    AtomicMeteringNode = auto()
-    AtomicTNode = auto()
-    MarketMaker = auto()
     ConductorTopologyNode = auto()
+    AtomicTNode = auto()
+    TerminalAsset = auto()
     InterconnectionComponent = auto()
+    Other = auto()
+    MarketMaker = auto()
+    AtomicMeteringNode = auto()
 
     @classmethod
     def values(cls):
@@ -60,23 +60,23 @@ class CoreGNodeRoleMap:
         return cls.local_to_type_dict[core_g_node_role]
 
     type_to_local_dict: Dict[str, CoreGNodeRole100] = {
-        "00000000": CoreGNodeRole100.Other,
-        "0f8872f7": CoreGNodeRole100.TerminalAsset,
-        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
-        "d9823442": CoreGNodeRole100.AtomicTNode,
-        "86f21dd2": CoreGNodeRole100.MarketMaker,
         "4502e355": CoreGNodeRole100.ConductorTopologyNode,
+        "d9823442": CoreGNodeRole100.AtomicTNode,
+        "0f8872f7": CoreGNodeRole100.TerminalAsset,
         "d67e564e": CoreGNodeRole100.InterconnectionComponent,
+        "00000000": CoreGNodeRole100.Other,
+        "86f21dd2": CoreGNodeRole100.MarketMaker,
+        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
     }
 
     local_to_type_dict: Dict[CoreGNodeRole100, str] = {
-        CoreGNodeRole100.Other: "00000000",
-        CoreGNodeRole100.TerminalAsset: "0f8872f7",
-        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
-        CoreGNodeRole100.AtomicTNode: "d9823442",
-        CoreGNodeRole100.MarketMaker: "86f21dd2",
         CoreGNodeRole100.ConductorTopologyNode: "4502e355",
+        CoreGNodeRole100.AtomicTNode: "d9823442",
+        CoreGNodeRole100.TerminalAsset: "0f8872f7",
         CoreGNodeRole100.InterconnectionComponent: "d67e564e",
+        CoreGNodeRole100.Other: "00000000",
+        CoreGNodeRole100.MarketMaker: "86f21dd2",
+        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
     }
 
 
@@ -117,7 +117,7 @@ class CreateDiscoverycertAlgo(NamedTuple):
                     errors.append(f"elt {elt} of OldChildAliasList must have type str.")
                 try:
                     property_format.check_is_lrd_alias_format(elt)
-                except SchemaError as e:
+                except ValueError as e:
                     errors.append(
                         f"elt {elt} of OldChildAliasList must have format LrdAliasFormat; {e}"
                     )
@@ -125,7 +125,7 @@ class CreateDiscoverycertAlgo(NamedTuple):
             errors.append(f"GNodeAlias {self.GNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.GNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeAlias {self.GNodeAlias}" " must have format LrdAliasFormat: {e}"
             )
@@ -137,7 +137,7 @@ class CreateDiscoverycertAlgo(NamedTuple):
             errors.append(f"DiscovererAddr {self.DiscovererAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.DiscovererAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"DiscovererAddr {self.DiscovererAddr}"
                 " must have format AlgoAddressStringFormat: {e}"

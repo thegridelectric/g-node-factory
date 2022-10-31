@@ -18,7 +18,7 @@ from .utils import GNodeRegistryStubRecorder
 from .utils import wait_for
 
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.settings")
 # django.setup()
 
 

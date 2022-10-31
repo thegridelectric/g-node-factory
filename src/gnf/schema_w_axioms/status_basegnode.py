@@ -51,7 +51,7 @@ class StatusBasegnode(NamedTuple):
             errors.append(f"FromGNodeAlias {self.FromGNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.FromGNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"FromGNodeAlias {self.FromGNodeAlias}"
                 " must have format LrdAliasFormat: {e}"
@@ -62,7 +62,7 @@ class StatusBasegnode(NamedTuple):
             )
         try:
             property_format.check_is_uuid_canonical_textual(self.FromGNodeInstanceId)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"FromGNodeInstanceId {self.FromGNodeInstanceId}"
                 " must have format UuidCanonicalTextual: {e}"
@@ -71,7 +71,7 @@ class StatusBasegnode(NamedTuple):
             errors.append(f"TopGNodeId {self.TopGNodeId} must have type str.")
         try:
             property_format.check_is_uuid_canonical_textual(self.TopGNodeId)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"TopGNodeId {self.TopGNodeId}" " must have format UuidCanonicalTextual"
             )
@@ -79,7 +79,7 @@ class StatusBasegnode(NamedTuple):
             errors.append(f"ToGNodeAlias {self.ToGNodeAlias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.ToGNodeAlias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"ToGNodeAlias {self.ToGNodeAlias}"
                 " must have format LrdAliasFormat: {e}"
