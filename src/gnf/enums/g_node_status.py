@@ -12,3 +12,7 @@ class GNodeStatus(StrEnum):
     @classmethod
     def default(cls) -> "GNodeStatus":
         return cls.Active
+
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]

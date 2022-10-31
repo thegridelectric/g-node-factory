@@ -1,5 +1,5 @@
-import config
-from dev_utils.dev_validator import DevValidator
+import gnf.config as config
+from gnf.dev_utils import DevValidator
 
 
 molly = DevValidator(config.MollyMetermaidSettings())

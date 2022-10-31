@@ -2,10 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.create_tatradingrights_algo_maker import (
-    CreateTatradingrightsAlgo_Maker as Maker,
-)
+
+from gnf.errors import SchemaError
+from gnf.schemata import CreateTatradingrightsAlgo_Maker as Maker
 
 
 def test_create_tatradingrights_algo_generated():

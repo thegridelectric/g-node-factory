@@ -15,3 +15,7 @@ class CoreGNodeRole(StrEnum):
     @classmethod
     def default(cls) -> "CoreGNodeRole":
         return cls.Other
+
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]

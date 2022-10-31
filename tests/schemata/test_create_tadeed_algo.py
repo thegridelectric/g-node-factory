@@ -2,8 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.create_tadeed_algo_maker import CreateTadeedAlgo_Maker as Maker
+
+from gnf.errors import SchemaError
+from gnf.schemata import CreateTadeedAlgo_Maker as Maker
 
 
 def test_create_tadeed_algo_generated():

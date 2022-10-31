@@ -26,7 +26,7 @@ class TransferTavalidatorcertAlgo(NamedTuple):
             errors.append(f"ValidatorAddr {self.ValidatorAddr} must have type str.")
         try:
             property_format.check_is_algo_address_string_format(self.ValidatorAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"ValidatorAddr {self.ValidatorAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -39,7 +39,7 @@ class TransferTavalidatorcertAlgo(NamedTuple):
             property_format.check_is_algo_msg_pack_encoded(
                 self.HalfSignedCertTransferMtx
             )
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"HalfSignedCertTransferMtx {self.HalfSignedCertTransferMtx}"
                 " must have format AlgoMsgPackEncoded: {e}"

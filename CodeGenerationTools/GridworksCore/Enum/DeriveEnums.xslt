@@ -67,8 +67,12 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
     <xsl:value-of select="$local-class-name"/>
     <xsl:text>":
         return cls.</xsl:text><xsl:value-of select="DefaultEnumValue"/>
+    <xsl:text>
 
-
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]
+</xsl:text>
 
 
                         </xsl:element>

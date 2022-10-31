@@ -186,7 +186,7 @@ class BasegnodeGt(NamedTuple):
             )
         try:
             property_format.check_is_algo_address_string_format(self.GNodeRegistryAddr)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeRegistryAddr {self.GNodeRegistryAddr}"
                 " must have format AlgoAddressStringFormat: {e}"
@@ -198,7 +198,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"PrevAlias {self.PrevAlias} must have type str.")
             try:
                 property_format.check_is_lrd_alias_format(self.PrevAlias)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"PrevAlias {self.PrevAlias}"
                     " must have format LrdAliasFormat: {e}"
@@ -217,7 +217,7 @@ class BasegnodeGt(NamedTuple):
                 property_format.check_is_algo_address_string_format(
                     self.OwnershipDeedValidatorAddr
                 )
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnershipDeedValidatorAddr {self.OwnershipDeedValidatorAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -226,13 +226,13 @@ class BasegnodeGt(NamedTuple):
             errors.append(f"Alias {self.Alias} must have type str.")
         try:
             property_format.check_is_lrd_alias_format(self.Alias)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(f"Alias {self.Alias}" " must have format LrdAliasFormat: {e}")
         if not isinstance(self.GNodeId, int):
             errors.append(f"GNodeId {self.GNodeId} must have type int.")
         try:
             property_format.check_is_uuid_canonical_textual(self.GNodeId)
-        except SchemaError as e:
+        except ValueError as e:
             errors.append(
                 f"GNodeId {self.GNodeId}" " must have format UuidCanonicalTextual: {e}"
             )
@@ -243,7 +243,7 @@ class BasegnodeGt(NamedTuple):
                 )
             try:
                 property_format.check_is_positive_integer(self.OwnershipDeedNftId)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnershipDeedNftId {self.OwnershipDeedNftId}"
                     " must have format PositiveInteger: {e}"
@@ -253,7 +253,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"OwnerAddr {self.OwnerAddr} must have type str.")
             try:
                 property_format.check_is_algo_address_string_format(self.OwnerAddr)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"OwnerAddr {self.OwnerAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -263,7 +263,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"DaemonAddr {self.DaemonAddr} must have type str.")
             try:
                 property_format.check_is_algo_address_string_format(self.DaemonAddr)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"DaemonAddr {self.DaemonAddr}"
                     " must have format AlgoAddressStringFormat: {e}"
@@ -273,7 +273,7 @@ class BasegnodeGt(NamedTuple):
                 errors.append(f"GpsPointId {self.GpsPointId} must have type str.")
             try:
                 property_format.check_is_uuid_canonical_textual(self.GpsPointId)
-            except SchemaError as e:
+            except ValueError as e:
                 errors.append(
                     f"GpsPointId {self.GpsPointId}"
                     " must have format UuidCanonicalTextual: {e}"

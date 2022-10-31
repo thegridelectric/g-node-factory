@@ -2,15 +2,16 @@ import os
 
 import django
 import pika
-from config import GnfSettings
-from python_test.utils import wait_for
+
+from gnf.config import GnfSettings
+
+from .utils import GNodeFactoryRabbitStubRecorder
+from .utils import GNodeRegistryStubRecorder
+from .utils import wait_for
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")
-django.setup()
-
-from python_test.utils import GNodeFactoryRabbitStubRecorder
-from python_test.utils import GNodeRegistryStubRecorder
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "python_code.django_related.settings")
+# django.setup()
 
 
 # def test_pika_types_and_sundry():

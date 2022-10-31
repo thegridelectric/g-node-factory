@@ -13,3 +13,7 @@ class RegistryGNodeRole(StrEnum):
     @classmethod
     def default(cls) -> "RegistryGNodeRole":
         return cls.GridWorks
+
+    @classmethod
+    def values(cls):
+        return [elt.value for elt in cls]

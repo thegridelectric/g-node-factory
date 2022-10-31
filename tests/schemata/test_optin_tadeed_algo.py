@@ -2,8 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.optin_tadeed_algo_maker import OptinTadeedAlgo_Maker as Maker
+
+from gnf.errors import SchemaError
+from gnf.schemata import OptinTadeedAlgo_Maker as Maker
 
 
 # def test_optin_tadeed_algo_generated():

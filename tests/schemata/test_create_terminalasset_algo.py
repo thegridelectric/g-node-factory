@@ -2,10 +2,9 @@
 import json
 
 import pytest
-from errors import SchemaError
-from schemata.create_terminalasset_algo_maker import (
-    CreateTerminalassetAlgo_Maker as Maker,
-)
+
+from gnf.errors import SchemaError
+from gnf.schemata import CreateTerminalassetAlgo_Maker as Maker
 
 
 def test_create_terminalasset_algo_generated():

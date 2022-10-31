@@ -1,7 +1,8 @@
-import algo_utils
-import config
 from algosdk.kmd import KMDClient
 from algosdk.v2client.algod import AlgodClient
+
+import gnf.algo_utils as algo_utils
+import gnf.config as config
 
 
 def test_get_algod_client():
