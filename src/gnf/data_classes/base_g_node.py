@@ -50,7 +50,11 @@ class BaseGNode(StreamlinedSerializerMixin):
         self.g_node_id = g_node_id
         self.alias = alias
         self.prev_alias = prev_alias
+        if not isinstance(status, GNodeStatus):
+            raise DcError(f"status {status} must be GNodeStatus, got {type(status)}")
         self.status = status
+        if not isinstance(role, CoreGNodeRole):
+            raise DcError(f"role {role} must be  CoreGNodeRole, got {type(role)}")
         self.role = role
         self.g_node_registry_addr = g_node_registry_addr
         self.ownership_deed_nft_id = ownership_deed_nft_id

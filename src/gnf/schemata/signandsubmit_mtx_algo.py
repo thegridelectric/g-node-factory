@@ -1,4 +1,4 @@
-"""signandsubmit.mtx.algo.000 type"""
+"""Type signandsubmit.mtx.algo, version 000"""
 import json
 from typing import Dict
 from typing import List
@@ -18,6 +18,7 @@ class SignandsubmitMtxAlgo(BaseModel):
     Addresses: List[str]
     Threshold: int  #
     TypeName: Literal["signandsubmit.mtx.algo"] = "signandsubmit.mtx.algo"
+    Version: str = "000"
 
     _validator_signer_address = predicate_validator(
         "SignerAddress", property_format.is_algo_address_string_format
@@ -46,6 +47,7 @@ class SignandsubmitMtxAlgo(BaseModel):
 
 class SignandsubmitMtxAlgo_Maker:
     type_name = "signandsubmit.mtx.algo"
+    version = "000"
 
     def __init__(
         self, signer_address: str, mtx: str, addresses: List[str], threshold: int
@@ -76,13 +78,12 @@ class SignandsubmitMtxAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> SignandsubmitMtxAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return SignandsubmitMtxAlgo(
-            TypeName=d2["TypeName"],
             SignerAddress=d2["SignerAddress"],
             Mtx=d2["Mtx"],
             Addresses=d2["Addresses"],
             Threshold=d2["Threshold"],
+            TypeName=d2["TypeName"],
+            Version="000",
         )

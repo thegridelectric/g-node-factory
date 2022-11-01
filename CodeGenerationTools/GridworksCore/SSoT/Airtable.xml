@@ -1400,7 +1400,7 @@
       <LocalValue>CurrentRmsMicroAmps</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>ad19e79c</Symbol>
-      <Index>6</Index>
+      <Idx>6</Idx>
       <DisplayName>spaceheat.telemetry.name.110__CurrentRmsMicroAmps</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1409,7 +1409,7 @@
       <LocalValue>GNodeFactory</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>79503448</Symbol>
-      <Index>1</Index>
+      <Idx>1</Idx>
       <DisplayName>registry.g.node.role.100__GNodeFactory</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1418,7 +1418,7 @@
       <LocalValue>PowerW</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>af39eec9</Symbol>
-      <Index>1</Index>
+      <Idx>1</Idx>
       <DisplayName>spaceheat.telemetry.name.100__PowerW</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1427,7 +1427,7 @@
       <LocalValue>WaterFlowGpmTimes100</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>d70cce28</Symbol>
-      <Index>5</Index>
+      <Idx>5</Idx>
       <DisplayName>spaceheat.telemetry.name.110__WaterFlowGpmTimes100</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1457,7 +1457,8 @@
       <LocalValue>ConductorTopologyNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>4502e355</Symbol>
-      <Index>5</Index>
+      <Idx>5</Idx>
+      <Version>1</Version>
       <DisplayName>core.g.node.role.100__ConductorTopologyNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1488,7 +1489,7 @@
       <LocalValue>WaterTempCTimes1000</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>c89d0ba1</Symbol>
-      <Index>3</Index>
+      <Idx>3</Idx>
       <DisplayName>spaceheat.telemetry.name.110__WaterTempCTimes1000</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1529,7 +1530,7 @@
       <LocalValue>WaterTempFTimes1000</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>793505aa</Symbol>
-      <Index>4</Index>
+      <Idx>4</Idx>
       <DisplayName>spaceheat.telemetry.name.100__WaterTempFTimes1000</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1571,7 +1572,7 @@
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>839b38db</Symbol>
       <Description>For passive GNodes, like TerminalAssets, this designation means no contracts may be entered into and no deed may be held for this GNode.  For active GNodes, no message may be sent from this GNode. Once a GNode is PermanentlyDeactivated it can have no other status in the future.</Description>
-      <Index>2</Index>
+      <Idx>2</Idx>
       <DisplayName>g.node.status.100__PermanentlyDeactivated</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1633,7 +1634,7 @@
       <LocalValue>WorldInstanceRegistry</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>baa537f6</Symbol>
-      <Index>3</Index>
+      <Idx>3</Idx>
       <DisplayName>registry.g.node.role.100__WorldInstanceRegistry</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1642,7 +1643,8 @@
       <LocalValue>AtomicTNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d9823442</Symbol>
-      <Index>3</Index>
+      <Idx>3</Idx>
+      <Version>0</Version>
       <DisplayName>core.g.node.role.100__AtomicTNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1660,7 +1662,7 @@
       <LocalValue>GallonsPerMinuteTimes10</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>329a68c0</Symbol>
-      <Index>7</Index>
+      <Idx>7</Idx>
       <DisplayName>spaceheat.telemetry.name.100__GallonsPerMinuteTimes10</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1812,7 +1814,7 @@
       <LocalValue>WaterFlowGpmTimes100</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>d70cce28</Symbol>
-      <Index>5</Index>
+      <Idx>5</Idx>
       <DisplayName>spaceheat.telemetry.name.100__WaterFlowGpmTimes100</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1821,7 +1823,8 @@
       <LocalValue>TerminalAsset</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>0f8872f7</Symbol>
-      <Index>1</Index>
+      <Idx>1</Idx>
+      <Version>0</Version>
       <DisplayName>core.g.node.role.100__TerminalAsset</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1846,7 +1849,7 @@
       <LocalValue>PhaseAngleDegreesTimes10</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>e0bb014b</Symbol>
-      <Index>10</Index>
+      <Idx>10</Idx>
       <DisplayName>spaceheat.telemetry.name.110__PhaseAngleDegreesTimes10</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1863,7 +1866,7 @@
       <LocalValue>WaterTempCTimes1000</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>c89d0ba1</Symbol>
-      <Index>3</Index>
+      <Idx>3</Idx>
       <DisplayName>spaceheat.telemetry.name.100__WaterTempCTimes1000</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1872,7 +1875,7 @@
       <LocalValue>WattHours</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>337b8659</Symbol>
-      <Index>11</Index>
+      <Idx>11</Idx>
       <DisplayName>spaceheat.telemetry.name.110__WattHours</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1881,7 +1884,7 @@
       <LocalValue>WorldCoordinator</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>06469a3c</Symbol>
-      <Index>4</Index>
+      <Idx>4</Idx>
       <DisplayName>registry.g.node.role.100__WorldCoordinator</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1930,7 +1933,7 @@
       <LocalValue>Unknown</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>00000000</Symbol>
-      <Index>0</Index>
+      <Idx>0</Idx>
       <GtEnums>recUJtDNaSJdt9wie</GtEnums>
       <DisplayName>spaceheat.telemetry.name.110__Unknown</DisplayName>
     </EnumSymbol>
@@ -1948,7 +1951,8 @@
       <LocalValue>InterconnectionComponent</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>d67e564e</Symbol>
-      <Index>6</Index>
+      <Idx>6</Idx>
+      <Version>1</Version>
       <DisplayName>core.g.node.role.100__InterconnectionComponent</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1957,7 +1961,7 @@
       <LocalValue>RelayState</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>5a71d4b3</Symbol>
-      <Index>2</Index>
+      <Idx>2</Idx>
       <DisplayName>spaceheat.telemetry.name.100__RelayState</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1966,7 +1970,7 @@
       <LocalValue>VoltageRmsMilliVolts</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>bb6fdd59</Symbol>
-      <Index>9</Index>
+      <Idx>9</Idx>
       <DisplayName>spaceheat.telemetry.name.110__VoltageRmsMilliVolts</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -1980,7 +1984,7 @@
       <LocalValue>PowerW</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>af39eec9</Symbol>
-      <Index>1</Index>
+      <Idx>1</Idx>
       <DisplayName>spaceheat.telemetry.name.110__PowerW</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2005,7 +2009,7 @@
       <LocalValue>Unknown</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>00000000</Symbol>
-      <Index>0</Index>
+      <Idx>0</Idx>
       <GtEnums>rechRk6DjahLATrOI</GtEnums>
       <DisplayName>registry.g.node.role.100__Unknown</DisplayName>
     </EnumSymbol>
@@ -2016,7 +2020,7 @@
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>153d3475</Symbol>
       <Description>The GNode has been proposed to the registry but is not yet active. The GNodeId and GNodeAlias are reserved at this point.</Description>
-      <Index>1</Index>
+      <Idx>1</Idx>
       <DisplayName>g.node.status.100__Pending</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2046,7 +2050,7 @@
       <LocalValue>GNodeRegistry</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>63a78529</Symbol>
-      <Index>2</Index>
+      <Idx>2</Idx>
       <DisplayName>registry.g.node.role.100__GNodeRegistry</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2079,7 +2083,7 @@
       <LocalValue>Unknown</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>00000000</Symbol>
-      <Index>0</Index>
+      <Idx>0</Idx>
       <GtEnums>rec2HyLffy6QK9QId</GtEnums>
       <DisplayName>spaceheat.telemetry.name.100__Unknown</DisplayName>
     </EnumSymbol>
@@ -2089,7 +2093,7 @@
       <LocalValue>CurrentRmsMilliAmps</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>aeed9c8e</Symbol>
-      <Index>8</Index>
+      <Idx>8</Idx>
       <DisplayName>spaceheat.telemetry.name.110__CurrentRmsMilliAmps</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2140,7 +2144,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrnsf344KWzeDNIJ/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrM9jHI7Iz6xMKMK/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -2152,7 +2156,7 @@
 For GNodes with actors, a Status of active is required for any authorized actor to send a message representing itself as that GNode.
 
 If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
-      <Index>0</Index>
+      <Idx>0</Idx>
       <DisplayName>g.node.status.100__Active</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2206,7 +2210,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>RelayState</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>5a71d4b3</Symbol>
-      <Index>2</Index>
+      <Idx>2</Idx>
       <DisplayName>spaceheat.telemetry.name.110__RelayState</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2298,8 +2302,9 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>Other</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>00000000</Symbol>
-      <Index>0</Index>
+      <Idx>0</Idx>
       <GtEnums>rec5HXPeyp3jic6FV</GtEnums>
+      <Version>0</Version>
       <DisplayName>core.g.node.role.100__Other</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2419,7 +2424,8 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>MarketMaker</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>86f21dd2</Symbol>
-      <Index>4</Index>
+      <Idx>4</Idx>
+      <Version>0</Version>
       <DisplayName>core.g.node.role.100__MarketMaker</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2540,7 +2546,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>GridWorks</LocalValue>
       <Enum>rechRk6DjahLATrOI</Enum>
       <Symbol>f0f14c88</Symbol>
-      <Index>5</Index>
+      <Idx>5</Idx>
       <DisplayName>registry.g.node.role.100__GridWorks</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2567,7 +2573,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recqx4EqT3OFtnxTG</Enum>
       <Symbol>f5831e1d</Symbol>
       <Description>The GNode has been suspended due to missing NFTs</Description>
-      <Index>3</Index>
+      <Idx>3</Idx>
       <DisplayName>g.node.status.100__Suspended</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2592,7 +2598,8 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>AtomicMeteringNode</LocalValue>
       <Enum>rec5HXPeyp3jic6FV</Enum>
       <Symbol>9521af06</Symbol>
-      <Index>2</Index>
+      <Idx>2</Idx>
+      <Version>0</Version>
       <DisplayName>core.g.node.role.100__AtomicMeteringNode</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2601,7 +2608,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>CurrentRmsMicroAmps</LocalValue>
       <Enum>rec2HyLffy6QK9QId</Enum>
       <Symbol>ad19e79c</Symbol>
-      <Index>6</Index>
+      <Idx>6</Idx>
       <DisplayName>spaceheat.telemetry.name.100__CurrentRmsMicroAmps</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2610,7 +2617,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>GallonsPerMinuteTimes10</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>329a68c0</Symbol>
-      <Index>7</Index>
+      <Idx>7</Idx>
       <DisplayName>spaceheat.telemetry.name.110__GallonsPerMinuteTimes10</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2651,7 +2658,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <LocalValue>WaterTempFTimes1000</LocalValue>
       <Enum>recUJtDNaSJdt9wie</Enum>
       <Symbol>793505aa</Symbol>
-      <Index>4</Index>
+      <Idx>4</Idx>
       <DisplayName>spaceheat.telemetry.name.110__WaterTempFTimes1000</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
@@ -2811,6 +2818,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recHZBCEFTBrFubo9</SchemaAttributes>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recqmA1Cu9GIg4hpp</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>resistive.heater.cac.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -2863,6 +2871,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UsedAsSubMessagein>rec6F0YzYq2cynuBc</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recrNYtQoRa7YhqI4</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>gt.temp.sensor.cac.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -2887,6 +2896,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UsedAsSubMessagein>recVqNOAao22ob4jS</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recsMoh2JkG2YPR8u</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>gt.electric.meter.component.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3123,6 +3133,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recvDYPGmlUWE3yzH</SchemaAttributes>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>rec1joYefgk9OQTyG</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>resistive.heater.component.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3177,6 +3188,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
 
 CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <ProtocolTypes>reccq15mpDgpXGekn</ProtocolTypes>
+      <DataClassIdField>GNodeId</DataClassIdField>
       <Alias>basegnode.gt.020</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3247,6 +3259,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recA3qFnYihsWSkVg</Axioms>
       <Axioms>recTQN80nxhBGq1of</Axioms>
       <Axioms>recmQsc2HRItZ3oL1</Axioms>
+      <DataClassIdField>GNodeId</DataClassIdField>
       <Alias>basegnode.gt.010</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3272,6 +3285,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recUMZCNeGQssAuAj</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>rec4u5c6FO198haBK</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>gt.pipe.flow.sensor.component.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3476,6 +3490,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recm7McSMLA5naEPt</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recIjNSTFZEY0rZ5x</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>electric.meter.cac.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3501,6 +3516,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recElLL0KN2fllmo7</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recdbl99ZoQqyOhS7</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>gt.boolean.actuator.component.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3749,6 +3765,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recSjtsFt8YhLc4wA</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recjwzTYeT77Cq7NZ</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>gt.electric.heater.cac.100</Alias>
       <RootStatus>Deprecated</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -3894,6 +3911,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recckyOp6IRG7lBqe</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recy2lAURQitTqKTR</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>gt.boolean.actuator.cac.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4068,6 +4086,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SemanticEnd>100</SemanticEnd>
       <Schemas>current.transformer.cac.gt.100.100</Schemas>
       <SchemaRoot>recBX9s6MqEmX6EjU</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>current.transformer.cac.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4231,6 +4250,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recB5TxUpNgNtBoCz</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recHrNVLHcDTTqaCq</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>gt.temp.sensor.component.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4258,6 +4278,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recfSsM88ywQwIQ1B</SchemaAttributes>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recIjNSTFZEY0rZ5x</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>electric.meter.cac.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4324,6 +4345,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recmImNP9NN2MGFm9</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recKVkCs5ktwXS3Bu</SchemaRoot>
+      <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
       <Alias>gt.pipe.flow.sensor.cac.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4416,6 +4438,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recnOY3tU8l8Hlr8t</SchemaAttributes>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recNZGEdUh6l7BfYp</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>current.transformer.component.gt.100</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4461,6 +4484,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recwB3WH6mXmzjugK</UsedAsSubMessagein>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recT6312S7LckLHZ9</SchemaRoot>
+      <DataClassIdField>ComponentId</DataClassIdField>
       <Alias>gt.electric.heater.component.100</Alias>
       <RootStatus>Deprecated</RootStatus>
       <ProtocolType>Json</ProtocolType>
@@ -4939,6 +4963,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <EnumName>g.node.status.100</EnumName>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <Idx>2</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec3XrurBTlbCXBfL</SchemaAttributeId>
@@ -4995,6 +5020,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>4</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec5cpQjpKGj0XoF8</SchemaAttributeId>
@@ -5613,6 +5639,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <EnumName>core.g.node.role.100</EnumName>
       <DefaultEnumValue>Other</DefaultEnumValue>
+      <Idx>3</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recEwx1N4X1KFrH7d</SchemaAttributeId>
@@ -5906,7 +5933,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itran0H1fVpICHHfb/recHw5JOwPznxEWve</SchemaAttribute>
+    <SchemaAttribute>itrDS9jg6UdCIYS5s/recHw5JOwPznxEWve</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recHyghQ3390tN8LF</SchemaAttributeId>
       <createdTime>2022-06-14T10:41:49Z</createdTime>
@@ -6137,6 +6164,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+      <Idx>8</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKdVPFQyTt95V3Y</SchemaAttributeId>
@@ -6170,6 +6198,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>11</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKwPBxJr8R55KlB</SchemaAttributeId>
@@ -6416,6 +6445,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>7</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recNXTWA84HMF94XV</SchemaAttributeId>
@@ -6764,6 +6794,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+      <Idx>1</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recTDwoVQyFPV2saO</SchemaAttributeId>
@@ -7187,7 +7218,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itran0H1fVpICHHfb/recZoRtISP4HaNWda</SchemaAttribute>
+    <SchemaAttribute>itrDS9jg6UdCIYS5s/recZoRtISP4HaNWda</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recay2Tf4O4c9dgvH</SchemaAttributeId>
       <createdTime>2022-09-19T15:07:08Z</createdTime>
@@ -7216,7 +7247,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>GNodeId</Value>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>Integer</PrimitiveType>
+      <PrimitiveType>String</PrimitiveType>
       <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
       <TestValue>'9405686a-14fd-4aef-945b-cd7c97903f14'</TestValue>
       <Schema>recDp8U1jLA9zeEx2</Schema>
@@ -7224,6 +7255,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+      <Idx>0</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recbR8wOIppFVic94</SchemaAttributeId>
@@ -7353,6 +7385,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>PositiveInteger</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>6</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recc61I5CYPBiSoz2</SchemaAttributeId>
@@ -8434,6 +8467,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>9</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recpnxWC9ATaBFzMB</SchemaAttributeId>
@@ -8464,7 +8498,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricHeaterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>gt.electric.heater.cac</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itran0H1fVpICHHfb/recpqHev4KGlcd4q4</SchemaAttribute>
+    <SchemaAttribute>itrDS9jg6UdCIYS5s/recpqHev4KGlcd4q4</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recpwKIE1g7BN8jGg</SchemaAttributeId>
       <createdTime>2022-09-30T19:13:23Z</createdTime>
@@ -8907,6 +8941,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <Idx>10</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recz0QGMX8yGwdpdl</SchemaAttributeId>
@@ -8961,6 +8996,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+      <Idx>5</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>reczfNmiB9hWAkSsY</SchemaAttributeId>

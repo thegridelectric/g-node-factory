@@ -1,4 +1,4 @@
-"""create.tatradingrights.algo.001 type"""
+"""Type create.tatradingrights.algo, version 001"""
 import json
 from typing import Dict
 from typing import Literal
@@ -11,6 +11,7 @@ from gnf.property_format import predicate_validator
 
 class CreateTatradingrightsAlgo(BaseModel):
     TypeName: Literal["create.tatradingrights.algo"] = "create.tatradingrights.algo"
+    Version: str = "001"
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -22,6 +23,7 @@ class CreateTatradingrightsAlgo(BaseModel):
 
 class CreateTatradingrightsAlgo_Maker:
     type_name = "create.tatradingrights.algo"
+    version = "001"
 
     def __init__(self):
 
@@ -46,9 +48,8 @@ class CreateTatradingrightsAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateTatradingrightsAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return CreateTatradingrightsAlgo(
             TypeName=d2["TypeName"],
+            Version="001",
         )

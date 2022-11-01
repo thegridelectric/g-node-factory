@@ -1,4 +1,4 @@
-"""create.terminalasset.algo.010 type"""
+"""Type create.terminalasset.algo, version 010"""
 import json
 from typing import Dict
 from typing import Literal
@@ -20,6 +20,7 @@ class CreateTerminalassetAlgo(BaseModel):
     FromGNodeInstanceId: str  #
     FromGNodeAlias: str  #
     TypeName: Literal["create.terminalasset.algo"] = "create.terminalasset.algo"
+    Version: str = "010"
 
     _validator_ta_g_node_alias = predicate_validator(
         "TaGNodeAlias", property_format.is_lrd_alias_format
@@ -55,6 +56,7 @@ class CreateTerminalassetAlgo(BaseModel):
 
 class CreateTerminalassetAlgo_Maker:
     type_name = "create.terminalasset.algo"
+    version = "010"
 
     def __init__(
         self,
@@ -97,11 +99,8 @@ class CreateTerminalassetAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateTerminalassetAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return CreateTerminalassetAlgo(
-            TypeName=d2["TypeName"],
             TaGNodeAlias=d2["TaGNodeAlias"],
             MicroLon=d2["MicroLon"],
             ValidatorAddr=d2["ValidatorAddr"],
@@ -110,4 +109,6 @@ class CreateTerminalassetAlgo_Maker:
             GNodeRegistryAddr=d2["GNodeRegistryAddr"],
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
             FromGNodeAlias=d2["FromGNodeAlias"],
+            TypeName=d2["TypeName"],
+            Version="010",
         )

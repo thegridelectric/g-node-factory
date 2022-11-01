@@ -1,4 +1,4 @@
-"""basegnode.gt.020 type"""
+"""Type basegnode.gt, version 020"""
 import json
 from enum import auto
 from typing import Any
@@ -13,6 +13,8 @@ from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.data_classes import BaseGNode
+from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeStatus
 from gnf.errors import SchemaError
 from gnf.message import as_enum
 from gnf.property_format import predicate_validator
@@ -60,15 +62,19 @@ class CoreGNodeRoleMap:
     def type_to_local(cls, symbol):
         if not CoreGNodeRole100SchemaEnum.is_symbol(symbol):
             raise SchemaError(f"{symbol} must belong to CoreGNodeRole100 symbols")
-        return cls.type_to_local_dict[symbol]
+        versioned_enum = cls.type_to_versioned_enum_dict[symbol]
+        return as_enum(versioned_enum, CoreGNodeRole, CoreGNodeRole.default())
 
     @classmethod
     def local_to_type(cls, core_g_node_role):
         if not isinstance(core_g_node_role, CoreGNodeRole100):
             raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole100}")
-        return cls.local_to_type_dict[core_g_node_role]
+        versioned_enum = as_enum(
+            core_g_node_role, CoreGNodeRole100, CoreGNodeRole100.default()
+        )
+        return cls.versioned_enum_to_type_dict[versioned_enum]
 
-    type_to_local_dict: Dict[str, CoreGNodeRole100] = {
+    type_to_versioned_enum_dict: Dict[str, CoreGNodeRole100] = {
         "00000000": CoreGNodeRole100.Other,
         "0f8872f7": CoreGNodeRole100.TerminalAsset,
         "9521af06": CoreGNodeRole100.AtomicMeteringNode,
@@ -78,7 +84,7 @@ class CoreGNodeRoleMap:
         "d67e564e": CoreGNodeRole100.InterconnectionComponent,
     }
 
-    local_to_type_dict: Dict[CoreGNodeRole100, str] = {
+    versioned_enum_to_type_dict: Dict[CoreGNodeRole100, str] = {
         CoreGNodeRole100.Other: "00000000",
         CoreGNodeRole100.TerminalAsset: "0f8872f7",
         CoreGNodeRole100.AtomicMeteringNode: "9521af06",
@@ -127,15 +133,19 @@ class GNodeStatusMap:
     def type_to_local(cls, symbol):
         if not GNodeStatus100SchemaEnum.is_symbol(symbol):
             raise SchemaError(f"{symbol} must belong to GNodeStatus100 symbols")
-        return cls.type_to_local_dict[symbol]
+        versioned_enum = cls.type_to_versioned_enum_dict[symbol]
+        return as_enum(versioned_enum, GNodeStatus, GNodeStatus.default())
 
     @classmethod
     def local_to_type(cls, g_node_status):
         if not isinstance(g_node_status, GNodeStatus100):
             raise SchemaError(f"{g_node_status} must be of type {GNodeStatus100}")
-        return cls.local_to_type_dict[g_node_status]
+        versioned_enum = as_enum(
+            g_node_status, GNodeStatus100, GNodeStatus100.default()
+        )
+        return cls.versioned_enum_to_type_dict[versioned_enum]
 
-    type_to_local_dict: Dict[str, GNodeStatus100] = {
+    type_to_versioned_enum_dict: Dict[str, GNodeStatus100] = {
         "00000000": GNodeStatus100.Unknown,
         "a2cfc2f7": GNodeStatus100.Active,
         "153d3475": GNodeStatus100.Pending,
@@ -143,7 +153,7 @@ class GNodeStatusMap:
         "f5831e1d": GNodeStatus100.Suspended,
     }
 
-    local_to_type_dict: Dict[GNodeStatus100, str] = {
+    versioned_enum_to_type_dict: Dict[GNodeStatus100, str] = {
         GNodeStatus100.Unknown: "00000000",
         GNodeStatus100.Active: "a2cfc2f7",
         GNodeStatus100.Pending: "153d3475",
@@ -153,11 +163,11 @@ class GNodeStatusMap:
 
 
 class BasegnodeGt(BaseModel):
-    Status: GNodeStatus100  #
-    GNodeRegistryAddr: str  #
-    Role: CoreGNodeRole100  #
+    GNodeId: str  #
     Alias: str  #
-    GNodeId: int  #
+    Status: GNodeStatus  #
+    Role: CoreGNodeRole  #
+    GNodeRegistryAddr: str  #
     PrevAlias: Optional[str] = None
     TradingRightsNftId: Optional[int] = None
     OwnershipDeedValidatorAddr: Optional[str] = None
@@ -166,77 +176,92 @@ class BasegnodeGt(BaseModel):
     DaemonAddr: Optional[str] = None
     GpsPointId: Optional[str] = None
     TypeName: Literal["basegnode.gt"] = "basegnode.gt"
-
-    @validator("Status", pre=True)
-    def _validator_status(cls, v: Any) -> GNodeStatus100:
-        return as_enum(v, GNodeStatus100, GNodeStatus100.Unknown)
-
-    _validator_g_node_registry_addr = predicate_validator(
-        "GNodeRegistryAddr", property_format.is_algo_address_string_format
-    )
-
-    @validator("Role", pre=True)
-    def _validator_role(cls, v: Any) -> CoreGNodeRole100:
-        return as_enum(v, CoreGNodeRole100, CoreGNodeRole100.Other)
-
-    @validator("PrevAlias")
-    def _validator_prev_alias(cls, v: Any) -> Optional[str]:
-        if not property_format.is_lrd_alias_format(v):
-            raise ValueError(f"PrevAlias {v} must have LrdAliasFormat")
-
-    @validator("OwnershipDeedValidatorAddr")
-    def _validator_ownership_deed_validator_addr(cls, v: Any) -> Optional[str]:
-        if not property_format.is_algo_address_string_format(v):
-            raise ValueError(
-                f"OwnershipDeedValidatorAddr {v} must have AlgoAddressStringFormat"
-            )
-
-    _validator_alias = predicate_validator("Alias", property_format.is_lrd_alias_format)
+    Version: str = "020"
 
     _validator_g_node_id = predicate_validator(
         "GNodeId", property_format.is_uuid_canonical_textual
     )
 
-    @validator("OwnershipDeedNftId")
-    def _validator_ownership_deed_nft_id(cls, v: Any) -> Optional[int]:
-        if not property_format.is_positive_integer(v):
-            raise ValueError(f"OwnershipDeedNftId {v} must have PositiveInteger")
-
-    @validator("OwnerAddr")
-    def _validator_owner_addr(cls, v: Any) -> Optional[str]:
-        if not property_format.is_algo_address_string_format(v):
-            raise ValueError(f"OwnerAddr {v} must have AlgoAddressStringFormat")
+    _validator_alias = predicate_validator("Alias", property_format.is_lrd_alias_format)
 
     @validator("DaemonAddr")
     def _validator_daemon_addr(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
         if not property_format.is_algo_address_string_format(v):
             raise ValueError(f"DaemonAddr {v} must have AlgoAddressStringFormat")
 
+    @validator("Status", pre=True)
+    def _validator_status(cls, v: Any) -> GNodeStatus100:
+        return as_enum(v, GNodeStatus100, GNodeStatus100.Unknown)
+
+    @validator("Role", pre=True)
+    def _validator_role(cls, v: Any) -> CoreGNodeRole100:
+        return as_enum(v, CoreGNodeRole100, CoreGNodeRole100.Other)
+
+    _validator_g_node_registry_addr = predicate_validator(
+        "GNodeRegistryAddr", property_format.is_algo_address_string_format
+    )
+
     @validator("GpsPointId")
     def _validator_gps_point_id(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
         if not property_format.is_uuid_canonical_textual(v):
             raise ValueError(f"GpsPointId {v} must have UuidCanonicalTextual")
 
+    @validator("OwnershipDeedNftId")
+    def _validator_ownership_deed_nft_id(cls, v: Any) -> Optional[int]:
+        if v is None:
+            return v
+        if not property_format.is_positive_integer(v):
+            raise ValueError(f"OwnershipDeedNftId {v} must have PositiveInteger")
+
+    @validator("OwnershipDeedValidatorAddr")
+    def _validator_ownership_deed_validator_addr(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
+        if not property_format.is_algo_address_string_format(v):
+            raise ValueError(
+                f"OwnershipDeedValidatorAddr {v} must have AlgoAddressStringFormat"
+            )
+
+    @validator("PrevAlias")
+    def _validator_prev_alias(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
+        if not property_format.is_lrd_alias_format(v):
+            raise ValueError(f"PrevAlias {v} must have LrdAliasFormat")
+
+    @validator("OwnerAddr")
+    def _validator_owner_addr(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
+        if not property_format.is_algo_address_string_format(v):
+            raise ValueError(f"OwnerAddr {v} must have AlgoAddressStringFormat")
+
     def as_dict(self) -> Dict:
         d = self.dict()
-        del d["Status"]
-        d["StatusGtEnumSymbol"] = GNodeStatusMap.local_to_type(self.Status)
-        del d["Role"]
-        d["RoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(self.Role)
-        if d["PrevAlias"] is None:
-            del d["PrevAlias"]
-        if d["TradingRightsNftId"] is None:
-            del d["TradingRightsNftId"]
-        if d["OwnershipDeedValidatorAddr"] is None:
-            del d["OwnershipDeedValidatorAddr"]
-        if d["OwnershipDeedNftId"] is None:
-            del d["OwnershipDeedNftId"]
-        if d["OwnerAddr"] is None:
-            del d["OwnerAddr"]
         if d["DaemonAddr"] is None:
             del d["DaemonAddr"]
+        if d["TradingRightsNftId"] is None:
+            del d["TradingRightsNftId"]
+        del d["Status"]
+        Status = as_enum(self.Status, GNodeStatus100, GNodeStatus100.default())
+        d["StatusGtEnumSymbol"] = GNodeStatusMap.local_to_type(Status)
+        del d["Role"]
+        Role = as_enum(self.Role, CoreGNodeRole100, CoreGNodeRole100.default())
+        d["RoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(Role)
         if d["GpsPointId"] is None:
             del d["GpsPointId"]
+        if d["OwnershipDeedNftId"] is None:
+            del d["OwnershipDeedNftId"]
+        if d["OwnershipDeedValidatorAddr"] is None:
+            del d["OwnershipDeedValidatorAddr"]
+        if d["PrevAlias"] is None:
+            del d["PrevAlias"]
+        if d["OwnerAddr"] is None:
+            del d["OwnerAddr"]
         return d
 
     def as_type(self) -> str:
@@ -245,36 +270,37 @@ class BasegnodeGt(BaseModel):
 
 class BasegnodeGt_Maker:
     type_name = "basegnode.gt"
+    version = "020"
 
     def __init__(
         self,
-        status: GNodeStatus100,
-        g_node_registry_addr: str,
-        role: CoreGNodeRole100,
+        g_node_id: str,
         alias: str,
-        g_node_id: int,
-        prev_alias: Optional[str],
-        trading_rights_nft_id: Optional[int],
-        ownership_deed_validator_addr: Optional[str],
-        ownership_deed_nft_id: Optional[int],
-        owner_addr: Optional[str],
         daemon_addr: Optional[str],
+        trading_rights_nft_id: Optional[int],
+        status: GNodeStatus,
+        role: CoreGNodeRole,
+        g_node_registry_addr: str,
         gps_point_id: Optional[str],
+        ownership_deed_nft_id: Optional[int],
+        ownership_deed_validator_addr: Optional[str],
+        prev_alias: Optional[str],
+        owner_addr: Optional[str],
     ):
 
         self.tuple = BasegnodeGt(
-            Status=status,
-            GNodeRegistryAddr=g_node_registry_addr,
-            Role=role,
-            PrevAlias=prev_alias,
-            TradingRightsNftId=trading_rights_nft_id,
-            OwnershipDeedValidatorAddr=ownership_deed_validator_addr,
-            Alias=alias,
             GNodeId=g_node_id,
-            OwnershipDeedNftId=ownership_deed_nft_id,
-            OwnerAddr=owner_addr,
+            Alias=alias,
             DaemonAddr=daemon_addr,
+            TradingRightsNftId=trading_rights_nft_id,
+            Status=status,
+            Role=role,
+            GNodeRegistryAddr=g_node_registry_addr,
             GpsPointId=gps_point_id,
+            OwnershipDeedNftId=ownership_deed_nft_id,
+            OwnershipDeedValidatorAddr=ownership_deed_validator_addr,
+            PrevAlias=prev_alias,
+            OwnerAddr=owner_addr,
             #
         )
 
@@ -295,69 +321,68 @@ class BasegnodeGt_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> BasegnodeGt:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
+        if "DaemonAddr" not in d2.keys():
+            d2["DaemonAddr"] = None
+        if "TradingRightsNftId" not in d2.keys():
+            d2["TradingRightsNftId"] = None
         if "StatusGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing StatusGtEnumSymbol")
         if d2["StatusGtEnumSymbol"] in GNodeStatus100SchemaEnum.symbols:
             d2["Status"] = GNodeStatusMap.type_to_local(d2["StatusGtEnumSymbol"])
         else:
-            d2["Status"] = GNodeStatus100.Unknown
+            d2["Status"] = GNodeStatus.default()
         if "RoleGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing RoleGtEnumSymbol")
         if d2["RoleGtEnumSymbol"] in CoreGNodeRole100SchemaEnum.symbols:
             d2["Role"] = CoreGNodeRoleMap.type_to_local(d2["RoleGtEnumSymbol"])
         else:
-            d2["Role"] = CoreGNodeRole100.Other
-        if "PrevAlias" not in d2.keys():
-            d2["PrevAlias"] = None
-        if "TradingRightsNftId" not in d2.keys():
-            d2["TradingRightsNftId"] = None
-        if "OwnershipDeedValidatorAddr" not in d2.keys():
-            d2["OwnershipDeedValidatorAddr"] = None
-        if "OwnershipDeedNftId" not in d2.keys():
-            d2["OwnershipDeedNftId"] = None
-        if "OwnerAddr" not in d2.keys():
-            d2["OwnerAddr"] = None
-        if "DaemonAddr" not in d2.keys():
-            d2["DaemonAddr"] = None
+            d2["Role"] = CoreGNodeRole.default()
         if "GpsPointId" not in d2.keys():
             d2["GpsPointId"] = None
+        if "OwnershipDeedNftId" not in d2.keys():
+            d2["OwnershipDeedNftId"] = None
+        if "OwnershipDeedValidatorAddr" not in d2.keys():
+            d2["OwnershipDeedValidatorAddr"] = None
+        if "PrevAlias" not in d2.keys():
+            d2["PrevAlias"] = None
+        if "OwnerAddr" not in d2.keys():
+            d2["OwnerAddr"] = None
 
         return BasegnodeGt(
-            TypeName=d2["TypeName"],
-            Status=d2["Status"],
-            GNodeRegistryAddr=d2["GNodeRegistryAddr"],
-            Role=d2["Role"],
-            PrevAlias=d2["PrevAlias"],
-            TradingRightsNftId=d2["TradingRightsNftId"],
-            OwnershipDeedValidatorAddr=d2["OwnershipDeedValidatorAddr"],
-            Alias=d2["Alias"],
             GNodeId=d2["GNodeId"],
-            OwnershipDeedNftId=d2["OwnershipDeedNftId"],
-            OwnerAddr=d2["OwnerAddr"],
+            Alias=d2["Alias"],
             DaemonAddr=d2["DaemonAddr"],
+            TradingRightsNftId=d2["TradingRightsNftId"],
+            Status=d2["Status"],
+            Role=d2["Role"],
+            GNodeRegistryAddr=d2["GNodeRegistryAddr"],
             GpsPointId=d2["GpsPointId"],
+            OwnershipDeedNftId=d2["OwnershipDeedNftId"],
+            OwnershipDeedValidatorAddr=d2["OwnershipDeedValidatorAddr"],
+            PrevAlias=d2["PrevAlias"],
+            OwnerAddr=d2["OwnerAddr"],
+            TypeName=d2["TypeName"],
+            Version="020",
         )
 
     @classmethod
     def tuple_to_dc(cls, t: BasegnodeGt) -> BaseGNode:
         s = {
-            "status": t.Status,
-            "g_node_registry_addr": t.GNodeRegistryAddr,
-            "role": t.Role,
-            "prev_alias": t.PrevAlias,
-            "trading_rights_nft_id": t.TradingRightsNftId,
-            "ownership_deed_validator_addr": t.OwnershipDeedValidatorAddr,
-            "alias": t.Alias,
             "g_node_id": t.GNodeId,
-            "ownership_deed_nft_id": t.OwnershipDeedNftId,
-            "owner_addr": t.OwnerAddr,
+            "alias": t.Alias,
             "daemon_addr": t.DaemonAddr,
+            "trading_rights_nft_id": t.TradingRightsNftId,
+            "status": t.Status,
+            "role": t.Role,
+            "g_node_registry_addr": t.GNodeRegistryAddr,
             "gps_point_id": t.GpsPointId,
+            "ownership_deed_nft_id": t.OwnershipDeedNftId,
+            "ownership_deed_validator_addr": t.OwnershipDeedValidatorAddr,
+            "prev_alias": t.PrevAlias,
+            "owner_addr": t.OwnerAddr,
         }
-        if s["base_g_node_id"] in BaseGNode.by_id.keys():
-            dc = BaseGNode.by_id[s["base_g_node_id"]]
+        if s["g_node_id"] in BaseGNode.by_id.keys():
+            dc = BaseGNode.by_id[s["g_node_id"]]
         else:
             dc = BaseGNode(**s)
         return dc
@@ -367,18 +392,18 @@ class BasegnodeGt_Maker:
         if dc is None:
             return None
         t = BasegnodeGt_Maker(
-            status=dc.status,
-            g_node_registry_addr=dc.g_node_registry_addr,
-            role=dc.role,
-            prev_alias=dc.prev_alias,
-            trading_rights_nft_id=dc.trading_rights_nft_id,
-            ownership_deed_validator_addr=dc.ownership_deed_validator_addr,
-            alias=dc.alias,
             g_node_id=dc.g_node_id,
-            ownership_deed_nft_id=dc.ownership_deed_nft_id,
-            owner_addr=dc.owner_addr,
+            alias=dc.alias,
             daemon_addr=dc.daemon_addr,
+            trading_rights_nft_id=dc.trading_rights_nft_id,
+            status=dc.status,
+            role=dc.role,
+            g_node_registry_addr=dc.g_node_registry_addr,
             gps_point_id=dc.gps_point_id,
+            ownership_deed_nft_id=dc.ownership_deed_nft_id,
+            ownership_deed_validator_addr=dc.ownership_deed_validator_addr,
+            prev_alias=dc.prev_alias,
+            owner_addr=dc.owner_addr,
         ).tuple
         return t
 

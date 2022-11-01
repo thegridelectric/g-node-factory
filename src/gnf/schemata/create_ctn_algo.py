@@ -1,4 +1,4 @@
-"""create.ctn.algo.001 type"""
+"""Type create.ctn.algo, version 001"""
 import json
 from typing import Dict
 from typing import List
@@ -21,6 +21,7 @@ class CreateCtnAlgo(BaseModel):
     GNodeRegistryAddr: str  #
     FromGNodeInstanceId: str  #
     TypeName: Literal["create.ctn.algo"] = "create.ctn.algo"
+    Version: str = "001"
 
     @validator("ChildAliasList")
     def _validator_child_alias_list(cls, v: List) -> List:
@@ -57,6 +58,7 @@ class CreateCtnAlgo(BaseModel):
 
 class CreateCtnAlgo_Maker:
     type_name = "create.ctn.algo"
+    version = "001"
 
     def __init__(
         self,
@@ -97,11 +99,8 @@ class CreateCtnAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateCtnAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return CreateCtnAlgo(
-            TypeName=d2["TypeName"],
             ChildAliasList=d2["ChildAliasList"],
             FromGNodeAlias=d2["FromGNodeAlias"],
             MicroLat=d2["MicroLat"],
@@ -109,4 +108,6 @@ class CreateCtnAlgo_Maker:
             CtnGNodeAlias=d2["CtnGNodeAlias"],
             GNodeRegistryAddr=d2["GNodeRegistryAddr"],
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
+            TypeName=d2["TypeName"],
+            Version="001",
         )

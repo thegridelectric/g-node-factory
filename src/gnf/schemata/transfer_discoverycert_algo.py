@@ -1,4 +1,4 @@
-"""transfer.discoverycert.algo.001 type"""
+"""Type transfer.discoverycert.algo, version 001"""
 import json
 from typing import Dict
 from typing import Literal
@@ -14,6 +14,7 @@ class TransferDiscoverycertAlgo(BaseModel):
     GNodeAlias: str  #
     DiscovererAddr: str  #
     TypeName: Literal["transfer.discoverycert.algo"] = "transfer.discoverycert.algo"
+    Version: str = "001"
 
     _validator_g_node_alias = predicate_validator(
         "GNodeAlias", property_format.is_lrd_alias_format
@@ -33,6 +34,7 @@ class TransferDiscoverycertAlgo(BaseModel):
 
 class TransferDiscoverycertAlgo_Maker:
     type_name = "transfer.discoverycert.algo"
+    version = "001"
 
     def __init__(self, g_node_alias: str, discoverer_addr: str):
 
@@ -59,11 +61,10 @@ class TransferDiscoverycertAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> TransferDiscoverycertAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return TransferDiscoverycertAlgo(
-            TypeName=d2["TypeName"],
             GNodeAlias=d2["GNodeAlias"],
             DiscovererAddr=d2["DiscovererAddr"],
+            TypeName=d2["TypeName"],
+            Version="001",
         )

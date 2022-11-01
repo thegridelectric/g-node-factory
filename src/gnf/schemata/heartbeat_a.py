@@ -1,4 +1,4 @@
-"""heartbeat.a.100 type"""
+"""Type heartbeat.a, version 100"""
 import json
 from typing import Dict
 from typing import Literal
@@ -11,6 +11,7 @@ from gnf.property_format import predicate_validator
 
 class HeartbeatA(BaseModel):
     TypeName: Literal["heartbeat.a"] = "heartbeat.a"
+    Version: str = "100"
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -22,6 +23,7 @@ class HeartbeatA(BaseModel):
 
 class HeartbeatA_Maker:
     type_name = "heartbeat.a"
+    version = "100"
 
     def __init__(self):
 
@@ -46,9 +48,8 @@ class HeartbeatA_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> HeartbeatA:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return HeartbeatA(
             TypeName=d2["TypeName"],
+            Version="100",
         )

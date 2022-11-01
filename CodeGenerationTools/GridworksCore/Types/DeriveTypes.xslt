@@ -34,16 +34,9 @@
                         </xsl:call-template>
                     </xsl:variable>
                     <xsl:variable name="data-class-id">
-                        <xsl:if test="IsCac='true'">
-                            <xsl:text>component_attribute_class_id</xsl:text>
-                        </xsl:if>
-                        <xsl:if test="IsComponent='true'">
-                            <xsl:text>component_id</xsl:text>
-                        </xsl:if>
-
-                        <xsl:if test="not (IsCac='true') and not (IsComponent='true')">
-                            <xsl:value-of select="$python-data-class"/><xsl:text>_id</xsl:text>
-                       </xsl:if>
+                        <xsl:call-template name="python-case">
+                            <xsl:with-param name="camel-case-text" select="translate(DataClassIdField,'.','_')"  />
+                        </xsl:call-template>
                     </xsl:variable>
                     <FileSetFile>
                                 <xsl:element name="RelativePath"><xsl:text>../../../src/gnf/schemata/</xsl:text>
@@ -53,7 +46,8 @@
                         <xsl:element name="FileContents">
 
 
-<xsl:text>"""</xsl:text><xsl:value-of select="Alias"/><xsl:text> type"""
+<xsl:text>"""Type </xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>, version </xsl:text>
+<xsl:value-of select="SemanticEnd"/><xsl:text>"""
 import json</xsl:text>
 <xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsEnum = 'true')])>0">
 <xsl:text>
@@ -141,17 +135,23 @@ from gnf.schemata.</xsl:text>
 </xsl:call-template><xsl:text>_Maker</xsl:text>
 </xsl:if>
 </xsl:for-each>
+<xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='')  and (count(TypesThatUse[text()=$schema-id])>0)]">
+<xsl:text>
+from gnf.enums import </xsl:text>
+<xsl:call-template name="nt-case">
+    <xsl:with-param name="mp-schema-text" select="LocalName" />
+</xsl:call-template>
+</xsl:for-each>
 
-
-<xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='') and (Status='Active') and (count(TypesThatUse[text()=$schema-id])>0)]">
+<xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='')  and (count(TypesThatUse[text()=$schema-id])>0)]">
 <xsl:variable name="enum-alias" select="Alias" />
 <xsl:variable name="enum-name-style" select="PythonEnumNameStyle" />
-<xsl:variable name="enum-class-name">
+<xsl:variable name="enum-name">
     <xsl:call-template name="nt-case">
         <xsl:with-param name="mp-schema-text" select="Alias" />
     </xsl:call-template>
 </xsl:variable>
-<xsl:variable name="local-class-name">
+<xsl:variable name="enum-local-name">
     <xsl:call-template name="nt-case">
         <xsl:with-param name="mp-schema-text" select="LocalName" />
     </xsl:call-template>
@@ -163,14 +163,14 @@ from gnf.schemata.</xsl:text>
 <xsl:text>
 
 
-class </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum:
+class </xsl:text><xsl:value-of select="$enum-name"/><xsl:text>SchemaEnum:
     enum_name: str = "</xsl:text>
     <xsl:value-of select="Alias"/>
     <xsl:text>"
     symbols: List[str] = [
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Index"/>
+    <xsl:sort select="Idx"/>
     <xsl:text>"</xsl:text><xsl:value-of select="Symbol"/><xsl:text>",
         </xsl:text>
 </xsl:for-each>
@@ -184,12 +184,12 @@ class </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum:
         return False
 
 
-class </xsl:text><xsl:value-of select="$enum-class-name"/>
+class </xsl:text><xsl:value-of select="$enum-name"/>
 <xsl:text>(StrEnum):
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-<xsl:sort select="Index"/>
+<xsl:sort select="Idx"/>
 <xsl:if test="$enum-name-style = 'Upper'">
     <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
 </xsl:if>
@@ -203,7 +203,7 @@ class </xsl:text><xsl:value-of select="$enum-class-name"/>
     <xsl:text>
     @classmethod
     def default(cls) -> "</xsl:text>
-    <xsl:value-of select="$enum-class-name"/>
+    <xsl:value-of select="$enum-name"/>
     <xsl:text>":
         return cls.</xsl:text><xsl:value-of select="DefaultEnumValue"/>
     <xsl:text>
@@ -213,33 +213,40 @@ class </xsl:text><xsl:value-of select="$enum-class-name"/>
         return [elt.value for elt in cls]
 
 
-class </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>Map:
+class </xsl:text><xsl:value-of select="$enum-local-name"/><xsl:text>Map:
     @classmethod
     def type_to_local(cls, symbol):
-        if not </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>SchemaEnum.is_symbol(symbol):
+        if not </xsl:text><xsl:value-of select="$enum-name"/><xsl:text>SchemaEnum.is_symbol(symbol):
             raise SchemaError(
-                f"{symbol} must belong to </xsl:text><xsl:value-of select="$enum-class-name"/>
+                f"{symbol} must belong to </xsl:text><xsl:value-of select="$enum-name"/>
                 <xsl:text> symbols"
             )
-        return cls.type_to_local_dict[symbol]
+        versioned_enum = cls.type_to_versioned_enum_dict[symbol]
+        return as_enum(versioned_enum, </xsl:text>
+        <xsl:value-of select="$enum-local-name"/><xsl:text>, </xsl:text>
+        <xsl:value-of select="$enum-local-name"/><xsl:text>.default())
 
     @classmethod
     def local_to_type(cls, </xsl:text>
             <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>):
         if not isinstance(</xsl:text><xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>, </xsl:text>
-        <xsl:value-of select="$enum-class-name"/><xsl:text>):
+        <xsl:value-of select="$enum-name"/><xsl:text>):
             raise SchemaError(f"{</xsl:text>
                 <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>} must be of type {</xsl:text>
-                    <xsl:value-of select="$enum-class-name"/><xsl:text>}")
-        return cls.local_to_type_dict[</xsl:text>
-        <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>]
+                    <xsl:value-of select="$enum-name"/><xsl:text>}")
+        versioned_enum = as_enum(</xsl:text>
+        <xsl:value-of select="translate(LocalName,'.','_')"/>
+        <xsl:text>, </xsl:text>
+        <xsl:value-of select="$enum-name"/><xsl:text>, </xsl:text>
+        <xsl:value-of select="$enum-name"/><xsl:text>.default())
+        return cls.versioned_enum_to_type_dict[versioned_enum]
 
-    type_to_local_dict: Dict[str, </xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>] = {</xsl:text>
+    type_to_versioned_enum_dict: Dict[str, </xsl:text><xsl:value-of select="$enum-name"/><xsl:text>] = {</xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Index"/>
+    <xsl:sort select="Idx"/>
         <xsl:text>
         "</xsl:text><xsl:value-of select="Symbol"/><xsl:text>": </xsl:text>
-        <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
+        <xsl:value-of select="$enum-name"/><xsl:text>.</xsl:text>
         <xsl:if test="$enum-name-style = 'Upper'">
             <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
         </xsl:if>
@@ -251,11 +258,11 @@ class </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>Map:
     <xsl:text>
     }
 
-    local_to_type_dict: Dict[</xsl:text><xsl:value-of select="$enum-class-name"/><xsl:text>, str] = {
+    versioned_enum_to_type_dict: Dict[</xsl:text><xsl:value-of select="$enum-name"/><xsl:text>, str] = {
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Index"/>
-    <xsl:value-of select="$enum-class-name"/><xsl:text>.</xsl:text>
+    <xsl:sort select="Idx"/>
+    <xsl:value-of select="$enum-name"/><xsl:text>.</xsl:text>
     <xsl:if test="$enum-name-style = 'Upper'">
         <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
     </xsl:if>
@@ -280,7 +287,7 @@ class </xsl:text>
 <xsl:text>(BaseModel):
     </xsl:text>
 <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-
+<xsl:sort select="Idx"/>
 
 <xsl:if test="(IsPrimitive = 'true') and (IsRequired = 'true') and not (IsList = 'true')">
     <xsl:value-of select="Value"/><xsl:text>: </xsl:text>
@@ -305,7 +312,7 @@ class </xsl:text>
 <xsl:if test = "(IsEnum = 'true') and not(IsList = 'true')">
     <xsl:value-of select="Value"/><xsl:text>: </xsl:text>
     <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="EnumName" />
+                    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
     </xsl:call-template>
 <xsl:text>  #
     </xsl:text>
@@ -315,7 +322,7 @@ class </xsl:text>
 <xsl:if test = "(IsEnum = 'true') and (IsList = 'true')">
     <xsl:value-of select="Value"/><xsl:text>: List[</xsl:text>
     <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="EnumName" />
+                    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
     </xsl:call-template>
 <xsl:text>]
     </xsl:text>
@@ -365,11 +372,14 @@ class </xsl:text>
 </xsl:if>
 </xsl:for-each>
 
-<xsl:text>TypeName: Literal["</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"] = "</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"</xsl:text>
+<xsl:text>TypeName: Literal["</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"] = "</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"
+    </xsl:text>
+<xsl:text>Version: str = "</xsl:text>
+<xsl:value-of select="SemanticEnd"/><xsl:text>"</xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+    <xsl:sort select="Idx"/>
 
-
-    <xsl:if test="(IsPrimitive='true') and (IsRequired = 'true') and not (IsList='true') and normalize-space(PrimitiveFormat) != ''">
+    <xsl:if test="(IsRequired = 'true') and (IsPrimitive='true') and not (IsList='true') and normalize-space(PrimitiveFormat) != ''">
             <xsl:text>
 
     _validator_</xsl:text>
@@ -385,30 +395,7 @@ class </xsl:text>
     </xsl:if>
 
 
-    <xsl:if test="(IsPrimitive='true') and (IsRequired = 'true') and (IsList='true') and normalize-space(PrimitiveFormat) != ''">
-                <xsl:text>
-
-    @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>")
-    def _validator_</xsl:text><xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template><xsl:text>(cls, v: List) -> List:
-        for elt in v:
-            if not property_format.is_</xsl:text>
-            <xsl:call-template name="python-case">
-                <xsl:with-param name="camel-case-text" select="translate(PrimitiveFormat,'.','_')"  />
-            </xsl:call-template>
-        <xsl:text>(elt):
-                raise ValueError(f"failure of predicate is_</xsl:text>
-                <xsl:call-template name="python-case">
-                    <xsl:with-param name="camel-case-text" select="translate(PrimitiveFormat,'.','_')"  />
-                </xsl:call-template>
-
-                <xsl:text>() on elt {elt} of </xsl:text><xsl:value-of select="Value"/>
-            <xsl:text>")
-        return v</xsl:text>
-    </xsl:if>
-
-    <xsl:if test="(IsEnum='true') and (IsRequired = 'true') and not (IsList='true')">
+    <xsl:if test="(IsRequired = 'true') and (IsEnum='true') and not (IsList='true')">
         <xsl:text>
 
     @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>", pre=True)
@@ -431,7 +418,31 @@ class </xsl:text>
         <xsl:text>)</xsl:text>
     </xsl:if>
 
-    <xsl:if test="(IsEnum='true') and (IsRequired = 'true') and (IsList='true')">
+
+    <xsl:if test="(IsRequired = 'true') and (IsPrimitive='true') and (IsList='true') and normalize-space(PrimitiveFormat) != ''">
+                <xsl:text>
+
+    @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>")
+    def _validator_</xsl:text><xsl:call-template name="python-case">
+        <xsl:with-param name="camel-case-text" select="Value"  />
+        </xsl:call-template><xsl:text>(cls, v: List) -> List:
+        for elt in v:
+            if not property_format.is_</xsl:text>
+            <xsl:call-template name="python-case">
+                <xsl:with-param name="camel-case-text" select="translate(PrimitiveFormat,'.','_')"  />
+            </xsl:call-template>
+        <xsl:text>(elt):
+                raise ValueError(f"failure of predicate is_</xsl:text>
+                <xsl:call-template name="python-case">
+                    <xsl:with-param name="camel-case-text" select="translate(PrimitiveFormat,'.','_')"  />
+                </xsl:call-template>
+
+                <xsl:text>() on elt {elt} of </xsl:text><xsl:value-of select="Value"/>
+            <xsl:text>")
+        return v</xsl:text>
+    </xsl:if>
+
+    <xsl:if test=" (IsRequired = 'true') and (IsEnum='true') and (IsList='true')">
         <xsl:text>
 
     @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>", pre=True)
@@ -459,7 +470,33 @@ class </xsl:text>
         return enum_list</xsl:text>
     </xsl:if>
 
-    <xsl:if test="(IsPrimitive='true') and not(IsRequired = 'true') and not (IsList='true') and normalize-space(PrimitiveFormat) != ''">
+    <xsl:if test="(IsRequired = 'true') and (IsType = 'true') and (IsList = 'true')">
+        <xsl:text>
+
+    @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>")
+    def _validator_</xsl:text><xsl:call-template name="python-case">
+        <xsl:with-param name="camel-case-text" select="Value"  />
+        </xsl:call-template><xsl:text>(cls, v: List) -> List:
+        for elt in v:
+            if not isinstance(elt, </xsl:text>
+            <xsl:call-template name="nt-case">
+                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
+    </xsl:call-template>
+        <xsl:text>):
+                raise ValueError(
+                        f"elt {elt} of </xsl:text><xsl:value-of select="Value"/>
+            <xsl:text> must have type </xsl:text>
+                <xsl:call-template name="nt-case">
+                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
+        </xsl:call-template>
+                <xsl:text>."
+                    )
+        return v</xsl:text>
+    </xsl:if>
+
+
+
+    <xsl:if test=" not(IsRequired = 'true') and (IsPrimitive='true') and not (IsList='true') and normalize-space(PrimitiveFormat) != ''">
     <xsl:text>
 
     @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>")
@@ -472,6 +509,8 @@ class </xsl:text>
         <xsl:with-param name="gw-type" select="PrimitiveType"/>
     </xsl:call-template>
     <xsl:text>]:
+        if v is None:
+            return v
         if not property_format.is_</xsl:text>
             <xsl:call-template name="python-case">
                 <xsl:with-param name="camel-case-text" select="translate(PrimitiveFormat,'.','_')"  />
@@ -502,29 +541,6 @@ class </xsl:text>
     </xsl:if>
 
 
-    <xsl:if test="(IsType = 'true') and (IsList = 'true')">
-        <xsl:text>
-
-    @validator("</xsl:text><xsl:value-of select="Value"/><xsl:text>")
-    def _validator_</xsl:text><xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template><xsl:text>(cls, v: List) -> List:
-        for elt in v:
-            if not isinstance(elt, </xsl:text>
-            <xsl:call-template name="nt-case">
-                <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
-    </xsl:call-template>
-        <xsl:text>):
-                raise ValueError(
-                        f"elt {elt} of </xsl:text><xsl:value-of select="Value"/>
-            <xsl:text> must have type </xsl:text>
-                <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAliasRoot" />
-        </xsl:call-template>
-                <xsl:text>."
-                    )
-        return v</xsl:text>
-    </xsl:if>
         </xsl:for-each>
 
     <xsl:text>
@@ -533,6 +549,7 @@ class </xsl:text>
         d = self.dict()</xsl:text>
 
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+        <xsl:sort select="Idx"/>
         <xsl:if test="not (IsRequired = 'true') and (normalize-space(SubTypeDataClass) = '')">
         <xsl:text>
         if d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] is None:
@@ -551,16 +568,26 @@ class </xsl:text>
                 <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="enum-name">
+            <xsl:call-template name="nt-case">
+                <xsl:with-param name="mp-schema-text" select="EnumName" />
+            </xsl:call-template>
+        </xsl:variable>
 
         <xsl:if test="not (IsList = 'true')">
     <xsl:text>
         del d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"]
+        </xsl:text><xsl:value-of select="Value"/>
+        <xsl:text> = as_enum(self.</xsl:text><xsl:value-of select="Value"/>
+        <xsl:text>, </xsl:text><xsl:value-of select="$enum-name"/>
+        <xsl:text>, </xsl:text>
+        <xsl:value-of select="$enum-name"/><xsl:text>.default())
         d["</xsl:text>
         <xsl:call-template name="nt-case">
                         <xsl:with-param name="mp-schema-text" select="Value" />
         </xsl:call-template>
         <xsl:text>GtEnumSymbol"] = </xsl:text><xsl:value-of select="$enum-local-name"/>
-        <xsl:text>Map.local_to_type(self.</xsl:text><xsl:value-of select="Value"/><xsl:text>)</xsl:text>
+        <xsl:text>Map.local_to_type(</xsl:text><xsl:value-of select="Value"/><xsl:text>)</xsl:text>
         </xsl:if>
 
 
@@ -634,10 +661,13 @@ class </xsl:text>
 <xsl:value-of select="$class-name"/>
 <xsl:text>_Maker:
     type_name = "</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"
+    version = "</xsl:text><xsl:value-of select="SemanticEnd"/><xsl:text>"
 
     def __init__(self</xsl:text>
-    <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsRequired='true')]">
-        <xsl:if test="(IsPrimitive = 'true') and not (IsList = 'true')">
+    <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+    <xsl:sort select="Idx"/>
+
+        <xsl:if test="(IsRequired='true') and (IsPrimitive = 'true') and not (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
@@ -648,7 +678,7 @@ class </xsl:text>
         </xsl:call-template>
         </xsl:if>
 
-        <xsl:if test="(IsPrimitive = 'true') and (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsPrimitive = 'true') and (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
             <xsl:call-template name="python-case">
@@ -660,29 +690,29 @@ class </xsl:text>
         </xsl:if>
 
 
-        <xsl:if test="IsEnum = 'true' and not (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsEnum = 'true') and not (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>: </xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
         </xsl:call-template>
         </xsl:if>
 
-        <xsl:if test="IsEnum = 'true' and (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsEnum = 'true') and (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>: List[</xsl:text>
         <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="EnumName" />
+                        <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
         </xsl:call-template><xsl:text>]</xsl:text>
         </xsl:if>
 
-        <xsl:if test="(IsType = 'true') and not(normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsType = 'true') and not(normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
@@ -690,7 +720,7 @@ class </xsl:text>
         </xsl:call-template><xsl:text>_id: str</xsl:text>
         </xsl:if>
 
-        <xsl:if test="(IsType = 'true') and  (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsType = 'true') and  (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                     <xsl:call-template name="python-case">
@@ -701,7 +731,7 @@ class </xsl:text>
                 </xsl:call-template>
         </xsl:if>
 
-        <xsl:if test="(IsType = 'true') and (IsList = 'true')">
+        <xsl:if test="(IsRequired='true') and (IsType = 'true') and (IsList = 'true')">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
@@ -712,12 +742,9 @@ class </xsl:text>
             </xsl:call-template>
                 <xsl:text>]</xsl:text>
         </xsl:if>
-        </xsl:for-each>
-
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not (IsRequired='true')]">
 
 
-        <xsl:if test=" (IsPrimitive = 'true') ">
+        <xsl:if test=" not (IsRequired='true') and (IsPrimitive = 'true') ">
                 <xsl:text>,
                     </xsl:text>
                 <xsl:call-template name="python-case">
@@ -728,7 +755,7 @@ class </xsl:text>
             </xsl:call-template><xsl:text>]</xsl:text>
         </xsl:if>
 
-        <xsl:if test="not(normalize-space(SubTypeDataClass) = '')">
+        <xsl:if test="not (IsRequired='true') and not(normalize-space(SubTypeDataClass) = '')">
                 <xsl:text>,
                     </xsl:text>
             <xsl:call-template name="python-case">
@@ -742,6 +769,7 @@ class </xsl:text>
         <xsl:text>(
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+        <xsl:sort select="Idx"/>
         <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true')">
         <xsl:value-of select="Value"/><xsl:text>=</xsl:text>
         <xsl:call-template name="python-case">
@@ -791,11 +819,9 @@ class </xsl:text>
     @classmethod
     def dict_to_tuple(cls, d: dict) -> </xsl:text><xsl:value-of select="$class-name"/>
 <xsl:text>:
-        d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")</xsl:text>
+        d2 = dict(d)</xsl:text>
 <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-
+<xsl:sort select="Idx"/>
 <xsl:if test="(IsType = 'true') and (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
 <xsl:text>
         if "</xsl:text><xsl:value-of select="Value"/><xsl:text>" not in d2.keys():
@@ -828,6 +854,9 @@ class </xsl:text>
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template>
+        <xsl:text>
+        if "TypeName" not in d2.keys():
+        raise SchemaError(f"dict {d2} missing TypeName")</xsl:text>
 </xsl:if>
 
 
@@ -932,9 +961,9 @@ class </xsl:text>
             <xsl:with-param name="mp-schema-text" select="Value" />
         </xsl:call-template><xsl:text>"] = </xsl:text>
         <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="EnumName" />
+            <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
         </xsl:call-template>
-        <xsl:text>.</xsl:text><xsl:value-of select="DefaultEnumValue"/>
+        <xsl:text>.default()</xsl:text>
     </xsl:if>
 
 
@@ -1000,9 +1029,9 @@ class </xsl:text>
 <xsl:text>
 
         return </xsl:text><xsl:value-of select="$class-name"/><xsl:text>(
-            TypeName=d2["TypeName"],
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+        <xsl:sort select="Idx"/>
         <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true') or (normalize-space(SubTypeDataClass) = '') or  (IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>=d2["</xsl:text>
         <xsl:value-of select="Value"/><xsl:text>"],
@@ -1016,6 +1045,8 @@ class </xsl:text>
         </xsl:if>
         </xsl:for-each>
         <xsl:text>
+        TypeName=d2["TypeName"],
+        Version="</xsl:text><xsl:value-of select="SemanticEnd"/><xsl:text>",
         )
 </xsl:text>
     <xsl:if test="(MakeDataClass='true')">
@@ -1026,7 +1057,8 @@ class </xsl:text>
         s = {
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:if test = "(IsPrimitive = 'true') or (IsEnum = 'true')">
+        <xsl:sort select="Idx"/>
+        <xsl:if test = "(IsPrimitive = 'true' or IsEnum = 'true')">
             <xsl:text>"</xsl:text>
                 <xsl:call-template name="python-case">
                     <xsl:with-param name="camel-case-text" select="Value"  />
@@ -1060,7 +1092,9 @@ class </xsl:text>
             return None
         t = </xsl:text><xsl:value-of select="$class-name"/><xsl:text>_Maker(
             </xsl:text>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and ((IsPrimitive = 'true') or (IsEnum = 'true'))]">
+        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+        <xsl:sort select="Idx"/>
+        <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true')">
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>=dc.</xsl:text>
@@ -1069,8 +1103,9 @@ class </xsl:text>
         </xsl:call-template>
         <xsl:text>,
             </xsl:text>
-    </xsl:for-each>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsType = 'true')]">
+        </xsl:if>
+
+        <xsl:if test="(IsType = 'true')">
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>)id=dc.</xsl:text>
@@ -1078,7 +1113,8 @@ class </xsl:text>
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template><xsl:text>_id,
             </xsl:text>
-    </xsl:for-each>
+        </xsl:if>
+        </xsl:for-each>
         <xsl:text>
         ).tuple
         return t

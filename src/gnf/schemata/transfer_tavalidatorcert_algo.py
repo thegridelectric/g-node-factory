@@ -1,4 +1,4 @@
-"""transfer.tavalidatorcert.algo.010 type"""
+"""Type transfer.tavalidatorcert.algo, version 010"""
 import json
 from typing import Dict
 from typing import Literal
@@ -14,6 +14,7 @@ class TransferTavalidatorcertAlgo(BaseModel):
     ValidatorAddr: str  #
     HalfSignedCertTransferMtx: str  #
     TypeName: Literal["transfer.tavalidatorcert.algo"] = "transfer.tavalidatorcert.algo"
+    Version: str = "010"
 
     _validator_validator_addr = predicate_validator(
         "ValidatorAddr", property_format.is_algo_address_string_format
@@ -33,6 +34,7 @@ class TransferTavalidatorcertAlgo(BaseModel):
 
 class TransferTavalidatorcertAlgo_Maker:
     type_name = "transfer.tavalidatorcert.algo"
+    version = "010"
 
     def __init__(self, validator_addr: str, half_signed_cert_transfer_mtx: str):
 
@@ -59,11 +61,10 @@ class TransferTavalidatorcertAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> TransferTavalidatorcertAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return TransferTavalidatorcertAlgo(
-            TypeName=d2["TypeName"],
             ValidatorAddr=d2["ValidatorAddr"],
             HalfSignedCertTransferMtx=d2["HalfSignedCertTransferMtx"],
+            TypeName=d2["TypeName"],
+            Version="010",
         )

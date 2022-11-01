@@ -1,4 +1,4 @@
-"""status.basegnode.010 type"""
+"""Type status.basegnode, version 010"""
 import json
 from typing import Dict
 from typing import List
@@ -22,6 +22,7 @@ class StatusBasegnode(BaseModel):
     TopGNodeId: str
     ToGNodeAlias: str  #
     TypeName: Literal["status.basegnode"] = "status.basegnode"
+    Version: str = "010"
 
     @validator("DescendantGNodeList")
     def _validator_descendant_g_node_list(cls, v: List) -> List:
@@ -60,6 +61,7 @@ class StatusBasegnode(BaseModel):
 
 class StatusBasegnode_Maker:
     type_name = "status.basegnode"
+    version = "010"
 
     def __init__(
         self,
@@ -98,8 +100,6 @@ class StatusBasegnode_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> StatusBasegnode:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
         if "DescendantGNodeList" not in d2.keys():
             raise SchemaError(f"dict {d2} missing DescendantGNodeList")
         descendant_g_node_list = []
@@ -117,11 +117,12 @@ class StatusBasegnode_Maker:
             raise SchemaError(f"dict {d2} missing TopGNodeId")
 
         return StatusBasegnode(
-            TypeName=d2["TypeName"],
             IncludeAllDescendants=d2["IncludeAllDescendants"],
             DescendantGNodeList=d2["DescendantGNodeList"],
             FromGNodeAlias=d2["FromGNodeAlias"],
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
             TopGNodeId=d2["TopGNodeId"],
             ToGNodeAlias=d2["ToGNodeAlias"],
+            TypeName=d2["TypeName"],
+            Version="010",
         )

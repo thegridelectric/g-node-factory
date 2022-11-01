@@ -1,4 +1,4 @@
-"""create.discoverycert.algo.001 type"""
+"""Type create.discoverycert.algo, version 001"""
 import json
 from enum import auto
 from typing import Any
@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from pydantic import validator
 
 import gnf.property_format as property_format
+from gnf.enums import CoreGNodeRole
 from gnf.errors import SchemaError
 from gnf.message import as_enum
 from gnf.property_format import predicate_validator
@@ -59,15 +60,19 @@ class CoreGNodeRoleMap:
     def type_to_local(cls, symbol):
         if not CoreGNodeRole100SchemaEnum.is_symbol(symbol):
             raise SchemaError(f"{symbol} must belong to CoreGNodeRole100 symbols")
-        return cls.type_to_local_dict[symbol]
+        versioned_enum = cls.type_to_versioned_enum_dict[symbol]
+        return as_enum(versioned_enum, CoreGNodeRole, CoreGNodeRole.default())
 
     @classmethod
     def local_to_type(cls, core_g_node_role):
         if not isinstance(core_g_node_role, CoreGNodeRole100):
             raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole100}")
-        return cls.local_to_type_dict[core_g_node_role]
+        versioned_enum = as_enum(
+            core_g_node_role, CoreGNodeRole100, CoreGNodeRole100.default()
+        )
+        return cls.versioned_enum_to_type_dict[versioned_enum]
 
-    type_to_local_dict: Dict[str, CoreGNodeRole100] = {
+    type_to_versioned_enum_dict: Dict[str, CoreGNodeRole100] = {
         "00000000": CoreGNodeRole100.Other,
         "0f8872f7": CoreGNodeRole100.TerminalAsset,
         "9521af06": CoreGNodeRole100.AtomicMeteringNode,
@@ -77,7 +82,7 @@ class CoreGNodeRoleMap:
         "d67e564e": CoreGNodeRole100.InterconnectionComponent,
     }
 
-    local_to_type_dict: Dict[CoreGNodeRole100, str] = {
+    versioned_enum_to_type_dict: Dict[CoreGNodeRole100, str] = {
         CoreGNodeRole100.Other: "00000000",
         CoreGNodeRole100.TerminalAsset: "0f8872f7",
         CoreGNodeRole100.AtomicMeteringNode: "9521af06",
@@ -91,12 +96,13 @@ class CoreGNodeRoleMap:
 class CreateDiscoverycertAlgo(BaseModel):
     OldChildAliasList: List[str]
     GNodeAlias: str  #
-    CoreGNodeRole: CoreGNodeRole100  #
+    CoreGNodeRole: CoreGNodeRole  #
     DiscovererAddr: str  #
     SupportingMaterialHash: str  #
     MicroLon: Optional[int] = None
     MicroLat: Optional[int] = None
     TypeName: Literal["create.discoverycert.algo"] = "create.discoverycert.algo"
+    Version: str = "001"
 
     @validator("OldChildAliasList")
     def _validator_old_child_alias_list(cls, v: List) -> List:
@@ -122,9 +128,10 @@ class CreateDiscoverycertAlgo(BaseModel):
     def as_dict(self) -> Dict:
         d = self.dict()
         del d["CoreGNodeRole"]
-        d["CoreGNodeRoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(
-            self.CoreGNodeRole
+        CoreGNodeRole = as_enum(
+            self.CoreGNodeRole, CoreGNodeRole100, CoreGNodeRole100.default()
         )
+        d["CoreGNodeRoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(CoreGNodeRole)
         if d["MicroLon"] is None:
             del d["MicroLon"]
         if d["MicroLat"] is None:
@@ -137,15 +144,16 @@ class CreateDiscoverycertAlgo(BaseModel):
 
 class CreateDiscoverycertAlgo_Maker:
     type_name = "create.discoverycert.algo"
+    version = "001"
 
     def __init__(
         self,
         old_child_alias_list: List[str],
         g_node_alias: str,
-        core_g_node_role: CoreGNodeRole100,
+        core_g_node_role: CoreGNodeRole,
         discoverer_addr: str,
-        supporting_material_hash: str,
         micro_lon: Optional[int],
+        supporting_material_hash: str,
         micro_lat: Optional[int],
     ):
 
@@ -177,8 +185,6 @@ class CreateDiscoverycertAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateDiscoverycertAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
         if "CoreGNodeRoleGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing CoreGNodeRoleGtEnumSymbol")
         if d2["CoreGNodeRoleGtEnumSymbol"] in CoreGNodeRole100SchemaEnum.symbols:
@@ -186,14 +192,13 @@ class CreateDiscoverycertAlgo_Maker:
                 d2["CoreGNodeRoleGtEnumSymbol"]
             )
         else:
-            d2["CoreGNodeRole"] = CoreGNodeRole100.Other
+            d2["CoreGNodeRole"] = CoreGNodeRole.default()
         if "MicroLon" not in d2.keys():
             d2["MicroLon"] = None
         if "MicroLat" not in d2.keys():
             d2["MicroLat"] = None
 
         return CreateDiscoverycertAlgo(
-            TypeName=d2["TypeName"],
             OldChildAliasList=d2["OldChildAliasList"],
             GNodeAlias=d2["GNodeAlias"],
             CoreGNodeRole=d2["CoreGNodeRole"],
@@ -201,4 +206,6 @@ class CreateDiscoverycertAlgo_Maker:
             MicroLon=d2["MicroLon"],
             SupportingMaterialHash=d2["SupportingMaterialHash"],
             MicroLat=d2["MicroLat"],
+            TypeName=d2["TypeName"],
+            Version="001",
         )

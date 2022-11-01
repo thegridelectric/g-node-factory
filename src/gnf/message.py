@@ -6,7 +6,7 @@ from typing import Optional
 from typing import TypeVar
 from typing import Union
 
-from gwproto.topic import MQTTTopic
+# from gwproto.topic import MQTTTopic
 from pydantic import BaseModel
 from pydantic import Field
 from pydantic.generics import GenericModel
@@ -59,8 +59,8 @@ class Message(GenericModel, Generic[PayloadT]):
     def get_type_name(cls) -> str:
         return Message.__fields__["TypeName"].default
 
-    def mqtt_topic(self) -> str:
-        return MQTTTopic.encode(self.src(), self.get_type_name(), self.message_type())
+    # def mqtt_topic(self) -> str:
+    #     return MQTTTopic.encode(self.src(), self.get_type_name(), self.message_type())
 
     @classmethod
     def _header_from_kwargs(cls, kwargs: dict[str, Any]) -> Header:

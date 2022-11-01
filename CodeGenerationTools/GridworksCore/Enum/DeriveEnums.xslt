@@ -52,7 +52,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-<xsl:sort select="Index"/>
+<xsl:sort select="Idx"/>
 <xsl:if test="$enum-name-style = 'Upper'">
     <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
 </xsl:if>

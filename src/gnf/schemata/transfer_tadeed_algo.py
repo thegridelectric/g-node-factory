@@ -1,4 +1,4 @@
-"""transfer.tadeed.algo.020 type"""
+"""Type transfer.tadeed.algo, version 020"""
 import json
 from typing import Dict
 from typing import Literal
@@ -18,6 +18,7 @@ class TransferTadeedAlgo(BaseModel):
     TaOwnerAddr: str  #
     MicroLon: int  #
     TypeName: Literal["transfer.tadeed.algo"] = "transfer.tadeed.algo"
+    Version: str = "020"
 
     _validator_first_deed_transfer_mtx = predicate_validator(
         "FirstDeedTransferMtx", property_format.is_algo_msg_pack_encoded
@@ -45,6 +46,7 @@ class TransferTadeedAlgo(BaseModel):
 
 class TransferTadeedAlgo_Maker:
     type_name = "transfer.tadeed.algo"
+    version = "020"
 
     def __init__(
         self,
@@ -83,15 +85,14 @@ class TransferTadeedAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> TransferTadeedAlgo:
         d2 = dict(d)
-        if "TypeName" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TypeName")
 
         return TransferTadeedAlgo(
-            TypeName=d2["TypeName"],
             FirstDeedTransferMtx=d2["FirstDeedTransferMtx"],
             MicroLat=d2["MicroLat"],
             DeedValidatorAddr=d2["DeedValidatorAddr"],
             TaDaemonAddr=d2["TaDaemonAddr"],
             TaOwnerAddr=d2["TaOwnerAddr"],
             MicroLon=d2["MicroLon"],
+            TypeName=d2["TypeName"],
+            Version="020",
         )
