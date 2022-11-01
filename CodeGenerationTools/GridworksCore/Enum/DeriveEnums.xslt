@@ -42,6 +42,7 @@
 
 
 <xsl:text>
+from typing import List
 from enum import auto
 from fastapi_utils.enums import StrEnum
 
@@ -71,7 +72,7 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
     <xsl:text>
 
     @classmethod
-    def values(cls):
+    def values(cls) -> List[str]:
         return [elt.value for elt in cls]
 </xsl:text>
 

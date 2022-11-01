@@ -1,89 +1,49 @@
 """create.tadeed.algo.010 type"""
-
 import json
-from typing import List
-from typing import NamedTuple
+from typing import Dict
+from typing import Literal
+
+from pydantic import BaseModel
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.property_format import predicate_validator
 
 
-class CreateTadeedAlgo(NamedTuple):
+class CreateTadeedAlgo(BaseModel):
     ValidatorAddr: str  #
     HalfSignedDeedCreationMtx: str  #
-    TypeName: str = "create.tadeed.algo.010"
+    TypeName: Literal["create.tadeed.algo"] = "create.tadeed.algo"
 
-    def as_type(self) -> str:
-        return json.dumps(self.asdict())
+    _validator_validator_addr = predicate_validator(
+        "ValidatorAddr", property_format.is_algo_address_string_format
+    )
 
-    def asdict(self):
-        d = self._asdict()
+    _validator_half_signed_deed_creation_mtx = predicate_validator(
+        "HalfSignedDeedCreationMtx", property_format.is_algo_msg_pack_encoded
+    )
+
+    def as_dict(self) -> Dict:
+        d = self.dict()
         return d
 
-    def derived_errors(self) -> List[str]:
-        errors = []
-        if not isinstance(self.ValidatorAddr, str):
-            errors.append(f"ValidatorAddr {self.ValidatorAddr} must have type str.")
-        try:
-            property_format.check_is_algo_address_string_format(self.ValidatorAddr)
-        except SchemaError as e:
-            errors.append(
-                f"ValidatorAddr {self.ValidatorAddr}"
-                " must have format AlgoAddressStringFormat: {e}"
-            )
-        if not isinstance(self.HalfSignedDeedCreationMtx, str):
-            errors.append(
-                f"HalfSignedDeedCreationMtx {self.HalfSignedDeedCreationMtx} must have type str."
-            )
-        try:
-            property_format.check_is_algo_msg_pack_encoded(
-                self.HalfSignedDeedCreationMtx
-            )
-        except SchemaError as e:
-            errors.append(
-                f"HalfSignedDeedCreationMtx {self.HalfSignedDeedCreationMtx}"
-                " must have format AlgoMsgPackEncoded: {e}"
-            )
-        if self.TypeName != "create.tadeed.algo.010":
-            errors.append(
-                f"Type requires TypeName of create.tadeed.algo.010, not {self.TypeName}."
-            )
-
-        return errors
-
-    def check_for_errors(self):
-        if self.derived_errors() == []:
-            errors = self.hand_coded_errors()
-        else:
-            errors = self.derived_errors()
-        if len(errors) > 0:
-            raise SchemaError(
-                f"Errors making create.tadeed.algo.010 for {self}: {errors}"
-            )
-
-    def __repr__(self):
-        return "CreateTadeedAlgo"
-
-    def hand_coded_errors(self):
-        return []
+    def as_type(self) -> str:
+        return json.dumps(self.as_dict())
 
 
 class CreateTadeedAlgo_Maker:
-    type_name = "create.tadeed.algo.010"
+    type_name = "create.tadeed.algo"
 
     def __init__(self, validator_addr: str, half_signed_deed_creation_mtx: str):
 
-        gw_tuple = CreateTadeedAlgo(
+        self.tuple = CreateTadeedAlgo(
             ValidatorAddr=validator_addr,
             HalfSignedDeedCreationMtx=half_signed_deed_creation_mtx,
             #
         )
-        gw_tuple.check_for_errors()
-        self.tuple = gw_tuple
 
     @classmethod
     def tuple_to_type(cls, tuple: CreateTadeedAlgo) -> str:
-        tuple.check_for_errors()
         return tuple.as_type()
 
     @classmethod
@@ -98,21 +58,12 @@ class CreateTadeedAlgo_Maker:
 
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateTadeedAlgo:
-        new_d = {}
-        for key in d.keys():
-            new_d[key] = d[key]
-        if "TypeName" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing TypeName")
-        if "ValidatorAddr" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing ValidatorAddr")
-        if "HalfSignedDeedCreationMtx" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing HalfSignedDeedCreationMtx")
+        d2 = dict(d)
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        gw_tuple = CreateTadeedAlgo(
-            TypeName=new_d["TypeName"],
-            ValidatorAddr=new_d["ValidatorAddr"],
-            HalfSignedDeedCreationMtx=new_d["HalfSignedDeedCreationMtx"],
-            #
+        return CreateTadeedAlgo(
+            TypeName=d2["TypeName"],
+            ValidatorAddr=d2["ValidatorAddr"],
+            HalfSignedDeedCreationMtx=d2["HalfSignedDeedCreationMtx"],
         )
-        gw_tuple.check_for_errors()
-        return gw_tuple

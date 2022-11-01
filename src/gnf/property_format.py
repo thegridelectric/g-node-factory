@@ -1,22 +1,64 @@
 import string
 import struct
+from typing import Any
+from typing import Callable
 
 import algosdk
 import algosdk.abi
 import pendulum
+import pydantic
+
+
+def predicate_validator(
+    field_name: str, predicate: Callable[[Any], bool], error_format: str = ""
+) -> classmethod:  # type: ignore
+    def _validator(v: Any) -> Any:
+        if not predicate(v):
+            if error_format:
+                err_str = error_format.format(value=v)
+            else:
+                err_str = f"Failure of predicate on [{v}] with predicate {predicate}"
+            raise ValueError(err_str)
+        return v
+
+    return pydantic.validator(field_name, allow_reuse=True)(_validator)
+
+
+def is_algo_address_string_format(candidate: str) -> bool:
+    """The public key of a private/public Ed25519 key pairis transformed into an Algorand address,
+    by adding a 4-byte checksum to the end of the public key and then encoding it
+    in base32.
+
+    Args:
+        candidate (str): candidate
+
+    Returns:
+        bool: True if is_algo_address_string_format
+    """
+
+    at = algosdk.abi.AddressType()
+    try:
+        result = at.decode(at.encode(candidate))
+    except Exception as e:
+        return False
+    return True
 
 
 def check_is_algo_address_string_format(candidate: str):
-    """
-    Note: could use algosdk.encoding.is_valid_address instead.
+    """Note: could use algosdk.encoding.is_valid_address instead.
     Leaving in for the moment to keep looking at algosdk.abi and understand
     how to use it.
 
-    Throw ValueError if algorand AddressType decode(encode(c)) fails.
-
     The public key of a private/public Ed25519 key pairis transformed into an Algorand address,
     by adding a 4-byte checksum to the end of the public key and then encoding it
-    in base32."""
+    in base32.
+
+    Args:
+        candidate (str): candidate
+
+    Raises:
+        ValueError: Throw ValueError if algorand AddressType decode(encode(c)) fails.
+    """
 
     at = algosdk.abi.AddressType()
     try:
@@ -25,28 +67,75 @@ def check_is_algo_address_string_format(candidate: str):
         raise ValueError(f"Not AlgoAddressStringFormat: {e}")
 
 
-def check_is_algo_private_key_format(candidate: str) -> bool:
+def is_algo_private_key_format(candidate: str) -> bool:
     """The private key of a private/public Ed25519 key pair is transformed into an Algorand address,
     by adding a 4-byte checksum to the end of the public key and then encoding it
-    in base32."""
+    in base32
+
+    Args:
+        candidate (str): _description_
+
+    Returns:
+        bool: True if candidate is_alg_private_key_format
+    """
+    try:
+        algosdk.account.address_from_private_key(candidate)
+    except Exception as e:
+        return False
+    return True
+
+
+def check_is_algo_private_key_format(candidate: str):
+    """The private key of a private/public Ed25519 key pair is transformed into an Algorand address,
+    by adding a 4-byte checksum to the end of the public key and then encoding it
+    in base32
+
+    Args:
+        candidate (str): candidate
+
+    Raises:
+        ValueError: if not is_algo_private_key_foramt
+    """
     try:
         algosdk.account.address_from_private_key(candidate)
     except Exception as e:
         raise ValueError(f"Not AlgoSecretKeyFormat: {e} /n {candidate} ")
+
+
+def is_algo_msg_pack_encoded(candidate: str) -> bool:
+    try:
+        algosdk.encoding.future_msgpack_decode(candidate)
+    except Exception as e:
+        return False
     return True
 
 
 def check_is_algo_msg_pack_encoded(candidate: str):
-    """Throw ValueError if algosdk.encoding.future_msg_decode(candidate)
-    throws an error"""
     try:
         algosdk.encoding.future_msgpack_decode(candidate)
     except Exception as e:
         raise ValueError(f"Not AlgoMsgPackEncoded: {e} /n {candidate}")
 
 
+def is_valid_asa_name(candidate: str) -> bool:
+    """a string no more than 32 chars
+
+    Args:
+        candidate (str): candidate
+
+    Returns:
+        bool: True if a string no more than 32 cars
+    """
+    try:
+        l = len(candidate)
+    except Exception as e:
+        return False
+    if l > 32:
+        return False
+    return True
+
+
 def check_is_valid_asa_name(candidate: str):
-    """Throw ValueError if not a string or longer than 32 chars"""
     try:
         l = len(candidate)
     except Exception as e:
@@ -57,6 +146,14 @@ def check_is_valid_asa_name(candidate: str):
         )
 
 
+def is_64_bit_hex(candidate) -> bool:
+    if len(candidate) != 8:
+        return False
+    if not all(c in string.hexdigits for c in candidate):
+        return False
+    return True
+
+
 def check_is_64_bit_hex(candidate):
     if len(candidate) != 8:
         raise ValueError(f" {candidate} Must be length 8, not {len(candidate)}")
@@ -64,9 +161,44 @@ def check_is_64_bit_hex(candidate):
         raise ValueError("Must be hex digits")
 
 
+def is_bit(candidate) -> bool:
+    if candidate not in {0, 1}:
+        return False
+    return True
+
+
 def check_is_bit(candidate):
     if candidate not in {0, 1}:
         raise ValueError(f"{e} must be either 0 or 1")
+
+
+def is_lrd_alias_format(candidate: str) -> bool:
+    """Lowercase AlphanumericStrings separated by dots (i.e. periods), with most
+    significant word to the left.  I.e. `dw1.ne` is the child of `dw1`.
+    Checking the format cannot verify the significance of words. All
+    words must be alphanumeric. Most significant word must start with
+    an alphabet charecter
+
+    Args:
+        candidate (str): candidate
+
+    Returns:
+        bool: True if is_lrod_alias_format
+    """
+    try:
+        x = candidate.split(".")
+    except:
+        return False
+    first_word = x[0]
+    first_char = first_word[0]
+    if not first_char.isalpha():
+        return False
+    for word in x:
+        if not word.isalnum():
+            return False
+    if not candidate.islower():
+        return False
+    return True
 
 
 def check_is_lrd_alias_format(candidate: str):
@@ -99,7 +231,7 @@ def check_is_lrd_alias_format(candidate: str):
         raise ValueError(f"alias must be lowercase. Got '{candidate}'")
 
 
-def check_is_lru_alias_format(candidate: str):
+def is_lru_alias_format(candidate: str) -> bool:
     """AlphanumericStrings separated by underscores, with most
     significant word to the left.  I.e. `dw1.ne` is the child of `dw1`.
     Checking the format cannot verify the significance of words. All
@@ -115,11 +247,27 @@ def check_is_lru_alias_format(candidate: str):
     return True
 
 
+def is_positive_integer(candidate) -> bool:
+    if not isinstance(candidate, int):
+        return False
+    if candidate <= 0:
+        return False
+    return True
+
+
 def check_is_positive_integer(candidate):
     if not isinstance(candidate, int):
         raise ValueError("Must be an integer")
     if candidate <= 0:
         raise ValueError("Must be positive integer")
+
+
+def is_reasonable_unix_time_ms(candidate) -> bool:
+    if pendulum.parse("2000-01-01T00:00:00Z").int_timestamp * 1000 > candidate:
+        return False
+    if pendulum.parse("3000-01-01T00:00:00Z").int_timestamp * 1000 < candidate:
+        return False
+    return True
 
 
 def check_is_reasonable_unix_time_ms(candidate):
@@ -129,11 +277,27 @@ def check_is_reasonable_unix_time_ms(candidate):
         raise ValueError("ReasonableUnixTimeMs must be before 3000 AD")
 
 
+def is_reasonable_unix_time_s(candidate) -> bool:
+    if pendulum.parse("2000-01-01T00:00:00Z").int_timestamp > candidate:
+        return False
+    if pendulum.parse("3000-01-01T00:00:00Z").int_timestamp < candidate:
+        return False
+    return True
+
+
 def check_is_reasonable_unix_time_s(candidate):
     if pendulum.parse("2000-01-01T00:00:00Z").int_timestamp > candidate:
         raise ValueError("ReasonableUnixTimeS must be after 2000 AD")
     if pendulum.parse("3000-01-01T00:00:00Z").int_timestamp < candidate:
         raise ValueError("ReasonableUnixTimeS must be before 3000 AD")
+
+
+def is_unsigned_short(candidate) -> bool:
+    try:
+        struct.pack("H", candidate)
+    except:
+        return False
+    return True
 
 
 def check_is_unsigned_short(candidate):
@@ -143,6 +307,14 @@ def check_is_unsigned_short(candidate):
         raise ValueError("requires 0 <= number <= 65535")
 
 
+def check_is_short_integer(candidate) -> bool:
+    try:
+        struct.pack("h", candidate)
+    except:
+        return False
+    return True
+
+
 def check_is_short_integer(candidate):
     try:
         struct.pack("h", candidate)
@@ -150,11 +322,32 @@ def check_is_short_integer(candidate):
         raise ValueError("short format requires (-32767 -1) <= number <= 32767")
 
 
+def is_uuid_canonical_textual(candidate) -> bool:
+    try:
+        x = candidate.split("-")
+    except AttributeError:
+        return False
+    if len(x) != 5:
+        return False
+    for hex_word in x:
+        try:
+            int(hex_word, 16)
+        except ValueError:
+            return False
+    if len(x[0]) != 8:
+        return False
+    if len(x[1]) != 4:
+        return False
+    if len(x[2]) != 4:
+        return False
+    if len(x[3]) != 4:
+        return False
+    if len(x[4]) != 12:
+        return False
+    return True
+
+
 def check_is_uuid_canonical_textual(candidate):
-    """
-    Raises:
-        ValueError: if not of the format "f7d517d9-7d3f-47bd-bd5c-ee04f636da6f"
-    """
     try:
         x = candidate.split("-")
     except AttributeError as e:
@@ -163,7 +356,7 @@ def check_is_uuid_canonical_textual(candidate):
         raise ValueError(f"Did not have 5 words")
     for hex_word in x:
         try:
-            y = int(hex_word, 16)
+            int(hex_word, 16)
         except ValueError:
             raise ValueError("Words are not all hex")
     if len(x[0]) != 8:

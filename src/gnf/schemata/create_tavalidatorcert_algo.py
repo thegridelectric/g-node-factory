@@ -1,89 +1,49 @@
 """create.tavalidatorcert.algo.010 type"""
-
 import json
-from typing import List
-from typing import NamedTuple
+from typing import Dict
+from typing import Literal
+
+from pydantic import BaseModel
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.property_format import predicate_validator
 
 
-class CreateTavalidatorcertAlgo(NamedTuple):
+class CreateTavalidatorcertAlgo(BaseModel):
     HalfSignedCertCreationMtx: str  #
     ValidatorAddr: str  #
-    TypeName: str = "create.tavalidatorcert.algo.010"
+    TypeName: Literal["create.tavalidatorcert.algo"] = "create.tavalidatorcert.algo"
 
-    def as_type(self) -> str:
-        return json.dumps(self.asdict())
+    _validator_half_signed_cert_creation_mtx = predicate_validator(
+        "HalfSignedCertCreationMtx", property_format.is_algo_msg_pack_encoded
+    )
 
-    def asdict(self):
-        d = self._asdict()
+    _validator_validator_addr = predicate_validator(
+        "ValidatorAddr", property_format.is_algo_address_string_format
+    )
+
+    def as_dict(self) -> Dict:
+        d = self.dict()
         return d
 
-    def derived_errors(self) -> List[str]:
-        errors = []
-        if not isinstance(self.HalfSignedCertCreationMtx, str):
-            errors.append(
-                f"HalfSignedCertCreationMtx {self.HalfSignedCertCreationMtx} must have type str."
-            )
-        try:
-            property_format.check_is_algo_msg_pack_encoded(
-                self.HalfSignedCertCreationMtx
-            )
-        except SchemaError as e:
-            errors.append(
-                f"HalfSignedCertCreationMtx {self.HalfSignedCertCreationMtx}"
-                " must have format AlgoMsgPackEncoded: {e}"
-            )
-        if not isinstance(self.ValidatorAddr, str):
-            errors.append(f"ValidatorAddr {self.ValidatorAddr} must have type str.")
-        try:
-            property_format.check_is_algo_address_string_format(self.ValidatorAddr)
-        except SchemaError as e:
-            errors.append(
-                f"ValidatorAddr {self.ValidatorAddr}"
-                " must have format AlgoAddressStringFormat: {e}"
-            )
-        if self.TypeName != "create.tavalidatorcert.algo.010":
-            errors.append(
-                f"Type requires TypeName of create.tavalidatorcert.algo.010, not {self.TypeName}."
-            )
-
-        return errors
-
-    def check_for_errors(self):
-        if self.derived_errors() == []:
-            errors = self.hand_coded_errors()
-        else:
-            errors = self.derived_errors()
-        if len(errors) > 0:
-            raise SchemaError(
-                f"Errors making create.tavalidatorcert.algo.010 for {self}: {errors}"
-            )
-
-    def __repr__(self):
-        return "CreateTavalidatorcertAlgo"
-
-    def hand_coded_errors(self):
-        return []
+    def as_type(self) -> str:
+        return json.dumps(self.as_dict())
 
 
 class CreateTavalidatorcertAlgo_Maker:
-    type_name = "create.tavalidatorcert.algo.010"
+    type_name = "create.tavalidatorcert.algo"
 
     def __init__(self, half_signed_cert_creation_mtx: str, validator_addr: str):
 
-        gw_tuple = CreateTavalidatorcertAlgo(
+        self.tuple = CreateTavalidatorcertAlgo(
             HalfSignedCertCreationMtx=half_signed_cert_creation_mtx,
             ValidatorAddr=validator_addr,
             #
         )
-        gw_tuple.check_for_errors()
-        self.tuple = gw_tuple
 
     @classmethod
     def tuple_to_type(cls, tuple: CreateTavalidatorcertAlgo) -> str:
-        tuple.check_for_errors()
         return tuple.as_type()
 
     @classmethod
@@ -98,21 +58,12 @@ class CreateTavalidatorcertAlgo_Maker:
 
     @classmethod
     def dict_to_tuple(cls, d: dict) -> CreateTavalidatorcertAlgo:
-        new_d = {}
-        for key in d.keys():
-            new_d[key] = d[key]
-        if "TypeName" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing TypeName")
-        if "HalfSignedCertCreationMtx" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing HalfSignedCertCreationMtx")
-        if "ValidatorAddr" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing ValidatorAddr")
+        d2 = dict(d)
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        gw_tuple = CreateTavalidatorcertAlgo(
-            TypeName=new_d["TypeName"],
-            HalfSignedCertCreationMtx=new_d["HalfSignedCertCreationMtx"],
-            ValidatorAddr=new_d["ValidatorAddr"],
-            #
+        return CreateTavalidatorcertAlgo(
+            TypeName=d2["TypeName"],
+            HalfSignedCertCreationMtx=d2["HalfSignedCertCreationMtx"],
+            ValidatorAddr=d2["ValidatorAddr"],
         )
-        gw_tuple.check_for_errors()
-        return gw_tuple

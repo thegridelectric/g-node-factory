@@ -6,6 +6,7 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.enums as enums
 import gnf.errors as errors
+import gnf.message as message
 
 # import gnf.load_dev_data as load_dev_data
 import gnf.property_format as property_format
@@ -23,6 +24,7 @@ __all__ = [
     "config",
     "enums",
     "errors",
+    "message",
     # "load_dev_data",
     "property_format",
     "PythonTaDaemon",

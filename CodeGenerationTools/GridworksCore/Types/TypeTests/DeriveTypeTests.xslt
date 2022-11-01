@@ -19,10 +19,11 @@
     <xsl:template match="/">
         <FileSet>
             <FileSetFiles>
-                <xsl:for-each select="$airtable//Schemas/Schema[(normalize-space(Alias) !='') and (Status = 'Active' or Status = 'Pending') and (InGnfSchemata = 'true') and (ProtocolType = 'Json' or ProtocolType = 'GwAlgoSerial')]">
+                <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
+                <xsl:variable name="schema-id" select="Type"/>
+                <xsl:for-each select="$airtable//Schemas/Schema[(SchemaId = $schema-id)  and (Status = 'Active' or Status = 'Pending') and (ProtocolType = 'Json' or ProtocolType = 'GwAlgoSerial')]">
                 <xsl:variable name="alias" select="Alias"/>
                 <xsl:variable name="local-alias" select="AliasRoot" />
-                <xsl:variable name="schema-id" select="SchemaId" />
                 <xsl:variable name="class-name">
                     <xsl:call-template name="nt-case">
                         <xsl:with-param name="mp-schema-text" select="$local-alias" />
@@ -542,7 +543,7 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
                         </xsl:element>
                      </FileSetFile>
                 </xsl:for-each>
-
+                </xsl:for-each>
             </FileSetFiles>
         </FileSet>
     </xsl:template>

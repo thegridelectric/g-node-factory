@@ -34,8 +34,6 @@
         "rec9Hc4AlRRUtSxke",
         "recVpLt1h1lFaJPPt",
         "recCHqdjf2zGBNMhz",
-        "rec3UK0uLi5lWoyyN",
-        "recGjJoqWwEcoicHt",
         "recsd3la7kaOFw8yq",
         "recUcGE6a9kjAbbwH"
       ],
@@ -134,11 +132,10 @@
         "recUhQ9rXPjUFix4H",
         "recF2gl6BCCKUSUrn",
         "recnGyPJnpH6R9f2l",
-        "recZuh8H1X3GNK654",
-        "recE16FiJgQvQonRo",
         "rec9VRrzy03CABwW5",
         "rec1yQZz9QnS5j8Ng",
-        "recNgrvONa0eoDSi7"
+        "recNgrvONa0eoDSi7",
+        "recM6WmGTyRm5VyiG"
       ],
       "TableGroup": "General",
       "ToName": "Schema"
@@ -264,11 +261,11 @@
       "RowKey": "1715. Scada-develop-v2022.05.16.323366. ProtocolType",
       "TableColumns": [
         "recuUHBRNUo0NM0vs",
-        "recv1QO20vS0TAnaa",
-        "reclTgP4wS3QJkkMx",
         "rec8Q6HYmsmkuRsNs",
         "reccu5newyZkH4tOk",
-        "recd0EUQz4KUYZsdd"
+        "recd0EUQz4KUYZsdd",
+        "rec6SVssD9tlcFgYf",
+        "recoKVya4EXKsA9uj"
       ],
       "TableGroup": "General",
       "ToName": "ProtocolType"
