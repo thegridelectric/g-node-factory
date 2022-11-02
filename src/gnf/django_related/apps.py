@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class GnodeRegistryConfig(AppConfig):
-    name = "django_related"
+class GnodeFactoryConfig(AppConfig):
+    name = "gnf.django_related"

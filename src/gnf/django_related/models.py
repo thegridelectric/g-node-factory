@@ -97,14 +97,23 @@ class BaseGNodeDb(models.Model):
             for key in self._meta.fields
             if (not key.is_relation and key.name != "id" and key.name != "_old_attrs")
         }
+
+        dc_d = dict(
+            d,
+            role=CoreGNodeRole(d["role_value"]),
+            status=GNodeStatus(d["status_value"]),
+        )
+        del dc_d["role_value"]
+        del dc_d["status_value"]
+
         if self.pk is None:
             # Creation axiom checks
             self.creation_axiom_1(d)
             try:
-                BaseGNode.check_creation_axioms(d)
+                BaseGNode.check_creation_axioms(dc_d)
             except DcError as e:
                 raise RegistryError(e)
-            dc_rep = BaseGNode(**d)
+            dc_rep = BaseGNode(**dc_d)
         else:
             # Update axiom checks
             old_d = {
@@ -117,16 +126,23 @@ class BaseGNodeDb(models.Model):
                     and self._old_attrs.get(key.name, None)
                 )
             }
-            dc_rep = BaseGNode(**old_d)
+            old_dc_d = dict(
+                d,
+                role=CoreGNodeRole(old_d["role_value"]),
+                status=GNodeStatus(old_d["status_value"]),
+            )
+            del old_dc_d["role_value"]
+            del old_dc_d["status_value"]
+            dc_rep = BaseGNode(**old_dc_d)
             try:
-                dc_rep.check_update_axioms(d)
+                dc_rep.check_update_axioms(dc_d)
             except DcError as e:
                 raise RegistryError(f"BaseGNode update failed: {e}")
             for key, value in d.items():
                 setattr(dc_rep, key, value)
         super().save(*args, **kwargs)
-        BaseGNode.by_id[d["g_node_id"]] = BaseGNode(**d)
-        BaseGNode.by_alias[d["alias"]] = BaseGNode(**d)
+        BaseGNode.by_id[d["g_node_id"]] = BaseGNode(**dc_d)
+        BaseGNode.by_alias[d["alias"]] = BaseGNode(**dc_d)
 
         self._old_attrs = {
             key: value

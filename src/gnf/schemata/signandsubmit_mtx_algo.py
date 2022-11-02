@@ -1,77 +1,116 @@
-"""signandsubmit.mtx.algo.000 type"""
-
+"""Type signandsubmit.mtx.algo, version 000"""
 import json
+from typing import Any
+from typing import Dict
 from typing import List
-from typing import NamedTuple
+from typing import Literal
 
 from algosdk import encoding
 from algosdk.future import transaction
+from pydantic import BaseModel
+from pydantic import root_validator
+from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.property_format import predicate_validator
 
 
-class SignandsubmitMtxAlgo(NamedTuple):
-    SignerAddress: str  #
+class SignandsubmitMtxAlgo(BaseModel):
     Mtx: str  #
     Addresses: List[str]
     Threshold: int  #
-    TypeName: str = "signandsubmit.mtx.algo.000"
+    SignerAddress: str  #
+    TypeName: Literal["signandsubmit.mtx.algo"] = "signandsubmit.mtx.algo"
+    Version: str = "000"
 
-    def as_type(self) -> str:
-        return json.dumps(self.asdict())
+    _validator_mtx = predicate_validator(
+        "Mtx", property_format.is_algo_msg_pack_encoded
+    )
 
-    def asdict(self):
-        d = self._asdict()
+    @validator("Addresses")
+    def _validator_addresses(cls, v: List) -> List:
+        for elt in v:
+            if not property_format.is_algo_address_string_format(elt):
+                raise ValueError(
+                    f"failure of predicate is_algo_address_string_format() on elt {elt} of Addresses"
+                )
+        return v
+
+    _validator_signer_address = predicate_validator(
+        "SignerAddress", property_format.is_algo_address_string_format
+    )
+
+    @root_validator(pre=True)
+    def _axioms_4(cls, v) -> Any:
+        """Axiom 4: Decoded Mtx must have type MultisigTransaction."""
+        mtx = encoding.future_msgpack_decode(v.get("Mtx", None))
+        if not isinstance(mtx, transaction.MultisigTransaction):
+            raise ValueError(
+                "Axiom 4: Decoded Mtx must have type MultisigTransaction,"
+                f" got {type(mtx)}"
+            )
+
+        return v
+
+    @root_validator
+    def _axiom_5(cls, v) -> Any:
+        """Axiom 5 (Internal Consistency): SignerAddress is one of the Addresses. Threshold is the
+        threshold for the MultisigTransaction. Addresses are the list of addresses for the
+         MultisigTransaction (order matters).
+        """
+        mtx = encoding.future_msgpack_decode(v.get("Mtx", None))
+        SignerAddress = v.get("SignerAddress", None)
+        Addresses = v.get("Addresses")
+        Threshold = v.get("Threshold")
+        if SignerAddress not in Addresses:
+            raise ValueError(
+                "Axiom 5 (Internal Consistency): SignerAddress must be one of the Addresses"
+            )
+        if Threshold != mtx.multisig.threshold:
+            raise ValueError(
+                "Axiom 5 (Internal Consistency): Threshold must equal "
+                f"Mtx.multisig.threshold. {Threshold} != {mtx.multisig.threshold}"
+            )
+        mtx_addresses = list(
+            map(lambda x: encoding.encode_address(x.public_key), mtx.multisig.subsigs)
+        )
+        if Addresses != mtx_addresses:
+            raise ValueError(
+                "Axiom 5 (Internal Consistency): Addresses must be the addresses for the"
+                f"MultisigTransaction. {Addresses} != {mtx_addresses}"
+            )
+        return v
+
+    @root_validator
+    def _axiom_6(cls, v) -> Any:
+        """Axiom 6 (Mtx threshold gets met): Once the SignerAddress signs, the Mtx meets its
+        threshold of signatures."""
+        mtx = encoding.future_msgpack_decode(v.get("Mtx", None))
+        SignerAddress = v.get("SignerAddress", None)
+        Threshold = v.get("Threshold")
+        has_sig = list(
+            map(
+                lambda x: encoding.encode_address(x.public_key),
+                filter(lambda x: x.signature is not None, mtx.multisig.subsigs),
+            )
+        )
+        has_sig.append(SignerAddress)
+        num_sigs_after_signing = len(set(has_sig))
+        if num_sigs_after_signing < Threshold:
+            raise ValueError(
+                "Axiom 6 (Mtx threshold gets met): Once the SignerAddress signs, the Mtx meets"
+                f"its threshold of signatures. Num sigs after signing {num_sigs_after_signing},"
+                f" Threshold {Threshold}."
+            )
+        return v
+
+    def as_dict(self) -> Dict:
+        d = self.dict()
         return d
 
-    def check_for_errors(self):
-        if self.derived_errors() == []:
-            errors = self.axiom_errors()
-        else:
-            errors = self.derived_errors()
-        if len(errors) > 0:
-            raise SchemaError(
-                f"Errors making signandsubmit.mtx.algo.000 for {self}: {errors}"
-            )
-
-    def derived_errors(self) -> List[str]:
-        errors = []
-        if not isinstance(self.SignerAddress, str):
-            errors.append(f"SignerAddress {self.SignerAddress} must have type str.")
-        try:
-            property_format.check_is_algo_address_string_format(self.SignerAddress)
-        except ValueError as e:
-            errors.append(
-                f"SignerAddress {self.SignerAddress}"
-                " must have format AlgoAddressStringFormat: {e}"
-            )
-        if not isinstance(self.Mtx, str):
-            errors.append(f"Mtx {self.Mtx} must have type str.")
-        try:
-            property_format.check_is_algo_msg_pack_encoded(self.Mtx)
-        except ValueError as e:
-            errors.append(f"Mtx {self.Mtx}" " must have format AlgoMsgPackEncoded: {e}")
-        if not isinstance(self.Addresses, list):
-            errors.append(f"Addresses {self.Addresses} must have type list.")
-        else:
-            for elt in self.Addresses:
-                if not isinstance(elt, str):
-                    errors.append(f"elt {elt} of Addresses must have type str.")
-                try:
-                    property_format.check_is_algo_address_string_format(elt)
-                except ValueError as e:
-                    errors.append(
-                        f"elt {elt} of Addresses must have format AlgoAddressStringFormat; {e}"
-                    )
-        if not isinstance(self.Threshold, int):
-            errors.append(f"Threshold {self.Threshold} must have type int.")
-        if self.TypeName != "signandsubmit.mtx.algo.000":
-            errors.append(
-                f"Type requires TypeName of signandsubmit.mtx.algo.000, not {self.TypeName}."
-            )
-
-        return errors
+    def as_type(self) -> str:
+        return json.dumps(self.as_dict())
 
     def __repr__(self):
         r = "SignandsubmitMtxAlgo"
@@ -91,94 +130,25 @@ class SignandsubmitMtxAlgo(NamedTuple):
         r += f"\n         - threshold={mtx.multisig.threshold}"
         return r
 
-    def _axiom_4_errors(self) -> List[str]:
-        """Axiom 4 (Mtx is MultisigTransaction): Once decoded, Mtx is a MultisigTransaction"""
-        errors = []
-        mtx = encoding.future_msgpack_decode(self.Mtx)
-        if not isinstance(mtx, transaction.MultisigTransaction):
-            errors.append(
-                "Axiom 4 (Mtx is MultisigTransaction): Once decoded, Mtx is a"
-                f"MultisigTransaction. Got {type(mtx)}"
-            )
-        return errors
-
-    def _axiom_5_errors(self) -> List[str]:
-        """Axiom 5 (Internal Consistency): SignerAddress is one of the Addresses. Threshold is the
-        threshold for the MultisigTransaction. Addresses are the list of addresses for the
-         MultisigTransaction (order matters).
-        """
-        errors = []
-        mtx = encoding.future_msgpack_decode(self.Mtx)
-        if self.SignerAddress not in self.Addresses:
-            errors.append(
-                "Axiom 5 (Internal Consistency): SignerAddress must be one of the Addresses"
-            )
-        if self.Threshold != mtx.multisig.threshold:
-            errors.append(
-                "Axiom 5 (Internal Consistency): Threshold must equal "
-                f"Mtx.multisig.threshold. {self.Threshold} != {mtx.multisig.threshold}"
-            )
-        mtx_addresses = list(
-            map(lambda x: encoding.encode_address(x.public_key), mtx.multisig.subsigs)
-        )
-        if self.Addresses != mtx_addresses:
-            errors.append(
-                "Axiom 5 (Internal Consistency): Addresses must be the addresses for the"
-                f"MultisigTransaction. {self.Addresses} != {mtx_addresses}"
-            )
-        return errors
-
-    def _axiom_6_errors(self) -> List[str]:
-        """Axiom 6 (Mtx threshold gets met): Once the SignerAddress signs, the Mtx meets its
-        threshold of signatures."""
-        errors = []
-        mtx = encoding.future_msgpack_decode(self.Mtx)
-        has_sig = list(
-            map(
-                lambda x: encoding.encode_address(x.public_key),
-                filter(lambda x: x.signature is not None, mtx.multisig.subsigs),
-            )
-        )
-        has_sig.append(self.SignerAddress)
-        num_sigs_after_signing = len(set(has_sig))
-        if num_sigs_after_signing < self.Threshold:
-            errors.append(
-                "Axiom 6 (Mtx threshold gets met): Once the SignerAddress signs, the Mtx meets"
-                f"its threshold of signatures. Num sigs after signing {num_sigs_after_signing},"
-                f" Threshold {self.Threshold}."
-            )
-        return errors
-
-    def axiom_errors(self):
-        errors = []
-        errors += self._axiom_4_errors()
-        if len(errors) != 0:
-            return errors
-        errors += self._axiom_5_errors()
-        errors += self._axiom_6_errors()
-        return errors
-
 
 class SignandsubmitMtxAlgo_Maker:
-    type_name = "signandsubmit.mtx.algo.000"
+    type_name = "signandsubmit.mtx.algo"
+    version = "000"
 
     def __init__(
-        self, signer_address: str, mtx: str, addresses: List[str], threshold: int
+        self, mtx: str, addresses: List[str], threshold: int, signer_address: str
     ):
 
-        gw_tuple = SignandsubmitMtxAlgo(
-            SignerAddress=signer_address,
+        self.tuple = SignandsubmitMtxAlgo(
             Mtx=mtx,
             Addresses=addresses,
             Threshold=threshold,
+            SignerAddress=signer_address,
             #
         )
-        gw_tuple.check_for_errors()
-        self.tuple = gw_tuple
 
     @classmethod
     def tuple_to_type(cls, tuple: SignandsubmitMtxAlgo) -> str:
-        tuple.check_for_errors()
         return tuple.as_type()
 
     @classmethod
@@ -193,27 +163,23 @@ class SignandsubmitMtxAlgo_Maker:
 
     @classmethod
     def dict_to_tuple(cls, d: dict) -> SignandsubmitMtxAlgo:
-        new_d = {}
-        for key in d.keys():
-            new_d[key] = d[key]
-        if "TypeName" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing TypeName")
-        if "SignerAddress" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing SignerAddress")
-        if "Mtx" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing Mtx")
-        if "Addresses" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing Addresses")
-        if "Threshold" not in new_d.keys():
-            raise SchemaError(f"dict {new_d} missing Threshold")
+        d2 = dict(d)
+        if "Mtx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Mtx")
+        if "Addresses" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Addresses")
+        if "Threshold" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Threshold")
+        if "SignerAddress" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing SignerAddress")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        gw_tuple = SignandsubmitMtxAlgo(
-            TypeName=new_d["TypeName"],
-            SignerAddress=new_d["SignerAddress"],
-            Mtx=new_d["Mtx"],
-            Addresses=new_d["Addresses"],
-            Threshold=new_d["Threshold"],
-            #
+        return SignandsubmitMtxAlgo(
+            Mtx=d2["Mtx"],
+            Addresses=d2["Addresses"],
+            Threshold=d2["Threshold"],
+            SignerAddress=d2["SignerAddress"],
+            TypeName=d2["TypeName"],
+            Version="000",
         )
-        gw_tuple.check_for_errors()
-        return gw_tuple

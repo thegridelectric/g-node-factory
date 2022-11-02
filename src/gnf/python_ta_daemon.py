@@ -12,9 +12,9 @@ import gnf.config as config
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
-from gnf.schemata import ExchangeTadeedAlgo
 from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import SignandsubmitMtxAlgo
+from gnf.schemata import TadeedAlgoExchange
 
 
 # sent by the daemon
@@ -124,13 +124,13 @@ class PythonTaDaemon:
         except Exception as e:
             LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
 
-    def exchange_tadeed_algo_received(self, payload: ExchangeTadeedAlgo):
+    def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
         """
          - Sign and submit the AssetTransfer mtx, which will send the old deed from
         the ta_multi acct to the GNodeFactory admin acct.
 
         Args:
-            payload: ExchangeTadeedAlgo
+            payload: TadeedAlgoExchange
         """
         mtx = encoding.future_msgpack_decode(payload.OldDeedTransferMtx)
         mtx.sign(self.acct.sk)

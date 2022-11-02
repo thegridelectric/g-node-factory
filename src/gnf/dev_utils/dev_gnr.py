@@ -12,10 +12,10 @@ from gnf.errors import SchemaError
 
 # Message types received by the GNodeRegistry
 # Message types sent by GNodeRegistry
-from gnf.schemata import CreateTerminalassetAlgo
-from gnf.schemata import CreateTerminalassetAlgo_Maker
+from gnf.schemata import BasegnodesBroadcast
+from gnf.schemata import BasegnodeTerminalassetCreate
+from gnf.schemata import BasegnodeTerminalassetCreate_Maker
 from gnf.schemata import HeartbeatA
-from gnf.schemata import StatusBasegnode
 
 
 LOGGER = logging.getLogger(__name__)
@@ -41,13 +41,15 @@ class DevGnr:
     def route_direct_message(
         self, from_g_node_role_value: str, from_g_node_alias: str, payload: HeartbeatA
     ):
+
         """Routes inbound messages to correct method"""
         LOGGER.info(f"Got {payload} from {from_g_node_alias}")
+        type_name = payload.TypeName
         if from_g_node_role_value != RegistryGNodeRole.GNodeFactory.value:
             raise NotImplementedError
-        if payload.TypeName == HeartbeatA.TypeName:
+        if type_name == HeartbeatA.TypeName:
             self.heartbeat_a_received(payload, from_g_node_alias)
-        elif payload.TypeName == StatusBasegnode.TypeName:
+        elif type_name == BasegnodesBroadcast.TypeName:
             self.status_basegnode_algo_received(payload, from_g_node_alias)
 
     def prepare_for_death(self):
@@ -57,13 +59,13 @@ class DevGnr:
 
     def send_direct_message(
         self,
-        payload: CreateTerminalassetAlgo,
+        payload: BasegnodeTerminalassetCreate,
         to_g_node_type_short_alias: str,
         to_g_node_alias: str,
     ):
         """Stub for actor_base send_direct_message"""
         LOGGER.info(
-            f"Stub for sending CreateTerminalassetAlgo to {to_g_node_alias} via rabbit"
+            f"Stub for sending BasegnodeTerminalassetCreate to {to_g_node_alias} via rabbit"
         )
         pass
 
@@ -82,23 +84,23 @@ class DevGnr:
         LOGGER.debug(f"HeartbeatA {payload} received from {from_g_node_alias}")
 
     def status_basegnode_algo_received(
-        self, payload: StatusBasegnode, from_g_node_alias: str
+        self, payload: BasegnodesBroadcast, from_g_node_alias: str
     ):
         """
         Args:
-            payload: StatusBasegnode
+            payload: BasegnodesBroadcast
             from_g_node_alias (str): alias of the actor sending the heartbeat
         """
-        if not isinstance(payload, StatusBasegnode):
-            raise SchemaError(f"Got type {type(payload)}, require StatusBasegnode")
+        if not isinstance(payload, BasegnodesBroadcast):
+            raise SchemaError(f"Got type {type(payload)}, require BasegnodesBroadcast")
 
         gnf_alias = self.settings.algo.gnf_g_node_alias
         if not from_g_node_alias == gnf_alias:
             LOGGER.info(
-                f"Got StatusBasegnode from {from_g_node_alias}. Only pay attention to {gnf_alias} "
+                f"Got BasegnodesBroadcast from {from_g_node_alias}. Only pay attention to {gnf_alias} "
             )
 
-        print(f"Got StatusBasegnode {payload}. Now implement")
+        print(f"Got BasegnodesBroadcast {payload}. Now implement")
         pass
 
     ##########################
@@ -107,7 +109,7 @@ class DevGnr:
 
     def generate_create_terminalasset_algo_payload(
         self, ta_owner_addr: str, validator_addr: str, micro_lat: int, micro_lon: int
-    ) -> CreateTerminalassetAlgo:
+    ) -> BasegnodeTerminalassetCreate:
         """This method generates a payload to send to the GNodeFactory. The request
         triggers the creation of two GNodes:
             - the TerminalAsset GNode
@@ -127,9 +129,9 @@ class DevGnr:
             micro_lon (int): Longitude of the TerminalAsset * 10**6
 
         Returns:
-            CreateTerminalassetAlgo payload
+            BasegnodeTerminalassetCreate payload
         """
-        payload = CreateTerminalassetAlgo_Maker(
+        payload = BasegnodeTerminalassetCreate_Maker(
             from_g_node_alias=self.alias,
             from_g_node_instance_id=self.g_node_instance_id,
             g_node_registry_addr=self.acct.addr,

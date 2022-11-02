@@ -1,5 +1,4 @@
-"""Settings for the GridWorks Scada, readable from environment and/or from env files."""
-from typing import Optional
+"""Settings for the GNodeFactory, readable from environment and/or from env files."""
 
 from pydantic import BaseModel
 from pydantic import BaseSettings
@@ -7,6 +6,12 @@ from pydantic import SecretStr
 
 
 DEFAULT_ENV_FILE = ".env"
+
+
+class DjangoClient(BaseModel):
+    """Django settings"""
+
+    secret_key: str = "ai#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
 
 
 class RabbitBrokerClient(BaseModel):
@@ -71,16 +76,19 @@ class AdaDiscovererSettings(BaseSettings):
 class GnfSettings(BaseSettings):
     """Settings for the gNodeFactory."""
 
-    algo: Algo = Algo()
-    log_level: str = "WARNING"
     g_node_alias: str = "dwgps.gnf"
-    rabbit: RabbitBrokerClient = RabbitBrokerClient()
+    g_node_id: str = "ba1bd498-8bed-4a80-aa61-aa91e5f7d532"
+    g_node_instance_id: str = "9fc843f3-ba36-46cc-990e-f45d3c02c210"
+    log_level: str = "WARNING"
     admin_acct_sk: SecretStr = SecretStr(
         "qUGjVDcxVa0TfV8IeL8ZG9FFROh/GzLaWS6Ie05jrHiLWHNvVZoPMX7bXlxHzGaJF9RAyueOoe1BXk+IUEBS2Q=="
     )
     graveyard_acct_sk: SecretStr = SecretStr(
         "6UKcDTGYg7sU41D3si+VKBQSd5w46Z4mjVkahRfLIQETgelijgk3svUjwQwu3APm4RNupjtbC68WLKUCHHDp0w=="
     )
+    algo: Algo = Algo()
+    rabbit: RabbitBrokerClient = RabbitBrokerClient()
+    django: DjangoClient = DjangoClient()
 
     class Config:
         env_prefix = "GNF_"
@@ -117,14 +125,14 @@ class HollyHomeownerSettings(BaseSettings):
 
 
 class DevGNodeRegistrySettings(BaseSettings):
-    algo: Algo = Algo()
-    universe: str = "dev"
     g_node_alias: str = "dwgps.gnr"
     g_node_instance_id: str = "4bab8ea7-e2f4-48fa-be52-51897ffee5ab"
-    rabbit: RabbitBrokerClient = RabbitBrokerClient()
     sk: SecretStr = SecretStr(
         "JDIoOhXNIu8zx3eILJElCfAFopbsq6w8IUCCt9ZrRShjmyG3rLm5ViHHS0SUhqCRvnJmEhEQpIHkfVHcpoyBrw=="
     )
+    log_level = "WARNING"
+    algo: Algo = Algo()
+    rabbit: RabbitBrokerClient = RabbitBrokerClient()
 
     class Config:
         env_prefix = "GNR_"

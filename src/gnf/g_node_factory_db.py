@@ -30,18 +30,19 @@ LOGGER = logging.getLogger(__name__)
 
 # Messages sent by Factory
 # Messages received by Factory
-from gnf.schemata import CreateDiscoverycertAlgo
-from gnf.schemata import CreateTadeedAlgo
-from gnf.schemata import CreateTavalidatorcertAlgo
-from gnf.schemata import CreateTerminalassetAlgo
-from gnf.schemata import ExchangeTadeedAlgo
-from gnf.schemata import ExchangeTadeedAlgo_Maker
+from gnf.schemata import BasegnodeCtnCreate
+from gnf.schemata import BasegnodeTerminalassetCreate
+from gnf.schemata import DiscoverycertAlgoCreate
+from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import HeartbeatA
 from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import OptinTadeedAlgo_Maker
-from gnf.schemata import TransferDiscoverycertAlgo
-from gnf.schemata import TransferTadeedAlgo
-from gnf.schemata import TransferTavalidatorcertAlgo
+from gnf.schemata import TadeedAlgoCreate
+from gnf.schemata import TadeedAlgoExchange
+from gnf.schemata import TadeedAlgoExchange_Maker
+from gnf.schemata import TadeedAlgoTransfer
+from gnf.schemata import TavalidatorcertAlgoCreate
+from gnf.schemata import TavalidatorcertAlgoTransfer
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_related.settings")
@@ -111,12 +112,12 @@ class GNodeFactoryDb:
         self,
         from_g_node_role_value: str,
         from_g_node_alias: str,
-        payload: CreateTerminalassetAlgo,
+        payload: BasegnodeTerminalassetCreate,
     ):
         LOGGER.info(f"Got {payload} from {from_g_node_alias}")
         if from_g_node_role_value != RegistryGNodeRole.GNodeRegistry.value:
             raise Exception(f"GNodeFactory only listens to GNodeRegistries")
-        if payload.TypeName == CreateTadeedAlgo.TypeName:
+        if payload.TypeName == BasegnodeTerminalassetCreate.TypeName:
             if payload.FromGNodeAlias != from_g_node_alias:
                 # Note: this validation should move to actor_base
                 LOGGER.info(
@@ -165,7 +166,7 @@ class GNodeFactoryDb:
         validator_addr: str,
         ta_owner_addr: str,
         ta_daemon_addr: str,
-    ) -> ExchangeTadeedAlgo:
+    ) -> TadeedAlgoExchange:
 
         ta_multi = MultisigAccount(
             version=1,
@@ -212,7 +213,7 @@ class GNodeFactoryDb:
         transfer_mtx = ta_multi.create_mtx(transfer_txn)
         transfer_mtx.sign(self.admin_account.sk)
 
-        payload = ExchangeTadeedAlgo_Maker(
+        payload = TadeedAlgoExchange_Maker(
             validator_addr=validator_addr,
             ta_owner_addr=ta_owner_addr,
             ta_daemon_addr=ta_daemon_addr,
@@ -281,7 +282,7 @@ class GNodeFactoryDb:
         return payload_hack
 
     def create_pending_ctn(
-        self, payload: CreateDiscoverycertAlgo
+        self, payload: DiscoverycertAlgoCreate
     ) -> Optional[OptinTadeedAlgo]:
         """Given a ctn alias and the list of the aliases of the gnodes that
         will become its children, creates a pending ctn."""
@@ -299,8 +300,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ctn_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.ConductorTopologyNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.ConductorTopologyNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "gps_point_id": gpsdb.gps_point_id,
         }
@@ -323,11 +324,11 @@ class GNodeFactoryDb:
         return opt_in_payload
 
     def create_discoverycertificate_received(
-        self, payload: CreateDiscoverycertAlgo
+        self, payload: DiscoverycertAlgoCreate
     ) -> Optional[OptinTadeedAlgo]:
-        if not isinstance(payload, CreateDiscoverycertAlgo):
+        if not isinstance(payload, DiscoverycertAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateDiscoverycertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type DiscoverycertAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
         txn = transaction.AssetCreateTxn(
@@ -355,8 +356,8 @@ class GNodeFactoryDb:
         parent_alias = ".".join(words[:-1])
         gn = {
             "alias": parent_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.AtomicMeteringNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.AtomicMeteringNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
         }
@@ -371,7 +372,7 @@ class GNodeFactoryDb:
         return atomic_metering_node
 
     def create_tadeed_algo_received(
-        self, payload: CreateTadeedAlgo
+        self, payload: TadeedAlgoCreate
     ) -> Optional[BaseGNodeDb]:
         """
         Co-signs and submits an AssetCreateTxn for a TaDeed. This method:
@@ -386,22 +387,22 @@ class GNodeFactoryDb:
             - Sends that payload to the ta.g_node_registry_addr
 
         Args:
-            payload: CreateTadeedAlgo. The validation of the type guarantees
+            payload: TadeedAlgoCreate. The validation of the type guarantees
         that payload.HalfSignedCertCreationMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that creates an appropriately-formatted TaDeed
 
         Raises:
-            SchemaError: if the payload does not have type CreateTadeedAlgo
+            SchemaError: if the payload does not have type TadeedAlgoCreate
 
         Returns:
             Optional[BaseGNodeDb]: None if the asset is not created
             otherwise the TerminalAsset database object
         """
         self.client.account_info(payload.ValidatorAddr)
-        if not isinstance(payload, CreateTadeedAlgo):
+        if not isinstance(payload, TadeedAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateTadeedAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TadeedAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -446,12 +447,12 @@ class GNodeFactoryDb:
         LOGGER.info(f"just received HeartbeatA {payload}")
 
     def create_tavalidatorcert_algo_received(
-        self, payload: CreateTavalidatorcertAlgo
+        self, payload: TavalidatorcertAlgoCreate
     ) -> Optional[int]:
         """Co-signs and submits an AssetCreateTxn for a  Validator Certificate NFT.
 
         Args:
-            payload: CreateTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoCreate. The validation of the type guarantees
         that payload.HalfSignedCertCreationMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that creates an appropriately-formatted Validator Certificate.
@@ -462,9 +463,9 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, CreateTavalidatorcertAlgo):
+        if not isinstance(payload, TavalidatorcertAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -486,30 +487,30 @@ class GNodeFactoryDb:
 
         return valdiator_cert_idx
 
-    def update_ctn_to_active(self, payload: TransferDiscoverycertAlgo) -> BaseGNodeDb:
+    def update_ctn_to_active(self, payload: DiscoverycertAlgoTransfer) -> BaseGNodeDb:
         """
-        Payload will be TransferDiscoverycertAlgo.
+        Payload will be DiscoverycertAlgoTransfer.
 
         """
 
         ctn = BaseGNodeDb.objects.filter(alias=payload.GNodeAlias)[0]
         if ctn.dc.role != CoreGNodeRole.ConductorTopologyNode:
             raise Exception(f"Expected Ctn, got {ctn.dc.role}!")
-        ctn.status = GNodeStatus.Active
+        ctn.status_value = GNodeStatus.Active.value
         ctn.save()
         LOGGER.info(f"Ctn is now Active: {ctn}")
         return ctn
 
     def transfer_discoverycert_algo_received(
-        self, payload: TransferDiscoverycertAlgo
+        self, payload: DiscoverycertAlgoTransfer
     ) -> Optional[BaseGNode]:
         """
         TODO: ADD!
         """
 
-        if not isinstance(payload, TransferDiscoverycertAlgo):
+        if not isinstance(payload, DiscoverycertAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferDiscoverycertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type DiscoverycertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -523,7 +524,7 @@ class GNodeFactoryDb:
         ctn = self.update_ctn_to_active(payload)
         return ctn.dc
 
-    def create_terminal_asset(self, payload: TransferTadeedAlgo) -> BaseGNodeDb:
+    def create_terminal_asset(self, payload: TadeedAlgoTransfer) -> BaseGNodeDb:
         mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
         asset_idx = mtx.transaction.dictify()["xaid"]
         v_multi = MultisigAccount(
@@ -538,7 +539,7 @@ class GNodeFactoryDb:
         atomic_metering_node = BaseGNodeDb.objects.filter(
             alias=atomic_metering_node_alias
         )[0]
-        atomic_metering_node.status = GNodeStatus.Active
+        atomic_metering_node.status_value = GNodeStatus.Active.value
         atomic_metering_node.save()
 
         gpsdb: GpsPointDb = GpsPointDb(
@@ -548,8 +549,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ta_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.TerminalAsset,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": asset_idx,
             "ownership_deed_validator_addr": payload.DeedValidatorAddr,
@@ -567,13 +568,13 @@ class GNodeFactoryDb:
             return None
         LOGGER.info(f"Pending TerminalAsset created: {terminal_asset}")
 
-        terminal_asset.status = GNodeStatus.Active
+        terminal_asset.status_value = GNodeStatus.Active
         terminal_asset.save()
         LOGGER.info(f"TerminalAsset is now Active: {terminal_asset}")
         return terminal_asset
 
     def transfer_tadeed_algo_received(
-        self, payload: TransferTadeedAlgo
+        self, payload: TadeedAlgoTransfer
     ) -> Optional[BaseGNode]:
         """
             - Checks  consistency for the GNodeAlias in the deed:
@@ -591,14 +592,14 @@ class GNodeFactoryDb:
         2-sig [GnfAdmin, TaDaemon, TaOwner] multi.
             - On confirmation, updates the GNodeDb gn:
                 - gn.ownership_deed_nft_id = ta_asset_id
-                - gn.status = Active
-                - gn parent (the AtomicMeteringNode) status = Active
+                - gn.status_value = Active.value
+                - gn parent (the AtomicMeteringNode) status = Active.value
             - Sends a StatusBaseGgnodeAlgo to the correct GNodeREgistry ,
             identified by gn.g_node_registry_addr. Status.TopGNodeAlias = gn parent
             - Returns that StatusBaseGgnodeAlgo payload
 
         Args:
-            payload: TransferTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoTransfer. The validation of the type guarantees
         that payload.HalfSignedCertTransferMtx is the encoding of a MultisigTransaction
         for the 1-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that transfers an appropriately-formatted Validator Certificate to the
@@ -610,9 +611,9 @@ class GNodeFactoryDb:
             - StatusBaseGgnodeAlgo otherwise
         """
 
-        if not isinstance(payload, TransferTadeedAlgo):
+        if not isinstance(payload, TadeedAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -651,13 +652,13 @@ class GNodeFactoryDb:
         return terminal_asset.dc
 
     def transfer_tavalidatorcert_algo_received(
-        self, payload: TransferTavalidatorcertAlgo
+        self, payload: TavalidatorcertAlgoTransfer
     ):
         """Signs and submits an AssetTransferTxn that sends a Validator Certificate
         to the payload.ValidatorAddr
 
         Args:
-            payload: TransferTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoTransfer. The validation of the type guarantees
         that payload.HalfSignedCertTransferMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that transfers an appropriately-formatted Validator Certificate to the
@@ -670,9 +671,9 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TransferTavalidatorcertAlgo):
+        if not isinstance(payload, TavalidatorcertAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
