@@ -1,21 +1,132 @@
 """Tests tavalidatorcert.algo.transfer type, version 000"""
 import json
+from typing import Dict
 
 import pytest
+from algosdk import encoding
+from algosdk.future import transaction
+from algosdk.v2client.algod import AlgodClient
 from pydantic import ValidationError
 
+import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
+import gnf.config as config
+import gnf.dev_utils.algo_setup as algo_setup
 from gnf.errors import SchemaError
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker as Maker
 
 
-def test_tavalidatorcert_algo_transfer_generated():
+def make_new_test_cert_and_return_asset_idx(
+    client: AlgodClient,
+    test_acct: algo_utils.BasicAccount,
+    gnf_admin: algo_utils.BasicAccount,
+) -> int:
+    multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
+        version=1,
+        threshold=2,
+        addresses=[gnf_admin.addr, test_acct.addr],
+    )
+    if algo_utils.algos(multi.addr) is None:
+        algo_setup.dev_fund_account(
+            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
+        )
+        algo_setup.dev_fund_account(
+            config.Algo(),
+            to_addr=multi.addr,
+            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
+        )
+    elif algo_utils.algos(multi.addr) < 100:
+        algo_setup.dev_fund_account(
+            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
+        )
+        algo_setup.dev_fund_account(
+            config.Algo(),
+            to_addr=multi.addr,
+            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
+        )
 
-    d = {
-        "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "HalfSignedCertTransferMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+    txn = transaction.AssetCreateTxn(
+        sender=multi.address(),
+        total=1,
+        decimals=0,
+        default_frozen=False,
+        manager=gnf_admin.addr,
+        asset_name="Test Validator of nothingness",
+        unit_name="VLDTR",
+        note="witty note",
+        url="http://localhost:5000/testValidator/who-we-are/",
+        sp=client.suggested_params(),
+    )
+
+    mtx = multi.create_mtx(txn)
+    mtx.sign(gnf_admin.sk)
+    mtx.sign(test_acct.sk)
+    response = algo_utils.send_signed_mtx(client=client, mtx=mtx)
+    return response.asset_idx
+
+
+def get_test_half_signed_cert_transfer_mtx(
+    client: AlgodClient,
+    test_acct: algo_utils.BasicAccount,
+    gnf_admin: algo_utils.BasicAccount,
+    asset_idx: int,
+) -> str:
+    multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
+        version=1,
+        threshold=2,
+        addresses=[gnf_admin.addr, test_acct.addr],
+    )
+
+    optInTxn = transaction.AssetOptInTxn(
+        sender=test_acct.addr,
+        index=asset_idx,
+        sp=client.suggested_params(),
+    )
+    signedTxn = optInTxn.sign(test_acct.sk)
+    client.send_transaction(signedTxn)
+    algo_utils.wait_for_transaction(client, signedTxn.get_txid())
+    transferTxn = transaction.AssetTransferTxn(
+        sender=multi.addr,
+        receiver=test_acct.addr,
+        amt=1,
+        index=asset_idx,
+        sp=client.suggested_params(),
+    )
+
+    mtx = multi.create_mtx(transferTxn)
+    mtx.sign(test_acct.sk)
+    return encoding.msgpack_encode(mtx)
+
+
+def get_test_dict() -> Dict:
+    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    test_acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
+        "LZlZFgStdj2T0otiJTRezerJhys0isRu4e6AM6fJJCRT03r0ziZrA44MFjjh6i6V2ySSQyRiCwvVzthpxjV7xA=="
+    )
+    gnf_admin: algo_utils.BasicAccount = algo_utils.BasicAccount(
+        config.GnfSettings().admin_acct_sk.get_secret_value()
+    )
+
+    asset_idx = api_utils.get_validator_cert_idx(test_acct.addr)
+    if asset_idx is None:
+        asset_idx = make_new_test_cert_and_return_asset_idx(
+            client, test_acct, gnf_admin
+        )
+
+    testHalfSignedCertTransferMtx = get_test_half_signed_cert_transfer_mtx(
+        client, test_acct, gnf_admin, asset_idx
+    )
+
+    return {
+        "ValidatorAddr": test_acct.addr,
+        "HalfSignedCertTransferMtx": testHalfSignedCertTransferMtx,
         "TypeName": "tavalidatorcert.algo.transfer",
         "Version": "000",
     }
+
+
+def test_tavalidatorcert_algo_transfer():
+    d = get_test_dict()
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple(d)
