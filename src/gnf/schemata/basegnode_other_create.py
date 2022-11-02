@@ -1,4 +1,4 @@
-"""Type heartbeat.a, version 000"""
+"""Type basegnode.other.create, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -8,8 +8,8 @@ from pydantic import BaseModel
 from gnf.errors import SchemaError
 
 
-class HeartbeatA(BaseModel):
-    TypeName: Literal["heartbeat.a"] = "heartbeat.a"
+class BasegnodeOtherCreate(BaseModel):
+    TypeName: Literal["basegnode.other.create"] = "basegnode.other.create"
     Version: str = "000"
 
     def as_dict(self) -> Dict:
@@ -20,22 +20,22 @@ class HeartbeatA(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class HeartbeatA_Maker:
-    type_name = "heartbeat.a"
+class BasegnodeOtherCreate_Maker:
+    type_name = "basegnode.other.create"
     version = "000"
 
     def __init__(self):
 
-        self.tuple = HeartbeatA(
+        self.tuple = BasegnodeOtherCreate(
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: HeartbeatA) -> str:
+    def tuple_to_type(cls, tuple: BasegnodeOtherCreate) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> HeartbeatA:
+    def type_to_tuple(cls, t: str) -> BasegnodeOtherCreate:
         try:
             d = json.loads(t)
         except TypeError:
@@ -45,12 +45,12 @@ class HeartbeatA_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> HeartbeatA:
+    def dict_to_tuple(cls, d: dict) -> BasegnodeOtherCreate:
         d2 = dict(d)
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
-        return HeartbeatA(
+        return BasegnodeOtherCreate(
             TypeName=d2["TypeName"],
             Version="000",
         )

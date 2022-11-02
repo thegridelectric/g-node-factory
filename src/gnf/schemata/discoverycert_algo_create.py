@@ -1,4 +1,4 @@
-"""Type create.discoverycert.algo, version 001"""
+"""Type discoverycert.algo.create, version 000"""
 import json
 from enum import auto
 from typing import Any
@@ -93,16 +93,24 @@ class CoreGNodeRoleMap:
     }
 
 
-class CreateDiscoverycertAlgo(BaseModel):
-    OldChildAliasList: List[str]
+class DiscoverycertAlgoCreate(BaseModel):
     GNodeAlias: str  #
     CoreGNodeRole: CoreGNodeRole  #
+    OldChildAliasList: List[str]
     DiscovererAddr: str  #
     SupportingMaterialHash: str  #
     MicroLon: Optional[int] = None
     MicroLat: Optional[int] = None
-    TypeName: Literal["create.discoverycert.algo"] = "create.discoverycert.algo"
-    Version: str = "001"
+    TypeName: Literal["discoverycert.algo.create"] = "discoverycert.algo.create"
+    Version: str = "000"
+
+    _validator_g_node_alias = predicate_validator(
+        "GNodeAlias", property_format.is_lrd_alias_format
+    )
+
+    @validator("CoreGNodeRole", pre=True)
+    def _validator_core_g_node_role(cls, v: Any) -> CoreGNodeRole100:
+        return as_enum(v, CoreGNodeRole100, CoreGNodeRole100.Other)
 
     @validator("OldChildAliasList")
     def _validator_old_child_alias_list(cls, v: List) -> List:
@@ -112,14 +120,6 @@ class CreateDiscoverycertAlgo(BaseModel):
                     f"failure of predicate is_lrd_alias_format() on elt {elt} of OldChildAliasList"
                 )
         return v
-
-    _validator_g_node_alias = predicate_validator(
-        "GNodeAlias", property_format.is_lrd_alias_format
-    )
-
-    @validator("CoreGNodeRole", pre=True)
-    def _validator_core_g_node_role(cls, v: Any) -> CoreGNodeRole100:
-        return as_enum(v, CoreGNodeRole100, CoreGNodeRole100.Other)
 
     _validator_discoverer_addr = predicate_validator(
         "DiscovererAddr", property_format.is_algo_address_string_format
@@ -132,48 +132,48 @@ class CreateDiscoverycertAlgo(BaseModel):
             self.CoreGNodeRole, CoreGNodeRole100, CoreGNodeRole100.default()
         )
         d["CoreGNodeRoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(CoreGNodeRole)
-        if d["MicroLon"] is None:
-            del d["MicroLon"]
         if d["MicroLat"] is None:
             del d["MicroLat"]
+        if d["MicroLon"] is None:
+            del d["MicroLon"]
         return d
 
     def as_type(self) -> str:
         return json.dumps(self.as_dict())
 
 
-class CreateDiscoverycertAlgo_Maker:
-    type_name = "create.discoverycert.algo"
-    version = "001"
+class DiscoverycertAlgoCreate_Maker:
+    type_name = "discoverycert.algo.create"
+    version = "000"
 
     def __init__(
         self,
-        old_child_alias_list: List[str],
         g_node_alias: str,
         core_g_node_role: CoreGNodeRole,
+        old_child_alias_list: List[str],
         discoverer_addr: str,
-        micro_lon: Optional[int],
         supporting_material_hash: str,
         micro_lat: Optional[int],
+        micro_lon: Optional[int],
     ):
 
-        self.tuple = CreateDiscoverycertAlgo(
-            OldChildAliasList=old_child_alias_list,
+        self.tuple = DiscoverycertAlgoCreate(
             GNodeAlias=g_node_alias,
             CoreGNodeRole=core_g_node_role,
+            OldChildAliasList=old_child_alias_list,
             DiscovererAddr=discoverer_addr,
-            MicroLon=micro_lon,
             SupportingMaterialHash=supporting_material_hash,
             MicroLat=micro_lat,
+            MicroLon=micro_lon,
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: CreateDiscoverycertAlgo) -> str:
+    def tuple_to_type(cls, tuple: DiscoverycertAlgoCreate) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> CreateDiscoverycertAlgo:
+    def type_to_tuple(cls, t: str) -> DiscoverycertAlgoCreate:
         try:
             d = json.loads(t)
         except TypeError:
@@ -183,8 +183,10 @@ class CreateDiscoverycertAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> CreateDiscoverycertAlgo:
+    def dict_to_tuple(cls, d: dict) -> DiscoverycertAlgoCreate:
         d2 = dict(d)
+        if "GNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing GNodeAlias")
         if "CoreGNodeRoleGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing CoreGNodeRoleGtEnumSymbol")
         if d2["CoreGNodeRoleGtEnumSymbol"] in CoreGNodeRole100SchemaEnum.symbols:
@@ -193,19 +195,27 @@ class CreateDiscoverycertAlgo_Maker:
             )
         else:
             d2["CoreGNodeRole"] = CoreGNodeRole.default()
-        if "MicroLon" not in d2.keys():
-            d2["MicroLon"] = None
+        if "OldChildAliasList" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing OldChildAliasList")
+        if "DiscovererAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing DiscovererAddr")
+        if "SupportingMaterialHash" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing SupportingMaterialHash")
         if "MicroLat" not in d2.keys():
             d2["MicroLat"] = None
+        if "MicroLon" not in d2.keys():
+            d2["MicroLon"] = None
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return CreateDiscoverycertAlgo(
-            OldChildAliasList=d2["OldChildAliasList"],
+        return DiscoverycertAlgoCreate(
             GNodeAlias=d2["GNodeAlias"],
             CoreGNodeRole=d2["CoreGNodeRole"],
+            OldChildAliasList=d2["OldChildAliasList"],
             DiscovererAddr=d2["DiscovererAddr"],
-            MicroLon=d2["MicroLon"],
             SupportingMaterialHash=d2["SupportingMaterialHash"],
             MicroLat=d2["MicroLat"],
+            MicroLon=d2["MicroLon"],
             TypeName=d2["TypeName"],
-            Version="001",
+            Version="000",
         )

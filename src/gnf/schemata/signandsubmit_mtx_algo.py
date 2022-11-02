@@ -13,16 +13,12 @@ from gnf.property_format import predicate_validator
 
 
 class SignandsubmitMtxAlgo(BaseModel):
-    SignerAddress: str  #
     Mtx: str  #
     Addresses: List[str]
     Threshold: int  #
+    SignerAddress: str  #
     TypeName: Literal["signandsubmit.mtx.algo"] = "signandsubmit.mtx.algo"
     Version: str = "000"
-
-    _validator_signer_address = predicate_validator(
-        "SignerAddress", property_format.is_algo_address_string_format
-    )
 
     _validator_mtx = predicate_validator(
         "Mtx", property_format.is_algo_msg_pack_encoded
@@ -37,6 +33,10 @@ class SignandsubmitMtxAlgo(BaseModel):
                 )
         return v
 
+    _validator_signer_address = predicate_validator(
+        "SignerAddress", property_format.is_algo_address_string_format
+    )
+
     def as_dict(self) -> Dict:
         d = self.dict()
         return d
@@ -50,14 +50,14 @@ class SignandsubmitMtxAlgo_Maker:
     version = "000"
 
     def __init__(
-        self, signer_address: str, mtx: str, addresses: List[str], threshold: int
+        self, mtx: str, addresses: List[str], threshold: int, signer_address: str
     ):
 
         self.tuple = SignandsubmitMtxAlgo(
-            SignerAddress=signer_address,
             Mtx=mtx,
             Addresses=addresses,
             Threshold=threshold,
+            SignerAddress=signer_address,
             #
         )
 
@@ -78,12 +78,22 @@ class SignandsubmitMtxAlgo_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> SignandsubmitMtxAlgo:
         d2 = dict(d)
+        if "Mtx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Mtx")
+        if "Addresses" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Addresses")
+        if "Threshold" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Threshold")
+        if "SignerAddress" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing SignerAddress")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
         return SignandsubmitMtxAlgo(
-            SignerAddress=d2["SignerAddress"],
             Mtx=d2["Mtx"],
             Addresses=d2["Addresses"],
             Threshold=d2["Threshold"],
+            SignerAddress=d2["SignerAddress"],
             TypeName=d2["TypeName"],
             Version="000",
         )

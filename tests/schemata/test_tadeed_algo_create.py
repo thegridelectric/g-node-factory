@@ -1,21 +1,21 @@
-"""Tests create.tadeed.algo type, version """
+"""Tests tadeed.algo.create type, version """
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import CreateTadeedAlgo
-from gnf.schemata import CreateTadeedAlgo_Maker as Maker
+from gnf.schemata import TadeedAlgoCreate
+from gnf.schemata import TadeedAlgoCreate_Maker as Maker
 
 
-def test_create_tadeed_algo_generated():
+def test_tadeed_algo_create_generated():
 
     d = {
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "HalfSignedDeedCreationMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
-        "TypeName": "create.tadeed.algo",
-        "Version": "",
+        "TypeName": "tadeed.algo.create",
+        "Version": "000",
     }
 
     with pytest.raises(SchemaError):
@@ -25,63 +25,47 @@ def test_create_tadeed_algo_generated():
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(d)
-    gw_tuple = Maker.type_to_tuple(gw_type)
+    gtype = json.dumps(d)
+    gtuple = Maker.type_to_tuple(gtype)
 
     # test type_to_tuple and tuple_to_type maps
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
+    assert Maker.type_to_tuple(Maker.tuple_to_type(gtuple)) == gtuple
 
     # test Maker init
     t = Maker(
-        validator_addr=gw_tuple.ValidatorAddr,
-        half_signed_deed_creation_mtx=gw_tuple.HalfSignedDeedCreationMtx,
+        validator_addr=gtuple.ValidatorAddr,
+        half_signed_deed_creation_mtx=gtuple.HalfSignedDeedCreationMtx,
         #
     ).tuple
-    assert t == gw_tuple
+    assert t == gtuple
 
     ######################################
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = d["TypeName"]
-    del d["TypeName"]
+    d2 = dict(d)
+    del d2["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = orig_value
+        Maker.dict_to_tuple(d2)
 
-    orig_value = d["ValidatorAddr"]
-    del d["ValidatorAddr"]
+    d2 = dict(d)
+    del d2["ValidatorAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d2)
 
-    orig_value = d["HalfSignedDeedCreationMtx"]
-    del d["HalfSignedDeedCreationMtx"]
+    d2 = dict(d)
+    del d2["HalfSignedDeedCreationMtx"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["HalfSignedDeedCreationMtx"] = orig_value
+        Maker.dict_to_tuple(d2)
 
     ######################################
-    # SchemaError raised if attributes have incorrect type
+    # Behavior on incorrect types
     ######################################
-
-    orig_value = d["ValidatorAddr"]
-    d["ValidatorAddr"] = 42
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["ValidatorAddr"] = orig_value
-
-    orig_value = d["HalfSignedDeedCreationMtx"]
-    d["HalfSignedDeedCreationMtx"] = 42
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["HalfSignedDeedCreationMtx"] = orig_value
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    d["TypeName"] = "not the type alias"
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = "create.tadeed.algo"
+    d2 = dict(d, TypeName="not the type alias")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)

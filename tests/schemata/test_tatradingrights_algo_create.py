@@ -1,25 +1,19 @@
-"""Tests create.basegnode.010 type"""
+"""Tests tatradingrights.algo.create type, version """
 import json
 
 import pytest
+from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import CreateBasegnode_Maker as Maker
+from gnf.schemata import TatradingrightsAlgoCreate
+from gnf.schemata import TatradingrightsAlgoCreate_Maker as Maker
 
 
-def test_create_basegnode_generated():
+def test_tatradingrights_algo_create_generated():
 
     d = {
-        "GNodeId": "9405686a-14fd-4aef-945b-cd7c97903f14",
-        "Alias": "dw1.iso.me.orange.ta",
-        "StatusGtEnumSymbol": "3661506b",
-        "RoleGtEnumSymbol": "0f8872f7",
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "GpsPointId": "50f3f6e8-5937-47c2-8d05-06525ef6467d",
-        "OwnershipDeedNftId": 5,
-        "OwnershipDeedValidatorAddr": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI",
-        "TypeName": "basegnode.gt",
-        "Version": "020",
+        "TypeName": "tatradingrights.algo.create",
+        "Version": "000",
     }
 
     with pytest.raises(SchemaError):
@@ -44,20 +38,20 @@ def test_create_basegnode_generated():
     ######################################
     # SchemaError raised if missing a required attribute
     ######################################
-    d2 = dict(d2)
+
+    d2 = dict(d)
     del d2["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
+        Maker.dict_to_tuple(d2)
 
     ######################################
-    # SchemaError raised if attributes have incorrect type
+    # Behavior on incorrect types
     ######################################
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    d["TypeName"] = "not the type alias"
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = "create.basegnode.010"
+    d2 = dict(d, TypeName="not the type alias")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)

@@ -1,18 +1,20 @@
-"""Tests heartbeat.a type, version """
+"""Tests discoverycert.algo.transfer type, version """
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import HeartbeatA
-from gnf.schemata import HeartbeatA_Maker as Maker
+from gnf.schemata import DiscoverycertAlgoTransfer
+from gnf.schemata import DiscoverycertAlgoTransfer_Maker as Maker
 
 
-def test_heartbeat_a_generated():
+def test_discoverycert_algo_transfer_generated():
 
     d = {
-        "TypeName": "heartbeat.a",
+        "GNodeAlias": "d1.isone.ver.keene.pwrs",
+        "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
+        "TypeName": "discoverycert.algo.transfer",
         "Version": "000",
     }
 
@@ -31,6 +33,8 @@ def test_heartbeat_a_generated():
 
     # test Maker init
     t = Maker(
+        g_node_alias=gtuple.GNodeAlias,
+        discoverer_addr=gtuple.DiscovererAddr,
         #
     ).tuple
     assert t == gtuple
@@ -41,6 +45,16 @@ def test_heartbeat_a_generated():
 
     d2 = dict(d)
     del d2["TypeName"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["GNodeAlias"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["DiscovererAddr"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -55,3 +69,13 @@ def test_heartbeat_a_generated():
     d2 = dict(d, TypeName="not the type alias")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
+
+    ######################################
+    # SchemaError raised if primitive attributes do not have appropriate property_format
+    ######################################
+
+    d2 = dict(d, GNodeAlias="a.b-h")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)
+
+    # End of Test

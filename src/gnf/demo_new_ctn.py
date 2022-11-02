@@ -6,7 +6,7 @@ import gnf.config as config
 from gnf.enums import CoreGNodeRole
 from gnf.g_node_factory_db import GNodeFactoryDb
 from gnf.python_ta_daemon import PythonTaDaemon
-from gnf.schemata import CreateDiscoverycertAlgo_Maker
+from gnf.schemata import DiscoverycertAlgoCreate_Maker
 
 
 logging.basicConfig(level="INFO")
@@ -25,7 +25,7 @@ def main():
 
     ada = algo_utils.BasicAccount(config.AdaDiscovererSettings().sk.get_secret_value())
 
-    payload = CreateDiscoverycertAlgo_Maker(
+    payload = DiscoverycertAlgoCreate_Maker(
         g_node_alias=config.AdaDiscovererSettings().discovered_ctn_alias,
         old_child_alias_list=config.AdaDiscovererSettings().original_child_alias_list,
         discoverer_addr=ada.addr,

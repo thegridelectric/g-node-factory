@@ -1,4 +1,4 @@
-"""Type transfer.discoverycert.algo, version 001"""
+"""Type discoverycert.algo.transfer, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,11 +10,11 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class TransferDiscoverycertAlgo(BaseModel):
+class DiscoverycertAlgoTransfer(BaseModel):
     GNodeAlias: str  #
     DiscovererAddr: str  #
-    TypeName: Literal["transfer.discoverycert.algo"] = "transfer.discoverycert.algo"
-    Version: str = "001"
+    TypeName: Literal["discoverycert.algo.transfer"] = "discoverycert.algo.transfer"
+    Version: str = "000"
 
     _validator_g_node_alias = predicate_validator(
         "GNodeAlias", property_format.is_lrd_alias_format
@@ -32,24 +32,24 @@ class TransferDiscoverycertAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class TransferDiscoverycertAlgo_Maker:
-    type_name = "transfer.discoverycert.algo"
-    version = "001"
+class DiscoverycertAlgoTransfer_Maker:
+    type_name = "discoverycert.algo.transfer"
+    version = "000"
 
     def __init__(self, g_node_alias: str, discoverer_addr: str):
 
-        self.tuple = TransferDiscoverycertAlgo(
+        self.tuple = DiscoverycertAlgoTransfer(
             GNodeAlias=g_node_alias,
             DiscovererAddr=discoverer_addr,
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: TransferDiscoverycertAlgo) -> str:
+    def tuple_to_type(cls, tuple: DiscoverycertAlgoTransfer) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> TransferDiscoverycertAlgo:
+    def type_to_tuple(cls, t: str) -> DiscoverycertAlgoTransfer:
         try:
             d = json.loads(t)
         except TypeError:
@@ -59,12 +59,18 @@ class TransferDiscoverycertAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> TransferDiscoverycertAlgo:
+    def dict_to_tuple(cls, d: dict) -> DiscoverycertAlgoTransfer:
         d2 = dict(d)
+        if "GNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing GNodeAlias")
+        if "DiscovererAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing DiscovererAddr")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return TransferDiscoverycertAlgo(
+        return DiscoverycertAlgoTransfer(
             GNodeAlias=d2["GNodeAlias"],
             DiscovererAddr=d2["DiscovererAddr"],
             TypeName=d2["TypeName"],
-            Version="001",
+            Version="000",
         )

@@ -1,4 +1,4 @@
-"""Type transfer.tadeed.algo, version 020"""
+"""Type tadeed.algo.transfer, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,15 +10,15 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class TransferTadeedAlgo(BaseModel):
+class TadeedAlgoTransfer(BaseModel):
     FirstDeedTransferMtx: str  #
     MicroLat: int  #
     DeedValidatorAddr: str  #
     TaDaemonAddr: str  #
     TaOwnerAddr: str  #
     MicroLon: int  #
-    TypeName: Literal["transfer.tadeed.algo"] = "transfer.tadeed.algo"
-    Version: str = "020"
+    TypeName: Literal["tadeed.algo.transfer"] = "tadeed.algo.transfer"
+    Version: str = "000"
 
     _validator_first_deed_transfer_mtx = predicate_validator(
         "FirstDeedTransferMtx", property_format.is_algo_msg_pack_encoded
@@ -44,9 +44,9 @@ class TransferTadeedAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class TransferTadeedAlgo_Maker:
-    type_name = "transfer.tadeed.algo"
-    version = "020"
+class TadeedAlgoTransfer_Maker:
+    type_name = "tadeed.algo.transfer"
+    version = "000"
 
     def __init__(
         self,
@@ -58,7 +58,7 @@ class TransferTadeedAlgo_Maker:
         micro_lon: int,
     ):
 
-        self.tuple = TransferTadeedAlgo(
+        self.tuple = TadeedAlgoTransfer(
             FirstDeedTransferMtx=first_deed_transfer_mtx,
             MicroLat=micro_lat,
             DeedValidatorAddr=deed_validator_addr,
@@ -69,11 +69,11 @@ class TransferTadeedAlgo_Maker:
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: TransferTadeedAlgo) -> str:
+    def tuple_to_type(cls, tuple: TadeedAlgoTransfer) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> TransferTadeedAlgo:
+    def type_to_tuple(cls, t: str) -> TadeedAlgoTransfer:
         try:
             d = json.loads(t)
         except TypeError:
@@ -83,10 +83,24 @@ class TransferTadeedAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> TransferTadeedAlgo:
+    def dict_to_tuple(cls, d: dict) -> TadeedAlgoTransfer:
         d2 = dict(d)
+        if "FirstDeedTransferMtx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing FirstDeedTransferMtx")
+        if "MicroLat" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing MicroLat")
+        if "DeedValidatorAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing DeedValidatorAddr")
+        if "TaDaemonAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaDaemonAddr")
+        if "TaOwnerAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaOwnerAddr")
+        if "MicroLon" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing MicroLon")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return TransferTadeedAlgo(
+        return TadeedAlgoTransfer(
             FirstDeedTransferMtx=d2["FirstDeedTransferMtx"],
             MicroLat=d2["MicroLat"],
             DeedValidatorAddr=d2["DeedValidatorAddr"],
@@ -94,5 +108,5 @@ class TransferTadeedAlgo_Maker:
             TaOwnerAddr=d2["TaOwnerAddr"],
             MicroLon=d2["MicroLon"],
             TypeName=d2["TypeName"],
-            Version="020",
+            Version="000",
         )

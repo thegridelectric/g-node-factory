@@ -1,4 +1,4 @@
-"""Type basegnode.gt, version 020"""
+"""Type basegnode.gt, version 000"""
 import json
 from enum import auto
 from typing import Any
@@ -176,7 +176,7 @@ class BasegnodeGt(BaseModel):
     DaemonAddr: Optional[str] = None
     GpsPointId: Optional[str] = None
     TypeName: Literal["basegnode.gt"] = "basegnode.gt"
-    Version: str = "020"
+    Version: str = "000"
 
     _validator_g_node_id = predicate_validator(
         "GNodeId", property_format.is_uuid_canonical_textual
@@ -270,7 +270,7 @@ class BasegnodeGt(BaseModel):
 
 class BasegnodeGt_Maker:
     type_name = "basegnode.gt"
-    version = "020"
+    version = "000"
 
     def __init__(
         self,
@@ -321,6 +321,10 @@ class BasegnodeGt_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> BasegnodeGt:
         d2 = dict(d)
+        if "GNodeId" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing GNodeId")
+        if "Alias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing Alias")
         if "StatusGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing StatusGtEnumSymbol")
         if d2["StatusGtEnumSymbol"] in GNodeStatus100SchemaEnum.symbols:
@@ -333,6 +337,8 @@ class BasegnodeGt_Maker:
             d2["Role"] = CoreGNodeRoleMap.type_to_local(d2["RoleGtEnumSymbol"])
         else:
             d2["Role"] = CoreGNodeRole.default()
+        if "GNodeRegistryAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing GNodeRegistryAddr")
         if "GpsPointId" not in d2.keys():
             d2["GpsPointId"] = None
         if "OwnershipDeedNftId" not in d2.keys():
@@ -347,6 +353,8 @@ class BasegnodeGt_Maker:
             d2["DaemonAddr"] = None
         if "TradingRightsNftId" not in d2.keys():
             d2["TradingRightsNftId"] = None
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
         return BasegnodeGt(
             GNodeId=d2["GNodeId"],
@@ -362,7 +370,7 @@ class BasegnodeGt_Maker:
             DaemonAddr=d2["DaemonAddr"],
             TradingRightsNftId=d2["TradingRightsNftId"],
             TypeName=d2["TypeName"],
-            Version="020",
+            Version="000",
         )
 
     @classmethod

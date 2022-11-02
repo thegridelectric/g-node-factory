@@ -1,4 +1,4 @@
-"""Type create.marketmaker.algo, version 001"""
+"""Type basegnode.marketmaker.create, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -6,12 +6,11 @@ from typing import Literal
 from pydantic import BaseModel
 
 from gnf.errors import SchemaError
-from gnf.property_format import predicate_validator
 
 
-class CreateMarketmakerAlgo(BaseModel):
-    TypeName: Literal["create.marketmaker.algo"] = "create.marketmaker.algo"
-    Version: str = "001"
+class BasegnodeMarketmakerCreate(BaseModel):
+    TypeName: Literal["basegnode.marketmaker.create"] = "basegnode.marketmaker.create"
+    Version: str = "000"
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -21,22 +20,22 @@ class CreateMarketmakerAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class CreateMarketmakerAlgo_Maker:
-    type_name = "create.marketmaker.algo"
-    version = "001"
+class BasegnodeMarketmakerCreate_Maker:
+    type_name = "basegnode.marketmaker.create"
+    version = "000"
 
     def __init__(self):
 
-        self.tuple = CreateMarketmakerAlgo(
+        self.tuple = BasegnodeMarketmakerCreate(
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: CreateMarketmakerAlgo) -> str:
+    def tuple_to_type(cls, tuple: BasegnodeMarketmakerCreate) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> CreateMarketmakerAlgo:
+    def type_to_tuple(cls, t: str) -> BasegnodeMarketmakerCreate:
         try:
             d = json.loads(t)
         except TypeError:
@@ -46,10 +45,12 @@ class CreateMarketmakerAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> CreateMarketmakerAlgo:
+    def dict_to_tuple(cls, d: dict) -> BasegnodeMarketmakerCreate:
         d2 = dict(d)
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return CreateMarketmakerAlgo(
+        return BasegnodeMarketmakerCreate(
             TypeName=d2["TypeName"],
-            Version="001",
+            Version="000",
         )

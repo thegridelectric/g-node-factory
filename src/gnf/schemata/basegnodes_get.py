@@ -1,4 +1,4 @@
-"""Type create.tatradingrights.algo, version 001"""
+"""Type basegnodes.get, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -6,12 +6,11 @@ from typing import Literal
 from pydantic import BaseModel
 
 from gnf.errors import SchemaError
-from gnf.property_format import predicate_validator
 
 
-class CreateTatradingrightsAlgo(BaseModel):
-    TypeName: Literal["create.tatradingrights.algo"] = "create.tatradingrights.algo"
-    Version: str = "001"
+class BasegnodesGet(BaseModel):
+    TypeName: Literal["basegnodes.get"] = "basegnodes.get"
+    Version: str = "000"
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -21,22 +20,22 @@ class CreateTatradingrightsAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class CreateTatradingrightsAlgo_Maker:
-    type_name = "create.tatradingrights.algo"
-    version = "001"
+class BasegnodesGet_Maker:
+    type_name = "basegnodes.get"
+    version = "000"
 
     def __init__(self):
 
-        self.tuple = CreateTatradingrightsAlgo(
+        self.tuple = BasegnodesGet(
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: CreateTatradingrightsAlgo) -> str:
+    def tuple_to_type(cls, tuple: BasegnodesGet) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> CreateTatradingrightsAlgo:
+    def type_to_tuple(cls, t: str) -> BasegnodesGet:
         try:
             d = json.loads(t)
         except TypeError:
@@ -46,10 +45,12 @@ class CreateTatradingrightsAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> CreateTatradingrightsAlgo:
+    def dict_to_tuple(cls, d: dict) -> BasegnodesGet:
         d2 = dict(d)
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return CreateTatradingrightsAlgo(
+        return BasegnodesGet(
             TypeName=d2["TypeName"],
-            Version="001",
+            Version="000",
         )

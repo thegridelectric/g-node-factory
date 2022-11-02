@@ -1,4 +1,4 @@
-"""Type transfer.tavalidatorcert.algo, version 010"""
+"""Type tavalidatorcert.algo.transfer, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,11 +10,11 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class TransferTavalidatorcertAlgo(BaseModel):
+class TavalidatorcertAlgoTransfer(BaseModel):
     ValidatorAddr: str  #
     HalfSignedCertTransferMtx: str  #
-    TypeName: Literal["transfer.tavalidatorcert.algo"] = "transfer.tavalidatorcert.algo"
-    Version: str = "010"
+    TypeName: Literal["tavalidatorcert.algo.transfer"] = "tavalidatorcert.algo.transfer"
+    Version: str = "000"
 
     _validator_validator_addr = predicate_validator(
         "ValidatorAddr", property_format.is_algo_address_string_format
@@ -32,24 +32,24 @@ class TransferTavalidatorcertAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class TransferTavalidatorcertAlgo_Maker:
-    type_name = "transfer.tavalidatorcert.algo"
-    version = "010"
+class TavalidatorcertAlgoTransfer_Maker:
+    type_name = "tavalidatorcert.algo.transfer"
+    version = "000"
 
     def __init__(self, validator_addr: str, half_signed_cert_transfer_mtx: str):
 
-        self.tuple = TransferTavalidatorcertAlgo(
+        self.tuple = TavalidatorcertAlgoTransfer(
             ValidatorAddr=validator_addr,
             HalfSignedCertTransferMtx=half_signed_cert_transfer_mtx,
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: TransferTavalidatorcertAlgo) -> str:
+    def tuple_to_type(cls, tuple: TavalidatorcertAlgoTransfer) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> TransferTavalidatorcertAlgo:
+    def type_to_tuple(cls, t: str) -> TavalidatorcertAlgoTransfer:
         try:
             d = json.loads(t)
         except TypeError:
@@ -59,12 +59,18 @@ class TransferTavalidatorcertAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> TransferTavalidatorcertAlgo:
+    def dict_to_tuple(cls, d: dict) -> TavalidatorcertAlgoTransfer:
         d2 = dict(d)
+        if "ValidatorAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing ValidatorAddr")
+        if "HalfSignedCertTransferMtx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing HalfSignedCertTransferMtx")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return TransferTavalidatorcertAlgo(
+        return TavalidatorcertAlgoTransfer(
             ValidatorAddr=d2["ValidatorAddr"],
             HalfSignedCertTransferMtx=d2["HalfSignedCertTransferMtx"],
             TypeName=d2["TypeName"],
-            Version="010",
+            Version="000",
         )

@@ -1,4 +1,4 @@
-"""Type optin.tadeed.algo, version 000"""
+"""Type tadeed.algo.exchange, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,12 +10,13 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class OptinTadeedAlgo(BaseModel):
+class TadeedAlgoExchange(BaseModel):
     TaDaemonAddr: str  #
     TaOwnerAddr: str  #
     ValidatorAddr: str  #
-    NewDeedOptInMtx: str  #
-    TypeName: Literal["optin.tadeed.algo"] = "optin.tadeed.algo"
+    NewTaDeedIdx: int  #
+    OldDeedTransferMtx: str  #
+    TypeName: Literal["tadeed.algo.exchange"] = "tadeed.algo.exchange"
     Version: str = "000"
 
     _validator_ta_daemon_addr = predicate_validator(
@@ -30,8 +31,8 @@ class OptinTadeedAlgo(BaseModel):
         "ValidatorAddr", property_format.is_algo_address_string_format
     )
 
-    _validator_new_deed_opt_in_mtx = predicate_validator(
-        "NewDeedOptInMtx", property_format.is_algo_msg_pack_encoded
+    _validator_old_deed_transfer_mtx = predicate_validator(
+        "OldDeedTransferMtx", property_format.is_algo_msg_pack_encoded
     )
 
     def as_dict(self) -> Dict:
@@ -42,8 +43,8 @@ class OptinTadeedAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class OptinTadeedAlgo_Maker:
-    type_name = "optin.tadeed.algo"
+class TadeedAlgoExchange_Maker:
+    type_name = "tadeed.algo.exchange"
     version = "000"
 
     def __init__(
@@ -51,23 +52,25 @@ class OptinTadeedAlgo_Maker:
         ta_daemon_addr: str,
         ta_owner_addr: str,
         validator_addr: str,
-        new_deed_opt_in_mtx: str,
+        new_ta_deed_idx: int,
+        old_deed_transfer_mtx: str,
     ):
 
-        self.tuple = OptinTadeedAlgo(
+        self.tuple = TadeedAlgoExchange(
             TaDaemonAddr=ta_daemon_addr,
             TaOwnerAddr=ta_owner_addr,
             ValidatorAddr=validator_addr,
-            NewDeedOptInMtx=new_deed_opt_in_mtx,
+            NewTaDeedIdx=new_ta_deed_idx,
+            OldDeedTransferMtx=old_deed_transfer_mtx,
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: OptinTadeedAlgo) -> str:
+    def tuple_to_type(cls, tuple: TadeedAlgoExchange) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> OptinTadeedAlgo:
+    def type_to_tuple(cls, t: str) -> TadeedAlgoExchange:
         try:
             d = json.loads(t)
         except TypeError:
@@ -77,7 +80,7 @@ class OptinTadeedAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> OptinTadeedAlgo:
+    def dict_to_tuple(cls, d: dict) -> TadeedAlgoExchange:
         d2 = dict(d)
         if "TaDaemonAddr" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TaDaemonAddr")
@@ -85,16 +88,19 @@ class OptinTadeedAlgo_Maker:
             raise SchemaError(f"dict {d2} missing TaOwnerAddr")
         if "ValidatorAddr" not in d2.keys():
             raise SchemaError(f"dict {d2} missing ValidatorAddr")
-        if "NewDeedOptInMtx" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing NewDeedOptInMtx")
+        if "NewTaDeedIdx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing NewTaDeedIdx")
+        if "OldDeedTransferMtx" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing OldDeedTransferMtx")
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
-        return OptinTadeedAlgo(
+        return TadeedAlgoExchange(
             TaDaemonAddr=d2["TaDaemonAddr"],
             TaOwnerAddr=d2["TaOwnerAddr"],
             ValidatorAddr=d2["ValidatorAddr"],
-            NewDeedOptInMtx=d2["NewDeedOptInMtx"],
+            NewTaDeedIdx=d2["NewTaDeedIdx"],
+            OldDeedTransferMtx=d2["OldDeedTransferMtx"],
             TypeName=d2["TypeName"],
             Version="000",
         )

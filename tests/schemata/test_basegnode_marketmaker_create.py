@@ -1,19 +1,19 @@
-"""Tests create.basegnode type, version """
+"""Tests basegnode.marketmaker.create type, version """
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import CreateBasegnode
-from gnf.schemata import CreateBasegnode_Maker as Maker
+from gnf.schemata import BasegnodeMarketmakerCreate
+from gnf.schemata import BasegnodeMarketmakerCreate_Maker as Maker
 
 
-def test_create_basegnode_generated():
+def test_basegnode_marketmaker_create_generated():
 
     d = {
-        "TypeName": "create.basegnode",
-        "Version": "",
+        "TypeName": "basegnode.marketmaker.create",
+        "Version": "000",
     }
 
     with pytest.raises(SchemaError):
@@ -23,37 +23,35 @@ def test_create_basegnode_generated():
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(d)
-    gw_tuple = Maker.type_to_tuple(gw_type)
+    gtype = json.dumps(d)
+    gtuple = Maker.type_to_tuple(gtype)
 
     # test type_to_tuple and tuple_to_type maps
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
+    assert Maker.type_to_tuple(Maker.tuple_to_type(gtuple)) == gtuple
 
     # test Maker init
     t = Maker(
         #
     ).tuple
-    assert t == gw_tuple
+    assert t == gtuple
 
     ######################################
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = d["TypeName"]
-    del d["TypeName"]
+    d2 = dict(d)
+    del d2["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = orig_value
+        Maker.dict_to_tuple(d2)
 
     ######################################
-    # SchemaError raised if attributes have incorrect type
+    # Behavior on incorrect types
     ######################################
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    d["TypeName"] = "not the type alias"
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = "create.basegnode"
+    d2 = dict(d, TypeName="not the type alias")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)

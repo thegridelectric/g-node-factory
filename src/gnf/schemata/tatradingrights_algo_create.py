@@ -1,4 +1,4 @@
-"""Type create.basegnode, version 010"""
+"""Type tatradingrights.algo.create, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -6,12 +6,11 @@ from typing import Literal
 from pydantic import BaseModel
 
 from gnf.errors import SchemaError
-from gnf.property_format import predicate_validator
 
 
-class CreateBasegnode(BaseModel):
-    TypeName: Literal["create.basegnode"] = "create.basegnode"
-    Version: str = "010"
+class TatradingrightsAlgoCreate(BaseModel):
+    TypeName: Literal["tatradingrights.algo.create"] = "tatradingrights.algo.create"
+    Version: str = "000"
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -21,22 +20,22 @@ class CreateBasegnode(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class CreateBasegnode_Maker:
-    type_name = "create.basegnode"
-    version = "010"
+class TatradingrightsAlgoCreate_Maker:
+    type_name = "tatradingrights.algo.create"
+    version = "000"
 
     def __init__(self):
 
-        self.tuple = CreateBasegnode(
+        self.tuple = TatradingrightsAlgoCreate(
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: CreateBasegnode) -> str:
+    def tuple_to_type(cls, tuple: TatradingrightsAlgoCreate) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> CreateBasegnode:
+    def type_to_tuple(cls, t: str) -> TatradingrightsAlgoCreate:
         try:
             d = json.loads(t)
         except TypeError:
@@ -46,10 +45,12 @@ class CreateBasegnode_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> CreateBasegnode:
+    def dict_to_tuple(cls, d: dict) -> TatradingrightsAlgoCreate:
         d2 = dict(d)
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return CreateBasegnode(
+        return TatradingrightsAlgoCreate(
             TypeName=d2["TypeName"],
-            Version="010",
+            Version="000",
         )

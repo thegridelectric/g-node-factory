@@ -1,4 +1,4 @@
-"""Type create.terminalasset.algo, version 010"""
+"""Type basegnode.terminalasset.create, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,7 +10,7 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class CreateTerminalassetAlgo(BaseModel):
+class BasegnodeTerminalassetCreate(BaseModel):
     TaGNodeAlias: str  #
     MicroLon: int  #
     ValidatorAddr: str  #
@@ -19,8 +19,10 @@ class CreateTerminalassetAlgo(BaseModel):
     GNodeRegistryAddr: str  #
     FromGNodeInstanceId: str  #
     FromGNodeAlias: str  #
-    TypeName: Literal["create.terminalasset.algo"] = "create.terminalasset.algo"
-    Version: str = "010"
+    TypeName: Literal[
+        "basegnode.terminalasset.create"
+    ] = "basegnode.terminalasset.create"
+    Version: str = "000"
 
     _validator_ta_g_node_alias = predicate_validator(
         "TaGNodeAlias", property_format.is_lrd_alias_format
@@ -54,9 +56,9 @@ class CreateTerminalassetAlgo(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class CreateTerminalassetAlgo_Maker:
-    type_name = "create.terminalasset.algo"
-    version = "010"
+class BasegnodeTerminalassetCreate_Maker:
+    type_name = "basegnode.terminalasset.create"
+    version = "000"
 
     def __init__(
         self,
@@ -70,7 +72,7 @@ class CreateTerminalassetAlgo_Maker:
         from_g_node_alias: str,
     ):
 
-        self.tuple = CreateTerminalassetAlgo(
+        self.tuple = BasegnodeTerminalassetCreate(
             TaGNodeAlias=ta_g_node_alias,
             MicroLon=micro_lon,
             ValidatorAddr=validator_addr,
@@ -83,11 +85,11 @@ class CreateTerminalassetAlgo_Maker:
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: CreateTerminalassetAlgo) -> str:
+    def tuple_to_type(cls, tuple: BasegnodeTerminalassetCreate) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> CreateTerminalassetAlgo:
+    def type_to_tuple(cls, t: str) -> BasegnodeTerminalassetCreate:
         try:
             d = json.loads(t)
         except TypeError:
@@ -97,10 +99,28 @@ class CreateTerminalassetAlgo_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> CreateTerminalassetAlgo:
+    def dict_to_tuple(cls, d: dict) -> BasegnodeTerminalassetCreate:
         d2 = dict(d)
+        if "TaGNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaGNodeAlias")
+        if "MicroLon" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing MicroLon")
+        if "ValidatorAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing ValidatorAddr")
+        if "TaOwnerAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaOwnerAddr")
+        if "MicroLat" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing MicroLat")
+        if "GNodeRegistryAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing GNodeRegistryAddr")
+        if "FromGNodeInstanceId" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing FromGNodeInstanceId")
+        if "FromGNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing FromGNodeAlias")
+        if "TypeName" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TypeName")
 
-        return CreateTerminalassetAlgo(
+        return BasegnodeTerminalassetCreate(
             TaGNodeAlias=d2["TaGNodeAlias"],
             MicroLon=d2["MicroLon"],
             ValidatorAddr=d2["ValidatorAddr"],
@@ -110,5 +130,5 @@ class CreateTerminalassetAlgo_Maker:
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
             FromGNodeAlias=d2["FromGNodeAlias"],
             TypeName=d2["TypeName"],
-            Version="010",
+            Version="000",
         )

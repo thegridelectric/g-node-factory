@@ -13,7 +13,7 @@ import gnf.dev_utils.algo_setup as algo_setup
 from gnf.algo_utils import BasicAccount
 
 # Schemata sent by discoverer
-from gnf.schemata import CreateDiscoverycertAlgo
+from gnf.schemata import DiscoverycertAlgoCreate
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class DevDiscoverer:
         self.seed_fund_validator_joint_account()
         LOGGER.info("DevDiscoverer Initialized")
 
-    def send_message_to_gnf(self, payload: CreateDiscoverycertAlgo):
+    def send_message_to_gnf(self, payload: DiscoverycertAlgoCreate):
         """Stub for when there is a mechanism (probably FastAPI) for validators  sending
         messages to GNodeFactory.
 
@@ -48,7 +48,7 @@ class DevDiscoverer:
 
     def generate_create_discoverycert_algo(
         self, terminal_asset_alias: str
-    ) -> CreateDiscoverycertAlgo:
+    ) -> DiscoverycertAlgoCreate:
 
         txn = transaction.AssetCreateTxn(
             sender=self.multi.address(),

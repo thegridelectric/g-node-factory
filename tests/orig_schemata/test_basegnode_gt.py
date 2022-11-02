@@ -14,20 +14,14 @@ from gnf.schemata import BasegnodeGt_Maker as Maker
 def test_basegnode_gt_generated():
 
     d = {
-        "GNodeId": "9405686a-14fd-4aef-945b-cd7c97903f14",
-        "Alias": "dw1.iso.me.orange.ta",
-        "StatusGtEnumSymbol": "3661506b",
-        "RoleGtEnumSymbol": "0f8872f7",
+        "GNodeId": "7b1df82e-10c5-49d9-8d02-1e837e31b87e",
+        "Alias": "d1",
+        "StatusGtEnumSymbol": "153d3475",
+        "RoleGtEnumSymbol": "00000000",
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "GpsPointId": "50f3f6e8-5937-47c2-8d05-06525ef6467d",
-        "OwnershipDeedNftId": 5,
-        "OwnershipDeedValidatorAddr": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI",
-        "PrevAlias": "dw1",
-        "OwnerAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "DaemonAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "TradingRightsNftId": 1,
+        "PrevAlias": "d",
         "TypeName": "basegnode.gt",
-        "Version": "000",
+        "Version": "020",
     }
 
     with pytest.raises(SchemaError):
@@ -37,36 +31,36 @@ def test_basegnode_gt_generated():
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gtype = json.dumps(d)
-    gtuple = Maker.type_to_tuple(gtype)
+    gw_type = json.dumps(d)
+    gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gtuple)) == gtuple
+    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
 
     # test Maker init
     t = Maker(
-        status=gtuple.Status,
-        g_node_registry_addr=gtuple.GNodeRegistryAddr,
-        role=gtuple.Role,
-        prev_alias=gtuple.PrevAlias,
-        trading_rights_nft_id=gtuple.TradingRightsNftId,
-        ownership_deed_validator_addr=gtuple.OwnershipDeedValidatorAddr,
-        alias=gtuple.Alias,
-        g_node_id=gtuple.GNodeId,
-        ownership_deed_nft_id=gtuple.OwnershipDeedNftId,
-        owner_addr=gtuple.OwnerAddr,
-        daemon_addr=gtuple.DaemonAddr,
-        gps_point_id=gtuple.GpsPointId,
+        status=gw_tuple.Status,
+        g_node_registry_addr=gw_tuple.GNodeRegistryAddr,
+        role=gw_tuple.Role,
+        prev_alias=gw_tuple.PrevAlias,
+        trading_rights_nft_id=gw_tuple.TradingRightsNftId,
+        ownership_deed_validator_addr=gw_tuple.OwnershipDeedValidatorAddr,
+        alias=gw_tuple.Alias,
+        g_node_id=gw_tuple.GNodeId,
+        ownership_deed_nft_id=gw_tuple.OwnershipDeedNftId,
+        owner_addr=gw_tuple.OwnerAddr,
+        daemon_addr=gw_tuple.DaemonAddr,
+        gps_point_id=gw_tuple.GpsPointId,
         #
     ).tuple
-    assert t == gtuple
+    assert t == gw_tuple
 
     ######################################
     # Dataclass related tests
     ######################################
 
-    dc = Maker.tuple_to_dc(gtuple)
-    assert gtuple == Maker.dc_to_tuple(dc)
+    dc = Maker.tuple_to_dc(gw_tuple)
+    assert gw_tuple == Maker.dc_to_tuple(dc)
     assert Maker.type_to_dc(Maker.dc_to_type(dc)) == dc
 
     ######################################
@@ -143,7 +137,7 @@ def test_basegnode_gt_generated():
     Maker.dict_to_tuple(d2)
 
     ######################################
-    # Behavior on incorrect types
+    # SchemaError raised if attributes have incorrect type
     ######################################
 
     d2 = dict(d, StatusGtEnumSymbol="hi")
