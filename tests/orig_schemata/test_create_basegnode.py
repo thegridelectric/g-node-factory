@@ -1,19 +1,25 @@
-"""Tests create.tatradingrights.algo type, version """
+"""Tests create.basegnode.010 type"""
 import json
 
 import pytest
-from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import CreateTatradingrightsAlgo
-from gnf.schemata import CreateTatradingrightsAlgo_Maker as Maker
+from gnf.schemata import CreateBasegnode_Maker as Maker
 
 
-def test_create_tatradingrights_algo_generated():
+def test_create_basegnode_generated():
 
     d = {
-        "TypeName": "create.tatradingrights.algo",
-        "Version": "",
+        "GNodeId": "9405686a-14fd-4aef-945b-cd7c97903f14",
+        "Alias": "dw1.iso.me.orange.ta",
+        "StatusGtEnumSymbol": "3661506b",
+        "RoleGtEnumSymbol": "0f8872f7",
+        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "GpsPointId": "50f3f6e8-5937-47c2-8d05-06525ef6467d",
+        "OwnershipDeedNftId": 5,
+        "OwnershipDeedValidatorAddr": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI",
+        "TypeName": "basegnode.gt",
+        "Version": "020",
     }
 
     with pytest.raises(SchemaError):
@@ -56,4 +62,4 @@ def test_create_tatradingrights_algo_generated():
     d["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d)
-    d["TypeName"] = "create.tatradingrights.algo"
+    d["TypeName"] = "create.basegnode.010"

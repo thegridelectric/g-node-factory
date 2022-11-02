@@ -1,16 +1,18 @@
-"""Tests create.terminalasset.algo.010 type"""
+"""Tests create.terminalasset.algo type, version """
 import json
 
 import pytest
+from pydantic import ValidationError
 
 from gnf.errors import SchemaError
+from gnf.schemata import CreateTerminalassetAlgo
 from gnf.schemata import CreateTerminalassetAlgo_Maker as Maker
 
 
 def test_create_terminalasset_algo_generated():
 
-    gw_dict = {
-        "TaGNodeAlias": "d1.isone.ver.keene.holly.ta",
+    d = {
+        "TaGNodeAlias": "dw1.iso.me.orange.ta",
         "MicroLon": -68691705,
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
@@ -18,17 +20,18 @@ def test_create_terminalasset_algo_generated():
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
         "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
         "FromGNodeAlias": "dwgps.gnr",
-        "TypeName": "create.terminalasset.algo.010",
+        "TypeName": "create.terminalasset.algo",
+        "Version": "",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(gw_dict)
+        Maker.type_to_tuple(d)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(gw_dict)
+    gw_type = json.dumps(d)
     gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
@@ -52,138 +55,138 @@ def test_create_terminalasset_algo_generated():
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = gw_dict["TypeName"]
-    del gw_dict["TypeName"]
+    orig_value = d["TypeName"]
+    del d["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = orig_value
 
-    orig_value = gw_dict["TaGNodeAlias"]
-    del gw_dict["TaGNodeAlias"]
+    orig_value = d["TaGNodeAlias"]
+    del d["TaGNodeAlias"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TaGNodeAlias"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TaGNodeAlias"] = orig_value
 
-    orig_value = gw_dict["MicroLon"]
-    del gw_dict["MicroLon"]
+    orig_value = d["MicroLon"]
+    del d["MicroLon"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["MicroLon"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["MicroLon"] = orig_value
 
-    orig_value = gw_dict["ValidatorAddr"]
-    del gw_dict["ValidatorAddr"]
+    orig_value = d["ValidatorAddr"]
+    del d["ValidatorAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
-    orig_value = gw_dict["TaOwnerAddr"]
-    del gw_dict["TaOwnerAddr"]
+    orig_value = d["TaOwnerAddr"]
+    del d["TaOwnerAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TaOwnerAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TaOwnerAddr"] = orig_value
 
-    orig_value = gw_dict["MicroLat"]
-    del gw_dict["MicroLat"]
+    orig_value = d["MicroLat"]
+    del d["MicroLat"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["MicroLat"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["MicroLat"] = orig_value
 
-    orig_value = gw_dict["GNodeRegistryAddr"]
-    del gw_dict["GNodeRegistryAddr"]
+    orig_value = d["GNodeRegistryAddr"]
+    del d["GNodeRegistryAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["GNodeRegistryAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["GNodeRegistryAddr"] = orig_value
 
-    orig_value = gw_dict["FromGNodeInstanceId"]
-    del gw_dict["FromGNodeInstanceId"]
+    orig_value = d["FromGNodeInstanceId"]
+    del d["FromGNodeInstanceId"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeInstanceId"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["FromGNodeInstanceId"] = orig_value
 
-    orig_value = gw_dict["FromGNodeAlias"]
-    del gw_dict["FromGNodeAlias"]
+    orig_value = d["FromGNodeAlias"]
+    del d["FromGNodeAlias"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeAlias"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["FromGNodeAlias"] = orig_value
 
     ######################################
     # SchemaError raised if attributes have incorrect type
     ######################################
 
-    orig_value = gw_dict["TaGNodeAlias"]
-    gw_dict["TaGNodeAlias"] = 42
+    orig_value = d["TaGNodeAlias"]
+    d["TaGNodeAlias"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TaGNodeAlias"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TaGNodeAlias"] = orig_value
 
-    orig_value = gw_dict["MicroLon"]
-    gw_dict["MicroLon"] = 1.1
+    orig_value = d["MicroLon"]
+    d["MicroLon"] = 1.1
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["MicroLon"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["MicroLon"] = orig_value
 
-    orig_value = gw_dict["ValidatorAddr"]
-    gw_dict["ValidatorAddr"] = 42
+    orig_value = d["ValidatorAddr"]
+    d["ValidatorAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
-    orig_value = gw_dict["TaOwnerAddr"]
-    gw_dict["TaOwnerAddr"] = 42
+    orig_value = d["TaOwnerAddr"]
+    d["TaOwnerAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TaOwnerAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TaOwnerAddr"] = orig_value
 
-    orig_value = gw_dict["MicroLat"]
-    gw_dict["MicroLat"] = 1.1
+    orig_value = d["MicroLat"]
+    d["MicroLat"] = 1.1
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["MicroLat"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["MicroLat"] = orig_value
 
-    orig_value = gw_dict["GNodeRegistryAddr"]
-    gw_dict["GNodeRegistryAddr"] = 42
+    orig_value = d["GNodeRegistryAddr"]
+    d["GNodeRegistryAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["GNodeRegistryAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["GNodeRegistryAddr"] = orig_value
 
-    orig_value = gw_dict["FromGNodeInstanceId"]
-    gw_dict["FromGNodeInstanceId"] = 42
+    orig_value = d["FromGNodeInstanceId"]
+    d["FromGNodeInstanceId"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeInstanceId"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["FromGNodeInstanceId"] = orig_value
 
-    orig_value = gw_dict["FromGNodeAlias"]
-    gw_dict["FromGNodeAlias"] = 42
+    orig_value = d["FromGNodeAlias"]
+    d["FromGNodeAlias"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeAlias"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["FromGNodeAlias"] = orig_value
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    gw_dict["TypeName"] = "not the type alias"
+    d["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = "create.terminalasset.algo.010"
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = "create.terminalasset.algo"
 
     ######################################
     # SchemaError raised if primitive attributes do not have appropriate property_format
     ######################################
 
-    gw_dict["TaGNodeAlias"] = "a.b-h"
+    d["TaGNodeAlias"] = "a.b-h"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TaGNodeAlias"] = "dw1.iso.me.orange.ta"
+        Maker.dict_to_tuple(d)
+    d["TaGNodeAlias"] = "dw1.iso.me.orange.ta"
 
-    gw_dict["FromGNodeInstanceId"] = "d4be12d5-33ba-4f1f-b9e5"
+    d["FromGNodeInstanceId"] = "d4be12d5-33ba-4f1f-b9e5"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeInstanceId"] = "f5de29a7-1e72-4627-818e-dc527a889fda"
+        Maker.dict_to_tuple(d)
+    d["FromGNodeInstanceId"] = "f5de29a7-1e72-4627-818e-dc527a889fda"
 
-    gw_dict["FromGNodeAlias"] = "a.b-h"
+    d["FromGNodeAlias"] = "a.b-h"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["FromGNodeAlias"] = "dwgps.gnr"
+        Maker.dict_to_tuple(d)
+    d["FromGNodeAlias"] = "dwgps.gnr"
 
     # End of Test

@@ -22,9 +22,7 @@ CodeGenerationTools/GridworksCore/SSoT/Airtable.xml
 CodeGenerationTools/GridworksCore/SassyMQ/
 .ssotme
 
-# Django stuff:
-*.log
-/src/gnf/django_related/settings.py
+# Django dev db:
 /src/gnf/django_related/db.sqlite3
 
 

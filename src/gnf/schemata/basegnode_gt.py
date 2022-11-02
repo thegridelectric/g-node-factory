@@ -184,13 +184,6 @@ class BasegnodeGt(BaseModel):
 
     _validator_alias = predicate_validator("Alias", property_format.is_lrd_alias_format)
 
-    @validator("DaemonAddr")
-    def _validator_daemon_addr(cls, v: Any) -> Optional[str]:
-        if v is None:
-            return v
-        if not property_format.is_algo_address_string_format(v):
-            raise ValueError(f"DaemonAddr {v} must have AlgoAddressStringFormat")
-
     @validator("Status", pre=True)
     def _validator_status(cls, v: Any) -> GNodeStatus100:
         return as_enum(v, GNodeStatus100, GNodeStatus100.Unknown)
@@ -240,12 +233,15 @@ class BasegnodeGt(BaseModel):
         if not property_format.is_algo_address_string_format(v):
             raise ValueError(f"OwnerAddr {v} must have AlgoAddressStringFormat")
 
+    @validator("DaemonAddr")
+    def _validator_daemon_addr(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
+        if not property_format.is_algo_address_string_format(v):
+            raise ValueError(f"DaemonAddr {v} must have AlgoAddressStringFormat")
+
     def as_dict(self) -> Dict:
         d = self.dict()
-        if d["DaemonAddr"] is None:
-            del d["DaemonAddr"]
-        if d["TradingRightsNftId"] is None:
-            del d["TradingRightsNftId"]
         del d["Status"]
         Status = as_enum(self.Status, GNodeStatus100, GNodeStatus100.default())
         d["StatusGtEnumSymbol"] = GNodeStatusMap.local_to_type(Status)
@@ -262,6 +258,10 @@ class BasegnodeGt(BaseModel):
             del d["PrevAlias"]
         if d["OwnerAddr"] is None:
             del d["OwnerAddr"]
+        if d["DaemonAddr"] is None:
+            del d["DaemonAddr"]
+        if d["TradingRightsNftId"] is None:
+            del d["TradingRightsNftId"]
         return d
 
     def as_type(self) -> str:
@@ -276,8 +276,6 @@ class BasegnodeGt_Maker:
         self,
         g_node_id: str,
         alias: str,
-        daemon_addr: Optional[str],
-        trading_rights_nft_id: Optional[int],
         status: GNodeStatus,
         role: CoreGNodeRole,
         g_node_registry_addr: str,
@@ -286,13 +284,13 @@ class BasegnodeGt_Maker:
         ownership_deed_validator_addr: Optional[str],
         prev_alias: Optional[str],
         owner_addr: Optional[str],
+        daemon_addr: Optional[str],
+        trading_rights_nft_id: Optional[int],
     ):
 
         self.tuple = BasegnodeGt(
             GNodeId=g_node_id,
             Alias=alias,
-            DaemonAddr=daemon_addr,
-            TradingRightsNftId=trading_rights_nft_id,
             Status=status,
             Role=role,
             GNodeRegistryAddr=g_node_registry_addr,
@@ -301,6 +299,8 @@ class BasegnodeGt_Maker:
             OwnershipDeedValidatorAddr=ownership_deed_validator_addr,
             PrevAlias=prev_alias,
             OwnerAddr=owner_addr,
+            DaemonAddr=daemon_addr,
+            TradingRightsNftId=trading_rights_nft_id,
             #
         )
 
@@ -321,10 +321,6 @@ class BasegnodeGt_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> BasegnodeGt:
         d2 = dict(d)
-        if "DaemonAddr" not in d2.keys():
-            d2["DaemonAddr"] = None
-        if "TradingRightsNftId" not in d2.keys():
-            d2["TradingRightsNftId"] = None
         if "StatusGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing StatusGtEnumSymbol")
         if d2["StatusGtEnumSymbol"] in GNodeStatus100SchemaEnum.symbols:
@@ -347,12 +343,14 @@ class BasegnodeGt_Maker:
             d2["PrevAlias"] = None
         if "OwnerAddr" not in d2.keys():
             d2["OwnerAddr"] = None
+        if "DaemonAddr" not in d2.keys():
+            d2["DaemonAddr"] = None
+        if "TradingRightsNftId" not in d2.keys():
+            d2["TradingRightsNftId"] = None
 
         return BasegnodeGt(
             GNodeId=d2["GNodeId"],
             Alias=d2["Alias"],
-            DaemonAddr=d2["DaemonAddr"],
-            TradingRightsNftId=d2["TradingRightsNftId"],
             Status=d2["Status"],
             Role=d2["Role"],
             GNodeRegistryAddr=d2["GNodeRegistryAddr"],
@@ -361,6 +359,8 @@ class BasegnodeGt_Maker:
             OwnershipDeedValidatorAddr=d2["OwnershipDeedValidatorAddr"],
             PrevAlias=d2["PrevAlias"],
             OwnerAddr=d2["OwnerAddr"],
+            DaemonAddr=d2["DaemonAddr"],
+            TradingRightsNftId=d2["TradingRightsNftId"],
             TypeName=d2["TypeName"],
             Version="020",
         )
@@ -370,8 +370,6 @@ class BasegnodeGt_Maker:
         s = {
             "g_node_id": t.GNodeId,
             "alias": t.Alias,
-            "daemon_addr": t.DaemonAddr,
-            "trading_rights_nft_id": t.TradingRightsNftId,
             "status": t.Status,
             "role": t.Role,
             "g_node_registry_addr": t.GNodeRegistryAddr,
@@ -380,6 +378,8 @@ class BasegnodeGt_Maker:
             "ownership_deed_validator_addr": t.OwnershipDeedValidatorAddr,
             "prev_alias": t.PrevAlias,
             "owner_addr": t.OwnerAddr,
+            "daemon_addr": t.DaemonAddr,
+            "trading_rights_nft_id": t.TradingRightsNftId,
         }
         if s["g_node_id"] in BaseGNode.by_id.keys():
             dc = BaseGNode.by_id[s["g_node_id"]]
@@ -394,8 +394,6 @@ class BasegnodeGt_Maker:
         t = BasegnodeGt_Maker(
             g_node_id=dc.g_node_id,
             alias=dc.alias,
-            daemon_addr=dc.daemon_addr,
-            trading_rights_nft_id=dc.trading_rights_nft_id,
             status=dc.status,
             role=dc.role,
             g_node_registry_addr=dc.g_node_registry_addr,
@@ -404,6 +402,8 @@ class BasegnodeGt_Maker:
             ownership_deed_validator_addr=dc.ownership_deed_validator_addr,
             prev_alias=dc.prev_alias,
             owner_addr=dc.owner_addr,
+            daemon_addr=dc.daemon_addr,
+            trading_rights_nft_id=dc.trading_rights_nft_id,
         ).tuple
         return t
 

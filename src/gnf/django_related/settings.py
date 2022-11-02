@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import dotenv
+
+import gnf.config as config
+
+
+gnf_settings = config.GnfSettings(_env_file=dotenv.find_dotenv())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +27,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "ii#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
+# SECRET_KEY = "ii#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
+SECRET_KEY = gnf_settings.django.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,7 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_related",
+    "gnf.django_related",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +62,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "django_related.urls"
+ROOT_URLCONF = "gnf.django_related.urls"
 
 TEMPLATES = [
     {
@@ -73,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "django_related.wsgi.application"
+WSGI_APPLICATION = "gnf.django_related.wsgi.application"
 
 
 # Database
@@ -87,7 +94,7 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = [
-    "django_related.db_settings.GnrTestDbRouter",
+    "gnf.django_related.db_settings.GnfTestDbRouter",
 ]
 
 # Password validation

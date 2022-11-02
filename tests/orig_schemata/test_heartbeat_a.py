@@ -1,29 +1,25 @@
-"""Tests create.tatradingrights.algo type, version """
+"""Tests heartbeat.a.100 type"""
 import json
 
 import pytest
-from pydantic import ValidationError
-
-from gnf.errors import SchemaError
-from gnf.schemata import CreateTatradingrightsAlgo
-from gnf.schemata import CreateTatradingrightsAlgo_Maker as Maker
+from errors import SchemaError
+from schemata.heartbeat_a_maker import HeartbeatA_Maker as Maker
 
 
-def test_create_tatradingrights_algo_generated():
+def test_heartbeat_a_generated():
 
-    d = {
-        "TypeName": "create.tatradingrights.algo",
-        "Version": "",
+    gw_dict = {
+        "TypeName": "heartbeat.a.100",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(d)
+        Maker.type_to_tuple(gw_dict)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(d)
+    gw_type = json.dumps(gw_dict)
     gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
@@ -39,11 +35,11 @@ def test_create_tatradingrights_algo_generated():
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = d["TypeName"]
-    del d["TypeName"]
+    orig_value = gw_dict["TypeName"]
+    del gw_dict["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["TypeName"] = orig_value
 
     ######################################
     # SchemaError raised if attributes have incorrect type
@@ -53,7 +49,7 @@ def test_create_tatradingrights_algo_generated():
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    d["TypeName"] = "not the type alias"
+    gw_dict["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = "create.tatradingrights.algo"
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["TypeName"] = "heartbeat.a.100"

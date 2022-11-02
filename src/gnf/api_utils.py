@@ -1,5 +1,8 @@
+import os
+from typing import Dict
 from typing import Optional
 
+import django
 from algosdk import encoding
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
@@ -8,6 +11,26 @@ import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.utils import camel_to_snake
+
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.django_related.settings")
+django.setup()
+from gnf.django_related.models import BaseGNodeDb
+from gnf.schemata import BasegnodeGt_Maker
+
+
+def dict_to_db(d: Dict) -> BaseGNodeDb:
+    gtuple = BasegnodeGt_Maker.dict_to_tuple(d)
+    d = {camel_to_snake(k): v for k, v in d.items()}
+    d["status_value"] = gtuple.Status.value
+    d["role_value"] = gtuple.Role.value
+    del d["status_gt_enum_symbol"]
+    del d["role_gt_enum_symbol"]
+    del d["type_name"]
+    del d["version"]
+    gndb = BaseGNodeDb.objects.create(**d)
+    return gndb
 
 
 def get_discoverer_account_with_admin(

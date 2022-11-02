@@ -299,8 +299,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ctn_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.ConductorTopologyNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.ConductorTopologyNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "gps_point_id": gpsdb.gps_point_id,
         }
@@ -355,8 +355,8 @@ class GNodeFactoryDb:
         parent_alias = ".".join(words[:-1])
         gn = {
             "alias": parent_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.AtomicMeteringNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.AtomicMeteringNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
         }
@@ -495,7 +495,7 @@ class GNodeFactoryDb:
         ctn = BaseGNodeDb.objects.filter(alias=payload.GNodeAlias)[0]
         if ctn.dc.role != CoreGNodeRole.ConductorTopologyNode:
             raise Exception(f"Expected Ctn, got {ctn.dc.role}!")
-        ctn.status = GNodeStatus.Active
+        ctn.status_value = GNodeStatus.Active.value
         ctn.save()
         LOGGER.info(f"Ctn is now Active: {ctn}")
         return ctn
@@ -538,7 +538,7 @@ class GNodeFactoryDb:
         atomic_metering_node = BaseGNodeDb.objects.filter(
             alias=atomic_metering_node_alias
         )[0]
-        atomic_metering_node.status = GNodeStatus.Active
+        atomic_metering_node.status_value = GNodeStatus.Active.value
         atomic_metering_node.save()
 
         gpsdb: GpsPointDb = GpsPointDb(
@@ -548,8 +548,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ta_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.TerminalAsset,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": asset_idx,
             "ownership_deed_validator_addr": payload.DeedValidatorAddr,
@@ -567,7 +567,7 @@ class GNodeFactoryDb:
             return None
         LOGGER.info(f"Pending TerminalAsset created: {terminal_asset}")
 
-        terminal_asset.status = GNodeStatus.Active
+        terminal_asset.status_value = GNodeStatus.Active
         terminal_asset.save()
         LOGGER.info(f"TerminalAsset is now Active: {terminal_asset}")
         return terminal_asset
@@ -591,8 +591,8 @@ class GNodeFactoryDb:
         2-sig [GnfAdmin, TaDaemon, TaOwner] multi.
             - On confirmation, updates the GNodeDb gn:
                 - gn.ownership_deed_nft_id = ta_asset_id
-                - gn.status = Active
-                - gn parent (the AtomicMeteringNode) status = Active
+                - gn.status_value = Active.value
+                - gn parent (the AtomicMeteringNode) status = Active.value
             - Sends a StatusBaseGgnodeAlgo to the correct GNodeREgistry ,
             identified by gn.g_node_registry_addr. Status.TopGNodeAlias = gn parent
             - Returns that StatusBaseGgnodeAlgo payload

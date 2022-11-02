@@ -170,7 +170,7 @@ class </xsl:text><xsl:value-of select="$enum-name"/><xsl:text>SchemaEnum:
     symbols: List[str] = [
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Idx"/>
+    <xsl:sort select="Idx" data-type="number"/>
     <xsl:text>"</xsl:text><xsl:value-of select="Symbol"/><xsl:text>",
         </xsl:text>
 </xsl:for-each>
@@ -189,7 +189,7 @@ class </xsl:text><xsl:value-of select="$enum-name"/>
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-<xsl:sort select="Idx"/>
+<xsl:sort select="Idx" data-type="number"/>
 <xsl:if test="$enum-name-style = 'Upper'">
     <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
 </xsl:if>
@@ -243,7 +243,7 @@ class </xsl:text><xsl:value-of select="$enum-local-name"/><xsl:text>Map:
 
     type_to_versioned_enum_dict: Dict[str, </xsl:text><xsl:value-of select="$enum-name"/><xsl:text>] = {</xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Idx"/>
+    <xsl:sort select="Idx" data-type="number"/>
         <xsl:text>
         "</xsl:text><xsl:value-of select="Symbol"/><xsl:text>": </xsl:text>
         <xsl:value-of select="$enum-name"/><xsl:text>.</xsl:text>
@@ -261,7 +261,7 @@ class </xsl:text><xsl:value-of select="$enum-local-name"/><xsl:text>Map:
     versioned_enum_to_type_dict: Dict[</xsl:text><xsl:value-of select="$enum-name"/><xsl:text>, str] = {
         </xsl:text>
     <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
-    <xsl:sort select="Idx"/>
+    <xsl:sort select="Idx" data-type="number"/>
     <xsl:value-of select="$enum-name"/><xsl:text>.</xsl:text>
     <xsl:if test="$enum-name-style = 'Upper'">
         <xsl:value-of select="translate(translate(LocalValue,'-',''),$lcletters, $ucletters)"/>
@@ -287,7 +287,7 @@ class </xsl:text>
 <xsl:text>(BaseModel):
     </xsl:text>
 <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-<xsl:sort select="Idx"/>
+<xsl:sort select="Idx" data-type="number"/>
 
 <xsl:if test="(IsPrimitive = 'true') and (IsRequired = 'true') and not (IsList = 'true')">
     <xsl:value-of select="Value"/><xsl:text>: </xsl:text>
@@ -377,7 +377,7 @@ class </xsl:text>
 <xsl:text>Version: str = "</xsl:text>
 <xsl:value-of select="SemanticEnd"/><xsl:text>"</xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-    <xsl:sort select="Idx"/>
+    <xsl:sort select="Idx" data-type="number"/>
 
     <xsl:if test="(IsRequired = 'true') and (IsPrimitive='true') and not (IsList='true') and normalize-space(PrimitiveFormat) != ''">
             <xsl:text>
@@ -549,7 +549,7 @@ class </xsl:text>
         d = self.dict()</xsl:text>
 
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:sort select="Idx"/>
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:if test="not (IsRequired = 'true') and (normalize-space(SubTypeDataClass) = '')">
         <xsl:text>
         if d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] is None:
@@ -665,7 +665,7 @@ class </xsl:text>
 
     def __init__(self</xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-    <xsl:sort select="Idx"/>
+    <xsl:sort select="Idx" data-type="number"/>
 
         <xsl:if test="(IsRequired='true') and (IsPrimitive = 'true') and not (IsList = 'true')">
                 <xsl:text>,
@@ -769,7 +769,7 @@ class </xsl:text>
         <xsl:text>(
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:sort select="Idx"/>
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true')">
         <xsl:value-of select="Value"/><xsl:text>=</xsl:text>
         <xsl:call-template name="python-case">
@@ -821,7 +821,7 @@ class </xsl:text>
 <xsl:text>:
         d2 = dict(d)</xsl:text>
 <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-<xsl:sort select="Idx"/>
+<xsl:sort select="Idx" data-type="number"/>
 <xsl:if test="(IsType = 'true') and (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
 <xsl:text>
         if "</xsl:text><xsl:value-of select="Value"/><xsl:text>" not in d2.keys():
@@ -1031,7 +1031,7 @@ class </xsl:text>
         return </xsl:text><xsl:value-of select="$class-name"/><xsl:text>(
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:sort select="Idx"/>
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true') or (normalize-space(SubTypeDataClass) = '') or  (IsList = 'true')">
         <xsl:value-of select="Value"/><xsl:text>=d2["</xsl:text>
         <xsl:value-of select="Value"/><xsl:text>"],
@@ -1057,7 +1057,7 @@ class </xsl:text>
         s = {
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:sort select="Idx"/>
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:if test = "(IsPrimitive = 'true' or IsEnum = 'true')">
             <xsl:text>"</xsl:text>
                 <xsl:call-template name="python-case">
@@ -1093,7 +1093,7 @@ class </xsl:text>
         t = </xsl:text><xsl:value-of select="$class-name"/><xsl:text>_Maker(
             </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:sort select="Idx"/>
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:if test="(IsPrimitive = 'true') or (IsEnum = 'true')">
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />

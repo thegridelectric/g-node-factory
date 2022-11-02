@@ -7,12 +7,12 @@ import gnf.config as config
 import gnf.enums as enums
 import gnf.errors as errors
 import gnf.message as message
-
-# import gnf.load_dev_data as load_dev_data
 import gnf.property_format as property_format
 import gnf.utils as utils
 from gnf.actor_base import ActorBase
-from gnf.python_ta_daemon import PythonTaDaemon
+from gnf.demo_new_ctn import main as demo_new_ctn
+from gnf.demo_new_terminal_asset import main as demo_new_terminal_asset
+from gnf.load_dev_data import main as load_dev_data
 
 
 __all__ = [
@@ -25,8 +25,9 @@ __all__ = [
     "enums",
     "errors",
     "message",
-    # "load_dev_data",
     "property_format",
-    "PythonTaDaemon",
     "utils",
+    "demo_new_terminal_asset",
+    "demo_new_ctn",
+    "load_dev_data",
 ]

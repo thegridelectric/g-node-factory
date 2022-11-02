@@ -1,134 +1,31 @@
-"""Tests transfer.validatorcert.algo.010 type"""
+"""Tests transfer.tavalidatorcert.algo type, version """
 import json
 
 import pytest
-from algosdk import encoding
-from algosdk.future import transaction
-from algosdk.v2client.algod import AlgodClient
+from pydantic import ValidationError
 
-import gnf.algo_utils as algo_utils
-import gnf.api_utils as api_utils
-import gnf.config as config
-import gnf.dev_utils.algo_setup as algo_setup
 from gnf.errors import SchemaError
+from gnf.schemata import TransferTavalidatorcertAlgo
 from gnf.schemata import TransferTavalidatorcertAlgo_Maker as Maker
 
 
-def make_new_test_cert_and_return_asset_idx(
-    client: AlgodClient,
-    test_acct: algo_utils.BasicAccount,
-    gnf_admin: algo_utils.BasicAccount,
-) -> int:
-    multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
-        version=1,
-        threshold=2,
-        addresses=[gnf_admin.addr, test_acct.addr],
-    )
-    if algo_utils.algos(multi.addr) is None:
-        algo_setup.dev_fund_account(
-            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
-        )
-        algo_setup.dev_fund_account(
-            config.Algo(),
-            to_addr=multi.addr,
-            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
-        )
-    elif algo_utils.algos(multi.addr) < 100:
-        algo_setup.dev_fund_account(
-            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
-        )
-        algo_setup.dev_fund_account(
-            config.Algo(),
-            to_addr=multi.addr,
-            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
-        )
+def test_transfer_tavalidatorcert_algo_generated():
 
-    txn = transaction.AssetCreateTxn(
-        sender=multi.address(),
-        total=1,
-        decimals=0,
-        default_frozen=False,
-        manager=gnf_admin.addr,
-        asset_name="Test Validator of nothingness",
-        unit_name="VLDTR",
-        note="witty note",
-        url="http://localhost:5000/testValidator/who-we-are/",
-        sp=client.suggested_params(),
-    )
-
-    mtx = multi.create_mtx(txn)
-    mtx.sign(gnf_admin.sk)
-    mtx.sign(test_acct.sk)
-    response = algo_utils.send_signed_mtx(client=client, mtx=mtx)
-    return response.asset_idx
-
-
-def get_test_half_signed_cert_transfer_mtx(
-    client: AlgodClient,
-    test_acct: algo_utils.BasicAccount,
-    gnf_admin: algo_utils.BasicAccount,
-    asset_idx: int,
-) -> str:
-    multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
-        version=1,
-        threshold=2,
-        addresses=[gnf_admin.addr, test_acct.addr],
-    )
-
-    optInTxn = transaction.AssetOptInTxn(
-        sender=test_acct.addr,
-        index=asset_idx,
-        sp=client.suggested_params(),
-    )
-    signedTxn = optInTxn.sign(test_acct.sk)
-    client.send_transaction(signedTxn)
-    algo_utils.wait_for_transaction(client, signedTxn.get_txid())
-    transferTxn = transaction.AssetTransferTxn(
-        sender=multi.addr,
-        receiver=test_acct.addr,
-        amt=1,
-        index=asset_idx,
-        sp=client.suggested_params(),
-    )
-
-    mtx = multi.create_mtx(transferTxn)
-    mtx.sign(test_acct.sk)
-    return encoding.msgpack_encode(mtx)
-
-
-def test_transfer_validatorcert_algo():
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
-    test_acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
-        "LZlZFgStdj2T0otiJTRezerJhys0isRu4e6AM6fJJCRT03r0ziZrA44MFjjh6i6V2ySSQyRiCwvVzthpxjV7xA=="
-    )
-    gnf_admin: algo_utils.BasicAccount = algo_utils.BasicAccount(
-        config.GnfSettings().admin_acct_sk.get_secret_value()
-    )
-
-    asset_idx = api_utils.get_validator_cert_idx(test_acct.addr)
-    if asset_idx is None:
-        asset_idx = make_new_test_cert_and_return_asset_idx(
-            client, test_acct, gnf_admin
-        )
-
-    testHalfSignedCertTransferMtx = get_test_half_signed_cert_transfer_mtx(
-        client, test_acct, gnf_admin, asset_idx
-    )
-
-    gw_dict = {
-        "ValidatorAddr": test_acct.addr,
-        "HalfSignedCertTransferMtx": testHalfSignedCertTransferMtx,
-        "TypeName": "transfer.tavalidatorcert.algo.010",
+    d = {
+        "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
+        "HalfSignedCertTransferMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+        "TypeName": "transfer.tavalidatorcert.algo",
+        "Version": "",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(gw_dict)
+        Maker.type_to_tuple(d)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(gw_dict)
+    gw_type = json.dumps(d)
     gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
@@ -146,45 +43,45 @@ def test_transfer_validatorcert_algo():
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = gw_dict["TypeName"]
-    del gw_dict["TypeName"]
+    orig_value = d["TypeName"]
+    del d["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = orig_value
 
-    orig_value = gw_dict["ValidatorAddr"]
-    del gw_dict["ValidatorAddr"]
+    orig_value = d["ValidatorAddr"]
+    del d["ValidatorAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
-    orig_value = gw_dict["HalfSignedCertTransferMtx"]
-    del gw_dict["HalfSignedCertTransferMtx"]
+    orig_value = d["HalfSignedCertTransferMtx"]
+    del d["HalfSignedCertTransferMtx"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["HalfSignedCertTransferMtx"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["HalfSignedCertTransferMtx"] = orig_value
 
     ######################################
     # SchemaError raised if attributes have incorrect type
     ######################################
 
-    orig_value = gw_dict["ValidatorAddr"]
-    gw_dict["ValidatorAddr"] = 42
+    orig_value = d["ValidatorAddr"]
+    d["ValidatorAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
-    orig_value = gw_dict["HalfSignedCertTransferMtx"]
-    gw_dict["HalfSignedCertTransferMtx"] = 42
+    orig_value = d["HalfSignedCertTransferMtx"]
+    d["HalfSignedCertTransferMtx"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["HalfSignedCertTransferMtx"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["HalfSignedCertTransferMtx"] = orig_value
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    gw_dict["TypeName"] = "not the type alias"
+    d["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = "transfer.validatorcert.algo.010"
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = "transfer.tavalidatorcert.algo"

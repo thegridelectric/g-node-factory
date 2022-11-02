@@ -1,28 +1,31 @@
-"""Tests create.validatorcert.algo.010 type"""
+"""Tests create.tavalidatorcert.algo type, version """
 import json
 
 import pytest
+from pydantic import ValidationError
 
 from gnf.errors import SchemaError
+from gnf.schemata import CreateTavalidatorcertAlgo
 from gnf.schemata import CreateTavalidatorcertAlgo_Maker as Maker
 
 
-def test_create_validatorcert_algo():
+def test_create_tavalidatorcert_algo_generated():
 
-    gw_dict = {
-        "HalfSignedCertCreationMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCCaszbRc+Y8G+clVkPcnrpfOvDkLUKVB3r+nOM5G4mCaqFzxEAYjou1knNqJfnQ/Hf+9BR5Q3iODO9lLK/k3raQokAGxcmoNYXJvONGUllxbsX2LgdkdA+Zl1C7s8MRKTK1DHQKo3RocgKhdgGjdHhuiKRhcGFyhaJhbq5UZXN0IFZhbGlkYXRvcqJhdbZodHRwOi8vcmFuZG9tLndlYi5wYWdloW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdhKjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQP6o3NuZMQgvbASYXCX0pGddnnNoDyK5A6U3tG4JMsc+ZNdSRlcSzykdHlwZaRhY2Zn",
-        "ValidatorAddr": "TKZTNULT4Y6BXZZFKZB5ZHV2L45PBZBNIKKQO6X6TTRTSG4JQJVB7VKMHU",
-        "TypeName": "create.tavalidatorcert.algo.010",
+    d = {
+        "HalfSignedCertCreationMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+        "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
+        "TypeName": "create.tavalidatorcert.algo",
+        "Version": "",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(gw_dict)
+        Maker.type_to_tuple(d)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(gw_dict)
+    gw_type = json.dumps(d)
     gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
@@ -40,45 +43,45 @@ def test_create_validatorcert_algo():
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = gw_dict["TypeName"]
-    del gw_dict["TypeName"]
+    orig_value = d["TypeName"]
+    del d["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = orig_value
 
-    orig_value = gw_dict["HalfSignedCertCreationMtx"]
-    del gw_dict["HalfSignedCertCreationMtx"]
+    orig_value = d["HalfSignedCertCreationMtx"]
+    del d["HalfSignedCertCreationMtx"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["HalfSignedCertCreationMtx"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["HalfSignedCertCreationMtx"] = orig_value
 
-    orig_value = gw_dict["ValidatorAddr"]
-    del gw_dict["ValidatorAddr"]
+    orig_value = d["ValidatorAddr"]
+    del d["ValidatorAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
     ######################################
     # SchemaError raised if attributes have incorrect type
     ######################################
 
-    orig_value = gw_dict["HalfSignedCertCreationMtx"]
-    gw_dict["HalfSignedCertCreationMtx"] = 42
+    orig_value = d["HalfSignedCertCreationMtx"]
+    d["HalfSignedCertCreationMtx"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["HalfSignedCertCreationMtx"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["HalfSignedCertCreationMtx"] = orig_value
 
-    orig_value = gw_dict["ValidatorAddr"]
-    gw_dict["ValidatorAddr"] = 42
+    orig_value = d["ValidatorAddr"]
+    d["ValidatorAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["ValidatorAddr"] = orig_value
+        Maker.dict_to_tuple(d)
+    d["ValidatorAddr"] = orig_value
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    gw_dict["TypeName"] = "not the type alias"
+    d["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = "create.validatorcert.algo.010"
+        Maker.dict_to_tuple(d)
+    d["TypeName"] = "create.tavalidatorcert.algo"

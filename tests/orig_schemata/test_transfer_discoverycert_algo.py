@@ -1,31 +1,28 @@
-"""Tests transfer.discoverycert.algo type, version """
+"""Tests transfer.discoverycert.algo.001 type"""
 import json
 
 import pytest
-from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TransferDiscoverycertAlgo
 from gnf.schemata import TransferDiscoverycertAlgo_Maker as Maker
 
 
 def test_transfer_discoverycert_algo_generated():
 
-    d = {
+    gw_dict = {
         "GNodeAlias": "d1.isone.ver.keene.pwrs",
         "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
-        "TypeName": "transfer.discoverycert.algo",
-        "Version": "",
+        "TypeName": "transfer.discoverycert.algo.001",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(d)
+        Maker.type_to_tuple(gw_dict)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(d)
+    gw_type = json.dumps(gw_dict)
     gw_tuple = Maker.type_to_tuple(gw_type)
 
     # test type_to_tuple and tuple_to_type maps
@@ -43,56 +40,56 @@ def test_transfer_discoverycert_algo_generated():
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = d["TypeName"]
-    del d["TypeName"]
+    orig_value = gw_dict["TypeName"]
+    del gw_dict["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["TypeName"] = orig_value
 
-    orig_value = d["GNodeAlias"]
-    del d["GNodeAlias"]
+    orig_value = gw_dict["GNodeAlias"]
+    del gw_dict["GNodeAlias"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["GNodeAlias"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["GNodeAlias"] = orig_value
 
-    orig_value = d["DiscovererAddr"]
-    del d["DiscovererAddr"]
+    orig_value = gw_dict["DiscovererAddr"]
+    del gw_dict["DiscovererAddr"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["DiscovererAddr"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["DiscovererAddr"] = orig_value
 
     ######################################
     # SchemaError raised if attributes have incorrect type
     ######################################
 
-    orig_value = d["GNodeAlias"]
-    d["GNodeAlias"] = 42
+    orig_value = gw_dict["GNodeAlias"]
+    gw_dict["GNodeAlias"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["GNodeAlias"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["GNodeAlias"] = orig_value
 
-    orig_value = d["DiscovererAddr"]
-    d["DiscovererAddr"] = 42
+    orig_value = gw_dict["DiscovererAddr"]
+    gw_dict["DiscovererAddr"] = 42
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["DiscovererAddr"] = orig_value
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["DiscovererAddr"] = orig_value
 
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    d["TypeName"] = "not the type alias"
+    gw_dict["TypeName"] = "not the type alias"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["TypeName"] = "transfer.discoverycert.algo"
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["TypeName"] = "transfer.discoverycert.algo.001"
 
     ######################################
     # SchemaError raised if primitive attributes do not have appropriate property_format
     ######################################
 
-    d["GNodeAlias"] = "a.b-h"
+    gw_dict["GNodeAlias"] = "a.b-h"
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["GNodeAlias"] = "d1.isone.ver.keene.pwrs"
+        Maker.dict_to_tuple(gw_dict)
+    gw_dict["GNodeAlias"] = "d1.isone.ver.keene.pwrs"
 
     # End of Test

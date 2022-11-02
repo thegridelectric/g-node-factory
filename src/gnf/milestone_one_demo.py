@@ -9,11 +9,11 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
 import gnf.load_dev_data as load_dev_data
-from gnf import PythonTaDaemon
 from gnf.data_classes import BaseGNode
 from gnf.dev_utils import DevHomeowner
 from gnf.dev_utils import DevValidator
 from gnf.g_node_factory_db import GNodeFactoryDb
+from gnf.python_ta_daemon import PythonTaDaemon
 
 
 pp = pprint.PrettyPrinter(indent=4)
