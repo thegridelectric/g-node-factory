@@ -92,6 +92,33 @@ def version_by_type_name() -> List[str]:
 
     return v
 
+
+def status_by_versioned_type_name() -> List[str]:
+    """
+    Returns:
+        Dict[str, str]: Keys are versioned TypeNames, values are type status
+    """
+
+    v: Dict = {
+        </xsl:text>
+    <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
+    <xsl:sort select="TypeName" data-type="text"/>
+    <xsl:variable name="schema-id" select="Type"/>
+    <xsl:for-each select="$airtable//Schemas/Schema[(SchemaId = $schema-id)  and (Status = 'Active' or Status = 'Pending') and (ProtocolCategory = 'Json' or ProtocolCategory = 'GwAlgoSerial')]">
+
+    <xsl:text>"</xsl:text>
+    <xsl:value-of select="Alias"/>
+    <xsl:text>": "</xsl:text>
+    <xsl:value-of select="Status"/>
+    <xsl:text>",
+        </xsl:text>
+    </xsl:for-each>
+    </xsl:for-each>
+    <xsl:text>
+    }
+
+    return v
+
 </xsl:text>
 
 

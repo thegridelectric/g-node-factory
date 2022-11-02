@@ -1,11 +1,10 @@
-"""Tests tadeed.algo.exchange type, version """
+"""Tests tadeed.algo.exchange type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedAlgoExchange
 from gnf.schemata import TadeedAlgoExchange_Maker as Maker
 
 
@@ -36,12 +35,11 @@ def test_tadeed_algo_exchange_generated():
 
     # test Maker init
     t = Maker(
-        validator_addr=gtuple.ValidatorAddr,
+        ta_daemon_addr=gtuple.TaDaemonAddr,
         ta_owner_addr=gtuple.TaOwnerAddr,
+        validator_addr=gtuple.ValidatorAddr,
         new_ta_deed_idx=gtuple.NewTaDeedIdx,
         old_deed_transfer_mtx=gtuple.OldDeedTransferMtx,
-        ta_daemon_addr=gtuple.TaDaemonAddr,
-        #
     ).tuple
     assert t == gtuple
 

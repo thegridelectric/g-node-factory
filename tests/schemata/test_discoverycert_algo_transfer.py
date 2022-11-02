@@ -1,11 +1,10 @@
-"""Tests discoverycert.algo.transfer type, version """
+"""Tests discoverycert.algo.transfer type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import DiscoverycertAlgoTransfer_Maker as Maker
 
 
@@ -35,7 +34,6 @@ def test_discoverycert_algo_transfer_generated():
     t = Maker(
         g_node_alias=gtuple.GNodeAlias,
         discoverer_addr=gtuple.DiscovererAddr,
-        #
     ).tuple
     assert t == gtuple
 

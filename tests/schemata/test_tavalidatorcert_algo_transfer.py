@@ -1,11 +1,10 @@
-"""Tests tavalidatorcert.algo.transfer type, version """
+"""Tests tavalidatorcert.algo.transfer type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker as Maker
 
 
@@ -35,7 +34,6 @@ def test_tavalidatorcert_algo_transfer_generated():
     t = Maker(
         validator_addr=gtuple.ValidatorAddr,
         half_signed_cert_transfer_mtx=gtuple.HalfSignedCertTransferMtx,
-        #
     ).tuple
     assert t == gtuple
 

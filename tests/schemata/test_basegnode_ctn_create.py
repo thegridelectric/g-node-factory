@@ -1,11 +1,10 @@
-"""Tests basegnode.ctn.create type, version """
+"""Tests basegnode.ctn.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeCtnCreate
 from gnf.schemata import BasegnodeCtnCreate_Maker as Maker
 
 
@@ -38,14 +37,13 @@ def test_basegnode_ctn_create_generated():
 
     # test Maker init
     t = Maker(
-        child_alias_list=gtuple.ChildAliasList,
         from_g_node_alias=gtuple.FromGNodeAlias,
+        from_g_node_instance_id=gtuple.FromGNodeInstanceId,
+        ctn_g_node_alias=gtuple.CtnGNodeAlias,
         micro_lat=gtuple.MicroLat,
         micro_lon=gtuple.MicroLon,
-        ctn_g_node_alias=gtuple.CtnGNodeAlias,
+        child_alias_list=gtuple.ChildAliasList,
         g_node_registry_addr=gtuple.GNodeRegistryAddr,
-        from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-        #
     ).tuple
     assert t == gtuple
 

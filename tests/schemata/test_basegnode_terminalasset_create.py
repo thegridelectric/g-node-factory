@@ -1,11 +1,10 @@
-"""Tests basegnode.terminalasset.create type, version """
+"""Tests basegnode.terminalasset.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeTerminalassetCreate
 from gnf.schemata import BasegnodeTerminalassetCreate_Maker as Maker
 
 
@@ -47,7 +46,6 @@ def test_basegnode_terminalasset_create_generated():
         g_node_registry_addr=gtuple.GNodeRegistryAddr,
         from_g_node_instance_id=gtuple.FromGNodeInstanceId,
         from_g_node_alias=gtuple.FromGNodeAlias,
-        #
     ).tuple
     assert t == gtuple
 

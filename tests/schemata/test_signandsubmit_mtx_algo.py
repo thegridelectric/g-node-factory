@@ -1,11 +1,10 @@
-"""Tests signandsubmit.mtx.algo type, version """
+"""Tests signandsubmit.mtx.algo type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import SignandsubmitMtxAlgo
 from gnf.schemata import SignandsubmitMtxAlgo_Maker as Maker
 
 
@@ -39,11 +38,10 @@ def test_signandsubmit_mtx_algo_generated():
 
     # test Maker init
     t = Maker(
-        signer_address=gtuple.SignerAddress,
         mtx=gtuple.Mtx,
         addresses=gtuple.Addresses,
         threshold=gtuple.Threshold,
-        #
+        signer_address=gtuple.SignerAddress,
     ).tuple
     assert t == gtuple
 

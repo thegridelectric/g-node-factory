@@ -1,11 +1,10 @@
-"""Tests tadeed.algo.transfer type, version """
+"""Tests tadeed.algo.transfer type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedAlgoTransfer
 from gnf.schemata import TadeedAlgoTransfer_Maker as Maker
 
 
@@ -43,7 +42,6 @@ def test_tadeed_algo_transfer_generated():
         ta_daemon_addr=gtuple.TaDaemonAddr,
         ta_owner_addr=gtuple.TaOwnerAddr,
         micro_lon=gtuple.MicroLon,
-        #
     ).tuple
     assert t == gtuple
 

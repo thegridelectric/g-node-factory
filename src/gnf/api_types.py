@@ -74,3 +74,33 @@ def version_by_type_name() -> List[str]:
     }
 
     return v
+
+
+def status_by_versioned_type_name() -> List[str]:
+    """
+    Returns:
+        Dict[str, str]: Keys are versioned TypeNames, values are type status
+    """
+
+    v: Dict = {
+        "basegnode.ctn.create.000": "Pending",
+        "basegnode.gt.000": "Pending",
+        "basegnode.marketmaker.create.000": "Pending",
+        "basegnode.other.create.000": "Pending",
+        "basegnode.terminalasset.create.000": "Pending",
+        "basegnodes.broadcast.000": "Pending",
+        "basegnodes.get.000": "Pending",
+        "discoverycert.algo.create.000": "Pending",
+        "discoverycert.algo.transfer.000": "Pending",
+        "heartbeat.a.000": "Pending",
+        "optin.tadeed.algo.000": "Pending",
+        "signandsubmit.mtx.algo.000": "Pending",
+        "tadeed.algo.create.000": "Pending",
+        "tadeed.algo.exchange.000": "Pending",
+        "tadeed.algo.transfer.000": "Pending",
+        "tatradingrights.algo.create.000": "Pending",
+        "tavalidatorcert.algo.create.000": "Pending",
+        "tavalidatorcert.algo.transfer.000": "Pending",
+    }
+
+    return v

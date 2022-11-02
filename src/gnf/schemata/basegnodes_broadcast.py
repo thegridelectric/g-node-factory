@@ -47,6 +47,7 @@ class BasegnodesBroadcast(BaseModel):
 
     def as_dict(self) -> Dict:
         d = self.dict()
+        d["TopGNode"] = self.TopGNode.as_dict()
 
         # Recursively call as_dict() for the SubTypes
         descendant_g_node_list = []

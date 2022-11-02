@@ -1,11 +1,10 @@
-"""Tests tavalidatorcert.algo.create type, version """
+"""Tests tavalidatorcert.algo.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker as Maker
 
 
@@ -33,9 +32,8 @@ def test_tavalidatorcert_algo_create_generated():
 
     # test Maker init
     t = Maker(
-        half_signed_cert_creation_mtx=gtuple.HalfSignedCertCreationMtx,
         validator_addr=gtuple.ValidatorAddr,
-        #
+        half_signed_cert_creation_mtx=gtuple.HalfSignedCertCreationMtx,
     ).tuple
     assert t == gtuple
 

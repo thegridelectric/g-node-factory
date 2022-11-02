@@ -33,6 +33,16 @@
                             <xsl:with-param name="camel-case-text" select="translate(DataClass,'.','_')"  />
                         </xsl:call-template>
                     </xsl:variable>
+                    <xsl:variable name="overwrite-mode">
+
+                    <xsl:if test="not (Status = 'Pending')">
+                    <xsl:text>Never</xsl:text>
+                    </xsl:if>
+                    <xsl:if test="(Status = 'Pending')">
+                    <xsl:text>Always</xsl:text>
+                    </xsl:if>
+                    </xsl:variable>
+
                     <xsl:variable name="data-class-id">
                         <xsl:call-template name="python-case">
                             <xsl:with-param name="camel-case-text" select="translate(DataClassIdField,'.','_')"  />
@@ -42,7 +52,7 @@
                                 <xsl:element name="RelativePath"><xsl:text>../../../src/gnf/schemata/</xsl:text>
                                 <xsl:value-of select="translate($local-alias,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
 
-                        <OverwriteMode>Always</OverwriteMode>
+                        <OverwriteMode><xsl:value-of select="$overwrite-mode"/></OverwriteMode>
                         <xsl:element name="FileContents">
 
 
@@ -546,16 +556,15 @@ class </xsl:text>
 
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
         <xsl:sort select="Idx" data-type="number"/>
-        <xsl:if test="not (IsRequired = 'true') and (normalize-space(SubTypeDataClass) = '')">
+
+        <xsl:if test="(IsType = 'true') and not (IsList = 'true')">
         <xsl:text>
-        if d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] is None:
-            del d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"]</xsl:text>
-    </xsl:if>
-    <xsl:if test="not (IsRequired = 'true') and not (normalize-space(SubTypeDataClass) = '')">
-        <xsl:text>
-        if d["</xsl:text><xsl:value-of select="Value"/><xsl:text>Id"] is None:
-            del d["</xsl:text><xsl:value-of select="Value"/><xsl:text>Id"]</xsl:text>
-    </xsl:if>
+        d["</xsl:text>
+            <xsl:value-of select="Value"/>
+            <xsl:text>"] = self.</xsl:text>
+            <xsl:value-of select="Value"/>
+            <xsl:text>.as_dict()</xsl:text>
+        </xsl:if>
 
     <xsl:if test="(IsEnum = 'true')">
 
@@ -611,15 +620,6 @@ class </xsl:text>
     </xsl:if>
 
 
-    <xsl:if test="(IsType = 'true') and  (normalize-space(SubTypeDataClass) = '') and not (IsList = 'true')">
-        <xsl:text>
-        d["</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>"] = self.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>.as_dict()</xsl:text>
-        </xsl:if>
-
     <xsl:if test="(IsType = 'true') and (IsList = 'true')">
         <xsl:text>
 
@@ -643,6 +643,12 @@ class </xsl:text>
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template>
+    </xsl:if>
+
+    <xsl:if test="not (IsRequired = 'true')">
+        <xsl:text>
+        if d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] is None:
+            del d["</xsl:text><xsl:value-of select="Value"/><xsl:text>"]</xsl:text>
     </xsl:if>
 
     </xsl:for-each>

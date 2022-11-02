@@ -1,4 +1,4 @@
-"""Tests discoverycert.algo.create type, version """
+"""Tests discoverycert.algo.create type, version 000"""
 import json
 
 import pytest
@@ -6,14 +6,13 @@ from pydantic import ValidationError
 
 from gnf.enums import CoreGNodeRole
 from gnf.errors import SchemaError
-from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import DiscoverycertAlgoCreate_Maker as Maker
 
 
 def test_discoverycert_algo_create_generated():
 
     d = {
-        "GNodeAlias": d1.isone.ver.keene,
+        "GNodeAlias": "d1.isone.ver.keene",
         "CoreGNodeRoleGtEnumSymbol": "4502e355",
         "OldChildAliasList": ["d1.isone.ver.keene.holly"],
         "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
@@ -39,14 +38,13 @@ def test_discoverycert_algo_create_generated():
 
     # test Maker init
     t = Maker(
-        old_child_alias_list=gtuple.OldChildAliasList,
         g_node_alias=gtuple.GNodeAlias,
         core_g_node_role=gtuple.CoreGNodeRole,
+        old_child_alias_list=gtuple.OldChildAliasList,
         discoverer_addr=gtuple.DiscovererAddr,
-        micro_lon=gtuple.MicroLon,
         supporting_material_hash=gtuple.SupportingMaterialHash,
         micro_lat=gtuple.MicroLat,
-        #
+        micro_lon=gtuple.MicroLon,
     ).tuple
     assert t == gtuple
 

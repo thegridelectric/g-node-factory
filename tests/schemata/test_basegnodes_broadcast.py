@@ -1,11 +1,10 @@
-"""Tests basegnodes.broadcast type, version """
+"""Tests basegnodes.broadcast type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodesBroadcast
 from gnf.schemata import BasegnodesBroadcast_Maker as Maker
 
 
@@ -64,13 +63,12 @@ def test_basegnodes_broadcast_generated():
 
     # test Maker init
     t = Maker(
-        include_all_descendants=gtuple.IncludeAllDescendants,
-        descendant_g_node_list_id=gtuple.DescendantGNodeListId,
         from_g_node_alias=gtuple.FromGNodeAlias,
         from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-        top_g_node_id=gtuple.TopGNodeId,
         to_g_node_alias=gtuple.ToGNodeAlias,
-        #
+        include_all_descendants=gtuple.IncludeAllDescendants,
+        top_g_node=gtuple.TopGNode,
+        descendant_g_node_list=gtuple.DescendantGNodeList,
     ).tuple
     assert t == gtuple
 
@@ -104,7 +102,7 @@ def test_basegnodes_broadcast_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TopGNodeId"]
+    del d2["TopGNode"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -121,41 +119,17 @@ def test_basegnodes_broadcast_generated():
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    orig_value = d["DescendantGNodeList"]
-    d["DescendantGNodeList"] = "Not a list."
+    d2 = dict(d, DescendantGNodeList="Not a list.")
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["DescendantGNodeList"] = orig_value
+        Maker.dict_to_tuple(d2)
 
-    orig_value = d["DescendantGNodeList"]
-    d["DescendantGNodeList"] = ["Not even a dict"]
+    d2 = dict(d, DescendantGNodeList=["Not a list of dicts"])
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
+        Maker.dict_to_tuple(d2)
 
-    d["DescendantGNodeList"] = [{"Failed": "Not a GtSimpleSingleStatus"}]
+    d2 = dict(d, DescendantGNodeList=[{"Failed": "Not a GtSimpleSingleStatus"}])
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d)
-    d["DescendantGNodeList"] = orig_value
-
-    with pytest.raises(SchemaError):
-        Maker(
-            include_all_descendants=d["IncludeAllDescendants"],
-            from_g_node_alias=d["FromGNodeAlias"],
-            from_g_node_instance_id=d["FromGNodeInstanceId"],
-            top_g_node=d["TopGNode"],
-            to_g_node_alias=d["ToGNodeAlias"],
-            descendant_g_node_list=["Not a BasegnodeGt010"],
-        )
-
-    with pytest.raises(SchemaError):
-        Maker(
-            include_all_descendants=gtuple.IncludeAllDescendants,
-            from_g_node_alias=gtuple.FromGNodeAlias,
-            from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-            top_g_node=gtuple.TopGNode,
-            to_g_node_alias=gtuple.ToGNodeAlias,
-            descendant_g_node_list="This string is not a list",
-        )
+        Maker.dict_to_tuple(d2)
 
     ######################################
     # SchemaError raised if TypeName is incorrect

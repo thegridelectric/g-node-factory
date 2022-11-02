@@ -1,11 +1,10 @@
-"""Tests basegnode.other.create type, version """
+"""Tests basegnode.other.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeOtherCreate
 from gnf.schemata import BasegnodeOtherCreate_Maker as Maker
 
 
@@ -30,9 +29,7 @@ def test_basegnode_other_create_generated():
     assert Maker.type_to_tuple(Maker.tuple_to_type(gtuple)) == gtuple
 
     # test Maker init
-    t = Maker(
-        #
-    ).tuple
+    t = Maker().tuple
     assert t == gtuple
 
     ######################################

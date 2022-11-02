@@ -1,4 +1,4 @@
-"""Tests basegnode.gt type, version """
+"""Tests basegnode.gt type, version 000"""
 import json
 
 import pytest
@@ -7,7 +7,6 @@ from pydantic import ValidationError
 from gnf.enums import CoreGNodeRole
 from gnf.enums import GNodeStatus
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeGt
 from gnf.schemata import BasegnodeGt_Maker as Maker
 
 
@@ -45,19 +44,18 @@ def test_basegnode_gt_generated():
 
     # test Maker init
     t = Maker(
-        status=gtuple.Status,
-        g_node_registry_addr=gtuple.GNodeRegistryAddr,
-        role=gtuple.Role,
-        prev_alias=gtuple.PrevAlias,
-        trading_rights_nft_id=gtuple.TradingRightsNftId,
-        ownership_deed_validator_addr=gtuple.OwnershipDeedValidatorAddr,
-        alias=gtuple.Alias,
         g_node_id=gtuple.GNodeId,
+        alias=gtuple.Alias,
+        status=gtuple.Status,
+        role=gtuple.Role,
+        g_node_registry_addr=gtuple.GNodeRegistryAddr,
+        gps_point_id=gtuple.GpsPointId,
         ownership_deed_nft_id=gtuple.OwnershipDeedNftId,
+        ownership_deed_validator_addr=gtuple.OwnershipDeedValidatorAddr,
+        prev_alias=gtuple.PrevAlias,
         owner_addr=gtuple.OwnerAddr,
         daemon_addr=gtuple.DaemonAddr,
-        gps_point_id=gtuple.GpsPointId,
-        #
+        trading_rights_nft_id=gtuple.TradingRightsNftId,
     ).tuple
     assert t == gtuple
 

@@ -1,11 +1,10 @@
-"""Tests tadeed.algo.create type, version """
+"""Tests tadeed.algo.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedAlgoCreate
 from gnf.schemata import TadeedAlgoCreate_Maker as Maker
 
 
@@ -35,7 +34,6 @@ def test_tadeed_algo_create_generated():
     t = Maker(
         validator_addr=gtuple.ValidatorAddr,
         half_signed_deed_creation_mtx=gtuple.HalfSignedDeedCreationMtx,
-        #
     ).tuple
     assert t == gtuple
 

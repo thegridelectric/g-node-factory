@@ -1,11 +1,10 @@
-"""Tests optin.tadeed.algo type, version """
+"""Tests optin.tadeed.algo type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import OptinTadeedAlgo_Maker as Maker
 
 
@@ -35,11 +34,10 @@ def test_optin_tadeed_algo_generated():
 
     # test Maker init
     t = Maker(
+        ta_daemon_addr=gtuple.TaDaemonAddr,
+        ta_owner_addr=gtuple.TaOwnerAddr,
         validator_addr=gtuple.ValidatorAddr,
         new_deed_opt_in_mtx=gtuple.NewDeedOptInMtx,
-        ta_owner_addr=gtuple.TaOwnerAddr,
-        ta_daemon_addr=gtuple.TaDaemonAddr,
-        #
     ).tuple
     assert t == gtuple
 
