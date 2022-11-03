@@ -15,7 +15,7 @@ logging.basicConfig(level="INFO")
 def main():
     molly_addr = config.SandboxDemo().molly_metermaid_addr
 
-    gnf = GNodeFactoryDb(config.GnfSettings())
+    factory = GNodeFactoryDb(config.GnfSettings())
 
     python_ta_daemon = PythonTaDaemon(
         sk=config.HollyTaDaemonSettings().sk.get_secret_value(),
@@ -35,11 +35,13 @@ def main():
         micro_lat=config.AdaDiscovererSettings().micro_lat,
     ).tuple
 
-    optin_payload = gnf.create_discoverycertificate_received(payload)
+    optin_payload = factory.create_discoverycertificate_received(payload)
 
     python_ta_daemon.optin_tadeed_algo_received(optin_payload)
 
-    created_assets = gnf.client.account_info(gnf.admin_account.addr)["created-assets"]
+    created_assets = factory.client.account_info(factory.admin_account.addr)[
+        "created-assets"
+    ]
     ta_deeds = list(
         filter(lambda x: x["params"]["unit-name"] == "TADEED", created_assets)
     )
@@ -54,7 +56,7 @@ def main():
         "d1.isone.ver.keene.holly.ta", molly_addr
     )
 
-    exchange_payload = gnf.generate_exchange_tadeed_algo(
+    exchange_payload = factory.generate_exchange_tadeed_algo(
         old_ta_deed_idx=old_ta_deed_idx,
         new_ta_deed_idx=new_ta_deed_idx,
         validator_addr=molly_addr,
@@ -68,7 +70,7 @@ def main():
 
     python_ta_daemon.client.account_info(python_ta_daemon.ta_multi.addr)
 
-    python_ta_daemon.client.account_info(gnf.admin_account.addr)
+    python_ta_daemon.client.account_info(factory.admin_account.addr)
 
 
 if __name__ == "__main__":

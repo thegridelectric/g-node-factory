@@ -86,10 +86,17 @@ class BaseGNodeDb(models.Model):
             for key in self._meta.fields
             if (not key.is_relation and key.name != "id" and key.name != "_old_attrs")
         }
-        if d["g_node_id"] in BaseGNode.by_id.keys():
-            return BaseGNode.by_id[d["g_node_id"]]
+        dc_d = dict(
+            d,
+            status=GNodeStatus(d["status_value"]),
+            role=CoreGNodeRole(d["role_value"]),
+        )
+        del dc_d["status_value"]
+        del dc_d["role_value"]
+        if dc_d["g_node_id"] in BaseGNode.by_id.keys():
+            return BaseGNode.by_id[dc_d["g_node_id"]]
         else:
-            return BaseGNode(**d)
+            return BaseGNode(**dc_d)
 
     def save(self, *args, **kwargs):
         d = {
