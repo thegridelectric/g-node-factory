@@ -134,8 +134,9 @@ class GNodeFactoryDb:
 
     def generate_optin_tadeed_algo(
         self,
-        new_ta_deed_idx: int,
         ta_daemon_addr: str,
+        new_ta_deed_idx: int,
+        validator_addr: str,
     ) -> OptinTadeedAlgo:
 
         payload = OptinTadeedAlgo_Maker(
