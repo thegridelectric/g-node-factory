@@ -35,7 +35,7 @@ def main():
         micro_lat=config.AdaDiscovererSettings().micro_lat,
     ).tuple
 
-    optin_payload = gnf.create_discoverycertificate_received(payload)
+    optin_payload = gnf.discoverycert_algo_create_received(payload)
 
     python_ta_daemon.optin_tadeed_algo_received(optin_payload)
 
@@ -53,6 +53,9 @@ def main():
     old_ta_deed_idx = api_utils.get_tadeed_cert_idx(
         "d1.isone.ver.keene.holly.ta", molly_addr
     )
+
+    print(f"old_ta_deed_idx is {old_ta_deed_idx}")
+    print(f"new_ta_deed_idx is {new_ta_deed_idx}")
 
     exchange_payload = gnf.generate_exchange_tadeed_algo(
         old_ta_deed_idx=old_ta_deed_idx,

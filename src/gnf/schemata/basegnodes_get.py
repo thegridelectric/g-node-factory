@@ -5,12 +5,30 @@ from typing import Literal
 
 from pydantic import BaseModel
 
+import gnf.property_format as property_format
 from gnf.errors import SchemaError
+from gnf.property_format import predicate_validator
 
 
 class BasegnodesGet(BaseModel):
+    TopGNodeAlias: str  #
+    IncludeAllDescendants: bool  #
+    FromGNodeAlias: str  #
+    FromGNodeInstanceId: str  #
     TypeName: Literal["basegnodes.get"] = "basegnodes.get"
     Version: str = "000"
+
+    _validator_top_g_node_alias = predicate_validator(
+        "TopGNodeAlias", property_format.is_lrd_alias_format
+    )
+
+    _validator_from_g_node_alias = predicate_validator(
+        "FromGNodeAlias", property_format.is_lrd_alias_format
+    )
+
+    _validator_from_g_node_instance_id = predicate_validator(
+        "FromGNodeInstanceId", property_format.is_uuid_canonical_textual
+    )
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -24,9 +42,19 @@ class BasegnodesGet_Maker:
     type_name = "basegnodes.get"
     version = "000"
 
-    def __init__(self):
+    def __init__(
+        self,
+        top_g_node_alias: str,
+        include_all_descendants: bool,
+        from_g_node_alias: str,
+        from_g_node_instance_id: str,
+    ):
 
         self.tuple = BasegnodesGet(
+            TopGNodeAlias=top_g_node_alias,
+            IncludeAllDescendants=include_all_descendants,
+            FromGNodeAlias=from_g_node_alias,
+            FromGNodeInstanceId=from_g_node_instance_id,
             #
         )
 
@@ -47,10 +75,22 @@ class BasegnodesGet_Maker:
     @classmethod
     def dict_to_tuple(cls, d: dict) -> BasegnodesGet:
         d2 = dict(d)
+        if "TopGNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TopGNodeAlias")
+        if "IncludeAllDescendants" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing IncludeAllDescendants")
+        if "FromGNodeAlias" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing FromGNodeAlias")
+        if "FromGNodeInstanceId" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing FromGNodeInstanceId")
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
         return BasegnodesGet(
+            TopGNodeAlias=d2["TopGNodeAlias"],
+            IncludeAllDescendants=d2["IncludeAllDescendants"],
+            FromGNodeAlias=d2["FromGNodeAlias"],
+            FromGNodeInstanceId=d2["FromGNodeInstanceId"],
             TypeName=d2["TypeName"],
             Version="000",
         )

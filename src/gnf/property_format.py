@@ -17,7 +17,7 @@ def predicate_validator(
             if error_format:
                 err_str = error_format.format(value=v)
             else:
-                err_str = f"Failure of predicate on [{v}] with predicate {predicate}"
+                err_str = f"{field_name}: {predicate} fails for [{v}]"
             raise ValueError(err_str)
         return v
 
@@ -241,9 +241,37 @@ def is_lru_alias_format(candidate: str) -> bool:
         x = candidate.split("_")
     except:
         return False
+    first_word = x[0]
+    first_char = first_word[0]
+    if not first_char.isalpha():
+        return False
     for word in x:
         if not word.isalnum():
             return False
+    if not candidate.islower():
+        return False
+    return True
+
+
+def is_lrh_alias_format(candidate: str) -> bool:
+    """AlphanumericStrings separated by hyphens, with most
+    significant word to the left.  I.e. `dw1.ne` is the child of `dw1`.
+    Checking the format cannot verify the significance of words. All
+    words must be alphanumeric. Most significant word must start with
+    an alphabet charecter"""
+    try:
+        x = candidate.split("-")
+    except:
+        return False
+    first_word = x[0]
+    first_char = first_word[0]
+    if not first_char.isalpha():
+        return False
+    for word in x:
+        if not word.isalnum():
+            return False
+    if not candidate.islower():
+        return False
     return True
 
 

@@ -167,7 +167,10 @@ class GNodeFactoryDb:
         ta_owner_addr: str,
         ta_daemon_addr: str,
     ) -> TadeedAlgoExchange:
-
+        if new_ta_deed_idx is None:
+            raise Exception(f"new_ta_deed_idx is None!")
+        if old_ta_deed_idx is None:
+            raise Exception(f"old_ta_deed_idx is None!")
         ta_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -323,7 +326,7 @@ class GNodeFactoryDb:
             )
         return opt_in_payload
 
-    def create_discoverycertificate_received(
+    def discoverycert_algo_create_received(
         self, payload: DiscoverycertAlgoCreate
     ) -> Optional[OptinTadeedAlgo]:
         if not isinstance(payload, DiscoverycertAlgoCreate):
