@@ -5,6 +5,7 @@ import logging
 from typing import Optional
 
 from algosdk import encoding
+from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 
 import gnf.algo_utils as algo_utils
@@ -99,30 +100,24 @@ class PythonTaDaemon:
 
     def optin_tadeed_algo_received(self, payload: OptinTadeedAlgo):
         """
-        Checks that the sender is ta_multi. Remaining checks (e.g., it is an AssetTransfer
-        that was signed by one sender) occur in OptinTadeedAlgo.
-
-        Then signs and submits the Optin mtx, which opts into a new ta_deed
-        for the ta_multi account.
+        Checks that payload.NewDeedIdx is a TaDeed
 
         Args:
             payload: OptinTadeedAlgo
         """
-        mtx = encoding.future_msgpack_decode(payload.NewDeedOptInMtx)
-        sender_addr = mtx.multisig.address()
-        if sender_addr != self.ta_multi.addr:
-            LOGGER.warning(
-                f"sender_addr ..{sender_addr[-6:]} does not match ta_multi "
-                f".. {self.ta_multi.addr[-6:0]}. Ignoring."
-            )
-            return
-        mtx.sign(self.acct.sk)
+        # TODO: check that payload.NewDeedIdx is a TaDeed
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=payload.NewDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+
+        signed_txn = txn.sign(self.acct.sk)
         try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
+            tx_id = self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        # r = algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
     def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
         """

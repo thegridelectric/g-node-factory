@@ -135,11 +135,11 @@ class TadeedAlgoExchange(BaseModel):
         return v
 
     @root_validator
-    def _axiom_7(cls, v) -> Any:
+    def _axiom_7(cls, v: Any) -> Any:
         """Axiom 7 (TaDeed order): The asset index of the new deed must be greater than the
         asset index of the old deed"""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
-        NewTaDeedIdx = v.get("NewTaDeedIdx:")
+        NewTaDeedIdx = v.get("NewTaDeedIdx")
         txn = mtx.transaction
         old_ta_deed_idx = txn.index
         if old_ta_deed_idx > NewTaDeedIdx:

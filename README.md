@@ -32,10 +32,13 @@ This repo has been developed through the generous funding of a grant provided by
 2. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory:
 
 ```
-./sandbox up
+./sandbox up dev
 ```
 
-This starts up a local blockchain on your computer. It can take a couple of minutes.
+This starts up a local blockchain on your computer. It can take a couple of minutes for the
+initial setup.
+
+**note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
 
 3. Set up your python environment (IMPROVE)
 

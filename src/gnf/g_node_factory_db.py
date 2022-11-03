@@ -135,27 +135,12 @@ class GNodeFactoryDb:
     def generate_optin_tadeed_algo(
         self,
         new_ta_deed_idx: int,
-        validator_addr: str,
-        ta_owner_addr: str,
         ta_daemon_addr: str,
     ) -> OptinTadeedAlgo:
-        ta_multi = MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[self.admin_account.addr, ta_daemon_addr, ta_owner_addr],
-        )
-        txn = transaction.AssetOptInTxn(
-            sender=ta_multi.addr,
-            index=new_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
-        mtx = ta_multi.create_mtx(txn)
-        mtx.sign(self.admin_account.sk)
+
         payload = OptinTadeedAlgo_Maker(
-            validator_addr=validator_addr,
-            ta_owner_addr=ta_owner_addr,
             ta_daemon_addr=ta_daemon_addr,
-            new_deed_opt_in_mtx=encoding.msgpack_encode(mtx),
+            new_deed_idx=new_ta_deed_idx,
         ).tuple
         return payload
 
@@ -277,8 +262,6 @@ class GNodeFactoryDb:
             new_ta_deed_idx = self.create_updated_ta_deed(g_node)
             payload_hack = self.generate_optin_tadeed_algo(
                 new_ta_deed_idx=new_ta_deed_idx,
-                validator_addr=g_node.ownership_deed_validator_addr,
-                ta_owner_addr=g_node.owner_addr,
                 ta_daemon_addr=g_node.daemon_addr,
             )
             LOGGER.debug(f"Creating payload_hack: {payload_hack}")
