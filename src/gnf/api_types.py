@@ -12,11 +12,12 @@ from gnf.schemata import BasegnodeTerminalassetCreate_Maker
 from gnf.schemata import DiscoverycertAlgoCreate_Maker
 from gnf.schemata import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata import HeartbeatA_Maker
-from gnf.schemata import OptinTadeedAlgo_Maker
-from gnf.schemata import SignandsubmitMtxAlgo_Maker
-from gnf.schemata import TadeedAlgoCreate_Maker
-from gnf.schemata import TadeedAlgoExchange_Maker
-from gnf.schemata import TadeedAlgoTransfer_Maker
+from gnf.schemata import InitialTadeedAlgoCreate_Maker
+from gnf.schemata import InitialTadeedAlgoOptin_Maker
+from gnf.schemata import InitialTadeedAlgoTransfer_Maker
+from gnf.schemata import NewTadeedAlgoOptin_Maker
+from gnf.schemata import NewTadeedSend_Maker
+from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
@@ -35,11 +36,12 @@ type_makers: List[HeartbeatA_Maker] = [
     DiscoverycertAlgoCreate_Maker,
     DiscoverycertAlgoTransfer_Maker,
     HeartbeatA_Maker,
-    OptinTadeedAlgo_Maker,
-    SignandsubmitMtxAlgo_Maker,
-    TadeedAlgoCreate_Maker,
-    TadeedAlgoExchange_Maker,
-    TadeedAlgoTransfer_Maker,
+    InitialTadeedAlgoCreate_Maker,
+    InitialTadeedAlgoOptin_Maker,
+    InitialTadeedAlgoTransfer_Maker,
+    NewTadeedAlgoOptin_Maker,
+    NewTadeedSend_Maker,
+    OldTadeedAlgoReturn_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
     TavalidatorcertAlgoTransfer_Maker,
@@ -63,11 +65,12 @@ def version_by_type_name() -> List[str]:
         "discoverycert.algo.create": "000",
         "discoverycert.algo.transfer": "000",
         "heartbeat.a": "000",
-        "optin.tadeed.algo": "000",
-        "signandsubmit.mtx.algo": "000",
-        "tadeed.algo.create": "000",
-        "tadeed.algo.exchange": "000",
-        "tadeed.algo.transfer": "000",
+        "initial.tadeed.algo.create": "000",
+        "initial.tadeed.algo.optin": "000",
+        "initial.tadeed.algo.transfer": "000",
+        "new.tadeed.algo.optin": "000",
+        "new.tadeed.send": "000",
+        "old.tadeed.algo.return": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
         "tavalidatorcert.algo.transfer": "000",
@@ -93,11 +96,12 @@ def status_by_versioned_type_name() -> List[str]:
         "discoverycert.algo.create.000": "Active",
         "discoverycert.algo.transfer.000": "Active",
         "heartbeat.a.000": "Active",
-        "optin.tadeed.algo.000": "Active",
-        "signandsubmit.mtx.algo.000": "Active",
-        "tadeed.algo.create.000": "Active",
-        "tadeed.algo.exchange.000": "Active",
-        "tadeed.algo.transfer.000": "Active",
+        "initial.tadeed.algo.create.000": "Active",
+        "initial.tadeed.algo.optin.000": "Active",
+        "initial.tadeed.algo.transfer.000": "Pending",
+        "new.tadeed.algo.optin.000": "Pending",
+        "new.tadeed.send.000": "Pending",
+        "old.tadeed.algo.return.000": "Pending",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",
         "tavalidatorcert.algo.transfer.000": "Active",

@@ -35,9 +35,11 @@ def main():
         micro_lat=config.AdaDiscovererSettings().micro_lat,
     ).tuple
 
-    optin_payload = factory.create_discoverycertificate_received(payload)
+    optin_payload = factory.discoverycert_algo_create_received(payload)
 
-    python_ta_daemon.optin_tadeed_algo_received(optin_payload)
+    send_payload = python_ta_daemon.new_tadeed_algo_optin_received(optin_payload)
+    return_payload = factory.new_tadeed_send_received(send_payload)
+    python_ta_daemon.old_tadeed_algo_return_received(return_payload)
 
     created_assets = factory.client.account_info(factory.admin_account.addr)[
         "created-assets"
@@ -51,24 +53,10 @@ def main():
             ta_deeds,
         )
     )
-    new_ta_deed_idx = new_ta_deed[0]["index"]
-    old_ta_deed_idx = api_utils.get_tadeed_cert_idx(
-        "d1.isone.ver.keene.holly.ta", molly_addr
-    )
-
-    exchange_payload = factory.generate_exchange_tadeed_algo(
-        old_ta_deed_idx=old_ta_deed_idx,
-        new_ta_deed_idx=new_ta_deed_idx,
-        validator_addr=molly_addr,
-        ta_owner_addr=python_ta_daemon.ta_owner_addr,
-        ta_daemon_addr=python_ta_daemon.acct.addr,
-    )
-
-    python_ta_daemon.exchange_tadeed_algo_received(exchange_payload)
 
     # To check that the deeds are in the correct place:
 
-    python_ta_daemon.client.account_info(python_ta_daemon.ta_multi.addr)
+    python_ta_daemon.client.account_info(python_ta_daemon.acct.addr)
 
     python_ta_daemon.client.account_info(factory.admin_account.addr)
 

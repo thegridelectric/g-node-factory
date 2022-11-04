@@ -1,19 +1,19 @@
-"""Tests tadeed.algo.create type, version 000"""
+"""Tests initial.tadeed.algo.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedAlgoCreate_Maker as Maker
+from gnf.schemata import InitialTadeedAlgoCreate_Maker as Maker
 
 
-def test_tadeed_algo_create_generated():
+def test_initial_tadeed_algo_create_generated():
 
     d = {
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "HalfSignedDeedCreationMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEA1Eb0A46T2R1Aym2+hIv+Bhf8b1POzeGd51noXYPYXd+7slYtEJ8W1qvOo3c0LzVIC5kPyU1Ud2Af0e5yKsMcHo3RocgKhdgGjdHhuiKRhcGFyhKJhbrRkdzEuaXNvLm1lLm9yYW5nZS50YaFtxCCLWHNvVZoPMX7bXlxHzGaJF9RAyueOoe1BXk+IUEBS2aF0AaJ1bqZUQURFRUSjZmVlzQPoomZ2zRgCo2dlbqpzYW5kbmV0LXYxomdoxCAv4hfmyOC1OlE4BuEiMcg9dD0tP7zQBGvdzguUlURZ+qJsds0b6qNzbmTEIMdnGF0JPZPHHFmVn8fmYiS7Wzi6UObcSZTp1gpcJYQHpHR5cGWkYWNmZw==",
-        "TypeName": "tadeed.algo.create",
+        "HalfSignedDeedCreationMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+        "TypeName": "initial.tadeed.algo.create",
         "Version": "000",
     }
 

@@ -8,7 +8,11 @@ from pydantic import SecretStr
 DEFAULT_ENV_FILE = ".env"
 
 
-class DjangoClient(BaseModel):
+class FastAPISettings(BaseModel):
+    port: int = 8000
+
+
+class DjangoSettings(BaseModel):
     """Django settings"""
 
     secret_key: str = "ai#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
@@ -88,7 +92,7 @@ class GnfSettings(BaseSettings):
     )
     algo: Algo = Algo()
     rabbit: RabbitBrokerClient = RabbitBrokerClient()
-    django: DjangoClient = DjangoClient()
+    django: DjangoSettings = DjangoSettings()
 
     class Config:
         env_prefix = "GNF_"

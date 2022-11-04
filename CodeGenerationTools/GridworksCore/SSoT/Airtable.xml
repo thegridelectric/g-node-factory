@@ -81,6 +81,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>rec0r8Vc4daPOhatR</SchemaRootId>
+      <createdTime>2022-11-04T17:08:01Z</createdTime>
+      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recvWBuo1Ws1SIL4b</SchemaRootscopy>
+      <Alias>new.tadeed.algo.optin</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>rec1E12bdSXOtQ9qP</SchemaRootId>
       <createdTime>2022-06-23T18:39:41Z</createdTime>
       <AliasRoot>gt.eq.reporting.config</AliasRoot>
@@ -123,9 +134,9 @@
       <SchemaRootId>rec430tANcSG2ZavF</SchemaRootId>
       <createdTime>2022-09-19T18:20:13Z</createdTime>
       <AliasRoot>tadeed.algo.exchange</AliasRoot>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <ProtocolCategory>Json</ProtocolCategory>
-      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <CurrentSemanticEnd>001</CurrentSemanticEnd>
       <SchemaAxioms>exchange.tadeed.algo.010__4, exchange.tadeed.algo.010__1, exchange.tadeed.algo.010__3, exchange.tadeed.algo.010__6, exchange.tadeed.algo.010__5, exchange.tadeed.algo.010__2</SchemaAxioms>
       <SchemaRootscopy>recXCK8GTrT3hnfKX</SchemaRootscopy>
       <Alias>tadeed.algo.exchange</Alias>
@@ -203,6 +214,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recERKCcoJa8mkC8L</SchemaRootId>
+      <createdTime>2022-11-04T13:41:08Z</createdTime>
+      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recAWKkS0hcyws7O6</SchemaRootscopy>
+      <Alias>initial.tadeed.algo.optin</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>recEdlcUTBfQ9Hy6D</SchemaRootId>
       <createdTime>2022-06-14T10:57:42Z</createdTime>
       <AliasRoot>gt.component</AliasRoot>
@@ -231,7 +253,7 @@
       <SchemaRootId>recEoebL6fHn6xzXL</SchemaRootId>
       <createdTime>2022-09-30T19:07:43Z</createdTime>
       <AliasRoot>signandsubmit.mtx.algo</AliasRoot>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaRootscopy>rec2qJdOZXwT9U5UP</SchemaRootscopy>
@@ -394,6 +416,17 @@
       <ReplaceWithTypeAliasRoot>resistive.heater.component.gt</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recTSdWeNPEKAZuAP</SchemaRootId>
+      <createdTime>2022-11-04T17:59:21Z</createdTime>
+      <AliasRoot>new.tadeed.send</AliasRoot>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recPy6SuizSerb3JG</SchemaRootscopy>
+      <Alias>new.tadeed.send</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>recUrIRjO9EYJRQhG</SchemaRootId>
       <createdTime>2022-06-23T18:37:48Z</createdTime>
       <AliasRoot>gt.powermeter.reporting.config</AliasRoot>
@@ -513,6 +546,17 @@
       <ReplaceWithTypeAliasRoot>electric.meter.cac.gt</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>reccq04oqFsHHPTlN</SchemaRootId>
+      <createdTime>2022-11-04T16:43:48Z</createdTime>
+      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recPf7eAhpge7kvO7</SchemaRootscopy>
+      <Alias>initial.tadeed.algo.transfer</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>reccsb7VI48EdWlGk</SchemaRootId>
       <createdTime>2022-11-02T12:51:03Z</createdTime>
       <AliasRoot>basegnodes.get</AliasRoot>
@@ -539,12 +583,23 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
-      <SchemaRootId>recdi7BezBflZlH45</SchemaRootId>
-      <createdTime>2022-09-20T13:29:20Z</createdTime>
-      <AliasRoot>tadeed.algo.transfer</AliasRoot>
+      <SchemaRootId>recde7ZQpg5BRpHxm</SchemaRootId>
+      <createdTime>2022-11-04T16:50:16Z</createdTime>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recMyDdiQjtfTMAP1</SchemaRootscopy>
+      <Alias>old.tadeed.algo.return</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recdi7BezBflZlH45</SchemaRootId>
+      <createdTime>2022-09-20T13:29:20Z</createdTime>
+      <AliasRoot>tadeed.algo.transfer</AliasRoot>
+      <Status>Deprecated</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>001</CurrentSemanticEnd>
       <SchemaAxioms>transfer.tadeed.algo.020__1, transfer.tadeed.algo.020__2, transfer.tadeed.algo.020__7, transfer.tadeed.algo.020__4, transfer.tadeed.algo.020__6, transfer.tadeed.algo.020__5, transfer.tadeed.algo.020__3</SchemaAxioms>
       <SchemaRootscopy>rech8RtBLsLVe51DN</SchemaRootscopy>
       <Alias>tadeed.algo.transfer</Alias>
@@ -881,9 +936,9 @@
       <SchemaRootId>recxnrRBEZg5cPVPt</SchemaRootId>
       <createdTime>2022-10-03T04:44:51Z</createdTime>
       <AliasRoot>optin.tadeed.algo</AliasRoot>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <ProtocolCategory>Json</ProtocolCategory>
-      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <SchemaRootscopy>rec9udDZT7JDuAbjl</SchemaRootscopy>
       <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
       <Alias>optin.tadeed.algo</Alias>
@@ -907,13 +962,13 @@
     <SchemaRoot>
       <SchemaRootId>recyuQKkp5CFejv2j</SchemaRootId>
       <createdTime>2022-09-21T18:01:12Z</createdTime>
-      <AliasRoot>tadeed.algo.create</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaAxioms>create.tadeed.algo.010__3, create.tadeed.algo.010__5, create.tadeed.algo.010__1, create.tadeed.algo.010__4, create.tadeed.algo.010__2, create.tadeed.algo.010__6</SchemaAxioms>
       <SchemaRootscopy>recO8OdobcISYms0B</SchemaRootscopy>
-      <Alias>tadeed.algo.create</Alias>
+      <Alias>initial.tadeed.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -2155,7 +2210,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrctrrw8rX1WKz3z/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrzSSxrY2DtCHE5q/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -2852,10 +2907,9 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recCMCD6fLQzuN9RA</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
       <SchemaRoot>recEoebL6fHn6xzXL</SchemaRoot>
-      <ProtocolTypes>rec5k0HDTjxB3yRLc</ProtocolTypes>
       <PreStatus>Active</PreStatus>
       <Alias>signandsubmit.mtx.algo.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
@@ -2864,7 +2918,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <AliasRoot>signandsubmit.mtx.algo</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3002,6 +3056,10 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
     <Schema>
       <SchemaId>rec8ILTteHhn4MpGd</SchemaId>
       <createdTime>2022-11-02T12:51:38Z</createdTime>
+      <SchemaAttributes>rec4j6ntpGttspb5O</SchemaAttributes>
+      <SchemaAttributes>recZVxZMDqON9vDkN</SchemaAttributes>
+      <SchemaAttributes>recdbLbodkd8hei4G</SchemaAttributes>
+      <SchemaAttributes>rec6erTuD9iej4cpC</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
       <SchemaRoot>reccsb7VI48EdWlGk</SchemaRoot>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
@@ -3101,10 +3159,9 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recDzW9fuX9MvVvla</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
       <SchemaRoot>recxnrRBEZg5cPVPt</SchemaRoot>
-      <ProtocolTypes>rec9HUzZ3tgJOalLk</ProtocolTypes>
       <PreStatus>Active</PreStatus>
       <Alias>optin.tadeed.algo.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
@@ -3112,9 +3169,9 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
       <AliasRoot>optin.tadeed.algo</AliasRoot>
-      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
-      <IsCurrent>1</IsCurrent>
-      <Status>Active</Status>
+      <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
+      <IsCurrent>0</IsCurrent>
+      <Status>Deprecated</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3123,6 +3180,30 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Alias>.</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
       <IsCurrent>1</IsCurrent>
+    </Schema>
+    <Schema>
+      <SchemaId>recAWKkS0hcyws7O6</SchemaId>
+      <createdTime>2022-11-04T13:41:29Z</createdTime>
+      <SchemaAttributes>recuEy4lhhe7MqUUN</SchemaAttributes>
+      <SchemaAttributes>rec3ez7rNTNCnqsst</SchemaAttributes>
+      <SchemaAttributes>recRMYT3frXP98k2q</SchemaAttributes>
+      <SchemaAttributes>recMpoAkDFT027Lro</SchemaAttributes>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recERKCcoJa8mkC8L</SchemaRoot>
+      <ProtocolTypes>recYSfcJBIVxFIWCZ</ProtocolTypes>
+      <PreStatus>Active</PreStatus>
+      <Alias>initial.tadeed.algo.optin.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Active</Status>
+      <InGwProto />
     </Schema>
     <Schema>
       <SchemaId>recDEr7ob2KLqM4gU</SchemaId>
@@ -3406,6 +3487,30 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsCurrent>1</IsCurrent>
     </Schema>
     <Schema>
+      <SchemaId>recMyDdiQjtfTMAP1</SchemaId>
+      <createdTime>2022-11-04T15:04:29Z</createdTime>
+      <SchemaAttributes>recQegsyGIGw5mDwR</SchemaAttributes>
+      <SchemaAttributes>recGTF9QvbMMCTiQu</SchemaAttributes>
+      <SchemaAttributes>recb1KEicJAMiVXJV</SchemaAttributes>
+      <SchemaAttributes>recElgddLa2jgifep</SchemaAttributes>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recde7ZQpg5BRpHxm</SchemaRoot>
+      <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
+      <PreStatus>Pending</PreStatus>
+      <Alias>old.tadeed.algo.return.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recNbXbJE9rcnLXAs</SchemaId>
       <createdTime>2022-07-05T12:48:52Z</createdTime>
       <SchemaAttributes>recJsAmOvRrHuzY0o</SchemaAttributes>
@@ -3481,7 +3586,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recG3uKKhjsdprmUN</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
       <SchemaRoot>recyuQKkp5CFejv2j</SchemaRoot>
-      <Axioms>recD6VlRaON0jdEE7</Axioms>
       <Axioms>rec41IGqMHOcsZEXl</Axioms>
       <Axioms>recmIcDGnWgPNQIua</Axioms>
       <Axioms>recCHkLILWYGN7rjn</Axioms>
@@ -3489,14 +3593,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>reccpDU01eDwuMvrf</Axioms>
       <ProtocolTypes>rect61DlS8mCPHnUL</ProtocolTypes>
       <PreStatus>Active</PreStatus>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.create</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -3555,6 +3659,32 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recPf7eAhpge7kvO7</SchemaId>
+      <createdTime>2022-11-04T15:33:25Z</createdTime>
+      <SchemaAttributes>reclVHMPGkM3r0cf2</SchemaAttributes>
+      <SchemaAttributes>recqbPC3JOFtb5oXx</SchemaAttributes>
+      <SchemaAttributes>rec1kx74Elyh0gRye</SchemaAttributes>
+      <SchemaAttributes>reci8yG7lmDsa51uV</SchemaAttributes>
+      <SchemaAttributes>recTGNe2hCg0CwUye</SchemaAttributes>
+      <SchemaAttributes>rech65PHs37XIxKeb</SchemaAttributes>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>reccq04oqFsHHPTlN</SchemaRoot>
+      <ProtocolTypes>recsRFfTXSym7gX54</ProtocolTypes>
+      <PreStatus>Pending</PreStatus>
+      <Alias>initial.tadeed.algo.transfer.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recPmpuzBMWnnZRpa</SchemaId>
       <createdTime>2022-07-03T21:26:12Z</createdTime>
       <SchemaAttributes>recjdjO1e7eWo3j8T</SchemaAttributes>
@@ -3573,6 +3703,31 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
+    </Schema>
+    <Schema>
+      <SchemaId>recPy6SuizSerb3JG</SchemaId>
+      <createdTime>2022-11-04T17:59:45Z</createdTime>
+      <SchemaAttributes>recR5j1j3DAzKovaR</SchemaAttributes>
+      <SchemaAttributes>recv0jEuP3xygb0bP</SchemaAttributes>
+      <SchemaAttributes>rec6n5D0n75iRarhL</SchemaAttributes>
+      <SchemaAttributes>rec0PurqCSDSSL9gV</SchemaAttributes>
+      <SchemaAttributes>recOdulFCYJbIktv4</SchemaAttributes>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recTSdWeNPEKAZuAP</SchemaRoot>
+      <ProtocolTypes>recQItJExa3ZiV3Jh</ProtocolTypes>
+      <PreStatus>Pending</PreStatus>
+      <Alias>new.tadeed.send.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>new.tadeed.send</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
     </Schema>
     <Schema>
       <SchemaId>recQ1SzB1rQPnbRUR</SchemaId>
@@ -3822,19 +3977,18 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recwsWtIgu909pJm1</Axioms>
       <Axioms>recYBKWxHw8Q6obsQ</Axioms>
       <Axioms>recdfhrc7m3cOTO3V</Axioms>
-      <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
-      <PreStatus>Active</PreStatus>
+      <PreStatus>Deprecated</PreStatus>
       <Alias>tadeed.algo.exchange.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <AliasRoot>tadeed.algo.exchange</AliasRoot>
-      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
-      <IsCurrent>1</IsCurrent>
-      <Status>Active</Status>
+      <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
+      <IsCurrent>0</IsCurrent>
+      <Status>Deprecated</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -4213,19 +4367,18 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recgr767PF8P1X06i</Axioms>
       <Axioms>rectREWSiFBVSQoOq</Axioms>
       <Axioms>recOyMaXAxwASJw4J</Axioms>
-      <ProtocolTypes>recsRFfTXSym7gX54</ProtocolTypes>
       <PreStatus>Active</PreStatus>
       <Alias>tadeed.algo.transfer.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <AliasRoot>tadeed.algo.transfer</AliasRoot>
-      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
-      <IsCurrent>1</IsCurrent>
-      <Status>Active</Status>
+      <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
+      <IsCurrent>0</IsCurrent>
+      <Status>Deprecated</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -4511,6 +4664,35 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recvWBuo1Ws1SIL4b</SchemaId>
+      <createdTime>2022-11-03T14:31:01Z</createdTime>
+      <SchemaAttributes>recJrM8N7ZnZMFE4c</SchemaAttributes>
+      <SchemaAttributes>rec83NurYrYX8rTtT</SchemaAttributes>
+      <SchemaAttributes>recALeeYiUYRuIxTl</SchemaAttributes>
+      <SchemaAttributes>reciVjnhmOGgZCihR</SchemaAttributes>
+      <SchemaAttributes>recYNAWavNDwN3uX1</SchemaAttributes>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>rec0r8Vc4daPOhatR</SchemaRoot>
+      <Axioms>recLImSRvyPbLliuE</Axioms>
+      <Axioms>recQn6ib10Nqp94i8</Axioms>
+      <Axioms>rechGHjDdnbThfv1R</Axioms>
+      <Axioms>recBWcnuqdt9wzynI</Axioms>
+      <ProtocolTypes>rec9HUzZ3tgJOalLk</ProtocolTypes>
+      <PreStatus>Pending</PreStatus>
+      <Alias>new.tadeed.algo.optin.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recwr8WwMjrVGNL7L</SchemaId>
       <createdTime>2022-06-23T18:37:48Z</createdTime>
       <SchemaAttributes>recAAAHCxBerQLxks</SchemaAttributes>
@@ -4657,6 +4839,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rec0PurqCSDSSL9gV</SchemaAttributeId>
+      <createdTime>2022-11-04T18:36:22Z</createdTime>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Value>OldTaDeedIdx</Value>
+      <Idx>1</Idx>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <TestValue>10</TestValue>
+      <PrimitiveType>Integer</PrimitiveType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rec0SCL5wm4k2QtCO</SchemaAttributeId>
       <createdTime>2022-07-03T22:29:19Z</createdTime>
       <Value>ValueList</Value>
@@ -4756,6 +4951,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <EnumName>spaceheat.telemetry.name.100</EnumName>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec1kx74Elyh0gRye</SchemaAttributeId>
+      <createdTime>2022-11-04T15:35:12Z</createdTime>
+      <Value>ValidatorAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>2</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec1lT7lfuqohFuY2</SchemaAttributeId>
@@ -4992,6 +5202,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rec3ez7rNTNCnqsst</SchemaAttributeId>
+      <createdTime>2022-11-04T13:44:02Z</createdTime>
+      <Value>TaOwnerAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
+      <Schema>recAWKkS0hcyws7O6</Schema>
+      <Idx>1</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rec4BpH0P9FNwZJqs</SchemaAttributeId>
       <createdTime>2022-09-22T18:50:53Z</createdTime>
       <Value>GNodeAlias</Value>
@@ -5018,6 +5243,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDEr7ob2KLqM4gU</Schema>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec4j6ntpGttspb5O</SchemaAttributeId>
+      <createdTime>2022-11-02T23:16:57Z</createdTime>
+      <Value>TopGNodeAlias</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>'d1'</TestValue>
+      <Schema>rec8ILTteHhn4MpGd</Schema>
+      <Idx>0</Idx>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec5Yab4cmmMu4DWm</SchemaAttributeId>
@@ -5085,6 +5326,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>gt.temp.sensor.cac</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rec6erTuD9iej4cpC</SchemaAttributeId>
+      <createdTime>2022-11-02T23:21:22Z</createdTime>
+      <Value>FromGNodeInstanceId</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
+      <TestValue>'1a952a89-e471-46ac-b563-f33f260ec819'</TestValue>
+      <Schema>rec8ILTteHhn4MpGd</Schema>
+      <Idx>3</Idx>
+      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rec6fCUex0HlMSbTR</SchemaAttributeId>
       <createdTime>2022-07-03T22:31:08Z</createdTime>
       <Value>TelemetryName</Value>
@@ -5097,6 +5354,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <EnumName>spaceheat.telemetry.name.100</EnumName>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec6n5D0n75iRarhL</SchemaAttributeId>
+      <createdTime>2022-11-04T18:01:02Z</createdTime>
+      <Value>SignedTadeedOptinTxn</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Idx>4</Idx>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec6nH5gOkhOLmbYf</SchemaAttributeId>
@@ -5139,6 +5411,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec83NurYrYX8rTtT</SchemaAttributeId>
+      <createdTime>2022-11-03T14:39:18Z</createdTime>
+      <Value>NewTaDeedIdx</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>0</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <TestValue>14</TestValue>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec83s8fct15feQXU</SchemaAttributeId>
@@ -5300,6 +5585,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recALeeYiUYRuIxTl</SchemaAttributeId>
+      <createdTime>2022-11-03T18:44:18Z</createdTime>
+      <Value>ValidatorAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>3</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recAy1MJ6WTkJC2Bt</SchemaAttributeId>
@@ -5617,6 +5917,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>gt.boolean.actuator.component</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recElgddLa2jgifep</SchemaAttributeId>
+      <createdTime>2022-11-04T15:05:54Z</createdTime>
+      <Value>SignedNewDeedTransferTxn</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <Schema>recMyDdiQjtfTMAP1</Schema>
+      <Idx>3</Idx>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recEmEL3LueXj4YbW</SchemaAttributeId>
       <createdTime>2022-06-17T12:09:48Z</createdTime>
       <Value>TypicalResponseTimeMs</Value>
@@ -5840,6 +6155,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <EnumName>core.g.node.role.100</EnumName>
       <DefaultEnumValue>Other</DefaultEnumValue>
     </SchemaAttribute>
+    <SchemaAttribute>itr5Ugd69rkoHbm3f/recGSAil9ULCQw1S1</SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recGTF9QvbMMCTiQu</SchemaAttributeId>
+      <createdTime>2022-11-04T15:05:42Z</createdTime>
+      <Value>TaDaemonAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recMyDdiQjtfTMAP1</Schema>
+      <Idx>1</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGXMXqUz6rHqVzg</SchemaAttributeId>
       <createdTime>2022-06-07T10:23:56Z</createdTime>
@@ -5970,7 +6301,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrZgMan8WVZVsjIx/recHw5JOwPznxEWve</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recHyghQ3390tN8LF</SchemaAttributeId>
       <createdTime>2022-06-14T10:41:49Z</createdTime>
@@ -6111,6 +6441,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-07-22T12:14:34Z</createdTime>
       <Value>MyTerminalAssetGNode</Value>
       <Schema>recyD0ycgUiT7TiH2</Schema>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recJrM8N7ZnZMFE4c</SchemaAttributeId>
+      <createdTime>2022-11-03T14:39:12Z</createdTime>
+      <Value>TaDaemonAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>2</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -6441,6 +6786,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <EnumName>sh.node.role.100</EnumName>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recMpoAkDFT027Lro</SchemaAttributeId>
+      <createdTime>2022-11-04T13:45:32Z</createdTime>
+      <Value>SignedInitialDaemonFundingTxn</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <Schema>recAWKkS0hcyws7O6</Schema>
+      <Idx>3</Idx>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recN8NS2KiZw0Wzbp</SchemaAttributeId>
       <createdTime>2022-07-10T14:13:38Z</createdTime>
       <Value>Component</Value>
@@ -6576,6 +6936,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>gt.sh.simple.telemetry.status</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recOdulFCYJbIktv4</SchemaAttributeId>
+      <createdTime>2022-11-04T18:36:27Z</createdTime>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Value>ValidatorAddr</Value>
+      <Idx>3</Idx>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recOpsZkD5RkikKq4</SchemaAttributeId>
       <createdTime>2022-08-11T17:28:11Z</createdTime>
       <Value>ValueList</Value>
@@ -6676,6 +7051,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recQegsyGIGw5mDwR</SchemaAttributeId>
+      <createdTime>2022-11-04T15:05:37Z</createdTime>
+      <Value>OldTaDeedIdx</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>20</TestValue>
+      <Schema>recMyDdiQjtfTMAP1</Schema>
+      <Idx>0</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recQx0K1YF0UKkU44</SchemaAttributeId>
       <createdTime>2022-09-20T12:07:49Z</createdTime>
       <Value>GNodeRegistryAddr</Value>
@@ -6685,6 +7073,34 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
       <TestValue>'MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU'</TestValue>
       <Schema>recGCcr92h87UpXkA</Schema>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recR5j1j3DAzKovaR</SchemaAttributeId>
+      <createdTime>2022-11-04T18:00:50Z</createdTime>
+      <Value>NewTaDeedIdx</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>14</TestValue>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Idx>0</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recRMYT3frXP98k2q</SchemaAttributeId>
+      <createdTime>2022-11-04T13:44:57Z</createdTime>
+      <Value>ValidatorAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>"7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"</TestValue>
+      <Schema>recAWKkS0hcyws7O6</Schema>
+      <Idx>2</Idx>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6854,6 +7270,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recTGNe2hCg0CwUye</SchemaAttributeId>
+      <createdTime>2022-11-04T15:35:19Z</createdTime>
+      <Value>FirstDeedTransferMtx</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>5</Idx>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recTIuInqPiemsf9b</SchemaAttributeId>
@@ -7040,6 +7471,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itr5Ugd69rkoHbm3f/recVrDoi6bmsCWv6a</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recVs9H70Rxs6FuHL</SchemaAttributeId>
       <createdTime>2022-06-07T09:34:52Z</createdTime>
@@ -7079,6 +7511,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveType>Integer</PrimitiveType>
       <TestValue>-3</TestValue>
       <Schema>rec3Noy3m1X4Vdly9</Schema>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recW5AqimRRZZ3Rne</SchemaAttributeId>
+      <createdTime>2022-11-02T23:20:50Z</createdTime>
+      <Value>FromGNodeInstanceId</Value>
+      <Idx>3</Idx>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -7204,6 +7644,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recYNAWavNDwN3uX1</SchemaAttributeId>
+      <createdTime>2022-11-04T18:41:25Z</createdTime>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>1</Idx>
+      <Value>OldTaDeedIdx</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <TestValue>10</TestValue>
+      <PrimitiveType>Integer</PrimitiveType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recYtyZl3uBr6N9Ey</SchemaAttributeId>
       <createdTime>2022-07-10T14:13:40Z</createdTime>
       <Value>ActorClass</Value>
@@ -7254,6 +7707,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>gt.sh.multipurpose.telemetry.status</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recZVxZMDqON9vDkN</SchemaAttributeId>
+      <createdTime>2022-11-02T23:18:49Z</createdTime>
+      <Value>IncludeAllDescendants</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Boolean</PrimitiveType>
+      <TestValue>'False'</TestValue>
+      <Schema>rec8ILTteHhn4MpGd</Schema>
+      <Idx>1</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recZoRtISP4HaNWda</SchemaAttributeId>
       <createdTime>2022-09-20T12:16:10Z</createdTime>
       <Value>FromGNodeAlias</Value>
@@ -7269,7 +7735,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrZgMan8WVZVsjIx/recZoRtISP4HaNWda</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recay2Tf4O4c9dgvH</SchemaAttributeId>
       <createdTime>2022-09-19T15:07:08Z</createdTime>
@@ -7291,6 +7756,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recb1KEicJAMiVXJV</SchemaAttributeId>
+      <createdTime>2022-11-04T15:05:49Z</createdTime>
+      <Value>ValidatorAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recMyDdiQjtfTMAP1</Schema>
+      <Idx>2</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recbP43UORyJcMOyK</SchemaAttributeId>
@@ -7541,6 +8021,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recdbLbodkd8hei4G</SchemaAttributeId>
+      <createdTime>2022-11-02T23:20:11Z</createdTime>
+      <Value>FromGNodeAlias</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>'dwgps.gnr'</TestValue>
+      <Schema>rec8ILTteHhn4MpGd</Schema>
+      <Idx>2</Idx>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recdqPO7pwrirLDj1</SchemaAttributeId>
       <createdTime>2022-07-25T21:47:07Z</createdTime>
       <Value>PipeFlowSensorComponentList</Value>
@@ -7774,6 +8270,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rech65PHs37XIxKeb</SchemaAttributeId>
+      <createdTime>2022-11-04T17:42:32Z</createdTime>
+      <Value>TaOwnerAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>4</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rech7EAFuj56GsPDR</SchemaAttributeId>
       <createdTime>2022-07-03T21:26:56Z</createdTime>
       <Value>RelayState</Value>
@@ -7870,6 +8381,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>reci8yG7lmDsa51uV</SchemaAttributeId>
+      <createdTime>2022-11-04T15:35:16Z</createdTime>
+      <Value>TaDaemonAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>3</Idx>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>reciCl45E5pQe7ans</SchemaAttributeId>
       <createdTime>2022-06-03T21:42:20Z</createdTime>
       <Value>DisplayName</Value>
@@ -7895,6 +8421,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>reciVjnhmOGgZCihR</SchemaAttributeId>
+      <createdTime>2022-11-03T18:44:55Z</createdTime>
+      <Value>SignedTaDeedCreationTxn</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>4</Idx>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>reciVyeMslNHUJKN8</SchemaAttributeId>
@@ -8169,6 +8710,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>reclVHMPGkM3r0cf2</SchemaAttributeId>
+      <createdTime>2022-11-04T15:34:56Z</createdTime>
+      <Value>MicroLat</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>44838681</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>0</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>reclWEqctUrS5WXwG</SchemaAttributeId>
       <createdTime>2022-09-14T16:28:40Z</createdTime>
       <Value>HalfSignedCertCreationMtx</Value>
@@ -8231,6 +8785,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricMeterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>electric.meter.cac.gt</SubMessageFormatAliasRoot>
     </SchemaAttribute>
+    <SchemaAttribute>itr5Ugd69rkoHbm3f/recm7McSMLA5naEPt</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recmAJ31xoOq5qTHU</SchemaAttributeId>
       <createdTime>2022-06-14T23:02:59Z</createdTime>
@@ -8542,6 +9097,12 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recpcWcXYGELHjdm0</SchemaAttributeId>
+      <createdTime>2022-11-02T23:16:22Z</createdTime>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recpnxWC9ATaBFzMB</SchemaAttributeId>
       <createdTime>2022-07-03T22:28:18Z</createdTime>
       <Value>ShNodeAlias</Value>
@@ -8570,7 +9131,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricHeaterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>gt.electric.heater.cac</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itrZgMan8WVZVsjIx/recpqHev4KGlcd4q4</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recpwKIE1g7BN8jGg</SchemaAttributeId>
       <createdTime>2022-09-30T19:13:23Z</createdTime>
@@ -8652,6 +9212,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>true</IsType>
       <SubMessageFormatAliasRoot>gt.sh.simple.single.status</SubMessageFormatAliasRoot>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recqbPC3JOFtb5oXx</SchemaAttributeId>
+      <createdTime>2022-11-04T15:35:06Z</createdTime>
+      <Value>MicroLon</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>-68705311</TestValue>
+      <Schema>recPf7eAhpge7kvO7</Schema>
+      <Idx>1</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recrD0Mo96XS8itFz</SchemaAttributeId>
@@ -8821,6 +9394,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recuEy4lhhe7MqUUN</SchemaAttributeId>
+      <createdTime>2022-11-04T13:43:52Z</createdTime>
+      <Value>TerminalAssetAlias</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.isone.ver.keene.holly.ta"</TestValue>
+      <Schema>recAWKkS0hcyws7O6</Schema>
+      <Idx>0</Idx>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recuI66lGgVCVPoNn</SchemaAttributeId>
       <createdTime>2022-08-11T17:28:08Z</createdTime>
       <Value>ReportTimeUnixMs</Value>
@@ -8858,6 +9447,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recNbXbJE9rcnLXAs</Schema>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recv0jEuP3xygb0bP</SchemaAttributeId>
+      <createdTime>2022-11-04T18:00:55Z</createdTime>
+      <Value>TaDaemonAddr</Value>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <Idx>2</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recvDYPGmlUWE3yzH</SchemaAttributeId>
@@ -9123,8 +9727,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The asset name must have valid GNodeAlias format, with the world_alias (first word of asset name matching the universe (e.g. dev universe -&gt; world starts with `d`)</Description>
       <AxiomNumber>5</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 5</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 5</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9223,8 +9827,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The HalfSignedDeedCreationMtx.txn must have type AssetConfigTxn</Description>
       <AxiomNumber>2</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 2</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 2</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9353,23 +9957,24 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <MakeDataClass>true</MakeDataClass>
     </SchemaAxiom>
     <SchemaAxiom>
+      <SchemaAxiomId>recBWcnuqdt9wzynI</SchemaAxiomId>
+      <createdTime>2022-11-03T19:00:14Z</createdTime>
+      <Description>Decoded SignedTaDeedCreationTxn must have type AssetConfigTransaction</Description>
+      <AxiomNumber>1</AxiomNumber>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>AssetConfigTransaction</ShortDescription>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 1</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
+      <MakeDataClass />
+    </SchemaAxiom>
+    <SchemaAxiom>
       <SchemaAxiomId>recCHkLILWYGN7rjn</SchemaAxiomId>
       <createdTime>2022-09-22T04:46:35Z</createdTime>
       <Description>For the asset getting created: total = 1, unit_name=TADEED, asset_name must be &lt;= 32 char, manager is Gnf Admin.</Description>
       <AxiomNumber>4</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 4</Name>
-      <Alias>tadeed.algo.create.000</Alias>
-      <MakeDataClass />
-    </SchemaAxiom>
-    <SchemaAxiom>
-      <SchemaAxiomId>recD6VlRaON0jdEE7</SchemaAxiomId>
-      <createdTime>2022-09-22T04:46:32Z</createdTime>
-      <Description>Decoded HalfSignedDeedCreationMtx must have type MultisigTransaction</Description>
-      <AxiomNumber>1</AxiomNumber>
-      <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 1</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 4</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9487,6 +10092,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
+      <SchemaAxiomId>recLImSRvyPbLliuE</SchemaAxiomId>
+      <createdTime>2022-11-03T18:37:06Z</createdTime>
+      <Description> NewDeedIdx is an active TaDeed created and owned by GnfAdminAccount</Description>
+      <AxiomNumber>2</AxiomNumber>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>Valid TaDeed</ShortDescription>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 2</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
+      <MakeDataClass />
+    </SchemaAxiom>
+    <SchemaAxiom>
       <SchemaAxiomId>recN1T4RyJw2VMsOW</SchemaAxiomId>
       <createdTime>2022-07-10T14:57:18Z</createdTime>
       <Description>SpaceheatNodes of role BoostElement must have a RatedVoltageV</Description>
@@ -9545,6 +10161,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <Name>tadeed.algo.transfer.000 Schema Axiom 4</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
+      <MakeDataClass />
+    </SchemaAxiom>
+    <SchemaAxiom>
+      <SchemaAxiomId>recQn6ib10Nqp94i8</SchemaAxiomId>
+      <createdTime>2022-11-03T18:59:36Z</createdTime>
+      <Description>TaDaemonAddr owns exactly 1 TaDeed. The creator of this old TaDeed is either the GnfAdminAccount or  the ValidatorMulti 2-sig [GnfAdminAccount, ValidatorAddr]. The asset index of the old TaDeed is less than the asset index of the new TaDeed. Finally, if the creator of the old TaDeed is the GnfAdminAccount, then the TaDaemonAddr is opted into (but does not own) exactly one TaDeed created by the ValidatorMulti account and owned by the GnfAdminAccount.</Description>
+      <AxiomNumber>3</AxiomNumber>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>Old TaDeed check</ShortDescription>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 3</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9672,8 +10299,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must have signed the mtx, and the signature must match the txn</Description>
       <AxiomNumber>6</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 6</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 6</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9746,6 +10373,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <MakeDataClass>true</MakeDataClass>
     </SchemaAxiom>
     <SchemaAxiom>
+      <SchemaAxiomId>rechGHjDdnbThfv1R</SchemaAxiomId>
+      <createdTime>2022-11-03T18:59:50Z</createdTime>
+      <Description>SignedTaDeedCreationTxn must be signed by Gnf Admin, and the signature must match the txn.</Description>
+      <AxiomNumber>4</AxiomNumber>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>Correctly Signed</ShortDescription>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 4</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
+      <MakeDataClass />
+    </SchemaAxiom>
+    <SchemaAxiom>
       <SchemaAxiomId>recj13iYXBkX5UZr3</SchemaAxiomId>
       <createdTime>2022-09-22T03:48:19Z</createdTime>
       <Description>Validator multi must have enough algos</Description>
@@ -9803,8 +10441,8 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The MultiSig must be the 2-sig multi [Gnf Admin, payload.ValidatorAddr]</Description>
       <AxiomNumber>3</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 3</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 3</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9989,6 +10627,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recoDIFE4bNJi9OJW</MpSchemaAttributes>
       <MpSchemaAttributes>recbP43UORyJcMOyK</MpSchemaAttributes>
       <MpSchemaAttributes>reczS8yfdcwnZOnYz</MpSchemaAttributes>
+      <MpSchemaAttributes>rec6erTuD9iej4cpC</MpSchemaAttributes>
       <DefaultFail1>"d4be12d5-33ba-4f1f-b9e5"</DefaultFail1>
     </PropertyFormat>
     <PropertyFormat>
@@ -10018,6 +10657,12 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recjPLNQVJ2uCOYfC</MpSchemaAttributes>
       <MpSchemaAttributes>recnqelpRWYmV8MJR</MpSchemaAttributes>
       <DefaultFail1>2</DefaultFail1>
+    </PropertyFormat>
+    <PropertyFormat>
+      <PropertyFormatId>recSvRBEpOcZWQMmY</PropertyFormatId>
+      <createdTime>2022-11-02T23:17:45Z</createdTime>
+      <Name>LrhAliasFormat</Name>
+      <Description>Lowercase alphanumeric strings separated by hypens, with most significant word to the left.  I.e. `dw1.ne` is the child of `dw1`.  Both the first and last word must start with a alphabet character.</Description>
     </PropertyFormat>
     <PropertyFormat>
       <PropertyFormatId>recb9fI4kRkTYXDzA</PropertyFormatId>
@@ -10068,6 +10713,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recSyaqv9CQCvmg7I</MpSchemaAttributes>
       <MpSchemaAttributes>recKa1tYnOwTj4VBZ</MpSchemaAttributes>
       <MpSchemaAttributes>recY4oRjMNkU4Kjqv</MpSchemaAttributes>
+      <MpSchemaAttributes>rec4j6ntpGttspb5O</MpSchemaAttributes>
+      <MpSchemaAttributes>recdbLbodkd8hei4G</MpSchemaAttributes>
+      <MpSchemaAttributes>recuEy4lhhe7MqUUN</MpSchemaAttributes>
       <DefaultFail1>"a.b-h"</DefaultFail1>
     </PropertyFormat>
     <PropertyFormat>
@@ -10114,6 +10762,17 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recJIkl9dZLq01OeF</MpSchemaAttributes>
       <MpSchemaAttributes>recDzW9fuX9MvVvla</MpSchemaAttributes>
       <MpSchemaAttributes>recfIIwlizAHrEW5g</MpSchemaAttributes>
+      <MpSchemaAttributes>recJrM8N7ZnZMFE4c</MpSchemaAttributes>
+      <MpSchemaAttributes>recALeeYiUYRuIxTl</MpSchemaAttributes>
+      <MpSchemaAttributes>rec3ez7rNTNCnqsst</MpSchemaAttributes>
+      <MpSchemaAttributes>recRMYT3frXP98k2q</MpSchemaAttributes>
+      <MpSchemaAttributes>recGTF9QvbMMCTiQu</MpSchemaAttributes>
+      <MpSchemaAttributes>recb1KEicJAMiVXJV</MpSchemaAttributes>
+      <MpSchemaAttributes>rec1kx74Elyh0gRye</MpSchemaAttributes>
+      <MpSchemaAttributes>reci8yG7lmDsa51uV</MpSchemaAttributes>
+      <MpSchemaAttributes>rech65PHs37XIxKeb</MpSchemaAttributes>
+      <MpSchemaAttributes>recv0jEuP3xygb0bP</MpSchemaAttributes>
+      <MpSchemaAttributes>recOdulFCYJbIktv4</MpSchemaAttributes>
     </PropertyFormat>
     <PropertyFormat>
       <PropertyFormatId>recqSXVzLo8RtEjlH</PropertyFormatId>
@@ -10147,6 +10806,11 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recG3uKKhjsdprmUN</MpSchemaAttributes>
       <MpSchemaAttributes>recSsJxTMJFhAidWC</MpSchemaAttributes>
       <MpSchemaAttributes>recEfJPESYeun1WwU</MpSchemaAttributes>
+      <MpSchemaAttributes>reciVjnhmOGgZCihR</MpSchemaAttributes>
+      <MpSchemaAttributes>recMpoAkDFT027Lro</MpSchemaAttributes>
+      <MpSchemaAttributes>recElgddLa2jgifep</MpSchemaAttributes>
+      <MpSchemaAttributes>recTGNe2hCg0CwUye</MpSchemaAttributes>
+      <MpSchemaAttributes>rec6n5D0n75iRarhL</MpSchemaAttributes>
     </PropertyFormat>
     <PropertyFormat>
       <PropertyFormatId>recx8kL4InkksReIF</PropertyFormatId>
@@ -10185,12 +10849,13 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
       <ProtocolTypes>recAKcZ5BDHN6JKil</ProtocolTypes>
       <ProtocolTypes>rec9HUzZ3tgJOalLk</ProtocolTypes>
-      <ProtocolTypes>rec5k0HDTjxB3yRLc</ProtocolTypes>
       <ProtocolTypes>rec1Kr8gSWyIe4lG2</ProtocolTypes>
       <ProtocolTypes>rectUrkJtiUPjNn5q</ProtocolTypes>
       <ProtocolTypes>recsRFfTXSym7gX54</ProtocolTypes>
       <ProtocolTypes>recxtr4LhX2Ixojmg</ProtocolTypes>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
+      <ProtocolTypes>recYSfcJBIVxFIWCZ</ProtocolTypes>
+      <ProtocolTypes>recQItJExa3ZiV3Jh</ProtocolTypes>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
       <ProtocolEnums>rec8Ahq8RdNkgPzQN</ProtocolEnums>
@@ -10225,22 +10890,13 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>tavalidatorcert.algo.create.000</TypeName>
     </ProtocolType>
     <ProtocolType>
-      <ProtocolTypeId>rec5k0HDTjxB3yRLc</ProtocolTypeId>
-      <createdTime>2022-10-31T20:32:30Z</createdTime>
-      <Protocol>recXaQaXNNDyxIlT7</Protocol>
-      <Type>rec2qJdOZXwT9U5UP</Type>
-      <Name>gnf signandsubmit.mtx.algo.000</Name>
-      <ProtocolName>gnf</ProtocolName>
-      <TypeName>signandsubmit.mtx.algo.000</TypeName>
-    </ProtocolType>
-    <ProtocolType>
       <ProtocolTypeId>rec9HUzZ3tgJOalLk</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
-      <Type>rec9udDZT7JDuAbjl</Type>
-      <Name>gnf optin.tadeed.algo.000</Name>
+      <Type>recvWBuo1Ws1SIL4b</Type>
+      <Name>gnf new.tadeed.algo.optin.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>optin.tadeed.algo.000</TypeName>
+      <TypeName>new.tadeed.algo.optin.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recA4Y7Iy3elTbyCB</ProtocolTypeId>
@@ -10273,10 +10929,19 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypeId>recPRrjd1GyqOVHIZ</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
-      <Type>recXCK8GTrT3hnfKX</Type>
-      <Name>gnf tadeed.algo.exchange.000</Name>
+      <Type>recMyDdiQjtfTMAP1</Type>
+      <Name>gnf old.tadeed.algo.return.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.exchange.000</TypeName>
+      <TypeName>old.tadeed.algo.return.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recQItJExa3ZiV3Jh</ProtocolTypeId>
+      <createdTime>2022-11-04T17:59:59Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Type>recPy6SuizSerb3JG</Type>
+      <Name>gnf new.tadeed.send.000</Name>
+      <ProtocolName>gnf</ProtocolName>
+      <TypeName>new.tadeed.send.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recY5s5LoUEwNBowT</ProtocolTypeId>
@@ -10286,6 +10951,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gnf basegnode.ctn.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.ctn.create.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recYSfcJBIVxFIWCZ</ProtocolTypeId>
+      <createdTime>2022-11-03T14:32:25Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Type>recAWKkS0hcyws7O6</Type>
+      <Name>gnf initial.tadeed.algo.optin.000</Name>
+      <ProtocolName>gnf</ProtocolName>
+      <TypeName>initial.tadeed.algo.optin.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recZiKOMXJ8UCneY9</ProtocolTypeId>
@@ -10327,19 +11001,19 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypeId>recsRFfTXSym7gX54</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
-      <Type>rech8RtBLsLVe51DN</Type>
-      <Name>gnf tadeed.algo.transfer.000</Name>
+      <Type>recPf7eAhpge7kvO7</Type>
+      <Name>gnf initial.tadeed.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.transfer.000</TypeName>
+      <TypeName>initial.tadeed.algo.transfer.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rect61DlS8mCPHnUL</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recO8OdobcISYms0B</Type>
-      <Name>gnf tadeed.algo.create.000</Name>
+      <Name>gnf initial.tadeed.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.create.000</TypeName>
+      <TypeName>initial.tadeed.algo.create.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rectUrkJtiUPjNn5q</ProtocolTypeId>

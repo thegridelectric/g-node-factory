@@ -1,25 +1,18 @@
-####################
-# Under Construction
-#####################
 import logging
-from typing import Optional
 
 from algosdk import encoding
+from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 
 import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
-from gnf.algo_utils import MultisigAccount
-from gnf.algo_utils import PendingTxnResponse
-from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import SignandsubmitMtxAlgo
-from gnf.schemata import TadeedAlgoExchange
-
-
-# sent by the daemon
-
-# types received by the daemon
+from gnf.schemata import InitialTadeedAlgoOptin
+from gnf.schemata import NewTadeedAlgoOptin
+from gnf.schemata import NewTadeedSend
+from gnf.schemata import NewTadeedSend_Maker
+from gnf.schemata import OldTadeedAlgoReturn
 
 
 LOGGER = logging.getLogger(__name__)
@@ -31,112 +24,97 @@ class PythonTaDaemon:
         self.client: AlgodClient = algo_utils.get_algod_client(algo_settings)
         self.acct: BasicAccount = BasicAccount(private_key=sk)
         self.ta_owner_addr = ta_owner_addr
-        self.ta_multi: MultisigAccount = self.get_ta_multi()
         LOGGER.info("TaOwner Smart Daemon Initialized")
 
-    def get_ta_multi(self) -> MultisigAccount:
+    def send_message_to_gnf(self, payload: NewTadeedSend):
+        """Stub for when there is a mechanism (probably FastAPI) for validators  sending
+        messages to GNodeFactory.
+
+        Args:
+            payload: Any valid payload in the API for sending
         """
-        Returns:
-            Multisig: returns the multisig ordered [gnfadmin, daemon, taOwner] with
-            signing threshold 2
-        """
-        addresses = [
-            self.algo_settings.gnf_admin_addr,
-            config.SandboxDemo().holly_ta_daemon_addr,
-            config.SandboxDemo().holly_homeowner_addr,
-        ]
-        return MultisigAccount(version=1, threshold=2, addresses=addresses)
+        pass
 
     ##########################
     # Messages Received
     ##########################
 
-    def signandsubmit_mtx_algo_received(
-        self, payload: SignandsubmitMtxAlgo
-    ) -> Optional[PendingTxnResponse]:
-        """Checks that the transaction is a Multisig transaction where
-        the TaOwner is one of the addresses and the TaOwner has signed
-        the transaction.
-
-        Also checks that payload.SignerAddress is TaDaemon address.
-        Then signs and submits
-
-        Args:
-            payload: SignandsubmitMtxAlgo)
-
-        Returns:
-            PendingTxnResponse of submitted Mtx if the original signer is ta_owner, otherwise None
-        """
-        ta_owner_address_as_bytes = encoding.decode_address(self.ta_owner_addr)
-        mtx = encoding.future_msgpack_decode(payload.Mtx)
-        x = list(
-            filter(
-                lambda x: x.public_key == ta_owner_address_as_bytes,
-                mtx.multisig.subsigs,
-            )
+    def initial_tadeed_algo_optin_received(self, payload: InitialTadeedAlgoOptin):
+        ta_deed_idx = api_utils.get_tadeed_cert_idx(
+            terminal_asset_alias=payload.TerminalAssetAlias,
+            validator_addr=payload.ValidatorAddr,
         )
-        if len(x) == 0:
-            LOGGER.info(
-                f"Ignoring signandsubmit. ta_owner ..{self.ta_owner_addr} not in mtx addresses"
+        if ta_deed_idx is None:
+            raise Exception(
+                f"called when validator {payload.ValidatorAddr[-6:]} did NOT have "
+                f"TADEED for {payload.TerminalAssetAlias}!"
             )
-            return
-        ta_owner_subsig = x[0]
-        if ta_owner_subsig.signature is None:
-            LOGGER.info(
-                f"Ignoring signandsubmit. ta_owner ..{self.ta_owner_addr} did not sign"
-            )
-        if payload.SignerAddress != self.acct.addr:
-            LOGGER.info(f"Igoring signandsubmit. My acct not the SignerAddress")
-            return None
-
-        mtx.sign(self.acct.sk)
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=ta_deed_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
         try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
-    def optin_tadeed_algo_received(self, payload: OptinTadeedAlgo):
+    def new_tadeed_algo_optin_received(
+        self, payload: NewTadeedAlgoOptin
+    ) -> NewTadeedSend:
         """
-        Checks that the sender is ta_multi. Remaining checks (e.g., it is an AssetTransfer
-        that was signed by one sender) occur in OptinTadeedAlgo.
-
-        Then signs and submits the Optin mtx, which opts into a new ta_deed
-        for the ta_multi account.
+        Checks that payload.NewDeedIdx is a TaDeed
 
         Args:
-            payload: OptinTadeedAlgo
+            payload: NewTadeedAlgoOptin
         """
-        mtx = encoding.future_msgpack_decode(payload.NewDeedOptInMtx)
-        sender_addr = mtx.multisig.address()
-        if sender_addr != self.ta_multi.addr:
-            LOGGER.warning(
-                f"sender_addr ..{sender_addr[-6:]} does not match ta_multi "
-                f".. {self.ta_multi.addr[-6:0]}. Ignoring."
-            )
-            return
-        mtx.sign(self.acct.sk)
-        try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
 
-    def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=payload.NewTaDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        # FIX
+        # Ready for new TaDeed -> let GNodeFactory know
+        payload = NewTadeedSend_Maker(
+            new_ta_deed_idx=payload.NewTaDeedIdx,
+            old_ta_deed_idx=payload.OldTaDeedIdx,
+            ta_daemon_addr=self.acct.addr,
+            validator_addr=payload.ValidatorAddr,
+            signed_tadeed_optin_txn=encoding.msgpack_encode(signed_txn),
+        ).tuple
+        self.send_message_to_gnf(payload)
+        LOGGER.info(f"Asking for transfer of new TaDeed {payload.NewTaDeedIdx}")
+        return payload
+
+    def old_tadeed_algo_return_received(self, payload: OldTadeedAlgoReturn):
         """
-         - Sign and submit the AssetTransfer mtx, which will send the old deed from
-        the ta_multi acct to the GNodeFactory admin acct.
+         - Transfer the  old deed back to the GNodeFactory admin acct.
 
         Args:
-            payload: TadeedAlgoExchange
+            payload: OldTadeedAlgoReturn
         """
-        mtx = encoding.future_msgpack_decode(payload.OldDeedTransferMtx)
-        mtx.sign(self.acct.sk)
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.acct.addr,
+            receiver=config.Algo().gnf_admin_addr,
+            amt=1,
+            index=payload.OldTaDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
         try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        LOGGER.info(f"Returned TaDeed {payload.OldTaDeedIdx} to GNodeFactory Admin")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
