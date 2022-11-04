@@ -42,10 +42,10 @@ def main():
     payload = molly.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
     factory.transfer_tavalidatorcert_algo_received(payload)
 
-    payload = molly.generate_create_tadeed_algo(
+    payload = molly.generate_initial_tadeed_algo_create(
         terminal_asset_alias=holly.initial_terminal_asset_alias,
     )
-    atomic_metering_node = factory.create_tadeed_algo_received(payload)
+    atomic_metering_node = factory.initial_tadeed_algo_create_received(payload)
     ta_deed_idx = atomic_metering_node.ownership_deed_nft_id
 
     payload = holly.initial_tadeed_algo_optin_generated()

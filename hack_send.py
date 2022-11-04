@@ -1,5 +1,5 @@
-from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import OptinTadeedAlgo_Maker as Maker
+from gnf.schemata import NewTadeedAlgoOptin
+from gnf.schemata import NewTadeedAlgoOptin_Maker as Maker
 
 
 d = {

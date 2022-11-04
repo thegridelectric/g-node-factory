@@ -22,16 +22,16 @@ from gnf.schemata.discoverycert_algo_transfer import DiscoverycertAlgoTransfer
 from gnf.schemata.discoverycert_algo_transfer import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata.heartbeat_a import HeartbeatA
 from gnf.schemata.heartbeat_a import HeartbeatA_Maker
+from gnf.schemata.initial_tadeed_algo_create import InitialTadeedAlgoCreate
+from gnf.schemata.initial_tadeed_algo_create import InitialTadeedAlgoCreate_Maker
 from gnf.schemata.initial_tadeed_algo_optin import InitialTadeedAlgoOptin
 from gnf.schemata.initial_tadeed_algo_optin import InitialTadeedAlgoOptin_Maker
 from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer
 from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer_Maker
+from gnf.schemata.new_tadeed_algo_optin import NewTadeedAlgoOptin
+from gnf.schemata.new_tadeed_algo_optin import NewTadeedAlgoOptin_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
-from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo
-from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo_Maker
-from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate
-from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate
@@ -47,8 +47,8 @@ __all__ = [
     "BasegnodesGet_Maker",
     "TavalidatorcertAlgoCreate",
     "TavalidatorcertAlgoCreate_Maker",
-    "OptinTadeedAlgo",
-    "OptinTadeedAlgo_Maker",
+    "NewTadeedAlgoOptin",
+    "NewTadeedAlgoOptin_Maker",
     "BasegnodeOtherCreate",
     "BasegnodeOtherCreate_Maker",
     "DiscoverycertAlgoCreate",
@@ -71,8 +71,8 @@ __all__ = [
     "TatradingrightsAlgoCreate_Maker",
     "InitialTadeedAlgoTransfer",
     "InitialTadeedAlgoTransfer_Maker",
-    "TadeedAlgoCreate",
-    "TadeedAlgoCreate_Maker",
+    "InitialTadeedAlgoCreate",
+    "InitialTadeedAlgoCreate_Maker",
     "DiscoverycertAlgoTransfer",
     "DiscoverycertAlgoTransfer_Maker",
     "TavalidatorcertAlgoTransfer",

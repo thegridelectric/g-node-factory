@@ -13,10 +13,10 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by validator
+from gnf.schemata import InitialTadeedAlgoCreate
+from gnf.schemata import InitialTadeedAlgoCreate_Maker
 from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import InitialTadeedAlgoTransfer_Maker
-from gnf.schemata import TadeedAlgoCreate
-from gnf.schemata import TadeedAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer
@@ -53,9 +53,9 @@ class DevValidator:
     # Messages sent
     ###################
 
-    def generate_create_tadeed_algo(
+    def generate_initial_tadeed_algo_create(
         self, terminal_asset_alias: str
-    ) -> TadeedAlgoCreate:
+    ) -> InitialTadeedAlgoCreate:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -70,7 +70,7 @@ class DevValidator:
         mtx = self.validator_multi.create_mtx(txn)
         mtx.sign(self.acct.sk)
 
-        payload = TadeedAlgoCreate_Maker(
+        payload = InitialTadeedAlgoCreate_Maker(
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple

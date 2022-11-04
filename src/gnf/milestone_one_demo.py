@@ -386,7 +386,7 @@ if ta_deed_idx is not None:
     raise Exception(f"Please ./sandbox reset to rerun demo")
 
 
-payload = molly.generate_create_tadeed_algo(
+payload = molly.generate_initial_tadeed_algo_create(
     terminal_asset_alias=holly.initial_terminal_asset_alias,
 )
 print("The GNodeFactory receives a half-signed TaDeed AssetCreationTxn.")
@@ -395,7 +395,7 @@ print(
 )
 print("and best-known grid topology information about this asset, tt signs and submits")
 
-atomic_metering_node = factory.create_tadeed_algo_received(payload)
+atomic_metering_node = factory.initial_tadeed_algo_create_received(payload)
 ta_deed_idx = atomic_metering_node.ownership_deed_nft_id
 print("")
 time.sleep(SCRIPT_SLEEP_S)

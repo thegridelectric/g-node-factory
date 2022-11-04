@@ -8,8 +8,8 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
 from gnf.schemata import InitialTadeedAlgoOptin
+from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import OldTadeedAlgoReturn
-from gnf.schemata import OptinTadeedAlgo
 
 
 LOGGER = logging.getLogger(__name__)
@@ -49,12 +49,12 @@ class PythonTaDaemon:
             raise Exception(f"Failure sending transaction")
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
-    def optin_tadeed_algo_received(self, payload: OptinTadeedAlgo):
+    def new_tadeed_algo_optin_received(self, payload: NewTadeedAlgoOptin):
         """
         Checks that payload.NewDeedIdx is a TaDeed
 
         Args:
-            payload: OptinTadeedAlgo
+            payload: NewTadeedAlgoOptin
         """
 
         txn = transaction.AssetOptInTxn(

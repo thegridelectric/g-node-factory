@@ -37,7 +37,7 @@ def main():
 
     optin_payload = factory.discoverycert_algo_create_received(payload)
 
-    python_ta_daemon.optin_tadeed_algo_received(optin_payload)
+    python_ta_daemon.new_tadeed_algo_optin_received(optin_payload)
 
     created_assets = factory.client.account_info(factory.admin_account.addr)[
         "created-assets"

@@ -37,12 +37,12 @@ from gnf.schemata import BasegnodeTerminalassetCreate
 from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import HeartbeatA
+from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import NewTadeedAlgoOptin
+from gnf.schemata import NewTadeedAlgoOptin_Maker
 from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OldTadeedAlgoReturn_Maker
-from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import OptinTadeedAlgo_Maker
-from gnf.schemata import TadeedAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 
@@ -223,7 +223,7 @@ class GNodeFactoryDb:
 
     def recursively_update_alias(
         self, g_node: BaseGNodeDb, new_parent_alias: str
-    ) -> Optional[OptinTadeedAlgo]:
+    ) -> Optional[NewTadeedAlgoOptin]:
         payload_hack = None
         orig_alias = g_node.alias
         final_word = orig_alias.split(".")[-1]
@@ -243,7 +243,7 @@ class GNodeFactoryDb:
             new_ta_deed_idx, signed_tadeed_creation_txn = self.create_updated_ta_deed(
                 g_node
             )
-            payload_hack = OptinTadeedAlgo_Maker(
+            payload_hack = NewTadeedAlgoOptin_Maker(
                 ta_daemon_addr=g_node.daemon_addr,
                 new_deed_idx=new_ta_deed_idx,
                 validator_addr=g_node.ownership_deed_validator_addr,
@@ -251,12 +251,12 @@ class GNodeFactoryDb:
                     signed_tadeed_creation_txn
                 ),
             ).tuple
-            print("Just created OptinTadeedAlgo payload" f"{payload_hack}")
+            print("Just created NewTadeedAlgoOptin payload" f"{payload_hack}")
         return payload_hack
 
     def create_pending_ctn(
         self, payload: DiscoverycertAlgoCreate
-    ) -> Optional[OptinTadeedAlgo]:
+    ) -> Optional[NewTadeedAlgoOptin]:
         """Given a ctn alias and the list of the aliases of the gnodes that
         will become its children, creates a pending ctn."""
         ctn_alias = payload.GNodeAlias
@@ -298,7 +298,7 @@ class GNodeFactoryDb:
 
     def discoverycert_algo_create_received(
         self, payload: DiscoverycertAlgoCreate
-    ) -> Optional[OptinTadeedAlgo]:
+    ) -> Optional[NewTadeedAlgoOptin]:
         if not isinstance(payload, DiscoverycertAlgoCreate):
             LOGGER.warning(
                 f"payload must be type DiscoverycertAlgoCreate, got {type(payload)}. Ignoring!"
@@ -344,8 +344,8 @@ class GNodeFactoryDb:
             return None
         return atomic_metering_node
 
-    def create_tadeed_algo_received(
-        self, payload: TadeedAlgoCreate
+    def initial_tadeed_algo_create_received(
+        self, payload: InitialTadeedAlgoCreate
     ) -> Optional[BaseGNodeDb]:
         """
         Co-signs and submits an AssetCreateTxn for a TaDeed. This method:
@@ -360,22 +360,22 @@ class GNodeFactoryDb:
             - Sends that payload to the ta.g_node_registry_addr
 
         Args:
-            payload: TadeedAlgoCreate. The validation of the type guarantees
+            payload: InitialTadeedAlgoCreate. The validation of the type guarantees
         that payload.HalfSignedCertCreationMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that creates an appropriately-formatted TaDeed
 
         Raises:
-            SchemaError: if the payload does not have type TadeedAlgoCreate
+            SchemaError: if the payload does not have type InitialTadeedAlgoCreate
 
         Returns:
             Optional[BaseGNodeDb]: None if the asset is not created
             otherwise the TerminalAsset database object
         """
         self.client.account_info(payload.ValidatorAddr)
-        if not isinstance(payload, TadeedAlgoCreate):
+        if not isinstance(payload, InitialTadeedAlgoCreate):
             LOGGER.warning(
-                f"payload must be type TadeedAlgoCreate, got {type(payload)}. Ignoring!"
+                f"payload must be type InitialTadeedAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
 

@@ -81,6 +81,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>rec0r8Vc4daPOhatR</SchemaRootId>
+      <createdTime>2022-11-04T17:08:01Z</createdTime>
+      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <SchemaRootscopy>recvWBuo1Ws1SIL4b</SchemaRootscopy>
+      <Alias>new.tadeed.algo.optin</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>rec1E12bdSXOtQ9qP</SchemaRootId>
       <createdTime>2022-06-23T18:39:41Z</createdTime>
       <AliasRoot>gt.eq.reporting.config</AliasRoot>
@@ -123,7 +134,7 @@
       <SchemaRootId>rec430tANcSG2ZavF</SchemaRootId>
       <createdTime>2022-09-19T18:20:13Z</createdTime>
       <AliasRoot>tadeed.algo.exchange</AliasRoot>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>001</CurrentSemanticEnd>
       <SchemaAxioms>exchange.tadeed.algo.010__4, exchange.tadeed.algo.010__1, exchange.tadeed.algo.010__3, exchange.tadeed.algo.010__6, exchange.tadeed.algo.010__5, exchange.tadeed.algo.010__2</SchemaAxioms>
@@ -526,13 +537,13 @@
     <SchemaRoot>
       <SchemaRootId>reccq04oqFsHHPTlN</SchemaRootId>
       <createdTime>2022-11-04T16:43:48Z</createdTime>
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <Alias>initial.tadeed.algo.transfer</Alias>
       <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
-      <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaRootscopy>recPf7eAhpge7kvO7</SchemaRootscopy>
+      <Alias>initial.tadeed.algo.transfer</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>reccsb7VI48EdWlGk</SchemaRootId>
@@ -563,13 +574,13 @@
     <SchemaRoot>
       <SchemaRootId>recde7ZQpg5BRpHxm</SchemaRootId>
       <createdTime>2022-11-04T16:50:16Z</createdTime>
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <Alias>old.tadeed.algo.return</Alias>
       <AliasRoot>old.tadeed.algo.return</AliasRoot>
-      <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaRootscopy>recMyDdiQjtfTMAP1</SchemaRootscopy>
+      <Alias>old.tadeed.algo.return</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recdi7BezBflZlH45</SchemaRootId>
@@ -914,11 +925,10 @@
       <SchemaRootId>recxnrRBEZg5cPVPt</SchemaRootId>
       <createdTime>2022-10-03T04:44:51Z</createdTime>
       <AliasRoot>optin.tadeed.algo</AliasRoot>
-      <Status>Active</Status>
+      <Status>Deprecated</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <SchemaRootscopy>rec9udDZT7JDuAbjl</SchemaRootscopy>
-      <SchemaRootscopy>recvWBuo1Ws1SIL4b</SchemaRootscopy>
       <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
       <Alias>optin.tadeed.algo</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
@@ -941,13 +951,13 @@
     <SchemaRoot>
       <SchemaRootId>recyuQKkp5CFejv2j</SchemaRootId>
       <createdTime>2022-09-21T18:01:12Z</createdTime>
-      <AliasRoot>tadeed.algo.create</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaAxioms>create.tadeed.algo.010__3, create.tadeed.algo.010__5, create.tadeed.algo.010__1, create.tadeed.algo.010__4, create.tadeed.algo.010__2, create.tadeed.algo.010__6</SchemaAxioms>
       <SchemaRootscopy>recO8OdobcISYms0B</SchemaRootscopy>
-      <Alias>tadeed.algo.create</Alias>
+      <Alias>initial.tadeed.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -2189,7 +2199,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrgkQl5py0MDmrUR/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrociW8bq2GlaYpy/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -3140,7 +3150,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recxnrRBEZg5cPVPt</SchemaRoot>
       <PreStatus>Active</PreStatus>
       <Alias>optin.tadeed.algo.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
@@ -3473,20 +3483,20 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recb1KEicJAMiVXJV</SchemaAttributes>
       <SchemaAttributes>recElgddLa2jgifep</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recde7ZQpg5BRpHxm</SchemaRoot>
       <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
       <PreStatus>Pending</PreStatus>
       <Alias>old.tadeed.algo.return.000</Alias>
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <IsCurrent>1</IsCurrent>
-      <Status>Pending</Status>
-      <SchemaRoot>recde7ZQpg5BRpHxm</SchemaRoot>
-      <AliasRoot>old.tadeed.algo.return</AliasRoot>
-      <MakeDataClass />
+      <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
       <IsCac />
       <IsComponent />
-      <RootStatus>Active</RootStatus>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3572,14 +3582,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>reccpDU01eDwuMvrf</Axioms>
       <ProtocolTypes>rect61DlS8mCPHnUL</ProtocolTypes>
       <PreStatus>Active</PreStatus>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.create</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -3646,20 +3656,20 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reci8yG7lmDsa51uV</SchemaAttributes>
       <SchemaAttributes>recTGNe2hCg0CwUye</SchemaAttributes>
       <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>reccq04oqFsHHPTlN</SchemaRoot>
       <ProtocolTypes>recsRFfTXSym7gX54</ProtocolTypes>
       <PreStatus>Pending</PreStatus>
       <Alias>initial.tadeed.algo.transfer.000</Alias>
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <IsCurrent>1</IsCurrent>
-      <Status>Pending</Status>
-      <SchemaRoot>reccq04oqFsHHPTlN</SchemaRoot>
-      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
-      <MakeDataClass />
+      <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
       <IsCac />
       <IsComponent />
-      <RootStatus>Active</RootStatus>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3932,7 +3942,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recdfhrc7m3cOTO3V</Axioms>
       <PreStatus>Deprecated</PreStatus>
       <Alias>tadeed.algo.exchange.000</Alias>
-      <RootStatus>Active</RootStatus>
+      <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
@@ -4623,24 +4633,23 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rec83NurYrYX8rTtT</SchemaAttributes>
       <SchemaAttributes>recALeeYiUYRuIxTl</SchemaAttributes>
       <SchemaAttributes>reciVjnhmOGgZCihR</SchemaAttributes>
-      <SemanticEnd>100</SemanticEnd>
-      <SchemaRoot>recxnrRBEZg5cPVPt</SchemaRoot>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>rec0r8Vc4daPOhatR</SchemaRoot>
       <Axioms>recLImSRvyPbLliuE</Axioms>
       <Axioms>recQn6ib10Nqp94i8</Axioms>
       <Axioms>rechGHjDdnbThfv1R</Axioms>
       <Axioms>recBWcnuqdt9wzynI</Axioms>
       <ProtocolTypes>rec9HUzZ3tgJOalLk</ProtocolTypes>
       <PreStatus>Active</PreStatus>
-      <Alias>optin.tadeed.algo.100</Alias>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
-      <AliasRoot>optin.tadeed.algo</AliasRoot>
-      <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
+      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
       <InGwProto />
@@ -6107,7 +6116,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrrfSgjKOQs6S3jE/recGXMXqUz6rHqVzg</SchemaAttribute>
+    <SchemaAttribute>itrLAvx2Ox7uyc3tG/recGXMXqUz6rHqVzg</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGfYlMT9hkh7Srg</SchemaAttributeId>
       <createdTime>2022-07-12T18:22:59Z</createdTime>
@@ -7418,7 +7427,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrrfSgjKOQs6S3jE/recW5AqimRRZZ3Rne</SchemaAttribute>
+    <SchemaAttribute>itrLAvx2Ox7uyc3tG/recW5AqimRRZZ3Rne</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recWJDdHiEzC7KYss</SchemaAttributeId>
       <createdTime>2022-06-10T12:21:07Z</createdTime>
@@ -8730,7 +8739,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrrfSgjKOQs6S3jE/recn2CJw74mLLQ8tr</SchemaAttribute>
+    <SchemaAttribute>itrLAvx2Ox7uyc3tG/recn2CJw74mLLQ8tr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recnK1jOCabM7QHvd</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:37Z</createdTime>
@@ -9581,8 +9590,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The asset name must have valid GNodeAlias format, with the world_alias (first word of asset name matching the universe (e.g. dev universe -&gt; world starts with `d`)</Description>
       <AxiomNumber>5</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 5</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 5</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9681,8 +9690,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The HalfSignedDeedCreationMtx.txn must have type AssetConfigTxn</Description>
       <AxiomNumber>2</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 2</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 2</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9817,8 +9826,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>1</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <ShortDescription>AssetConfigTransaction</ShortDescription>
-      <Name>optin.tadeed.algo.100 Schema Axiom 1</Name>
-      <Alias>optin.tadeed.algo.100</Alias>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 1</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9827,8 +9836,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>For the asset getting created: total = 1, unit_name=TADEED, asset_name must be &lt;= 32 char, manager is Gnf Admin.</Description>
       <AxiomNumber>4</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 4</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 4</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -9952,8 +9961,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>2</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <ShortDescription>Valid TaDeed</ShortDescription>
-      <Name>optin.tadeed.algo.100 Schema Axiom 2</Name>
-      <Alias>optin.tadeed.algo.100</Alias>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 2</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -10024,8 +10033,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>3</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <ShortDescription>Old TaDeed check</ShortDescription>
-      <Name>optin.tadeed.algo.100 Schema Axiom 3</Name>
-      <Alias>optin.tadeed.algo.100</Alias>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 3</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -10153,8 +10162,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must have signed the mtx, and the signature must match the txn</Description>
       <AxiomNumber>6</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 6</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 6</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -10233,8 +10242,8 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>4</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <ShortDescription>Correctly Signed</ShortDescription>
-      <Name>optin.tadeed.algo.100 Schema Axiom 4</Name>
-      <Alias>optin.tadeed.algo.100</Alias>
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 4</Name>
+      <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -10295,8 +10304,8 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The MultiSig must be the 2-sig multi [Gnf Admin, payload.ValidatorAddr]</Description>
       <AxiomNumber>3</AxiomNumber>
       <Schema>recO8OdobcISYms0B</Schema>
-      <Name>tadeed.algo.create.000 Schema Axiom 3</Name>
-      <Alias>tadeed.algo.create.000</Alias>
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 3</Name>
+      <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
     </SchemaAxiom>
     <SchemaAxiom>
@@ -10743,9 +10752,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recvWBuo1Ws1SIL4b</Type>
-      <Name>gnf optin.tadeed.algo.100</Name>
+      <Name>gnf new.tadeed.algo.optin.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>optin.tadeed.algo.100</TypeName>
+      <TypeName>new.tadeed.algo.optin.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recA4Y7Iy3elTbyCB</ProtocolTypeId>
@@ -10851,9 +10860,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recO8OdobcISYms0B</Type>
-      <Name>gnf tadeed.algo.create.000</Name>
+      <Name>gnf initial.tadeed.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.create.000</TypeName>
+      <TypeName>initial.tadeed.algo.create.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rectUrkJtiUPjNn5q</ProtocolTypeId>
