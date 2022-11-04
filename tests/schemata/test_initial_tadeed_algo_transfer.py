@@ -1,22 +1,23 @@
-"""Tests tadeed.algo.exchange type, version 001"""
+"""Tests initial.tadeed.algo.transfer type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedAlgoExchange_Maker as Maker
+from gnf.schemata import InitialTadeedAlgoTransfer_Maker as Maker
 
 
-def test_tadeed_algo_exchange_generated():
+def test_initial_tadeed_algo_transfer_generated():
 
     d = {
-        "OldTaDeedIdx": 20,
-        "TaDaemonAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
+        "MicroLat": 44838681,
+        "MicroLon": -68705311,
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "SignedNewDeedTransferTxn": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
-        "TypeName": "tadeed.algo.exchange",
-        "Version": "001",
+        "TaDaemonAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
+        "FirstDeedTransferMtx": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+        "TypeName": "initial.tadeed.algo.transfer",
+        "Version": "000",
     }
 
     with pytest.raises(SchemaError):
@@ -34,10 +35,11 @@ def test_tadeed_algo_exchange_generated():
 
     # test Maker init
     t = Maker(
-        old_ta_deed_idx=gtuple.OldTaDeedIdx,
-        ta_daemon_addr=gtuple.TaDaemonAddr,
+        micro_lat=gtuple.MicroLat,
+        micro_lon=gtuple.MicroLon,
         validator_addr=gtuple.ValidatorAddr,
-        signed_new_deed_transfer_txn=gtuple.SignedNewDeedTransferTxn,
+        ta_daemon_addr=gtuple.TaDaemonAddr,
+        first_deed_transfer_mtx=gtuple.FirstDeedTransferMtx,
     ).tuple
     assert t == gtuple
 
@@ -51,12 +53,12 @@ def test_tadeed_algo_exchange_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["OldTaDeedIdx"]
+    del d2["MicroLat"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TaDaemonAddr"]
+    del d2["MicroLon"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -66,7 +68,12 @@ def test_tadeed_algo_exchange_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["SignedNewDeedTransferTxn"]
+    del d2["TaDaemonAddr"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["FirstDeedTransferMtx"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -74,7 +81,11 @@ def test_tadeed_algo_exchange_generated():
     # Behavior on incorrect types
     ######################################
 
-    d2 = dict(d, OldTaDeedIdx="20.1")
+    d2 = dict(d, MicroLat="44838681.1")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d, MicroLon="-68705311.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

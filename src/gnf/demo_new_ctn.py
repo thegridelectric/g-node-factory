@@ -68,7 +68,7 @@ def main():
 
     # To check that the deeds are in the correct place:
 
-    python_ta_daemon.client.account_info(python_ta_daemon.ta_multi.addr)
+    python_ta_daemon.client.account_info(python_ta_daemon.acct.addr)
 
     python_ta_daemon.client.account_info(factory.admin_account.addr)
 

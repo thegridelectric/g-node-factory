@@ -13,10 +13,10 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by validator
+from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata import TadeedAlgoCreate
 from gnf.schemata import TadeedAlgoCreate_Maker
-from gnf.schemata import TadeedAlgoTransfer
-from gnf.schemata import TadeedAlgoTransfer_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer
@@ -102,66 +102,50 @@ class DevValidator:
         self.send_message_to_gnf(payload)
         return payload
 
-    def generate_transfer_tadeed_algo(
+    def generate_initial_tadeed_algo_transfer(
         self,
         ta_deed_idx: int,
-        ta_owner_addr: str,
         ta_daemon_addr: str,
         micro_lat: int,
         micro_lon: int,
-    ) -> Optional[TadeedAlgoTransfer]:
+    ) -> Optional[InitialTadeedAlgoTransfer]:
         """
         This method is supposed to be called exactly for the FIRST time a TaDeed
         NFT is created for this ta_owner. For updated deeds, uses ExchangeTadeedAlgo
 
-        Let ta_multi be 2-sig [GnfAdmin, ta_daemon, ta_owner] acct. This method:
-
-         - Makes sure ta_multi account has at least TaDeedConsideration Algos
-         - Has ta_multi account opt into the ta_deed_idx (requires
-        ta_owner sk, and ta_daemon sk, which we are giving it for the sake of expediency
-        in this dev version)
-
-          - Creates the TadeedAlgoTransfer payload and sends it to the Gnf
+          - Creates the InitialTadeedAlgoTransfer payload and sends it to the Gnf
           - Returns the payload
         Args:
             ta_deed_idx (int): asset id of the TaDeed NFT
-            ta_owner (BasicAccount): The owner of the TerminalAsset
             ta_daemon (BasicAccount): The Layer 1 contract supporting NFT ownership
             and creation (TaDeed, TaTradingRights)
 
         Returns:
-            TadeedAlgoTransfer if sent,
+            InitialTadeedAlgoTransfer if sent,
             None if ta_multi does not have ta_deed_consideration_algos
         """
-        ta_multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[
-                config.Algo().gnf_admin_addr,
-                ta_daemon_addr,
-                ta_owner_addr,
-            ],
-        )
+
         required_algos = config.Algo().ta_deed_consideration_algos
-        if algo_utils.algos(ta_multi.addr) < required_algos:
+        if algo_utils.algos(ta_daemon_addr) < required_algos:
+            Exception(f"ta_daemon_addr not sufficiently funded!")
             return None
         txn = transaction.AssetTransferTxn(
             sender=self.validator_multi.addr,
-            receiver=ta_multi.addr,
+            receiver=ta_daemon_addr,
             amt=1,
             index=ta_deed_idx,
             sp=self.client.suggested_params(),
         )
         mtx = self.validator_multi.create_mtx(txn)
         mtx.sign(self.acct.sk)
-        payload = TadeedAlgoTransfer_Maker(
-            first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
-            deed_validator_addr=self.acct.addr,
-            ta_owner_addr=ta_owner_addr,
-            ta_daemon_addr=ta_daemon_addr,
+        payload = InitialTadeedAlgoTransfer_Maker(
             micro_lat=micro_lat,
             micro_lon=micro_lon,
-        ).tuple
+            validator_addr=self.acct.addr,
+            ta_daemon_addr=ta_daemon_addr,
+            first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
+        )
+
         self.send_message_to_gnf(payload)
         return payload
 

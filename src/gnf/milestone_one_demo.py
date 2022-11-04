@@ -508,7 +508,7 @@ print("")
 time.sleep(SCRIPT_SLEEP_S)
 
 
-payload = molly.generate_transfer_tadeed_algo(
+payload = molly.generate_initial_tadeed_algo_transfer(
     ta_deed_idx=ta_deed_idx,
     ta_owner_addr=holly.acct.addr,
     ta_daemon_addr=daemon.acct.addr,
@@ -522,7 +522,7 @@ print(
     "Molly creates and sends a TransferTadeedAlgo message to the GNodeFactory. The GNodeFactory validates that"
 )
 print("everything is in order, co-signs the deed transfer and submits it to the chain.")
-terminal_asset = factory.transfer_tadeed_algo_received(payload)
+terminal_asset = factory.initial_tadeed_algo_transfer_received(payload)
 print("")
 print("")
 time.sleep(SCRIPT_SLEEP_S)

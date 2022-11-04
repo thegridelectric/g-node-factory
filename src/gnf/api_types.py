@@ -12,11 +12,11 @@ from gnf.schemata import BasegnodeTerminalassetCreate_Maker
 from gnf.schemata import DiscoverycertAlgoCreate_Maker
 from gnf.schemata import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata import HeartbeatA_Maker
+from gnf.schemata import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata import OptinTadeedAlgo_Maker
 from gnf.schemata import TadeedAlgoCreate_Maker
 from gnf.schemata import TadeedAlgoExchange_Maker
 from gnf.schemata import TadeedAlgoOptinInitial_Maker
-from gnf.schemata import TadeedAlgoTransfer_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
@@ -35,11 +35,11 @@ type_makers: List[HeartbeatA_Maker] = [
     DiscoverycertAlgoCreate_Maker,
     DiscoverycertAlgoTransfer_Maker,
     HeartbeatA_Maker,
+    InitialTadeedAlgoTransfer_Maker,
     OptinTadeedAlgo_Maker,
     TadeedAlgoCreate_Maker,
     TadeedAlgoExchange_Maker,
     TadeedAlgoOptinInitial_Maker,
-    TadeedAlgoTransfer_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
     TavalidatorcertAlgoTransfer_Maker,
@@ -63,11 +63,11 @@ def version_by_type_name() -> List[str]:
         "discoverycert.algo.create": "000",
         "discoverycert.algo.transfer": "000",
         "heartbeat.a": "000",
+        "initial.tadeed.algo.transfer": "000",
         "optin.tadeed.algo": "100",
         "tadeed.algo.create": "000",
-        "tadeed.algo.exchange": "000",
+        "tadeed.algo.exchange": "001",
         "tadeed.algo.optin.initial": "000",
-        "tadeed.algo.transfer": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
         "tavalidatorcert.algo.transfer": "000",
@@ -93,11 +93,11 @@ def status_by_versioned_type_name() -> List[str]:
         "discoverycert.algo.create.000": "Active",
         "discoverycert.algo.transfer.000": "Active",
         "heartbeat.a.000": "Active",
-        "optin.tadeed.algo.100": "Pending",
+        "initial.tadeed.algo.transfer.000": "Pending",
+        "optin.tadeed.algo.100": "Active",
         "tadeed.algo.create.000": "Active",
-        "tadeed.algo.exchange.000": "Active",
-        "tadeed.algo.optin.initial.000": "Pending",
-        "tadeed.algo.transfer.000": "Active",
+        "tadeed.algo.exchange.001": "Pending",
+        "tadeed.algo.optin.initial.000": "Active",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",
         "tavalidatorcert.algo.transfer.000": "Active",

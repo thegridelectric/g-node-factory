@@ -1,10 +1,5 @@
-####################
-# Under Construction
-#####################
 import logging
-from typing import Optional
 
-from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 
@@ -13,15 +8,9 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
-from gnf.algo_utils import PendingTxnResponse
 from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import TadeedAlgoExchange
 from gnf.schemata import TadeedAlgoOptinInitial
-
-
-# sent by the daemon
-
-# types received by the daemon
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,21 +22,7 @@ class PythonTaDaemon:
         self.client: AlgodClient = algo_utils.get_algod_client(algo_settings)
         self.acct: BasicAccount = BasicAccount(private_key=sk)
         self.ta_owner_addr = ta_owner_addr
-        self.ta_multi: MultisigAccount = self.get_ta_multi()
         LOGGER.info("TaOwner Smart Daemon Initialized")
-
-    def get_ta_multi(self) -> MultisigAccount:
-        """
-        Returns:
-            Multisig: returns the multisig ordered [gnfadmin, daemon, taOwner] with
-            signing threshold 2
-        """
-        addresses = [
-            self.algo_settings.gnf_admin_addr,
-            config.SandboxDemo().holly_ta_daemon_addr,
-            config.SandboxDemo().holly_homeowner_addr,
-        ]
-        return MultisigAccount(version=1, threshold=2, addresses=addresses)
 
     ##########################
     # Messages Received
@@ -91,24 +66,29 @@ class PythonTaDaemon:
 
         signed_txn = txn.sign(self.acct.sk)
         try:
-            tx_id = self.client.send_transaction(signed_txn)
+            self.client.send_transaction(signed_txn)
         except:
             raise Exception(f"Failure sending transaction")
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
     def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
         """
-         - Sign and submit the AssetTransfer mtx, which will send the old deed from
-        the ta_multi acct to the GNodeFactory admin acct.
+         - Transfer the  old deed back to the GNodeFactory admin acct.
 
         Args:
             payload: TadeedAlgoExchange
         """
-        mtx = encoding.future_msgpack_decode(payload.OldDeedTransferMtx)
-        mtx.sign(self.acct.sk)
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.acct.addr,
+            receiver=config.Algo().gnf_admin_addr,
+            amt=1,
+            index=payload.OldTaDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
         try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())

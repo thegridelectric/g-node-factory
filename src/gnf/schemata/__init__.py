@@ -22,6 +22,8 @@ from gnf.schemata.discoverycert_algo_transfer import DiscoverycertAlgoTransfer
 from gnf.schemata.discoverycert_algo_transfer import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata.heartbeat_a import HeartbeatA
 from gnf.schemata.heartbeat_a import HeartbeatA_Maker
+from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer
+from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo_Maker
 from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate
@@ -30,8 +32,6 @@ from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange
 from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange_Maker
 from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial
 from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial_Maker
-from gnf.schemata.tadeed_algo_transfer import TadeedAlgoTransfer
-from gnf.schemata.tadeed_algo_transfer import TadeedAlgoTransfer_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate
@@ -69,8 +69,8 @@ __all__ = [
     "BasegnodeGt_Maker",
     "TatradingrightsAlgoCreate",
     "TatradingrightsAlgoCreate_Maker",
-    "TadeedAlgoTransfer",
-    "TadeedAlgoTransfer_Maker",
+    "InitialTadeedAlgoTransfer",
+    "InitialTadeedAlgoTransfer_Maker",
     "TadeedAlgoCreate",
     "TadeedAlgoCreate_Maker",
     "DiscoverycertAlgoTransfer",

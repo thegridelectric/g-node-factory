@@ -51,15 +51,14 @@ def main():
     payload = holly.opt_into_original_deed()
     python_ta_daemon.tadeed_algo_optin_initial_received(payload)
 
-    payload = molly.generate_transfer_tadeed_algo(
+    payload = molly.generate_initial_tadeed_algo_transfer(
         ta_deed_idx=ta_deed_idx,
-        ta_owner_addr=holly.acct.addr,
         ta_daemon_addr=python_ta_daemon.acct.addr,
         micro_lat=45666353,
         micro_lon=-68691705,
     )
 
-    factory.transfer_tadeed_algo_received(payload)
+    factory.initial_tadeed_algo_transfer_received(payload)
 
 
 if __name__ == "__main__":

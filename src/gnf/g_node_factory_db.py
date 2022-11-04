@@ -37,12 +37,12 @@ from gnf.schemata import BasegnodeTerminalassetCreate
 from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import HeartbeatA
+from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import OptinTadeedAlgo_Maker
 from gnf.schemata import TadeedAlgoCreate
 from gnf.schemata import TadeedAlgoExchange
 from gnf.schemata import TadeedAlgoExchange_Maker
-from gnf.schemata import TadeedAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 
@@ -146,57 +146,46 @@ class GNodeFactoryDb:
             raise Exception(f"new_ta_deed_idx is None!")
         if old_ta_deed_idx is None:
             raise Exception(f"old_ta_deed_idx is None!")
-        ta_multi = MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[self.admin_account.addr, ta_daemon_addr, ta_owner_addr],
-        )
-        # First, transfer new deed to ta_multi
-        transfer_new_txn = transaction.AssetTransferTxn(
-            sender=self.admin_account.addr,
-            receiver=ta_multi.addr,
-            amt=1,
-            index=new_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
 
-        signed_txn = transfer_new_txn.sign(self.admin_account.sk)
-        txid = self.client.send_raw_transaction(encoding.msgpack_encode(signed_txn))
-        LOGGER.info(
-            f"Transferring new deed {new_ta_deed_idx} w txid {txid[-6:]}. Waiting for confirmation"
-        )
-        r = algo_utils.wait_for_transaction(self.client, txid)
-
-        # Second, opt into old tadeed
+        # opt into old tadeed
         txn = transaction.AssetOptInTxn(
             sender=self.admin_account.addr,
             index=old_ta_deed_idx,
             sp=self.client.suggested_params(),
         )
         signed_txn = txn.sign(self.admin_account.sk)
-        txid = self.client.send_raw_transaction(encoding.msgpack_encode(signed_txn))
-        LOGGER.info(
-            f"Opting into old deed {old_ta_deed_idx} w txid {txid[-6:]}. Waiting for confirmation"
-        )
-        r = algo_utils.wait_for_transaction(self.client, txid)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
-        # Third, create mtx to transfer old deed to Gnf
-        transfer_txn = transaction.AssetTransferTxn(
-            sender=ta_multi.addr,
-            receiver=self.admin_account.addr,
+        # transfer new deed to ta_daeomon
+        txn = transaction.AssetTransferTxn(
+            sender=self.admin_account.addr,
+            receiver=ta_daemon_addr,
             amt=1,
-            index=old_ta_deed_idx,
+            index=new_ta_deed_idx,
             sp=self.client.suggested_params(),
         )
-        transfer_mtx = ta_multi.create_mtx(transfer_txn)
-        transfer_mtx.sign(self.admin_account.sk)
 
+        signed_new_deed_transafer_txn = txn.sign(self.admin_account.sk)
+        try:
+            self.client.send_transaction(signed_new_deed_transafer_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(
+            self.client, signed_new_deed_transafer_txn.get_txid()
+        )
+
+        # ask TaDaemon to transfer back the old deed
         payload = TadeedAlgoExchange_Maker(
-            validator_addr=validator_addr,
-            ta_owner_addr=ta_owner_addr,
+            old_ta_deed_idx=old_ta_deed_idx,
             ta_daemon_addr=ta_daemon_addr,
-            new_ta_deed_idx=new_ta_deed_idx,
-            old_deed_transfer_mtx=encoding.msgpack_encode(transfer_mtx),
+            validator_addr=validator_addr,
+            signed_new_deed_transfer_txn=encoding.msgpack_encode(
+                signed_new_deed_transafer_txn
+            ),
         ).tuple
         return payload
 
@@ -508,7 +497,7 @@ class GNodeFactoryDb:
         ctn = self.update_ctn_to_active(payload)
         return ctn.dc
 
-    def create_terminal_asset(self, payload: TadeedAlgoTransfer) -> BaseGNodeDb:
+    def create_terminal_asset(self, payload: InitialTadeedAlgoTransfer) -> BaseGNodeDb:
         mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
         asset_idx = mtx.transaction.dictify()["xaid"]
         v_multi = MultisigAccount(
@@ -557,8 +546,8 @@ class GNodeFactoryDb:
         LOGGER.info(f"TerminalAsset is now Active: {terminal_asset}")
         return terminal_asset
 
-    def transfer_tadeed_algo_received(
-        self, payload: TadeedAlgoTransfer
+    def initial_tadeed_algo_transfer_received(
+        self, payload: InitialTadeedAlgoTransfer
     ) -> Optional[BaseGNode]:
         """
             - Checks  consistency for the GNodeAlias in the deed:
@@ -595,7 +584,7 @@ class GNodeFactoryDb:
             - StatusBaseGgnodeAlgo otherwise
         """
 
-        if not isinstance(payload, TadeedAlgoTransfer):
+        if not isinstance(payload, InitialTadeedAlgoTransfer):
             LOGGER.warning(
                 f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
