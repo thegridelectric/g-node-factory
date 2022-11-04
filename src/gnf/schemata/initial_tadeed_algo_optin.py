@@ -1,4 +1,4 @@
-"""Type tadeed.algo.optin.initial, version 000"""
+"""Type initial.tadeed.algo.optin, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,12 +10,12 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class TadeedAlgoOptinInitial(BaseModel):
+class InitialTadeedAlgoOptin(BaseModel):
     TerminalAssetAlias: str  #
     TaOwnerAddr: str  #
     ValidatorAddr: str  #
     SignedInitialDaemonFundingTxn: str  #
-    TypeName: Literal["tadeed.algo.optin.initial"] = "tadeed.algo.optin.initial"
+    TypeName: Literal["initial.tadeed.algo.optin"] = "initial.tadeed.algo.optin"
     Version: str = "000"
 
     _validator_terminal_asset_alias = predicate_validator(
@@ -42,8 +42,8 @@ class TadeedAlgoOptinInitial(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class TadeedAlgoOptinInitial_Maker:
-    type_name = "tadeed.algo.optin.initial"
+class InitialTadeedAlgoOptin_Maker:
+    type_name = "initial.tadeed.algo.optin"
     version = "000"
 
     def __init__(
@@ -54,7 +54,7 @@ class TadeedAlgoOptinInitial_Maker:
         signed_initial_daemon_funding_txn: str,
     ):
 
-        self.tuple = TadeedAlgoOptinInitial(
+        self.tuple = InitialTadeedAlgoOptin(
             TerminalAssetAlias=terminal_asset_alias,
             TaOwnerAddr=ta_owner_addr,
             ValidatorAddr=validator_addr,
@@ -63,11 +63,11 @@ class TadeedAlgoOptinInitial_Maker:
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: TadeedAlgoOptinInitial) -> str:
+    def tuple_to_type(cls, tuple: InitialTadeedAlgoOptin) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> TadeedAlgoOptinInitial:
+    def type_to_tuple(cls, t: str) -> InitialTadeedAlgoOptin:
         try:
             d = json.loads(t)
         except TypeError:
@@ -77,7 +77,7 @@ class TadeedAlgoOptinInitial_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> TadeedAlgoOptinInitial:
+    def dict_to_tuple(cls, d: dict) -> InitialTadeedAlgoOptin:
         d2 = dict(d)
         if "TerminalAssetAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TerminalAssetAlias")
@@ -90,7 +90,7 @@ class TadeedAlgoOptinInitial_Maker:
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
-        return TadeedAlgoOptinInitial(
+        return InitialTadeedAlgoOptin(
             TerminalAssetAlias=d2["TerminalAssetAlias"],
             TaOwnerAddr=d2["TaOwnerAddr"],
             ValidatorAddr=d2["ValidatorAddr"],

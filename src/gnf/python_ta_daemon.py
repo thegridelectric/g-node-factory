@@ -7,10 +7,9 @@ import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
-from gnf.algo_utils import MultisigAccount
+from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import TadeedAlgoOptinInitial
 
 
 LOGGER = logging.getLogger(__name__)
@@ -28,7 +27,7 @@ class PythonTaDaemon:
     # Messages Received
     ##########################
 
-    def tadeed_algo_optin_initial_received(self, payload: TadeedAlgoOptinInitial):
+    def initial_tadeed_algo_optin_received(self, payload: InitialTadeedAlgoOptin):
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,

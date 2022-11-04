@@ -205,12 +205,12 @@
     <SchemaRoot>
       <SchemaRootId>recERKCcoJa8mkC8L</SchemaRootId>
       <createdTime>2022-11-04T13:41:08Z</createdTime>
-      <AliasRoot>tadeed.algo.optin.initial</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
       <Status>Active</Status>
       <ProtocolCategory>Json</ProtocolCategory>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <SchemaRootscopy>recAWKkS0hcyws7O6</SchemaRootscopy>
-      <Alias>tadeed.algo.optin.initial</Alias>
+      <Alias>initial.tadeed.algo.optin</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -2189,7 +2189,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrQpdB3a8TiyzUA2/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrgkQl5py0MDmrUR/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -3171,14 +3171,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recERKCcoJa8mkC8L</SchemaRoot>
       <ProtocolTypes>recYSfcJBIVxFIWCZ</ProtocolTypes>
       <PreStatus>Active</PreStatus>
-      <Alias>tadeed.algo.optin.initial.000</Alias>
+      <Alias>initial.tadeed.algo.optin.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.optin.initial</AliasRoot>
+      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -6107,7 +6107,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrSrJz1q43pDDLai/recGXMXqUz6rHqVzg</SchemaAttribute>
+    <SchemaAttribute>itrrfSgjKOQs6S3jE/recGXMXqUz6rHqVzg</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGfYlMT9hkh7Srg</SchemaAttributeId>
       <createdTime>2022-07-12T18:22:59Z</createdTime>
@@ -7418,7 +7418,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrSrJz1q43pDDLai/recW5AqimRRZZ3Rne</SchemaAttribute>
+    <SchemaAttribute>itrrfSgjKOQs6S3jE/recW5AqimRRZZ3Rne</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recWJDdHiEzC7KYss</SchemaAttributeId>
       <createdTime>2022-06-10T12:21:07Z</createdTime>
@@ -8730,7 +8730,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrSrJz1q43pDDLai/recn2CJw74mLLQ8tr</SchemaAttribute>
+    <SchemaAttribute>itrrfSgjKOQs6S3jE/recn2CJw74mLLQ8tr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recnK1jOCabM7QHvd</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:37Z</createdTime>
@@ -10797,9 +10797,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-11-03T14:32:25Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recAWKkS0hcyws7O6</Type>
-      <Name>gnf tadeed.algo.optin.initial.000</Name>
+      <Name>gnf initial.tadeed.algo.optin.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.optin.initial.000</TypeName>
+      <TypeName>initial.tadeed.algo.optin.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recZiKOMXJ8UCneY9</ProtocolTypeId>

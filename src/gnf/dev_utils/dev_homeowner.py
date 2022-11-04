@@ -13,8 +13,8 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by homeowner
-from gnf.schemata import TadeedAlgoOptinInitial
-from gnf.schemata import TadeedAlgoOptinInitial_Maker
+from gnf.schemata import InitialTadeedAlgoOptin
+from gnf.schemata import InitialTadeedAlgoOptin_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -49,14 +49,14 @@ class DevHomeowner:
     # Messages Sent
     ##########################
 
-    def opt_into_original_deed(self) -> TadeedAlgoOptinInitial:
+    def initial_tadeed_algo_optin_generated(self) -> InitialTadeedAlgoOptin:
         """
          - Sends 50 algos to TaDaemon acct
-         - Sends TadeedAlgoOptinInitial to TaDaemon, with signed
+         - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
          funding txn for proof of identity.
 
         Returns:
-            TadeedAlgoOptinInitial:
+            InitialTadeedAlgoOptin:
         """
         required_algos = config.Algo().ta_deed_consideration_algos
         txn = transaction.PaymentTxn(
@@ -72,7 +72,7 @@ class DevHomeowner:
             raise errors.AlgoError(f"Failure sending transaction")
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
-        payload = TadeedAlgoOptinInitial_Maker(
+        payload = InitialTadeedAlgoOptin_Maker(
             terminal_asset_alias=self.initial_terminal_asset_alias,
             ta_owner_addr=self.acct.addr,
             validator_addr=self.validator_addr,

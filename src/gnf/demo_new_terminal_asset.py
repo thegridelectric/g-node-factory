@@ -48,8 +48,8 @@ def main():
     atomic_metering_node = factory.create_tadeed_algo_received(payload)
     ta_deed_idx = atomic_metering_node.ownership_deed_nft_id
 
-    payload = holly.opt_into_original_deed()
-    python_ta_daemon.tadeed_algo_optin_initial_received(payload)
+    payload = holly.initial_tadeed_algo_optin_generated()
+    python_ta_daemon.initial_tadeed_algo_optin_received(payload)
 
     payload = molly.generate_initial_tadeed_algo_transfer(
         ta_deed_idx=ta_deed_idx,
