@@ -204,12 +204,15 @@ class GNodeFactoryDb:
     # Messages Received
     ##########################
 
-    def create_updated_ta_deed(self, g_node: BaseGNodeDb):
+    def create_updated_ta_deed(
+        self, g_node: BaseGNodeDb
+    ) -> tuple[int, transaction.SignedTransaction]:
         """
         Creates a TADEED with asset name reflecting the updated
         GNodeAlias
         Returns:
-            int: asset_idx for new TADEED
+            tuple[int, transaction.SignedTransaction]: asset_idx for new TADEED,
+            signed transaction (by GnfAdmin) for creating new TADEED
         """
         txn = transaction.AssetCreateTxn(
             sender=self.admin_account.addr,
@@ -231,7 +234,7 @@ class GNodeFactoryDb:
 
     def recursively_update_alias(
         self, g_node: BaseGNodeDb, new_parent_alias: str
-    ) -> OptinTadeedAlgo:
+    ) -> Optional[OptinTadeedAlgo]:
         payload_hack = None
         orig_alias = g_node.alias
         final_word = orig_alias.split(".")[-1]
@@ -259,7 +262,8 @@ class GNodeFactoryDb:
                     signed_tadeed_creation_txn
                 ),
             ).tuple
-            return payload_hack
+            print("Just created OptinTadeedAlgo payload" f"{payload_hack}")
+        return payload_hack
 
     def create_pending_ctn(
         self, payload: DiscoverycertAlgoCreate

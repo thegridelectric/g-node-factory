@@ -13,9 +13,9 @@ from gnf.schemata import DiscoverycertAlgoCreate_Maker
 from gnf.schemata import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata import HeartbeatA_Maker
 from gnf.schemata import OptinTadeedAlgo_Maker
-from gnf.schemata import SignandsubmitMtxAlgo_Maker
 from gnf.schemata import TadeedAlgoCreate_Maker
 from gnf.schemata import TadeedAlgoExchange_Maker
+from gnf.schemata import TadeedAlgoOptinInitial_Maker
 from gnf.schemata import TadeedAlgoTransfer_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
@@ -36,9 +36,9 @@ type_makers: List[HeartbeatA_Maker] = [
     DiscoverycertAlgoTransfer_Maker,
     HeartbeatA_Maker,
     OptinTadeedAlgo_Maker,
-    SignandsubmitMtxAlgo_Maker,
     TadeedAlgoCreate_Maker,
     TadeedAlgoExchange_Maker,
+    TadeedAlgoOptinInitial_Maker,
     TadeedAlgoTransfer_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
@@ -64,9 +64,9 @@ def version_by_type_name() -> List[str]:
         "discoverycert.algo.transfer": "000",
         "heartbeat.a": "000",
         "optin.tadeed.algo": "100",
-        "signandsubmit.mtx.algo": "000",
         "tadeed.algo.create": "000",
         "tadeed.algo.exchange": "000",
+        "tadeed.algo.optin.initial": "000",
         "tadeed.algo.transfer": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
@@ -94,9 +94,9 @@ def status_by_versioned_type_name() -> List[str]:
         "discoverycert.algo.transfer.000": "Active",
         "heartbeat.a.000": "Active",
         "optin.tadeed.algo.100": "Pending",
-        "signandsubmit.mtx.algo.000": "Active",
         "tadeed.algo.create.000": "Active",
         "tadeed.algo.exchange.000": "Active",
+        "tadeed.algo.optin.initial.000": "Pending",
         "tadeed.algo.transfer.000": "Active",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",

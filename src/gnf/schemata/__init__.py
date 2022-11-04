@@ -24,12 +24,12 @@ from gnf.schemata.heartbeat_a import HeartbeatA
 from gnf.schemata.heartbeat_a import HeartbeatA_Maker
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo_Maker
-from gnf.schemata.signandsubmit_mtx_algo import SignandsubmitMtxAlgo
-from gnf.schemata.signandsubmit_mtx_algo import SignandsubmitMtxAlgo_Maker
 from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate
 from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate_Maker
 from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange
 from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange_Maker
+from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial
+from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial_Maker
 from gnf.schemata.tadeed_algo_transfer import TadeedAlgoTransfer
 from gnf.schemata.tadeed_algo_transfer import TadeedAlgoTransfer_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
@@ -47,8 +47,6 @@ __all__ = [
     "BasegnodesGet_Maker",
     "TavalidatorcertAlgoCreate",
     "TavalidatorcertAlgoCreate_Maker",
-    "SignandsubmitMtxAlgo",
-    "SignandsubmitMtxAlgo_Maker",
     "OptinTadeedAlgo",
     "OptinTadeedAlgo_Maker",
     "BasegnodeOtherCreate",
@@ -61,6 +59,8 @@ __all__ = [
     "TadeedAlgoExchange_Maker",
     "BasegnodeCtnCreate",
     "BasegnodeCtnCreate_Maker",
+    "TadeedAlgoOptinInitial",
+    "TadeedAlgoOptinInitial_Maker",
     "BasegnodeTerminalassetCreate",
     "BasegnodeTerminalassetCreate_Maker",
     "BasegnodeMarketmakerCreate",

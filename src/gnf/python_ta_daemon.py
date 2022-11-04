@@ -9,13 +9,14 @@ from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 
 import gnf.algo_utils as algo_utils
+import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
 from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import SignandsubmitMtxAlgo
 from gnf.schemata import TadeedAlgoExchange
+from gnf.schemata import TadeedAlgoOptinInitial
 
 
 # sent by the daemon
@@ -52,51 +53,27 @@ class PythonTaDaemon:
     # Messages Received
     ##########################
 
-    def signandsubmit_mtx_algo_received(
-        self, payload: SignandsubmitMtxAlgo
-    ) -> Optional[PendingTxnResponse]:
-        """Checks that the transaction is a Multisig transaction where
-        the TaOwner is one of the addresses and the TaOwner has signed
-        the transaction.
-
-        Also checks that payload.SignerAddress is TaDaemon address.
-        Then signs and submits
-
-        Args:
-            payload: SignandsubmitMtxAlgo)
-
-        Returns:
-            PendingTxnResponse of submitted Mtx if the original signer is ta_owner, otherwise None
-        """
-        ta_owner_address_as_bytes = encoding.decode_address(self.ta_owner_addr)
-        mtx = encoding.future_msgpack_decode(payload.Mtx)
-        x = list(
-            filter(
-                lambda x: x.public_key == ta_owner_address_as_bytes,
-                mtx.multisig.subsigs,
-            )
+    def tadeed_algo_optin_initial_received(self, payload: TadeedAlgoOptinInitial):
+        ta_deed_idx = api_utils.get_tadeed_cert_idx(
+            terminal_asset_alias=payload.TerminalAssetAlias,
+            validator_addr=payload.ValidatorAddr,
         )
-        if len(x) == 0:
-            LOGGER.info(
-                f"Ignoring signandsubmit. ta_owner ..{self.ta_owner_addr} not in mtx addresses"
+        if ta_deed_idx is None:
+            raise Exception(
+                f"called when validator {payload.ValidatorAddr[-6:]} did NOT have "
+                f"TADEED for {payload.TerminalAssetAlias}!"
             )
-            return
-        ta_owner_subsig = x[0]
-        if ta_owner_subsig.signature is None:
-            LOGGER.info(
-                f"Ignoring signandsubmit. ta_owner ..{self.ta_owner_addr} did not sign"
-            )
-        if payload.SignerAddress != self.acct.addr:
-            LOGGER.info(f"Igoring signandsubmit. My acct not the SignerAddress")
-            return None
-
-        mtx.sign(self.acct.sk)
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=ta_deed_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
         try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
     def optin_tadeed_algo_received(self, payload: OptinTadeedAlgo):
         """
@@ -105,7 +82,7 @@ class PythonTaDaemon:
         Args:
             payload: OptinTadeedAlgo
         """
-        # TODO: check that payload.NewDeedIdx is a TaDeed
+
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=payload.NewDeedIdx,
@@ -117,7 +94,7 @@ class PythonTaDaemon:
             tx_id = self.client.send_transaction(signed_txn)
         except:
             raise Exception(f"Failure sending transaction")
-        # r = algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
     def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
         """

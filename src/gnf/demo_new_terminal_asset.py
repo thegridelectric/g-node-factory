@@ -23,6 +23,12 @@ def main():
         initial_terminal_asset_alias=config.SandboxDemo().initial_holly_ta_alias,
     )
 
+    python_ta_daemon = PythonTaDaemon(
+        sk=config.HollyTaDaemonSettings().sk.get_secret_value(),
+        ta_owner_addr=config.SandboxDemo().holly_homeowner_addr,
+        algo_settings=config.Algo(),
+    )
+
     molly = DevValidator(config.MollyMetermaidSettings())
 
     cert_idx = api_utils.get_validator_cert_idx(validator_addr=molly.acct.addr)
@@ -43,14 +49,7 @@ def main():
     ta_deed_idx = atomic_metering_node.ownership_deed_nft_id
 
     payload = holly.opt_into_original_deed()
-
-    python_ta_daemon = PythonTaDaemon(
-        sk=config.HollyTaDaemonSettings().sk.get_secret_value(),
-        ta_owner_addr=config.SandboxDemo().holly_homeowner_addr,
-        algo_settings=config.Algo(),
-    )
-
-    python_ta_daemon.signandsubmit_mtx_algo_received(payload)
+    python_ta_daemon.tadeed_algo_optin_initial_received(payload)
 
     payload = molly.generate_transfer_tadeed_algo(
         ta_deed_idx=ta_deed_idx,
