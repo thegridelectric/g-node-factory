@@ -2156,7 +2156,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrc4RAKXB4qLfHY5/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrea676qSMhJFume/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -5385,13 +5385,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
       <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
       <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <Idx>2</Idx>
-      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recAy1MJ6WTkJC2Bt</SchemaAttributeId>
@@ -6000,7 +6000,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrREL73Z9s3LNvWH/recGzFhE65zhdlVJK</SchemaAttribute>
+    <SchemaAttribute>itrJVyzC2UztronvB/recGzFhE65zhdlVJK</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recH7ddbJqijWO0lA</SchemaAttributeId>
       <createdTime>2022-06-04T19:20:22Z</createdTime>
@@ -7303,7 +7303,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrREL73Z9s3LNvWH/recY4oRjMNkU4Kjqv</SchemaAttribute>
+    <SchemaAttribute>itrJVyzC2UztronvB/recY4oRjMNkU4Kjqv</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recYD7KpGFv86yleu</SchemaAttributeId>
       <createdTime>2022-06-15T22:56:24Z</createdTime>
@@ -8047,13 +8047,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
       <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
       <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <Idx>3</Idx>
-      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>reciVyeMslNHUJKN8</SchemaAttributeId>
@@ -8603,7 +8603,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrREL73Z9s3LNvWH/recoPn9xJOxqb6ifT</SchemaAttribute>
+    <SchemaAttribute>itrJVyzC2UztronvB/recoPn9xJOxqb6ifT</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recobizeq1ZYGN5A2</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:44Z</createdTime>
@@ -9520,11 +9520,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAxiom>
       <SchemaAxiomId>recBWcnuqdt9wzynI</SchemaAxiomId>
       <createdTime>2022-11-03T19:00:14Z</createdTime>
-      <AxiomNumber>4</AxiomNumber>
+      <Description>Decoded SignedTaDeedCreationTxn must have type AssetConfigTransaction</Description>
+      <AxiomNumber>1</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>AssetConfigTransaction</ShortDescription>
+      <Name>optin.tadeed.algo.100 Schema Axiom 1</Name>
       <Alias>optin.tadeed.algo.100</Alias>
       <MakeDataClass />
-      <Name>optin.tadeed.algo.100 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recCHkLILWYGN7rjn</SchemaAxiomId>
@@ -9654,10 +9656,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAxiomId>recLImSRvyPbLliuE</SchemaAxiomId>
       <createdTime>2022-11-03T18:37:06Z</createdTime>
       <Description> NewDeedIdx is an active TaDeed created and owned by GnfAdminAccount</Description>
-      <AxiomNumber>1</AxiomNumber>
+      <AxiomNumber>2</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <ShortDescription>Valid TaDeed</ShortDescription>
-      <Name>optin.tadeed.algo.100 Schema Axiom 1</Name>
+      <Name>optin.tadeed.algo.100 Schema Axiom 2</Name>
       <Alias>optin.tadeed.algo.100</Alias>
       <MakeDataClass />
     </SchemaAxiom>
@@ -9725,13 +9727,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAxiom>
       <SchemaAxiomId>recQn6ib10Nqp94i8</SchemaAxiomId>
       <createdTime>2022-11-03T18:59:36Z</createdTime>
-      <Name>optin.tadeed.algo.100 Schema Axiom 2</Name>
+      <Description>TaDaemonAddr owns exactly 1 TaDeed. The creator of this old TaDeed is either the GnfAdminAccount or  the ValidatorMulti 2-sig [GnfAdminAccount, ValidatorAddr]. The asset index of the old TaDeed is less than the asset index of the new TaDeed. Finally, if the creator of the old TaDeed is the GnfAdminAccount, then the TaDaemonAddr is opted into (but does not own) exactly one TaDeed created by the ValidatorMulti account and owned by the GnfAdminAccount.</Description>
+      <AxiomNumber>3</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>Old TaDeed check</ShortDescription>
+      <Name>optin.tadeed.algo.100 Schema Axiom 3</Name>
       <Alias>optin.tadeed.algo.100</Alias>
       <MakeDataClass />
-      <AxiomNumber>2</AxiomNumber>
-      <Description>TaDaemonAddr owns exactly 1 TaDeed. The creator of this old TaDeed is either the GnfAdminAccount or  the ValidatorMulti 2-sig [GnfAdminAccount, ValidatorAddr]. The asset index of the old TaDeed is less than the asset index of the new TaDeed. Finally, if the creator of the old TaDeed is the GnfAdminAccount, then the TaDaemonAddr is opted into (but does not own) exactly one TaDeed created by the ValidatorMulti account and owned by the GnfAdminAccount.</Description>
-      <ShortDescription>Old TaDeed check</ShortDescription>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recSkcGAjBCP4uFPX</SchemaAxiomId>
@@ -9934,11 +9936,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAxiom>
       <SchemaAxiomId>rechGHjDdnbThfv1R</SchemaAxiomId>
       <createdTime>2022-11-03T18:59:50Z</createdTime>
+      <Description>SignedTaDeedCreationTxn must be signed by Gnf Admin, and the signature must match the txn.</Description>
+      <AxiomNumber>4</AxiomNumber>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <ShortDescription>Correctly Signed</ShortDescription>
+      <Name>optin.tadeed.algo.100 Schema Axiom 4</Name>
       <Alias>optin.tadeed.algo.100</Alias>
       <MakeDataClass />
-      <Name>optin.tadeed.algo.100 Schema Axiom 3</Name>
-      <AxiomNumber>3</AxiomNumber>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recj13iYXBkX5UZr3</SchemaAxiomId>
@@ -10319,7 +10323,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recDzW9fuX9MvVvla</MpSchemaAttributes>
       <MpSchemaAttributes>recfIIwlizAHrEW5g</MpSchemaAttributes>
       <MpSchemaAttributes>recJrM8N7ZnZMFE4c</MpSchemaAttributes>
-      <MpSchemaAttributes>reciVjnhmOGgZCihR</MpSchemaAttributes>
+      <MpSchemaAttributes>recALeeYiUYRuIxTl</MpSchemaAttributes>
     </PropertyFormat>
     <PropertyFormat>
       <PropertyFormatId>recqSXVzLo8RtEjlH</PropertyFormatId>
@@ -10353,7 +10357,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recG3uKKhjsdprmUN</MpSchemaAttributes>
       <MpSchemaAttributes>recSsJxTMJFhAidWC</MpSchemaAttributes>
       <MpSchemaAttributes>recEfJPESYeun1WwU</MpSchemaAttributes>
-      <MpSchemaAttributes>recALeeYiUYRuIxTl</MpSchemaAttributes>
+      <MpSchemaAttributes>reciVjnhmOGgZCihR</MpSchemaAttributes>
     </PropertyFormat>
     <PropertyFormat>
       <PropertyFormatId>recx8kL4InkksReIF</PropertyFormatId>

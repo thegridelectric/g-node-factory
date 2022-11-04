@@ -1,6 +1,8 @@
 import logging
 import os
+from typing import Any
 from typing import Optional
+from typing import Tuple
 
 import django
 from algosdk import encoding
@@ -132,19 +134,6 @@ class GNodeFactoryDb:
     # Messages Sent
     ##########################
 
-    def generate_optin_tadeed_algo(
-        self,
-        ta_daemon_addr: str,
-        new_ta_deed_idx: int,
-        validator_addr: str,
-    ) -> OptinTadeedAlgo:
-
-        payload = OptinTadeedAlgo_Maker(
-            ta_daemon_addr=ta_daemon_addr,
-            new_deed_idx=new_ta_deed_idx,
-        ).tuple
-        return payload
-
     def generate_exchange_tadeed_algo(
         self,
         old_ta_deed_idx: int,
@@ -215,7 +204,7 @@ class GNodeFactoryDb:
     # Messages Received
     ##########################
 
-    def create_updated_ta_deed(self, g_node: BaseGNodeDb) -> int:
+    def create_updated_ta_deed(self, g_node: BaseGNodeDb):
         """
         Creates a TADEED with asset name reflecting the updated
         GNodeAlias
@@ -238,7 +227,7 @@ class GNodeFactoryDb:
         except:
             raise Exception(f"Failure sending transaction")
         r = algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-        return r.asset_idx
+        return [r.asset_idx, signed_txn]
 
     def recursively_update_alias(
         self, g_node: BaseGNodeDb, new_parent_alias: str
@@ -259,14 +248,18 @@ class GNodeFactoryDb:
         g_node.alias = new_alias
         g_node.save()
         if g_node.dc.role == CoreGNodeRole.TerminalAsset:
-
-            new_ta_deed_idx = self.create_updated_ta_deed(g_node)
-            payload_hack = self.generate_optin_tadeed_algo(
-                new_ta_deed_idx=new_ta_deed_idx,
-                ta_daemon_addr=g_node.daemon_addr,
+            new_ta_deed_idx, signed_tadeed_creation_txn = self.create_updated_ta_deed(
+                g_node
             )
-            LOGGER.debug(f"Creating payload_hack: {payload_hack}")
-        return payload_hack
+            payload_hack = OptinTadeedAlgo_Maker(
+                ta_daemon_addr=g_node.daemon_addr,
+                new_deed_idx=new_ta_deed_idx,
+                validator_addr=g_node.ownership_deed_validator_addr,
+                signed_ta_deed_creation_txn=encoding.msgpack_encode(
+                    signed_tadeed_creation_txn
+                ),
+            ).tuple
+            return payload_hack
 
     def create_pending_ctn(
         self, payload: DiscoverycertAlgoCreate
