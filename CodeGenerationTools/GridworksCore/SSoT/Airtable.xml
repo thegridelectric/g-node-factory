@@ -128,7 +128,6 @@
       <CurrentSemanticEnd>001</CurrentSemanticEnd>
       <SchemaAxioms>exchange.tadeed.algo.010__4, exchange.tadeed.algo.010__1, exchange.tadeed.algo.010__3, exchange.tadeed.algo.010__6, exchange.tadeed.algo.010__5, exchange.tadeed.algo.010__2</SchemaAxioms>
       <SchemaRootscopy>recXCK8GTrT3hnfKX</SchemaRootscopy>
-      <SchemaRootscopy>recMyDdiQjtfTMAP1</SchemaRootscopy>
       <Alias>tadeed.algo.exchange</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
@@ -560,6 +559,17 @@
       <SchemaRootscopy>recPbLemXyDnvKcIc</SchemaRootscopy>
       <Alias>gt.boolean.actuator.component</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recde7ZQpg5BRpHxm</SchemaRootId>
+      <createdTime>2022-11-04T16:50:16Z</createdTime>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>old.tadeed.algo.return</Alias>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recMyDdiQjtfTMAP1</SchemaRootscopy>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recdi7BezBflZlH45</SchemaRootId>
@@ -2179,7 +2189,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrcv8fAxlWZbwRBi/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrQpdB3a8TiyzUA2/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -3462,21 +3472,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recGTF9QvbMMCTiQu</SchemaAttributes>
       <SchemaAttributes>recb1KEicJAMiVXJV</SchemaAttributes>
       <SchemaAttributes>recElgddLa2jgifep</SchemaAttributes>
-      <SemanticEnd>001</SemanticEnd>
-      <SchemaRoot>rec430tANcSG2ZavF</SchemaRoot>
+      <SemanticEnd>000</SemanticEnd>
       <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
       <PreStatus>Pending</PreStatus>
-      <Alias>tadeed.algo.exchange.001</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass />
-      <IsCac />
-      <IsComponent />
+      <Alias>old.tadeed.algo.return.000</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.exchange</AliasRoot>
-      <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
+      <SchemaRoot>recde7ZQpg5BRpHxm</SchemaRoot>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
+      <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
+      <IsCac />
+      <IsComponent />
+      <RootStatus>Active</RootStatus>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <InGwProto />
     </Schema>
     <Schema>
@@ -6097,7 +6107,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr1cd6rMoQfJKmeM/recGXMXqUz6rHqVzg</SchemaAttribute>
+    <SchemaAttribute>itrSrJz1q43pDDLai/recGXMXqUz6rHqVzg</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGfYlMT9hkh7Srg</SchemaAttributeId>
       <createdTime>2022-07-12T18:22:59Z</createdTime>
@@ -7408,7 +7418,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr1cd6rMoQfJKmeM/recW5AqimRRZZ3Rne</SchemaAttribute>
+    <SchemaAttribute>itrSrJz1q43pDDLai/recW5AqimRRZZ3Rne</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recWJDdHiEzC7KYss</SchemaAttributeId>
       <createdTime>2022-06-10T12:21:07Z</createdTime>
@@ -8720,7 +8730,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itr1cd6rMoQfJKmeM/recn2CJw74mLLQ8tr</SchemaAttribute>
+    <SchemaAttribute>itrSrJz1q43pDDLai/recn2CJw74mLLQ8tr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recnK1jOCabM7QHvd</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:37Z</createdTime>
@@ -10769,9 +10779,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recMyDdiQjtfTMAP1</Type>
-      <Name>gnf tadeed.algo.exchange.001</Name>
+      <Name>gnf old.tadeed.algo.return.000</Name>
       <ProtocolName>gnf</ProtocolName>
-      <TypeName>tadeed.algo.exchange.001</TypeName>
+      <TypeName>old.tadeed.algo.return.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recY5s5LoUEwNBowT</ProtocolTypeId>

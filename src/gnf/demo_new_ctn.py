@@ -56,7 +56,7 @@ def main():
         "d1.isone.ver.keene.holly.ta", molly_addr
     )
 
-    exchange_payload = factory.generate_exchange_tadeed_algo(
+    exchange_payload = factory.generate_old_tadeed_algo_return(
         old_ta_deed_idx=old_ta_deed_idx,
         new_ta_deed_idx=new_ta_deed_idx,
         validator_addr=molly_addr,
@@ -64,7 +64,7 @@ def main():
         ta_daemon_addr=python_ta_daemon.acct.addr,
     )
 
-    python_ta_daemon.exchange_tadeed_algo_received(exchange_payload)
+    python_ta_daemon.old_tadeed_algo_return_received(exchange_payload)
 
     # To check that the deeds are in the correct place:
 

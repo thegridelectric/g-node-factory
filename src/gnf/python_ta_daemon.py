@@ -8,8 +8,8 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
+from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import TadeedAlgoExchange
 from gnf.schemata import TadeedAlgoOptinInitial
 
 
@@ -71,12 +71,12 @@ class PythonTaDaemon:
             raise Exception(f"Failure sending transaction")
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
-    def exchange_tadeed_algo_received(self, payload: TadeedAlgoExchange):
+    def old_tadeed_algo_return_received(self, payload: OldTadeedAlgoReturn):
         """
          - Transfer the  old deed back to the GNodeFactory admin acct.
 
         Args:
-            payload: TadeedAlgoExchange
+            payload: OldTadeedAlgoReturn
         """
 
         txn = transaction.AssetTransferTxn(

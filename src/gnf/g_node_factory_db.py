@@ -38,11 +38,11 @@ from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import HeartbeatA
 from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import OptinTadeedAlgo
 from gnf.schemata import OptinTadeedAlgo_Maker
 from gnf.schemata import TadeedAlgoCreate
-from gnf.schemata import TadeedAlgoExchange
-from gnf.schemata import TadeedAlgoExchange_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 
@@ -134,14 +134,14 @@ class GNodeFactoryDb:
     # Messages Sent
     ##########################
 
-    def generate_exchange_tadeed_algo(
+    def generate_old_tadeed_algo_return(
         self,
         old_ta_deed_idx: int,
         new_ta_deed_idx: int,
         validator_addr: str,
         ta_owner_addr: str,
         ta_daemon_addr: str,
-    ) -> TadeedAlgoExchange:
+    ) -> OldTadeedAlgoReturn:
         if new_ta_deed_idx is None:
             raise Exception(f"new_ta_deed_idx is None!")
         if old_ta_deed_idx is None:
@@ -179,7 +179,7 @@ class GNodeFactoryDb:
         )
 
         # ask TaDaemon to transfer back the old deed
-        payload = TadeedAlgoExchange_Maker(
+        payload = OldTadeedAlgoReturn_Maker(
             old_ta_deed_idx=old_ta_deed_idx,
             ta_daemon_addr=ta_daemon_addr,
             validator_addr=validator_addr,

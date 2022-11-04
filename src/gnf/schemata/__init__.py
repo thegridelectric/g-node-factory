@@ -24,12 +24,12 @@ from gnf.schemata.heartbeat_a import HeartbeatA
 from gnf.schemata.heartbeat_a import HeartbeatA_Maker
 from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer
 from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer_Maker
+from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
+from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo
 from gnf.schemata.optin_tadeed_algo import OptinTadeedAlgo_Maker
 from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate
 from gnf.schemata.tadeed_algo_create import TadeedAlgoCreate_Maker
-from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange
-from gnf.schemata.tadeed_algo_exchange import TadeedAlgoExchange_Maker
 from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial
 from gnf.schemata.tadeed_algo_optin_initial import TadeedAlgoOptinInitial_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
@@ -55,8 +55,8 @@ __all__ = [
     "DiscoverycertAlgoCreate_Maker",
     "HeartbeatA",
     "HeartbeatA_Maker",
-    "TadeedAlgoExchange",
-    "TadeedAlgoExchange_Maker",
+    "OldTadeedAlgoReturn",
+    "OldTadeedAlgoReturn_Maker",
     "BasegnodeCtnCreate",
     "BasegnodeCtnCreate_Maker",
     "TadeedAlgoOptinInitial",
