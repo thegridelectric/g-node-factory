@@ -54,6 +54,7 @@ def main():
     payload = molly.generate_initial_tadeed_algo_transfer(
         ta_deed_idx=ta_deed_idx,
         ta_daemon_addr=python_ta_daemon.acct.addr,
+        ta_owner_addr=holly.acct.addr,
         micro_lat=45666353,
         micro_lon=-68691705,
     )

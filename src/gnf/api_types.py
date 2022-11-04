@@ -16,6 +16,7 @@ from gnf.schemata import InitialTadeedAlgoCreate_Maker
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
 from gnf.schemata import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata import NewTadeedAlgoOptin_Maker
+from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
@@ -39,6 +40,7 @@ type_makers: List[HeartbeatA_Maker] = [
     InitialTadeedAlgoOptin_Maker,
     InitialTadeedAlgoTransfer_Maker,
     NewTadeedAlgoOptin_Maker,
+    NewTadeedSend_Maker,
     OldTadeedAlgoReturn_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
@@ -67,6 +69,7 @@ def version_by_type_name() -> List[str]:
         "initial.tadeed.algo.optin": "000",
         "initial.tadeed.algo.transfer": "000",
         "new.tadeed.algo.optin": "000",
+        "new.tadeed.send": "000",
         "old.tadeed.algo.return": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
@@ -96,7 +99,8 @@ def status_by_versioned_type_name() -> List[str]:
         "initial.tadeed.algo.create.000": "Active",
         "initial.tadeed.algo.optin.000": "Active",
         "initial.tadeed.algo.transfer.000": "Pending",
-        "new.tadeed.algo.optin.000": "Active",
+        "new.tadeed.algo.optin.000": "Pending",
+        "new.tadeed.send.000": "Pending",
         "old.tadeed.algo.return.000": "Pending",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",

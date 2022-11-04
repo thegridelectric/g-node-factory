@@ -30,6 +30,8 @@ from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer
 from gnf.schemata.initial_tadeed_algo_transfer import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata.new_tadeed_algo_optin import NewTadeedAlgoOptin
 from gnf.schemata.new_tadeed_algo_optin import NewTadeedAlgoOptin_Maker
+from gnf.schemata.new_tadeed_send import NewTadeedSend
+from gnf.schemata.new_tadeed_send import NewTadeedSend_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
@@ -57,6 +59,8 @@ __all__ = [
     "HeartbeatA_Maker",
     "OldTadeedAlgoReturn",
     "OldTadeedAlgoReturn_Maker",
+    "NewTadeedSend",
+    "NewTadeedSend_Maker",
     "BasegnodeCtnCreate",
     "BasegnodeCtnCreate_Maker",
     "InitialTadeedAlgoOptin",

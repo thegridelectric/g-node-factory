@@ -106,6 +106,7 @@ class DevValidator:
         self,
         ta_deed_idx: int,
         ta_daemon_addr: str,
+        ta_owner_addr: str,
         micro_lat: int,
         micro_lon: int,
     ) -> Optional[InitialTadeedAlgoTransfer]:
@@ -143,8 +144,9 @@ class DevValidator:
             micro_lon=micro_lon,
             validator_addr=self.acct.addr,
             ta_daemon_addr=ta_daemon_addr,
+            ta_owner_addr=ta_owner_addr,
             first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
-        )
+        ).tuple
 
         self.send_message_to_gnf(payload)
         return payload

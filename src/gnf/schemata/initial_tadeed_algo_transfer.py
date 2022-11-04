@@ -15,6 +15,7 @@ class InitialTadeedAlgoTransfer(BaseModel):
     MicroLon: int  #
     ValidatorAddr: str  #
     TaDaemonAddr: str  #
+    TaOwnerAddr: str  #
     FirstDeedTransferMtx: str  #
     TypeName: Literal["initial.tadeed.algo.transfer"] = "initial.tadeed.algo.transfer"
     Version: str = "000"
@@ -25,6 +26,10 @@ class InitialTadeedAlgoTransfer(BaseModel):
 
     _validator_ta_daemon_addr = predicate_validator(
         "TaDaemonAddr", property_format.is_algo_address_string_format
+    )
+
+    _validator_ta_owner_addr = predicate_validator(
+        "TaOwnerAddr", property_format.is_algo_address_string_format
     )
 
     _validator_first_deed_transfer_mtx = predicate_validator(
@@ -49,6 +54,7 @@ class InitialTadeedAlgoTransfer_Maker:
         micro_lon: int,
         validator_addr: str,
         ta_daemon_addr: str,
+        ta_owner_addr: str,
         first_deed_transfer_mtx: str,
     ):
 
@@ -57,6 +63,7 @@ class InitialTadeedAlgoTransfer_Maker:
             MicroLon=micro_lon,
             ValidatorAddr=validator_addr,
             TaDaemonAddr=ta_daemon_addr,
+            TaOwnerAddr=ta_owner_addr,
             FirstDeedTransferMtx=first_deed_transfer_mtx,
             #
         )
@@ -86,6 +93,8 @@ class InitialTadeedAlgoTransfer_Maker:
             raise SchemaError(f"dict {d2} missing ValidatorAddr")
         if "TaDaemonAddr" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TaDaemonAddr")
+        if "TaOwnerAddr" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaOwnerAddr")
         if "FirstDeedTransferMtx" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FirstDeedTransferMtx")
         if "TypeName" not in d2.keys():
@@ -96,6 +105,7 @@ class InitialTadeedAlgoTransfer_Maker:
             MicroLon=d2["MicroLon"],
             ValidatorAddr=d2["ValidatorAddr"],
             TaDaemonAddr=d2["TaDaemonAddr"],
+            TaOwnerAddr=d2["TaOwnerAddr"],
             FirstDeedTransferMtx=d2["FirstDeedTransferMtx"],
             TypeName=d2["TypeName"],
             Version="000",

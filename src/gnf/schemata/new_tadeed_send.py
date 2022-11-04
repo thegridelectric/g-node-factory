@@ -1,4 +1,4 @@
-"""Type new.tadeed.algo.optin, version 000"""
+"""Type new.tadeed.send, version 000"""
 import json
 from typing import Dict
 from typing import Literal
@@ -10,13 +10,13 @@ from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
 
-class NewTadeedAlgoOptin(BaseModel):
+class NewTadeedSend(BaseModel):
     NewTaDeedIdx: int  #
     OldTaDeedIdx: int  #
     TaDaemonAddr: str  #
     ValidatorAddr: str  #
-    SignedTaDeedCreationTxn: str  #
-    TypeName: Literal["new.tadeed.algo.optin"] = "new.tadeed.algo.optin"
+    SignedTadeedOptinTxn: str  #
+    TypeName: Literal["new.tadeed.send"] = "new.tadeed.send"
     Version: str = "000"
 
     _validator_ta_daemon_addr = predicate_validator(
@@ -27,8 +27,8 @@ class NewTadeedAlgoOptin(BaseModel):
         "ValidatorAddr", property_format.is_algo_address_string_format
     )
 
-    _validator_signed_ta_deed_creation_txn = predicate_validator(
-        "SignedTaDeedCreationTxn", property_format.is_algo_msg_pack_encoded
+    _validator_signed_tadeed_optin_txn = predicate_validator(
+        "SignedTadeedOptinTxn", property_format.is_algo_msg_pack_encoded
     )
 
     def as_dict(self) -> Dict:
@@ -39,8 +39,8 @@ class NewTadeedAlgoOptin(BaseModel):
         return json.dumps(self.as_dict())
 
 
-class NewTadeedAlgoOptin_Maker:
-    type_name = "new.tadeed.algo.optin"
+class NewTadeedSend_Maker:
+    type_name = "new.tadeed.send"
     version = "000"
 
     def __init__(
@@ -49,24 +49,24 @@ class NewTadeedAlgoOptin_Maker:
         old_ta_deed_idx: int,
         ta_daemon_addr: str,
         validator_addr: str,
-        signed_ta_deed_creation_txn: str,
+        signed_tadeed_optin_txn: str,
     ):
 
-        self.tuple = NewTadeedAlgoOptin(
+        self.tuple = NewTadeedSend(
             NewTaDeedIdx=new_ta_deed_idx,
             OldTaDeedIdx=old_ta_deed_idx,
             TaDaemonAddr=ta_daemon_addr,
             ValidatorAddr=validator_addr,
-            SignedTaDeedCreationTxn=signed_ta_deed_creation_txn,
+            SignedTadeedOptinTxn=signed_tadeed_optin_txn,
             #
         )
 
     @classmethod
-    def tuple_to_type(cls, tuple: NewTadeedAlgoOptin) -> str:
+    def tuple_to_type(cls, tuple: NewTadeedSend) -> str:
         return tuple.as_type()
 
     @classmethod
-    def type_to_tuple(cls, t: str) -> NewTadeedAlgoOptin:
+    def type_to_tuple(cls, t: str) -> NewTadeedSend:
         try:
             d = json.loads(t)
         except TypeError:
@@ -76,7 +76,7 @@ class NewTadeedAlgoOptin_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> NewTadeedAlgoOptin:
+    def dict_to_tuple(cls, d: dict) -> NewTadeedSend:
         d2 = dict(d)
         if "NewTaDeedIdx" not in d2.keys():
             raise SchemaError(f"dict {d2} missing NewTaDeedIdx")
@@ -86,17 +86,17 @@ class NewTadeedAlgoOptin_Maker:
             raise SchemaError(f"dict {d2} missing TaDaemonAddr")
         if "ValidatorAddr" not in d2.keys():
             raise SchemaError(f"dict {d2} missing ValidatorAddr")
-        if "SignedTaDeedCreationTxn" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing SignedTaDeedCreationTxn")
+        if "SignedTadeedOptinTxn" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing SignedTadeedOptinTxn")
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
-        return NewTadeedAlgoOptin(
+        return NewTadeedSend(
             NewTaDeedIdx=d2["NewTaDeedIdx"],
             OldTaDeedIdx=d2["OldTaDeedIdx"],
             TaDaemonAddr=d2["TaDaemonAddr"],
             ValidatorAddr=d2["ValidatorAddr"],
-            SignedTaDeedCreationTxn=d2["SignedTaDeedCreationTxn"],
+            SignedTadeedOptinTxn=d2["SignedTadeedOptinTxn"],
             TypeName=d2["TypeName"],
             Version="000",
         )

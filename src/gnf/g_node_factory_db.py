@@ -41,6 +41,7 @@ from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin_Maker
+from gnf.schemata import NewTadeedSend
 from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
@@ -139,8 +140,8 @@ class GNodeFactoryDb:
         old_ta_deed_idx: int,
         new_ta_deed_idx: int,
         validator_addr: str,
-        ta_owner_addr: str,
         ta_daemon_addr: str,
+        signed_new_deed_transfer_txn: transaction.SignedTransaction,
     ) -> OldTadeedAlgoReturn:
         if new_ta_deed_idx is None:
             raise Exception(f"new_ta_deed_idx is None!")
@@ -153,38 +154,20 @@ class GNodeFactoryDb:
             index=old_ta_deed_idx,
             sp=self.client.suggested_params(),
         )
-        signed_txn = txn.sign(self.admin_account.sk)
+        txn = txn.sign(self.admin_account.sk)
         try:
-            self.client.send_transaction(signed_txn)
+            self.client.send_transaction(txn)
         except:
             raise Exception(f"Failure sending transaction")
-        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        algo_utils.wait_for_transaction(self.client, txn.get_txid())
 
-        # transfer new deed to ta_daeomon
-        txn = transaction.AssetTransferTxn(
-            sender=self.admin_account.addr,
-            receiver=ta_daemon_addr,
-            amt=1,
-            index=new_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
-
-        signed_new_deed_transafer_txn = txn.sign(self.admin_account.sk)
-        try:
-            self.client.send_transaction(signed_new_deed_transafer_txn)
-        except:
-            raise Exception(f"Failure sending transaction")
-        algo_utils.wait_for_transaction(
-            self.client, signed_new_deed_transafer_txn.get_txid()
-        )
-
-        # ask TaDaemon to transfer back the old deed
+        # ask for the old TaDeed back
         payload = OldTadeedAlgoReturn_Maker(
             old_ta_deed_idx=old_ta_deed_idx,
             ta_daemon_addr=ta_daemon_addr,
             validator_addr=validator_addr,
             signed_new_deed_transfer_txn=encoding.msgpack_encode(
-                signed_new_deed_transafer_txn
+                signed_new_deed_transfer_txn
             ),
         ).tuple
         return payload
@@ -192,6 +175,35 @@ class GNodeFactoryDb:
     ##########################
     # Messages Received
     ##########################
+
+    def new_tadeed_send_received(self, payload: NewTadeedSend) -> OldTadeedAlgoReturn:
+        if not isinstance(payload, NewTadeedSend):
+            LOGGER.info(
+                f"payload must be type NewTadeedSend, got {type(payload)}. Ignoring!"
+            )
+            return None
+        txn = transaction.AssetTransferTxn(
+            sender=self.admin_account.addr,
+            receiver=payload.TaDaemonAddr,
+            amt=1,
+            index=payload.NewTaDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_account.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+
+        LOGGER.info(f"New TaDeed {payload.NewTaDeedIdx} sent to TaDaemon")
+        return self.generate_old_tadeed_algo_return(
+            old_ta_deed_idx=payload.OldTaDeedIdx,
+            new_ta_deed_idx=payload.NewTaDeedIdx,
+            validator_addr=payload.ValidatorAddr,
+            ta_daemon_addr=payload.TaDaemonAddr,
+            signed_new_deed_transfer_txn=signed_txn,
+        )
 
     def create_updated_ta_deed(
         self, g_node: BaseGNodeDb
@@ -219,6 +231,7 @@ class GNodeFactoryDb:
         except:
             raise Exception(f"Failure sending transaction")
         r = algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        LOGGER.info(f"New TaDeed {r.asset_idx} created for {g_node.alias}")
         return [r.asset_idx, signed_txn]
 
     def recursively_update_alias(
@@ -243,15 +256,16 @@ class GNodeFactoryDb:
             new_ta_deed_idx, signed_tadeed_creation_txn = self.create_updated_ta_deed(
                 g_node
             )
+
             payload_hack = NewTadeedAlgoOptin_Maker(
+                new_ta_deed_idx=new_ta_deed_idx,
+                old_ta_deed_idx=g_node.ownership_deed_nft_id,
                 ta_daemon_addr=g_node.daemon_addr,
-                new_deed_idx=new_ta_deed_idx,
                 validator_addr=g_node.ownership_deed_validator_addr,
                 signed_ta_deed_creation_txn=encoding.msgpack_encode(
                     signed_tadeed_creation_txn
                 ),
             ).tuple
-            print("Just created NewTadeedAlgoOptin payload" f"{payload_hack}")
         return payload_hack
 
     def create_pending_ctn(
@@ -399,9 +413,7 @@ class GNodeFactoryDb:
             return None
 
         ta_deed_idx = response.asset_idx
-        LOGGER.info(
-            f"TaDeed created for {ta_deed_alias} with ta_deed_idx {ta_deed_idx}"
-        )
+        LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_deed_alias} ")
 
         atomic_metering_node = self.create_pending_atomic_metering_node(
             ta_alias=ta_deed_alias, ta_deed_idx=ta_deed_idx
@@ -503,7 +515,7 @@ class GNodeFactoryDb:
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
-            addresses=[self.admin_account.addr, payload.DeedValidatorAddr],
+            addresses=[self.admin_account.addr, payload.ValidatorAddr],
         )
         a = self.client.account_asset_info(v_multi.addr, asset_idx)
         ta_alias: str = a["created-asset"]["name"]
@@ -526,7 +538,7 @@ class GNodeFactoryDb:
             "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": asset_idx,
-            "ownership_deed_validator_addr": payload.DeedValidatorAddr,
+            "ownership_deed_validator_addr": payload.ValidatorAddr,
             "owner_addr": payload.TaOwnerAddr,
             "daemon_addr": payload.TaDaemonAddr,
             "gps_point_id": gpsdb.gps_point_id,
@@ -556,9 +568,9 @@ class GNodeFactoryDb:
                 - gn.status = Pending
                 - gn.lat and gn.lon exist
                 - gn.smart_daemon_addr =
-                - gn.ownernship_deed_fnt_id does not exist
+                - gn.ownership_deed_nft_id does not exist
                 - gn.ownership_deed_nft_creator_addr exists and matches
-                2-sig [GnfAdmin, payload.DeedValidatorAddr]
+                2-sig [GnfAdmin, payload.ValidatorAddr]
 
 
             - Signs and submits an AssetTransferTxn that sends a TaDeed to the
@@ -586,7 +598,7 @@ class GNodeFactoryDb:
 
         if not isinstance(payload, InitialTadeedAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
+                f"payload must be type InitialTadeedAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -597,7 +609,7 @@ class GNodeFactoryDb:
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
-            addresses=[self.admin_account.addr, payload.DeedValidatorAddr],
+            addresses=[self.admin_account.addr, payload.ValidatorAddr],
         )
         a = self.client.account_asset_info(v_multi.addr, asset_idx)
         terminal_asset_alias = a["created-asset"]["name"]
@@ -619,7 +631,7 @@ class GNodeFactoryDb:
             LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
             return None
         LOGGER.info(
-            f"TaDeed for {terminal_asset_alias}, asset-index {asset_idx} transferred to owner multi!"
+            f"TaDeed {asset_idx} for {terminal_asset_alias} transferred to TaDaemon"
         )
         terminal_asset = self.create_terminal_asset(payload)
         return terminal_asset.dc
