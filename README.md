@@ -25,88 +25,71 @@ The GNodeFactory is an actor in a larger Transactive Energy Management (TEM) sys
 
 This repo has been developed through the generous funding of a grant provided by the [Algorand Foundation](https://www.algorand.foundation/). For more context, please read our Algorand [Milestone 1 writeup](docs/wiki/milestone-1.md). For design specifications for the repo, go [here](docs/wiki/milestone-1-specifications.md). For a very short description of what GNodes are and why we need a factory for them, skip to [Background](#Background) below.
 
-# Local Demo setup
+## Local Demo setup
 
-1.  Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory:
+1. Install [docker](https://docs.docker.com/get-docker/) and docker-compose.
 
-```
-./sandbox up
-```
-
-2. Follow instructions below to install python and its required libraries
-
-3. From `python_code` (the working directory):
+2. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory:
 
 ```
-cp django_related/dev_settings.py django_related/settings.py
+./sandbox up dev
 ```
 
-4. From the `python_code` directory, with `venv` activated, run
-   ```
-   ./reset-dev-db.sh
-   python demo.py
-   ```
-   This goes through the process of getting `MollyMetermaid` set up as a recognized Validator. The demo requires that all of the various accounts are free of assets. Therefore, if you have run the test suite or already run the demo, you will also need to run `./sandbox reset` from your Algorand sandbox directory before doing the above.
+This starts up a local blockchain on your computer. It can take a couple of minutes for the
+initial setup.
 
-# Testing
+**note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
 
-From the top level directory with `venv` activated:
+3. Set up your python environment (IMPROVE)
 
 ```
-export PYTHONPATH=`pwd`/python_code:$PYTHONPATH
+poetry shell
+```
+
+4. Run before each demo:
+
+- From this repo, **flush database**:
+  ```
+  ./reset-dev-db.sh
+  ```
+- From sandbox repo, **flush blockchin**:
+  ```
+  ./sandbox reset
+  ```
+
+5. Run the milestone 1 demo from this repo:
+
+```
+python demo.py
+```
+
+## Explaining what the demo does
+
+1.  **Loads in preliminary GNodes** One axiom for adding a GNode is that its parent must already exist, unless it is the root. Since this demo involves adding `TerminalAssets`, we need to add the root world GNode (`d1`), the root of the electric grid (`d1.isone`), and then a few ConductorTopologyNodes that
+    are stepping down in voltage (`d1.isone.ver`, `d1.isone.ver.keene`).
+2.  **Creates a new TerminalAsset** Creates a TerminalAsset `d1.isone.ver.keene.holly.ta` for Holly's heating system. This includes first setting up MollyMetermaid as a validator, and then having MollyMetermaid validate Holly's heating system. This process results in a TaValidator certificate (an NFT) for MollyMetermaid and a TaDeed (also an NFT) for HollyHomeowner.
+3.  **Adding a new ConductorTopologyNode** Creates a ConductorTopologyNode `d1.isone.ver.keene.pwrs`, which triggers a cascade of updating the aliases for all of its descendants, including HollyHomeowner's `TerminalAsset`.
+
+## Testing
+
 pytest -v
-```
 
-# Developing
+## Configuration and secrets
 
-## Python related
-
-### Install Python and its required libraries
-
-- Use python 3.10.4
-- At present the code is not packaged and assumes `python_code` as the pythonpath. So from `python_code` subdirectory:
-  - `python -m venv venv`
-  - `source venv/bin/activate`
-  - `pip install -r requirements/dev.txt`
-
-### Message Types, Schema, APIs, ABIs - how does this communicate
-
-Over the last year, we have been developing a new structure of APIs and type schema for the various applications in the GridWorks ecosystem. While there are a lot of useful design in existing schema structures (like cap'n proto) we are looking for something that:
-(a) allows for single-type schema evolution (where every message sent has a specific type) instead of evolution of an entire collection of types and
-(b) allows for significant semantic checking. We have developed our own native mechanisms for this using code generation tools. At present they are overly complicated and not as functional as we want re schema evolution. However, they allow for off-loading almost all of the syntax and semantics validation to the schema sdk, taking this burden off the application code using them.
-
-The semantic is organized into a set of axioms that must hold true for any instance
-of the type. To see this working, looka t and run `schema_demo.py` while also
-examining the axioms in `schemata/create_tadeed_algo.py
-
-### Adding libraries
-
-- If you want to add a new library used in all contexts, then add it to requirements/base.in and from the `requirements` subfolder run
-  - `pip-compile --output-file=base.txt base.in`
-  - `pip-compile --output-file=dev.txt dev.in`
-
-We use pip-tools to organize requirements. The `.in` files clarify the key modules (including which ones are important to pin and which ones can be set to the latest release) and then the corresponding `.txt` files are generated via pip-tools. This means we always run on pinned requirements (from the .txt files) and can typically upgrade to the latest release, except for cases where the code requires a pinned older version.
-
-The pip-tools also allow for building layers of requirements on top of each other. This allows us to have development tools that are not needed in production to show up for the first time in `dev.txt`, for example (like the pip-tool itself).
-
-### Python Configuration and secrets
-
-The python code is meant to run out-of-the box as long as you have done the above step. Configurations
-and secrets are passed around in a `settings` object of type `GnfSettings` defined in `python_code/settings.py`.
-These come with default values defined in settings.py, which are overwritten with values from the
+For non-dev lifecycle,
+look at `src/gnf/config`. This has the default values, which are overwritten with values from a
 git ignored top-level `.env` file. All dev examples are intended to run without needing to create
-a `.env` file. A template `.env-template` is provided as well.
+a `.env` file. A template `.env-template` is provided.
 
-### Python Code derivation tools
+## Code derivation tools
 
-The schemata
-The primary derivation tool used for this is [ssot.me](https://explore.ssot.me/app/#!/home), developed by EJ Alexandra of [An Abstract Level LLC](https://effortlessapi.com/pages/effortlessapi/blog).
+The primary derivation tool used for this is [ssot.me](https://explore.ssot.me/app/#!/home), developed by EJ Alexandra of [An Abstract Level LLC](https://effortlessapi.com/pages/effortlessapi/blog). All of the xslt code in `CodeGeneration` uses this tool.
 
 The `ssotme` cli and its upstream `ssotme` service pull data from our [private airtable](https://airtable.com/appgibWM6WZW20bBx/tblRducbzl15OWmwv/viwIvHvZcrMELIP3x?blocks=hide) down into an odxml file and a json file, and then references local `.xslt` scripts in order to derive code. The `.xslt` allows for two toggles - one where files are always overwritten, and one where the derivation tools will leave files alone once any hand-written code is added. Mostly that toggle is set to `always overwrite` since we are working with immutable schemata. Note that the `ssotme cli` requires an internet connection to work, since it needs to access the upstream `ssotme` service.
 
 If you want to add enums or schema, you will need access to the `ssotme cli` and the airtable. Contact Jessica for this.
 
-# Background
+## Background
 
 What are GNodes and why do we need a factory for them?
 

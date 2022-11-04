@@ -15,7 +15,6 @@
         "recd0wQ7MgMBERZHO",
         "recR593Dz0RXe99QZ",
         "rec7FNSU0EcIocQa7",
-        "recF8WJ1QgeyqagoL",
         "reckkC2u8ssqKX5vI",
         "recumZN3MTdFhMVeE",
         "reciPgA34pOecvd1t",
@@ -34,10 +33,9 @@
         "rec9Hc4AlRRUtSxke",
         "recVpLt1h1lFaJPPt",
         "recCHqdjf2zGBNMhz",
-        "rec3UK0uLi5lWoyyN",
-        "recGjJoqWwEcoicHt",
         "recsd3la7kaOFw8yq",
-        "recUcGE6a9kjAbbwH"
+        "recUcGE6a9kjAbbwH",
+        "recsCmQ5g1sy3MKx6"
       ],
       "TableGroup": "General",
       "ToName": "SchemaRoot"
@@ -70,7 +68,8 @@
         "recijKzwR2ysi05Tw",
         "recP01pcpn9IH4YWi",
         "recR8GihKYocly4ws",
-        "recpwxT1wxgQieaK6"
+        "recpwxT1wxgQieaK6",
+        "rec53CGS0F3E1mou6"
       ],
       "TableGroup": "General",
       "ToName": "GtEnum"
@@ -94,8 +93,9 @@
         "recm07MG5sgXULksp",
         "recPKemt4onQT8ZFH",
         "recFwntdOrnLF9aAo",
-        "recggZTyU9XH8CgZn",
-        "rec1JSnlLmuGbFPfj"
+        "rec1JSnlLmuGbFPfj",
+        "recUFY8e25ExnMaKe",
+        "rec03zFNfGGaUDBSx"
       ],
       "TableGroup": "General",
       "ToName": "EnumSymbol"
@@ -118,7 +118,6 @@
         "recK3TmgvWgU41rzP",
         "rec6rUCCriZUENHny",
         "recSguyKFhRciuJQL",
-        "recrTqdDjHbERSueZ",
         "rec8veT969D0X8XjZ",
         "recQd9hkAt1T75SnB",
         "rectqsp5nVV67Pw29",
@@ -133,12 +132,13 @@
         "recUhQ9rXPjUFix4H",
         "recF2gl6BCCKUSUrn",
         "recnGyPJnpH6R9f2l",
-        "recZuh8H1X3GNK654",
-        "recE16FiJgQvQonRo",
-        "recH6HslJI9nczigb",
         "rec9VRrzy03CABwW5",
         "rec1yQZz9QnS5j8Ng",
-        "recNgrvONa0eoDSi7"
+        "recNgrvONa0eoDSi7",
+        "recM6WmGTyRm5VyiG",
+        "recLKvaHUspm7AQTA",
+        "recIcfGu9JI3P1Y0r",
+        "recsXqU5tmQrN0PLG"
       ],
       "TableGroup": "General",
       "ToName": "Schema"
@@ -177,7 +177,10 @@
         "reckVS5ICRsxKUAXl",
         "recbc8jQAARujKTzH",
         "recjveOB9Y83Q7F1R",
-        "recwVu1tWOkY9F7eE"
+        "recwVu1tWOkY9F7eE",
+        "recSoCRO4RArrspow",
+        "rec79xrFUreX4G9Jg",
+        "rec33x4ISDxna99r3"
       ],
       "TableGroup": "General",
       "ToName": "SchemaAttribute"
@@ -246,7 +249,8 @@
         "recscYGbW4n76PZ8R",
         "rec1wncaoPV1ULnh1",
         "recfp14OnVUtyxayh",
-        "recqkmKMC6jeUoLgR"
+        "recqkmKMC6jeUoLgR",
+        "rec8pBpq68cjbJpvB"
       ],
       "TableGroup": "General",
       "ToName": "Protocol"
@@ -263,11 +267,11 @@
       "RowKey": "1715. Scada-develop-v2022.05.16.323366. ProtocolType",
       "TableColumns": [
         "recuUHBRNUo0NM0vs",
-        "recv1QO20vS0TAnaa",
-        "reclTgP4wS3QJkkMx",
         "rec8Q6HYmsmkuRsNs",
         "reccu5newyZkH4tOk",
-        "recd0EUQz4KUYZsdd"
+        "recd0EUQz4KUYZsdd",
+        "rec6SVssD9tlcFgYf",
+        "recoKVya4EXKsA9uj"
       ],
       "TableGroup": "General",
       "ToName": "ProtocolType"
@@ -336,6 +340,27 @@
       ],
       "TableGroup": "General",
       "ToName": "AppUser"
+    },
+    {
+      "ProjectTableId": "reczlSg0kpbDE3qIR",
+      "AirtableName": "ProtocolEnums",
+      "CreatedAt": "2022-10-31T18:36:34",
+      "DisplayName": "ProtocolEnums",
+      "Name": "ProtocolEnum",
+      "PluralName": "ProtocolEnums",
+      "Project": "recIuUqkLn41mZ8TS",
+      "ProjectVersion": "recYfeHO0N6fC3sxJ",
+      "RowKey": "1715. Scada-develop-v2022.05.16.323366. ProtocolEnum",
+      "TableColumns": [
+        "recIcxnukshytDvwK",
+        "rec1gLJn2G00sI1qY",
+        "recrvvAFzhZUlCJ2I",
+        "recP4P14HKZjUDZBt",
+        "recr96n96UW8lS39U",
+        "recjXq1gXqcFoFoUM"
+      ],
+      "TableGroup": "General",
+      "ToName": "ProtocolEnum"
     }
   ]
 }

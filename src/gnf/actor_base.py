@@ -173,7 +173,7 @@ class ActorBase(ABC):
         except SchemaError:
             return
 
-        if type_name not in api_types.get_api_type_name_list():
+        if type_name not in api_types.version_by_type_name().keys():
             self._latest_on_message_diagnostic = (
                 OnReceiveMessageDiagnostic.UNKNOWN_TYPE_NAME
             )
@@ -810,8 +810,7 @@ class ActorBase(ABC):
     def get_payload_type_name(self, basic_deliver, body: bytes) -> str:
         """The TypeName tis a string hat provides the strongly typed specification
             (API/ABI) for the incoming message. This is similar to knowing
-            the protobuf name/method or the ABI name/method. The list of recognized
-            TypeNames is returned by api_types.get_api_type_name_list()
+            the protobuf name/method or the ABI name/method.
 
             The TypeName will articulate, in particular, how
             to decode the payload.

@@ -1,6 +1,8 @@
 import logging
 import os
+from typing import Any
 from typing import Optional
+from typing import Tuple
 
 import django
 from algosdk import encoding
@@ -30,18 +32,20 @@ LOGGER = logging.getLogger(__name__)
 
 # Messages sent by Factory
 # Messages received by Factory
-from gnf.schemata import CreateDiscoverycertAlgo
-from gnf.schemata import CreateTadeedAlgo
-from gnf.schemata import CreateTavalidatorcertAlgo
-from gnf.schemata import CreateTerminalassetAlgo
-from gnf.schemata import ExchangeTadeedAlgo
-from gnf.schemata import ExchangeTadeedAlgo_Maker
+from gnf.schemata import BasegnodeCtnCreate
+from gnf.schemata import BasegnodeTerminalassetCreate
+from gnf.schemata import DiscoverycertAlgoCreate
+from gnf.schemata import DiscoverycertAlgoTransfer
 from gnf.schemata import HeartbeatA
-from gnf.schemata import OptinTadeedAlgo
-from gnf.schemata import OptinTadeedAlgo_Maker
-from gnf.schemata import TransferDiscoverycertAlgo
-from gnf.schemata import TransferTadeedAlgo
-from gnf.schemata import TransferTavalidatorcertAlgo
+from gnf.schemata import InitialTadeedAlgoCreate
+from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import NewTadeedAlgoOptin
+from gnf.schemata import NewTadeedAlgoOptin_Maker
+from gnf.schemata import NewTadeedSend
+from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import OldTadeedAlgoReturn_Maker
+from gnf.schemata import TavalidatorcertAlgoCreate
+from gnf.schemata import TavalidatorcertAlgoTransfer
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_related.settings")
@@ -111,12 +115,12 @@ class GNodeFactoryDb:
         self,
         from_g_node_role_value: str,
         from_g_node_alias: str,
-        payload: CreateTerminalassetAlgo,
+        payload: BasegnodeTerminalassetCreate,
     ):
         LOGGER.info(f"Got {payload} from {from_g_node_alias}")
         if from_g_node_role_value != RegistryGNodeRole.GNodeRegistry.value:
             raise Exception(f"GNodeFactory only listens to GNodeRegistries")
-        if payload.TypeName == CreateTadeedAlgo.TypeName:
+        if payload.TypeName == BasegnodeTerminalassetCreate.TypeName:
             if payload.FromGNodeAlias != from_g_node_alias:
                 # Note: this validation should move to actor_base
                 LOGGER.info(
@@ -131,93 +135,40 @@ class GNodeFactoryDb:
     # Messages Sent
     ##########################
 
-    def generate_optin_tadeed_algo(
-        self,
-        new_ta_deed_idx: int,
-        validator_addr: str,
-        ta_owner_addr: str,
-        ta_daemon_addr: str,
-    ) -> OptinTadeedAlgo:
-        ta_multi = MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[self.admin_account.addr, ta_daemon_addr, ta_owner_addr],
-        )
-        txn = transaction.AssetOptInTxn(
-            sender=ta_multi.addr,
-            index=new_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
-        mtx = ta_multi.create_mtx(txn)
-        mtx.sign(self.admin_account.sk)
-        payload = OptinTadeedAlgo_Maker(
-            validator_addr=validator_addr,
-            ta_owner_addr=ta_owner_addr,
-            ta_daemon_addr=ta_daemon_addr,
-            new_deed_opt_in_mtx=encoding.msgpack_encode(mtx),
-        ).tuple
-        return payload
-
-    def generate_exchange_tadeed_algo(
+    def generate_old_tadeed_algo_return(
         self,
         old_ta_deed_idx: int,
         new_ta_deed_idx: int,
         validator_addr: str,
-        ta_owner_addr: str,
         ta_daemon_addr: str,
-    ) -> ExchangeTadeedAlgo:
+        signed_new_deed_transfer_txn: transaction.SignedTransaction,
+    ) -> OldTadeedAlgoReturn:
+        if new_ta_deed_idx is None:
+            raise Exception(f"new_ta_deed_idx is None!")
+        if old_ta_deed_idx is None:
+            raise Exception(f"old_ta_deed_idx is None!")
 
-        ta_multi = MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[self.admin_account.addr, ta_daemon_addr, ta_owner_addr],
-        )
-        # First, transfer new deed to ta_multi
-        transfer_new_txn = transaction.AssetTransferTxn(
-            sender=self.admin_account.addr,
-            receiver=ta_multi.addr,
-            amt=1,
-            index=new_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
-
-        signed_txn = transfer_new_txn.sign(self.admin_account.sk)
-        txid = self.client.send_raw_transaction(encoding.msgpack_encode(signed_txn))
-        LOGGER.info(
-            f"Transferring new deed {new_ta_deed_idx} w txid {txid[-6:]}. Waiting for confirmation"
-        )
-        r = algo_utils.wait_for_transaction(self.client, txid)
-
-        # Second, opt into old tadeed
+        # opt into old tadeed
         txn = transaction.AssetOptInTxn(
             sender=self.admin_account.addr,
             index=old_ta_deed_idx,
             sp=self.client.suggested_params(),
         )
-        signed_txn = txn.sign(self.admin_account.sk)
-        txid = self.client.send_raw_transaction(encoding.msgpack_encode(signed_txn))
-        LOGGER.info(
-            f"Opting into old deed {old_ta_deed_idx} w txid {txid[-6:]}. Waiting for confirmation"
-        )
-        r = algo_utils.wait_for_transaction(self.client, txid)
+        txn = txn.sign(self.admin_account.sk)
+        try:
+            self.client.send_transaction(txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, txn.get_txid())
 
-        # Third, create mtx to transfer old deed to Gnf
-        transfer_txn = transaction.AssetTransferTxn(
-            sender=ta_multi.addr,
-            receiver=self.admin_account.addr,
-            amt=1,
-            index=old_ta_deed_idx,
-            sp=self.client.suggested_params(),
-        )
-        transfer_mtx = ta_multi.create_mtx(transfer_txn)
-        transfer_mtx.sign(self.admin_account.sk)
-
-        payload = ExchangeTadeedAlgo_Maker(
-            validator_addr=validator_addr,
-            ta_owner_addr=ta_owner_addr,
+        # ask for the old TaDeed back
+        payload = OldTadeedAlgoReturn_Maker(
+            old_ta_deed_idx=old_ta_deed_idx,
             ta_daemon_addr=ta_daemon_addr,
-            new_ta_deed_idx=new_ta_deed_idx,
-            old_deed_transfer_mtx=encoding.msgpack_encode(transfer_mtx),
+            validator_addr=validator_addr,
+            signed_new_deed_transfer_txn=encoding.msgpack_encode(
+                signed_new_deed_transfer_txn
+            ),
         ).tuple
         return payload
 
@@ -225,12 +176,44 @@ class GNodeFactoryDb:
     # Messages Received
     ##########################
 
-    def create_updated_ta_deed(self, g_node: BaseGNodeDb) -> int:
+    def new_tadeed_send_received(self, payload: NewTadeedSend) -> OldTadeedAlgoReturn:
+        if not isinstance(payload, NewTadeedSend):
+            LOGGER.info(
+                f"payload must be type NewTadeedSend, got {type(payload)}. Ignoring!"
+            )
+            return None
+        txn = transaction.AssetTransferTxn(
+            sender=self.admin_account.addr,
+            receiver=payload.TaDaemonAddr,
+            amt=1,
+            index=payload.NewTaDeedIdx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_account.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+
+        LOGGER.info(f"New TaDeed {payload.NewTaDeedIdx} sent to TaDaemon")
+        return self.generate_old_tadeed_algo_return(
+            old_ta_deed_idx=payload.OldTaDeedIdx,
+            new_ta_deed_idx=payload.NewTaDeedIdx,
+            validator_addr=payload.ValidatorAddr,
+            ta_daemon_addr=payload.TaDaemonAddr,
+            signed_new_deed_transfer_txn=signed_txn,
+        )
+
+    def create_updated_ta_deed(
+        self, g_node: BaseGNodeDb
+    ) -> tuple[int, transaction.SignedTransaction]:
         """
         Creates a TADEED with asset name reflecting the updated
         GNodeAlias
         Returns:
-            int: asset_idx for new TADEED
+            tuple[int, transaction.SignedTransaction]: asset_idx for new TADEED,
+            signed transaction (by GnfAdmin) for creating new TADEED
         """
         txn = transaction.AssetCreateTxn(
             sender=self.admin_account.addr,
@@ -248,11 +231,12 @@ class GNodeFactoryDb:
         except:
             raise Exception(f"Failure sending transaction")
         r = algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-        return r.asset_idx
+        LOGGER.info(f"New TaDeed {r.asset_idx} created for {g_node.alias}")
+        return [r.asset_idx, signed_txn]
 
     def recursively_update_alias(
         self, g_node: BaseGNodeDb, new_parent_alias: str
-    ) -> OptinTadeedAlgo:
+    ) -> Optional[NewTadeedAlgoOptin]:
         payload_hack = None
         orig_alias = g_node.alias
         final_word = orig_alias.split(".")[-1]
@@ -269,20 +253,24 @@ class GNodeFactoryDb:
         g_node.alias = new_alias
         g_node.save()
         if g_node.dc.role == CoreGNodeRole.TerminalAsset:
-
-            new_ta_deed_idx = self.create_updated_ta_deed(g_node)
-            payload_hack = self.generate_optin_tadeed_algo(
-                new_ta_deed_idx=new_ta_deed_idx,
-                validator_addr=g_node.ownership_deed_validator_addr,
-                ta_owner_addr=g_node.owner_addr,
-                ta_daemon_addr=g_node.daemon_addr,
+            new_ta_deed_idx, signed_tadeed_creation_txn = self.create_updated_ta_deed(
+                g_node
             )
-            LOGGER.debug(f"Creating payload_hack: {payload_hack}")
+
+            payload_hack = NewTadeedAlgoOptin_Maker(
+                new_ta_deed_idx=new_ta_deed_idx,
+                old_ta_deed_idx=g_node.ownership_deed_nft_id,
+                ta_daemon_addr=g_node.daemon_addr,
+                validator_addr=g_node.ownership_deed_validator_addr,
+                signed_ta_deed_creation_txn=encoding.msgpack_encode(
+                    signed_tadeed_creation_txn
+                ),
+            ).tuple
         return payload_hack
 
     def create_pending_ctn(
-        self, payload: CreateDiscoverycertAlgo
-    ) -> Optional[OptinTadeedAlgo]:
+        self, payload: DiscoverycertAlgoCreate
+    ) -> Optional[NewTadeedAlgoOptin]:
         """Given a ctn alias and the list of the aliases of the gnodes that
         will become its children, creates a pending ctn."""
         ctn_alias = payload.GNodeAlias
@@ -299,8 +287,8 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ctn_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.ConductorTopologyNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.ConductorTopologyNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "gps_point_id": gpsdb.gps_point_id,
         }
@@ -322,12 +310,12 @@ class GNodeFactoryDb:
             )
         return opt_in_payload
 
-    def create_discoverycertificate_received(
-        self, payload: CreateDiscoverycertAlgo
-    ) -> Optional[OptinTadeedAlgo]:
-        if not isinstance(payload, CreateDiscoverycertAlgo):
+    def discoverycert_algo_create_received(
+        self, payload: DiscoverycertAlgoCreate
+    ) -> Optional[NewTadeedAlgoOptin]:
+        if not isinstance(payload, DiscoverycertAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateDiscoverycertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type DiscoverycertAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
         txn = transaction.AssetCreateTxn(
@@ -355,8 +343,8 @@ class GNodeFactoryDb:
         parent_alias = ".".join(words[:-1])
         gn = {
             "alias": parent_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.AtomicMeteringNode,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.AtomicMeteringNode.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
         }
@@ -370,8 +358,8 @@ class GNodeFactoryDb:
             return None
         return atomic_metering_node
 
-    def create_tadeed_algo_received(
-        self, payload: CreateTadeedAlgo
+    def initial_tadeed_algo_create_received(
+        self, payload: InitialTadeedAlgoCreate
     ) -> Optional[BaseGNodeDb]:
         """
         Co-signs and submits an AssetCreateTxn for a TaDeed. This method:
@@ -386,22 +374,22 @@ class GNodeFactoryDb:
             - Sends that payload to the ta.g_node_registry_addr
 
         Args:
-            payload: CreateTadeedAlgo. The validation of the type guarantees
+            payload: InitialTadeedAlgoCreate. The validation of the type guarantees
         that payload.HalfSignedCertCreationMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that creates an appropriately-formatted TaDeed
 
         Raises:
-            SchemaError: if the payload does not have type CreateTadeedAlgo
+            SchemaError: if the payload does not have type InitialTadeedAlgoCreate
 
         Returns:
             Optional[BaseGNodeDb]: None if the asset is not created
             otherwise the TerminalAsset database object
         """
         self.client.account_info(payload.ValidatorAddr)
-        if not isinstance(payload, CreateTadeedAlgo):
+        if not isinstance(payload, InitialTadeedAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateTadeedAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type InitialTadeedAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -425,9 +413,7 @@ class GNodeFactoryDb:
             return None
 
         ta_deed_idx = response.asset_idx
-        LOGGER.info(
-            f"TaDeed created for {ta_deed_alias} with ta_deed_idx {ta_deed_idx}"
-        )
+        LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_deed_alias} ")
 
         atomic_metering_node = self.create_pending_atomic_metering_node(
             ta_alias=ta_deed_alias, ta_deed_idx=ta_deed_idx
@@ -446,12 +432,12 @@ class GNodeFactoryDb:
         LOGGER.info(f"just received HeartbeatA {payload}")
 
     def create_tavalidatorcert_algo_received(
-        self, payload: CreateTavalidatorcertAlgo
+        self, payload: TavalidatorcertAlgoCreate
     ) -> Optional[int]:
         """Co-signs and submits an AssetCreateTxn for a  Validator Certificate NFT.
 
         Args:
-            payload: CreateTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoCreate. The validation of the type guarantees
         that payload.HalfSignedCertCreationMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that creates an appropriately-formatted Validator Certificate.
@@ -462,9 +448,9 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, CreateTavalidatorcertAlgo):
+        if not isinstance(payload, TavalidatorcertAlgoCreate):
             LOGGER.warning(
-                f"payload must be type CreateTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -486,30 +472,30 @@ class GNodeFactoryDb:
 
         return valdiator_cert_idx
 
-    def update_ctn_to_active(self, payload: TransferDiscoverycertAlgo) -> BaseGNodeDb:
+    def update_ctn_to_active(self, payload: DiscoverycertAlgoTransfer) -> BaseGNodeDb:
         """
-        Payload will be TransferDiscoverycertAlgo.
+        Payload will be DiscoverycertAlgoTransfer.
 
         """
 
         ctn = BaseGNodeDb.objects.filter(alias=payload.GNodeAlias)[0]
         if ctn.dc.role != CoreGNodeRole.ConductorTopologyNode:
             raise Exception(f"Expected Ctn, got {ctn.dc.role}!")
-        ctn.status = GNodeStatus.Active
+        ctn.status_value = GNodeStatus.Active.value
         ctn.save()
         LOGGER.info(f"Ctn is now Active: {ctn}")
         return ctn
 
     def transfer_discoverycert_algo_received(
-        self, payload: TransferDiscoverycertAlgo
+        self, payload: DiscoverycertAlgoTransfer
     ) -> Optional[BaseGNode]:
         """
         TODO: ADD!
         """
 
-        if not isinstance(payload, TransferDiscoverycertAlgo):
+        if not isinstance(payload, DiscoverycertAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferDiscoverycertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type DiscoverycertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -523,13 +509,13 @@ class GNodeFactoryDb:
         ctn = self.update_ctn_to_active(payload)
         return ctn.dc
 
-    def create_terminal_asset(self, payload: TransferTadeedAlgo) -> BaseGNodeDb:
+    def create_terminal_asset(self, payload: InitialTadeedAlgoTransfer) -> BaseGNodeDb:
         mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
         asset_idx = mtx.transaction.dictify()["xaid"]
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
-            addresses=[self.admin_account.addr, payload.DeedValidatorAddr],
+            addresses=[self.admin_account.addr, payload.ValidatorAddr],
         )
         a = self.client.account_asset_info(v_multi.addr, asset_idx)
         ta_alias: str = a["created-asset"]["name"]
@@ -538,7 +524,7 @@ class GNodeFactoryDb:
         atomic_metering_node = BaseGNodeDb.objects.filter(
             alias=atomic_metering_node_alias
         )[0]
-        atomic_metering_node.status = GNodeStatus.Active
+        atomic_metering_node.status_value = GNodeStatus.Active.value
         atomic_metering_node.save()
 
         gpsdb: GpsPointDb = GpsPointDb(
@@ -548,11 +534,11 @@ class GNodeFactoryDb:
 
         gn = {
             "alias": ta_alias,
-            "status": GNodeStatus.Pending,
-            "role": CoreGNodeRole.TerminalAsset,
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": config.SandboxDemo().gnr_addr,
             "ownership_deed_nft_id": asset_idx,
-            "ownership_deed_validator_addr": payload.DeedValidatorAddr,
+            "ownership_deed_validator_addr": payload.ValidatorAddr,
             "owner_addr": payload.TaOwnerAddr,
             "daemon_addr": payload.TaDaemonAddr,
             "gps_point_id": gpsdb.gps_point_id,
@@ -567,13 +553,13 @@ class GNodeFactoryDb:
             return None
         LOGGER.info(f"Pending TerminalAsset created: {terminal_asset}")
 
-        terminal_asset.status = GNodeStatus.Active
+        terminal_asset.status_value = GNodeStatus.Active
         terminal_asset.save()
         LOGGER.info(f"TerminalAsset is now Active: {terminal_asset}")
         return terminal_asset
 
-    def transfer_tadeed_algo_received(
-        self, payload: TransferTadeedAlgo
+    def initial_tadeed_algo_transfer_received(
+        self, payload: InitialTadeedAlgoTransfer
     ) -> Optional[BaseGNode]:
         """
             - Checks  consistency for the GNodeAlias in the deed:
@@ -582,23 +568,23 @@ class GNodeFactoryDb:
                 - gn.status = Pending
                 - gn.lat and gn.lon exist
                 - gn.smart_daemon_addr =
-                - gn.ownernship_deed_fnt_id does not exist
+                - gn.ownership_deed_nft_id does not exist
                 - gn.ownership_deed_nft_creator_addr exists and matches
-                2-sig [GnfAdmin, payload.DeedValidatorAddr]
+                2-sig [GnfAdmin, payload.ValidatorAddr]
 
 
             - Signs and submits an AssetTransferTxn that sends a TaDeed to the
         2-sig [GnfAdmin, TaDaemon, TaOwner] multi.
             - On confirmation, updates the GNodeDb gn:
                 - gn.ownership_deed_nft_id = ta_asset_id
-                - gn.status = Active
-                - gn parent (the AtomicMeteringNode) status = Active
+                - gn.status_value = Active.value
+                - gn parent (the AtomicMeteringNode) status = Active.value
             - Sends a StatusBaseGgnodeAlgo to the correct GNodeREgistry ,
             identified by gn.g_node_registry_addr. Status.TopGNodeAlias = gn parent
             - Returns that StatusBaseGgnodeAlgo payload
 
         Args:
-            payload: TransferTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoTransfer. The validation of the type guarantees
         that payload.HalfSignedCertTransferMtx is the encoding of a MultisigTransaction
         for the 1-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that transfers an appropriately-formatted Validator Certificate to the
@@ -610,9 +596,9 @@ class GNodeFactoryDb:
             - StatusBaseGgnodeAlgo otherwise
         """
 
-        if not isinstance(payload, TransferTadeedAlgo):
+        if not isinstance(payload, InitialTadeedAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type InitialTadeedAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 
@@ -623,7 +609,7 @@ class GNodeFactoryDb:
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
-            addresses=[self.admin_account.addr, payload.DeedValidatorAddr],
+            addresses=[self.admin_account.addr, payload.ValidatorAddr],
         )
         a = self.client.account_asset_info(v_multi.addr, asset_idx)
         terminal_asset_alias = a["created-asset"]["name"]
@@ -645,19 +631,19 @@ class GNodeFactoryDb:
             LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
             return None
         LOGGER.info(
-            f"TaDeed for {terminal_asset_alias}, asset-index {asset_idx} transferred to owner multi!"
+            f"TaDeed {asset_idx} for {terminal_asset_alias} transferred to TaDaemon"
         )
         terminal_asset = self.create_terminal_asset(payload)
         return terminal_asset.dc
 
     def transfer_tavalidatorcert_algo_received(
-        self, payload: TransferTavalidatorcertAlgo
+        self, payload: TavalidatorcertAlgoTransfer
     ):
         """Signs and submits an AssetTransferTxn that sends a Validator Certificate
         to the payload.ValidatorAddr
 
         Args:
-            payload: TransferTavalidatorcertAlgo. The validation of the type guarantees
+            payload: TavalidatorcertAlgoTransfer. The validation of the type guarantees
         that payload.HalfSignedCertTransferMtx is the encoding of a MultisigTransaction
         for the 2-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
         that transfers an appropriately-formatted Validator Certificate to the
@@ -670,9 +656,9 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TransferTavalidatorcertAlgo):
+        if not isinstance(payload, TavalidatorcertAlgoTransfer):
             LOGGER.warning(
-                f"payload must be type TransferTavalidatorcertAlgo, got {type(payload)}. Ignoring!"
+                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
             )
             return None
 

@@ -19,104 +19,111 @@
     <xsl:template match="/">
         <FileSet>
             <FileSetFiles>
-                <xsl:for-each select="$airtable//Schemas/Schema[(normalize-space(Alias) !='') and (Status = 'Active' or Status = 'Pending') and (InGnfSchemata = 'true') and (ProtocolType = 'Json' or ProtocolType = 'GwAlgoSerial')]">
-                <xsl:variable name="alias" select="Alias"/>
-                <xsl:variable name="local-alias" select="AliasRoot" />
-                <xsl:variable name="schema-id" select="SchemaId" />
+                <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
+                <xsl:variable name="schema-id" select="Type"/>
+                <xsl:for-each select="$airtable//Schemas/Schema[(SchemaId = $schema-id)  and (Status = 'Active' or Status = 'Pending') and (ProtocolCategory = 'Json' or ProtocolCategory = 'GwAlgoSerial')]">
+                <xsl:variable name="type-name" select="AliasRoot"/>
                 <xsl:variable name="class-name">
                     <xsl:call-template name="nt-case">
-                        <xsl:with-param name="mp-schema-text" select="$local-alias" />
+                        <xsl:with-param name="mp-schema-text" select="$type-name" />
                     </xsl:call-template>
                 </xsl:variable>
+                <xsl:variable name="overwrite-mode">
 
+                    <xsl:if test="not (Status = 'Pending')">
+                    <xsl:text>Never</xsl:text>
+                    </xsl:if>
+                    <xsl:if test="(Status = 'Pending')">
+                    <xsl:text>Always</xsl:text>
+                    </xsl:if>
+                    </xsl:variable>
                 <FileSetFile>
                             <xsl:element name="RelativePath"><xsl:text>../../../../tests/schemata/test_</xsl:text>
-                            <xsl:value-of select="translate($local-alias,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
+                            <xsl:value-of select="translate($type-name,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
 
-                    <OverwriteMode>Never</OverwriteMode>
+                    <OverwriteMode><xsl:value-of select="$overwrite-mode"/></OverwriteMode>
                     <xsl:element name="FileContents">
 
-<xsl:text>"""Tests </xsl:text><xsl:value-of select="$alias"/><xsl:text> type"""
+<xsl:text>"""Tests </xsl:text><xsl:value-of select="AliasRoot"/><xsl:text> type, version </xsl:text>
+<xsl:value-of select="SemanticEnd"/>
+<xsl:text>"""
 import json
 
 import pytest
+from pydantic import ValidationError
 
-from errors import SchemaError
-from schemata.</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/><xsl:text>_maker import (
-    </xsl:text>
-<xsl:value-of select="$class-name"/><xsl:text>_Maker as Maker,
-)
+from gnf.errors import SchemaError
+from gnf.schemata import </xsl:text>
+<xsl:value-of select="$class-name"/><xsl:text>_Maker as Maker</xsl:text>
+<xsl:for-each select="$airtable//GtEnums/GtEnum[(normalize-space(Alias) !='')  and (count(TypesThatUse[text()=$schema-id])>0)]">
+<xsl:text>
+from gnf.enums import </xsl:text>
+<xsl:call-template name="nt-case">
+    <xsl:with-param name="mp-schema-text" select="LocalName" />
+</xsl:call-template>
+</xsl:for-each>
+<xsl:text>
 
 
-def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
+def test_</xsl:text><xsl:value-of select="translate($type-name,'.','_')"/>
 <xsl:text>_generated():
 
-    gw_dict = {</xsl:text>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and ((not (IsEnum = 'true') and normalize-space(SubTypeDataClass) = '') or (IsList = 'true'))]">
+
+    d = {</xsl:text>
+        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+        <xsl:sort select="Idx" data-type="number"/>
+        <xsl:if test="(not (IsEnum = 'true'))">
         <xsl:text>
         "</xsl:text><xsl:value-of select="Value"  />
         <xsl:text>": </xsl:text>
         <xsl:value-of select="normalize-space(TestValue)"/>
         <xsl:text>,</xsl:text>
-        </xsl:for-each>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsEnum = 'true') and not (IsList = 'true')]">
+        </xsl:if>
+
+        <xsl:if test="(IsEnum = 'true') and not (IsList = 'true')">
         <xsl:text>
         "</xsl:text><xsl:value-of select="Value"  />
         <xsl:text>GtEnumSymbol": </xsl:text>
         <xsl:value-of select="normalize-space(TestValue)"/>
             <xsl:text>,</xsl:text>
-        </xsl:for-each>
+        </xsl:if>
 
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (normalize-space(SubTypeDataClass) != '')and  not (IsList = 'true')]">
-        <xsl:text>
-        "</xsl:text><xsl:value-of select="Value"  />
-        <xsl:text>Id": </xsl:text>
-        <xsl:value-of select="normalize-space(TestValue)"/>
-        <xsl:text>,</xsl:text>
+
         </xsl:for-each>
     <xsl:text>
-        "TypeName": "</xsl:text><xsl:value-of select="$alias"/><xsl:text>",
+        "TypeName": "</xsl:text><xsl:value-of select="$type-name"/><xsl:text>",
+        "Version": "</xsl:text><xsl:value-of select="SemanticEnd"/><xsl:text>",
     }
 
     with pytest.raises(SchemaError):
-        Maker.type_to_tuple(gw_dict)
+        Maker.type_to_tuple(d)
 
     with pytest.raises(SchemaError):
         Maker.type_to_tuple('"not a dict"')
 
     # Test type_to_tuple
-    gw_type = json.dumps(gw_dict)
-    gw_tuple = Maker.type_to_tuple(gw_type)
+    gtype = json.dumps(d)
+    gtuple = Maker.type_to_tuple(gtype)
 
     # test type_to_tuple and tuple_to_type maps
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
+    assert Maker.type_to_tuple(Maker.tuple_to_type(gtuple)) == gtuple
 
     # test Maker init
     t = Maker(
         </xsl:text>
         <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
-        <xsl:if test="(normalize-space(SubTypeDataClass) = '') ">
+        <xsl:sort select="Idx" data-type="number"/>
         <xsl:call-template name="python-case">
             <xsl:with-param name="camel-case-text" select="Value"  />
         </xsl:call-template>
-        <xsl:text>=gw_tuple.</xsl:text>
+        <xsl:text>=gtuple.</xsl:text>
         <xsl:value-of select="Value"/>
         <xsl:text>,
         </xsl:text>
-        </xsl:if>
-        <xsl:if test="(normalize-space(SubTypeDataClass) != '') ">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>_id=gw_tuple.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>Id,
-        </xsl:text>
-        </xsl:if>
         </xsl:for-each>
-        <xsl:text>#
+        <xsl:text>
     ).tuple
-    assert t == gw_tuple
+    assert t == gtuple
 
     </xsl:text>
     <xsl:if test="MakeDataClass='true'">
@@ -124,8 +131,8 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
     # Dataclass related tests
     ######################################
 
-    dc = Maker.tuple_to_dc(gw_tuple)
-    assert gw_tuple == Maker.dc_to_tuple(dc)
+    dc = Maker.tuple_to_dc(gtuple)
+    assert gtuple == Maker.dc_to_tuple(dc)
     assert Maker.type_to_dc(Maker.dc_to_type(dc)) == dc
 
     </xsl:text>
@@ -134,50 +141,38 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
     # SchemaError raised if missing a required attribute
     ######################################
 
-    orig_value = gw_dict["TypeName"]
-    del gw_dict["TypeName"]
+    d2 = dict(d)
+    del d2["TypeName"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = orig_value
+        Maker.dict_to_tuple(d2)
 
     </xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (IsRequired='true') ]">
-    <xsl:if test = "((not (IsEnum = 'true') and normalize-space(SubTypeDataClass) = '') or (IsList = 'true'))">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    del gw_dict["</xsl:text>
+    <xsl:sort select="Idx" data-type="number"/>
+
+
+    <xsl:if test = "((not (IsEnum = 'true')) or (IsList = 'true'))">
+
+    <xsl:text>d2 = dict(d)
+    del d2["</xsl:text>
     <xsl:value-of  select="Value"/><xsl:text>"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/>
-    <xsl:text>"] = orig_value
+        Maker.dict_to_tuple(d2)
 
     </xsl:text>
     </xsl:if>
+
+
     <xsl:if test = "((IsEnum = 'true') and not (IsList = 'true'))">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>GtEnumSymbol"]
-    del gw_dict["</xsl:text>
+    <xsl:text>d2 = dict(d)
+    del d2["</xsl:text>
     <xsl:value-of  select="Value"/><xsl:text>GtEnumSymbol"]
     with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/>
-    <xsl:text>GtEnumSymbol"] = orig_value
+        Maker.dict_to_tuple(d2)
 
     </xsl:text>
     </xsl:if>
-    <xsl:if test = "((normalize-space(SubTypeDataClass) != '') and not (IsList = 'true'))">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>Id"]
-    del gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>Id"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/>
-    <xsl:text>Id"] = orig_value
 
-    </xsl:text>
-    </xsl:if>
 
     </xsl:for-each>
 
@@ -188,315 +183,116 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
 
     </xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not (IsRequired='true')]">
+    <xsl:sort select="Idx" data-type="number"/>
+
     <xsl:if test= "(normalize-space(SubTypeDataClass) != '')">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>Id"]
-    del gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>Id"]
-    gw_type = json.dumps(gw_dict)
-    gw_tuple = Maker.type_to_tuple(gw_type)
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/>
-    <xsl:text>Id"] = orig_value
+    <xsl:text>d2 = dict(d)
+    if "</xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>Id" in d2.keys():
+        del d2["</xsl:text>
+        <xsl:value-of  select="Value"/><xsl:text>Id"]
+    Maker.dict_to_tuple(d2)
 
     </xsl:text>
     </xsl:if>
+
     <xsl:if  test= "(normalize-space(SubTypeDataClass) = '')">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    del gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_type = json.dumps(gw_dict)
-    gw_tuple = Maker.type_to_tuple(gw_type)
-    assert Maker.type_to_tuple(Maker.tuple_to_type(gw_tuple)) == gw_tuple
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/>
-    <xsl:text>"] = orig_value
+    <xsl:text>d2 = dict(d)
+    if "</xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>" in d2.keys():
+        del d2["</xsl:text>
+        <xsl:value-of  select="Value"/><xsl:text>"]
+    Maker.dict_to_tuple(d2)
 
     </xsl:text>
     </xsl:if>
     </xsl:for-each>
     </xsl:if>
     <xsl:text>######################################
-    # SchemaError raised if attributes have incorrect type
-    ######################################
-
-    </xsl:text>
+    # Behavior on incorrect types
+    ######################################</xsl:text>
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)]">
+    <xsl:sort select="Idx" data-type="number"/>
     <xsl:variable name="attribute"><xsl:value-of select="Value"/></xsl:variable>
 
-    <xsl:if test = "(normalize-space(SubTypeDataClass) != '')">
-        <xsl:text>orig_value = gw_dict["</xsl:text>
-        <xsl:value-of  select="Value"/><xsl:text>Id"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>Id"] = "Not a dataclass id"
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>Id"] = orig_value
+    <xsl:if test= "(IsPrimitive='true') and not(IsList = 'true')">
 
-    </xsl:text>
-    </xsl:if>
-    <xsl:if test= "not(IsList = 'true') and (IsType='true') and (normalize-space(SubTypeDataClass) = '') ">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = "Not a </xsl:text>
-    <xsl:call-template name="nt-case">
-        <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
-    </xsl:call-template><xsl:text>."
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = orig_value
+        <xsl:if test = "PrimitiveType='Integer'">
+    <xsl:text>
 
-    with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-        <xsl:if test="(normalize-space(SubTypeDataClass) = '') ">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>=gw_tuple.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>,
-            </xsl:text>
+    d2 = dict(d, </xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>="</xsl:text>
+         <xsl:value-of select="TestValue"/><xsl:text>.1")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)</xsl:text>
         </xsl:if>
-        <xsl:if test="(normalize-space(SubTypeDataClass) != '') ">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>_id=gw_tuple.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>Id,
-            </xsl:text>
+
+        <xsl:if test = "PrimitiveType='Number'">
+    <xsl:text>
+
+    d2 = dict(d, </xsl:text>
+        <xsl:value-of  select="Value"/><xsl:text>="this is not a float")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)</xsl:text>
         </xsl:if>
-        </xsl:for-each>
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="$attribute"  />
-        </xsl:call-template>
-        <xsl:text>="Not a </xsl:text>
-        <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
-                </xsl:call-template><xsl:text>",
-        )
 
-    </xsl:text>
-    </xsl:if>
-    <xsl:if test= "not(IsList = 'true') and (IsPrimitive='true') ">
+        <xsl:if test = "PrimitiveType='Boolean'">
+    <xsl:text>
 
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = </xsl:text>
-            <xsl:if test = "PrimitiveType='Integer'">
-            <xsl:text>1.1
-    </xsl:text>
-            </xsl:if>
-            <xsl:if test = "PrimitiveType='Number'">
-            <xsl:text>"This string is not a float."
-    </xsl:text>
-            </xsl:if>
-            <xsl:if test = "PrimitiveType='Boolean'">
-            <xsl:text>"This string is not a boolean."
-    </xsl:text>
-            </xsl:if>
-            <xsl:if test = "PrimitiveType='String'">
-            <xsl:text>42
-    </xsl:text>
-            </xsl:if>
-    <xsl:text>with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = orig_value
-
-    </xsl:text>
-    </xsl:if>
-    <xsl:if test = "not (IsList = 'true') and IsEnum = 'true'">
-
-    <xsl:text>with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-        <xsl:if test="(normalize-space(SubTypeDataClass) = '') ">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>=gw_tuple.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>,
-            </xsl:text>
+    d2 = dict(d, </xsl:text>
+        <xsl:value-of  select="Value"/><xsl:text>="this is not a boolean")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)</xsl:text>
         </xsl:if>
-        <xsl:if test="(normalize-space(SubTypeDataClass) != '') ">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>_id=gw_tuple.</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>Id,
-            </xsl:text>
-        </xsl:if>
-        </xsl:for-each>
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="$attribute"  />
-        </xsl:call-template>
-        <xsl:text>="This is not a </xsl:text>
-        <xsl:call-template name="nt-case">
-            <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
-        </xsl:call-template><xsl:text> Enum.",
-        )
-
-    </xsl:text>
-
     </xsl:if>
-    <xsl:if test= "(IsList = 'true') and (IsType='true') ">
-    <xsl:text>orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = "Not a list."
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = orig_value
 
-    orig_value = gw_dict["</xsl:text>
-    <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = ["Not even a dict"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
 
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = [{"Failed": "Not a GtSimpleSingleStatus"}]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = orig_value
+    <xsl:if test = "(IsEnum = 'true') and not (IsList = 'true')">
+    <xsl:text>
 
-    with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-        <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-        <xsl:call-template name="python-case">
-            <xsl:with-param name="camel-case-text" select="Value"  />
-        </xsl:call-template>
-        <xsl:text>=gw_dict["</xsl:text>
-        <xsl:value-of select="Value"/>
-        <xsl:text>"],
-            </xsl:text>
-        </xsl:for-each>
-            <xsl:call-template name="python-case">
-                <xsl:with-param name="camel-case-text" select="$attribute"  />
-            </xsl:call-template>
-              <xsl:text>=["Not a </xsl:text>
-                <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="SubMessageFormatAlias" />
-                </xsl:call-template>
-                <xsl:text>"],
-        )
-
-    with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-    <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="Value"  />
-    </xsl:call-template>
-    <xsl:text>=gw_tuple.</xsl:text>
+    d2 = dict(d, </xsl:text>
     <xsl:value-of select="Value"/>
-    <xsl:text>,
-            </xsl:text>
-    </xsl:for-each>
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="$attribute"  />
-    </xsl:call-template>
-    <xsl:text>="This string is not a list",
-        )
-
-    </xsl:text>
-        </xsl:if>
-    <xsl:if test = "(IsList = 'true') and (IsPrimitive = 'true')">
-        <xsl:text>orig_value = gw_dict["</xsl:text>
-        <xsl:value-of  select="Value"/><xsl:text>"]
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = "This string is not a list."
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = </xsl:text>
-            <xsl:if test = "IsEnum = 'true'">
-            <xsl:text>["This string is not a </xsl:text>
-                <xsl:call-template name="nt-case">
-                    <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
-                </xsl:call-template>
-                <xsl:text>GtEnumSymbol."]
-    </xsl:text>
-            </xsl:if>
-            <xsl:if test = "IsPrimitive='true'">
-                <xsl:if test = "PrimitiveType='Integer'">
-            <xsl:text>[1.1]
-    </xsl:text>
-                </xsl:if>
-                <xsl:if test = "PrimitiveType='Number'">
-            <xsl:text>["This string is not a float."]
-    </xsl:text>
-                </xsl:if>
-                <xsl:if test = "PrimitiveType='Boolean'">
-            <xsl:text>["This string is not a boolean."]
-    </xsl:text>
-                </xsl:if>
-                <xsl:if test = "PrimitiveType='String'">
-            <xsl:text>[42]
-    </xsl:text>
-                </xsl:if>
-            </xsl:if>
-        <xsl:text>with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of  select="Value"/><xsl:text>"] = orig_value
-
-    </xsl:text>
-    </xsl:if>
-    <xsl:if test = "(IsList = 'true') and (IsEnum= 'true')">
-
-    <xsl:text>with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-    <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="Value"  />
-    </xsl:call-template>
-    <xsl:text>=gw_tuple.</xsl:text>
+    <xsl:text>GtEnumSymbol = 'hi')
+    Maker.dict_to_tuple(d2).</xsl:text>
     <xsl:value-of select="Value"/>
-    <xsl:text>,
-            </xsl:text>
-    </xsl:for-each>
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="$attribute"  />
-    </xsl:call-template>
-    <xsl:text>="This string is not a list",
-        )
-
-    with pytest.raises(SchemaError):
-        Maker(
-            </xsl:text>
-    <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and not(Value=$attribute)]">
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="Value"  />
-    </xsl:call-template>
-    <xsl:text>=gw_tuple.</xsl:text>
-    <xsl:value-of select="Value"/>
-    <xsl:text>,
-            </xsl:text>
-    </xsl:for-each>
-    <xsl:call-template name="python-case">
-        <xsl:with-param name="camel-case-text" select="$attribute"  />
-    </xsl:call-template>
-    <xsl:text>=["This is not a </xsl:text>
+    <xsl:text> = </xsl:text>
     <xsl:call-template name="nt-case">
         <xsl:with-param name="mp-schema-text" select="EnumLocalName" />
-    </xsl:call-template><xsl:text> Enum."],
-        )
-
-    </xsl:text>
+    </xsl:call-template>
+    <xsl:text>.default()</xsl:text>
     </xsl:if>
+
+
+    <xsl:if test= "(IsType='true')  and (IsList = 'true')">
+    <xsl:text>
+
+    d2  = dict(d, </xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>="Not a list.")
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2  = dict(d, </xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>=["Not a list of dicts"])
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2  = dict(d, </xsl:text>
+    <xsl:value-of  select="Value"/><xsl:text>= [{"Failed": "Not a GtSimpleSingleStatus"}])
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)</xsl:text>
+        </xsl:if>
 
     </xsl:for-each>
 
-    <xsl:text>######################################
+    <xsl:text>
+
+    ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################
 
-    gw_dict["TypeName"] = "not the type alias"
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["TypeName"] = "</xsl:text><xsl:value-of select="$alias"/><xsl:text>"
+    d2 = dict(d, TypeName="not the type alias")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)
 </xsl:text>
     <xsl:if test="count($airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (normalize-space(PrimitiveFormatFail1) != '')]) > 0">
 
@@ -506,30 +302,29 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
     ######################################</xsl:text>
 
     <xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id) and (normalize-space(PrimitiveFormatFail1) != '')]">
+    <xsl:sort select="Idx" data-type="number"/>
+
     <xsl:if test="not (IsList='true')">
     <xsl:text>
 
-    gw_dict["</xsl:text>
+    d2 = dict(d, </xsl:text>
     <xsl:value-of select="Value"/>
-    <xsl:text>"] = </xsl:text>
-    <xsl:value-of select="normalize-space(PrimitiveFormatFail1)"/><xsl:text>
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] = </xsl:text>
-    <xsl:value-of select="normalize-space(TestValue)"/>
+    <xsl:text>=</xsl:text>
+    <xsl:value-of select="normalize-space(PrimitiveFormatFail1)"/><xsl:text>)
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)</xsl:text>
     </xsl:if>
 
     <xsl:if test="(IsList='true')">
     <xsl:text>
 
-    gw_dict["</xsl:text>
+    d2 = dict(d, </xsl:text>
     <xsl:value-of select="Value"/>
-    <xsl:text>"] = [</xsl:text>
-    <xsl:value-of select="normalize-space(PrimitiveFormatFail1)"/><xsl:text>]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(gw_dict)
-    gw_dict["</xsl:text><xsl:value-of select="Value"/><xsl:text>"] = </xsl:text>
-    <xsl:value-of select="normalize-space(TestValue)"/>
+    <xsl:text>=[</xsl:text>
+    <xsl:value-of select="normalize-space(PrimitiveFormatFail1)"/><xsl:text>])
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)</xsl:text>
+
     </xsl:if>
     </xsl:for-each>
 
@@ -542,7 +337,7 @@ def test_</xsl:text><xsl:value-of select="translate($local-alias,'.','_')"/>
                         </xsl:element>
                      </FileSetFile>
                 </xsl:for-each>
-
+                </xsl:for-each>
             </FileSetFiles>
         </FileSet>
     </xsl:template>

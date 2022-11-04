@@ -8,12 +8,13 @@ import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
+import gnf.errors as errors
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by homeowner
-from gnf.schemata import SignandsubmitMtxAlgo
-from gnf.schemata import SignandsubmitMtxAlgo_Maker
+from gnf.schemata import InitialTadeedAlgoOptin
+from gnf.schemata import InitialTadeedAlgoOptin_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -33,11 +34,7 @@ class DevHomeowner:
             private_key=self.settings.sk.get_secret_value()
         )
         self.ta_daemon_addr = ta_daemon_addr
-        self.ta_multi = MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[config.Algo().gnf_admin_addr, ta_daemon_addr, self.acct.addr],
-        )
+
         self.validator_addr = validator_addr
         self.validator_multi = MultisigAccount(
             version=1,
@@ -52,46 +49,36 @@ class DevHomeowner:
     # Messages Sent
     ##########################
 
-    def opt_into_original_deed(self) -> SignandsubmitMtxAlgo:
+    def initial_tadeed_algo_optin_generated(self) -> InitialTadeedAlgoOptin:
         """
-         - Sends 50 algos to ta_multi acct
-         - Gets TaDeedIdx from ValidatorMulti acct
-         - Creates and signs TaDeed Optin for ta_multi as an mtx
-         - Sends mtx to daemon using signandsubmit payload
+         - Sends 50 algos to TaDaemon acct
+         - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
+         funding txn for proof of identity.
 
         Returns:
-            SignandsubmitMtxAlgo:
+            InitialTadeedAlgoOptin:
         """
         required_algos = config.Algo().ta_deed_consideration_algos
-        algo_setup.dev_fund_to_min(self.ta_multi.addr, required_algos)
-        LOGGER.info(f"ta_multi funded with {required_algos} Algos")
-
-        ta_deed_idx = api_utils.get_tadeed_cert_idx(
-            terminal_asset_alias=self.initial_terminal_asset_alias,
-            validator_addr=self.validator_addr,
-        )
-        if ta_deed_idx is None:
-            raise Exception(
-                f"called when validator {self.validator_addr[-6:]} did NOT have "
-                f"TADEED for {self.initial_terminal_asset_alias}!"
-            )
-        txn = transaction.AssetOptInTxn(
-            sender=self.ta_multi.addr,
-            index=ta_deed_idx,
+        txn = transaction.PaymentTxn(
+            sender=self.acct.addr,
+            receiver=self.ta_daemon_addr,
+            amt=required_algos * 10**6,
             sp=self.client.suggested_params(),
         )
-        mtx = self.ta_multi.create_mtx(txn)
-        mtx.sign(self.acct.sk)
-        payload = SignandsubmitMtxAlgo_Maker(
-            signer_address=self.ta_daemon_addr,
-            mtx=encoding.msgpack_encode(mtx),
-            threshold=2,
-            addresses=[
-                config.Algo().gnf_admin_addr,
-                self.ta_daemon_addr,
-                self.acct.addr,
-            ],
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise errors.AlgoError(f"Failure sending transaction")
+        algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+
+        payload = InitialTadeedAlgoOptin_Maker(
+            terminal_asset_alias=self.initial_terminal_asset_alias,
+            ta_owner_addr=self.acct.addr,
+            validator_addr=self.validator_addr,
+            signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
         ).tuple
+
         return payload
 
     ##########################

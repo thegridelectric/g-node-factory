@@ -1,15 +1,16 @@
-"""Tests for schema enum registry.g.node.role"""
+"""Tests for schema enum registry.g.node.role.100"""
 from gnf.enums import RegistryGNodeRole
 
 
-def test_component_category():
+def test_registry_g_node_role():
 
     assert set(RegistryGNodeRole.values()) == {
+        "Unknown",
         "GNodeFactory",
+        "GNodeRegistry",
         "WorldInstanceRegistry",
         "WorldCoordinator",
-        "GNodeRegistry",
         "GridWorks",
     }
 
-    assert RegistryGNodeRole.default() == RegistryGNodeRole.GridWorks
+    assert RegistryGNodeRole.default() == RegistryGNodeRole.Unknown

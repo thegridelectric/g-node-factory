@@ -13,14 +13,14 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by validator
-from gnf.schemata import CreateTadeedAlgo
-from gnf.schemata import CreateTadeedAlgo_Maker
-from gnf.schemata import CreateTavalidatorcertAlgo
-from gnf.schemata import CreateTavalidatorcertAlgo_Maker
-from gnf.schemata import TransferTadeedAlgo
-from gnf.schemata import TransferTadeedAlgo_Maker
-from gnf.schemata import TransferTavalidatorcertAlgo
-from gnf.schemata import TransferTavalidatorcertAlgo_Maker
+from gnf.schemata import InitialTadeedAlgoCreate
+from gnf.schemata import InitialTadeedAlgoCreate_Maker
+from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import InitialTadeedAlgoTransfer_Maker
+from gnf.schemata import TavalidatorcertAlgoCreate
+from gnf.schemata import TavalidatorcertAlgoCreate_Maker
+from gnf.schemata import TavalidatorcertAlgoTransfer
+from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -40,7 +40,7 @@ class DevValidator:
         self.seed_fund_validator_joint_account()
         LOGGER.info("DevValidator Initialized")
 
-    def send_message_to_gnf(self, payload: CreateTavalidatorcertAlgo):
+    def send_message_to_gnf(self, payload: TavalidatorcertAlgoCreate):
         """Stub for when there is a mechanism (probably FastAPI) for validators  sending
         messages to GNodeFactory.
 
@@ -53,9 +53,9 @@ class DevValidator:
     # Messages sent
     ###################
 
-    def generate_create_tadeed_algo(
+    def generate_initial_tadeed_algo_create(
         self, terminal_asset_alias: str
-    ) -> CreateTadeedAlgo:
+    ) -> InitialTadeedAlgoCreate:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -70,14 +70,14 @@ class DevValidator:
         mtx = self.validator_multi.create_mtx(txn)
         mtx.sign(self.acct.sk)
 
-        payload = CreateTadeedAlgo_Maker(
+        payload = InitialTadeedAlgoCreate_Maker(
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
         self.send_message_to_gnf(payload)
         return payload
 
-    def generate_create_tavalidatorcert_algo(self) -> CreateTavalidatorcertAlgo:
+    def generate_create_tavalidatorcert_algo(self) -> TavalidatorcertAlgoCreate:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -95,89 +95,75 @@ class DevValidator:
         mtx = self.validator_multi.create_mtx(txn)
         mtx.sign(self.acct.sk)
 
-        payload = CreateTavalidatorcertAlgo_Maker(
+        payload = TavalidatorcertAlgoCreate_Maker(
             validator_addr=self.acct.addr,
             half_signed_cert_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
         self.send_message_to_gnf(payload)
         return payload
 
-    def generate_transfer_tadeed_algo(
+    def generate_initial_tadeed_algo_transfer(
         self,
         ta_deed_idx: int,
-        ta_owner_addr: str,
         ta_daemon_addr: str,
+        ta_owner_addr: str,
         micro_lat: int,
         micro_lon: int,
-    ) -> Optional[TransferTadeedAlgo]:
+    ) -> Optional[InitialTadeedAlgoTransfer]:
         """
         This method is supposed to be called exactly for the FIRST time a TaDeed
         NFT is created for this ta_owner. For updated deeds, uses ExchangeTadeedAlgo
 
-        Let ta_multi be 2-sig [GnfAdmin, ta_daemon, ta_owner] acct. This method:
-
-         - Makes sure ta_multi account has at least TaDeedConsideration Algos
-         - Has ta_multi account opt into the ta_deed_idx (requires
-        ta_owner sk, and ta_daemon sk, which we are giving it for the sake of expediency
-        in this dev version)
-
-          - Creates the TransferTadeedAlgo payload and sends it to the Gnf
+          - Creates the InitialTadeedAlgoTransfer payload and sends it to the Gnf
           - Returns the payload
         Args:
             ta_deed_idx (int): asset id of the TaDeed NFT
-            ta_owner (BasicAccount): The owner of the TerminalAsset
             ta_daemon (BasicAccount): The Layer 1 contract supporting NFT ownership
             and creation (TaDeed, TaTradingRights)
 
         Returns:
-            TransferTadeedAlgo if sent,
+            InitialTadeedAlgoTransfer if sent,
             None if ta_multi does not have ta_deed_consideration_algos
         """
-        ta_multi: algo_utils.MultisigAccount = algo_utils.MultisigAccount(
-            version=1,
-            threshold=2,
-            addresses=[
-                config.Algo().gnf_admin_addr,
-                ta_daemon_addr,
-                ta_owner_addr,
-            ],
-        )
+
         required_algos = config.Algo().ta_deed_consideration_algos
-        if algo_utils.algos(ta_multi.addr) < required_algos:
+        if algo_utils.algos(ta_daemon_addr) < required_algos:
+            Exception(f"ta_daemon_addr not sufficiently funded!")
             return None
         txn = transaction.AssetTransferTxn(
             sender=self.validator_multi.addr,
-            receiver=ta_multi.addr,
+            receiver=ta_daemon_addr,
             amt=1,
             index=ta_deed_idx,
             sp=self.client.suggested_params(),
         )
         mtx = self.validator_multi.create_mtx(txn)
         mtx.sign(self.acct.sk)
-        payload = TransferTadeedAlgo_Maker(
-            first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
-            deed_validator_addr=self.acct.addr,
-            ta_owner_addr=ta_owner_addr,
-            ta_daemon_addr=ta_daemon_addr,
+        payload = InitialTadeedAlgoTransfer_Maker(
             micro_lat=micro_lat,
             micro_lon=micro_lon,
+            validator_addr=self.acct.addr,
+            ta_daemon_addr=ta_daemon_addr,
+            ta_owner_addr=ta_owner_addr,
+            first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
         ).tuple
+
         self.send_message_to_gnf(payload)
         return payload
 
     def generate_transfer_tavalidatorcert_algo(
         self, cert_idx: int
-    ) -> TransferTavalidatorcertAlgo:
+    ) -> TavalidatorcertAlgoTransfer:
         """First, opts in to the validator cert asset. Then, generates and signs the
         multsig transaction for transfer from the multi account self.multi (joint w
-        gnf, threshold 2). Creates the TransferTavalidatorcertAlgopayload with this
+        gnf, threshold 2). Creates the TavalidatorcertAlgoTransferpayload with this
         mtx and sends it to the gnf.
 
         Args:
             cert_idx (int): the asset index for this validator's cert
 
         Returns:
-            TransferTavalidatorcertAlgo: the payload sent to the Gnf.
+            TavalidatorcertAlgoTransfer: the payload sent to the Gnf.
         """
 
         # Opting in to the cert
@@ -202,7 +188,7 @@ class DevValidator:
         mtx = self.validator_multi.create_mtx(transferTxn)
         mtx.sign(self.acct.sk)
 
-        payload = TransferTavalidatorcertAlgo_Maker(
+        payload = TavalidatorcertAlgoTransfer_Maker(
             validator_addr=self.acct.addr,
             half_signed_cert_transfer_mtx=encoding.msgpack_encode(mtx),
         ).tuple

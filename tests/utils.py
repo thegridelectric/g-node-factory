@@ -3,7 +3,7 @@ from typing import Callable
 from typing import NamedTuple
 from typing import Optional
 
-from gnf import ActorBase
+from gnf.actor_base import ActorBase
 from gnf.actor_base import OnSendMessageDiagnostic
 from gnf.config import DevGNodeRegistrySettings
 from gnf.config import GnfSettings

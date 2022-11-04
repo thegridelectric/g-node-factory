@@ -50,7 +50,11 @@ class BaseGNode(StreamlinedSerializerMixin):
         self.g_node_id = g_node_id
         self.alias = alias
         self.prev_alias = prev_alias
+        if not isinstance(status, GNodeStatus):
+            raise DcError(f"status {status} must be GNodeStatus, got {type(status)}")
         self.status = status
+        if not isinstance(role, CoreGNodeRole):
+            raise DcError(f"role {role} must be  CoreGNodeRole, got {type(role)}")
         self.role = role
         self.g_node_registry_addr = g_node_registry_addr
         self.ownership_deed_nft_id = ownership_deed_nft_id
@@ -266,15 +270,15 @@ class BaseGNode(StreamlinedSerializerMixin):
     @classmethod
     def _schema_axiom_1(cls, attributes: Dict):
         """Schema Axiom 1: The following attributes must exist: g_node_id,
-        alias, status_value, role_value, g_node_registry_addr"""
+        alias, status, role, g_node_registry_addr"""
         if "g_node_id" not in attributes.keys():
             raise DcError("g_node_id must exist")
         if "alias" not in attributes.keys():
             raise DcError("alias must exist")
-        if "status_value" not in attributes.keys():
-            raise DcError(f"status_value must exist for g node {attributes}")
-        if "role_value" not in attributes.keys():
-            raise DcError(f"role_value must exist for g node {attributes}")
+        if "status" not in attributes.keys():
+            raise DcError(f"status must exist for g node {attributes}")
+        if "role" not in attributes.keys():
+            raise DcError(f"role must exist for g node {attributes}")
         if "g_node_registry_addr" not in attributes.keys():
             raise DcError(f"g_node_registry_addr must exist for g node {attributes}")
 

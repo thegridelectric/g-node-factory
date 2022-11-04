@@ -1,7 +1,7 @@
 # db router
 
 
-class GnrTestDbRouter:
+class GnfTestDbRouter:
     """
     A router to control all database operations on models in the
     auth application.
@@ -11,7 +11,7 @@ class GnrTestDbRouter:
         """
         Attempts to read auth models go to auth_db.
         """
-        if model._meta.app_label == "django_related":
+        if model._meta.app_label == "gnf.django_related":
             return "default"
         return None
 
@@ -19,7 +19,7 @@ class GnrTestDbRouter:
         """
         Attempts to write auth models go to auth_db.
         """
-        if model._meta.app_label == "django_related":
+        if model._meta.app_label == "gnf.django_related":
             return "default"
         return None
 
@@ -28,8 +28,8 @@ class GnrTestDbRouter:
         Allow relations if a model in the auth app is involved.
         """
         if (
-            obj1._meta.app_label == "django_related"
-            or obj2._meta.app_label == "django_related"
+            obj1._meta.app_label == "gnf.django_related"
+            or obj2._meta.app_label == "gnf.django_related"
         ):
             return True
         return None
@@ -39,6 +39,6 @@ class GnrTestDbRouter:
         Make sure the auth app only appears in the 'auth_db'
         database.
         """
-        if app_label == "django_related":
+        if app_label == "gnf.django_related":
             return db == "default"
         return None
