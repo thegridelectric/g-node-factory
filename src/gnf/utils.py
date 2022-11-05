@@ -1,18 +1,48 @@
 import json
+import logging
 import re
 import time
 from typing import Any
 from typing import Optional
 
 import pendulum
+from algosdk.error import AlgodHTTPError
+from algosdk.v2client.algod import AlgodClient
+from pydantic import BaseModel
 
+import gnf.algo_utils as algo_utils
+import gnf.config as config
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
 
 
 DEFAULT_STEP_DURATION = 0.1
 
+LOG_FORMAT = (
+    "%(levelname) -10s %(asctime)s %(name) -30s %(funcName) "
+    "-35s %(lineno) -5d: %(message)s"
+)
+LOGGER = logging.getLogger(__name__)
+
+
+class RestfulResponse(BaseModel):
+    Note: str
+    HttpStatusCode: int = 200
+    PayloadTypeName: Optional[str] = None
+    PayloadAsDict: Optional[Any] = None
+
+
 snake_add_underscore_to_camel_pattern = re.compile(r"(?<!^)(?=[A-Z])")
+
+
+def get_ta_alias_from_ta_deed_idx(ta_deed_idx: int) -> Optional[str]:
+    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    try:
+        alias = client.asset_info(ta_deed_idx)["params"]["name"]
+    except AlgodHTTPError as e:
+        LOGGER.info(f"Failed to get alias from ta_deed_idx {ta_deed_idx}: {e}")
+        return None
+    return alias
 
 
 def camel_to_snake(name):

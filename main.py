@@ -9,7 +9,9 @@ from gnf.config import FastAPISettings as Settings
 from gnf.data_classes import BaseGNode
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import BasegnodeGt_Maker
+from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin
+from gnf.schemata import OldTadeedAlgoReturn
 
 
 class Item(BaseModel):
@@ -20,8 +22,18 @@ class Item(BaseModel):
 app = FastAPI()
 
 
-@app.post("/optin-tadeed-algo/")
-async def optin_tadeed_algo_received(payload: NewTadeedAlgoOptin):
+@app.post("/initial-tadeed-algo-optin/")
+async def initial_tadeed_algo_optin_received(payload: InitialTadeedAlgoOptin):
+    return payload
+
+
+@app.post("/new-tadeed-algo-optin/")
+async def new_tadeed_algo_received(payload: NewTadeedAlgoOptin):
+    return payload
+
+
+@app.post("/old-tadeed-algo-return/")
+async def old_tadeed_algo_return_received(payload: OldTadeedAlgoReturn):
     return payload
 
 

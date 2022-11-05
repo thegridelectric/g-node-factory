@@ -1,8 +1,10 @@
 import logging
 
+import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -18,6 +20,7 @@ from gnf.schemata import InitialTadeedAlgoOptin_Maker
 
 
 LOGGER = logging.getLogger(__name__)
+TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevHomeowner:
@@ -34,7 +37,6 @@ class DevHomeowner:
             private_key=self.settings.sk.get_secret_value()
         )
         self.ta_daemon_addr = ta_daemon_addr
-
         self.validator_addr = validator_addr
         self.validator_multi = MultisigAccount(
             version=1,
@@ -49,7 +51,7 @@ class DevHomeowner:
     # Messages Sent
     ##########################
 
-    def initial_tadeed_algo_optin_generated(self) -> InitialTadeedAlgoOptin:
+    def post_initial_tadeed_algo_optin(self) -> InitialTadeedAlgoOptin:
         """
          - Sends 50 algos to TaDaemon acct
          - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
@@ -78,8 +80,11 @@ class DevHomeowner:
             validator_addr=self.validator_addr,
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
         ).tuple
-
-        return payload
+        api_endpoint = f"{TA_DAEMON_API_ROOT}/initial-tadeed-algo-optin/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info("Sent InitialTadeedAlgoOptin")
+        pprint(r.json())
+        return r
 
     ##########################
     # dev methods

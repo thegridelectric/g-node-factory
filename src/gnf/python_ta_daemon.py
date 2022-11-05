@@ -13,6 +13,7 @@ from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
+from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
@@ -39,16 +40,22 @@ class PythonTaDaemon:
     # Messages Received
     ##########################
 
-    def initial_tadeed_algo_optin_received(self, payload: InitialTadeedAlgoOptin):
+    def initial_tadeed_algo_optin_received(
+        self, payload: InitialTadeedAlgoOptin
+    ) -> RestfulResponse:
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,
         )
         if ta_deed_idx is None:
-            raise Exception(
-                f"called when validator {payload.ValidatorAddr[-6:]} did NOT have "
-                f"TADEED for {payload.TerminalAssetAlias}!"
+            note = f"called when validator {payload.ValidatorAddr[-6:]} did NOT have TADEED for {payload.TerminalAssetAlias}!"
+            LOGGER.info(note)
+            r = RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
             )
+            return r
+
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=ta_deed_idx,
@@ -60,15 +67,24 @@ class PythonTaDaemon:
         except:
             raise Exception(f"Failure sending transaction")
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        note = f"TaDaemon successfully opted in to Initial TaDeed {ta_deed_idx}"
+        LOGGER.info(note)
+        r = RestfulResponse(Note=note)
+        return r
 
     def new_tadeed_algo_optin_received(
         self, payload: NewTadeedAlgoOptin
-    ) -> NewTadeedSend:
-        """
-        Checks that payload.NewDeedIdx is a TaDeed
+    ) -> RestfulResponse:
+        """Opts in to a new (i.e. updated) TaDeed
 
         Args:
-            payload: NewTadeedAlgoOptin
+            payload (NewTadeedAlgoOptin): NewTadeedAlgoOptin
+
+        Returns:
+            RestfulResponse:  HttpStatusCode 422 if there is a semantic
+            issue (e.g. failure sending transaction on blockchain)
+
+            Otherwise, Payload is NewTadeedSend
         """
 
         txn = transaction.AssetOptInTxn(
@@ -81,22 +97,33 @@ class PythonTaDaemon:
         try:
             self.client.send_transaction(signed_txn)
         except:
-            raise Exception(f"Failure sending transaction")
+            note = "Failure sending transaction on Algo blockchain"
+            r = RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
+            return r
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-        # FIX
-        # Ready for new TaDeed -> let GNodeFactory know
-        payload = NewTadeedSend_Maker(
+
+        return_payload = NewTadeedSend_Maker(
             new_ta_deed_idx=payload.NewTaDeedIdx,
             old_ta_deed_idx=payload.OldTaDeedIdx,
             ta_daemon_addr=self.acct.addr,
             validator_addr=payload.ValidatorAddr,
             signed_tadeed_optin_txn=encoding.msgpack_encode(signed_txn),
         ).tuple
-        self.send_message_to_gnf(payload)
-        LOGGER.info(f"Asking for transfer of new TaDeed {payload.NewTaDeedIdx}")
-        return payload
+        note = f"Opted in to TaDeed {payload.NewTaDeedIdx}, ready for transfer"
+        r = RestfulResponse(
+            Note=note,
+            PayloadTypeName=NewTadeedSend_Maker.type_name,
+            PayloadAsDict=return_payload.as_dict(),
+        )
+        LOGGER.info(f"Opted in to TaDeed {payload.NewTaDeedIdx}, ready for transfer")
+        return r
 
-    def old_tadeed_algo_return_received(self, payload: OldTadeedAlgoReturn):
+    def old_tadeed_algo_return_received(
+        self, payload: OldTadeedAlgoReturn
+    ) -> RestfulResponse:
         """
          - Transfer the  old deed back to the GNodeFactory admin acct.
 
@@ -115,6 +142,15 @@ class PythonTaDaemon:
         try:
             self.client.send_transaction(signed_txn)
         except:
-            raise Exception(f"Failure sending transaction")
-        LOGGER.info(f"Returned TaDeed {payload.OldTaDeedIdx} to GNodeFactory Admin")
+            note = "Failure sending transaction on Algo blockchain"
+            r = RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
+            return r
+
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
+        note = f"TaDaemon transferred old TaDeed {payload.OldTaDeedIdx} to GNodeFactoryAdmin"
+        LOGGER.info(note)
+        r = RestfulResponse(Note=note)
+        return r
