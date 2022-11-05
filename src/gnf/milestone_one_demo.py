@@ -487,7 +487,7 @@ print(
 print("")
 print("")
 time.sleep(SCRIPT_SLEEP_S)
-payload = holly.initial_tadeed_algo_optin_generated()
+payload = holly.post_initial_tadeed_algo_optin()
 
 daemon = PythonTaDaemon(
     sk=config.HollyTaDaemonSettings().sk.get_secret_value(),

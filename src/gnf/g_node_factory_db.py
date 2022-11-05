@@ -5,13 +5,16 @@ from typing import Optional
 from typing import Tuple
 
 import django
+import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
+import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
@@ -21,6 +24,7 @@ from gnf.enums import GNodeStatus
 from gnf.enums import RegistryGNodeRole
 from gnf.errors import RegistryError
 from gnf.errors import SchemaError
+from gnf.utils import RestfulResponse
 
 
 LOG_FORMAT = (
@@ -28,7 +32,7 @@ LOG_FORMAT = (
     "-35s %(lineno) -5d: %(message)s"
 )
 LOGGER = logging.getLogger(__name__)
-
+TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
 
 # Messages sent by Factory
 # Messages received by Factory
@@ -42,7 +46,7 @@ from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin_Maker
 from gnf.schemata import NewTadeedSend
-from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
@@ -135,14 +139,14 @@ class GNodeFactoryDb:
     # Messages Sent
     ##########################
 
-    def generate_old_tadeed_algo_return(
+    def post_old_tadeed_algo_return(
         self,
         old_ta_deed_idx: int,
         new_ta_deed_idx: int,
         validator_addr: str,
         ta_daemon_addr: str,
         signed_new_deed_transfer_txn: transaction.SignedTransaction,
-    ) -> OldTadeedAlgoReturn:
+    ):
         if new_ta_deed_idx is None:
             raise Exception(f"new_ta_deed_idx is None!")
         if old_ta_deed_idx is None:
@@ -170,13 +174,28 @@ class GNodeFactoryDb:
                 signed_new_deed_transfer_txn
             ),
         ).tuple
-        return payload
+        api_endpoint = f"{TA_DAEMON_API_ROOT}/old-tadeed-algo-return/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        pprint(r.json())
+        ta_alias = utils.get_ta_alias_from_ta_deed_idx(new_ta_deed_idx)
+        if ta_alias is None:
+            raise Exception(
+                f"new_ta_deed_idx {new_ta_deed_idx} does not provide a GNodeAlias!!"
+            )
+        gndbs = BaseGNodeDb.objects.filter(alias=ta_alias)
+        if len(gndbs) != 1:
+            raise Exception(
+                f"Expected 1 BaseGNode with alias {ta_alias}. Got {len(gndbs)}"
+            )
+        ta_db = gndbs[0]
+        ta_db.ownership_deed_nft_id = new_ta_deed_idx
+        ta_db.save()
 
     ##########################
     # Messages Received
     ##########################
 
-    def new_tadeed_send_received(self, payload: NewTadeedSend) -> OldTadeedAlgoReturn:
+    def new_tadeed_send_received(self, payload: NewTadeedSend):
         if not isinstance(payload, NewTadeedSend):
             LOGGER.info(
                 f"payload must be type NewTadeedSend, got {type(payload)}. Ignoring!"
@@ -197,7 +216,7 @@ class GNodeFactoryDb:
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
         LOGGER.info(f"New TaDeed {payload.NewTaDeedIdx} sent to TaDaemon")
-        return self.generate_old_tadeed_algo_return(
+        self.post_old_tadeed_algo_return(
             old_ta_deed_idx=payload.OldTaDeedIdx,
             new_ta_deed_idx=payload.NewTaDeedIdx,
             validator_addr=payload.ValidatorAddr,
@@ -310,9 +329,7 @@ class GNodeFactoryDb:
             )
         return opt_in_payload
 
-    def discoverycert_algo_create_received(
-        self, payload: DiscoverycertAlgoCreate
-    ) -> Optional[NewTadeedAlgoOptin]:
+    def discoverycert_algo_create_received(self, payload: DiscoverycertAlgoCreate):
         if not isinstance(payload, DiscoverycertAlgoCreate):
             LOGGER.warning(
                 f"payload must be type DiscoverycertAlgoCreate, got {type(payload)}. Ignoring!"
@@ -334,7 +351,16 @@ class GNodeFactoryDb:
         if role != CoreGNodeRole.ConductorTopologyNode:
             raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
         opt_in_payload = self.create_pending_ctn(payload)
-        return opt_in_payload
+        api_endpoint = f"{TA_DAEMON_API_ROOT}/new-tadeed-algo-optin/"
+        r = requests.post(url=api_endpoint, json=opt_in_payload.as_dict())
+        pprint(r.json())
+        r = RestfulResponse(**r.json())
+        if not r.PayloadTypeName == NewTadeedSend_Maker.type_name:
+            raise Exception(
+                f"Expected r.PayloadTypeName to be 'new.tadeed.send' but got {r.PayloadTypeName}"
+            )
+        payload = NewTadeedSend_Maker.dict_to_tuple(r.PayloadAsDict)
+        self.new_tadeed_send_received(payload)
 
     def create_pending_atomic_metering_node(
         self, ta_alias: str, ta_deed_idx
