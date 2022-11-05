@@ -700,3 +700,14 @@ class GNodeFactoryDb:
         LOGGER.info(
             f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} transferred\n txId {response.tx_id}"
         )
+
+    ########################
+    # GNode related
+    ########################
+
+    def get_base_g_node(self, g_node_alias) -> Optional[BaseGNode]:
+        r = BaseGNodeDb.objects.filter(alias=g_node_alias)
+        if len(r) == 0:
+            return None
+        gndb = r[0]
+        return gndb.dc

@@ -1,7 +1,5 @@
 import logging
 
-from rich.pretty import pprint
-
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup

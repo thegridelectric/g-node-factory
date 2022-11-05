@@ -14,11 +14,6 @@ from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import OldTadeedAlgoReturn
 
 
-class Item(BaseModel):
-    name: str
-    description: str | None = None
-
-
 app = FastAPI()
 
 
