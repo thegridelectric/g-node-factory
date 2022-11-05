@@ -57,7 +57,13 @@ poetry shell
   ./sandbox reset
   ```
 
-5. Run the milestone 1 demo from this repo:
+5. Start the PythonTaDaemon FastAPI:
+
+```
+uvicorn gnf.ta_daemon_rest_api:app --reload
+```
+
+6. Run the milestone 1 demo from this repo:
 
 ```
 python demo.py
