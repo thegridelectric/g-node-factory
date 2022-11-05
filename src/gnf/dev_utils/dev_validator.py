@@ -24,6 +24,7 @@ from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
 
 
 LOGGER = logging.getLogger(__name__)
+TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevValidator:

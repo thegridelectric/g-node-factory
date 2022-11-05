@@ -5,12 +5,21 @@ from typing import Any
 from typing import Optional
 
 import pendulum
+from pydantic import BaseModel
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
 
 
 DEFAULT_STEP_DURATION = 0.1
+
+
+class RestfulResponse(BaseModel):
+    Note: str
+    HttpStatusCode: int = 200
+    PayloadTypeName: Optional[str] = None
+    PayloadAsDict: Optional[Any] = None
+
 
 snake_add_underscore_to_camel_pattern = re.compile(r"(?<!^)(?=[A-Z])")
 
