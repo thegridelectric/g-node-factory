@@ -14,6 +14,7 @@ from rich.pretty import pprint
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
+import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
@@ -176,7 +177,19 @@ class GNodeFactoryDb:
         api_endpoint = f"{TA_DAEMON_API_ROOT}/old-tadeed-algo-return/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         pprint(r.json())
-        # TODO: change GNode status to active
+        ta_alias = utils.get_ta_alias_from_ta_deed_idx(new_ta_deed_idx)
+        if ta_alias is None:
+            raise Exception(
+                f"new_ta_deed_idx {new_ta_deed_idx} does not provide a GNodeAlias!!"
+            )
+        gndbs = BaseGNodeDb.objects.filter(alias=ta_alias)
+        if len(gndbs) != 1:
+            raise Exception(
+                f"Expected 1 BaseGNode with alias {ta_alias}. Got {len(gndbs)}"
+            )
+        ta_db = gndbs[0]
+        ta_db.ownership_deed_nft_id = new_ta_deed_idx
+        ta_db.save()
 
     ##########################
     # Messages Received
