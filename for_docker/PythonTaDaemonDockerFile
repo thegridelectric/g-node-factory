@@ -1,0 +1,26 @@
+
+ARG REMOTE_BASE=jessmillar/g-node-factory-base:latest
+#ARG REMOTE_BASE=python:3.10
+
+FROM $REMOTE_BASE AS app-base
+
+
+WORKDIR /app
+
+# # Install Poetry
+# RUN curl -sSL  https://install.python-poetry.org | POETRY_HOME=/opt/poetry python && \
+#     cd /usr/local/bin && \
+#     ln -s /opt/poetry/bin/poetry && \
+#     poetry config virtualenvs.create false
+
+
+COPY ./src /app/src
+
+COPY README.md /app/README.md
+
+COPY keep_alive.py /app/keep_alive.py
+
+#CMD ["uvicorn", "gnf.ta_daemon_rest_api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+
+
+ENTRYPOINT python keep_alive.py
