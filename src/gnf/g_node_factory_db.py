@@ -14,6 +14,7 @@ from rich.pretty import pprint
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
+import gnf.orm_utils as orm_utils
 import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
@@ -99,7 +100,7 @@ class GNodeFactoryDb:
             settings.graveyard_acct_sk.get_secret_value()
         )
         algo_utils.verify_account_exists_and_funded(self.graveyard_account.addr)
-        self.load_g_nodes_as_data_classes()
+        orm_utils.load_g_nodes_as_data_classes()
         LOGGER.info(f"Database GNodeFactory initialized")
 
     def load_g_nodes_as_data_classes(self):
@@ -700,14 +701,3 @@ class GNodeFactoryDb:
         LOGGER.info(
             f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} transferred\n txId {response.tx_id}"
         )
-
-    ########################
-    # GNode related
-    ########################
-
-    def get_base_g_node(self, g_node_alias) -> Optional[BaseGNode]:
-        r = BaseGNodeDb.objects.filter(alias=g_node_alias)
-        if len(r) == 0:
-            return None
-        gndb = r[0]
-        return gndb.dc
