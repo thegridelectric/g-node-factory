@@ -119,18 +119,6 @@ def test_basegnodes_broadcast_generated():
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, DescendantGNodeList="Not a list.")
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, DescendantGNodeList=["Not a list of dicts"])
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, DescendantGNodeList=[{"Failed": "Not a GtSimpleSingleStatus"}])
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
     ######################################
     # SchemaError raised if TypeName is incorrect
     ######################################

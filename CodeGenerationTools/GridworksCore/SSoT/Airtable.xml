@@ -482,7 +482,6 @@
       <MakeDataClass>true</MakeDataClass>
       <DataClass>BaseGNode</DataClass>
       <SchemaAxioms>basegnode.010__</SchemaAxioms>
-      <SchemaRootscopy>recGCcr92h87UpXkA</SchemaRootscopy>
       <SchemaRootscopy>recDp8U1jLA9zeEx2</SchemaRootscopy>
       <Description>BaseGNode. Authority is GNodeFactory. </Description>
       <Alias>basegnode.gt</Alias>
@@ -1042,7 +1041,6 @@
       <FiniteStringSetMembers>recEpQyhK6EjK50v3</FiniteStringSetMembers>
       <FiniteStringSetMembers>reclMrRIA4ISmRw6t</FiniteStringSetMembers>
       <FiniteStringSetMembers>recvNW0XMWSQSZEGn</FiniteStringSetMembers>
-      <SchemaAttributes>recrjCdhTDEaBkdRF</SchemaAttributes>
       <SchemaAttributes>recEpIg7AB9Qr2dpX</SchemaAttributes>
       <SchemaAttributes>recGSAil9ULCQw1S1</SchemaAttributes>
       <AliasRoot>core.g.node.role</AliasRoot>
@@ -1369,7 +1367,6 @@
       <FiniteStringSetMembers>recBxzAFmSdGMky9f</FiniteStringSetMembers>
       <FiniteStringSetMembers>recuDHqYzSnUGgaOA</FiniteStringSetMembers>
       <FiniteStringSetMembers>recmkdghA4yolcvkz</FiniteStringSetMembers>
-      <SchemaAttributes>reclRTU51xKZZawTG</SchemaAttributes>
       <SchemaAttributes>rec3Ip25a5UdscQKD</SchemaAttributes>
       <AliasRoot>g.node.status</AliasRoot>
       <SemanticEnd>100</SemanticEnd>
@@ -2210,7 +2207,7 @@
       <Symbol>f4de2c48</Symbol>
       <DisplayName>spaceheat.node.role.100__Heatpump</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrzSSxrY2DtCHE5q/reccZaMkM1dTHxKk2</EnumSymbol>
+    <EnumSymbol>itrjKTD6aLlZwFtXG/reccZaMkM1dTHxKk2</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reccbyMtvH1trII7S</EnumSymbolId>
       <createdTime>2022-08-02T13:49:35Z</createdTime>
@@ -3296,7 +3293,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
 CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <ProtocolTypes>reccq15mpDgpXGekn</ProtocolTypes>
       <DataClassIdField>GNodeId</DataClassIdField>
-      <PreStatus>Active</PreStatus>
+      <PreStatus>Pending</PreStatus>
       <Alias>basegnode.gt.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -3309,7 +3306,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AliasRoot>basegnode.gt</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
-      <Status>Active</Status>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3340,48 +3337,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Alias>.</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
       <IsCurrent>1</IsCurrent>
-    </Schema>
-    <Schema>
-      <SchemaId>recGCcr92h87UpXkA</SchemaId>
-      <createdTime>2022-09-20T12:06:09Z</createdTime>
-      <SchemaAttributes>recTDwoVQyFPV2saO</SchemaAttributes>
-      <SchemaAttributes>reczO5i6ljWprmnIJ</SchemaAttributes>
-      <SchemaAttributes>reclRTU51xKZZawTG</SchemaAttributes>
-      <SchemaAttributes>recrjCdhTDEaBkdRF</SchemaAttributes>
-      <SchemaAttributes>recQx0K1YF0UKkU44</SchemaAttributes>
-      <SchemaAttributes>recDXdDsbAyT48jLe</SchemaAttributes>
-      <SchemaAttributes>recgIswkzJP4yfkEq</SchemaAttributes>
-      <SchemaAttributes>rec5cpQjpKGj0XoF8</SchemaAttributes>
-      <UsedAsSubMessagein>recoe5Oa6CzAAMH80</UsedAsSubMessagein>
-      <UsedAsSubMessagein>recCuVGEIt5PtitBs</UsedAsSubMessagein>
-      <SemanticEnd>010</SemanticEnd>
-      <SchemaRoot>recZhfzRnHkE804iR</SchemaRoot>
-      <Axioms>rec8QaabpXAukXsTE</Axioms>
-      <Axioms>recKKyFj7Ie9JH7L9</Axioms>
-      <Axioms>rec9ncrQz98EtjseD</Axioms>
-      <Axioms>recuAHte3M38xBpxd</Axioms>
-      <Axioms>reca1Y8LeKit4sVLu</Axioms>
-      <Axioms>rec7CRy4NcfIww7pH</Axioms>
-      <Axioms>recZtIDTzQSfBVyMx</Axioms>
-      <Axioms>recstTBCe9nhA6pgn</Axioms>
-      <Axioms>recA3qFnYihsWSkVg</Axioms>
-      <Axioms>recTQN80nxhBGq1of</Axioms>
-      <Axioms>recmQsc2HRItZ3oL1</Axioms>
-      <DataClassIdField>GNodeId</DataClassIdField>
-      <Alias>basegnode.gt.010</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
-      <DataClass>BaseGNode</DataClass>
-      <IsCac />
-      <IsComponent />
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <Description>BaseGNode. Authority is GNodeFactory. </Description>
-      <AliasRoot>basegnode.gt</AliasRoot>
-      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
-      <IsCurrent>0</IsCurrent>
-      <Status>Deprecated</Status>
-      <InGwProto />
     </Schema>
     <Schema>
       <SchemaId>recGuvhjDYO65d5rP</SchemaId>
@@ -4841,15 +4796,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>rec0PurqCSDSSL9gV</SchemaAttributeId>
       <createdTime>2022-11-04T18:36:22Z</createdTime>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <Schema>recPy6SuizSerb3JG</Schema>
       <Value>OldTaDeedIdx</Value>
-      <Idx>1</Idx>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <TestValue>10</TestValue>
       <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>10</TestValue>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Idx>1</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec0SCL5wm4k2QtCO</SchemaAttributeId>
@@ -5276,19 +5231,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>rec5cpQjpKGj0XoF8</SchemaAttributeId>
-      <createdTime>2022-09-20T12:11:54Z</createdTime>
-      <Value>OwnershipDeedNftCreatorAddr</Value>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
-      <TestValue>'RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>rec5fPnJhhjAzAa6m</SchemaAttributeId>
       <createdTime>2022-07-12T18:02:56Z</createdTime>
       <Value>DefaultBaud</Value>
@@ -5419,11 +5361,11 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
       <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>14</TestValue>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <Idx>0</Idx>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
-      <TestValue>14</TestValue>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec83s8fct15feQXU</SchemaAttributeId>
@@ -5734,13 +5676,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
   'TypeName': 'basegnode.gt',
   'Version': '020'}]</TestValue>
       <Schema>recT4SSkJ18pz5YoZ</Schema>
-      <SubTypeFormat>recGCcr92h87UpXkA</SubTypeFormat>
       <Idx>5</Idx>
-      <SubMessageFormatAlias>basegnode.gt.010</SubMessageFormatAlias>
       <IsEnum>false</IsEnum>
-      <IsType>true</IsType>
-      <SubTypeDataClass>BaseGNode</SubTypeDataClass>
-      <SubMessageFormatAliasRoot>basegnode.gt</SubMessageFormatAliasRoot>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recCyeOy0hRRYAvoc</SchemaAttributeId>
@@ -5787,20 +5725,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>1656245000</PrimitiveFormatFail1>
-    </SchemaAttribute>
-    <SchemaAttribute>
-      <SchemaAttributeId>recDXdDsbAyT48jLe</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:55Z</createdTime>
-      <Value>GpsPointId</Value>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
-      <TestValue>'50f3f6e8-5937-47c2-8d05-06525ef6467d'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recDzW9fuX9MvVvla</SchemaAttributeId>
@@ -6155,7 +6079,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <EnumName>core.g.node.role.100</EnumName>
       <DefaultEnumValue>Other</DefaultEnumValue>
     </SchemaAttribute>
-    <SchemaAttribute>itr5Ugd69rkoHbm3f/recGSAil9ULCQw1S1</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGTF9QvbMMCTiQu</SchemaAttributeId>
       <createdTime>2022-11-04T15:05:42Z</createdTime>
@@ -6183,6 +6106,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrSy1mDqTCTjo9Me/recGXMXqUz6rHqVzg</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recGfYlMT9hkh7Srg</SchemaAttributeId>
       <createdTime>2022-07-12T18:22:59Z</createdTime>
@@ -6545,7 +6469,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
       <TestValue>'dw1'</TestValue>
       <Schema>recDp8U1jLA9zeEx2</Schema>
-      <Idx>8</Idx>
+      <Idx>5</Idx>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6844,7 +6768,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
       <TestValue>'RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI'</TestValue>
       <Schema>recDp8U1jLA9zeEx2</Schema>
-      <Idx>7</Idx>
+      <Idx>8</Idx>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6938,17 +6862,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>recOdulFCYJbIktv4</SchemaAttributeId>
       <createdTime>2022-11-04T18:36:27Z</createdTime>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <Schema>recPy6SuizSerb3JG</Schema>
       <Value>ValidatorAddr</Value>
-      <Idx>3</Idx>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
       <PrimitiveType>String</PrimitiveType>
       <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
+      <Schema>recPy6SuizSerb3JG</Schema>
+      <Idx>3</Idx>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recOpsZkD5RkikKq4</SchemaAttributeId>
@@ -7060,20 +6984,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <TestValue>20</TestValue>
       <Schema>recMyDdiQjtfTMAP1</Schema>
       <Idx>0</Idx>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
-      <SchemaAttributeId>recQx0K1YF0UKkU44</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:49Z</createdTime>
-      <Value>GNodeRegistryAddr</Value>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
-      <TestValue>'MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -7255,21 +7165,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
-    </SchemaAttribute>
-    <SchemaAttribute>
-      <SchemaAttributeId>recTDwoVQyFPV2saO</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:13Z</createdTime>
-      <Value>GNodeId</Value>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>Integer</PrimitiveType>
-      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
-      <TestValue>'9405686a-14fd-4aef-945b-cd7c97903f14'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recTGNe2hCg0CwUye</SchemaAttributeId>
@@ -7471,7 +7366,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr5Ugd69rkoHbm3f/recVrDoi6bmsCWv6a</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recVs9H70Rxs6FuHL</SchemaAttributeId>
       <createdTime>2022-06-07T09:34:52Z</createdTime>
@@ -7522,6 +7416,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrSy1mDqTCTjo9Me/recW5AqimRRZZ3Rne</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recWJDdHiEzC7KYss</SchemaAttributeId>
       <createdTime>2022-06-10T12:21:07Z</createdTime>
@@ -7646,15 +7541,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>recYNAWavNDwN3uX1</SchemaAttributeId>
       <createdTime>2022-11-04T18:41:25Z</createdTime>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <Schema>recvWBuo1Ws1SIL4b</Schema>
-      <Idx>1</Idx>
       <Value>OldTaDeedIdx</Value>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <TestValue>10</TestValue>
       <PrimitiveType>Integer</PrimitiveType>
+      <TestValue>10</TestValue>
+      <Schema>recvWBuo1Ws1SIL4b</Schema>
+      <Idx>1</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recYtyZl3uBr6N9Ey</SchemaAttributeId>
@@ -7915,7 +7810,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recKcuGOfjTIPqtXk</PrimitiveFormatId>
       <TestValue>5</TestValue>
       <Schema>recDp8U1jLA9zeEx2</Schema>
-      <Idx>6</Idx>
+      <Idx>7</Idx>
       <PrimitiveFormat>PositiveInteger</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -8219,19 +8114,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recKcuGOfjTIPqtXk</PrimitiveFormatId>
       <TestValue>40</TestValue>
       <Schema>recdXzxjKArjU2z9Z</Schema>
-      <PrimitiveFormat>PositiveInteger</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
-      <SchemaAttributeId>recgIswkzJP4yfkEq</SchemaAttributeId>
-      <createdTime>2022-09-20T12:08:00Z</createdTime>
-      <Value>OwnershipDeedNftId</Value>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>Integer</PrimitiveType>
-      <PrimitiveFormatId>recKcuGOfjTIPqtXk</PrimitiveFormatId>
-      <TestValue>5</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <PrimitiveFormat>PositiveInteger</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -8696,20 +8578,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>reclRTU51xKZZawTG</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:24Z</createdTime>
-      <Value>Status</Value>
-      <IsRequired>true</IsRequired>
-      <Enum>recqx4EqT3OFtnxTG</Enum>
-      <TestValue>'3661506b'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <EnumLocalName>g.node.status</EnumLocalName>
-      <IsEnum>true</IsEnum>
-      <IsType>false</IsType>
-      <EnumName>g.node.status.100</EnumName>
-      <DefaultEnumValue>Unknown</DefaultEnumValue>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>reclVHMPGkM3r0cf2</SchemaAttributeId>
       <createdTime>2022-11-04T15:34:56Z</createdTime>
       <Value>MicroLat</Value>
@@ -8785,7 +8653,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubTypeDataClass>ElectricMeterCac</SubTypeDataClass>
       <SubMessageFormatAliasRoot>electric.meter.cac.gt</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itr5Ugd69rkoHbm3f/recm7McSMLA5naEPt</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recmAJ31xoOq5qTHU</SchemaAttributeId>
       <createdTime>2022-06-14T23:02:59Z</createdTime>
@@ -8862,6 +8729,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
+    <SchemaAttribute>itrSy1mDqTCTjo9Me/recn2CJw74mLLQ8tr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recnK1jOCabM7QHvd</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:37Z</createdTime>
@@ -9026,13 +8894,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
  'TypeName': 'basegnode.gt',
  'Version': '020'}</TestValue>
       <Schema>recT4SSkJ18pz5YoZ</Schema>
-      <SubTypeFormat>recGCcr92h87UpXkA</SubTypeFormat>
       <Idx>4</Idx>
-      <SubMessageFormatAlias>basegnode.gt.010</SubMessageFormatAlias>
       <IsEnum>false</IsEnum>
-      <IsType>true</IsType>
-      <SubTypeDataClass>BaseGNode</SubTypeDataClass>
-      <SubMessageFormatAliasRoot>basegnode.gt</SubMessageFormatAliasRoot>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recojCBLEKvcVMiLq</SchemaAttributeId>
@@ -9287,20 +9151,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recrjCdhTDEaBkdRF</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:37Z</createdTime>
-      <Value>Role</Value>
-      <IsRequired>true</IsRequired>
-      <Enum>rec5HXPeyp3jic6FV</Enum>
-      <TestValue>'0f8872f7'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <EnumLocalName>core.g.node.role</EnumLocalName>
-      <IsEnum>true</IsEnum>
-      <IsType>false</IsType>
-      <EnumName>core.g.node.role.100</EnumName>
-      <DefaultEnumValue>Other</DefaultEnumValue>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recrpGZFYeoLlFiGW</SchemaAttributeId>
       <createdTime>2022-06-04T19:11:12Z</createdTime>
       <Value>DisplayName</Value>
@@ -9458,10 +9308,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
       <TestValue>'7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII'</TestValue>
       <Schema>recPy6SuizSerb3JG</Schema>
+      <Idx>2</Idx>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
-      <Idx>2</Idx>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recvDYPGmlUWE3yzH</SchemaAttributeId>
@@ -9640,21 +9490,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>telemetry.snapshot.spaceheat</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>reczO5i6ljWprmnIJ</SchemaAttributeId>
-      <createdTime>2022-09-20T12:07:19Z</createdTime>
-      <Value>GNodeAlias</Value>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <PrimitiveType>String</PrimitiveType>
-      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.iso.me.orange.ta'</TestValue>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>reczOogxDbgX7j8pi</SchemaAttributeId>
       <createdTime>2022-06-15T22:48:53Z</createdTime>
       <Value>SamplePeriodS</Value>
@@ -9675,7 +9510,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
       <TestValue>'50f3f6e8-5937-47c2-8d05-06525ef6467d'</TestValue>
       <Schema>recDp8U1jLA9zeEx2</Schema>
-      <Idx>5</Idx>
+      <Idx>6</Idx>
       <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -9866,25 +9701,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-09-27T15:48:08Z</createdTime>
       <Description>If GpsPointId is not None, then  there is a GpsPoint in the GNodeFactory with that GpsPointId</Description>
       <AxiomNumber>3</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnCreate>true</OnCreate>
       <OnUpdate>true</OnUpdate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Joint Axiom 3</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Joint Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec8QaabpXAukXsTE</SchemaAxiomId>
       <createdTime>2022-09-27T14:43:19Z</createdTime>
       <Description>Alias cannot be used, now or previously, by this or other BaseGNodes</Description>
       <AxiomNumber>1</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnCreate>true</OnCreate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Creation Axiom 1</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Creation Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec9JAVtjVuxToq7k</SchemaAxiomId>
@@ -9908,20 +9737,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The following attributes must exist: GNodeId, Alias, StatusValue, RoleValue, GNodeRegistryAddr
 </Description>
       <AxiomNumber>1</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <Name>basegnode.gt.010 Schema Axiom 1</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recA3qFnYihsWSkVg</SchemaAxiomId>
       <createdTime>2022-09-27T15:48:17Z</createdTime>
       <Description>Assume role is TerminalAsset and status is Active. Then the OwnershipDeedNftId must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi</Description>
       <AxiomNumber>4</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <Name>basegnode.gt.010 Schema Axiom 4</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recAV3jdy4xK2e6V4</SchemaAxiomId>
@@ -10062,12 +9885,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-09-27T15:47:53Z</createdTime>
       <Description>GNodeId must be a unique string of UUID format</Description>
       <AxiomNumber>2</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnCreate>true</OnCreate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Creation Axiom 2</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Creation Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recKkK9eMIcEKx0ye</SchemaAxiomId>
@@ -10193,12 +10013,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
         - Suspended can only change to Active or PermanentlyDeactivated
         - PermanentlyDeactivated cannot change.</Description>
       <AxiomNumber>2</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnUpdate>true</OnUpdate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Update Axiom 2</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Update Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recTkeaCQFCcUSkmI</SchemaAxiomId>
@@ -10269,23 +10086,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
         - SmartDaemonAddr must be a string of format AlgoAddressStringFormat
         - TradingRightsNftId must be an integer</Description>
       <AxiomNumber>2</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <Name>basegnode.gt.010 Schema Axiom 2</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>reca1Y8LeKit4sVLu</SchemaAxiomId>
       <createdTime>2022-09-27T15:48:05Z</createdTime>
       <Description>There is at most one root GNode.</Description>
       <AxiomNumber>2</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnCreate>true</OnCreate>
       <OnUpdate>true</OnUpdate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Joint Axiom 2</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Joint Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recbUbrTdnis2Ytj6</SchemaAxiomId>
@@ -10450,12 +10261,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-09-27T15:48:31Z</createdTime>
       <Description>Alias cannot be used, now or previously, by this or other BaseGNodes</Description>
       <AxiomNumber>1</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnUpdate>true</OnUpdate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Update Axiom 1</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Update Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recmVA9R07PrCBEAO</SchemaAxiomId>
@@ -10480,10 +10288,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
         The Nft must be for a Valid TaDeed created by the 2-sig [GnfAdmin, ownership_deed_validator_addr]
         multi whose asset_name is this GNodeAlias.</Description>
       <AxiomNumber>3</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
-      <Name>basegnode.gt.010 Schema Axiom 3</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recsymqeqSBbr9R9o</SchemaAxiomId>
@@ -10531,13 +10336,10 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
             - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode</Description>
       <AxiomNumber>1</AxiomNumber>
-      <Schema>recGCcr92h87UpXkA</Schema>
       <OnCreate>true</OnCreate>
       <OnUpdate>true</OnUpdate>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.010 Joint Axiom 1</Name>
-      <Alias>basegnode.gt.010</Alias>
-      <MakeDataClass>true</MakeDataClass>
+      <Name> Joint Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recueNLsroZPIyXPm</SchemaAxiomId>
@@ -10622,8 +10424,6 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recEG1vhkFUlzIEeO</MpSchemaAttributes>
       <MpSchemaAttributes>recrICREghk3LscaD</MpSchemaAttributes>
       <MpSchemaAttributes>recsEvybSpl9WN6Ny</MpSchemaAttributes>
-      <MpSchemaAttributes>recTDwoVQyFPV2saO</MpSchemaAttributes>
-      <MpSchemaAttributes>recDXdDsbAyT48jLe</MpSchemaAttributes>
       <MpSchemaAttributes>recoDIFE4bNJi9OJW</MpSchemaAttributes>
       <MpSchemaAttributes>recbP43UORyJcMOyK</MpSchemaAttributes>
       <MpSchemaAttributes>reczS8yfdcwnZOnYz</MpSchemaAttributes>
@@ -10642,7 +10442,6 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>reclgcZrxIoZfiovl</MpSchemaAttributes>
       <MpSchemaAttributes>recbiauzDka396rY5</MpSchemaAttributes>
       <MpSchemaAttributes>recgIQb2yDNArvM73</MpSchemaAttributes>
-      <MpSchemaAttributes>recgIswkzJP4yfkEq</MpSchemaAttributes>
       <MpSchemaAttributes>recc60wtw6OyygCAS</MpSchemaAttributes>
     </PropertyFormat>
     <PropertyFormat>
@@ -10705,7 +10504,6 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recHw5JOwPznxEWve</MpSchemaAttributes>
       <MpSchemaAttributes>recdtoFwqku5okZTc</MpSchemaAttributes>
       <MpSchemaAttributes>rec2EuDcLlLMuM7C5</MpSchemaAttributes>
-      <MpSchemaAttributes>reczO5i6ljWprmnIJ</MpSchemaAttributes>
       <MpSchemaAttributes>recZoRtISP4HaNWda</MpSchemaAttributes>
       <MpSchemaAttributes>recpJTfJmJx5HokjQ</MpSchemaAttributes>
       <MpSchemaAttributes>rec4BpH0P9FNwZJqs</MpSchemaAttributes>
@@ -10742,8 +10540,6 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recRlXL6ZwaIEk13c</MpSchemaAttributes>
       <MpSchemaAttributes>recGzFhE65zhdlVJK</MpSchemaAttributes>
       <MpSchemaAttributes>recfAClSUjZOHVHgw</MpSchemaAttributes>
-      <MpSchemaAttributes>recQx0K1YF0UKkU44</MpSchemaAttributes>
-      <MpSchemaAttributes>rec5cpQjpKGj0XoF8</MpSchemaAttributes>
       <MpSchemaAttributes>recFgsax2FGGg4UTE</MpSchemaAttributes>
       <MpSchemaAttributes>reckEe9774XgeDvIL</MpSchemaAttributes>
       <MpSchemaAttributes>recnK1jOCabM7QHvd</MpSchemaAttributes>

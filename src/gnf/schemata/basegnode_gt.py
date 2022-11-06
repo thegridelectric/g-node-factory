@@ -196,12 +196,21 @@ class BasegnodeGt(BaseModel):
         "GNodeRegistryAddr", property_format.is_algo_address_string_format
     )
 
+    @validator("PrevAlias")
+    def _validator_prev_alias(cls, v: Any) -> Optional[str]:
+        if v is None:
+            return v
+        if not property_format.is_lrd_alias_format(v):
+            raise ValueError(f"PrevAlias {v} must have LrdAliasFormat")
+        return v
+
     @validator("GpsPointId")
     def _validator_gps_point_id(cls, v: Any) -> Optional[str]:
         if v is None:
             return v
         if not property_format.is_uuid_canonical_textual(v):
             raise ValueError(f"GpsPointId {v} must have UuidCanonicalTextual")
+        return v
 
     @validator("OwnershipDeedNftId")
     def _validator_ownership_deed_nft_id(cls, v: Any) -> Optional[int]:
@@ -209,6 +218,7 @@ class BasegnodeGt(BaseModel):
             return v
         if not property_format.is_positive_integer(v):
             raise ValueError(f"OwnershipDeedNftId {v} must have PositiveInteger")
+        return v
 
     @validator("OwnershipDeedValidatorAddr")
     def _validator_ownership_deed_validator_addr(cls, v: Any) -> Optional[str]:
@@ -218,13 +228,7 @@ class BasegnodeGt(BaseModel):
             raise ValueError(
                 f"OwnershipDeedValidatorAddr {v} must have AlgoAddressStringFormat"
             )
-
-    @validator("PrevAlias")
-    def _validator_prev_alias(cls, v: Any) -> Optional[str]:
-        if v is None:
-            return v
-        if not property_format.is_lrd_alias_format(v):
-            raise ValueError(f"PrevAlias {v} must have LrdAliasFormat")
+        return v
 
     @validator("OwnerAddr")
     def _validator_owner_addr(cls, v: Any) -> Optional[str]:
@@ -232,6 +236,7 @@ class BasegnodeGt(BaseModel):
             return v
         if not property_format.is_algo_address_string_format(v):
             raise ValueError(f"OwnerAddr {v} must have AlgoAddressStringFormat")
+        return v
 
     @validator("DaemonAddr")
     def _validator_daemon_addr(cls, v: Any) -> Optional[str]:
@@ -239,6 +244,7 @@ class BasegnodeGt(BaseModel):
             return v
         if not property_format.is_algo_address_string_format(v):
             raise ValueError(f"DaemonAddr {v} must have AlgoAddressStringFormat")
+        return v
 
     def as_dict(self) -> Dict:
         d = self.dict()
@@ -248,14 +254,14 @@ class BasegnodeGt(BaseModel):
         del d["Role"]
         Role = as_enum(self.Role, CoreGNodeRole100, CoreGNodeRole100.default())
         d["RoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(Role)
+        if d["PrevAlias"] is None:
+            del d["PrevAlias"]
         if d["GpsPointId"] is None:
             del d["GpsPointId"]
         if d["OwnershipDeedNftId"] is None:
             del d["OwnershipDeedNftId"]
         if d["OwnershipDeedValidatorAddr"] is None:
             del d["OwnershipDeedValidatorAddr"]
-        if d["PrevAlias"] is None:
-            del d["PrevAlias"]
         if d["OwnerAddr"] is None:
             del d["OwnerAddr"]
         if d["DaemonAddr"] is None:
@@ -279,10 +285,10 @@ class BasegnodeGt_Maker:
         status: GNodeStatus,
         role: CoreGNodeRole,
         g_node_registry_addr: str,
+        prev_alias: Optional[str],
         gps_point_id: Optional[str],
         ownership_deed_nft_id: Optional[int],
         ownership_deed_validator_addr: Optional[str],
-        prev_alias: Optional[str],
         owner_addr: Optional[str],
         daemon_addr: Optional[str],
         trading_rights_nft_id: Optional[int],
@@ -294,10 +300,10 @@ class BasegnodeGt_Maker:
             Status=status,
             Role=role,
             GNodeRegistryAddr=g_node_registry_addr,
+            PrevAlias=prev_alias,
             GpsPointId=gps_point_id,
             OwnershipDeedNftId=ownership_deed_nft_id,
             OwnershipDeedValidatorAddr=ownership_deed_validator_addr,
-            PrevAlias=prev_alias,
             OwnerAddr=owner_addr,
             DaemonAddr=daemon_addr,
             TradingRightsNftId=trading_rights_nft_id,
@@ -339,14 +345,14 @@ class BasegnodeGt_Maker:
             d2["Role"] = CoreGNodeRole.default()
         if "GNodeRegistryAddr" not in d2.keys():
             raise SchemaError(f"dict {d2} missing GNodeRegistryAddr")
+        if "PrevAlias" not in d2.keys():
+            d2["PrevAlias"] = None
         if "GpsPointId" not in d2.keys():
             d2["GpsPointId"] = None
         if "OwnershipDeedNftId" not in d2.keys():
             d2["OwnershipDeedNftId"] = None
         if "OwnershipDeedValidatorAddr" not in d2.keys():
             d2["OwnershipDeedValidatorAddr"] = None
-        if "PrevAlias" not in d2.keys():
-            d2["PrevAlias"] = None
         if "OwnerAddr" not in d2.keys():
             d2["OwnerAddr"] = None
         if "DaemonAddr" not in d2.keys():
@@ -362,10 +368,10 @@ class BasegnodeGt_Maker:
             Status=d2["Status"],
             Role=d2["Role"],
             GNodeRegistryAddr=d2["GNodeRegistryAddr"],
+            PrevAlias=d2["PrevAlias"],
             GpsPointId=d2["GpsPointId"],
             OwnershipDeedNftId=d2["OwnershipDeedNftId"],
             OwnershipDeedValidatorAddr=d2["OwnershipDeedValidatorAddr"],
-            PrevAlias=d2["PrevAlias"],
             OwnerAddr=d2["OwnerAddr"],
             DaemonAddr=d2["DaemonAddr"],
             TradingRightsNftId=d2["TradingRightsNftId"],
@@ -381,10 +387,10 @@ class BasegnodeGt_Maker:
             "status": t.Status,
             "role": t.Role,
             "g_node_registry_addr": t.GNodeRegistryAddr,
+            "prev_alias": t.PrevAlias,
             "gps_point_id": t.GpsPointId,
             "ownership_deed_nft_id": t.OwnershipDeedNftId,
             "ownership_deed_validator_addr": t.OwnershipDeedValidatorAddr,
-            "prev_alias": t.PrevAlias,
             "owner_addr": t.OwnerAddr,
             "daemon_addr": t.DaemonAddr,
             "trading_rights_nft_id": t.TradingRightsNftId,
@@ -405,10 +411,10 @@ class BasegnodeGt_Maker:
             status=dc.status,
             role=dc.role,
             g_node_registry_addr=dc.g_node_registry_addr,
+            prev_alias=dc.prev_alias,
             gps_point_id=dc.gps_point_id,
             ownership_deed_nft_id=dc.ownership_deed_nft_id,
             ownership_deed_validator_addr=dc.ownership_deed_validator_addr,
-            prev_alias=dc.prev_alias,
             owner_addr=dc.owner_addr,
             daemon_addr=dc.daemon_addr,
             trading_rights_nft_id=dc.trading_rights_nft_id,
