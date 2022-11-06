@@ -191,6 +191,10 @@ class GNodeFactoryDb:
         ta_db = gndbs[0]
         ta_db.ownership_deed_nft_id = new_ta_deed_idx
         ta_db.save()
+        atn_dc = ta_db.dc.parent()
+        atn_db = BaseGNodeDb.objects.filter(alias=atn_dc.alias)[0]
+        atn_db.ownership_deed_nft_id = new_ta_deed_idx
+        atn_db.save()
 
     ##########################
     # Messages Received
