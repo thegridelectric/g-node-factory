@@ -14,6 +14,7 @@ from rich.pretty import pprint
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
+import gnf.gnf_db as gnf_db
 import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
@@ -58,7 +59,7 @@ from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import GpsPointDb
 
 
-class GNodeFactoryDb:
+class GnfRabbitActor:
     """This is the database implementation of the GNodeFactory, where the topological
     and geographical information about the electric grid is stored in a database accessible
     only to this python GNodeFactory and its developer support.
@@ -99,17 +100,8 @@ class GNodeFactoryDb:
             settings.graveyard_acct_sk.get_secret_value()
         )
         algo_utils.verify_account_exists_and_funded(self.graveyard_account.addr)
-        self.load_g_nodes_as_data_classes()
+        gnf_db.load_g_nodes_as_data_classes()
         LOGGER.info(f"Database GNodeFactory initialized")
-
-    def load_g_nodes_as_data_classes(self):
-        """Loads all objects in GNodeFactoryDb and GpsPointDb into
-        the respective class Dicts
-        """
-        for gpsdb in GpsPointDb.objects.all():
-            gpsdb.dc
-        for gndb in BaseGNodeDb.objects.all():
-            gndb.dc
 
     ########################
     # RabbitMq router gb
@@ -190,6 +182,10 @@ class GNodeFactoryDb:
         ta_db = gndbs[0]
         ta_db.ownership_deed_nft_id = new_ta_deed_idx
         ta_db.save()
+        atn_dc = ta_db.dc.parent()
+        atn_db = BaseGNodeDb.objects.filter(alias=atn_dc.alias)[0]
+        atn_db.ownership_deed_nft_id = new_ta_deed_idx
+        atn_db.save()
 
     ##########################
     # Messages Received
@@ -457,7 +453,7 @@ class GNodeFactoryDb:
             raise SchemaError(f"payload must be HeartbeatA, got {type(payload)}")
         LOGGER.info(f"just received HeartbeatA {payload}")
 
-    def create_tavalidatorcert_algo_received(
+    def tavalidatorcert_algo_create_received(
         self, payload: TavalidatorcertAlgoCreate
     ) -> Optional[int]:
         """Co-signs and submits an AssetCreateTxn for a  Validator Certificate NFT.
@@ -474,29 +470,15 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TavalidatorcertAlgoCreate):
-            LOGGER.warning(
-                f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
-            )
-            return None
-
-        mtx = encoding.future_msgpack_decode(payload.HalfSignedCertCreationMtx)
-        mtx.sign(self.admin_account.sk)
-        try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
-            return None
-
-        valdiator_cert_idx = response.asset_idx
-        LOGGER.info(
-            f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} created, asset_idx"
-            f" {valdiator_cert_idx} \n tx_id {response.tx_id}"
+        r = gnf_db.tavalidatorcert_algo_create_received(
+            payload=payload, settings=self.settings
         )
 
-        return valdiator_cert_idx
+        if r.HttpStatusCode > 200:
+            LOGGER.warning(r.Note)
+            return None
+        validator_cert_idx = r.PayloadAsDict["Value"]
+        return validator_cert_idx
 
     def update_ctn_to_active(self, payload: DiscoverycertAlgoTransfer) -> BaseGNodeDb:
         """
@@ -653,7 +635,7 @@ class GNodeFactoryDb:
             response: PendingTxnResponse = algo_utils.send_signed_mtx(
                 client=self.client, mtx=mtx
             )
-        except:
+        except Exception as e:
             LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
             return None
         LOGGER.info(
@@ -662,7 +644,7 @@ class GNodeFactoryDb:
         terminal_asset = self.create_terminal_asset(payload)
         return terminal_asset.dc
 
-    def transfer_tavalidatorcert_algo_received(
+    def tavalidatorcert_algo_transfer_received(
         self, payload: TavalidatorcertAlgoTransfer
     ):
         """Signs and submits an AssetTransferTxn that sends a Validator Certificate
@@ -682,21 +664,11 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TavalidatorcertAlgoTransfer):
-            LOGGER.warning(
-                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
-            )
-            return None
-
-        mtx = encoding.future_msgpack_decode(payload.HalfSignedCertTransferMtx)
-        mtx.sign(self.admin_account.sk)
-        try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
-            return None
-        LOGGER.info(
-            f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} transferred\n txId {response.tx_id}"
+        r = gnf_db.tavalidatorcert_algo_transfer_received(
+            payload=payload, settings=self.settings
         )
+
+        if r.HttpStatusCode > 200:
+            LOGGER.warning(r.Note)
+        else:
+            LOGGER.info(r.Note)

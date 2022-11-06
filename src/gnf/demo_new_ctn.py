@@ -3,7 +3,7 @@ import logging
 import gnf.algo_utils as algo_utils
 import gnf.config as config
 from gnf.enums import CoreGNodeRole
-from gnf.g_node_factory_db import GNodeFactoryDb
+from gnf.gnf_rabbit_actor import GnfRabbitActor
 from gnf.schemata import DiscoverycertAlgoCreate_Maker
 
 
@@ -12,7 +12,7 @@ logging.basicConfig(level="INFO")
 
 def main():
 
-    factory = GNodeFactoryDb(config.GnfSettings())
+    factory = GnfRabbitActor(config.GnfSettings())
 
     ada = algo_utils.BasicAccount(config.AdaDiscovererSettings().sk.get_secret_value())
 

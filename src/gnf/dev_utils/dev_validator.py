@@ -1,9 +1,11 @@
 import logging
 from typing import Optional
 
+import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -21,10 +23,12 @@ from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
+from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
-TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
+
+GNF_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevValidator:
@@ -54,9 +58,9 @@ class DevValidator:
     # Messages sent
     ###################
 
-    def generate_initial_tadeed_algo_create(
+    def post_initial_tadeed_algo_create(
         self, terminal_asset_alias: str
-    ) -> InitialTadeedAlgoCreate:
+    ) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -75,10 +79,25 @@ class DevValidator:
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
-        self.send_message_to_gnf(payload)
-        return payload
+        LOGGER.info(
+            f"Posting request to GnfRestAPI to create a TaDeed for {terminal_asset_alias}"
+        )
+        api_endpoint = f"{GNF_API_ROOT}/initial-tadeed-algo-create/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info("Response from GnfRestAPI:")
+        pprint(r.json())
+        if r.status_code > 200:
+            LOGGER.warning(r.json())
+            if "detail" in r.json().keys():
+                note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
+            else:
+                note = r.reason
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        r = RestfulResponse(**r.json())
+        return r
 
-    def generate_create_tavalidatorcert_algo(self) -> TavalidatorcertAlgoCreate:
+    def post_create_tavalidatorcert_algo(self) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -100,8 +119,45 @@ class DevValidator:
             validator_addr=self.acct.addr,
             half_signed_cert_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
-        self.send_message_to_gnf(payload)
-        return payload
+        LOGGER.info("Posting request to GnfRestAPI to create new TaValidatorCert")
+        api_endpoint = f"{GNF_API_ROOT}/tavalidatorcert-algo-create/"
+
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info("Response from GnfRestAPI:")
+        pprint(r.json())
+
+        if r.status_code > 200:
+            LOGGER.warning(r.json())
+            if "detail" in r.json().keys():
+                note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
+            else:
+                note = r.reason
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+
+        r = RestfulResponse(**r.json())
+        cert_idx = r.PayloadAsDict["Value"]
+
+        payload = self.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
+        LOGGER.info(
+            f"Posting request to GnfRestAPI to transfer TaValidatorCert {cert_idx}"
+        )
+
+        api_endpoint = f"{GNF_API_ROOT}/tavalidatorcert-algo-transfer/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info("Response from GnfRestAPI:")
+        pprint(r.json())
+
+        if r.status_code > 200:
+            LOGGER.warning(r.json())
+            if "detail" in r.json().keys():
+                note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
+            else:
+                note = r.reason
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        r = RestfulResponse(**r.json())
+        return r
 
     def generate_initial_tadeed_algo_transfer(
         self,

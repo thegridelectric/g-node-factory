@@ -18,10 +18,10 @@ def test_basegnode_gt_generated():
         "StatusGtEnumSymbol": "3661506b",
         "RoleGtEnumSymbol": "0f8872f7",
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "PrevAlias": "dw1",
         "GpsPointId": "50f3f6e8-5937-47c2-8d05-06525ef6467d",
         "OwnershipDeedNftId": 5,
         "OwnershipDeedValidatorAddr": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI",
-        "PrevAlias": "dw1",
         "OwnerAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "DaemonAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "TradingRightsNftId": 1,
@@ -49,10 +49,10 @@ def test_basegnode_gt_generated():
         status=gtuple.Status,
         role=gtuple.Role,
         g_node_registry_addr=gtuple.GNodeRegistryAddr,
+        prev_alias=gtuple.PrevAlias,
         gps_point_id=gtuple.GpsPointId,
         ownership_deed_nft_id=gtuple.OwnershipDeedNftId,
         ownership_deed_validator_addr=gtuple.OwnershipDeedValidatorAddr,
-        prev_alias=gtuple.PrevAlias,
         owner_addr=gtuple.OwnerAddr,
         daemon_addr=gtuple.DaemonAddr,
         trading_rights_nft_id=gtuple.TradingRightsNftId,
@@ -106,6 +106,11 @@ def test_basegnode_gt_generated():
     ######################################
 
     d2 = dict(d)
+    if "PrevAlias" in d2.keys():
+        del d2["PrevAlias"]
+    Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
     if "GpsPointId" in d2.keys():
         del d2["GpsPointId"]
     Maker.dict_to_tuple(d2)
@@ -118,11 +123,6 @@ def test_basegnode_gt_generated():
     d2 = dict(d)
     if "OwnershipDeedValidatorAddr" in d2.keys():
         del d2["OwnershipDeedValidatorAddr"]
-    Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    if "PrevAlias" in d2.keys():
-        del d2["PrevAlias"]
     Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
@@ -178,11 +178,11 @@ def test_basegnode_gt_generated():
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, GpsPointId="d4be12d5-33ba-4f1f-b9e5")
+    d2 = dict(d, PrevAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, PrevAlias="a.b-h")
+    d2 = dict(d, GpsPointId="d4be12d5-33ba-4f1f-b9e5")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
