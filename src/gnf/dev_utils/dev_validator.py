@@ -58,9 +58,9 @@ class DevValidator:
     # Messages sent
     ###################
 
-    def generate_initial_tadeed_algo_create(
+    def post_initial_tadeed_algo_create(
         self, terminal_asset_alias: str
-    ) -> InitialTadeedAlgoCreate:
+    ) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -79,8 +79,23 @@ class DevValidator:
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
-        self.send_message_to_gnf(payload)
-        return payload
+        LOGGER.info(
+            f"Posting request to GnfRestAPI to create a TaDeed for {terminal_asset_alias}"
+        )
+        api_endpoint = f"{GNF_API_ROOT}/initial-tadeed-algo-create/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info("Response from GnfRestAPI:")
+        pprint(r.json())
+        if r.status_code > 200:
+            LOGGER.warning(r.json())
+            if "detail" in r.json().keys():
+                note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
+            else:
+                note = r.reason
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        r = RestfulResponse(**r.json())
+        return r
 
     def post_create_tavalidatorcert_algo(self) -> RestfulResponse:
 

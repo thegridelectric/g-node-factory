@@ -3,6 +3,6 @@ from gnf import demo_new_terminal_asset
 from gnf import load_dev_data
 
 
-load_dev_data()
-demo_new_terminal_asset()
-# demo_new_ctn()
+load_dev_data.main()
+demo_new_terminal_asset.main()
+# demo_new_ctn.main()

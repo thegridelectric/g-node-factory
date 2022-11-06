@@ -14,7 +14,7 @@ from rich.pretty import pprint
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
-import gnf.orm_utils as orm_utils
+import gnf.gnf_db as gnf_db
 import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
@@ -59,7 +59,7 @@ from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import GpsPointDb
 
 
-class GNodeFactoryDb:
+class GnfRabbitActor:
     """This is the database implementation of the GNodeFactory, where the topological
     and geographical information about the electric grid is stored in a database accessible
     only to this python GNodeFactory and its developer support.
@@ -100,17 +100,8 @@ class GNodeFactoryDb:
             settings.graveyard_acct_sk.get_secret_value()
         )
         algo_utils.verify_account_exists_and_funded(self.graveyard_account.addr)
-        orm_utils.load_g_nodes_as_data_classes()
+        gnf_db.load_g_nodes_as_data_classes()
         LOGGER.info(f"Database GNodeFactory initialized")
-
-    def load_g_nodes_as_data_classes(self):
-        """Loads all objects in GNodeFactoryDb and GpsPointDb into
-        the respective class Dicts
-        """
-        for gpsdb in GpsPointDb.objects.all():
-            gpsdb.dc
-        for gndb in BaseGNodeDb.objects.all():
-            gndb.dc
 
     ########################
     # RabbitMq router gb
@@ -479,7 +470,7 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        r = orm_utils.tavalidatorcert_algo_create_received(
+        r = gnf_db.tavalidatorcert_algo_create_received(
             payload=payload, settings=self.settings
         )
 
@@ -673,7 +664,7 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        r = orm_utils.tavalidatorcert_algo_transfer_received(
+        r = gnf_db.tavalidatorcert_algo_transfer_received(
             payload=payload, settings=self.settings
         )
 

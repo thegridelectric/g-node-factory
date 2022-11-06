@@ -1,3 +1,7 @@
+import os
+
+
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 import logging
 from typing import List
 from typing import Optional
@@ -183,24 +187,9 @@ def initial_tadeed_algo_create_received(
         return r
 
     ta_deed_idx = response.asset_idx
-    # n = f"Initial TaDeed {ta_deed_idx} created for {ta_deed_alias} ")
-    lrh_ta_alias = ta_alias.replace(".", "-")
-    LOGGER.info(f"lrh_ta_alias is {lrh_ta_alias} and ta_deed_idx is {ta_deed_idx}")
-    api_endpoint = (
-        f"{GNF_API_ROOT}/hack-create-atomic-metering-node/{lrh_ta_alias}/{ta_deed_idx}"
-    )
-    r = requests.get(url=api_endpoint)
-
-    if r.status_code > 200:
-        if "detail" in r.json().keys():
-            note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
-        else:
-            note = r.reason
-        r = RestfulResponse(Note=note, HttpStatusCode=422)
-        return r
-    r = RestfulResponse(**r.json())
+    LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
+    r = create_pending_atomic_metering_node(ta_alias=ta_alias, ta_deed_idx=ta_deed_idx)
     return r
-    return RestfulResponse(Note="did not make a db call")
 
 
 ###############
@@ -256,20 +245,25 @@ class HackAtmCreate(BaseModel):
 
 
 def create_pending_atomic_metering_node(
-    lrh_ta_alias: str, ta_deed_idx: int
+    ta_alias: str, ta_deed_idx: int
 ) -> RestfulResponse:
-    if not property_format.is_lrh_alias_format(lrh_ta_alias):
+    if not property_format.is_lrd_alias_format(ta_alias):
         r = RestfulResponse(
-            Note=f"{lrh_ta_alias} must have LRH Alias Format",
+            Note=f"{ta_alias} must have LRD Alias Format",
             HttpStatusCode=422,
         )
         return r
     load_g_nodes_as_data_classes()
-    ta_alias = lrh_ta_alias.replace("-", ".")
     words = ta_alias.split(".")
+    if words[-1] != "ta":
+        r = RestfulResponse(
+            Note=f"{ta_alias} must end in '.ta'",
+            HttpStatusCode=422,
+        )
+        return r
     if len(words) == 1:
         r = RestfulResponse(
-            Note=f"{lrh_ta_alias} does not have a parent; ignoring",
+            Note=f"{ta_alias} does not have a parent; ignoring",
             HttpStatusCode=422,
         )
         return r

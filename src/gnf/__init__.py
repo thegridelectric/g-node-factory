@@ -6,13 +6,10 @@ import gnf.config as config
 import gnf.enums as enums
 import gnf.errors as errors
 import gnf.message as message
-import gnf.orm_utils as orm_utils
 import gnf.property_format as property_format
+import gnf.rest_api as rest_api
 import gnf.ta_daemon_rest_api as ta_daemon_rest_api
 import gnf.utils as utils
-from gnf.demo_new_ctn import main as demo_new_ctn
-from gnf.demo_new_terminal_asset import main as demo_new_terminal_asset
-from gnf.load_dev_data import main as load_dev_data
 
 
 __all__ = [
@@ -20,14 +17,11 @@ __all__ = [
     "api_utils",
     "api_types",
     "config",
-    "demo_new_terminal_asset",
-    "demo_new_ctn",
     "enums",
     "errors",
-    "load_dev_data",
     "message",
-    "orm_utils",
     "property_format",
     "utils",
     "ta_daemon_rest_api",
+    "rest_api",
 ]
