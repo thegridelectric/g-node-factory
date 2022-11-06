@@ -14,32 +14,17 @@ ENV PYTHONUNBUFFERED 1
 
 FROM image-base AS app-compiler-image
 
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential gcc libpq-dev postgresql postgresql-contrib
+# Update os stuff
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential gcc libpq-dev postgresql postgresql-contrib curl
 
+WORKDIR /app
 
-ENV VIRTUAL_ENV=/opt/venv
-RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# Install Poetry
+RUN curl -sSL  https://install.python-poetry.org | POETRY_HOME=/opt/poetry python && \
+    cd /usr/local/bin && \
+    ln -s /opt/poetry/bin/poetry && \
+    poetry config virtualenvs.create false
 
-COPY python_code/requirements/base.txt base.txt
-RUN pip install -r base.txt
-RUN rm base.txt
+COPY pyproject.toml /poetry.lock* /app/
 
-
-# add any other compilation here. Limit what you add because any changes
-# result in re-loading gcc
-
-####################################################################################################
-# image-db-base
-####################################################################################################
-FROM image-base AS image-db-base
-RUN mkdir -p /usr/share/man/man1 && apt-get install --no-install-recommends --yes sqlite3
-
-###################################################################################################
-# registry base
-###################################################################################################
-
-FROM image-db-base AS registry-base
-
-COPY --from=app-compiler-image /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+RUN poetry install --no-root --no-dev
