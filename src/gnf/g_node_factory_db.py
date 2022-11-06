@@ -462,7 +462,7 @@ class GNodeFactoryDb:
             raise SchemaError(f"payload must be HeartbeatA, got {type(payload)}")
         LOGGER.info(f"just received HeartbeatA {payload}")
 
-    def create_tavalidatorcert_algo_received(
+    def tavalidatorcert_algo_create_received(
         self, payload: TavalidatorcertAlgoCreate
     ) -> Optional[int]:
         """Co-signs and submits an AssetCreateTxn for a  Validator Certificate NFT.
@@ -479,29 +479,15 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TavalidatorcertAlgoCreate):
-            LOGGER.warning(
-                f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
-            )
-            return None
-
-        mtx = encoding.future_msgpack_decode(payload.HalfSignedCertCreationMtx)
-        mtx.sign(self.admin_account.sk)
-        try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except Exception as e:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
-            return None
-
-        valdiator_cert_idx = response.asset_idx
-        LOGGER.info(
-            f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} created, asset_idx"
-            f" {valdiator_cert_idx} \n tx_id {response.tx_id}"
+        r = orm_utils.tavalidatorcert_algo_create_received(
+            payload=payload, settings=self.settings
         )
 
-        return valdiator_cert_idx
+        if r.HttpStatusCode > 200:
+            LOGGER.warning(r.Note)
+            return None
+        validator_cert_idx = r.PayloadAsDict["Value"]
+        return validator_cert_idx
 
     def update_ctn_to_active(self, payload: DiscoverycertAlgoTransfer) -> BaseGNodeDb:
         """
@@ -658,7 +644,7 @@ class GNodeFactoryDb:
             response: PendingTxnResponse = algo_utils.send_signed_mtx(
                 client=self.client, mtx=mtx
             )
-        except:
+        except Exception as e:
             LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
             return None
         LOGGER.info(
@@ -667,7 +653,7 @@ class GNodeFactoryDb:
         terminal_asset = self.create_terminal_asset(payload)
         return terminal_asset.dc
 
-    def transfer_tavalidatorcert_algo_received(
+    def tavalidatorcert_algo_transfer_received(
         self, payload: TavalidatorcertAlgoTransfer
     ):
         """Signs and submits an AssetTransferTxn that sends a Validator Certificate
@@ -687,21 +673,11 @@ class GNodeFactoryDb:
             - validator_cert_idx otherwise
         """
 
-        if not isinstance(payload, TavalidatorcertAlgoTransfer):
-            LOGGER.warning(
-                f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
-            )
-            return None
-
-        mtx = encoding.future_msgpack_decode(payload.HalfSignedCertTransferMtx)
-        mtx.sign(self.admin_account.sk)
-        try:
-            response: PendingTxnResponse = algo_utils.send_signed_mtx(
-                client=self.client, mtx=mtx
-            )
-        except:
-            LOGGER.warning(f"Tried to sign transaction but there was an error.\n {e}")
-            return None
-        LOGGER.info(
-            f"ValidatorCert for ..{payload.ValidatorAddr[-6:]} transferred\n txId {response.tx_id}"
+        r = orm_utils.tavalidatorcert_algo_transfer_received(
+            payload=payload, settings=self.settings
         )
+
+        if r.HttpStatusCode > 200:
+            LOGGER.warning(r.Note)
+        else:
+            LOGGER.info(r.Note)

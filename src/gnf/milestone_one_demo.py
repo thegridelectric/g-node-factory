@@ -211,7 +211,7 @@ if cert_idx is not None:
     raise Exception(
         f"There is already a Validator Certificate for Molly! Please ./sandbox reset and start the demo over."
     )
-payload = molly.generate_create_tavalidatorcert_algo()
+payload = molly.post_create_tavalidatorcert_algo()
 print("")
 print("")
 print(f"payload: {payload}")
@@ -249,7 +249,7 @@ print(
     "Assuming it is, the GNodeFactory then signs and submits the transaction and gets back the newly created cert_idx "
 )
 
-cert_idx = factory.create_tavalidatorcert_algo_received(payload)
+cert_idx = factory.tavalidatorcert_algo_create_received(payload)
 
 
 print("")
@@ -304,7 +304,7 @@ payload = molly.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
 print("")
 print("")
 print(f"gnf.TransferTavalidatorcertAlgReceived(payload)")
-factory.transfer_tavalidatorcert_algo_received(payload)
+factory.tavalidatorcert_algo_transfer_received(payload)
 print("")
 print("")
 
