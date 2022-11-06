@@ -36,20 +36,19 @@ class BaseGNode(StreamlinedSerializerMixin):
         self,
         g_node_id: Optional[str] = None,
         alias: Optional[str] = None,
-        prev_alias: Optional[str] = None,
         status: Optional[GNodeStatus] = None,
         role: Optional[CoreGNodeRole] = None,
         g_node_registry_addr: Optional[str] = None,
+        prev_alias: Optional[str] = None,
+        gps_point_id: Optional[str] = None,
         ownership_deed_nft_id: Optional[int] = None,
         ownership_deed_validator_addr: Optional[str] = None,
         owner_addr: Optional[str] = None,
         daemon_addr: Optional[str] = None,
         trading_rights_nft_id: Optional[int] = None,
-        gps_point_id: Optional[str] = None,
     ):
         self.g_node_id = g_node_id
         self.alias = alias
-        self.prev_alias = prev_alias
         if not isinstance(status, GNodeStatus):
             raise DcError(f"status {status} must be GNodeStatus, got {type(status)}")
         self.status = status
@@ -57,12 +56,13 @@ class BaseGNode(StreamlinedSerializerMixin):
             raise DcError(f"role {role} must be  CoreGNodeRole, got {type(role)}")
         self.role = role
         self.g_node_registry_addr = g_node_registry_addr
+        self.prev_alias = prev_alias
+        self.gps_point_id = gps_point_id
         self.ownership_deed_nft_id = ownership_deed_nft_id
         self.ownership_deed_validator_addr = ownership_deed_validator_addr
         self.owner_addr = owner_addr
         self.daemon_addr = daemon_addr
         self.trading_rights_nft_id = trading_rights_nft_id
-        self.gps_point_id = gps_point_id
         self.__class__.by_alias[self.alias] = self
 
     def __repr__(self):

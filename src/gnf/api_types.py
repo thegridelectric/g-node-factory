@@ -87,7 +87,7 @@ def status_by_versioned_type_name() -> List[str]:
 
     v: Dict = {
         "basegnode.ctn.create.000": "Pending",
-        "basegnode.gt.000": "Active",
+        "basegnode.gt.000": "Pending",
         "basegnode.marketmaker.create.000": "Pending",
         "basegnode.other.create.000": "Pending",
         "basegnode.terminalasset.create.000": "Pending",

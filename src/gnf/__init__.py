@@ -7,11 +7,9 @@ import gnf.enums as enums
 import gnf.errors as errors
 import gnf.message as message
 import gnf.property_format as property_format
+import gnf.rest_api as rest_api
 import gnf.ta_daemon_rest_api as ta_daemon_rest_api
 import gnf.utils as utils
-from gnf.demo_new_ctn import main as demo_new_ctn
-from gnf.demo_new_terminal_asset import main as demo_new_terminal_asset
-from gnf.load_dev_data import main as load_dev_data
 
 
 __all__ = [
@@ -25,7 +23,5 @@ __all__ = [
     "property_format",
     "utils",
     "ta_daemon_rest_api",
-    "demo_new_terminal_asset",
-    "demo_new_ctn",
-    "load_dev_data",
+    "rest_api",
 ]

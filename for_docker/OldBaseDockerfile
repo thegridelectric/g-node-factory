@@ -1,0 +1,45 @@
+ARG REMOTE_BASE=python:3.10-slim-buster
+####################################################################################################
+# docker-base - meant to be re-run only rarely
+####################################################################################################
+
+FROM $REMOTE_BASE AS image-base
+
+RUN apt-get update
+ENV PYTHONUNBUFFERED 1
+
+####################################################################################################
+# app-compiler-image
+####################################################################################################
+
+FROM image-base AS app-compiler-image
+
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential gcc libpq-dev postgresql postgresql-contrib
+
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY python_code/requirements/base.txt base.txt
+RUN pip install -r base.txt
+RUN rm base.txt
+
+
+# add any other compilation here. Limit what you add because any changes
+# result in re-loading gcc
+
+####################################################################################################
+# image-db-base
+####################################################################################################
+FROM image-base AS image-db-base
+RUN mkdir -p /usr/share/man/man1 && apt-get install --no-install-recommends --yes sqlite3
+
+###################################################################################################
+# registry base
+###################################################################################################
+
+FROM image-db-base AS registry-base
+
+COPY --from=app-compiler-image /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"

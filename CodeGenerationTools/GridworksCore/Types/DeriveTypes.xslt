@@ -524,7 +524,9 @@ class </xsl:text>
         <xsl:text>(v):
             raise ValueError(f"</xsl:text>
            <xsl:value-of select="Value"/><xsl:text> {v} must have </xsl:text>
-           <xsl:value-of select="PrimitiveFormat"/><xsl:text>")</xsl:text>
+           <xsl:value-of select="PrimitiveFormat"/><xsl:text>")
+        return v
+           </xsl:text>
     </xsl:if>
 
 
