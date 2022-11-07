@@ -1,17 +1,12 @@
 from functools import lru_cache
 from typing import List
-from typing import Optional
 
-from algosdk import encoding
-from algosdk.v2client.algod import AlgodClient
 from fastapi import Depends
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.gnf_db as gnf_db
-from gnf.algo_utils import PendingTxnResponse
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate
@@ -28,20 +23,21 @@ def get_settings():
     return config.GnfSettings()
 
 
-@app.get("/base-g-nodes/")
-async def get_base_g_nodes(
-    gns: List[BasegnodeGt] = Depends(gnf_db.retrieve_all_gns),
-):
-    return gns
-
-
-@app.get("/base-g-nodes/{lrh_g_node_alias}")
-async def get_base_g_node(gn: BasegnodeGt = Depends(gnf_db.g_node_from_alias)):
+@app.get("/base-g-nodes/{lrh_g_node_alias}", response_model=BasegnodeGt)
+async def get_base_g_node(lrh_g_node_alias: str):
+    gn = gnf_db.g_node_from_alias(lrh_g_node_alias)
     return gn
 
 
-@app.get("/base-g-nodes/by-id/{g_node_id}")
-async def get_base_g_node(gn: BasegnodeGt = Depends(gnf_db.g_node_from_id)):
+@app.get("/base-g-nodes/", response_model=List[BasegnodeGt])
+async def get_base_g_nodes():
+    gns = gnf_db.retrieve_all_gns()
+    return gns
+
+
+@app.get("/base-g-nodes/by-id/{g_node_id}", response_model=BasegnodeGt)
+async def get_base_g_node(g_node_id: str):
+    gn = gnf_db.g_node_from_id(g_node_id)
     return gn
 
 
