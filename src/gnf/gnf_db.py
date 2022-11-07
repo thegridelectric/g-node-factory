@@ -1,7 +1,3 @@
-import os
-
-
-os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 import logging
 from typing import List
 from typing import Optional
@@ -131,7 +127,12 @@ def tavalidatorcert_algo_transfer_received(
     return r
 
 
-def initial_tadeed_algo_create_received(
+###############
+# Requiring database access
+##############
+
+
+async def initial_tadeed_algo_create_received(
     payload: InitialTadeedAlgoCreate, settings: config.GnfSettings
 ) -> RestfulResponse:
     """
@@ -188,63 +189,54 @@ def initial_tadeed_algo_create_received(
 
     ta_deed_idx = response.asset_idx
     LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
-    r = create_pending_atomic_metering_node(ta_alias=ta_alias, ta_deed_idx=ta_deed_idx)
+    r = await create_pending_atomic_metering_node(
+        ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
+    )
     return r
 
 
-###############
-# Requiring database access
-##############
-
-
-def load_g_nodes_as_data_classes():
+async def load_g_nodes_as_data_classes():
     """Loads all objects in GNodeFactoryDb and GpsPointDb into
     the respective class Dicts
     """
-    for gpsdb in GpsPointDb.objects.all():
+    async for gpsdb in GpsPointDb.objects.all():
         gpsdb.dc
-    for gndb in BaseGNodeDb.objects.all():
+    async for gndb in BaseGNodeDb.objects.all():
         gndb.dc
 
 
-def retrieve_all_gns() -> List[BasegnodeGt]:
-    gns = BaseGNodeDb.objects.all()
-    gn_gt_list = []
-    for gn in gns:
+async def retrieve_all_gns() -> List[BasegnodeGt]:
+    gn_gt_list: List[BasegnodeGt] = []
+    async for gn in BaseGNodeDb.objects.all():
         gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
         gn_gt_list.append(gn_gt)
     return gn_gt_list
 
 
-def g_node_from_alias(lrh_g_node_alias: str) -> Optional[BasegnodeGt]:
+async def g_node_from_alias(lrh_g_node_alias: str) -> Optional[BasegnodeGt]:
     if not property_format.is_lrh_alias_format(lrh_g_node_alias):
         raise ValueError(f"{lrh_g_node_alias} must have LRH Alias Format")
     g_node_alias = lrh_g_node_alias.replace("-", ".")
-    gn = BaseGNodeDb.objects.filter(alias=g_node_alias).first()
+    gn = await BaseGNodeDb.objects.filter(alias=g_node_alias).afirst()
     if not gn:
-        old_gn = BaseGNodeHistory.objects.filter(alias=g_node_alias).first()
+        old_gn = await BaseGNodeHistory.objects.filter(alias=g_node_alias).afirst()
         if not old_gn:
             return None
-        gn = BaseGNodeDb.objects.filter(g_node_id=old_gn.g_node_id).first()
+        gn = await BaseGNodeDb.objects.filter(g_node_id=old_gn.g_node_id).afirst()
 
     gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
     return gn_gt
 
 
-def g_node_from_id(g_node_id: str) -> Optional[BasegnodeGt]:
-    gn = BaseGNodeDb.objects.filter(g_node_id=g_node_id).first()
+async def g_node_from_id(g_node_id: str) -> Optional[BasegnodeGt]:
+    gn = await BaseGNodeDb.objects.filter(g_node_id=g_node_id).afirst()
     if not gn:
         return None
     gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
     return gn_gt
 
 
-class HackAtmCreate(BaseModel):
-    TaAlias: str
-    TaDeedIdx: int
-
-
-def create_pending_atomic_metering_node(
+async def create_pending_atomic_metering_node(
     ta_alias: str, ta_deed_idx: int
 ) -> RestfulResponse:
     if not property_format.is_lrd_alias_format(ta_alias):
@@ -253,7 +245,7 @@ def create_pending_atomic_metering_node(
             HttpStatusCode=422,
         )
         return r
-    load_g_nodes_as_data_classes()
+    await load_g_nodes_as_data_classes()
     words = ta_alias.split(".")
     if words[-1] != "ta":
         r = RestfulResponse(
@@ -277,7 +269,7 @@ def create_pending_atomic_metering_node(
     }
     LOGGER.info(f"About to try and create a new GNode w alias {parent_alias}")
     try:
-        atm_db = BaseGNodeDb.objects.create(**gn)
+        atm_db = await BaseGNodeDb.objects.acreate(**gn)
     except RegistryError as e:
         note = f"Not creating pending AtomicMeteringNode. Error making parent: {e}"
         r = RestfulResponse(

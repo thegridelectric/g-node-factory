@@ -62,7 +62,7 @@ poetry shell
 5. Start the PythonTaDaemon FastAPI:
 
 ```
-uvicorn gnf.ta_daemon_rest_api:app --reload
+uvicorn gnf.rest_api:app --reload
 ```
 
 (go to http://127.0.0.1:8000/docs# for inspecting the api)

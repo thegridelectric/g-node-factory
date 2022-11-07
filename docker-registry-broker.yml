@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   dev-registry-broker:
-    container_name: dev-registry_rabbit
+    container_name: dev-registry-rabbit
     image: "jessmillar/dev-registry-rabbit:latest"
     ports:
       - 4369:4369

@@ -25,19 +25,19 @@ def get_settings():
 
 @app.get("/base-g-nodes/{lrh_g_node_alias}", response_model=BasegnodeGt)
 async def get_base_g_node(lrh_g_node_alias: str):
-    gn = gnf_db.g_node_from_alias(lrh_g_node_alias)
+    gn = await gnf_db.g_node_from_alias(lrh_g_node_alias)
     return gn
 
 
 @app.get("/base-g-nodes/", response_model=List[BasegnodeGt])
 async def get_base_g_nodes():
-    gns = gnf_db.retrieve_all_gns()
+    gns = await gnf_db.retrieve_all_gns()
     return gns
 
 
 @app.get("/base-g-nodes/by-id/{g_node_id}", response_model=BasegnodeGt)
 async def get_base_g_node(g_node_id: str):
-    gn = gnf_db.g_node_from_id(g_node_id)
+    gn = await gnf_db.g_node_from_id(g_node_id)
     return gn
 
 
@@ -74,7 +74,7 @@ async def initial_tadeed_algo_create_received(
     payload: InitialTadeedAlgoCreate,
     settings: config.GnfSettings = Depends(get_settings),
 ):
-    r = gnf_db.initial_tadeed_algo_create_received(
+    r = await gnf_db.initial_tadeed_algo_create_received(
         payload=payload,
         settings=settings,
     )
