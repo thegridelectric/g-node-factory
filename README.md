@@ -43,6 +43,8 @@ initial setup.
 3. Set up your python environment (IMPROVE)
 
 ```
+poetry install
+
 poetry shell
 ```
 
