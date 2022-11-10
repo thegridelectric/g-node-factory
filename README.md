@@ -1,23 +1,9 @@
 # G Node Factory
 
-[![PyPI](https://img.shields.io/pypi/v/g-node-factory.svg)][pypi_]
-[![Status](https://img.shields.io/pypi/status/g-node-factory.svg)][status]
-[![Python Version](https://img.shields.io/pypi/pyversions/g-node-factory)][python version]
-[![License](https://img.shields.io/pypi/l/g-node-factory)][license]
-
-[![Read the documentation at https://g-node-factory.readthedocs.io/](https://img.shields.io/readthedocs/g-node-factory/latest.svg?label=Read%20the%20Docs)][read the docs]
-[![Tests](https://github.com/thegridelectric/g-node-factory/workflows/Tests/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/thegridelectric/g-node-factory/branch/main/graph/badge.svg)][codecov]
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
-[pypi_]: https://pypi.org/project/g-node-factory/
-[status]: https://pypi.org/project/g-node-factory/
-[python version]: https://pypi.org/project/g-node-factory
-[read the docs]: https://g-node-factory.readthedocs.io/
-[tests]: https://github.com/thegridelectric/g-node-factory/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/thegridelectric/g-node-factory
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
@@ -27,51 +13,67 @@ This repo has been developed through the generous funding of a grant provided by
 
 ## Local Demo setup
 
-1. Install [docker](https://docs.docker.com/get-docker/) and docker-compose.
+1. Set up python environment
 
-2. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory:
+    ```
+    poetry install
 
-```
-./sandbox up dev
-```
+    poetry shell
+    ```
 
-This starts up a local blockchain on your computer. It can take a couple of minutes for the
-initial setup.
+2. Install [docker](https://docs.docker.com/get-docker/) 
 
-**note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
+3. Start docker containers
 
-3. Set up your python environment (IMPROVE)
+  - **X86 CPU**:
 
-```
-poetry install
+    ```
+    docker compose -f docker-demo-x86.yml up -d
+    ```
 
-poetry shell
-```
+  - **arm CPU**:
 
-4. Run before each demo:
+      ```
+      docker compose -f docker-demo-arm.yml up -d
+      ```
+
+4. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory
+
+    ```
+    ./sandbox up dev
+    ```
+
+    This starts up a local blockchain on your computer. It can take a couple of minutes for the
+    initial setup.
+
+    **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
+
+
+
+5. Run before each demo:
 
 - From this repo, **flush database**:
-  ```
-  ./reset-dev-db.sh
+    ```
+    ./reset-dev-db.sh
   ```
 - From sandbox repo, **flush blockchin**:
-  ```
-  ./sandbox reset
-  ```
+    ```
+    ./sandbox reset
+    ```
 
-5. Start the PythonTaDaemon FastAPI:
+6. Start the PythonTaDaemon FastAPI:
 
-```
-uvicorn gnf.rest_api:app --reload
-```
+    ```
+    uvicorn gnf.rest_api:app --reload
+    ```
 
-(go to http://127.0.0.1:8000/docs# for inspecting the api)
+    (go to http://127.0.0.1:8000/docs# for inspecting the api)
 
-6. Run the milestone 1 demo from this repo:
+7. Run the milestone 1 demo from this repo:
 
-```
-python demo.py
-```
+    ```
+    python demo.py
+    ```
 
 ## Explaining what the demo does
 
