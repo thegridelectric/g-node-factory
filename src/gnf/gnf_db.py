@@ -1,8 +1,12 @@
+import json
 import logging
+import pprint
 from typing import List
 from typing import Optional
 
+import requests
 from algosdk import encoding
+from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 from asgiref.sync import sync_to_async
 
@@ -21,8 +25,12 @@ from gnf.enums import GNodeStatus
 from gnf.errors import RegistryError
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import BasegnodeGt_Maker
+from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import NewTadeedAlgoOptin_Maker
+from gnf.schemata import NewTadeedSend
+from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -230,6 +238,42 @@ async def initial_tadeed_algo_create_received(
         ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
     )
     return r
+
+
+def discoverycert_algo_create_received(
+    self, payload: DiscoverycertAlgoCreate, settings: config.GnfSettings
+):
+    admin_account: BasicAccount = BasicAccount(
+        settings.admin_acct_sk.get_secret_value()
+    )
+    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+
+    txn = transaction.AssetCreateTxn(
+        sender=admin_account.addr,
+        total=1,
+        decimals=0,
+        default_frozen=False,
+        manager=admin_account.addr,
+        asset_name=payload.GNodeAlias,
+        unit_name="DISCOVER",
+        sp=client.suggested_params(),
+    )
+    # TODO: create this and be ready to send it to discoverer, add  payload.SupportingMaterialHash
+
+    role = payload.CoreGNodeRole
+    if role != CoreGNodeRole.ConductorTopologyNode:
+        raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
+    opt_in_payload = self.create_pending_ctn(payload)
+    api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
+    r = requests.post(url=api_endpoint, json=opt_in_payload.as_dict())
+    pprint(r.json())
+    r = RestfulResponse(**r.json())
+    if not r.PayloadTypeName == NewTadeedSend_Maker.type_name:
+        raise Exception(
+            f"Expected r.PayloadTypeName to be 'new.tadeed.send' but got {r.PayloadTypeName}"
+        )
+    payload = NewTadeedSend_Maker.dict_to_tuple(r.PayloadAsDict)
+    self.new_tadeed_send_received(payload)
 
 
 async def load_g_nodes_as_data_classes():
