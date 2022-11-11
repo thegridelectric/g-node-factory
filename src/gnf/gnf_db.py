@@ -2,10 +2,8 @@ import logging
 from typing import List
 from typing import Optional
 
-import requests
 from algosdk import encoding
 from algosdk.v2client.algod import AlgodClient
-from pydantic import BaseModel
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -118,7 +116,7 @@ def tavalidatorcert_algo_transfer_received(
         response: PendingTxnResponse = algo_utils.send_signed_mtx(
             client=client, mtx=mtx
         )
-    except:
+    except Exception as e:
         note = f"Tried to sign transaction but there was an error.\n {e}"
         r = RestfulResponse(Note=note, HttpStatusCode=422)
         return r
