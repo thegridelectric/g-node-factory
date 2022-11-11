@@ -1,5 +1,7 @@
 import logging
 
+from rich.pretty import pprint
+
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
@@ -32,6 +34,7 @@ def main():
     r = molly.post_tavalidatorcert_algo_create()
 
     if r.HttpStatusCode > 200:
+        pprint(r)
         raise Exception("Stopping demo due to errors")
 
     r = molly.post_initial_tadeed_algo_create(
@@ -39,24 +42,26 @@ def main():
     )
 
     if r.HttpStatusCode > 200:
+        pprint(r)
         raise Exception("Stopping demo due to errors")
 
     atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)
 
     ta_deed_idx = atm_gt.OwnershipDeedNftId
 
-    # holly.post_initial_tadeed_algo_optin()
+    holly.post_initial_tadeed_algo_optin()
 
-    # r = molly.post_initial_tadeed_algo_transfer(
-    #     ta_deed_idx=ta_deed_idx,
-    #     ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
-    #     ta_owner_addr=holly.acct.addr,
-    #     micro_lat=45666353,
-    #     micro_lon=-68691705,
-    # )
+    r = molly.post_initial_tadeed_algo_transfer(
+        ta_deed_idx=ta_deed_idx,
+        ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
+        ta_owner_addr=holly.acct.addr,
+        micro_lat=45666353,
+        micro_lon=-68691705,
+    )
 
-    # if r.HttpStatusCode > 200:
-    #     raise Exception("Stopping demo due to errors")
+    if r.HttpStatusCode > 200:
+        pprint(r)
+        raise Exception("Stopping demo due to errors")
 
 
 if __name__ == "__main__":

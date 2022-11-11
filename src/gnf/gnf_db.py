@@ -341,7 +341,12 @@ async def create_terminal_asset(
 
     amn = await BaseGNodeDb.objects.filter(alias=amn_alias).afirst()
     amn.status_value = GNodeStatus.Active.value
-    await sync_to_async(amn.save())()
+
+    # This line is a problem if os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+    # is removed
+
+    async_save = sync_to_async(amn.save)
+    await async_save()
 
     gps_d = {
         "lat": payload.MicroLat / 10**6,
@@ -373,12 +378,13 @@ async def create_terminal_asset(
         return r
 
     ta.status_value = GNodeStatus.Active
-    await sync_to_async(ta.save())()
+    async_ta_save = sync_to_async(ta.save)
+    await async_ta_save()
     note = (
         f"TerminalAsset created: {ta} and TaDeed {asset_idx}" " transferred to TaDaemon"
     )
 
-    ta_gt = BasegnodeGt_Maker.dict_to_tuple(ta.dc)
+    ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta.dc)
     r = RestfulResponse(
         Note=note,
         PayloadTypeName="basegnode.gt",

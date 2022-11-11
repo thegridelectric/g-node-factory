@@ -213,15 +213,16 @@ class DevValidator:
         r = requests.post(url=api_endpoint, json=payload.as_dict())
 
         LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
 
         if r.status_code > 200:
-            if "detail" in r.json().keys():
+            if r.status_code == 422:
                 note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
             else:
                 note = r.reason
-            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            r = RestfulResponse(Note=note, HttpStatusCode=r.status_code)
             return r
+
+        pprint(r.json())
         r = RestfulResponse(**r.json())
         return r
 
