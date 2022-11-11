@@ -9,6 +9,7 @@ import gnf.config as config
 import gnf.gnf_db as gnf_db
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import InitialTadeedAlgoCreate
+from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -75,6 +76,22 @@ async def initial_tadeed_algo_create_received(
     settings: config.GnfSettings = Depends(get_settings),
 ):
     r = await gnf_db.initial_tadeed_algo_create_received(
+        payload=payload,
+        settings=settings,
+    )
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/initial-tadeed-algo-transfer/", response_model=RestfulResponse)
+async def initial_tadeed_algo_transfer_received(
+    payload: InitialTadeedAlgoTransfer,
+    settings: config.GnfSettings = Depends(get_settings),
+):
+    r = await gnf_db.initial_tadeed_algo_transfer_received(
         payload=payload,
         settings=settings,
     )

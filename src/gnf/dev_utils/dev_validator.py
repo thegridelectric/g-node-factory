@@ -97,7 +97,7 @@ class DevValidator:
         r = RestfulResponse(**r.json())
         return r
 
-    def post_create_tavalidatorcert_algo(self) -> RestfulResponse:
+    def post_tavalidatorcert_algo_create(self) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -120,7 +120,7 @@ class DevValidator:
             half_signed_cert_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
         LOGGER.info("Posting request to GnfRestAPI to create new TaValidatorCert")
-        api_endpoint = f"{GNF_API_ROOT}/tavalidatorcert-algo-create/"
+        api_endpoint = f"{self.settings.algo.gnf_api_root}/tavalidatorcert-algo-create/"
 
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
@@ -143,13 +143,14 @@ class DevValidator:
             f"Posting request to GnfRestAPI to transfer TaValidatorCert {cert_idx}"
         )
 
-        api_endpoint = f"{GNF_API_ROOT}/tavalidatorcert-algo-transfer/"
+        api_endpoint = (
+            f"{self.settings.algo.gnf_api_root}/tavalidatorcert-algo-transfer/"
+        )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
         pprint(r.json())
 
         if r.status_code > 200:
-            LOGGER.warning(r.json())
             if "detail" in r.json().keys():
                 note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
             else:
@@ -159,14 +160,14 @@ class DevValidator:
         r = RestfulResponse(**r.json())
         return r
 
-    def generate_initial_tadeed_algo_transfer(
+    def post_initial_tadeed_algo_transfer(
         self,
         ta_deed_idx: int,
         ta_daemon_addr: str,
         ta_owner_addr: str,
         micro_lat: int,
         micro_lon: int,
-    ) -> Optional[InitialTadeedAlgoTransfer]:
+    ) -> RestfulResponse:
         """
         This method is supposed to be called exactly for the FIRST time a TaDeed
         NFT is created for this ta_owner. For updated deeds, uses ExchangeTadeedAlgo
@@ -205,8 +206,23 @@ class DevValidator:
             first_deed_transfer_mtx=encoding.msgpack_encode(mtx),
         ).tuple
 
-        self.send_message_to_gnf(payload)
-        return payload
+        api_endpoint = (
+            f"{self.settings.algo.gnf_api_root}/initial-tadeed-algo-transfer/"
+        )
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+
+        LOGGER.info("Response from GnfRestAPI:")
+        pprint(r.json())
+
+        if r.status_code > 200:
+            if "detail" in r.json().keys():
+                note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
+            else:
+                note = r.reason
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        r = RestfulResponse(**r.json())
+        return r
 
     def generate_transfer_tavalidatorcert_algo(
         self, cert_idx: int

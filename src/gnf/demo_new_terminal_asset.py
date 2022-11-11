@@ -29,25 +29,25 @@ def main():
         raise Exception(
             f"There is already a Validator Certificate for Molly! Please ./sandbox reset and start the demo over."
         )
-    r = molly.post_create_tavalidatorcert_algo()
+    r = molly.post_tavalidatorcert_algo_create()
 
-    if r.HttpStatusCode > 200:
-        raise Exception("Stopping demo due to errors")
+    # if r.HttpStatusCode > 200:
+    #     raise Exception("Stopping demo due to errors")
 
-    r = molly.post_initial_tadeed_algo_create(
-        terminal_asset_alias=holly.initial_terminal_asset_alias,
-    )
+    # r = molly.post_initial_tadeed_algo_create(
+    #     terminal_asset_alias=holly.initial_terminal_asset_alias,
+    # )
 
-    if r.HttpStatusCode > 200:
-        raise Exception("Stopping demo due to errors")
+    # if r.HttpStatusCode > 200:
+    #     raise Exception("Stopping demo due to errors")
 
-    atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)
+    # atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)
 
-    ta_deed_idx = atm_gt.OwnershipDeedNftId
+    # ta_deed_idx = atm_gt.OwnershipDeedNftId
 
     # holly.post_initial_tadeed_algo_optin()
 
-    # payload = molly.generate_initial_tadeed_algo_transfer(
+    # r = molly.post_initial_tadeed_algo_transfer(
     #     ta_deed_idx=ta_deed_idx,
     #     ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
     #     ta_owner_addr=holly.acct.addr,
@@ -55,7 +55,8 @@ def main():
     #     micro_lon=-68691705,
     # )
 
-    # factory.initial_tadeed_algo_transfer_received(payload)
+    # if r.HttpStatusCode > 200:
+    #     raise Exception("Stopping demo due to errors")
 
 
 if __name__ == "__main__":
