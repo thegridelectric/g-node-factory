@@ -16,6 +16,7 @@ def main():
 
     holly = DevHomeowner(
         settings=config.HollyHomeownerSettings(),
+        ta_daemon_port=config.SandboxDemo().holly_daemon_port,
         ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
         validator_addr=config.SandboxDemo().molly_metermaid_addr,
         initial_terminal_asset_alias=config.SandboxDemo().initial_holly_ta_alias,

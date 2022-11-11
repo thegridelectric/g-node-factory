@@ -59,6 +59,7 @@ class SandboxDemo(BaseModel):
     )
     gnr_addr: str = "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU"
     initial_holly_ta_alias: str = "d1.isone.ver.keene.holly.ta"
+    holly_daemon_port: str = "8001"
 
 
 class HollyTaDaemonSettings(BaseSettings):

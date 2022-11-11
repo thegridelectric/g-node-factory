@@ -20,18 +20,19 @@ from gnf.schemata import InitialTadeedAlgoOptin_Maker
 
 
 LOGGER = logging.getLogger(__name__)
-TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevHomeowner:
     def __init__(
         self,
         settings: config.HollyHomeownerSettings,
+        ta_daemon_port: str,
         ta_daemon_addr: str,
         validator_addr: str,
         initial_terminal_asset_alias: str,
     ):
         self.settings = settings
+        self.ta_daemon_api_root = f"http://127.0.0.1:{ta_daemon_port}"
         self.client: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
         self.acct: BasicAccount = BasicAccount(
             private_key=self.settings.sk.get_secret_value()
@@ -80,7 +81,7 @@ class DevHomeowner:
             validator_addr=self.validator_addr,
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
         ).tuple
-        api_endpoint = f"{TA_DAEMON_API_ROOT}/initial-tadeed-algo-optin/"
+        api_endpoint = f"{self.ta_daemon_api_root}/initial-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Sent InitialTadeedAlgoOptin")
         pprint(r.json())

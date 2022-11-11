@@ -33,7 +33,7 @@ LOG_FORMAT = (
     "-35s %(lineno) -5d: %(message)s"
 )
 LOGGER = logging.getLogger(__name__)
-TA_DAEMON_API_ROOT = "http://127.0.0.1:8000"
+
 
 # Messages sent by Factory
 # Messages received by Factory
@@ -137,6 +137,7 @@ class GnfRabbitActor:
         new_ta_deed_idx: int,
         validator_addr: str,
         ta_daemon_addr: str,
+        ta_daemon_port: str,
         signed_new_deed_transfer_txn: transaction.SignedTransaction,
     ):
         if new_ta_deed_idx is None:
@@ -166,7 +167,7 @@ class GnfRabbitActor:
                 signed_new_deed_transfer_txn
             ),
         ).tuple
-        api_endpoint = f"{TA_DAEMON_API_ROOT}/old-tadeed-algo-return/"
+        api_endpoint = f"http://127.0.0.1:{ta_daemon_port}/old-tadeed-algo-return/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         pprint(r.json())
         ta_alias = utils.get_ta_alias_from_ta_deed_idx(new_ta_deed_idx)
@@ -325,7 +326,10 @@ class GnfRabbitActor:
             )
         return opt_in_payload
 
-    def discoverycert_algo_create_received(self, payload: DiscoverycertAlgoCreate):
+    def discoverycert_algo_create_received(
+        self,
+        payload: DiscoverycertAlgoCreate,
+    ):
         if not isinstance(payload, DiscoverycertAlgoCreate):
             LOGGER.warning(
                 f"payload must be type DiscoverycertAlgoCreate, got {type(payload)}. Ignoring!"
@@ -347,7 +351,7 @@ class GnfRabbitActor:
         if role != CoreGNodeRole.ConductorTopologyNode:
             raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
         opt_in_payload = self.create_pending_ctn(payload)
-        api_endpoint = f"{TA_DAEMON_API_ROOT}/new-tadeed-algo-optin/"
+        api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=opt_in_payload.as_dict())
         pprint(r.json())
         r = RestfulResponse(**r.json())
