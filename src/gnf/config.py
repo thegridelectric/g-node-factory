@@ -45,7 +45,7 @@ class Algo(BaseModel):
     )
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
-    gnf_api_root: str = "0.0.0.0:8000"
+    gnf_api_root: str = "http://0.0.0.0:8000"
 
 
 class SandboxDemo(BaseModel):

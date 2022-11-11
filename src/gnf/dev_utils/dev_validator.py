@@ -82,7 +82,8 @@ class DevValidator:
         LOGGER.info(
             f"Posting request to GnfRestAPI to create a TaDeed for {terminal_asset_alias}"
         )
-        api_endpoint = f"{GNF_API_ROOT}/initial-tadeed-algo-create/"
+
+        api_endpoint = f"{self.settings.algo.gnf_api_root}/initial-tadeed-algo-create/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
         pprint(r.json())

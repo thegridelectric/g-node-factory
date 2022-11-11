@@ -32,7 +32,7 @@ class DevHomeowner:
         initial_terminal_asset_alias: str,
     ):
         self.settings = settings
-        self.ta_daemon_api_root = f"http://127.0.0.1:{ta_daemon_port}"
+        self.ta_daemon_api_root = f"http://0.0.0.0:{ta_daemon_port}"
         self.client: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
         self.acct: BasicAccount = BasicAccount(
             private_key=self.settings.sk.get_secret_value()
