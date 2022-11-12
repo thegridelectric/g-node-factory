@@ -234,7 +234,7 @@ async def initial_tadeed_algo_transfer_received(
         LOGGER.info(note)
         r = RestfulResponse(Note=note, HttpStatusCode=422)
         return r
-    return await create_terminal_asset(payload, admin_account, client)
+    return await activate_terminal_asset(payload, admin_account, client)
 
 
 async def initial_tadeed_algo_create_received(
@@ -485,10 +485,6 @@ async def post_old_tadeed_algo_return(
     ta_db.ownership_deed_nft_id = new_ta_deed_idx
     async_ta_save = sync_to_async(ta_db.save)
     await async_ta_save()
-    atm_db = await parent(ta_db)
-    atm_db.ownership_deed_nft_id = new_ta_deed_idx
-    async_atm_save = sync_to_async(atm_db.save)
-    await async_atm_save()
 
     return RestfulResponse(
         Note=f"Old deed {old_ta_deed_idx} transferred back and GNodes updated"
@@ -629,7 +625,6 @@ async def create_pending_atomic_metering_node(
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.AtomicMeteringNode.value,
         "g_node_registry_addr": config.SandboxDemo().gnr_addr,
-        "ownership_deed_nft_id": ta_deed_idx,
     }
     LOGGER.info(f"About to try and create a new GNode w alias {parent_alias}")
     try:
@@ -642,17 +637,38 @@ async def create_pending_atomic_metering_node(
             HttpStatusCode=422,
         )
         return r
-    LOGGER.info(f"Just created a new GNode for {parent_alias}")
-    atm_gt = BasegnodeGt_Maker.dc_to_tuple(atm_db.dc)
+    atm_db.status_value = GNodeStatus.Active.value
+    async_save = sync_to_async(atm_db.save)
+    await async_save()
+
+    gn = {
+        "alias": ta_alias,
+        "status_value": GNodeStatus.Pending.value,
+        "role_value": CoreGNodeRole.TerminalAsset.value,
+        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "ownership_deed_nft_id": ta_deed_idx,
+    }
+
+    try:
+        ta_db: BaseGNodeDb = await BaseGNodeDb.objects.acreate(**gn)
+    except RegistryError as e:
+        note = f"Not creating pending terminal asset. Error making terminalasset: {e}"
+        LOGGER.info(note)
+        r = RestfulResponse(
+            Note=note,
+            HttpStatusCode=422,
+        )
+        return r
+    ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta_db.dc)
     r = RestfulResponse(
-        Note="Successfully created pending Atomic Metering Node",
+        Note="Successfully created pending TerminalAsset",
         PayloadTypeName="basegnode.gt",
-        PayloadAsDict=atm_gt.as_dict(),
+        PayloadAsDict=ta_gt.as_dict(),
     )
     return r
 
 
-async def create_terminal_asset(
+async def activate_terminal_asset(
     payload: InitialTadeedAlgoTransfer, admin_account: BasicAccount, client: AlgodClient
 ) -> RestfulResponse:
     mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
@@ -664,13 +680,6 @@ async def create_terminal_asset(
     )
     a = client.account_asset_info(v_multi.addr, asset_idx)
     ta_alias: str = a["created-asset"]["name"]
-    amn_alias = ".".join(ta_alias.split(".")[:-1])
-
-    amn = await BaseGNodeDb.objects.filter(alias=amn_alias).afirst()
-    amn.status_value = GNodeStatus.Active.value
-
-    async_save = sync_to_async(amn.save)
-    await async_save()
 
     gps_d = {
         "lat": payload.MicroLat / 10**6,
@@ -678,37 +687,25 @@ async def create_terminal_asset(
     }
     gpsdb: GpsPointDb = await GpsPointDb.objects.acreate(**gps_d)
 
-    gn = {
-        "alias": ta_alias,
-        "status_value": GNodeStatus.Pending.value,
-        "role_value": CoreGNodeRole.TerminalAsset.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
-        "ownership_deed_nft_id": asset_idx,
-        "ownership_deed_validator_addr": payload.ValidatorAddr,
-        "owner_addr": payload.TaOwnerAddr,
-        "daemon_addr": payload.TaDaemonAddr,
-        "gps_point_id": gpsdb.gps_point_id,
-    }
-
-    try:
-        ta: BaseGNodeDb = await BaseGNodeDb.objects.acreate(**gn)
-    except RegistryError as e:
-        note = f"Not creating pending terminal asset. Error making terminalasset: {e}"
-        LOGGER.info(note)
+    ta_db: BaseGNodeDb = await BaseGNodeDb.objects.filter(alias=ta_alias).afirst()
+    if ta_db is None:
+        note = f"In activate_terminal_asset. Could not find {ta_alias}!"
         r = RestfulResponse(
             Note=note,
             HttpStatusCode=422,
         )
         return r
+    ta_db.ownership_deed_validator_addr = payload.ValidatorAddr
+    ta_db.owner_addr = payload.TaOwnerAddr
+    ta_db.daemon_addr = payload.TaDaemonAddr
+    ta_db.gps_point_id = gpsdb.gps_point_id
+    ta_db.status_value = GNodeStatus.Active.value
+    async_save = sync_to_async(ta_db.save)
+    await async_save()
 
-    ta.status_value = GNodeStatus.Active
-    async_ta_save = sync_to_async(ta.save)
-    await async_ta_save()
-    note = (
-        f"TerminalAsset created: {ta} and TaDeed {asset_idx}" " transferred to TaDaemon"
-    )
+    note = f" TaDeed {asset_idx} transferred to TaDaemon and Ta {ta_alias} activated"
 
-    ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta.dc)
+    ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta_db.dc)
     r = RestfulResponse(
         Note=note,
         PayloadTypeName="basegnode.gt",
