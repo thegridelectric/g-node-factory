@@ -1,14 +1,19 @@
 from functools import lru_cache
+from typing import Dict
 from typing import List
 
 from fastapi import Depends
 from fastapi import FastAPI
 from fastapi import HTTPException
+from pydantic import ValidationError
 
 import gnf.config as config
 import gnf.gnf_db as gnf_db
 from gnf.schemata import BasegnodeGt
+from gnf.schemata import DiscoverycertAlgoCreate
+from gnf.schemata import DiscoverycertAlgoCreate_Maker
 from gnf.schemata import InitialTadeedAlgoCreate
+from gnf.schemata import InitialTadeedAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -78,6 +83,44 @@ async def initial_tadeed_algo_create_received(
         payload=payload,
         settings=settings,
     )
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/initial-tadeed-algo-transfer/", response_model=RestfulResponse)
+async def initial_tadeed_algo_transfer_received(
+    payload: InitialTadeedAlgoTransfer,
+    settings: config.GnfSettings = Depends(get_settings),
+):
+    r = await gnf_db.initial_tadeed_algo_transfer_received(
+        payload=payload,
+        settings=settings,
+    )
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/discoverycert-algo-create/")
+async def discovercert_algo_create_received(
+    payload_dict: Dict,
+    settings: config.GnfSettings = Depends(get_settings),
+):
+    try:
+        payload = DiscoverycertAlgoCreate_Maker.dict_to_tuple(payload_dict)
+    except ValidationError as e:
+        raise HTTPException(status_code=422, detail=f"{e}")
+    r = await gnf_db.discoverycert_algo_create_received(
+        payload=payload,
+        settings=settings,
+    )
+    if r is None:
+        return None
     if r.HttpStatusCode > 200:
         raise HTTPException(
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"

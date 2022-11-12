@@ -45,6 +45,7 @@ class Algo(BaseModel):
     )
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
+    gnf_api_root: str = "http://0.0.0.0:8000"
 
 
 class SandboxDemo(BaseModel):
@@ -59,6 +60,7 @@ class SandboxDemo(BaseModel):
     )
     gnr_addr: str = "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU"
     initial_holly_ta_alias: str = "d1.isone.ver.keene.holly.ta"
+    holly_daemon_port: str = "8001"
 
 
 class HollyTaDaemonSettings(BaseSettings):

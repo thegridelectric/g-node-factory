@@ -1,32 +1,21 @@
 import logging
 
-import gnf.algo_utils as algo_utils
+from rich.pretty import pprint
+
 import gnf.config as config
-from gnf.enums import CoreGNodeRole
-from gnf.gnf_rabbit_actor import GnfRabbitActor
-from gnf.schemata import DiscoverycertAlgoCreate_Maker
+from gnf.dev_utils.dev_discovery import DevDiscoverer
 
 
 logging.basicConfig(level="INFO")
 
+LOGGER = logging.getLogger(__name__)
+
 
 def main():
-
-    factory = GnfRabbitActor(config.GnfSettings())
-
-    ada = algo_utils.BasicAccount(config.AdaDiscovererSettings().sk.get_secret_value())
-
-    payload = DiscoverycertAlgoCreate_Maker(
-        g_node_alias=config.AdaDiscovererSettings().discovered_ctn_alias,
-        old_child_alias_list=config.AdaDiscovererSettings().original_child_alias_list,
-        discoverer_addr=ada.addr,
-        supporting_material_hash="supporting material",
-        core_g_node_role=CoreGNodeRole.ConductorTopologyNode,
-        micro_lon=config.AdaDiscovererSettings().micro_lon,
-        micro_lat=config.AdaDiscovererSettings().micro_lat,
-    ).tuple
-
-    factory.discoverycert_algo_create_received(payload)
+    ada = DevDiscoverer(settings=config.AdaDiscovererSettings())
+    r = ada.post_discoverycert_algo_create()
+    LOGGER.info("Ada received response to discoverycert algo")
+    pprint(r.json())
 
 
 if __name__ == "__main__":

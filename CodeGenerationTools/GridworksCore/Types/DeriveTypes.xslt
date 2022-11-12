@@ -357,13 +357,7 @@ class </xsl:text>
     <xsl:text>]
     </xsl:text>
  </xsl:if>
-
-
-</xsl:for-each>
-<xsl:for-each select="$airtable//SchemaAttributes/SchemaAttribute[(Schema = $schema-id)  and not (IsRequired = 'true')]">
-
-
-<xsl:if test="not (IsRequired = 'true') and (IsPrimitive = 'true')">
+ <xsl:if test="not (IsRequired = 'true') and (IsPrimitive = 'true')">
     <xsl:value-of select="Value"/><xsl:text>: Optional[</xsl:text>
     <xsl:call-template name="python-type">
         <xsl:with-param name="gw-type" select="PrimitiveType"/>
@@ -376,7 +370,9 @@ class </xsl:text>
     <xsl:value-of select="Value"/><xsl:text>Id: Optional[str] = None
     </xsl:text>
 </xsl:if>
+
 </xsl:for-each>
+
 
 <xsl:text>TypeName: Literal["</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"] = "</xsl:text><xsl:value-of select="AliasRoot"/><xsl:text>"
     </xsl:text>
