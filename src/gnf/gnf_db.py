@@ -1,3 +1,27 @@
+"""This is the FastAPI implementation of the GNodeFactory, where the topological
+and geographical information about the electric grid is stored in a database accessible
+only to this python GNodeFactory and its developer support.
+
+For every TerminalAsset presented by the `GNodeRegistry` with the appropriate set of
+information from two actors - the asset owner (`Holly Homeowner`) and the asset validator
+(`Molly Metermaid`) this factory creates two non-fungible tokens and returns pointers
+for them to the `GNodeRegistry`. The tokens created are
+    1) the `taDeed` NFT which, like a house deed, provides proof of ownership of the
+    TerminalAsset for the asset owner; and
+    2) the `taTradingRights` NFT, which the asset owner is expected to provide to
+    another entity (the algo account associated to an `AtomicTransactiveNode`) as
+    part of a ServiceLevelAgreement contract with an organization who will trade
+    in electricity markets with the terminalAsset on behalf of the asset Owner.
+
+This implementation of the factory requires that all stakeholders trust GridWorks
+and its devs to not adjust/change the topological data. Since this data is foundational
+for proof-of-origin for exchanges of electrical resource (ancillary services, energy)
+for money, this is not ideal. The second
+
+The data  in the `baseGNode` table of this database implementation is designed to
+be moved into a publicly accessible stateful smart contract. For this reason all
+location-related data is hashed, even though it belongs to a private database.
+"""
 import json
 import logging
 import pprint
@@ -14,9 +38,11 @@ import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
+import gnf.utils as utils
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
+from gnf.data_classes import BaseGNode
 from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import BaseGNodeHistory
 from gnf.django_related.models import GpsPointDb
@@ -28,9 +54,12 @@ from gnf.schemata import BasegnodeGt_Maker
 from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoTransfer
+from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin_Maker
 from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
+from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -139,6 +168,37 @@ def tavalidatorcert_algo_transfer_received(
 async def initial_tadeed_algo_transfer_received(
     payload: InitialTadeedAlgoTransfer, settings: config.GnfSettings
 ) -> RestfulResponse:
+    """
+        - Checks  consistency for the GNodeAlias in the deed:
+            - in the BaseGNodeDb, there is a BaseGNode gn with this alias
+            - gn.role = TerminalAsset
+            - gn.status = Pending
+            - gn.lat and gn.lon exist
+            - gn.ownership_deed_nft_id does not exist
+            - gn.ownership_deed_nft_creator_addr exists and matches
+            2-sig [GnfAdmin, payload.ValidatorAddr]
+
+        - Sends TaDeed to the TaDaemon.
+        - On confirmation, updates the GNodeDb gn:
+            - gn.ownership_deed_nft_id = ta_asset_id
+            - gn.status_value = Active.value
+            - gn parent (the AtomicMeteringNode) status = Active.value
+        - Sends a StatusBaseGgnodeAlgo to the correct GNodeRegistry ,
+        identified by gn.g_node_registry_addr. Status.TopGNodeAlias = gn parent
+        - Returns that StatusBaseGgnodeAlgo payload
+
+    Args:
+        payload: TavalidatorcertAlgoTransfer. The validation of the type guarantees
+    that payload.HalfSignedCertTransferMtx is the encoding of a MultisigTransaction
+    for the 1-sig multi [Gnf Admin, payload.ValidatorAddr] signed by the validator
+    that transfers an appropriately-formatted Validator Certificate to the
+    payload.ValidatorAddr. It also guarantees that the multi account is sufficiently
+    funded and opted in.
+
+    Returns RestfulResponse:
+        - None if transferring deed does not happen.
+        - BaseGnodeGt for the TerminalAssetotherwise
+    """
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
@@ -240,40 +300,263 @@ async def initial_tadeed_algo_create_received(
     return r
 
 
-def discoverycert_algo_create_received(
-    self, payload: DiscoverycertAlgoCreate, settings: config.GnfSettings
-):
+async def create_updated_ta_deed(
+    g_node: BaseGNodeDb,
+    settings: config.GnfSettings,
+) -> tuple[int, transaction.SignedTransaction]:
+    """
+    Creates a TADEED with asset name reflecting the updated
+    GNodeAlias
+    Returns:
+        tuple[int, transaction.SignedTransaction]: asset_idx for new TADEED,
+        signed transaction (by GnfAdmin) for creating new TADEED
+    """
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
     client: AlgodClient = algo_utils.get_algod_client(settings.algo)
-
     txn = transaction.AssetCreateTxn(
         sender=admin_account.addr,
         total=1,
         decimals=0,
         default_frozen=False,
         manager=admin_account.addr,
-        asset_name=payload.GNodeAlias,
-        unit_name="DISCOVER",
+        asset_name=g_node.alias,
+        unit_name="TADEED",
         sp=client.suggested_params(),
     )
-    # TODO: create this and be ready to send it to discoverer, add  payload.SupportingMaterialHash
+    signed_txn = txn.sign(admin_account.sk)
+    try:
+        client.send_transaction(signed_txn)
+    except:
+        raise Exception(f"Failure sending transaction")
+    r = algo_utils.wait_for_transaction(client, signed_txn.get_txid())
+    LOGGER.info(f"New TaDeed {r.asset_idx} created for {g_node.alias}")
+    return [r.asset_idx, signed_txn]
+
+
+async def recursively_update_alias(
+    g_node: BaseGNodeDb,
+    new_parent_alias: str,
+    settings: config.GnfSettings,
+) -> str:
+
+    orig_alias = g_node.alias
+    final_word = orig_alias.split(".")[-1]
+    new_alias = new_parent_alias + "." + final_word
+    for dc_child in g_node.dc.children():
+        child = await BaseGNodeDb.objects.filter(alias=dc_child.alias).afirst()
+        await recursively_update_alias(
+            g_node=child,
+            new_parent_alias=new_alias,
+            settings=settings,
+        )
+
+    g_node.prev_alias = g_node.alias
+    g_node.alias = new_alias
+    async_save = sync_to_async(g_node.save)
+    await async_save()
+    if g_node.dc.role == CoreGNodeRole.TerminalAsset:
+        new_ta_deed_idx, signed_tadeed_creation_txn = await create_updated_ta_deed(
+            g_node,
+            settings,
+        )
+
+        payload = NewTadeedAlgoOptin_Maker(
+            new_ta_deed_idx=new_ta_deed_idx,
+            old_ta_deed_idx=g_node.ownership_deed_nft_id,
+            ta_daemon_addr=g_node.daemon_addr,
+            validator_addr=g_node.ownership_deed_validator_addr,
+            signed_ta_deed_creation_txn=encoding.msgpack_encode(
+                signed_tadeed_creation_txn
+            ),
+        ).tuple
+
+        api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        if r.status_code == 200:
+            rr = RestfulResponse(**r.json())
+            try:
+                payload = NewTadeedSend_Maker.dict_to_tuple(rr.PayloadAsDict)
+            except ValueError as e:
+                LOGGER.info(f"Error in NewTadeedSend response: {e}")
+                return
+
+            r = await new_tadeed_send_received(payload, settings)
+
+
+async def new_tadeed_send_received(
+    payload: NewTadeedSend, settings: config.GnfSettings
+) -> RestfulResponse:
+    admin_account: BasicAccount = BasicAccount(
+        settings.admin_acct_sk.get_secret_value()
+    )
+    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    txn = transaction.AssetTransferTxn(
+        sender=admin_account.addr,
+        receiver=payload.TaDaemonAddr,
+        amt=1,
+        index=payload.NewTaDeedIdx,
+        sp=client.suggested_params(),
+    )
+    signed_txn = txn.sign(admin_account.sk)
+    try:
+        client.send_transaction(signed_txn)
+    except:
+        note = f"Failure sending AssetTransfer txn for {payload.NewTaDeedIdx}"
+        r = RestfulResponse(Note=note, HttpStatusCode=422)
+        return r
+    algo_utils.wait_for_transaction(client, signed_txn.get_txid())
+
+    LOGGER.info(f"New TaDeed {payload.NewTaDeedIdx} sent to TaDaemon")
+    return await post_old_tadeed_algo_return(
+        old_ta_deed_idx=payload.OldTaDeedIdx,
+        new_ta_deed_idx=payload.NewTaDeedIdx,
+        validator_addr=payload.ValidatorAddr,
+        ta_daemon_addr=payload.TaDaemonAddr,
+        signed_new_deed_transfer_txn=signed_txn,
+        settings=settings,
+    )
+
+
+async def post_old_tadeed_algo_return(
+    old_ta_deed_idx: int,
+    new_ta_deed_idx: int,
+    validator_addr: str,
+    ta_daemon_addr: str,
+    signed_new_deed_transfer_txn: transaction.SignedTransaction,
+    settings: config.GnfSettings,
+) -> RestfulResponse:
+    admin_account: BasicAccount = BasicAccount(
+        settings.admin_acct_sk.get_secret_value()
+    )
+    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+
+    # opt into old tadeed
+    txn = transaction.AssetOptInTxn(
+        sender=admin_account.addr,
+        index=old_ta_deed_idx,
+        sp=client.suggested_params(),
+    )
+    txn = txn.sign(admin_account.sk)
+    try:
+        client.send_transaction(txn)
+    except:
+        note = (
+            f"In generate_old_tadeed_algo_return. Failure sending transaction to opt into"
+            f" old_ta_deed_idx {old_ta_deed_idx}"
+        )
+        return RestfulResponse(Note=note, HttpStatusCode=422)
+    algo_utils.wait_for_transaction(client, txn.get_txid())
+
+    # ask for the old TaDeed back
+    payload = OldTadeedAlgoReturn_Maker(
+        old_ta_deed_idx=old_ta_deed_idx,
+        ta_daemon_addr=ta_daemon_addr,
+        validator_addr=validator_addr,
+        signed_new_deed_transfer_txn=encoding.msgpack_encode(
+            signed_new_deed_transfer_txn
+        ),
+    ).tuple
+    api_endpoint = f"http://0.0.0.0:8001/old-tadeed-algo-return/"
+    r = requests.post(url=api_endpoint, json=payload.as_dict())
+    if r.status_code > 200:
+        if r.status_code == 422:
+            note = (
+                f"OldTadeedAlgoReturn error for {old_ta_deed_idx}:" + r.json()["detail"]
+            )
+        else:
+            note = r.reason
+        r = RestfulResponse(Note=note, HttpStatusCode=422)
+        return r
+    ta_alias = utils.get_ta_alias_from_ta_deed_idx(new_ta_deed_idx)
+    if ta_alias is None:
+        note = (
+            "In post_old_tadeed_algo_return ..."
+            f"new_ta_deed_idx {new_ta_deed_idx} does not provide a GNodeAlias!!"
+        )
+        return RestfulResponse(Note=note, HttpStatusCode=422)
+    ta_db: BaseGNodeDb = await BaseGNodeDb.objects.filter(alias=ta_alias).afirst()
+    if ta_db is None:
+        return RestfulResponse(
+            Note=f"ta_alias {ta_alias} for deed {new_ta_deed_idx} not in GNodeFactory!",
+            HttpStatusCode=422,
+        )
+    ta_db.ownership_deed_nft_id = new_ta_deed_idx
+    async_ta_save = sync_to_async(ta_db.save)
+    await async_ta_save()
+    atm_db = await parent(ta_db)
+    atm_db.ownership_deed_nft_id = new_ta_deed_idx
+    async_atm_save = sync_to_async(atm_db.save)
+    await async_atm_save()
+
+    return RestfulResponse(
+        Note=f"Old deed {old_ta_deed_idx} transferred back and GNodes updated"
+    )
+
+
+async def create_pending_ctn(
+    payload: DiscoverycertAlgoCreate, settings: config.GnfSettings
+) -> RestfulResponse:
+    """Given a ctn alias and the list of the aliases of the gnodes that
+    will become its children, creates a pending ctn."""
+    ctn_alias = payload.GNodeAlias
+    if payload.CoreGNodeRole != CoreGNodeRole.ConductorTopologyNode:
+        note = f"create_pending_ctn called for role {payload.CoreGNodeRole}!"
+        return RestfulResponse(Note=note, HttpStatusCode=422)
+
+    existing = await BaseGNodeDb.objects.filter(alias=ctn_alias).afirst()
+    if existing is not None:
+        note = f"Ctn {ctn_alias} already exists. Not issuing cert"
+        return RestfulResponse(Note=note, HttpStatusCode=422)
+
+    original_child_alias_list = payload.OldChildAliasList
+
+    gps_d = {
+        "lat": payload.MicroLat / 10**6,
+        "lon": payload.MicroLon / 10**6,
+    }
+    gpsdb: GpsPointDb = await GpsPointDb.objects.acreate(**gps_d)
+
+    gn = {
+        "alias": ctn_alias,
+        "status_value": GNodeStatus.Pending.value,
+        "role_value": CoreGNodeRole.ConductorTopologyNode.value,
+        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "gps_point_id": gpsdb.gps_point_id,
+    }
+
+    try:
+        await BaseGNodeDb.objects.acreate(**gn)
+    except RegistryError as e:
+        return RestfulResponse(
+            Note=f"Not creating pending ctn. Errors: {e}", HttpStatusCode=422
+        )
+
+    for child_alias in original_child_alias_list:
+        try:
+            dc_child = BaseGNode.by_alias[child_alias]
+        except KeyError:
+            raise Exception(f"Child alias {child_alias} not in GNodeFactory!")
+        child = await BaseGNodeDb.objects.filter(alias=dc_child.alias).afirst()
+        await recursively_update_alias(
+            g_node=child,
+            new_parent_alias=ctn_alias,
+            settings=settings,
+        )
+
+    return RestfulResponse(Note=f"Created {ctn_alias}")
+
+
+async def discoverycert_algo_create_received(
+    payload: DiscoverycertAlgoCreate, settings: config.GnfSettings
+) -> RestfulResponse:
 
     role = payload.CoreGNodeRole
     if role != CoreGNodeRole.ConductorTopologyNode:
         raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
-    opt_in_payload = self.create_pending_ctn(payload)
-    api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
-    r = requests.post(url=api_endpoint, json=opt_in_payload.as_dict())
-    pprint(r.json())
-    r = RestfulResponse(**r.json())
-    if not r.PayloadTypeName == NewTadeedSend_Maker.type_name:
-        raise Exception(
-            f"Expected r.PayloadTypeName to be 'new.tadeed.send' but got {r.PayloadTypeName}"
-        )
-    payload = NewTadeedSend_Maker.dict_to_tuple(r.PayloadAsDict)
-    self.new_tadeed_send_received(payload)
+    await load_g_nodes_as_data_classes()
+    return await create_pending_ctn(payload, settings)
 
 
 async def load_g_nodes_as_data_classes():
@@ -386,9 +669,6 @@ async def create_terminal_asset(
     amn = await BaseGNodeDb.objects.filter(alias=amn_alias).afirst()
     amn.status_value = GNodeStatus.Active.value
 
-    # This line is a problem if os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
-    # is removed
-
     async_save = sync_to_async(amn.save)
     await async_save()
 
@@ -435,3 +715,52 @@ async def create_terminal_asset(
         PayloadAsDict=ta_gt.as_dict(),
     )
     return r
+
+
+async def parent_from_alias(alias: str) -> Optional["BaseGNodeDb"]:
+    """
+    Returns:
+        - BaseGNodeDb. If the parent as suggested by the alias exists as an
+        Active BaseGNode, returns that.
+        - None. If alias is one word long (i.e. root of world), or if the
+        parent suggested by the alias is not Active
+    """
+    alias_list = alias.split(".")
+    alias_list.pop()
+    parent_alias = ".".join(alias_list)
+    parent = await BaseGNodeDb.objects.filter(
+        alias=parent_alias, status_value="Active"
+    ).afirst()
+    return parent
+
+
+async def parent(gndb: BaseGNodeDb) -> Optional["BaseGNodeDb"]:
+    """
+    Raises: DcError if "natural" parent (as suggested by alias) is not Active,
+    and either
+        - prev_alias is None, OR
+        - the parent as suggested by prev_alias is not Active and/or
+        does not exist.
+    Returns:
+        BaseGNode.   Parent BaseGNode
+            - If the parent as suggested by the alias exists as an
+        Active BaseGNode, returns that ("natural" parent)
+            - Else, if the parent as suggested by the prev_alais exists
+            as an active BaseGNode, returns that.
+        None.
+            - If alias is one word long (i.e. root of world)
+    """
+    if len(gndb.alias.split(".")) == 1:
+        return None
+    natural_parent = await parent_from_alias(gndb.alias)
+    if natural_parent is not None:
+        return natural_parent
+
+    # alias may point to incorrect parent if getting updated
+    if gndb.prev_alias is None:
+        raise RegistryError(f"error finding parent for {gndb.alias}!")
+
+    parent_pending_alias_update = await parent_from_alias(gndb.prev_alias)
+    if parent_pending_alias_update is None:
+        raise RegistryError(f"error finding parent for {gndb.alias}!")
+    return parent_pending_alias_update
