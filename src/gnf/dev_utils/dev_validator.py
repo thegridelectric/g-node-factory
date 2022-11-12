@@ -148,18 +148,18 @@ class DevValidator:
             f"{self.settings.algo.gnf_api_root}/tavalidatorcert-algo-transfer/"
         )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
+        LOGGER.info(f"Response from GnfRestAPI: {r.status_code}")
 
         if r.status_code > 200:
-            if "detail" in r.json().keys():
+            if r.status_code == 422:
                 note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
             else:
                 note = r.reason
             r = RestfulResponse(Note=note, HttpStatusCode=422)
+            pprint(r)
             return r
-        r = RestfulResponse(**r.json())
-        return r
+        pprint(r.json())
+        return RestfulResponse(**r.json())
 
     def post_initial_tadeed_algo_transfer(
         self,
