@@ -79,18 +79,13 @@ class DevValidator:
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
-        LOGGER.info(
-            f"Posting request to GnfRestAPI to create a TaDeed for {terminal_asset_alias}"
-        )
 
         api_endpoint = f"{self.settings.algo.gnf_api_root}/initial-tadeed-algo-create/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
         if r.status_code > 200:
-            LOGGER.warning(r.json())
             if "detail" in r.json().keys():
-                note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
+                note = r.json()["detail"]
             else:
                 note = r.reason
             r = RestfulResponse(Note=note, HttpStatusCode=422)

@@ -79,7 +79,7 @@ This repo has been developed through the generous funding of a grant provided by
 
 1.  **Loads in preliminary GNodes** One axiom for adding a GNode is that its parent must already exist, unless it is the root. Since this demo involves adding `TerminalAssets`, we need to add the root world GNode (`d1`), the root of the electric grid (`d1.isone`), and then a few ConductorTopologyNodes that
     are stepping down in voltage (`d1.isone.ver`, `d1.isone.ver.keene`).
-2.  **Creates a new TerminalAsset** Creates a TerminalAsset `d1.isone.ver.keene.holly.ta` for Holly's heating system. This includes first setting up MollyMetermaid as a validator, and then having MollyMetermaid validate Holly's heating system. This process results in a TaValidator certificate (an NFT) for MollyMetermaid and a TaDeed (also an NFT) for HollyHomeowner.
+2.  **Creates a new TerminalAsset** Creates a TerminalAsset `dw1.isone.ver.keene.holly.ta` for Holly's heating system. This includes first setting up MollyMetermaid as a validator, and then having MollyMetermaid validate Holly's heating system. This process results in a TaValidator certificate (an NFT) for MollyMetermaid and a TaDeed (also an NFT) for HollyHomeowner.
 3.  **Adding a new ConductorTopologyNode** Creates a ConductorTopologyNode `d1.isone.ver.keene.pwrs`, which triggers a cascade of updating the aliases for all of its descendants, including HollyHomeowner's `TerminalAsset`.
 
 ## Testing

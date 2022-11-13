@@ -11,6 +11,7 @@ from gnf.schemata import BasegnodeGt_Maker
 
 
 logging.basicConfig(level="INFO")
+LOGGER = logging.getLogger(__name__)
 
 
 def main():
@@ -37,12 +38,16 @@ def main():
         pprint(r)
         raise Exception("Stopping demo due to errors")
 
+    ta_alias = holly.initial_terminal_asset_alias
+    LOGGER.info(
+            f"Post to GnfRestAPI/initial-tadeed-algo-create to create a TaDeed for {ta_alias}"
+        )
     r = molly.post_initial_tadeed_algo_create(
-        terminal_asset_alias=holly.initial_terminal_asset_alias,
+        terminal_asset_alias=ta_alias,
     )
+    pprint(r)
 
     if r.HttpStatusCode > 200:
-        pprint(r)
         raise Exception("Stopping demo due to errors")
 
     atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)

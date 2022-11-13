@@ -59,7 +59,7 @@ class SandboxDemo(BaseModel):
         "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
     )
     gnr_addr: str = "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU"
-    initial_holly_ta_alias: str = "d1.isone.ver.keene.holly.ta"
+    initial_holly_ta_alias: str = "dw1.isone.ver.keene.holly.ta"
     holly_daemon_port: str = "8001"
 
 
@@ -74,7 +74,7 @@ class AdaDiscovererSettings(BaseSettings):
         "X20eXB/VZilEmzaPCDSn9WsuGZ5/f0+IxuEhfYfVtmZR9q5bcbjpBodPpiUCCkr0Xv11sKYxf08PnAKQFNtW3Q=="
     )
     discovered_ctn_alias = "d1.isone.ver.keene.pwrs"
-    original_child_alias_list = ["d1.isone.ver.keene.holly"]
+    original_child_alias_list = ["dw1.isone.ver.keene.holly"]
     micro_lat = 44838681
     micro_lon = -68705311
 

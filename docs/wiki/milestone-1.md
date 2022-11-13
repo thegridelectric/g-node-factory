@@ -133,9 +133,9 @@ It is a very simple NFT. None of the mutable addresses are used other than manag
 
 There are two main issues to handle.
 
-The first is what to do when the current shared understanding of the electric grid updates in a way that results in renaming this `TerminalAsset`’s `GNodeAlias`. For example, if the above `TerminalAsset` is located in Millinocket ME, we may only at first identify it as being served by the Keene Road 345 kV substation, with its parent node as the Distribution Utility, Versant. We will give it a `GNodeAlias` of `d1.isone.ver.keene.holly.ta`. Imagine we then realize that the Powersville Road substation should be included in our representation of the topology. This results in the creation of a new ConductorTopologyNode GNode `d1.isone.ver.keene.pwrs`, which triggers GNodeAlias updates for all of Keene’s descendants in the spanning tree. For example, Holly’s TerminalAsset GNodeAlias must change from
+The first is what to do when the current shared understanding of the electric grid updates in a way that results in renaming this `TerminalAsset`’s `GNodeAlias`. For example, if the above `TerminalAsset` is located in Millinocket ME, we may only at first identify it as being served by the Keene Road 345 kV substation, with its parent node as the Distribution Utility, Versant. We will give it a `GNodeAlias` of `dw1.isone.ver.keene.holly.ta`. Imagine we then realize that the Powersville Road substation should be included in our representation of the topology. This results in the creation of a new ConductorTopologyNode GNode `d1.isone.ver.keene.pwrs`, which triggers GNodeAlias updates for all of Keene’s descendants in the spanning tree. For example, Holly’s TerminalAsset GNodeAlias must change from
 
-`d1.isone.ver.keene.holly.ta`
+`dw1.isone.ver.keene.holly.ta`
 
 to
 
