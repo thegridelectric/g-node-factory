@@ -45,6 +45,10 @@ class DevTaOwner:
                 self.settings.validator_addr,
             ],
         )
+        ta_daemon_acct: BasicAccount = BasicAccount()
+        self.ta_daemon_sk: str = ta_daemon_acct.sk
+        self.ta_daemon_addr: str = ta_daemon_acct.addr
+        self.settings.ta_daemon_addr: str = ta_daemon_acct.addr  # REMOVE!!!
         self.seed_fund_own_account()
 
     ##########################
@@ -63,7 +67,7 @@ class DevTaOwner:
         required_algos = config.GnfPublic().ta_deed_consideration_algos
         txn = transaction.PaymentTxn(
             sender=self.acct.addr,
-            receiver=self.settings.ta_daemon_addr,
+            receiver=self.ta_daemon_addr,
             amt=required_algos * 10**6,
             sp=self.client.suggested_params(),
         )
@@ -79,6 +83,7 @@ class DevTaOwner:
             ta_owner_addr=self.acct.addr,
             validator_addr=self.settings.validator_addr,
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
+            ta_daemon_private_key=self.ta_daemon_sk,
         ).tuple
         api_endpoint = f"{self.settings.ta_daemon_api_root}/initial-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())

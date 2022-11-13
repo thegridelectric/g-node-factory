@@ -1,8 +1,10 @@
 import logging
+from typing import Optional
 
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from pydantic import SecretStr
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -26,9 +28,7 @@ class PythonTaDaemon:
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        self.acct: BasicAccount = BasicAccount(
-            private_key=settings.sk.get_secret_value()
-        )
+        self.acct: Optional[BasicAccount] = None
         LOGGER.info("TaOwner Smart Daemon Initialized")
 
     ##########################
@@ -38,6 +38,15 @@ class PythonTaDaemon:
     def initial_tadeed_algo_optin_received(
         self, payload: InitialTadeedAlgoOptin
     ) -> RestfulResponse:
+        if self.acct is not None:
+            r = RestfulResponse(
+                Note=f"Already initialized. Ignoring {ta_deed_idx} opt in request"
+            )
+            return r
+        self.settings.sk = SecretStr(payload.TaDaemonPrivateKey)
+        self.settings.validator_addr = payload.ValidatorAddr
+        self.settings.ta_owner_addr = payload.TaOwnerAddr
+        self.acct = BasicAccount(private_key=self.settings.sk.get_secret_value())
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,

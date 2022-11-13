@@ -24,7 +24,7 @@ class GnfPublic(BaseModel):
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
     gnf_api_root: str = "http://0.0.0.0:8000"
-    molly_api_root: str =  "http://0.0.0.0:8001"
+    molly_api_root: str = "http://0.0.0.0:8001"
 
 
 class AlgoApiSecrets(BaseModel):
@@ -52,6 +52,7 @@ class TaOwnerSettings(BaseSettings):
     sk: SecretStr = SecretStr(
         "sp4SDWmH8Rin0IhPJQq1UMsSR5C0j1IGqzLdcwCMySBVzT8lEUwjwwpS9z6l6dKSg52WWEjRdJDAL+eVt4kvBg=="
     )
+
     ta_daemon_addr: str = "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
     validator_addr: str = "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
     ta_daemon_api_root: str = f"http://0.0.0.0:8002"

@@ -1,4 +1,4 @@
-"""Type initial.tadeed.algo.optin, version 000"""
+"""Type initial.tadeed.algo.optin, version 001"""
 import json
 from typing import Dict
 from typing import Literal
@@ -15,8 +15,9 @@ class InitialTadeedAlgoOptin(BaseModel):
     TaOwnerAddr: str  #
     ValidatorAddr: str  #
     SignedInitialDaemonFundingTxn: str  #
+    TaDaemonPrivateKey: str  #
     TypeName: Literal["initial.tadeed.algo.optin"] = "initial.tadeed.algo.optin"
-    Version: str = "000"
+    Version: str = "001"
 
     _validator_terminal_asset_alias = predicate_validator(
         "TerminalAssetAlias", property_format.is_lrd_alias_format
@@ -44,7 +45,7 @@ class InitialTadeedAlgoOptin(BaseModel):
 
 class InitialTadeedAlgoOptin_Maker:
     type_name = "initial.tadeed.algo.optin"
-    version = "000"
+    version = "001"
 
     def __init__(
         self,
@@ -52,6 +53,7 @@ class InitialTadeedAlgoOptin_Maker:
         ta_owner_addr: str,
         validator_addr: str,
         signed_initial_daemon_funding_txn: str,
+        ta_daemon_private_key: str,
     ):
 
         self.tuple = InitialTadeedAlgoOptin(
@@ -59,6 +61,7 @@ class InitialTadeedAlgoOptin_Maker:
             TaOwnerAddr=ta_owner_addr,
             ValidatorAddr=validator_addr,
             SignedInitialDaemonFundingTxn=signed_initial_daemon_funding_txn,
+            TaDaemonPrivateKey=ta_daemon_private_key,
             #
         )
 
@@ -87,6 +90,8 @@ class InitialTadeedAlgoOptin_Maker:
             raise SchemaError(f"dict {d2} missing ValidatorAddr")
         if "SignedInitialDaemonFundingTxn" not in d2.keys():
             raise SchemaError(f"dict {d2} missing SignedInitialDaemonFundingTxn")
+        if "TaDaemonPrivateKey" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TaDaemonPrivateKey")
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
@@ -95,6 +100,7 @@ class InitialTadeedAlgoOptin_Maker:
             TaOwnerAddr=d2["TaOwnerAddr"],
             ValidatorAddr=d2["ValidatorAddr"],
             SignedInitialDaemonFundingTxn=d2["SignedInitialDaemonFundingTxn"],
+            TaDaemonPrivateKey=d2["TaDaemonPrivateKey"],
             TypeName=d2["TypeName"],
-            Version="000",
+            Version="001",
         )
