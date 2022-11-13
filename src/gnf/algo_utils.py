@@ -112,7 +112,7 @@ def get_app_global_state(
 ##############################################################################
 
 
-def get_kmd_client(settings: config.BlahBlahBlahSettings) -> KMDClient:
+def get_kmd_client(settings: config.VanillaSettings) -> KMDClient:
     return KMDClient(
         settings.algo_api_secrets.kmd_token.get_secret_value(),
         settings.public.kmd_address,
@@ -446,7 +446,7 @@ def micro_algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    settings = config.BlahBlahBlahSettings()
+    settings = config.VanillaSettings()
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
@@ -467,7 +467,7 @@ def algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    settings = config.BlahBlahBlahSettings()
+    settings = config.VanillaSettings()
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,

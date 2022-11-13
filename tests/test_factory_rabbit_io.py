@@ -3,7 +3,7 @@ import os
 import django
 import pika
 
-from gnf.config import BlahBlahBlahSettings
+from gnf.config import VanillaSettings
 
 from .utils import GNodeFactoryRabbitStubRecorder
 from .utils import GNodeRegistryStubRecorder

@@ -5,8 +5,8 @@ from typing import Optional
 
 from gnf.actor_base import ActorBase
 from gnf.actor_base import OnSendMessageDiagnostic
-from gnf.config import BlahBlahBlahSettings
 from gnf.config import DevGNodeRegistrySettings
+from gnf.config import VanillaSettings
 from gnf.enums import RegistryGNodeRole
 from gnf.schemata import HeartbeatA
 from gnf.schemata import HeartbeatA_Maker
@@ -52,7 +52,7 @@ class GNodeFactoryRabbitStubRecorder(ActorBase):
     latest_payload: Optional[HeartbeatA]
     routing_to_gnr__heartbeat_a__worked: bool = False
 
-    def __init__(self, settings: BlahBlahBlahSettings):
+    def __init__(self, settings: VanillaSettings):
         self.messages_received = 0
         self.messages_routed_internally = 0
         self.latest_from_g_node_role_value: Optional[str] = None

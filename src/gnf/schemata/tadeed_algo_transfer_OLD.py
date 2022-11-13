@@ -94,7 +94,7 @@ class TadeedAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         txn = mtx.transaction
         DeedValidatorAddr = v.get("DeedValidatorAddr", None)
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
@@ -129,7 +129,7 @@ class TadeedAlgoTransfer(BaseModel):
         txn = mtx.transaction
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
@@ -167,7 +167,7 @@ class TadeedAlgoTransfer(BaseModel):
         (specifically because this is the FIRST tadeed and should initialize the multi."""
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

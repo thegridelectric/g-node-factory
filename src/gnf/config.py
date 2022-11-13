@@ -24,6 +24,7 @@ class GnfPublic(BaseModel):
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
     gnf_api_root: str = "http://0.0.0.0:8000"
+    molly_api_root: str =  "http://0.0.0.0:8001"
 
 
 class AlgoApiSecrets(BaseModel):
@@ -36,12 +37,12 @@ class AlgoApiSecrets(BaseModel):
     gen_kmd_wallet_password: SecretStr = SecretStr("")
 
 
-class BlahBlahBlahSettings(BaseSettings):
+class VanillaSettings(BaseSettings):
     algo_api_secrets: AlgoApiSecrets = AlgoApiSecrets()
     public: GnfPublic = GnfPublic()
 
     class Config:
-        env_prefix = "BASE_"
+        env_prefix = "VANILLA_"
         env_nested_delimiter = "__"
 
 
@@ -53,7 +54,7 @@ class TaOwnerSettings(BaseSettings):
     )
     ta_daemon_addr: str = "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
     validator_addr: str = "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
-    ta_daemon_api_root: str = f"http://0.0.0.0:8001"
+    ta_daemon_api_root: str = f"http://0.0.0.0:8002"
     initial_ta_alias: str = "d1.isone.ver.keene.holly.ta"
     micro_lat: int = 45511230
     micro_lon: int = -68354650
@@ -111,7 +112,6 @@ class TaDaemonSettings(BaseSettings):
     )
     ta_owner_addr: str = "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"
     validator_addr: str = "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
-    api_root: str = "http://0.0.0.0:8001"
 
     class Config:
         env_prefix = "TAD_"

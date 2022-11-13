@@ -145,7 +145,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
         ValidatorAddr = v.get("ValidatorAddr", None)
         od: OrderedDict = txn.dictify()
         asset_index = od["xaid"]
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

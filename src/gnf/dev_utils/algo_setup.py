@@ -35,20 +35,20 @@ LOGGER = logging.getLogger(__name__)
 def dev_fund_to_min(addr: str, min_algos: int):
     if algo_utils.algos(addr) is None:
         dev_fund_account(
-            config.BlahBlahBlahSettings(),
+            config.VanillaSettings(),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )
     elif algo_utils.algos(addr) < min_algos:
         dev_fund_account(
-            config.BlahBlahBlahSettings(),
+            config.VanillaSettings(),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )
 
 
 def dev_fund_account(
-    settings: config.BlahBlahBlahSettings,
+    settings: config.VanillaSettings,
     to_addr: str,
     amt_in_micros: int = FUNDING_AMOUNT,
 ) -> PendingTxnResponse:
@@ -76,7 +76,7 @@ def dev_fund_account(
 
 
 def dev_get_genesis_accounts(
-    settings: config.BlahBlahBlahSettings,
+    settings: config.VanillaSettings,
 ) -> List[BasicAccount]:
     global kmdAccounts
 
@@ -115,7 +115,7 @@ def dev_get_genesis_accounts(
     return kmdAccounts
 
 
-def dev_fund_admin_and_graveyard(settings: config.BlahBlahBlahSettings):
+def dev_fund_admin_and_graveyard(settings: config.VanillaSettings):
     """Fund admin account from one of the sandbox
     genesis accounts. Only for the dev universe"""
     admin_addr = settings.public.gnf_admin_addr

@@ -36,7 +36,7 @@ snake_add_underscore_to_camel_pattern = re.compile(r"(?<!^)(?=[A-Z])")
 
 
 def get_ta_alias_from_ta_deed_idx(ta_deed_idx: int) -> Optional[str]:
-    settings = config.BlahBlahBlahSettings()
+    settings = config.VanillaSettings()
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,

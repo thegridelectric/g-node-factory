@@ -388,7 +388,7 @@ async def recursively_update_alias(
             ),
         ).tuple
 
-        api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
+        api_endpoint = f"http://0.0.0.0:8002/new-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         if r.status_code == 200:
             rr = RestfulResponse(**r.json())
@@ -480,7 +480,7 @@ async def post_old_tadeed_algo_return(
             signed_new_deed_transfer_txn
         ),
     ).tuple
-    api_endpoint = f"http://0.0.0.0:8001/old-tadeed-algo-return/"
+    api_endpoint = f"http://0.0.0.0:8002/old-tadeed-algo-return/"
     r = requests.post(url=api_endpoint, json=payload.as_dict())
     if r.status_code > 200:
         if r.status_code == 422:

@@ -59,7 +59,7 @@ class OptinTadeedAlgo(BaseModel):
     def _axiom_2(cls, v) -> Any:
         """Axiom 2 (Valid TaDeed): NewDeedIdx is an active TaDeed created and owned by GnfAdminAccount"""
         NewDeedIdx = v.get("NewDeedIdx", None)
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

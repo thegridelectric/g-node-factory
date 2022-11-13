@@ -21,14 +21,14 @@ def test_pay_account():
     # This is the test of payAccount working, called by devFundAccount which grabs
     # a genesis BasicAccount
     r = algo_setup.dev_fund_account(
-        settings=config.BlahBlahBlahSettings(),
+        settings=config.VanillaSettings(),
         to_addr=multi.addr,
         amt_in_micros=200_000,
     )
     assert isinstance(r, algo_utils.PendingTxnResponse)
     assert algo_utils.micro_algos(multi.addr) >= initial_balance + 200_000
 
-    settings = config.BlahBlahBlahSettings()
+    settings = config.VanillaSettings()
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,

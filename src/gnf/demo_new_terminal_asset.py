@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 def main():
-    algo_setup.dev_fund_admin_and_graveyard(config.BlahBlahBlahSettings())
+    algo_setup.dev_fund_admin_and_graveyard(config.VanillaSettings())
 
     holly = DevTaOwner(settings=config.TaOwnerSettings())
 

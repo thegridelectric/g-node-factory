@@ -67,7 +67,7 @@ class TadeedAlgoExchange(BaseModel):
         must be GnfAdmin, asset must be a TaDeed"""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
         txn = mtx.transaction
-        settings = config.BlahBlahBlahSettings()
+        settings = config.VanillaSettings()
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

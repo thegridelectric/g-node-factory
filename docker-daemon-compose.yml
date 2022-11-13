@@ -5,4 +5,4 @@ services:
     container_name: dev-python-ta-daemon
     image: "jessmillar/python-ta-daemon:latest"
     ports:
-      - 8001:8000
+      - 8002:8000
