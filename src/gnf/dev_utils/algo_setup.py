@@ -3,6 +3,7 @@ from random import choice
 from typing import List
 from typing import Optional
 
+import dotenv
 from algosdk.kmd import KMDClient
 from algosdk.v2client.algod import AlgodClient
 
@@ -35,13 +36,13 @@ LOGGER = logging.getLogger(__name__)
 def dev_fund_to_min(addr: str, min_algos: int):
     if algo_utils.algos(addr) is None:
         dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )
     elif algo_utils.algos(addr) < min_algos:
         dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )

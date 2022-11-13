@@ -4,6 +4,7 @@ from typing import Any
 from typing import Dict
 from typing import Literal
 
+import dotenv
 from algosdk import encoding
 from algosdk.future.transaction import SignedTransaction
 from algosdk.v2client.algod import AlgodClient
@@ -59,7 +60,7 @@ class OptinTadeedAlgo(BaseModel):
     def _axiom_2(cls, v) -> Any:
         """Axiom 2 (Valid TaDeed): NewDeedIdx is an active TaDeed created and owned by GnfAdminAccount"""
         NewDeedIdx = v.get("NewDeedIdx", None)
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

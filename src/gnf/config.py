@@ -61,7 +61,7 @@ class TaOwnerSettings(BaseSettings):
     micro_lon: int = -68354650
 
     class Config:
-        env_prefix = "TAO_"
+        env_prefix = "HH_"
         env_nested_delimiter = "__"
 
 

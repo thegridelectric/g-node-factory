@@ -1,6 +1,7 @@
 import os
 
 import django
+import dotenv
 import pika
 
 from gnf.config import VanillaSettings

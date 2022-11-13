@@ -3,6 +3,7 @@ from typing import Dict
 from typing import Optional
 
 import django
+import dotenv
 from algosdk import encoding
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
@@ -129,7 +130,7 @@ def get_validator_cert_idx(validator_addr: str) -> Optional[int]:
         the asset index of the cert
     """
     multi: algo_utils.MultisigAccount = get_validator_account_with_admin(validator_addr)
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
@@ -158,7 +159,7 @@ def is_validator(acct_addr: str) -> bool:
         False otherwise
 
     """
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
@@ -191,7 +192,7 @@ def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[i
         Optional[int]: returns None if no validatorCert is found, otherwise
         the asset index of the cert
     """
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,

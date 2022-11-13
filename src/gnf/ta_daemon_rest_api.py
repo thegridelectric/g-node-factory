@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-import gnf.config as config
 from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin
@@ -10,8 +9,7 @@ from gnf.utils import RestfulResponse
 
 
 app = FastAPI()
-
-daemon = PythonTaDaemon(settings=config.TaDaemonSettings())
+daemon = PythonTaDaemon()
 
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)

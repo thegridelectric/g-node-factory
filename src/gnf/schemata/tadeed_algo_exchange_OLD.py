@@ -4,6 +4,7 @@ from typing import Any
 from typing import Dict
 from typing import Literal
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
@@ -67,7 +68,7 @@ class TadeedAlgoExchange(BaseModel):
         must be GnfAdmin, asset must be a TaDeed"""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
         txn = mtx.transaction
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

@@ -6,6 +6,7 @@ from typing import List
 from typing import Literal
 from typing import NamedTuple
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.future.transaction import AssetTransferTxn
@@ -94,7 +95,7 @@ class TadeedAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         txn = mtx.transaction
         DeedValidatorAddr = v.get("DeedValidatorAddr", None)
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
@@ -129,7 +130,7 @@ class TadeedAlgoTransfer(BaseModel):
         txn = mtx.transaction
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
@@ -167,7 +168,7 @@ class TadeedAlgoTransfer(BaseModel):
         (specifically because this is the FIRST tadeed and should initialize the multi."""
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

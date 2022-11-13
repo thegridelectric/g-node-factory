@@ -2,6 +2,7 @@
 import json
 from typing import Dict
 
+import dotenv
 import pytest
 from algosdk import encoding
 from algosdk.future import transaction
@@ -28,24 +29,24 @@ def make_new_test_cert_and_return_asset_idx(
     )
     if algo_utils.algos(multi.addr) is None:
         algo_setup.dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=test_acct.addr,
             amt_in_micros=1_000_000,
         )
         algo_setup.dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=multi.addr,
             amt_in_micros=config.GnfPublic().gnf_validator_funding_threshold_algos
             * 10**6,
         )
     elif algo_utils.algos(multi.addr) < 100:
         algo_setup.dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=test_acct.addr,
             amt_in_micros=1_000_000,
         )
         algo_setup.dev_fund_account(
-            config.VanillaSettings(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=multi.addr,
             amt_in_micros=config.GnfPublic().gnf_validator_funding_threshold_algos
             * 10**6,
@@ -105,7 +106,7 @@ def get_test_half_signed_cert_transfer_mtx(
 
 
 def get_test_dict() -> Dict:
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
@@ -114,7 +115,9 @@ def get_test_dict() -> Dict:
         "LZlZFgStdj2T0otiJTRezerJhys0isRu4e6AM6fJJCRT03r0ziZrA44MFjjh6i6V2ySSQyRiCwvVzthpxjV7xA=="
     )
     gnf_admin: algo_utils.BasicAccount = algo_utils.BasicAccount(
-        config.VanillaSettings().admin_acct_sk.get_secret_value()
+        config.GnfSettings(
+            _env_file=dotenv.find_dotenv()
+        ).admin_acct_sk.get_secret_value()
     )
 
     asset_idx = api_utils.get_validator_cert_idx(test_acct.addr)

@@ -6,6 +6,7 @@ from typing import List
 from typing import Literal
 from typing import OrderedDict
 
+import dotenv
 from algosdk import encoding
 from algosdk.future.transaction import AssetTransferTxn
 from algosdk.future.transaction import MultisigTransaction
@@ -145,7 +146,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
         ValidatorAddr = v.get("ValidatorAddr", None)
         od: OrderedDict = txn.dictify()
         asset_index = od["xaid"]
-        settings = config.VanillaSettings()
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
         client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,

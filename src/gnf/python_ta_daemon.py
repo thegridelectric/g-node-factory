@@ -1,6 +1,7 @@
 import logging
 from typing import Optional
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
@@ -22,7 +23,12 @@ LOGGER = logging.getLogger(__name__)
 
 
 class PythonTaDaemon:
-    def __init__(self, settings: config.TaDaemonSettings):
+    def __init__(
+        self,
+        settings: config.TaDaemonSettings = config.TaDaemonSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
         self.settings = settings
         self.client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),

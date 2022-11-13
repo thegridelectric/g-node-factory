@@ -1,5 +1,6 @@
 import logging
 
+import dotenv
 from rich.pretty import pprint
 
 import gnf.api_utils as api_utils
@@ -15,7 +16,9 @@ LOGGER = logging.getLogger(__name__)
 
 
 def main():
-    algo_setup.dev_fund_admin_and_graveyard(config.VanillaSettings())
+    algo_setup.dev_fund_admin_and_graveyard(
+        config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    )
 
     holly = DevTaOwner(settings=config.TaOwnerSettings())
 

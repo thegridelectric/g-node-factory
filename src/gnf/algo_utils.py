@@ -13,6 +13,7 @@ from typing import Optional
 from typing import Tuple
 from typing import Union
 
+import dotenv
 from algosdk import account
 from algosdk import encoding
 from algosdk import mnemonic
@@ -446,7 +447,7 @@ def micro_algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
@@ -467,7 +468,7 @@ def algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    settings = config.VanillaSettings()
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
     client: AlgodClient = AlgodClient(
         settings.algo_api_secrets.algod_token.get_secret_value(),
         settings.public.algod_address,
