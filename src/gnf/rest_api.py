@@ -86,21 +86,22 @@ async def initial_tadeed_algo_create_received(
 
     if r.HttpStatusCode > 200:
         raise HTTPException(
-            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: /initial-tadeed-algo-create/ {r.Note}"
+            status_code=r.HttpStatusCode,
+            detail=f"[{r.HttpStatusCode}]: /initial-tadeed-algo-create/ {r.Note}",
         )
 
-    return   RestfulResponse(
+    return RestfulResponse(
         Note="/initial-tadeed-algo-create/: " + r.Note,
         HttpStatusCode=r.HttpStatusCode,
         PayloadTypeName=r.PayloadTypeName,
-        PayloadAsDict=r.PayloadAsDict
+        PayloadAsDict=r.PayloadAsDict,
     )
 
 
 @app.post("/initial-tadeed-algo-transfer/", response_model=RestfulResponse)
 async def initial_tadeed_algo_transfer_received(
     payload: InitialTadeedAlgoTransfer,
-    settings: config.GnfSettings = Depends(get_settings),
+    settings: config.GnfPublic = Depends(get_settings),
 ):
     r = await gnf_db.initial_tadeed_algo_transfer_received(
         payload=payload,

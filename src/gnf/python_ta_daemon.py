@@ -20,21 +20,16 @@ LOGGER = logging.getLogger(__name__)
 
 
 class PythonTaDaemon:
-    def __init__(self, sk: str, ta_owner_addr: str, algo_settings: config.Algo):
-        self.algo_settings = algo_settings
-        self.client: AlgodClient = algo_utils.get_algod_client(algo_settings)
-        self.acct: BasicAccount = BasicAccount(private_key=sk)
-        self.ta_owner_addr = ta_owner_addr
+    def __init__(self, settings: config.TaDaemonSettings):
+        self.settings = settings
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        self.acct: BasicAccount = BasicAccount(
+            private_key=settings.sk.get_secret_value()
+        )
         LOGGER.info("TaOwner Smart Daemon Initialized")
-
-    def send_message_to_gnf(self, payload: NewTadeedSend):
-        """Stub for when there is a mechanism (probably FastAPI) for validators  sending
-        messages to GNodeFactory.
-
-        Args:
-            payload: Any valid payload in the API for sending
-        """
-        pass
 
     ##########################
     # Messages Received
@@ -133,7 +128,7 @@ class PythonTaDaemon:
 
         txn = transaction.AssetTransferTxn(
             sender=self.acct.addr,
-            receiver=config.Algo().gnf_admin_addr,
+            receiver=config.GnfPublic().gnf_admin_addr,
             amt=1,
             index=payload.OldTaDeedIdx,
             sp=self.client.suggested_params(),

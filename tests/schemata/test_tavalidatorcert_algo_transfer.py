@@ -28,21 +28,27 @@ def make_new_test_cert_and_return_asset_idx(
     )
     if algo_utils.algos(multi.addr) is None:
         algo_setup.dev_fund_account(
-            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
+            config.BlahBlahBlahSettings(),
+            to_addr=test_acct.addr,
+            amt_in_micros=1_000_000,
         )
         algo_setup.dev_fund_account(
-            config.Algo(),
+            config.BlahBlahBlahSettings(),
             to_addr=multi.addr,
-            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
+            amt_in_micros=config.GnfPublic().gnf_validator_funding_threshold_algos
+            * 10**6,
         )
     elif algo_utils.algos(multi.addr) < 100:
         algo_setup.dev_fund_account(
-            config.Algo(), to_addr=test_acct.addr, amt_in_micros=1_000_000
+            config.BlahBlahBlahSettings(),
+            to_addr=test_acct.addr,
+            amt_in_micros=1_000_000,
         )
         algo_setup.dev_fund_account(
-            config.Algo(),
+            config.BlahBlahBlahSettings(),
             to_addr=multi.addr,
-            amt_in_micros=config.Algo().gnf_validator_funding_threshold_algos * 10**6,
+            amt_in_micros=config.GnfPublic().gnf_validator_funding_threshold_algos
+            * 10**6,
         )
 
     txn = transaction.AssetCreateTxn(
@@ -99,12 +105,16 @@ def get_test_half_signed_cert_transfer_mtx(
 
 
 def get_test_dict() -> Dict:
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    settings = config.BlahBlahBlahSettings()
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     test_acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
         "LZlZFgStdj2T0otiJTRezerJhys0isRu4e6AM6fJJCRT03r0ziZrA44MFjjh6i6V2ySSQyRiCwvVzthpxjV7xA=="
     )
     gnf_admin: algo_utils.BasicAccount = algo_utils.BasicAccount(
-        config.GnfSettings().admin_acct_sk.get_secret_value()
+        config.BlahBlahBlahSettings().admin_acct_sk.get_secret_value()
     )
 
     asset_idx = api_utils.get_validator_cert_idx(test_acct.addr)

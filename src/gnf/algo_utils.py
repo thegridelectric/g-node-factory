@@ -112,24 +112,10 @@ def get_app_global_state(
 ##############################################################################
 
 
-def get_kmd_client(settings_algo: config.Algo) -> KMDClient:
+def get_kmd_client(settings: config.BlahBlahBlahSettings) -> KMDClient:
     return KMDClient(
-        settings_algo.kmd_token.get_secret_value(), settings_algo.kmd_address
-    )
-
-
-def get_algod_client(settings_algo: config.Algo) -> AlgodClient:
-    """Returns an AlgoD client
-
-    Args:
-        settings (GnfSettings): Duck typed to be GnfSettings OR
-        dev settings for demo homeowner and g node registry.
-
-    Returns:
-        AlgodClient
-    """
-    return AlgodClient(
-        settings_algo.algod_token.get_secret_value(), settings_algo.algod_address
+        settings.algo_api_secrets.kmd_token.get_secret_value(),
+        settings.public.kmd_address,
     )
 
 
@@ -460,7 +446,11 @@ def micro_algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    client = get_algod_client(settings_algo=config.Algo())
+    settings = config.BlahBlahBlahSettings()
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     try:
         microAlgoBalance = client.account_info(addr)["amount"]
     except:
@@ -477,7 +467,11 @@ def algos(addr: str) -> Optional[int]:
     if there is an issue getting this number
     """
     property_format.check_is_algo_address_string_format(addr)
-    client = get_algod_client(settings_algo=config.Algo())
+    settings = config.BlahBlahBlahSettings()
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     try:
         microAlgoBalance = client.account_info(addr)["amount"]
     except:

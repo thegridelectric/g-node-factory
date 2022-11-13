@@ -22,31 +22,30 @@ from gnf.schemata import InitialTadeedAlgoOptin_Maker
 LOGGER = logging.getLogger(__name__)
 
 
-class DevHomeowner:
+class DevTaOwner:
     def __init__(
         self,
-        settings: config.HollyHomeownerSettings,
-        ta_daemon_port: str,
-        ta_daemon_addr: str,
-        validator_addr: str,
-        initial_terminal_asset_alias: str,
+        settings: config.TaOwnerSettings,
     ):
+        LOGGER.info(f"Initializing TaOwner for {settings.initial_ta_alias}")
+
         self.settings = settings
-        self.ta_daemon_api_root = f"http://0.0.0.0:{ta_daemon_port}"
-        self.client: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
         self.acct: BasicAccount = BasicAccount(
             private_key=self.settings.sk.get_secret_value()
         )
-        self.ta_daemon_addr = ta_daemon_addr
-        self.validator_addr = validator_addr
         self.validator_multi = MultisigAccount(
             version=1,
             threshold=2,
-            addresses=[config.Algo().gnf_admin_addr, validator_addr],
+            addresses=[
+                self.settings.public.gnf_admin_addr,
+                self.settings.validator_addr,
+            ],
         )
-        self.initial_terminal_asset_alias = initial_terminal_asset_alias
         self.seed_fund_own_account()
-        LOGGER.info("HollyHomeowner Initialized")
 
     ##########################
     # Messages Sent
@@ -61,10 +60,10 @@ class DevHomeowner:
         Returns:
             InitialTadeedAlgoOptin:
         """
-        required_algos = config.Algo().ta_deed_consideration_algos
+        required_algos = config.GnfPublic().ta_deed_consideration_algos
         txn = transaction.PaymentTxn(
             sender=self.acct.addr,
-            receiver=self.ta_daemon_addr,
+            receiver=self.settings.ta_daemon_addr,
             amt=required_algos * 10**6,
             sp=self.client.suggested_params(),
         )
@@ -76,12 +75,12 @@ class DevHomeowner:
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
 
         payload = InitialTadeedAlgoOptin_Maker(
-            terminal_asset_alias=self.initial_terminal_asset_alias,
+            terminal_asset_alias=self.settings.initial_ta_alias,
             ta_owner_addr=self.acct.addr,
-            validator_addr=self.validator_addr,
+            validator_addr=self.settings.validator_addr,
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
         ).tuple
-        api_endpoint = f"{self.ta_daemon_api_root}/initial-tadeed-algo-optin/"
+        api_endpoint = f"{self.settings.ta_daemon_api_root}/initial-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Sent InitialTadeedAlgoOptin")
         pprint(r.json())
@@ -91,10 +90,10 @@ class DevHomeowner:
     # dev methods
     ########################
     def seed_fund_own_account(self):
-        algos = config.Algo().ta_deed_consideration_algos + 1
+        algos = self.settings.public.ta_deed_consideration_algos + 1
         if algo_utils.algos(self.acct.addr) < algos:
             algo_setup.dev_fund_account(
-                settings_algo=self.settings.algo,
+                settings=self.settings,
                 to_addr=self.acct.addr,
                 amt_in_micros=10**6 * algos,
             )

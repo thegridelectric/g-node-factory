@@ -5,7 +5,7 @@ from rich.pretty import pprint
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
-from gnf.dev_utils import DevHomeowner
+from gnf.dev_utils import DevTaOwner
 from gnf.dev_utils import DevValidator
 from gnf.schemata import BasegnodeGt_Maker
 
@@ -15,17 +15,11 @@ LOGGER = logging.getLogger(__name__)
 
 
 def main():
-    algo_setup.dev_fund_admin_and_graveyard(config.GnfSettings())
+    algo_setup.dev_fund_admin_and_graveyard(config.BlahBlahBlahSettings())
 
-    holly = DevHomeowner(
-        settings=config.HollyHomeownerSettings(),
-        ta_daemon_port=config.SandboxDemo().holly_daemon_port,
-        ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
-        validator_addr=config.SandboxDemo().molly_metermaid_addr,
-        initial_terminal_asset_alias=config.SandboxDemo().initial_holly_ta_alias,
-    )
+    holly = DevTaOwner(settings=config.TaOwnerSettings())
 
-    molly = DevValidator(config.MollyMetermaidSettings())
+    molly = DevValidator(config.ValidatorSettings())
 
     cert_idx = api_utils.get_validator_cert_idx(validator_addr=molly.acct.addr)
     if cert_idx is not None:
@@ -38,10 +32,10 @@ def main():
         pprint(r)
         raise Exception("Stopping demo due to errors")
 
-    ta_alias = holly.initial_terminal_asset_alias
+    ta_alias = holly.settings.initial_ta_alias
     LOGGER.info(
-            f"Post to GnfRestAPI/initial-tadeed-algo-create to create a TaDeed for {ta_alias}"
-        )
+        f"Post to GnfRestAPI/initial-tadeed-algo-create to create a TaDeed for {ta_alias}"
+    )
     r = molly.post_initial_tadeed_algo_create(
         terminal_asset_alias=ta_alias,
     )

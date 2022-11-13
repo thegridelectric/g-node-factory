@@ -9,6 +9,7 @@ from typing import OrderedDict
 from algosdk import encoding
 from algosdk.future.transaction import AssetTransferTxn
 from algosdk.future.transaction import MultisigTransaction
+from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
@@ -60,7 +61,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("HalfSignedCertTransferMtx", None))
         msig = mtx.multisig
         ValidatorAddr = v.get("ValidatorAddr", None)
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,
@@ -106,7 +107,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
                 "Axiom 5: Receiver should be ValidatorAddr (encoding.decode_address(ValidatorAddress)),"
                 " not {od['arcv']} "
             )
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,
@@ -144,7 +145,11 @@ class TavalidatorcertAlgoTransfer(BaseModel):
         ValidatorAddr = v.get("ValidatorAddr", None)
         od: OrderedDict = txn.dictify()
         asset_index = od["xaid"]
-        client = algo_utils.get_algod_client(config.Algo())
+        settings = config.BlahBlahBlahSettings()
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
         validator_assets = client.account_info(ValidatorAddr)["assets"]
         if (
             len(list(filter(lambda x: x["asset-id"] == asset_index, validator_assets)))
@@ -154,7 +159,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
                 f"Axiom 7: ValidatorAddr {ValidatorAddr} has not opted in to certificate"
                 f" {asset_index}"
             )
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,

@@ -16,9 +16,12 @@ LOGGER = logging.getLogger(__name__)
 
 
 class DevDiscoverer:
-    def __init__(self, settings: config.AdaDiscovererSettings):
+    def __init__(self, settings: config.DiscovererSettings):
         self.settings = settings
-        self.client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
         self.acct: BasicAccount = algo_utils.BasicAccount(
             private_key=self.settings.sk.get_secret_value()
         )
@@ -30,13 +33,13 @@ class DevDiscoverer:
 
     def post_discoverycert_algo_create(self) -> RestfulResponse:
         payload = DiscoverycertAlgoCreate_Maker(
-            g_node_alias=config.AdaDiscovererSettings().discovered_ctn_alias,
-            old_child_alias_list=config.AdaDiscovererSettings().original_child_alias_list,
+            g_node_alias=config.DiscovererSettings().discovered_ctn_alias,
+            old_child_alias_list=config.DiscovererSettings().original_child_alias_list,
             discoverer_addr=self.acct.addr,
             supporting_material_hash="supporting material",
             core_g_node_role=CoreGNodeRole.ConductorTopologyNode,
-            micro_lon=config.AdaDiscovererSettings().micro_lon,
-            micro_lat=config.AdaDiscovererSettings().micro_lat,
+            micro_lon=config.DiscovererSettings().micro_lon,
+            micro_lat=config.DiscovererSettings().micro_lat,
         ).tuple
-        api_endpoint = f"{config.Algo().gnf_api_root}/discoverycert-algo-create/"
+        api_endpoint = f"{config.GnfPublic().gnf_api_root}/discoverycert-algo-create/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())

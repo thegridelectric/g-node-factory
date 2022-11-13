@@ -91,7 +91,11 @@ def tavalidatorcert_algo_create_received(
     │     and 'PayloadAsDict': {'Value': ValidatorCertIdx}
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     if not isinstance(payload, TavalidatorcertAlgoCreate):
         note = f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
         r = RestfulResponse(
@@ -144,7 +148,10 @@ def tavalidatorcert_algo_transfer_received(
         - HttpStatusCode 200 if successful, note has blockchain transaction id
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     if not isinstance(payload, TavalidatorcertAlgoTransfer):
         note = f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
         r = RestfulResponse(Note=note, HttpStatusCode=422)
@@ -202,7 +209,10 @@ async def initial_tadeed_algo_transfer_received(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
 
     # Figure out terminal_asset_alias
@@ -266,7 +276,10 @@ async def initial_tadeed_algo_create_received(
         otherwise the TerminalAsset database object
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
     if not isinstance(payload, InitialTadeedAlgoCreate):
         note = f"payload must be type InitialTadeedAlgoCreate, got {type(payload)}. Ignoring!"
@@ -314,7 +327,10 @@ async def create_updated_ta_deed(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     txn = transaction.AssetCreateTxn(
         sender=admin_account.addr,
         total=1,
@@ -391,7 +407,10 @@ async def new_tadeed_send_received(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     txn = transaction.AssetTransferTxn(
         sender=admin_account.addr,
         receiver=payload.TaDaemonAddr,
@@ -430,7 +449,10 @@ async def post_old_tadeed_algo_return(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
     # opt into old tadeed
     txn = transaction.AssetOptInTxn(

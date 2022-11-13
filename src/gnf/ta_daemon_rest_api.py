@@ -11,11 +11,7 @@ from gnf.utils import RestfulResponse
 
 app = FastAPI()
 
-daemon = PythonTaDaemon(
-    sk=config.HollyTaDaemonSettings().sk.get_secret_value(),
-    ta_owner_addr=config.SandboxDemo().holly_homeowner_addr,
-    algo_settings=config.Algo(),
-)
+daemon = PythonTaDaemon(settings=config.TaDaemonSettings())
 
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)

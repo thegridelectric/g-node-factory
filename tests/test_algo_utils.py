@@ -1,5 +1,6 @@
 import algosdk
 import pytest
+from algosdk.v2client.algod import AlgodClient
 
 import gnf.algo_utils as algo_utils
 import gnf.config as config
@@ -8,8 +9,10 @@ from gnf.errors import AlgoError
 
 
 def test_pay_account():
-    addr0: algo_utils.BasicAccount = algo_setup.get_gnf_admin_address()
-    addr1: algo_utils.BasicAccount = algo_setup.get_molly_metermaid_address()
+    algo_settings = config.GnfPublic()
+    sandbox_settings = config.SandboxDemo()
+    addr0: str = algo_settings.gnf_admin_addr
+    addr1: str = sandbox_settings.molly_metermaid_addr
     addresses = [addr0, addr1]
     multi = algo_utils.MultisigAccount(version=1, threshold=2, addresses=addresses)
 
@@ -17,12 +20,18 @@ def test_pay_account():
     # This is the test of payAccount working, called by devFundAccount which grabs
     # a genesis BasicAccount
     r = algo_setup.dev_fund_account(
-        settings_algo=config.Algo(), to_addr=multi.addr, amt_in_micros=200_000
+        settings=config.BlahBlahBlahSettings(),
+        to_addr=multi.addr,
+        amt_in_micros=200_000,
     )
     assert isinstance(r, algo_utils.PendingTxnResponse)
     assert algo_utils.micro_algos(multi.addr) >= initial_balance + 200_000
 
-    client = algo_utils.get_algod_client(config.Algo())
+    settings = config.BlahBlahBlahSettings()
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
     # MultisigAccount attempts to pay a BasicAccount. But a MultisigAccount does not
     # contain the private signing keys of its component addresses, so this will fail.
