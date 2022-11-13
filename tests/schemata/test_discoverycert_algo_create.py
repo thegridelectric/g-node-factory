@@ -14,7 +14,7 @@ def test_discoverycert_algo_create_generated():
     d = {
         "GNodeAlias": "d1.isone.ver.keene",
         "CoreGNodeRoleGtEnumSymbol": "4502e355",
-        "OldChildAliasList": ["dw1.isone.ver.keene.holly"],
+        "OldChildAliasList": ["d1.isone.ver.keene.holly"],
         "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
         "SupportingMaterialHash": "hash of supporting material",
         "MicroLat": 44838681,

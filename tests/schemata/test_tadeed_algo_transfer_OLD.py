@@ -32,7 +32,7 @@
 #         decimals=0,
 #         default_frozen=False,
 #         manager=gnf_admin.addr,
-#         asset_name="dw1.iso.test.ta",
+#         asset_name="d1.iso.test.ta",
 #         unit_name="TADEED",
 #         sp=client.suggested_params(),
 #     )

@@ -1,6 +1,5 @@
 # G Node Factory
 
-
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
@@ -15,71 +14,69 @@ This repo has been developed through the generous funding of a grant provided by
 
 1. Set up python environment
 
-    ```
-    poetry install
+   ```
+   poetry install
 
-    poetry shell
-    ```
+   poetry shell
+   ```
 
-2. Install [docker](https://docs.docker.com/get-docker/) 
+2. Install [docker](https://docs.docker.com/get-docker/)
 
 3. Start docker containers
 
-  - **X86 CPU**:
+- **X86 CPU**:
 
-    ```
-    docker compose -f docker-demo-x86.yml up -d
-    ```
+  ```
+  docker compose -f docker-demo-x86.yml up -d
+  ```
 
-  - **arm CPU**:
+- **arm CPU**:
 
-      ```
-      docker compose -f docker-demo-arm.yml up -d
-      ```
+  ```
+  docker compose -f docker-demo-arm.yml up -d
+  ```
 
 4. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory
 
-    ```
-    ./sandbox up dev
-    ```
+   ```
+   ./sandbox up dev
+   ```
 
-    This starts up a local blockchain on your computer. It can take a couple of minutes for the
-    initial setup.
+   This starts up a local blockchain on your computer. It can take a couple of minutes for the
+   initial setup.
 
-    **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
-
-
+   **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
 
 5. Run before each demo:
 
 - From this repo, **flush database**:
-    ```
-    ./reset-dev-db.sh
+  ```
+  ./reset-dev-db.sh
   ```
 - From sandbox repo, **flush blockchin**:
-    ```
-    ./sandbox reset
-    ```
+  ```
+  ./sandbox reset
+  ```
 
 6. Start the PythonTaDaemon FastAPI:
 
-    ```
-    uvicorn gnf.rest_api:app --reload
-    ```
+   ```
+   uvicorn gnf.rest_api:app --reload
+   ```
 
-    (go to http://127.0.0.1:8000/docs# for inspecting the api)
+   (go to http://127.0.0.1:8000/docs# for inspecting the api)
 
 7. Run the milestone 1 demo from this repo:
 
-    ```
-    python demo.py
-    ```
+   ```
+   python demo.py
+   ```
 
 ## Explaining what the demo does
 
 1.  **Loads in preliminary GNodes** One axiom for adding a GNode is that its parent must already exist, unless it is the root. Since this demo involves adding `TerminalAssets`, we need to add the root world GNode (`d1`), the root of the electric grid (`d1.isone`), and then a few ConductorTopologyNodes that
     are stepping down in voltage (`d1.isone.ver`, `d1.isone.ver.keene`).
-2.  **Creates a new TerminalAsset** Creates a TerminalAsset `dw1.isone.ver.keene.holly.ta` for Holly's heating system. This includes first setting up MollyMetermaid as a validator, and then having MollyMetermaid validate Holly's heating system. This process results in a TaValidator certificate (an NFT) for MollyMetermaid and a TaDeed (also an NFT) for HollyHomeowner.
+2.  **Creates a new TerminalAsset** Creates a TerminalAsset `d1.isone.ver.keene.holly.ta` for Holly's heating system. This includes first setting up MollyMetermaid as a validator, and then having MollyMetermaid validate Holly's heating system. This process results in a TaValidator certificate (an NFT) for MollyMetermaid and a TaDeed (also an NFT) for HollyHomeowner.
 3.  **Adding a new ConductorTopologyNode** Creates a ConductorTopologyNode `d1.isone.ver.keene.pwrs`, which triggers a cascade of updating the aliases for all of its descendants, including HollyHomeowner's `TerminalAsset`.
 
 ## Testing
