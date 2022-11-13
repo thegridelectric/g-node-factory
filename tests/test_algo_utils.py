@@ -12,7 +12,7 @@ from gnf.errors import AlgoError
 def test_pay_account():
     algo_settings = config.GnfPublic()
     addr0: str = algo_settings.gnf_admin_addr
-    validator_sk = config.ValidatorSettings.sk.get_secret_value()
+    validator_sk = config.ValidatorSettings().sk.get_secret_value()
     molly_acct = algo_utils.BasicAccount(private_key=validator_sk)
     addr1: str = molly_acct.addr
     addresses = [addr0, addr1]

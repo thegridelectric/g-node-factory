@@ -13,7 +13,6 @@ from gnf.config import VanillaSettings
 from gnf.schemata import HeartbeatA_Maker
 
 from .utils import GNodeFactoryRabbitStubRecorder
-from .utils import GNodeRegistryStubRecorder
 from .utils import wait_for
 
 

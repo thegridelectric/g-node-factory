@@ -7,7 +7,6 @@ import pika
 from gnf.config import VanillaSettings
 
 from .utils import GNodeFactoryRabbitStubRecorder
-from .utils import GNodeRegistryStubRecorder
 from .utils import wait_for
 
 

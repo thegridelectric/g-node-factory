@@ -6,7 +6,7 @@ import gnf.config as config
 
 
 def test_get_kmd_client():
-    client = algo_utils.get_kmd_client(algo_secrets=config.GnfPublic())
+    client = algo_utils.get_kmd_client(settings=config.VanillaSettings())
     assert isinstance(client, KMDClient)
 
     response = client.versions()
