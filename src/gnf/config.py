@@ -8,21 +8,6 @@ from pydantic import SecretStr
 DEFAULT_ENV_FILE = ".env"
 
 
-class SandboxDemo(BaseModel):
-    molly_metermaid_addr: str = (
-        "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
-    )
-    holly_homeowner_addr: str = (
-        "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"
-    )
-    holly_ta_daemon_addr: str = (
-        "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
-    )
-    gnr_addr: str = "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU"
-    initial_holly_ta_alias: str = "d1.isone.ver.keene.holly.ta"
-    holly_daemon_port: str = "8001"
-
-
 class GnfPublic(BaseModel):
     """This class is the publicly available information about the GNodeFactory"""
 
@@ -35,6 +20,7 @@ class GnfPublic(BaseModel):
     gnf_graveyard_addr: str = (
         "COA6SYUOBE33F5JDYEGC5XAD43QRG3VGHNNQXLYWFSSQEHDQ5HJ52NDNPI"
     )
+    gnr_addr: str = "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE"
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
     gnf_api_root: str = "http://0.0.0.0:8000"
@@ -69,6 +55,8 @@ class TaOwnerSettings(BaseSettings):
     validator_addr: str = "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
     ta_daemon_api_root: str = f"http://0.0.0.0:8001"
     initial_ta_alias: str = "d1.isone.ver.keene.holly.ta"
+    micro_lat: int = 45511230
+    micro_lon: int = -68354650
 
     class Config:
         env_prefix = "TAO_"
@@ -140,3 +128,15 @@ class DiscovererSettings(BaseSettings):
     original_child_alias_list = ["d1.isone.ver.keene.holly"]
     micro_lat = 44838681
     micro_lon = -68705311
+
+
+class GnrSettings(BaseSettings):
+    algo_api_secrets: AlgoApiSecrets = AlgoApiSecrets()
+    public: GnfPublic = GnfPublic()
+    sk: SecretStr = SecretStr(
+        "RvfbAEdn2ADe0pF7984ioBuLTnd+t46cITzcEbE5v2i+gSoCj1dQJhh3hmCgvlexErCDilQ1O9tKs7SYTXjadQ=="
+    )
+
+    class Config:
+        env_prefix = "GNR_"
+        env_nested_delimiter = "__"

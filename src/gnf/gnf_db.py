@@ -308,7 +308,7 @@ async def initial_tadeed_algo_create_received(
     ta_deed_idx = response.asset_idx
     LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
     r = await create_pending_atomic_metering_node(
-        ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
+        ta_alias=ta_alias, ta_deed_idx=ta_deed_idx, settings=settings
     )
     return r
 
@@ -540,7 +540,7 @@ async def create_pending_ctn(
         "alias": ctn_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.ConductorTopologyNode.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
         "gps_point_id": gpsdb.gps_point_id,
     }
 
@@ -619,7 +619,7 @@ async def g_node_from_id(g_node_id: str) -> Optional[BasegnodeGt]:
 
 
 async def create_pending_atomic_metering_node(
-    ta_alias: str, ta_deed_idx: int
+    ta_alias: str, ta_deed_idx: int, settings: config.GnfSettings
 ) -> RestfulResponse:
     if not property_format.is_lrd_alias_format(ta_alias):
         r = RestfulResponse(
@@ -646,7 +646,7 @@ async def create_pending_atomic_metering_node(
         "alias": parent_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.AtomicMeteringNode.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
     }
     LOGGER.info(f"About to try and create a new GNode w alias {parent_alias}")
     try:
@@ -667,7 +667,7 @@ async def create_pending_atomic_metering_node(
         "alias": ta_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.TerminalAsset.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
         "ownership_deed_nft_id": ta_deed_idx,
     }
 

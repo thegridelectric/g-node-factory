@@ -52,10 +52,10 @@ def main():
 
     r = molly.post_initial_tadeed_algo_transfer(
         ta_deed_idx=ta_deed_idx,
-        ta_daemon_addr=config.SandboxDemo().holly_ta_daemon_addr,
+        ta_daemon_addr=holly.settings.ta_daemon_addr,
         ta_owner_addr=holly.acct.addr,
-        micro_lat=45666353,
-        micro_lon=-68691705,
+        micro_lat=holly.settings.micro_lat,
+        micro_lon=-holly.settings.micro_lon,
     )
 
     if r.HttpStatusCode > 200:
