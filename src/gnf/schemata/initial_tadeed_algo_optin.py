@@ -1,9 +1,11 @@
 """Type initial.tadeed.algo.optin, version 001"""
 import json
+from typing import Any
 from typing import Dict
 from typing import Literal
 
 from pydantic import BaseModel
+from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
@@ -35,7 +37,7 @@ class InitialTadeedAlgoOptin(BaseModel):
         "SignedInitialDaemonFundingTxn", property_format.is_algo_msg_pack_encoded
     )
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         return d
 
@@ -80,7 +82,7 @@ class InitialTadeedAlgoOptin_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> InitialTadeedAlgoOptin:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> InitialTadeedAlgoOptin:
         d2 = dict(d)
         if "TerminalAssetAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TerminalAssetAlias")

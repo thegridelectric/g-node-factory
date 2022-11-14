@@ -1,9 +1,11 @@
 """Type discoverycert.algo.transfer, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import Literal
 
 from pydantic import BaseModel
+from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
@@ -24,7 +26,7 @@ class DiscoverycertAlgoTransfer(BaseModel):
         "DiscovererAddr", property_format.is_algo_address_string_format
     )
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         return d
 
@@ -59,7 +61,7 @@ class DiscoverycertAlgoTransfer_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> DiscoverycertAlgoTransfer:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> DiscoverycertAlgoTransfer:
         d2 = dict(d)
         if "GNodeAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing GNodeAlias")

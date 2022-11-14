@@ -1,5 +1,6 @@
 """Type basegnode.ctn.create, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import List
 from typing import Literal
@@ -18,7 +19,7 @@ class BasegnodeCtnCreate(BaseModel):
     CtnGNodeAlias: str  #
     MicroLat: int  #
     MicroLon: int  #
-    ChildAliasList: List[str]
+    ChildAliasList: List[str]  #
     GNodeRegistryAddr: str  #
     TypeName: Literal["basegnode.ctn.create"] = "basegnode.ctn.create"
     Version: str = "000"
@@ -48,7 +49,7 @@ class BasegnodeCtnCreate(BaseModel):
         "GNodeRegistryAddr", property_format.is_algo_address_string_format
     )
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         return d
 
@@ -97,7 +98,7 @@ class BasegnodeCtnCreate_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> BasegnodeCtnCreate:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> BasegnodeCtnCreate:
         d2 = dict(d)
         if "FromGNodeAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FromGNodeAlias")

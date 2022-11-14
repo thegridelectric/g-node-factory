@@ -31,7 +31,7 @@ class CoreGNodeRole000SchemaEnum:
     ]
 
     @classmethod
-    def is_symbol(cls, candidate) -> bool:
+    def is_symbol(cls, candidate: str) -> bool:
         if candidate in cls.symbols:
             return True
         return False
@@ -57,16 +57,16 @@ class CoreGNodeRole000(StrEnum):
 
 class CoreGNodeRoleMap:
     @classmethod
-    def type_to_local(cls, symbol):
+    def type_to_local(cls, symbol: str) -> CoreGNodeRole:
         if not CoreGNodeRole000SchemaEnum.is_symbol(symbol):
             raise SchemaError(f"{symbol} must belong to CoreGNodeRole000 symbols")
         versioned_enum = cls.type_to_versioned_enum_dict[symbol]
         return as_enum(versioned_enum, CoreGNodeRole, CoreGNodeRole.default())
 
     @classmethod
-    def local_to_type(cls, core_g_node_role):
-        if not isinstance(core_g_node_role, CoreGNodeRole000):
-            raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole000}")
+    def local_to_type(cls, core_g_node_role: CoreGNodeRole) -> str:
+        if not isinstance(core_g_node_role, CoreGNodeRole):
+            raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole}")
         versioned_enum = as_enum(
             core_g_node_role, CoreGNodeRole000, CoreGNodeRole000.default()
         )
@@ -96,7 +96,7 @@ class CoreGNodeRoleMap:
 class DiscoverycertAlgoCreate(BaseModel):
     GNodeAlias: str  #
     CoreGNodeRole: CoreGNodeRole  #
-    OldChildAliasList: List[str]
+    OldChildAliasList: List[str]  #
     DiscovererAddr: str  #
     SupportingMaterialHash: str  #
     MicroLat: Optional[int] = None
@@ -108,9 +108,9 @@ class DiscoverycertAlgoCreate(BaseModel):
         "GNodeAlias", property_format.is_lrd_alias_format
     )
 
-    @validator("CoreGNodeRole", pre=True)
-    def _validator_core_g_node_role(cls, v: Any) -> CoreGNodeRole000:
-        return as_enum(v, CoreGNodeRole000, CoreGNodeRole000.Other)
+    @validator("CoreGNodeRole")
+    def _validator_core_g_node_role(cls, v: CoreGNodeRole) -> CoreGNodeRole:
+        return as_enum(v, CoreGNodeRole, CoreGNodeRole.Other)
 
     @validator("OldChildAliasList")
     def _validator_old_child_alias_list(cls, v: List) -> List:
@@ -125,11 +125,11 @@ class DiscoverycertAlgoCreate(BaseModel):
         "DiscovererAddr", property_format.is_algo_address_string_format
     )
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         del d["CoreGNodeRole"]
         CoreGNodeRole = as_enum(
-            self.CoreGNodeRole, CoreGNodeRole000, CoreGNodeRole000.default()
+            self.CoreGNodeRole, CoreGNodeRole, CoreGNodeRole.default()
         )
         d["CoreGNodeRoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(CoreGNodeRole)
         if d["MicroLat"] is None:
@@ -183,7 +183,7 @@ class DiscoverycertAlgoCreate_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> DiscoverycertAlgoCreate:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> DiscoverycertAlgoCreate:
         d2 = dict(d)
         if "GNodeAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing GNodeAlias")

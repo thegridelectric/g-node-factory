@@ -1,5 +1,6 @@
 """Type basegnodes.broadcast, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import List
 from typing import Literal
@@ -20,10 +21,8 @@ class BasegnodesBroadcast(BaseModel):
     ToGNodeAlias: str  #
     IncludeAllDescendants: bool  #
     TopGNode: BasegnodeGt  #
-    TopGNodeId: Optional[str] = None
     DescendantGNodeList: List[BasegnodeGt]
-    DescendantGNodeListId: Optional[str] = None
-    TypeName: Literal["basegnodes.broadcast"] = "basegnodes.broadcast"
+    # TypeName: Literal["basegnodes.broadcast"] = "basegnodes.broadcast"
     Version: str = "000"
 
     _validator_from_g_node_alias = predicate_validator(
@@ -47,7 +46,7 @@ class BasegnodesBroadcast(BaseModel):
                 )
         return v
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         d["TopGNode"] = self.TopGNode.as_dict()
 
@@ -101,7 +100,7 @@ class BasegnodesBroadcast_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> BasegnodesBroadcast:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> BasegnodesBroadcast:
         d2 = dict(d)
         if "FromGNodeAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FromGNodeAlias")

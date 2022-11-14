@@ -1,9 +1,11 @@
 """Type basegnode.marketmaker.create, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import Literal
 
 from pydantic import BaseModel
+from pydantic import validator
 
 from gnf.errors import SchemaError
 
@@ -12,7 +14,7 @@ class BasegnodeMarketmakerCreate(BaseModel):
     TypeName: Literal["basegnode.marketmaker.create"] = "basegnode.marketmaker.create"
     Version: str = "000"
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         return d
 
@@ -45,7 +47,7 @@ class BasegnodeMarketmakerCreate_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> BasegnodeMarketmakerCreate:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> BasegnodeMarketmakerCreate:
         d2 = dict(d)
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
