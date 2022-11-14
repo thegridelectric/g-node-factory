@@ -1,4 +1,4 @@
-# Milestone 1 Specifications
+# Design Specifications
 
 Milestone 1 implements two flows:
 
@@ -11,7 +11,6 @@ For the first flow, there are two actors: the GNodeFactory, and MollyMetermaid (
 
 ## TaValidaton Certification Flow
 
-**Figure 1: TaValidator Certification**
 ![alt_text](img/ta-validator-cert-flow.png)
 
 Notes.
@@ -56,9 +55,8 @@ Notes.
 
    ## TerminalAsset Creation Flow
 
-   &nbsp;
 
-**Figure 3:`TerminalAsset` Creation Flow**
+
 ![alt_text](img/terminal-asset-creation-flow.png)
 
 Notes:
