@@ -28,6 +28,7 @@
 """ List of all the schema types """
 </xsl:text>
 <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
+<xsl:sort select="TypeName" data-type="text"/>
 <xsl:variable name="schema-id" select="Type"/>
 <xsl:for-each select="$airtable//Schemas/Schema[(SchemaId = $schema-id)  and (Status = 'Active' or Status = 'Pending') and (ProtocolCategory = 'Json' or ProtocolCategory = 'GwAlgoSerial')]">
 <xsl:variable name="local-alias" select="AliasRoot" />
@@ -54,6 +55,7 @@ from gnf.schemata.</xsl:text>
 
 __all__ = [</xsl:text>
 <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
+<xsl:sort select="TypeName" data-type="text"/>
 <xsl:variable name="schema-id" select="Type"/>
 <xsl:for-each select="$airtable//Schemas/Schema[(SchemaId = $schema-id)  and (Status = 'Active' or Status = 'Pending') and (ProtocolCategory = 'Json' or ProtocolCategory = 'GwAlgoSerial')]">                    <xsl:variable name="local-alias" select="AliasRoot" />
 <xsl:text>
