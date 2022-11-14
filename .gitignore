@@ -39,3 +39,8 @@ venv.bak/
 # algo related
 *.teal
 *.teal.tok
+
+
+input_data/**
+!input_data/**/
+!input_data/**/__init__.py

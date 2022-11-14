@@ -20,7 +20,7 @@ def main():
         config.VanillaSettings(_env_file=dotenv.find_dotenv())
     )
 
-    # holly = DevTaOwner(settings=config.TaOwnerSettings())
+    holly = DevTaOwner(settings=config.TaOwnerSettings())
 
     molly = DevValidator(config.ValidatorSettings())
 

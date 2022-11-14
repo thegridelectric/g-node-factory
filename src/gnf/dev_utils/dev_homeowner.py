@@ -1,6 +1,6 @@
 import logging
 import subprocess
-
+import os
 import requests
 import requests_async
 from algosdk import encoding
@@ -17,7 +17,6 @@ from gnf.algo_utils import MultisigAccount
 # Schemata sent by homeowner
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
-from gnf.schemata import TadaemonSkHack_Maker
 from gnf.schemata import TerminalassetCertifyHack_Maker
 from gnf.utils import RestfulResponse
 
@@ -55,34 +54,16 @@ class DevTaOwner:
         self.ta_daemon_api_root = (
             f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
         )
-        self.ta_daemon_process: subprocess.Popen = self.start_ta_daemon()
-        rr: RestfulResponse = self.post_daemon_secrets_hack()
-        if rr.HttpStatusCode > 200:
-            raise Exception(f"Failed to spawn TaDaemon: {rr.Note}")
+        self.pr: subprocess.Popen = self.start_ta_daemon()
 
     ##########################
     # Messages Sent
     ##########################
 
-    def post_daemon_secrets_hack(self) -> RestfulResponse:
-        payload = TadaemonSkHack_Maker(
-            ta_owner_addr=self.acct.addr, ta_daemon_sk=self.ta_daemon_sk
-        ).tuple
-        api_endpoint = f"{self.ta_daemon_api_root}/sk-hack/"
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
-        if r.status_code > 200:
-            if r.status_code == 422:
-                note = f"Error posting sk to daemon: " + r.json()["detail"]
-            else:
-                note = r.reason
-            rr = RestfulResponse(Note=note, HttpStatusCode=422)
-            return rr
-        return RestfulResponse(Note="Success getting sk to daemon")
-
     def start_ta_daemon(self) -> subprocess.Popen:
         LOGGER.info("Starting ta Daemon")
         cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {self.settings.ta_daemon_api_port}"
-        pr = subprocess.Popen(cmd.split())
+        pr = subprocess.Popen(cmd.split(), env=dict(os.environ, TAD_SK=self.ta_daemon_sk, TAD_TA_OWNER_ADDR=self.acct.addr))
         return pr
 
     async def request_ta_certification(self) -> RestfulResponse:

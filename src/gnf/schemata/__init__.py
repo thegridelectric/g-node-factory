@@ -34,8 +34,6 @@ from gnf.schemata.new_tadeed_send import NewTadeedSend
 from gnf.schemata.new_tadeed_send import NewTadeedSend_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
-from gnf.schemata.tadaemon_sk_hack import TadaemonSkHack
-from gnf.schemata.tadaemon_sk_hack import TadaemonSkHack_Maker
 from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack
 from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
@@ -85,8 +83,6 @@ __all__ = [
     "InitialTadeedAlgoCreate_Maker",
     "DiscoverycertAlgoTransfer",
     "DiscoverycertAlgoTransfer_Maker",
-    "TadaemonSkHack",
-    "TadaemonSkHack_Maker",
     "TavalidatorcertAlgoTransfer",
     "TavalidatorcertAlgoTransfer_Maker",
     "TadeedSpecsHack",

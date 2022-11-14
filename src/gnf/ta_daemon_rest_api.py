@@ -5,7 +5,6 @@ from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import OldTadeedAlgoReturn
-from gnf.schemata import TadaemonSkHack
 from gnf.utils import RestfulResponse
 
 
@@ -13,15 +12,9 @@ app = FastAPI()
 daemon = PythonTaDaemon()
 
 
-@app.post("/sk-hack/", response_model=RestfulResponse)
-async def sk_hack_received(payload: TadaemonSkHack):
-    rr = daemon.sk_hack_received(payload)
-    if rr.HttpStatusCode > 200:
-        raise HTTPException(
-            status_code=rr.HttpStatusCode, detail=f"[{rr.HttpStatusCode}]: {rr.Note}"
-        )
-    return rr
-
+@app.get("/env/")
+async def show_env():
+    return daemon.settings
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)
 async def initial_tadeed_algo_optin_received(payload: InitialTadeedAlgoOptin):
@@ -31,7 +24,6 @@ async def initial_tadeed_algo_optin_received(payload: InitialTadeedAlgoOptin):
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
         )
     return r
-
 
 @app.post("/new-tadeed-algo-optin/", response_model=RestfulResponse)
 async def new_tadeed_algo_received(payload: NewTadeedAlgoOptin):

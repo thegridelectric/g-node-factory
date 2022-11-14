@@ -16,7 +16,6 @@ from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
-from gnf.schemata import TadaemonSkHack
 from gnf.utils import RestfulResponse
 
 
@@ -41,15 +40,6 @@ class PythonTaDaemon:
     ##########################
     # Messages Received
     ##########################
-
-    def sk_hack_received(self, payload: TadaemonSkHack) -> RestfulResponse:
-        if self.acct is not None:
-            return RestfulResponse(
-                Note="Ignoring. Already set up with my key", HttpStatusCode=422
-            )
-        self.settings.sk: SecretStr = SecretStr(payload.TaDaemonSk)
-        self.acct = BasicAccount(payload.TaDaemonSk)
-        return RestfulResponse(Note=f"Success. Account has addr {self.acct.addr}")
 
     def initial_tadeed_algo_optin_received(
         self, payload: InitialTadeedAlgoOptin
