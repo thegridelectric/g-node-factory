@@ -23,8 +23,10 @@ class GnfPublic(BaseModel):
     gnr_addr: str = "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE"
     gnf_validator_funding_threshold_algos: int = 100
     ta_deed_consideration_algos: int = 50
-    gnf_api_root: str = "http://0.0.0.0:8000"
-    molly_api_root: str = "http://0.0.0.0:8001"
+    gnf_api_root: str = "http://localhost:8000"
+    molly_api_root: str = "http://localhost:8001"
+    molly_cert_name: str = "Molly Metermaid"
+    molly_name: str = "Molly Inc Telemetry Surveyors and Purveyors"
 
 
 class AlgoApiSecrets(BaseModel):
@@ -71,9 +73,9 @@ class ValidatorSettings(BaseSettings):
     sk: SecretStr = SecretStr(
         "FCLmrvflibLD6Deu3NNiUQCC9LOWpXLsbMR/cP2oJzH8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBg=="
     )
-    validator_cert_name: str = "Molly Metermaid"
-    validator_name: str = "Molly Inc Telemetry Surveyors and Purveyors"
-    validator_web_page: str = "http://localhost:5000/mollyco/who-we-are/"
+    cert_name: str = "Molly Metermaid"
+    name: str = "Molly Inc Telemetry Surveyors and Purveyors"
+    api_root: str = "http://localhost:8001"
 
     class Config:
         env_prefix = "VLDTR_"

@@ -1,9 +1,10 @@
 import logging
 
-import requests
+import requests_async as requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from asgiref.sync import sync_to_async
 from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
@@ -17,6 +18,7 @@ from gnf.algo_utils import MultisigAccount
 # Schemata sent by homeowner
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
+from gnf.schemata import TerminalassetCertifyHack_Maker
 
 
 LOGGER = logging.getLogger(__name__)
@@ -54,6 +56,16 @@ class DevTaOwner:
     ##########################
     # Messages Sent
     ##########################
+
+    async def request_ta_certification(self) -> None:
+        ta_alias = self.settings.initial_ta_alias
+        payload = TerminalassetCertifyHack_Maker(terminal_asset_alias=ta_alias).tuple
+        LOGGER.info(f"Requesting certification for {ta_alias}")
+        api_endpoint = (
+            f"{self.settings.public.molly_api_root}/terminalasset-certification/"
+        )
+        r = await requests.post(url=api_endpoint, json=payload.as_dict())
+        return r
 
     def post_initial_tadeed_algo_optin(self) -> InitialTadeedAlgoOptin:
         """

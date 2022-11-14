@@ -67,18 +67,18 @@ class DevValidator:
     # Messages received
     ################
 
-    async def terminalasset_certify_hack_received(
+    def terminalasset_certify_hack_received(
         self, payload: TerminalassetCertifyHack
     ) -> RestfulResponse:
         ta_alias = payload.TerminalAssetAlias
-        r = await self.post_initial_tadeed_algo_create(ta_alias=ta_alias)
+        r = self.post_initial_tadeed_algo_create(ta_alias=ta_alias)
         return r
 
     ###################
     # Messages sent
     ###################
 
-    async def post_initial_tadeed_algo_create(self, ta_alias: str) -> RestfulResponse:
+    def post_initial_tadeed_algo_create(self, ta_alias: str) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -101,10 +101,8 @@ class DevValidator:
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-create/"
         )
-        async_request = sync_to_async(
-            requests.post(url=api_endpoint, json=payload.as_dict())
-        )
-        request_response = await async_request()
+        request_response = requests.post(url=api_endpoint, json=payload.as_dict())
+
         if request_response.status_code > 200:
             if "detail" in request_response.json().keys():
                 note = request_response.json()["detail"]
@@ -123,10 +121,10 @@ class DevValidator:
             decimals=0,
             default_frozen=False,
             manager=self.settings.public.gnf_admin_addr,
-            asset_name=self.settings.validator_cert_name,
+            asset_name=self.settings.cert_name,
             unit_name="VLDTR",
-            note=self.settings.validator_name,
-            url=self.settings.validator_web_page,
+            note=self.settings.name,
+            url=self.settings.api_root,
             sp=self.client.suggested_params(),
         )
 
@@ -180,7 +178,7 @@ class DevValidator:
         pprint(r.json())
         return RestfulResponse(**r.json())
 
-    def post_initial_tadeed_algo_transfer(
+    def certify_terminal_asset(
         self,
         ta_deed_idx: int,
         ta_daemon_addr: str,

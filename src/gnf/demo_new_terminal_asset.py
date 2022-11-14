@@ -35,35 +35,28 @@ def main():
         pprint(r)
         raise Exception("Stopping demo due to errors")
 
-    ta_alias = holly.settings.initial_ta_alias
-    LOGGER.info(
-        f"Post to GnfRestAPI/initial-tadeed-algo-create to create a TaDeed for {ta_alias}"
-    )
-    r = molly.post_initial_tadeed_algo_create(
-        ta_alias=ta_alias,
-    )
-    pprint(r)
+    # holly.request_ta_certification()
 
-    if r.HttpStatusCode > 200:
-        raise Exception("Stopping demo due to errors")
+    # if r.HttpStatusCode > 200:
+    #     raise Exception("Stopping demo due to errors")
 
-    atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)
+    # atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)
 
-    ta_deed_idx = atm_gt.OwnershipDeedNftId
+    # ta_deed_idx = atm_gt.OwnershipDeedNftId
 
-    holly.post_initial_tadeed_algo_optin()
+    # holly.post_initial_tadeed_algo_optin()
 
-    r = molly.post_initial_tadeed_algo_transfer(
-        ta_deed_idx=ta_deed_idx,
-        ta_daemon_addr=holly.settings.ta_daemon_addr,
-        ta_owner_addr=holly.acct.addr,
-        micro_lat=holly.settings.micro_lat,
-        micro_lon=-holly.settings.micro_lon,
-    )
+    # r = molly.certify_terminal_asset(
+    #     ta_deed_idx=ta_deed_idx,
+    #     ta_daemon_addr=holly.settings.ta_daemon_addr,
+    #     ta_owner_addr=holly.acct.addr,
+    #     micro_lat=holly.settings.micro_lat,
+    #     micro_lon=-holly.settings.micro_lon,
+    # )
 
-    if r.HttpStatusCode > 200:
-        pprint(r)
-        raise Exception("Stopping demo due to errors")
+    # if r.HttpStatusCode > 200:
+    #     pprint(r)
+    #     raise Exception("Stopping demo due to errors")
 
 
 if __name__ == "__main__":
