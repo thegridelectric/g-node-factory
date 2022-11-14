@@ -98,10 +98,10 @@
       <ServerRoleId>reczel9oTcNrweZ1X</ServerRoleId>
       <ReturnTypeId>recvGFiTtzXNrhLBm</ReturnTypeId>
       <PostTypeId>recH9GUDdSB7SiwNG</PostTypeId>
+      <PostTypeName>bid</PostTypeName>
+      <ServerShorthand>marketmaker</ServerShorthand>
       <Name>Post bid to marketmaker</Name>
       <ServerRole>MarketMaker</ServerRole>
-      <ServerShorthand>marketmaker</ServerShorthand>
-      <PostTypeName>bid</PostTypeName>
       <PostTypeVersion>000</PostTypeVersion>
       <ReturnTypeVersion>000</ReturnTypeVersion>
       <ReturnTypeName>bid.ack</ReturnTypeName>
@@ -118,8 +118,8 @@
       <AliasRoot>tavalidatorcert.algo.transfer</AliasRoot>
       <Description>This type is meant to be sent from a pendingValidator (e.g. "MollyMetermaid", or molly) to the GNodeFactoryDb, so that the gnf will transfer an already created ValidatorCert to the pendingValidator's account. </Description>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tavalidatorcert.algo.transfer</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tavalidatorcert.algo.transfer</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec0r8Vc4daPOhatR</SchemaRootId>
@@ -129,8 +129,8 @@
       <Status>Active</Status>
       <AliasRoot>new.tadeed.algo.optin</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>new.tadeed.algo.optin</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>new.tadeed.algo.optin</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec1E12bdSXOtQ9qP</SchemaRootId>
@@ -142,8 +142,8 @@
       <AliasRoot>gt.eq.reporting.config</AliasRoot>
       <UsedAsSubMessagein>ElectricalQuantityReportingConfigList</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.eq.reporting.config</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.eq.reporting.config</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec1gy4a9zTVXe420</SchemaRootId>
@@ -153,8 +153,8 @@
       <Status>Active</Status>
       <AliasRoot>sim.timestep</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>sim.timestep</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>sim.timestep</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec1joYefgk9OQTyG</SchemaRootId>
@@ -168,8 +168,8 @@
       <AliasRoot>resistive.heater.component.gt</AliasRoot>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>resistive.heater.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>resistive.heater.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec23C6am0WIH9veT</SchemaRootId>
@@ -179,8 +179,8 @@
       <Status>Deprecated</Status>
       <AliasRoot>gt.sh.simple.status</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.sh.simple.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.simple.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec430tANcSG2ZavF</SchemaRootId>
@@ -191,8 +191,8 @@
       <SchemaAxioms>exchange.tadeed.algo.010__4, exchange.tadeed.algo.010__1, exchange.tadeed.algo.010__3, exchange.tadeed.algo.010__6, exchange.tadeed.algo.010__5, exchange.tadeed.algo.010__2</SchemaAxioms>
       <AliasRoot>tadeed.algo.exchange</AliasRoot>
       <CurrentSemanticEnd>001</CurrentSemanticEnd>
-      <Alias>tadeed.algo.exchange</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tadeed.algo.exchange</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec4u5c6FO198haBK</SchemaRootId>
@@ -207,8 +207,8 @@
       <UsedAsSubMessagein>PipeFlowSensorComponents</UsedAsSubMessagein>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>pipe.flow.sensor.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>pipe.flow.sensor.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec6PDgvHMkqnbyOQ</SchemaRootId>
@@ -220,8 +220,8 @@
       <Status>Active</Status>
       <AliasRoot>market.type.gt</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>market.type.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>market.type.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec9aKp2kx0NQDDc6</SchemaRootId>
@@ -231,8 +231,8 @@
       <Status>Active</Status>
       <AliasRoot>latest.price</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>latest.price</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>latest.price</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rec9vczzxftBbTBvm</SchemaRootId>
@@ -240,10 +240,10 @@
       <ProtocolCategory>Json</ProtocolCategory>
       <SchemaRootscopy>recTKuleOQoZ3n0HH</SchemaRootscopy>
       <Status>Active</Status>
-      <AliasRoot>tadeed.specs.private.hack</AliasRoot>
+      <AliasRoot>tadaemon.sk.hack</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tadeed.specs.private.hack</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tadaemon.sk.hack</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recBNevzmPrROWd5j</SchemaRootId>
@@ -256,8 +256,8 @@
       <UsedAsSubMessagein>Snapshot</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>telemetry.snapshot.spaceheat</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>telemetry.snapshot.spaceheat</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recBX9s6MqEmX6EjU</SchemaRootId>
@@ -271,8 +271,8 @@
       <Status>Active</Status>
       <AliasRoot>current.transformer.cac.gt</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>current.transformer.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>current.transformer.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recBr8F2Oy5JbxQGP</SchemaRootId>
@@ -282,8 +282,8 @@
       <Status>Active</Status>
       <AliasRoot>bid.ack</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>bid.ack</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>bid.ack</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recCGkiwasshpUQnL</SchemaRootId>
@@ -296,8 +296,8 @@
       <UsedAsSubMessagein>MultipurposeTelemetryList, MultipurposeTelemetryList</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.multipurpose.telemetry.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.multipurpose.telemetry.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recCpUQ75l1hoKN45</SchemaRootId>
@@ -308,8 +308,8 @@
       <SchemaAxioms>spaceheat.status.100__, spaceheat.status.100__</SchemaAxioms>
       <AliasRoot>spaceheat.status</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>spaceheat.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>spaceheat.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recDnKXIasoP8ODSd</SchemaRootId>
@@ -321,8 +321,8 @@
       <Status>Active</Status>
       <AliasRoot>gnode.gt</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>gnode.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gnode.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recERKCcoJa8mkC8L</SchemaRootId>
@@ -332,8 +332,8 @@
       <Status>Active</Status>
       <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
       <CurrentSemanticEnd>001</CurrentSemanticEnd>
-      <Alias>initial.tadeed.algo.optin</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>initial.tadeed.algo.optin</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recEdlcUTBfQ9Hy6D</SchemaRootId>
@@ -346,8 +346,8 @@
       <AliasRoot>gt.component</AliasRoot>
       <UsedAsSubMessagein>OtherComponents, Component, Component, Component</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.component</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.component</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recEfMvX9DPwXpcJ3</SchemaRootId>
@@ -357,8 +357,8 @@
       <Status>Active</Status>
       <AliasRoot>discoverycert.algo.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>discoverycert.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>discoverycert.algo.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recEoebL6fHn6xzXL</SchemaRootId>
@@ -368,8 +368,8 @@
       <Status>Deprecated</Status>
       <AliasRoot>signandsubmit.mtx.algo</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>signandsubmit.mtx.algo</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>signandsubmit.mtx.algo</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recGPwKi4Sb6sxayy</SchemaRootId>
@@ -379,8 +379,8 @@
       <Status>Active</Status>
       <AliasRoot>ear.g.node.alias.list.toss</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>ear.g.node.alias.list.toss</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>ear.g.node.alias.list.toss</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recGQ4lX5HOPJraGN</SchemaRootId>
@@ -390,8 +390,8 @@
       <Status>Active</Status>
       <AliasRoot>price.quantity</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>price.quantity</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>price.quantity</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recHrNVLHcDTTqaCq</SchemaRootId>
@@ -406,8 +406,8 @@
       <UsedAsSubMessagein>TempSensorComponents</UsedAsSubMessagein>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>temp.sensor.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>temp.sensor.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recIjNSTFZEY0rZ5x</SchemaRootId>
@@ -420,8 +420,8 @@
       <Status>Active</Status>
       <AliasRoot>electric.meter.cac.gt</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>electric.meter.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>electric.meter.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recK5H9Pt9ZpF6hgi</SchemaRootId>
@@ -434,8 +434,8 @@
       <AliasRoot>gt.component.attribute.class</AliasRoot>
       <UsedAsSubMessagein>OtherCacs, ComponentAttributeClass</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.component.attribute.class</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.component.attribute.class</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recKVkCs5ktwXS3Bu</SchemaRootId>
@@ -450,8 +450,8 @@
       <AliasRoot>pipe.flow.sensor.cac.gt</AliasRoot>
       <UsedAsSubMessagein>ComponentAttributeClass, PipeFlowSensorCacs</UsedAsSubMessagein>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>pipe.flow.sensor.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>pipe.flow.sensor.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recLF7qGdmXsqb9M2</SchemaRootId>
@@ -461,8 +461,8 @@
       <Status>Active</Status>
       <AliasRoot>bid</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>bid</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>bid</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recLc7QnBdk9iPdHI</SchemaRootId>
@@ -473,8 +473,8 @@
       <AliasRoot>gt.sh.simple.single.status</AliasRoot>
       <UsedAsSubMessagein>SimpleSingleStatusList</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.sh.simple.single.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.simple.single.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNH5aI7c5Latl1K</SchemaRootId>
@@ -487,8 +487,8 @@
       <UsedAsSubMessagein>BooleanactuatorCmdList, BooleanactuatorCmdList</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.booleanactuator.cmd.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.booleanactuator.cmd.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNShQmJ0F04UlrH</SchemaRootId>
@@ -498,8 +498,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnode.other.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnode.other.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnode.other.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNZGEdUh6l7BfYp</SchemaRootId>
@@ -512,8 +512,8 @@
       <AliasRoot>current.transformer.component.gt</AliasRoot>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>current.transformer.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>current.transformer.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNgGDYcengufuFe</SchemaRootId>
@@ -523,8 +523,8 @@
       <Status>Active</Status>
       <AliasRoot>atn.params.report.heatpumpwithbooststore</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>atn.params.report.heatpumpwithbooststore</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>atn.params.report.heatpumpwithbooststore</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNgwEZ9cfcNmeTI</SchemaRootId>
@@ -534,8 +534,8 @@
       <Status>Active</Status>
       <AliasRoot>hack.state</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>hack.state</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>hack.state</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recNkT1cGWR3vqFMM</SchemaRootId>
@@ -545,8 +545,8 @@
       <Status>Active</Status>
       <AliasRoot>atn.params.heatpumpwithbooststore</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>atn.params.heatpumpwithbooststore</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>atn.params.heatpumpwithbooststore</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recPnrf8TmF9WBgAm</SchemaRootId>
@@ -559,8 +559,8 @@
       <AliasRoot>snapshot.spaceheat</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>snapshot.spaceheat</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>snapshot.spaceheat</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recT6312S7LckLHZ9</SchemaRootId>
@@ -576,8 +576,8 @@
       <ReplaceWithSchema>rec1joYefgk9OQTyG</ReplaceWithSchema>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.electric.heater.component</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.electric.heater.component</Alias>
       <ReplaceWithTypeAliasRoot>resistive.heater.component.gt</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -588,8 +588,8 @@
       <Status>Active</Status>
       <AliasRoot>new.tadeed.send</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>new.tadeed.send</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>new.tadeed.send</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recUrIRjO9EYJRQhG</SchemaRootId>
@@ -601,8 +601,8 @@
       <SchemaAxioms>gt.powermeter.reporting.config.100__</SchemaAxioms>
       <AliasRoot>gt.powermeter.reporting.config</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.powermeter.reporting.config</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.powermeter.reporting.config</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recUtfxpuihd6JBQ9</SchemaRootId>
@@ -612,8 +612,8 @@
       <Status>Active</Status>
       <AliasRoot>discoverycert.algo.transfer</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>discoverycert.algo.transfer</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>discoverycert.algo.transfer</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recVNiapT0HIufahj</SchemaRootId>
@@ -623,8 +623,8 @@
       <Status>Active</Status>
       <AliasRoot>heartbeat.a</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>heartbeat.a</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>heartbeat.a</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recWDAtZiKvWaXnRX</SchemaRootId>
@@ -634,8 +634,8 @@
       <Status>Pending</Status>
       <AliasRoot>spaceheat.dnack</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>spaceheat.dnack</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>spaceheat.dnack</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recZhfzRnHkE804iR</SchemaRootId>
@@ -649,8 +649,8 @@
       <AliasRoot>basegnode.gt</AliasRoot>
       <Description>BaseGNode. Authority is GNodeFactory. </Description>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnode.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnode.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recaDjX9PV6CUrf6k</SchemaRootId>
@@ -660,8 +660,8 @@
       <Status>Active</Status>
       <AliasRoot>price.quantity.unitless</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>price.quantity.unitless</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>price.quantity.unitless</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recb8a2JTfYBmC6v7</SchemaRootId>
@@ -671,8 +671,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnode.terminalasset.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnode.terminalasset.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnode.terminalasset.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recbbx6wGZEfqP2Kn</SchemaRootId>
@@ -686,8 +686,8 @@
       <AliasRoot>gt.sh.status</AliasRoot>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recc5qGcZNQPmktbe</SchemaRootId>
@@ -700,8 +700,8 @@
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
       <SendAlias>p</SendAlias>
-      <Alias>gs.pwr</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gs.pwr</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>reccc96DDf5Ue9FmA</SchemaRootId>
@@ -716,8 +716,8 @@
       <UsedAsSubMessagein>ComponentAttributeClass, ElectricMeterCacs</UsedAsSubMessagein>
       <ReplaceWithSchema>recIjNSTFZEY0rZ5x</ReplaceWithSchema>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.electric.meter.cac</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.electric.meter.cac</Alias>
       <ReplaceWithTypeAliasRoot>electric.meter.cac.gt</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -728,8 +728,8 @@
       <Status>Active</Status>
       <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>initial.tadeed.algo.transfer</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>initial.tadeed.algo.transfer</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>reccsb7VI48EdWlGk</SchemaRootId>
@@ -739,8 +739,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnodes.get</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnodes.get</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnodes.get</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recdbl99ZoQqyOhS7</SchemaRootId>
@@ -754,8 +754,8 @@
       <UsedAsSubMessagein>BooleanActuatorComponents</UsedAsSubMessagein>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>boolean.actuator.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>boolean.actuator.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recde7ZQpg5BRpHxm</SchemaRootId>
@@ -765,8 +765,8 @@
       <Status>Active</Status>
       <AliasRoot>old.tadeed.algo.return</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>old.tadeed.algo.return</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>old.tadeed.algo.return</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recdi7BezBflZlH45</SchemaRootId>
@@ -777,8 +777,8 @@
       <SchemaAxioms>transfer.tadeed.algo.020__1, transfer.tadeed.algo.020__2, transfer.tadeed.algo.020__7, transfer.tadeed.algo.020__4, transfer.tadeed.algo.020__6, transfer.tadeed.algo.020__5, transfer.tadeed.algo.020__3</SchemaAxioms>
       <AliasRoot>tadeed.algo.transfer</AliasRoot>
       <CurrentSemanticEnd>001</CurrentSemanticEnd>
-      <Alias>tadeed.algo.transfer</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tadeed.algo.transfer</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recdmZpmDC9qq3Wz5</SchemaRootId>
@@ -790,8 +790,8 @@
       <AliasRoot>gt.driver.booleanactuator.cmd</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.driver.booleanactuator.cmd</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.driver.booleanactuator.cmd</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rece1suo3h3SqfW4M</SchemaRootId>
@@ -803,8 +803,8 @@
       <Status>Active</Status>
       <AliasRoot>gt.sensor.reporting.config</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.sensor.reporting.config</Alias>
       <ConsistencyCheck>0</ConsistencyCheck>
+      <Alias>gt.sensor.reporting.config</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>receVdNEfIE1HLnwN</SchemaRootId>
@@ -818,8 +818,8 @@
       <AliasRoot>gt.sh.cli.atn.cmd</AliasRoot>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.cli.atn.cmd</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.cli.atn.cmd</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rechCPLYrkc1asuPJ</SchemaRootId>
@@ -831,8 +831,8 @@
       <AliasRoot>tavalidatorcert.algo.create</AliasRoot>
       <Description>This type is meant to be sent from a pendingValidator (e.g. "MollyMetermaid", or molly) to the GNodeFactoryDb, to initiate the process of certifying the pendingValidator as a validator. Being a validator means that a ValidatorCertificate NFT is created by the multi account [[GNodeFactory.admin, molly], threshold 2] and owned by molly.</Description>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tavalidatorcert.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tavalidatorcert.algo.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rechZ9OTpGxuT8xWl</SchemaRootId>
@@ -842,8 +842,8 @@
       <Status>Pending</Status>
       <AliasRoot>gt.power.sync</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.power.sync</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.power.sync</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rechZBY0G1JuNeEuG</SchemaRootId>
@@ -857,8 +857,8 @@
       <Description>Boolean dispatch command sent over the cloud broker from one GNode (FromGNodeAlias/ FromGNodeId) to another (ToGNodeAlias). AboutNodeAlias is the node getting dispatched. It may be a GNode, but it can also be a SpaceHeatNode.</Description>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.dispatch.boolean</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.dispatch.boolean</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>reci4VO3iee2LGfcG</SchemaRootId>
@@ -868,8 +868,8 @@
       <Status>Active</Status>
       <AliasRoot>flo.params.heatpumpwithbooststore</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>flo.params.heatpumpwithbooststore</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>flo.params.heatpumpwithbooststore</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recijDUCMCF0drLi3</SchemaRootId>
@@ -882,8 +882,8 @@
       <SchemaAxioms>spaceheat.node.gt.100__</SchemaAxioms>
       <AliasRoot>spaceheat.node.gt</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>spaceheat.node.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>spaceheat.node.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recjI10N2qf36kpmC</SchemaRootId>
@@ -895,8 +895,8 @@
       <AliasRoot>gt.sh.cli.scada.response</AliasRoot>
       <ReplaceWithSchema>recPnrf8TmF9WBgAm</ReplaceWithSchema>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
-      <Alias>gt.sh.cli.scada.response</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.cli.scada.response</Alias>
       <ReplaceWithTypeAliasRoot>snapshot.spaceheat</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -908,8 +908,8 @@
       <Status>Active</Status>
       <AliasRoot>ready</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>ready</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>ready</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recjwzTYeT77Cq7NZ</SchemaRootId>
@@ -925,9 +925,20 @@
       <UsedAsSubMessagein>ComponentAttributeClass, ElectricHeaterCacs, ComponentAttributeClass</UsedAsSubMessagein>
       <ReplaceWithSchema>recqmA1Cu9GIg4hpp</ReplaceWithSchema>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.electric.heater.cac</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.electric.heater.cac</Alias>
       <ReplaceWithTypeAliasRoot>resistive.heater.cac.gt</ReplaceWithTypeAliasRoot>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recl00nd7rYLyLDUL</SchemaRootId>
+      <createdTime>2022-11-14T15:41:26Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recPPTLAWZu08mD7s</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>terminalasset.certify.hack</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>terminalasset.certify.hack</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recmRa74R0GAk0PKx</SchemaRootId>
@@ -937,8 +948,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnode.marketmaker.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnode.marketmaker.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnode.marketmaker.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recnOen6KenxkwQtB</SchemaRootId>
@@ -950,8 +961,8 @@
       <AliasRoot>gt.thermal.edge</AliasRoot>
       <UsedAsSubMessagein>ThermalEdges</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.thermal.edge</Alias>
       <ConsistencyCheck>0</ConsistencyCheck>
+      <Alias>gt.thermal.edge</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recnUzSx1WgKUdTZO</SchemaRootId>
@@ -963,8 +974,8 @@
       <AliasRoot>gt.dispatch</AliasRoot>
       <ReplaceWithSchema>rechZBY0G1JuNeEuG</ReplaceWithSchema>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
-      <Alias>gt.dispatch</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.dispatch</Alias>
       <ReplaceWithTypeAliasRoot>gt.dispatch.boolean</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -977,8 +988,8 @@
       <AliasRoot>gt.dispatch.boolean.local</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.dispatch.boolean.local</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.dispatch.boolean.local</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recpr0byizj3PmqXi</SchemaRootId>
@@ -994,8 +1005,8 @@
       <AliasRoot>gt.sh.node</AliasRoot>
       <ReplaceWithSchema>recijDUCMCF0drLi3</ReplaceWithSchema>
       <CurrentSemanticEnd>120</CurrentSemanticEnd>
-      <Alias>gt.sh.node</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.node</Alias>
       <ReplaceWithTypeAliasRoot>spaceheat.node.gt</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -1010,8 +1021,8 @@
       <Status>Active</Status>
       <AliasRoot>resistive.heater.cac.gt</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>resistive.heater.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>resistive.heater.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recrNYtQoRa7YhqI4</SchemaRootId>
@@ -1026,8 +1037,8 @@
       <AliasRoot>temp.sensor.cac.gt</AliasRoot>
       <UsedAsSubMessagein>ComponentAttributeClass, TempSensorCacs</UsedAsSubMessagein>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>temp.sensor.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>temp.sensor.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recsMoh2JkG2YPR8u</SchemaRootId>
@@ -1042,8 +1053,8 @@
       <UsedAsSubMessagein>ElectricMeterComponents</UsedAsSubMessagein>
       <IsComponent>true</IsComponent>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>electric.meter.component.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>electric.meter.component.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>rect6WA80mNWDt7v0</SchemaRootId>
@@ -1053,8 +1064,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnode.ctn.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnode.ctn.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnode.ctn.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recuGgxcKPz76mhQc</SchemaRootId>
@@ -1064,8 +1075,8 @@
       <Status>Active</Status>
       <AliasRoot>tadeed.specs.hack</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tadeed.specs.hack</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tadeed.specs.hack</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recuocYj9OaOIsmtn</SchemaRootId>
@@ -1075,8 +1086,8 @@
       <Status>Active</Status>
       <AliasRoot>tatradingrights.algo.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tatradingrights.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>tatradingrights.algo.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recv1lkBTFvuSSGOn</SchemaRootId>
@@ -1086,8 +1097,8 @@
       <Status>Active</Status>
       <AliasRoot>spaceheat.dna</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>spaceheat.dna</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>spaceheat.dna</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recvoY8JOncNeQjYF</SchemaRootId>
@@ -1097,8 +1108,8 @@
       <Status>Pending</Status>
       <AliasRoot>gt.spaceheat.house.config</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>gt.spaceheat.house.config</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.spaceheat.house.config</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recwcEF6jm0pivW8K</SchemaRootId>
@@ -1111,8 +1122,8 @@
       <UsedAsSubMessagein>SimpleTelemetryList, SimpleTelemetryList</UsedAsSubMessagein>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.simple.telemetry.status</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.simple.telemetry.status</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recx3kwLemvtMaT0t</SchemaRootId>
@@ -1124,8 +1135,8 @@
       <AliasRoot>gt.sh.telemetry.from.multipurpose.sensor</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.sh.telemetry.from.multipurpose.sensor</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.telemetry.from.multipurpose.sensor</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recx4EL5mDebUhtzp</SchemaRootId>
@@ -1138,8 +1149,8 @@
       <AliasRoot>gt.telemetry</AliasRoot>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
-      <Alias>gt.telemetry</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.telemetry</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recxnrRBEZg5cPVPt</SchemaRootId>
@@ -1150,8 +1161,8 @@
       <AliasRoot>optin.tadeed.algo</AliasRoot>
       <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
-      <Alias>optin.tadeed.algo</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>optin.tadeed.algo</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recy2lAURQitTqKTR</SchemaRootId>
@@ -1165,8 +1176,8 @@
       <AliasRoot>boolean.actuator.cac.gt</AliasRoot>
       <UsedAsSubMessagein>ComponentAttributeClass, BooleanActuatorCacs</UsedAsSubMessagein>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>boolean.actuator.cac.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>boolean.actuator.cac.gt</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recyuQKkp5CFejv2j</SchemaRootId>
@@ -1177,8 +1188,8 @@
       <SchemaAxioms>create.tadeed.algo.010__3, create.tadeed.algo.010__5, create.tadeed.algo.010__1, create.tadeed.algo.010__4, create.tadeed.algo.010__2, create.tadeed.algo.010__6</SchemaAxioms>
       <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>initial.tadeed.algo.create</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>initial.tadeed.algo.create</Alias>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recyuopIDguUgR1mI</SchemaRootId>
@@ -1191,8 +1202,8 @@
       <UsedAsSubMessagein>Snapshot, Snapshot</UsedAsSubMessagein>
       <ReplaceWithSchema>recBNevzmPrROWd5j</ReplaceWithSchema>
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
-      <Alias>gt.sh.status.snapshot</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>gt.sh.status.snapshot</Alias>
       <ReplaceWithTypeAliasRoot>telemetry.snapshot.spaceheat</ReplaceWithTypeAliasRoot>
     </SchemaRoot>
     <SchemaRoot>
@@ -1203,8 +1214,8 @@
       <Status>Active</Status>
       <AliasRoot>basegnodes.broadcast</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>basegnodes.broadcast</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>basegnodes.broadcast</Alias>
     </SchemaRoot>
   </SchemaRoots>
   <RestfulGets>
@@ -1213,10 +1224,10 @@
       <createdTime>2022-11-08T16:36:45Z</createdTime>
       <ServerRoleId>reczel9oTcNrweZ1X</ServerRoleId>
       <GetId>recd5K0XiAzHsj2Pw</GetId>
-      <Name>Get latest.price from marketmaker</Name>
-      <ServerRole>MarketMaker</ServerRole>
       <GetTypeName>latest.price</GetTypeName>
       <ServerShorthand>marketmaker</ServerShorthand>
+      <Name>Get latest.price from marketmaker</Name>
+      <ServerRole>MarketMaker</ServerRole>
       <GetTypeVersion>000</GetTypeVersion>
     </RestfulGet>
   </RestfulGets>
@@ -1256,8 +1267,8 @@
       <SchemaAttributes>recjuJ8RaGljvo9ZZ</SchemaAttributes>
       <SchemaAttributes>recl3xwMzRxkadUBM</SchemaAttributes>
       <Alias>spaceheat.telemetry.name.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec4S3L3NZiPihbLi</GtEnumId>
@@ -1279,8 +1290,8 @@
       <SchemaAttributes>recnabpmvAZza5CWK</SchemaAttributes>
       <SchemaAttributes>rec3MAw2y2MewO5VK</SchemaAttributes>
       <Alias>distribution.tariff.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec57bh9xoIxLUHjY</GtEnumId>
@@ -1299,8 +1310,8 @@
       <SchemaAttributes>recy6wm0IgQI90zHG</SchemaAttributes>
       <SchemaAttributes>rec0DytUWYZc8xqSl</SchemaAttributes>
       <Alias>emitter.pump.feedback.model.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>ConstantDeltaT</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec5HXPeyp3jic6FV</GtEnumId>
@@ -1325,8 +1336,8 @@
       <SchemaAttributes>recEpIg7AB9Qr2dpX</SchemaAttributes>
       <SchemaAttributes>recGSAil9ULCQw1S1</SchemaAttributes>
       <Alias>core.g.node.role.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Other</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec6tWfTKE5P1Yoa0</GtEnumId>
@@ -1379,8 +1390,8 @@
       <SchemaAttributes>recRU6cvY6FKUwxbv</SchemaAttributes>
       <SchemaAttributes>recSWBVF41HakpB18</SchemaAttributes>
       <Alias>bid.price.unit.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec7Ck8y72m0NytYa</GtEnumId>
@@ -1422,8 +1433,8 @@
       <LocalName>message.category</LocalName>
       <AliasRoot>message.category</AliasRoot>
       <Alias>message.category.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rec7qsokBmd2hN5vT</GtEnumId>
@@ -1461,8 +1472,8 @@
       <SchemaAttributes>reclsQog4UhrdIbyr</SchemaAttributes>
       <SchemaAttributes>recFv92txxktPwANR</SchemaAttributes>
       <Alias>recognized.currency.unit.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recEyU9EKDtM3bD18</GtEnumId>
@@ -1481,8 +1492,8 @@
       <SchemaAttributes>recn1qW3ADtk1dB5T</SchemaAttributes>
       <SchemaAttributes>recVtRiqtAcpf0fqr</SchemaAttributes>
       <Alias>recognized.temperature.unit.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>C</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recGY8tA8qaJlpJXP</GtEnumId>
@@ -1558,8 +1569,8 @@
       <SchemaAttributes>recC9UBTiJt4Qvu0t</SchemaAttributes>
       <SchemaAttributes>recLfb3AjS6LNracR</SchemaAttributes>
       <Alias>spaceheat.make.model.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>UnknownMake__UnknownModel</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recPvHsXzCenxLa7v</GtEnumId>
@@ -1575,8 +1586,8 @@
       <LocalName>universe.type</LocalName>
       <AliasRoot>universe.type</AliasRoot>
       <Alias>universe.type.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Dev</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recQeMNisJZjsYXTl</GtEnumId>
@@ -1597,8 +1608,8 @@
       <LocalName>actor.class</LocalName>
       <AliasRoot>spaceheat.actor.class</AliasRoot>
       <Alias>spaceheat.actor.class.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>NoActor</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recUJtDNaSJdt9wie</GtEnumId>
@@ -1629,8 +1640,8 @@
       <SchemaAttributes>recygXnG0FNBHKEpI</SchemaAttributes>
       <SchemaAttributes>rec5N3oYOvCWemw2p</SchemaAttributes>
       <Alias>mixing.valve.feedback.model.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>ConstantSwt</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recZB6uJDEaCzvTZX</GtEnumId>
@@ -1659,8 +1670,8 @@
       <AliasRoot>g.node.role</AliasRoot>
       <SchemaAttributes>recF8QiEbhrOARMRK</SchemaAttributes>
       <Alias>g.node.role.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recZmZP13YV9Rmbnw</GtEnumId>
@@ -1683,8 +1694,8 @@
       <AliasRoot>market.type.alias</AliasRoot>
       <SchemaAttributes>recOxmICij5REVdXj</SchemaAttributes>
       <Alias>market.type.alias.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recc1W1unmzowrKX9</GtEnumId>
@@ -1709,8 +1720,8 @@
       <SchemaAttributes>recL9BeJniQtSOgyV</SchemaAttributes>
       <SchemaAttributes>recEwx1N4X1KFrH7d</SchemaAttributes>
       <Alias>spaceheat.unit.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recf9ZTshqRu81HZo</GtEnumId>
@@ -1732,8 +1743,8 @@
       <SchemaAttributes>rec85nrhXQw9tRODn</SchemaAttributes>
       <SchemaAttributes>recaaEpN2NrRBsCmW</SchemaAttributes>
       <Alias>energy.supply.type.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>rechRk6DjahLATrOI</GtEnumId>
@@ -1753,8 +1764,8 @@
       <LocalName>registry.g.node.role</LocalName>
       <AliasRoot>registry.g.node.role</AliasRoot>
       <Alias>registry.g.node.role.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>reclaO4DqpDmwPOIC</GtEnumId>
@@ -1776,8 +1787,8 @@
       <LocalName>message.category.symbol</LocalName>
       <AliasRoot>message.category.symbol</AliasRoot>
       <Alias>message.category.symbol.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recomGYBJ9ldSsiNU</GtEnumId>
@@ -1826,8 +1837,8 @@
       <SchemaAttributes>rec5yCVNnWVXBDdMc</SchemaAttributes>
       <SchemaAttributes>recOhTtiANrJcVKgf</SchemaAttributes>
       <Alias>bid.quantity.unit.000</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>AvgMW</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recpuISeVCSDhSUOB</GtEnumId>
@@ -1861,8 +1872,8 @@
       <SchemaAttributes>rec3Ip25a5UdscQKD</SchemaAttributes>
       <SchemaAttributes>recVtNsE7nmGPy31j</SchemaAttributes>
       <Alias>g.node.status.100</Alias>
-      <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
+      <DefaultSymbol>00000000</DefaultSymbol>
     </GtEnum>
     <GtEnum>
       <GtEnumId>recv25tG4mBjyVeMY</GtEnumId>
@@ -2753,7 +2764,7 @@
       <Enum>recZB6uJDEaCzvTZX</Enum>
       <DisplayName>g.node.role.000__PriceService</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrbWdeYKc4z2xbts/recUtA3HI1KJ6BADP</EnumSymbol>
+    <EnumSymbol>itr8LzlKhlpuEgk0N/recUtA3HI1KJ6BADP</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recVVshv4AuJAbuyp</EnumSymbolId>
       <createdTime>2022-08-01T12:19:47Z</createdTime>
@@ -3653,7 +3664,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recQeMNisJZjsYXTl</Enum>
       <DisplayName>spaceheat.actor.class.000__PrimaryMeter</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrbWdeYKc4z2xbts/recyHL0VJtn5jmtIW</EnumSymbol>
+    <EnumSymbol>itr8LzlKhlpuEgk0N/recyHL0VJtn5jmtIW</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recyNnqxvxbEGLzhG</EnumSymbolId>
       <createdTime>2022-11-08T22:21:38Z</createdTime>
@@ -3736,12 +3747,12 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <createdTime>2022-11-08T16:35:22Z</createdTime>
       <BrokerPairing>recXoGg7l3r7ZG6Em</BrokerPairing>
       <PayloadId>recjpCj1MoKBvlAbR</PayloadId>
+      <From>atomictnode</From>
+      <PayloadTypeName>ready</PayloadTypeName>
+      <To>timecoordinator</To>
       <Name>atomictnode sends ready to timecoordinator</Name>
       <FromRole>AtomicTNode</FromRole>
-      <From>atomictnode</From>
       <ToRole>TimeCoordinator</ToRole>
-      <To>timecoordinator</To>
-      <PayloadTypeName>ready</PayloadTypeName>
     </ConvoMessage>
   </ConvoMessages>
   <Schemas>
@@ -3754,14 +3765,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recDMDjJ0WR1xxx1F</SchemaAttributes>
       <SchemaAttributes>recNpHoc7bhC32M0w</SchemaAttributes>
       <SchemaRoot>recoAsAg06Qp7jYp3</SchemaRoot>
+      <AliasRoot>gt.dispatch.boolean.local</AliasRoot>
       <Alias>gt.dispatch.boolean.local.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.dispatch.boolean.local</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -3783,15 +3794,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Axioms>rech3zpojTnscbsH1</Axioms>
       <Axioms>rec9XtfVmUCtTZwfg</Axioms>
       <ProtocolTypes>recxtr4LhX2Ixojmg</ProtocolTypes>
+      <AliasRoot>tavalidatorcert.algo.transfer</AliasRoot>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>This type is meant to be sent from a pendingValidator (e.g. "MollyMetermaid", or molly) to the GNodeFactoryDb, so that the gnf will transfer an already created ValidatorCert to the pendingValidator's account. </Description>
-      <AliasRoot>tavalidatorcert.algo.transfer</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -3809,16 +3820,16 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recgqtFKFWYqHsb0q</SchemaAttributes>
       <SchemaAttributes>recoBjlyHgao1lKtI</SchemaAttributes>
       <SchemaRoot>recpr0byizj3PmqXi</SchemaRoot>
+      <AliasRoot>gt.sh.node</AliasRoot>
       <Alias>gt.sh.node.120</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ShNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>spaceheat.node.gt</ReplaceWithSchema>
-      <AliasRoot>gt.sh.node</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>120</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -3830,14 +3841,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SemanticEnd>100</SemanticEnd>
       <SchemaRoot>recx4EL5mDebUhtzp</SchemaRoot>
       <Enums>rec2HyLffy6QK9QId</Enums>
+      <AliasRoot>gt.telemetry</AliasRoot>
       <Alias>gt.telemetry.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.telemetry</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -3855,15 +3866,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recqmA1Cu9GIg4hpp</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>resistive.heater.cac.gt</AliasRoot>
       <Alias>resistive.heater.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ResistiveHeaterCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>resistive.heater.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -3879,14 +3890,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recCMCD6fLQzuN9RA</SchemaAttributes>
       <SchemaRoot>recEoebL6fHn6xzXL</SchemaRoot>
       <PreStatus>Active</PreStatus>
+      <AliasRoot>signandsubmit.mtx.algo</AliasRoot>
       <Alias>signandsubmit.mtx.algo.000</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>signandsubmit.mtx.algo</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -3909,15 +3920,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UsedAsSubMessagein>rec6F0YzYq2cynuBc</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>temp.sensor.cac.gt</AliasRoot>
       <Alias>temp.sensor.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>TempSensorCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>temp.sensor.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -3935,14 +3946,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recNgGDYcengufuFe</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recfsDYNRW0af16Ol</ProtocolTypes>
+      <AliasRoot>atn.params.report.heatpumpwithbooststore</AliasRoot>
       <Alias>atn.params.report.heatpumpwithbooststore.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>atn.params.report.heatpumpwithbooststore</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -3960,15 +3971,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UsedAsSubMessagein>recVqNOAao22ob4jS</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>electric.meter.component.gt</AliasRoot>
       <Alias>electric.meter.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ElectricMeterComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>electric.meter.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -3989,14 +4000,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <PreStatus>Pending</PreStatus>
       <Enums>rec5HXPeyp3jic6FV</Enums>
       <ProtocolTypes>recAJ6AYNLdBZ7XfK</ProtocolTypes>
+      <AliasRoot>discoverycert.algo.create</AliasRoot>
       <Alias>discoverycert.algo.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>discoverycert.algo.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4009,14 +4020,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recmRa74R0GAk0PKx</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>reccfgO8fAUzT3J2W</ProtocolTypes>
+      <AliasRoot>basegnode.marketmaker.create</AliasRoot>
       <Alias>basegnode.marketmaker.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnode.marketmaker.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4041,14 +4052,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>rec6F0YzYq2cynuBc</SchemaAttributes>
       <SchemaAttributes>recyiS4OAWw4Xe5dF</SchemaAttributes>
       <SchemaRoot>recvoY8JOncNeQjYF</SchemaRoot>
+      <AliasRoot>gt.spaceheat.house.config</AliasRoot>
       <Alias>gt.spaceheat.house.config.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.spaceheat.house.config</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4067,14 +4078,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Topics>rec5d0mwIHTTqYjC8</Topics>
       <ProtocolTypes>recuetPMCxsDyU0R4</ProtocolTypes>
       <ProtocolTypes>reccuFJPlMliv6yW8</ProtocolTypes>
+      <AliasRoot>sim.timestep</AliasRoot>
       <Alias>sim.timestep.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>sim.timestep</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4091,14 +4102,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>reccsb7VI48EdWlGk</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
+      <AliasRoot>basegnodes.get</AliasRoot>
       <Alias>basegnodes.get.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnodes.get</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4116,14 +4127,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UsedAsSubMessagein>recOWeL6PoLldCrop</UsedAsSubMessagein>
       <UsedAsSubMessagein>recBtrSRyxjOXp8aA</UsedAsSubMessagein>
       <Enums>recUJtDNaSJdt9wie</Enums>
+      <AliasRoot>gt.sh.simple.telemetry.status</AliasRoot>
       <Alias>gt.sh.simple.telemetry.status.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.simple.telemetry.status</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4152,15 +4163,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enums>recZB6uJDEaCzvTZX</Enums>
       <ProtocolTypes>recmXImdzdJvIhwRj</ProtocolTypes>
       <DataClassIdField>GNodeId</DataClassIdField>
+      <AliasRoot>gnode.gt</AliasRoot>
       <Alias>gnode.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>GNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gnode.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4175,14 +4186,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recGRNEh1iK0tu10N</SchemaAttributes>
       <SchemaAttributes>recP42BiKvu4xhepH</SchemaAttributes>
       <SchemaRoot>recx3kwLemvtMaT0t</SchemaRoot>
+      <AliasRoot>gt.sh.telemetry.from.multipurpose.sensor</AliasRoot>
       <Alias>gt.sh.telemetry.from.multipurpose.sensor.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.telemetry.from.multipurpose.sensor</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4196,14 +4207,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recKwPBxJr8R55KlB</SchemaAttributes>
       <SchemaAttributes>recfMyBibCC1lqTy1</SchemaAttributes>
       <SchemaRoot>recx4EL5mDebUhtzp</SchemaRoot>
+      <AliasRoot>gt.telemetry</AliasRoot>
       <Alias>gt.telemetry.110</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.telemetry</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4218,15 +4229,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recDzW9fuX9MvVvla</SchemaAttributes>
       <SchemaRoot>recxnrRBEZg5cPVPt</SchemaRoot>
       <PreStatus>Active</PreStatus>
+      <AliasRoot>optin.tadeed.algo</AliasRoot>
       <Alias>optin.tadeed.algo.000</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>Sent by Gnf to Daemon to opt into a new tadeed.</Description>
-      <AliasRoot>optin.tadeed.algo</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -4244,14 +4255,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recERKCcoJa8mkC8L</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recYSfcJBIVxFIWCZ</ProtocolTypes>
+      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
       <Alias>initial.tadeed.algo.optin.001</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>initial.tadeed.algo.optin</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4270,14 +4281,14 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recJ3u86m6sh2vNWk</SchemaAttributes>
       <SchemaRoot>rec1E12bdSXOtQ9qP</SchemaRoot>
       <UsedAsSubMessagein>recbw5AyGqRuPCnlj</UsedAsSubMessagein>
+      <AliasRoot>gt.eq.reporting.config</AliasRoot>
       <Alias>gt.eq.reporting.config.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.eq.reporting.config</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4300,15 +4311,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enums>recA15Ak50x6bNMx1</Enums>
       <ProtocolTypes>rectD1KxAzqJILPfu</ProtocolTypes>
       <DataClassIdField>Alias</DataClassIdField>
+      <AliasRoot>market.type.gt</AliasRoot>
       <Alias>market.type.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>MarketType</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>market.type.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4327,15 +4338,15 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>rec1joYefgk9OQTyG</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>resistive.heater.component.gt</AliasRoot>
       <Alias>resistive.heater.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ResistiveHeaterComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>resistive.heater.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4385,16 +4396,16 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <UpdateDescription>New attributes: PrevAlias, OwnerAddr, DaemonAddr, TradingRightsNftId.
 
 CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
+      <AliasRoot>basegnode.gt</AliasRoot>
       <Alias>basegnode.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>BaseGNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>BaseGNode. Authority is GNodeFactory. </Description>
-      <AliasRoot>basegnode.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4409,14 +4420,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recmUBXrUigX4SFIe</SchemaAttributes>
       <SchemaAttributes>recqTlmb22FCbFzaQ</SchemaAttributes>
       <SchemaRoot>rec23C6am0WIH9veT</SchemaRoot>
+      <AliasRoot>gt.sh.simple.status</AliasRoot>
       <Alias>gt.sh.simple.status.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.simple.status</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -4425,12 +4436,12 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <Schema>
       <SchemaId>recEKslrKeykiUHjb</SchemaId>
       <createdTime>2022-11-13T19:53:26Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <PreStatus>Pending</PreStatus>
       <Alias>.000</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
-      <SemanticEnd>000</SemanticEnd>
-      <PreStatus>Pending</PreStatus>
     </Schema>
     <Schema>
       <SchemaId>recGuvhjDYO65d5rP</SchemaId>
@@ -4444,15 +4455,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recUMZCNeGQssAuAj</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>pipe.flow.sensor.component.gt</AliasRoot>
       <Alias>pipe.flow.sensor.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>PipeFlowSensorComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>pipe.flow.sensor.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4475,14 +4486,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <Enums>recounhEj97w5SfDm</Enums>
       <ProtocolTypes>recSNej4i6EwucKbV</ProtocolTypes>
+      <AliasRoot>bid</AliasRoot>
       <Alias>bid.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>bid</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4502,14 +4513,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>rect6WA80mNWDt7v0</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recY5s5LoUEwNBowT</ProtocolTypes>
+      <AliasRoot>basegnode.ctn.create</AliasRoot>
       <Alias>basegnode.ctn.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnode.ctn.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4526,16 +4537,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reczovvHr0jpI0nE1</SchemaAttributes>
       <SchemaAttributes>recLaGiS5e3m5TwNz</SchemaAttributes>
       <SchemaRoot>recpr0byizj3PmqXi</SchemaRoot>
+      <AliasRoot>gt.sh.node</AliasRoot>
       <Alias>gt.sh.node.110</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ShNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>spaceheat.node.gt</ReplaceWithSchema>
-      <AliasRoot>gt.sh.node</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>120</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -4548,14 +4559,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recA8ZIAfqjXqOMln</SchemaAttributes>
       <SchemaAttributes>rec9l5Rw1XyfocKPt</SchemaAttributes>
       <SchemaRoot>recv1lkBTFvuSSGOn</SchemaRoot>
+      <AliasRoot>spaceheat.dna</AliasRoot>
       <Alias>spaceheat.dna.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>spaceheat.dna</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4571,14 +4582,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recde7ZQpg5BRpHxm</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recPRrjd1GyqOVHIZ</ProtocolTypes>
+      <AliasRoot>old.tadeed.algo.return</AliasRoot>
       <Alias>old.tadeed.algo.return.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>old.tadeed.algo.return</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4598,14 +4609,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recdwjoLr6DQUc20I</SchemaAttributes>
       <SchemaAttributes>recJSFsEahEgbS5C2</SchemaAttributes>
       <SchemaRoot>recbbx6wGZEfqP2Kn</SchemaRoot>
+      <AliasRoot>gt.sh.status</AliasRoot>
       <Alias>gt.sh.status.110</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.status</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4621,14 +4632,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recZOVb1cq9Dq3Oi5</SchemaAttributes>
       <SchemaAttributes>recE2H3ffos4Ujqq7</SchemaAttributes>
       <SchemaRoot>recbbx6wGZEfqP2Kn</SchemaRoot>
+      <AliasRoot>gt.sh.status</AliasRoot>
       <Alias>gt.sh.status.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.status</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -4641,14 +4652,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recw4w4kyKb5qsTUd</SchemaAttributes>
       <SendAlias>p</SendAlias>
       <SchemaRoot>recc5qGcZNQPmktbe</SchemaRoot>
+      <AliasRoot>gs.pwr</AliasRoot>
       <Alias>gs.pwr.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>GridworksSerial</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>GridworksSerial</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gs.pwr</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4667,17 +4678,42 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>rec0f380MCLuVPnca</Axioms>
       <Axioms>reccpDU01eDwuMvrf</Axioms>
       <ProtocolTypes>rect61DlS8mCPHnUL</ProtocolTypes>
+      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
       <Alias>initial.tadeed.algo.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>initial.tadeed.algo.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recPPTLAWZu08mD7s</SchemaId>
+      <createdTime>2022-11-14T15:43:18Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recsXoFOxudbW1SiS</SchemaAttributes>
+      <SchemaAttributes>recBClfoIYbmVTcvi</SchemaAttributes>
+      <SchemaAttributes>recjn4JQDiHTxb8zW</SchemaAttributes>
+      <SchemaAttributes>recRbzzZK0pCTehDf</SchemaAttributes>
+      <SchemaRoot>recl00nd7rYLyLDUL</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>rec5K84S2MN0iMNlE</ProtocolTypes>
+      <ProtocolTypes>reccEMLYgCyyYLPr2</ProtocolTypes>
+      <AliasRoot>terminalasset.certify.hack</AliasRoot>
+      <Alias>terminalasset.certify.hack.000</Alias>
+      <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <RootStatus>Active</RootStatus>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -4693,15 +4729,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recElLL0KN2fllmo7</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>boolean.actuator.component.gt</AliasRoot>
       <Alias>boolean.actuator.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>BooleanActuatorComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>boolean.actuator.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4720,14 +4756,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>reccq04oqFsHHPTlN</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recsRFfTXSym7gX54</ProtocolTypes>
+      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
       <Alias>initial.tadeed.algo.transfer.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>initial.tadeed.algo.transfer</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4741,14 +4777,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rech7EAFuj56GsPDR</SchemaAttributes>
       <SchemaAttributes>recsyCaWjc5Ii5DrU</SchemaAttributes>
       <SchemaRoot>recdmZpmDC9qq3Wz5</SchemaRoot>
+      <AliasRoot>gt.driver.booleanactuator.cmd</AliasRoot>
       <Alias>gt.driver.booleanactuator.cmd.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.driver.booleanactuator.cmd</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4765,14 +4801,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recTSdWeNPEKAZuAP</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recQItJExa3ZiV3Jh</ProtocolTypes>
+      <AliasRoot>new.tadeed.send</AliasRoot>
       <Alias>new.tadeed.send.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>new.tadeed.send</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4790,15 +4826,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recMNoEhsIjpp7oXK</SchemaAttributes>
       <SchemaAttributes>recF5JRJR6AVkfQsK</SchemaAttributes>
       <SchemaRoot>rece1suo3h3SqfW4M</SchemaRoot>
+      <AliasRoot>gt.sensor.reporting.config</AliasRoot>
       <Alias>gt.sensor.reporting.config.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass />
       <DataClass>SensorReportingConfig</DataClass>
+      <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>0</ConsistencyCheck>
-      <AliasRoot>gt.sensor.reporting.config</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4811,14 +4847,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recFUjvwvmvvkA01e</SchemaAttributes>
       <SchemaAttributes>reci0niurz5s0wuXJ</SchemaAttributes>
       <SchemaRoot>receVdNEfIE1HLnwN</SchemaRoot>
+      <AliasRoot>gt.sh.cli.atn.cmd</AliasRoot>
       <Alias>gt.sh.cli.atn.cmd.110</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.cli.atn.cmd</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4836,14 +4872,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>reczYInsSYetUcVpZ</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec1Kr8gSWyIe4lG2</ProtocolTypes>
+      <AliasRoot>basegnodes.broadcast</AliasRoot>
       <Alias>basegnodes.broadcast.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnodes.broadcast</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4853,22 +4889,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaId>recTKuleOQoZ3n0HH</SchemaId>
       <createdTime>2022-11-12T08:37:00Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
-      <SchemaAttributes>rec1V96HgrdOW9OFp</SchemaAttributes>
-      <SchemaAttributes>recAM62P6u7Myayn1</SchemaAttributes>
-      <SchemaAttributes>recesxZZSeuzCx7U1</SchemaAttributes>
-      <SchemaAttributes>recoWJB5esb0LuWws</SchemaAttributes>
-      <SchemaAttributes>recCgi3t1EjjRSkhS</SchemaAttributes>
       <SchemaRoot>rec9vczzxftBbTBvm</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recvYKEgKxumNmkih</ProtocolTypes>
-      <Alias>tadeed.specs.private.hack.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
+      <AliasRoot>tadaemon.sk.hack</AliasRoot>
+      <Alias>tadaemon.sk.hack.000</Alias>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.specs.private.hack</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4885,15 +4916,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recUyndqnwyKAWe93</SchemaAttributes>
       <SchemaAttributes>recSNRAurDrIeUgqg</SchemaAttributes>
       <SchemaRoot>rechZBY0G1JuNeEuG</SchemaRoot>
+      <AliasRoot>gt.dispatch.boolean</AliasRoot>
       <Alias>gt.dispatch.boolean.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>Boolean dispatch command sent over the cloud broker from one GNode (FromGNodeAlias/ FromGNodeId) to another (ToGNodeAlias). AboutNodeAlias is the node getting dispatched. It may be a GNode, but it can also be a SpaceHeatNode.</Description>
-      <AliasRoot>gt.dispatch.boolean</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -4911,14 +4942,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reccTfzFazDviUeXp</SchemaAttributes>
       <SchemaAttributes>recn2CJw74mLLQ8tr</SchemaAttributes>
       <SchemaRoot>rechZ9OTpGxuT8xWl</SchemaRoot>
+      <AliasRoot>gt.power.sync</AliasRoot>
       <Alias>gt.power.sync.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.power.sync</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4938,15 +4969,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reclgcZrxIoZfiovl</SchemaAttributes>
       <SchemaRoot>recijDUCMCF0drLi3</SchemaRoot>
       <Axioms>recN1T4RyJw2VMsOW</Axioms>
+      <AliasRoot>spaceheat.node.gt</AliasRoot>
       <Alias>spaceheat.node.gt.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ShNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>spaceheat.node.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -4959,15 +4990,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recCyeOy0hRRYAvoc</SchemaAttributes>
       <SchemaAttributes>recjXMbjBpdJFTXBi</SchemaAttributes>
       <SchemaRoot>recjI10N2qf36kpmC</SchemaRoot>
+      <AliasRoot>gt.sh.cli.scada.response</AliasRoot>
       <Alias>gt.sh.cli.scada.response.110</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>snapshot.spaceheat</ReplaceWithSchema>
-      <AliasRoot>gt.sh.cli.scada.response</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -4980,15 +5011,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reckbdPijd806F8LT</SchemaAttributes>
       <SchemaAttributes>recazWVfmVGIXktTn</SchemaAttributes>
       <SchemaRoot>recnUzSx1WgKUdTZO</SchemaRoot>
+      <AliasRoot>gt.dispatch</AliasRoot>
       <Alias>gt.dispatch.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>gt.dispatch.boolean</ReplaceWithSchema>
-      <AliasRoot>gt.dispatch</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5006,16 +5037,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recpqHev4KGlcd4q4</UsedAsSubMessagein>
       <UsedAsSubMessagein>recSjtsFt8YhLc4wA</UsedAsSubMessagein>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>gt.electric.heater.cac</AliasRoot>
       <Alias>gt.electric.heater.cac.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ElectricHeaterCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>resistive.heater.cac.gt</ReplaceWithSchema>
-      <AliasRoot>gt.electric.heater.cac</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -5038,14 +5069,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recwsWtIgu909pJm1</Axioms>
       <Axioms>recYBKWxHw8Q6obsQ</Axioms>
       <Axioms>recdfhrc7m3cOTO3V</Axioms>
+      <AliasRoot>tadeed.algo.exchange</AliasRoot>
       <Alias>tadeed.algo.exchange.000</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.exchange</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5058,14 +5089,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recuocYj9OaOIsmtn</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recg3ZHFD17mRWVDL</ProtocolTypes>
+      <AliasRoot>tatradingrights.algo.create</AliasRoot>
       <Alias>tatradingrights.algo.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tatradingrights.algo.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5079,15 +5110,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recnVh3bX9GSsAkr3</SchemaAttributes>
       <SchemaRoot>recnOen6KenxkwQtB</SchemaRoot>
       <UsedAsSubMessagein>rechikfSomM4gopMG</UsedAsSubMessagein>
+      <AliasRoot>gt.thermal.edge</AliasRoot>
       <Alias>gt.thermal.edge.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass />
       <DataClass>ThermalEdge</DataClass>
+      <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>0</ConsistencyCheck>
-      <AliasRoot>gt.thermal.edge</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -5100,15 +5131,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reciVyeMslNHUJKN8</SchemaAttributes>
       <SchemaAttributes>rec96i0QHA47Ra3SD</SchemaAttributes>
       <SchemaRoot>recnUzSx1WgKUdTZO</SchemaRoot>
+      <AliasRoot>gt.dispatch</AliasRoot>
       <Alias>gt.dispatch.110</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>gt.dispatch.boolean</ReplaceWithSchema>
-      <AliasRoot>gt.dispatch</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -5121,14 +5152,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recNShQmJ0F04UlrH</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recA4Y7Iy3elTbyCB</ProtocolTypes>
+      <AliasRoot>basegnode.other.create</AliasRoot>
       <Alias>basegnode.other.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnode.other.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5147,15 +5178,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recckyOp6IRG7lBqe</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>boolean.actuator.cac.gt</AliasRoot>
       <Alias>boolean.actuator.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>BooleanActuatorCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>boolean.actuator.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5173,15 +5204,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recbRDhEoGNs9jYEB</UsedAsSubMessagein>
       <UsedAsSubMessagein>recjXMbjBpdJFTXBi</UsedAsSubMessagein>
       <Axioms>recsymqeqSBbr9R9o</Axioms>
+      <AliasRoot>gt.sh.status.snapshot</AliasRoot>
       <Alias>gt.sh.status.snapshot.110</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>telemetry.snapshot.spaceheat</ReplaceWithSchema>
-      <AliasRoot>gt.sh.status.snapshot</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -5202,14 +5233,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recb8a2JTfYBmC6v7</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recZiKOMXJ8UCneY9</ProtocolTypes>
+      <AliasRoot>basegnode.terminalasset.create</AliasRoot>
       <Alias>basegnode.terminalasset.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>basegnode.terminalasset.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5230,14 +5261,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PreStatus>Pending</PreStatus>
       <Topics>recVOa2DYOtTyarDA</Topics>
       <ProtocolTypes>recM6At5qFrk4dsir</ProtocolTypes>
+      <AliasRoot>hack.state</AliasRoot>
       <Alias>hack.state.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>hack.state</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5255,14 +5286,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recuGgxcKPz76mhQc</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recFreOp8J4dIjXkD</ProtocolTypes>
+      <ProtocolTypes>reciUjZq6Ym3P59mT</ProtocolTypes>
+      <AliasRoot>tadeed.specs.hack</AliasRoot>
       <Alias>tadeed.specs.hack.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.specs.hack</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5278,14 +5310,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recB2fok3eH3LnZmw</ProtocolTypes>
       <ProtocolTypes>rec2Gvd8Nt7DvqTpf</ProtocolTypes>
+      <AliasRoot>ready</AliasRoot>
       <Alias>ready.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>ready</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5306,15 +5338,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recOxFpekpRcZJpFj</Axioms>
       <Axioms>recEDIu6H6gEbyn4v</Axioms>
       <ProtocolTypes>rec3V5oWa4cyRtWNc</ProtocolTypes>
+      <AliasRoot>tavalidatorcert.algo.create</AliasRoot>
       <Alias>tavalidatorcert.algo.create.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <Description>This type is meant to be sent from a pendingValidator (e.g. "MollyMetermaid", or molly) to the GNodeFactoryDb, to initiate the process of certifying the pendingValidator as a validator. Being a validator means that a ValidatorCertificate NFT is created by the multi account [[GNodeFactory.admin, molly], threshold 2] and owned by molly.</Description>
-      <AliasRoot>tavalidatorcert.algo.create</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -5331,16 +5363,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recXEIMX0kmlJ7eWH</SchemaAttributes>
       <SchemaRoot>recpr0byizj3PmqXi</SchemaRoot>
       <UsedAsSubMessagein>recVsS10EII3fL0zm</UsedAsSubMessagein>
+      <AliasRoot>gt.sh.node</AliasRoot>
       <Alias>gt.sh.node.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ShNode</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>spaceheat.node.gt</ReplaceWithSchema>
-      <AliasRoot>gt.sh.node</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>120</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5352,15 +5384,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SemanticEnd>100</SemanticEnd>
       <SchemaAttributes>recbRDhEoGNs9jYEB</SchemaAttributes>
       <SchemaRoot>recjI10N2qf36kpmC</SchemaRoot>
+      <AliasRoot>gt.sh.cli.scada.response</AliasRoot>
       <Alias>gt.sh.cli.scada.response.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>snapshot.spaceheat</ReplaceWithSchema>
-      <AliasRoot>gt.sh.cli.scada.response</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5383,14 +5415,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Topics>recnCUFtuRaM9imRG</Topics>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <ProtocolTypes>recanqppJwatq7fmU</ProtocolTypes>
+      <AliasRoot>latest.price</AliasRoot>
       <Alias>latest.price.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>latest.price</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5407,14 +5439,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recBNevzmPrROWd5j</SchemaRoot>
       <UsedAsSubMessagein>recz0QGMX8yGwdpdl</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
+      <AliasRoot>telemetry.snapshot.spaceheat</AliasRoot>
       <Alias>telemetry.snapshot.spaceheat.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>telemetry.snapshot.spaceheat</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5432,15 +5464,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PreStatus>Pending</PreStatus>
       <Schemas>current.transformer.cac.gt.100.100</Schemas>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>current.transformer.cac.gt</AliasRoot>
       <Alias>current.transformer.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>CurrentTransformerCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>current.transformer.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5458,14 +5490,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recCGkiwasshpUQnL</SchemaRoot>
       <UsedAsSubMessagein>recZOVb1cq9Dq3Oi5</UsedAsSubMessagein>
       <UsedAsSubMessagein>recK2zOa4WxMEeSn9</UsedAsSubMessagein>
+      <AliasRoot>gt.sh.multipurpose.telemetry.status</AliasRoot>
       <Alias>gt.sh.multipurpose.telemetry.status.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.multipurpose.telemetry.status</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -5477,14 +5509,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recCpUQ75l1hoKN45</SchemaRoot>
       <Axioms>rec2kI3cJzijFOyV4</Axioms>
       <Axioms>recDqvo81744FkpWd</Axioms>
+      <AliasRoot>spaceheat.status</AliasRoot>
       <Alias>spaceheat.status.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>spaceheat.status</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -5501,15 +5533,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recmAJ31xoOq5qTHU</UsedAsSubMessagein>
       <UsedAsSubMessagein>rec0jyQjtqhV69IU6</UsedAsSubMessagein>
       <UsedAsSubMessagein>recN8NS2KiZw0Wzbp</UsedAsSubMessagein>
+      <AliasRoot>gt.component</AliasRoot>
       <Alias>gt.component.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>Component</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.component</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -5533,14 +5565,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>recgr767PF8P1X06i</Axioms>
       <Axioms>rectREWSiFBVSQoOq</Axioms>
       <Axioms>recOyMaXAxwASJw4J</Axioms>
+      <AliasRoot>tadeed.algo.transfer</AliasRoot>
       <Alias>tadeed.algo.transfer.000</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadeed.algo.transfer</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>001</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5560,14 +5592,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Enums>recounhEj97w5SfDm</Enums>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <ProtocolTypes>rec0yahRyau7Mzmzk</ProtocolTypes>
+      <AliasRoot>price.quantity</AliasRoot>
       <Alias>price.quantity.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>price.quantity</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5582,14 +5614,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rec1SyaI5uoDhNW1f</SchemaAttributes>
       <SchemaAttributes>recTVpMk0yoQ95CTi</SchemaAttributes>
       <SchemaRoot>recGPwKi4Sb6sxayy</SchemaRoot>
+      <AliasRoot>ear.g.node.alias.list.toss</AliasRoot>
       <Alias>ear.g.node.alias.list.toss.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>ear.g.node.alias.list.toss</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -5606,15 +5638,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recB5TxUpNgNtBoCz</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>temp.sensor.component.gt</AliasRoot>
       <Alias>temp.sensor.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>TempSensorComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>temp.sensor.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5635,15 +5667,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recIjNSTFZEY0rZ5x</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>electric.meter.cac.gt</AliasRoot>
       <Alias>electric.meter.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ElectricMeterCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>electric.meter.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5655,14 +5687,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SemanticEnd>100</SemanticEnd>
       <SchemaAttributes>recZ6Qnf2ivCfWkSG</SchemaAttributes>
       <SchemaRoot>receVdNEfIE1HLnwN</SchemaRoot>
+      <AliasRoot>gt.sh.cli.atn.cmd</AliasRoot>
       <Alias>gt.sh.cli.atn.cmd.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.cli.atn.cmd</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>110</RootCurrentSemanticEnd>
       <IsCurrent>0</IsCurrent>
       <Status>Deprecated</Status>
@@ -5676,15 +5708,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recK5H9Pt9ZpF6hgi</SchemaRoot>
       <UsedAsSubMessagein>recyiS4OAWw4Xe5dF</UsedAsSubMessagein>
       <UsedAsSubMessagein>recLO20AZmUda0yof</UsedAsSubMessagein>
+      <AliasRoot>gt.component.attribute.class</AliasRoot>
       <Alias>gt.component.attribute.class.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ComponentAttributeClass</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.component.attribute.class</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -5702,15 +5734,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recmImNP9NN2MGFm9</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentAttributeClassId</DataClassIdField>
+      <AliasRoot>pipe.flow.sensor.cac.gt</AliasRoot>
       <Alias>pipe.flow.sensor.cac.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>PipeFlowSensorCac</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac>true</IsCac>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>pipe.flow.sensor.cac.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5725,14 +5757,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recUtfxpuihd6JBQ9</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rectUrkJtiUPjNn5q</ProtocolTypes>
+      <AliasRoot>discoverycert.algo.transfer</AliasRoot>
       <Alias>discoverycert.algo.transfer.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>discoverycert.algo.transfer</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5748,14 +5780,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rec2ERXNwEH6jyyHv</SchemaAttributes>
       <SchemaRoot>recLc7QnBdk9iPdHI</SchemaRoot>
       <UsedAsSubMessagein>recqTlmb22FCbFzaQ</UsedAsSubMessagein>
+      <AliasRoot>gt.sh.simple.single.status</AliasRoot>
       <Alias>gt.sh.simple.single.status.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.simple.single.status</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -5771,14 +5803,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recNH5aI7c5Latl1K</SchemaRoot>
       <UsedAsSubMessagein>recE2H3ffos4Ujqq7</UsedAsSubMessagein>
       <UsedAsSubMessagein>recJSFsEahEgbS5C2</UsedAsSubMessagein>
+      <AliasRoot>gt.sh.booleanactuator.cmd.status</AliasRoot>
       <Alias>gt.sh.booleanactuator.cmd.status.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.sh.booleanactuator.cmd.status</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -5796,15 +5828,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recNZGEdUh6l7BfYp</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>current.transformer.component.gt</AliasRoot>
       <Alias>current.transformer.component.gt.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>CurrentTransformerComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>current.transformer.component.gt</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5859,14 +5891,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Enums>recA15Ak50x6bNMx1</Enums>
       <Enums>recEyU9EKDtM3bD18</Enums>
       <ProtocolTypes>recGRKTWPhlGhVZqf</ProtocolTypes>
+      <AliasRoot>atn.params.heatpumpwithbooststore</AliasRoot>
       <Alias>atn.params.heatpumpwithbooststore.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>atn.params.heatpumpwithbooststore</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -5880,14 +5912,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recEG1vhkFUlzIEeO</SchemaAttributes>
       <SchemaAttributes>recz0QGMX8yGwdpdl</SchemaAttributes>
       <SchemaRoot>recPnrf8TmF9WBgAm</SchemaRoot>
+      <AliasRoot>snapshot.spaceheat</AliasRoot>
       <Alias>snapshot.spaceheat.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>snapshot.spaceheat</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
@@ -5902,14 +5934,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <UsedAsSubMessagein>recb85VFWSeaqaKV0</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recDST3lwGBFXqsz1</ProtocolTypes>
+      <AliasRoot>price.quantity.unitless</AliasRoot>
       <Alias>price.quantity.unitless.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>price.quantity.unitless</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5926,16 +5958,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recT6312S7LckLHZ9</SchemaRoot>
       <UsedAsSubMessagein>recwB3WH6mXmzjugK</UsedAsSubMessagein>
       <DataClassIdField>ComponentId</DataClassIdField>
+      <AliasRoot>gt.electric.heater.component</AliasRoot>
       <Alias>gt.electric.heater.component.100</Alias>
-      <RootStatus>Deprecated</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass>true</MakeDataClass>
       <DataClass>ElectricHeaterComponent</DataClass>
+      <MakeDataClass>true</MakeDataClass>
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent>true</IsComponent>
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithSchema>resistive.heater.component.gt</ReplaceWithSchema>
-      <AliasRoot>gt.electric.heater.component</AliasRoot>
+      <RootStatus>Deprecated</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
@@ -5952,14 +5984,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <RestfulPosts2>recg6kZdbgxDUXAAh</RestfulPosts2>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec40fE823klMVCmv</ProtocolTypes>
+      <AliasRoot>bid.ack</AliasRoot>
       <Alias>bid.ack.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>bid.ack</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5981,14 +6013,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Axioms>rechGHjDdnbThfv1R</Axioms>
       <Axioms>recBWcnuqdt9wzynI</Axioms>
       <ProtocolTypes>rec9HUzZ3tgJOalLk</ProtocolTypes>
+      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
       <Alias>new.tadeed.algo.optin.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>new.tadeed.algo.optin</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -6004,14 +6036,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rec8i1VAK2sgrnBWW</SchemaAttributes>
       <SchemaRoot>recUrIRjO9EYJRQhG</SchemaRoot>
       <Axioms>rec29eq9Lc6OGIhYk</Axioms>
+      <AliasRoot>gt.powermeter.reporting.config</AliasRoot>
       <Alias>gt.powermeter.reporting.config.100</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>gt.powermeter.reporting.config</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -6025,14 +6057,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <ProtocolTypes>recAKcZ5BDHN6JKil</ProtocolTypes>
       <ProtocolTypes>recASxd0yY7a1nWR4</ProtocolTypes>
       <ProtocolTypes>recnBbGAlK4U8sngT</ProtocolTypes>
+      <AliasRoot>heartbeat.a</AliasRoot>
       <Alias>heartbeat.a.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>heartbeat.a</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -6063,14 +6095,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recFfUWpEtleVPBMJ</SchemaAttributes>
       <SchemaAttributes>recmSQdvXU121Kb5s</SchemaAttributes>
       <SchemaRoot>recWDAtZiKvWaXnRX</SchemaRoot>
+      <AliasRoot>spaceheat.dnack</AliasRoot>
       <Alias>spaceheat.dnack.100</Alias>
-      <RootStatus>Pending</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>spaceheat.dnack</AliasRoot>
+      <RootStatus>Pending</RootStatus>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
@@ -6139,14 +6171,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Enums>recA15Ak50x6bNMx1</Enums>
       <Enums>recEyU9EKDtM3bD18</Enums>
       <ProtocolTypes>recGpv7lXS5nQj5jR</ProtocolTypes>
+      <AliasRoot>flo.params.heatpumpwithbooststore</AliasRoot>
       <Alias>flo.params.heatpumpwithbooststore.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>flo.params.heatpumpwithbooststore</AliasRoot>
+      <RootStatus>Active</RootStatus>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Active</Status>
@@ -6401,22 +6433,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <EnumName>spaceheat.telemetry.name.000</EnumName>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
-    </SchemaAttribute>
-    <SchemaAttribute>
-      <SchemaAttributeId>rec1V96HgrdOW9OFp</SchemaAttributeId>
-      <createdTime>2022-11-12T08:37:36Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>recTKuleOQoZ3n0HH</Schema>
-      <PrimitiveType>String</PrimitiveType>
-      <Value>TerminalAssetAlias</Value>
-      <Idx>0</Idx>
-      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>"d1.isone.ver.keene.holly.ta"</TestValue>
-      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec1X9YAxHaCnkpkS</SchemaAttributeId>
@@ -7305,19 +7321,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recAM62P6u7Myayn1</SchemaAttributeId>
-      <createdTime>2022-11-12T08:37:38Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>recTKuleOQoZ3n0HH</Schema>
-      <PrimitiveType>String</PrimitiveType>
-      <Value>TaOwnerSk</Value>
-      <Idx>1</Idx>
-      <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recAdxq0F1HX95zBg</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:58Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -7373,6 +7376,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>true</IsType>
       <SubTypeDataClass>TempSensorComponent</SubTypeDataClass>
       <SubMessageFormatAliasRoot>temp.sensor.component.gt</SubMessageFormatAliasRoot>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recBClfoIYbmVTcvi</SchemaAttributeId>
+      <createdTime>2022-11-14T20:05:45Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recPPTLAWZu08mD7s</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>TaDaemonApiFqdn</Value>
+      <Idx>2</Idx>
+      <TestValue>"http://localhost"</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recBVDU0F7Ph6bKFW</SchemaAttributeId>
@@ -7515,19 +7531,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recCgi3t1EjjRSkhS</SchemaAttributeId>
-      <createdTime>2022-11-12T08:37:45Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>recTKuleOQoZ3n0HH</Schema>
-      <PrimitiveType>Integer</PrimitiveType>
-      <Value>MicroLon</Value>
-      <Idx>4</Idx>
-      <TestValue>68691705</TestValue>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recCuVGEIt5PtitBs</SchemaAttributeId>
       <createdTime>2022-09-20T12:17:31Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -7571,7 +7574,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itr0tlDZIYPZ3iDp8/recCyeOy0hRRYAvoc</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recD4VpikwJAaTf0c</SchemaAttributeId>
       <createdTime>2022-06-03T21:41:06Z</createdTime>
@@ -7592,16 +7594,17 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>recDDR1LciMqVZlgf</SchemaAttributeId>
       <createdTime>2022-11-13T19:55:15Z</createdTime>
-      <Schema>recAWKkS0hcyws7O6</Schema>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <Value>TaDaemonPrivateKey</Value>
-      <Idx>4</Idx>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <TestValue>"tQ8ABbLLR96cnRE3Y2tlrj2d/rNPRFkf8FosJ46tVIlub0lPIBPqkJ4yknqibTR4kTV1+ncKT324feI6iSD2bw=="</TestValue>
+      <Schema>recAWKkS0hcyws7O6</Schema>
       <PrimitiveType>String</PrimitiveType>
+      <Value>TaDaemonPrivateKey</Value>
+      <Idx>4</Idx>
+      <TestValue>"tQ8ABbLLR96cnRE3Y2tlrj2d/rNPRFkf8FosJ46tVIlub0lPIBPqkJ4yknqibTR4kTV1+ncKT324feI6iSD2bw=="</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itr2ma6TCxaFEAY4P/recDDR1LciMqVZlgf</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recDK3v8t65JbIgGo</SchemaAttributeId>
       <createdTime>2022-11-10T14:23:47Z</createdTime>
@@ -8128,6 +8131,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveType>Integer</PrimitiveType>
       <Value>ValueList</Value>
       <TestValue>[18000]</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recGRzu7ytpO5MI60</SchemaAttributeId>
+      <createdTime>2022-11-14T20:06:16Z</createdTime>
+      <Value>TaDaemonApiPort</Value>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -8925,7 +8935,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itr0tlDZIYPZ3iDp8/recLl3tp0CYubBgaU</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recLnMCNd00yOpeVw</SchemaAttributeId>
       <createdTime>2022-07-10T12:50:15Z</createdTime>
@@ -8937,6 +8946,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itr2ma6TCxaFEAY4P/recLnMCNd00yOpeVw</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recM6VoWcVRIgmS54</SchemaAttributeId>
       <createdTime>2022-06-20T11:30:07Z</createdTime>
@@ -9510,6 +9520,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recRbzzZK0pCTehDf</SchemaAttributeId>
+      <createdTime>2022-11-14T20:06:29Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recPPTLAWZu08mD7s</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>TaDaemonApiPort</Value>
+      <Idx>1</Idx>
+      <TestValue>"8002"</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recRjhyzbBd693UU7</SchemaAttributeId>
@@ -10323,7 +10346,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr0tlDZIYPZ3iDp8/recXVUzIp49WFOFdH</SchemaAttribute>
+    <SchemaAttribute>itr2ma6TCxaFEAY4P/recXVUzIp49WFOFdH</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recXgOcojFyG3Ftr6</SchemaAttributeId>
       <createdTime>2022-09-30T19:09:15Z</createdTime>
@@ -11097,19 +11120,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recesxZZSeuzCx7U1</SchemaAttributeId>
-      <createdTime>2022-11-12T08:37:40Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>recTKuleOQoZ3n0HH</Schema>
-      <PrimitiveType>String</PrimitiveType>
-      <Value>TaDaemonSk</Value>
-      <Idx>2</Idx>
-      <TestValue>"NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"</TestValue>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recf4bdL2dzLWS08E</SchemaAttributeId>
       <createdTime>2022-11-10T13:23:45Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -11684,7 +11694,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>2</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itr0tlDZIYPZ3iDp8/recjPLNQVJ2uCOYfC</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recjXMbjBpdJFTXBi</SchemaAttributeId>
       <createdTime>2022-07-05T12:57:11Z</createdTime>
@@ -11698,6 +11707,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>true</IsType>
       <SubMessageFormatAliasRoot>gt.sh.status.snapshot</SubMessageFormatAliasRoot>
     </SchemaAttribute>
+    <SchemaAttribute>itr2ma6TCxaFEAY4P/recjXMbjBpdJFTXBi</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recjdjO1e7eWo3j8T</SchemaAttributeId>
       <createdTime>2022-07-03T21:26:50Z</createdTime>
@@ -11728,6 +11738,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <EnumName>spaceheat.telemetry.name.000</EnumName>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recjn4JQDiHTxb8zW</SchemaAttributeId>
+      <createdTime>2022-11-14T20:06:06Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recPPTLAWZu08mD7s</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>TaDaemonAddr</Value>
+      <Idx>3</Idx>
+      <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
+      <TestValue>"NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"</TestValue>
+      <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recjuJ8RaGljvo9ZZ</SchemaAttributeId>
@@ -12297,19 +12322,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recoWJB5esb0LuWws</SchemaAttributeId>
-      <createdTime>2022-11-12T08:37:42Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>recTKuleOQoZ3n0HH</Schema>
-      <PrimitiveType>Integer</PrimitiveType>
-      <Value>MicroLat</Value>
-      <Idx>3</Idx>
-      <TestValue>45666353</TestValue>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recobizeq1ZYGN5A2</SchemaAttributeId>
       <createdTime>2022-09-22T05:41:44Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -12758,6 +12770,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recsXoFOxudbW1SiS</SchemaAttributeId>
+      <createdTime>2022-11-14T15:46:41Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recPPTLAWZu08mD7s</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>TerminalAssetAlias</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.isone.ver.keene.holly.ta"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recsZD75bQDFRNQt2</SchemaAttributeId>
       <createdTime>2022-06-20T13:16:49Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -13054,7 +13082,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr0tlDZIYPZ3iDp8/recx4xJLSgpMi1EVN</SchemaAttribute>
+    <SchemaAttribute>itr2ma6TCxaFEAY4P/recx4xJLSgpMi1EVN</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recx8cseO4jjodTMZ</SchemaAttributeId>
       <createdTime>2022-11-12T08:16:47Z</createdTime>
@@ -13315,9 +13343,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The asset name must have valid GNodeAlias format, with the world_alias (first word of asset name matching the universe (e.g. dev universe -&gt; world starts with `d`)</Description>
       <Schema>recO8OdobcISYms0B</Schema>
       <AxiomNumber>5</AxiomNumber>
-      <Name>initial.tadeed.algo.create.000 Schema Axiom 5</Name>
       <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec1osS0C34lxMFkC</SchemaAxiomId>
@@ -13328,27 +13356,27 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>2</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Joint Axiom 2</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Joint Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec29eq9Lc6OGIhYk</SchemaAxiomId>
       <createdTime>2022-06-23T19:06:38Z</createdTime>
       <Description>PollPeriodMs must be less than ReportingPeriodMs. PollPeriodMs is how frequently data is polled from the meter. ReportingPeriodMs is the synchronous report to the scada.</Description>
       <Schema>recwr8WwMjrVGNL7L</Schema>
-      <Name>gt.powermeter.reporting.config.100 Schema Axiom </Name>
       <Alias>gt.powermeter.reporting.config.100</Alias>
       <MakeDataClass />
+      <Name>gt.powermeter.reporting.config.100 Schema Axiom </Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec2kI3cJzijFOyV4</SchemaAxiomId>
       <createdTime>2022-07-09T23:04:17Z</createdTime>
       <Description>ReportingPeriodS must be 300 </Description>
       <Schema>recepkVk3vOelGIUa</Schema>
-      <Name>spaceheat.status.100 Schema Axiom </Name>
       <Alias>spaceheat.status.100</Alias>
       <MakeDataClass />
+      <Name>spaceheat.status.100 Schema Axiom </Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec2tMERYL2Mdnty3</SchemaAxiomId>
@@ -13356,9 +13384,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>Assume role is TerminalAsset and status is Active. Then the OwnershipDeedNftId must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi</Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>basegnode.gt.000 Schema Axiom 4</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec3XryMcqFFAbgHY</SchemaAxiomId>
@@ -13372,9 +13400,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>3</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 3</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec3dplhqy7h95uAR</SchemaAxiomId>
@@ -13385,9 +13413,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>1</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Joint Axiom 1</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Joint Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec3y6NgORATdYSHC</SchemaAxiomId>
@@ -13405,9 +13433,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>5</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Creation Axiom 5</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Creation Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec41IGqMHOcsZEXl</SchemaAxiomId>
@@ -13415,9 +13443,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The HalfSignedDeedCreationMtx.txn must have type AssetConfigTxn</Description>
       <Schema>recO8OdobcISYms0B</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>initial.tadeed.algo.create.000 Schema Axiom 2</Name>
       <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec4oleeZwPh0Ng0M</SchemaAxiomId>
@@ -13425,9 +13453,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>Decoded OldDeedTransferMtx must have type transaction.MultisigTransaction</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>1</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 1</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec5VDuzpUgfcEkJx</SchemaAxiomId>
@@ -13435,9 +13463,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The MultiSig must belong to the 2-sig Multi [Gnf Admin, payload.DeedValidatorAddr]</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 3</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec5yMaEEPe5St8sT</SchemaAxiomId>
@@ -13445,9 +13473,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>For the asset transfer: receiver is validator, sender is validator multi, transfer amount is 1</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>5</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 5</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec7CRy4NcfIww7pH</SchemaAxiomId>
@@ -13480,9 +13508,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must have signed the mtx</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>8</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 8</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 8</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rec9ncrQz98EtjseD</SchemaAxiomId>
@@ -13505,9 +13533,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description> Decoded FirstDeedTransferMtx must have type MultisigTransaction</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>1</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 1</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recAZ1Zsq5mzNmXks</SchemaAxiomId>
@@ -13516,9 +13544,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
 </Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>1</AxiomNumber>
-      <Name>basegnode.gt.000 Schema Axiom 1</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recBJRHgd3WPVUvQw</SchemaAxiomId>
@@ -13528,9 +13556,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>1</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Creation Axiom 1</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Creation Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recBWcnuqdt9wzynI</SchemaAxiomId>
@@ -13539,9 +13567,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <AxiomNumber>1</AxiomNumber>
       <ShortDescription>AssetConfigTransaction</ShortDescription>
-      <Name>new.tadeed.algo.optin.000 Schema Axiom 1</Name>
       <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recCHkLILWYGN7rjn</SchemaAxiomId>
@@ -13549,9 +13577,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>For the asset getting created: total = 1, unit_name=TADEED, asset_name must be &lt;= 32 char, manager is Gnf Admin.</Description>
       <Schema>recO8OdobcISYms0B</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>initial.tadeed.algo.create.000 Schema Axiom 4</Name>
       <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recDXr4RoTH1jDsXd</SchemaAxiomId>
@@ -13559,9 +13587,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The HalfSignedCertTransferMtx.txn must have type AssetTransferTxn</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 2</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recDox3OhEiNyIdlK</SchemaAxiomId>
@@ -13574,9 +13602,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-07-09T23:05:08Z</createdTime>
       <Description>All internal timestamps must be consistent</Description>
       <Schema>recepkVk3vOelGIUa</Schema>
-      <Name>spaceheat.status.100 Schema Axiom </Name>
       <Alias>spaceheat.status.100</Alias>
       <MakeDataClass />
+      <Name>spaceheat.status.100 Schema Axiom </Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recEDIu6H6gEbyn4v</SchemaAxiomId>
@@ -13584,9 +13612,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>There must not already be a ValidatorCert in the 2-sig [Gnf Admin, ValidatorAddr] acct.</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>6</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 6</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recEXGRVitjMKiPmR</SchemaAxiomId>
@@ -13594,9 +13622,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>For the asset getting created: total = 1, unit_name=VLDTR, manager is Gnf Admin, asset_name and url not blank.</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 4</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recH512a7g6p8cLQM</SchemaAxiomId>
@@ -13604,9 +13632,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>total must be 1, unit name must be TADEED, manager must be Gnf Admin or Gnf Graveyard</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 3</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recISoW81cXDnqgJt</SchemaAxiomId>
@@ -13629,9 +13657,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
         - TradingRightsNftId must be an integer</Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>basegnode.gt.000 Schema Axiom 2</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recKKyFj7Ie9JH7L9</SchemaAxiomId>
@@ -13650,9 +13678,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
         multi whose asset_name is this GNodeAlias.</Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>basegnode.gt.000 Schema Axiom 3</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recKmoKIL8lpLdK2U</SchemaAxiomId>
@@ -13660,9 +13688,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>Decoded HalfSignedCertTransferMtx must have type MultisigTransaction</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>1</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 1</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recLImSRvyPbLliuE</SchemaAxiomId>
@@ -13671,18 +13699,18 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <AxiomNumber>2</AxiomNumber>
       <ShortDescription>Valid TaDeed</ShortDescription>
-      <Name>new.tadeed.algo.optin.000 Schema Axiom 2</Name>
       <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recN1T4RyJw2VMsOW</SchemaAxiomId>
       <createdTime>2022-07-10T14:57:18Z</createdTime>
       <Description>SpaceheatNodes of role BoostElement must have a RatedVoltageV</Description>
       <Schema>recUj3ZPKMsXanG88</Schema>
-      <Name>spaceheat.node.gt.100 Schema Axiom </Name>
       <Alias>spaceheat.node.gt.100</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>spaceheat.node.gt.100 Schema Axiom </Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recNXTuKhV6lGeDjv</SchemaAxiomId>
@@ -13692,9 +13720,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>4</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Creation Axiom 4</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Creation Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recNjCDYdZLdvtzAs</SchemaAxiomId>
@@ -13702,9 +13730,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The Transfer asset-index must be for the existing Validator Certificate co-created by the multi account</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 4</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recOxFpekpRcZJpFj</SchemaAxiomId>
@@ -13712,9 +13740,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must sign the HalfSignedCertCreationMtx</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>5</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 5</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recOyMaXAxwASJw4J</SchemaAxiomId>
@@ -13722,9 +13750,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The Mtx must be signed by the DeedValidatorAddr</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>7</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 7</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 7</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recP9v8cvgHgbDnpZ</SchemaAxiomId>
@@ -13732,9 +13760,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The asset must be created and owned by the 2-sig [Gnf Admin, payload.DeedValidator] multi account</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 4</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recQn6ib10Nqp94i8</SchemaAxiomId>
@@ -13743,9 +13771,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <AxiomNumber>3</AxiomNumber>
       <ShortDescription>Old TaDeed check</ShortDescription>
-      <Name>new.tadeed.algo.optin.000 Schema Axiom 3</Name>
       <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recSkcGAjBCP4uFPX</SchemaAxiomId>
@@ -13753,9 +13781,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>Decoded HalfSignedCertCreationMtx must have type MultisigTransaction</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>1</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 1</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recTQN80nxhBGq1of</SchemaAxiomId>
@@ -13776,9 +13804,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The HalfSignedCertCreationMtx MultiSig must be the 1-sig TaMulti [Gnf Admin, payload.ValidatorAddr]</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 3</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recUb6ezx8SD26ynT</SchemaAxiomId>
@@ -13796,9 +13824,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>4</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 4</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recY7qq8BPIydsNm8</SchemaAxiomId>
@@ -13812,9 +13840,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The asset name must have valid GNodeAlias format, with the world_alias (first</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>5</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 5</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recYBcjALeSkC3DmL</SchemaAxiomId>
@@ -13824,9 +13852,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AxiomNumber>3</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Creation Axiom 3</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Creation Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recZtIDTzQSfBVyMx</SchemaAxiomId>
@@ -13863,9 +13891,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must have signed the mtx, and the signature must match the txn</Description>
       <Schema>recO8OdobcISYms0B</Schema>
       <AxiomNumber>6</AxiomNumber>
-      <Name>initial.tadeed.algo.create.000 Schema Axiom 6</Name>
       <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recdfhrc7m3cOTO3V</SchemaAxiomId>
@@ -13873,9 +13901,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>        word of asset name matching the universe (e.g. dev universe -&gt; world starts with `d</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>6</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 6</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>receh4LRvdaFqsV5D</SchemaAxiomId>
@@ -13890,9 +13918,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>6</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 6</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recgkttJLsyUmqLlp</SchemaAxiomId>
@@ -13900,9 +13928,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The FirstDeedTransferMtx.txn must have type AssetTransferTxn</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 2</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recgr767PF8P1X06i</SchemaAxiomId>
@@ -13910,9 +13938,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr] account has opted in to the Deed and has enough funding (TaDeed Consideration Algos, publicly set by the Gnf)</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>5</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 5</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rech3zpojTnscbsH1</SchemaAxiomId>
@@ -13920,9 +13948,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>ValidatorAddr must have opted into the certificate, and the multi account must still own the certificate</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>7</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 7</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 7</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rechF4eml8urlVmxU</SchemaAxiomId>
@@ -13932,9 +13960,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>1</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 1</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 1</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rechGHjDdnbThfv1R</SchemaAxiomId>
@@ -13943,9 +13971,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recvWBuo1Ws1SIL4b</Schema>
       <AxiomNumber>4</AxiomNumber>
       <ShortDescription>Correctly Signed</ShortDescription>
-      <Name>new.tadeed.algo.optin.000 Schema Axiom 4</Name>
       <Alias>new.tadeed.algo.optin.000</Alias>
       <MakeDataClass />
+      <Name>new.tadeed.algo.optin.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recj13iYXBkX5UZr3</SchemaAxiomId>
@@ -13953,9 +13981,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>Validator multi must have enough algos</Description>
       <Schema>rec1SFXYQUXElpeJ9</Schema>
       <AxiomNumber>6</AxiomNumber>
-      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 6</Name>
       <Alias>tavalidatorcert.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.transfer.000 Schema Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recjrbpPTEVatFS5z</SchemaAxiomId>
@@ -13975,9 +14003,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Description>The OldDeedTransferMtx.txn must have type transaction.AssetTransferTxn</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 2</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recloTCbAMeQzOIzq</SchemaAxiomId>
@@ -13989,9 +14017,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>5</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 5</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 5</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recm1BVL3DIFeVGNU</SchemaAxiomId>
@@ -14005,9 +14033,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The MultiSig must be the 2-sig multi [Gnf Admin, payload.ValidatorAddr]</Description>
       <Schema>recO8OdobcISYms0B</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>initial.tadeed.algo.create.000 Schema Axiom 3</Name>
       <Alias>initial.tadeed.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>initial.tadeed.algo.create.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recmQsc2HRItZ3oL1</SchemaAxiomId>
@@ -14030,9 +14058,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The HalfSignedCertCreationMtx MultiSig must be the 2-sig Multi [Gnf Admin, payload.ValidatorAddr]</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>3</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 3</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 3</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recstTBCe9nhA6pgn</SchemaAxiomId>
@@ -14048,9 +14076,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-06-20T13:22:33Z</createdTime>
       <Description>TelemetryNameList, AboutNodeList, ValueList must all be lists of the same length</Description>
       <Schema>recauOuVBqhRdNWcN</Schema>
-      <Name>gt.sh.status.snapshot.110 Schema Axiom </Name>
       <Alias>gt.sh.status.snapshot.110</Alias>
       <MakeDataClass />
+      <Name>gt.sh.status.snapshot.110 Schema Axiom </Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rectEwF6ZLLRopleW</SchemaAxiomId>
@@ -14060,9 +14088,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <AxiomNumber>2</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
       <OnCreate>true</OnCreate>
-      <Name>basegnode.gt.000 Creation Axiom 2</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Creation Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>rectREWSiFBVSQoOq</SchemaAxiomId>
@@ -14070,9 +14098,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr] must not own any assets (specifically because this is the FIRST tadeed and should initialize the multi.</Description>
       <Schema>rech8RtBLsLVe51DN</Schema>
       <AxiomNumber>6</AxiomNumber>
-      <Name>tadeed.algo.transfer.000 Schema Axiom 6</Name>
       <Alias>tadeed.algo.transfer.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.transfer.000 Schema Axiom 6</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recuAHte3M38xBpxd</SchemaAxiomId>
@@ -14102,9 +14130,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Schema>recDp8U1jLA9zeEx2</Schema>
       <AxiomNumber>2</AxiomNumber>
       <DataClassOnly>true</DataClassOnly>
-      <Name>basegnode.gt.000 Update Axiom 2</Name>
       <Alias>basegnode.gt.000</Alias>
       <MakeDataClass>true</MakeDataClass>
+      <Name>basegnode.gt.000 Update Axiom 2</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recwsWtIgu909pJm1</SchemaAxiomId>
@@ -14112,9 +14140,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The asset-index of the new deed must be greater than the asset-index of the old deed</Description>
       <Schema>recXCK8GTrT3hnfKX</Schema>
       <AxiomNumber>4</AxiomNumber>
-      <Name>tadeed.algo.exchange.000 Schema Axiom 4</Name>
       <Alias>tadeed.algo.exchange.000</Alias>
       <MakeDataClass />
+      <Name>tadeed.algo.exchange.000 Schema Axiom 4</Name>
     </SchemaAxiom>
     <SchemaAxiom>
       <SchemaAxiomId>recyO8wUTKZpFsCtt</SchemaAxiomId>
@@ -14122,9 +14150,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Description>The transaction must have type AssetConfigTxn</Description>
       <Schema>reccFZLsGTVhuzGsn</Schema>
       <AxiomNumber>2</AxiomNumber>
-      <Name>tavalidatorcert.algo.create.000 Schema Axiom 2</Name>
       <Alias>tavalidatorcert.algo.create.000</Alias>
       <MakeDataClass />
+      <Name>tavalidatorcert.algo.create.000 Schema Axiom 2</Name>
     </SchemaAxiom>
   </SchemaAxioms>
   <PropertyFormats>
@@ -14302,7 +14330,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>rec7Kmzb0rNhgYfq6</MpSchemaAttributes>
       <MpSchemaAttributes>recwn71nnfdBV252s</MpSchemaAttributes>
       <MpSchemaAttributes>recJZMdMai2LWeadg</MpSchemaAttributes>
-      <MpSchemaAttributes>rec1V96HgrdOW9OFp</MpSchemaAttributes>
+      <MpSchemaAttributes>recsXoFOxudbW1SiS</MpSchemaAttributes>
       <Name>LrdAliasFormat</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14371,6 +14399,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recl91pTGyfMk8gRd</MpSchemaAttributes>
       <MpSchemaAttributes>recx8cseO4jjodTMZ</MpSchemaAttributes>
       <MpSchemaAttributes>reciLChH0fU9IFCds</MpSchemaAttributes>
+      <MpSchemaAttributes>recjn4JQDiHTxb8zW</MpSchemaAttributes>
       <Name>AlgoAddressStringFormat</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14440,6 +14469,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>recfsDYNRW0af16Ol</ProtocolTypes>
       <ProtocolTypes>recFreOp8J4dIjXkD</ProtocolTypes>
       <ProtocolTypes>recvYKEgKxumNmkih</ProtocolTypes>
+      <ProtocolTypes>rec5K84S2MN0iMNlE</ProtocolTypes>
       <Name>atn</Name>
       <ProtocolEnums>recLjDrJSnNnwWD54</ProtocolEnums>
       <ProtocolEnums>recRncRvdA6tysnAt</ProtocolEnums>
@@ -14487,6 +14517,8 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
       <ProtocolTypes>recYSfcJBIVxFIWCZ</ProtocolTypes>
       <ProtocolTypes>recQItJExa3ZiV3Jh</ProtocolTypes>
+      <ProtocolTypes>reciUjZq6Ym3P59mT</ProtocolTypes>
+      <ProtocolTypes>reccEMLYgCyyYLPr2</ProtocolTypes>
       <Name>gnf</Name>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
@@ -14512,144 +14544,158 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-11-08T04:00:15Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>rechXkF4uGNAulje7</Type>
-      <Name>atn price.quantity.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>price.quantity.000</TypeName>
+      <Name>atn price.quantity.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec1Kr8gSWyIe4lG2</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recT4SSkJ18pz5YoZ</Type>
-      <Name>gnf basegnodes.broadcast.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnodes.broadcast.000</TypeName>
+      <Name>gnf basegnodes.broadcast.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec2Gvd8Nt7DvqTpf</ProtocolTypeId>
       <createdTime>2022-11-08T18:54:54Z</createdTime>
       <Protocol>recre1axpcL8VVuaQ</Protocol>
       <Type>recc2Km1jUViJqVeK</Type>
-      <Name>gwtime ready.000</Name>
       <ProtocolName>gwtime</ProtocolName>
       <TypeName>ready.000</TypeName>
+      <Name>gwtime ready.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec2QIaMX8gSssv7M</ProtocolTypeId>
       <createdTime>2022-11-02T12:51:33Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>rec8ILTteHhn4MpGd</Type>
-      <Name>gnf basegnodes.get.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnodes.get.000</TypeName>
+      <Name>gnf basegnodes.get.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec3V5oWa4cyRtWNc</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>reccFZLsGTVhuzGsn</Type>
-      <Name>gnf tavalidatorcert.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>tavalidatorcert.algo.create.000</TypeName>
+      <Name>gnf tavalidatorcert.algo.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec40fE823klMVCmv</ProtocolTypeId>
       <createdTime>2022-11-08T17:32:53Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recvGFiTtzXNrhLBm</Type>
-      <Name>atn bid.ack.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>bid.ack.000</TypeName>
+      <Name>atn bid.ack.000</Name>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>rec5K84S2MN0iMNlE</ProtocolTypeId>
+      <createdTime>2022-11-14T15:42:52Z</createdTime>
+      <Protocol>rec3nJaxOMLIKJoNY</Protocol>
+      <Type>recPPTLAWZu08mD7s</Type>
+      <ProtocolName>atn</ProtocolName>
+      <TypeName>terminalasset.certify.hack.000</TypeName>
+      <Name>atn terminalasset.certify.hack.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec9HUzZ3tgJOalLk</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recvWBuo1Ws1SIL4b</Type>
-      <Name>gnf new.tadeed.algo.optin.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>new.tadeed.algo.optin.000</TypeName>
+      <Name>gnf new.tadeed.algo.optin.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recA4Y7Iy3elTbyCB</ProtocolTypeId>
       <createdTime>2022-10-31T20:31:13Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>reca1A5UXpnpmZdiH</Type>
-      <Name>gnf basegnode.other.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.other.create.000</TypeName>
+      <Name>gnf basegnode.other.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recAJ6AYNLdBZ7XfK</ProtocolTypeId>
       <createdTime>2022-10-31T20:31:19Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>rec5bEVzI1k5qcXYg</Type>
-      <Name>gnf discoverycert.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>discoverycert.algo.create.000</TypeName>
+      <Name>gnf discoverycert.algo.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recAKcZ5BDHN6JKil</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:28Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recxNIfCRauFrb57o</Type>
-      <Name>gnf heartbeat.a.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>heartbeat.a.000</TypeName>
+      <Name>gnf heartbeat.a.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recASxd0yY7a1nWR4</ProtocolTypeId>
       <createdTime>2022-11-06T20:36:28Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recxNIfCRauFrb57o</Type>
-      <Name>atn heartbeat.a.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>heartbeat.a.000</TypeName>
+      <Name>atn heartbeat.a.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recB2fok3eH3LnZmw</ProtocolTypeId>
       <createdTime>2022-11-08T03:23:53Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recc2Km1jUViJqVeK</Type>
-      <Name>atn ready.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>ready.000</TypeName>
+      <Name>atn ready.000</Name>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recD3ljiQIeTgIh7G</ProtocolTypeId>
+      <createdTime>2022-11-14T23:07:02Z</createdTime>
+      <Name></Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recDST3lwGBFXqsz1</ProtocolTypeId>
       <createdTime>2022-11-08T04:09:15Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recsHXkpUxoOF9vYp</Type>
-      <Name>atn price.quantity.unitless.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>price.quantity.unitless.000</TypeName>
+      <Name>atn price.quantity.unitless.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recFreOp8J4dIjXkD</ProtocolTypeId>
       <createdTime>2022-11-12T08:15:45Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recbGrdqqYGiwVYVK</Type>
-      <Name>atn tadeed.specs.hack.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>tadeed.specs.hack.000</TypeName>
+      <Name>atn tadeed.specs.hack.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recGRKTWPhlGhVZqf</ProtocolTypeId>
       <createdTime>2022-11-09T23:48:19Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recrZz3gmzl97POA1</Type>
-      <Name>atn atn.params.heatpumpwithbooststore.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>atn.params.heatpumpwithbooststore.000</TypeName>
+      <Name>atn atn.params.heatpumpwithbooststore.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recGpv7lXS5nQj5jR</ProtocolTypeId>
       <createdTime>2022-11-10T13:22:56Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>reczzIn3wGYrEKtbr</Type>
-      <Name>atn flo.params.heatpumpwithbooststore.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>flo.params.heatpumpwithbooststore.000</TypeName>
+      <Name>atn flo.params.heatpumpwithbooststore.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recJyGiKdNEsSmseU</ProtocolTypeId>
@@ -14666,198 +14712,216 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <createdTime>2022-11-07T18:58:07Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recbAMyCyUX2bLKfz</Type>
-      <Name>atn hack.state.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>hack.state.000</TypeName>
+      <Name>atn hack.state.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recPRrjd1GyqOVHIZ</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recMyDdiQjtfTMAP1</Type>
-      <Name>gnf old.tadeed.algo.return.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>old.tadeed.algo.return.000</TypeName>
+      <Name>gnf old.tadeed.algo.return.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recQItJExa3ZiV3Jh</ProtocolTypeId>
       <createdTime>2022-11-04T17:59:59Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recPy6SuizSerb3JG</Type>
-      <Name>gnf new.tadeed.send.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>new.tadeed.send.000</TypeName>
+      <Name>gnf new.tadeed.send.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recSNej4i6EwucKbV</ProtocolTypeId>
       <createdTime>2022-11-08T04:42:44Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recH9GUDdSB7SiwNG</Type>
-      <Name>atn bid.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>bid.000</TypeName>
+      <Name>atn bid.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recY5s5LoUEwNBowT</ProtocolTypeId>
       <createdTime>2022-10-31T20:31:17Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recJH4tbXOqVJkMVW</Type>
-      <Name>gnf basegnode.ctn.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.ctn.create.000</TypeName>
+      <Name>gnf basegnode.ctn.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recYSfcJBIVxFIWCZ</ProtocolTypeId>
       <createdTime>2022-11-03T14:32:25Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recAWKkS0hcyws7O6</Type>
-      <Name>gnf initial.tadeed.algo.optin.001</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>initial.tadeed.algo.optin.001</TypeName>
+      <Name>gnf initial.tadeed.algo.optin.001</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recZiKOMXJ8UCneY9</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recazQb2vEXgbroHd</Type>
-      <Name>gnf basegnode.terminalasset.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.terminalasset.create.000</TypeName>
+      <Name>gnf basegnode.terminalasset.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recanqppJwatq7fmU</ProtocolTypeId>
       <createdTime>2022-11-08T08:14:57Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recd5K0XiAzHsj2Pw</Type>
-      <Name>atn latest.price.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>latest.price.000</TypeName>
+      <Name>atn latest.price.000</Name>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>reccEMLYgCyyYLPr2</ProtocolTypeId>
+      <createdTime>2022-11-14T23:08:09Z</createdTime>
+      <Name>gnf terminalasset.certify.hack.000</Name>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <Type>recPPTLAWZu08mD7s</Type>
+      <TypeName>terminalasset.certify.hack.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>reccfgO8fAUzT3J2W</ProtocolTypeId>
       <createdTime>2022-10-31T20:31:21Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>rec70ndc2atifo8Ri</Type>
-      <Name>gnf basegnode.marketmaker.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.marketmaker.create.000</TypeName>
+      <Name>gnf basegnode.marketmaker.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>reccq15mpDgpXGekn</ProtocolTypeId>
       <createdTime>2022-10-31T20:31:08Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recDp8U1jLA9zeEx2</Type>
-      <Name>gnf basegnode.gt.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnode.gt.000</TypeName>
+      <Name>gnf basegnode.gt.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>reccuFJPlMliv6yW8</ProtocolTypeId>
       <createdTime>2022-11-08T18:54:46Z</createdTime>
       <Protocol>recre1axpcL8VVuaQ</Protocol>
       <Type>rec7peRuDqMNa0vlW</Type>
-      <Name>gwtime sim.timestep.000</Name>
       <ProtocolName>gwtime</ProtocolName>
       <TypeName>sim.timestep.000</TypeName>
+      <Name>gwtime sim.timestep.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recfsDYNRW0af16Ol</ProtocolTypeId>
       <createdTime>2022-11-11T00:45:59Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>rec3fLb6b0gIeuCTO</Type>
-      <Name>atn atn.params.report.heatpumpwithbooststore.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>atn.params.report.heatpumpwithbooststore.000</TypeName>
+      <Name>atn atn.params.report.heatpumpwithbooststore.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recg3ZHFD17mRWVDL</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recXrOxZu3uUqL6pH</Type>
-      <Name>gnf tatradingrights.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>tatradingrights.algo.create.000</TypeName>
+      <Name>gnf tatradingrights.algo.create.000</Name>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>reciUjZq6Ym3P59mT</ProtocolTypeId>
+      <createdTime>2022-11-14T23:07:27Z</createdTime>
+      <Name>gnf tadeed.specs.hack.000</Name>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <Type>recbGrdqqYGiwVYVK</Type>
+      <TypeName>tadeed.specs.hack.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recmXImdzdJvIhwRj</ProtocolTypeId>
       <createdTime>2022-11-06T19:58:32Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>rec8uTC7GK5qgXzg9</Type>
-      <Name>atn gnode.gt.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>gnode.gt.000</TypeName>
+      <Name>atn gnode.gt.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recnBbGAlK4U8sngT</ProtocolTypeId>
       <createdTime>2022-11-08T18:54:37Z</createdTime>
       <Protocol>recre1axpcL8VVuaQ</Protocol>
       <Type>recxNIfCRauFrb57o</Type>
-      <Name>gwtime heartbeat.a.000</Name>
       <ProtocolName>gwtime</ProtocolName>
       <TypeName>heartbeat.a.000</TypeName>
+      <Name>gwtime heartbeat.a.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recsRFfTXSym7gX54</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recPf7eAhpge7kvO7</Type>
-      <Name>gnf initial.tadeed.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>initial.tadeed.algo.transfer.000</TypeName>
+      <Name>gnf initial.tadeed.algo.transfer.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rect61DlS8mCPHnUL</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recO8OdobcISYms0B</Type>
-      <Name>gnf initial.tadeed.algo.create.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>initial.tadeed.algo.create.000</TypeName>
+      <Name>gnf initial.tadeed.algo.create.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rectD1KxAzqJILPfu</ProtocolTypeId>
       <createdTime>2022-11-08T04:58:01Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recDYjXYf8RbWmUFe</Type>
-      <Name>atn market.type.gt.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>market.type.gt.000</TypeName>
+      <Name>atn market.type.gt.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rectUrkJtiUPjNn5q</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>recn0YpsBzBOA9yvq</Type>
-      <Name>gnf discoverycert.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>discoverycert.algo.transfer.000</TypeName>
+      <Name>gnf discoverycert.algo.transfer.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recuetPMCxsDyU0R4</ProtocolTypeId>
       <createdTime>2022-11-07T20:23:32Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>rec7peRuDqMNa0vlW</Type>
-      <Name>atn sim.timestep.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>sim.timestep.000</TypeName>
+      <Name>atn sim.timestep.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recvYKEgKxumNmkih</ProtocolTypeId>
       <createdTime>2022-11-12T08:37:15Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recTKuleOQoZ3n0HH</Type>
-      <Name>atn tadeed.specs.private.hack.000</Name>
       <ProtocolName>atn</ProtocolName>
-      <TypeName>tadeed.specs.private.hack.000</TypeName>
+      <TypeName>tadaemon.sk.hack.000</TypeName>
+      <Name>atn tadaemon.sk.hack.000</Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recxtr4LhX2Ixojmg</ProtocolTypeId>
       <createdTime>2022-10-31T20:34:49Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <Type>rec1SFXYQUXElpeJ9</Type>
-      <Name>gnf tavalidatorcert.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>tavalidatorcert.algo.transfer.000</TypeName>
+      <Name>gnf tavalidatorcert.algo.transfer.000</Name>
     </ProtocolType>
   </ProtocolTypes>
   <GNodeRoles>
@@ -14984,33 +15048,33 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-11-08T16:21:31Z</createdTime>
       <FromId>rectxhMaA0VNuhHQ2</FromId>
       <Payload>rec7peRuDqMNa0vlW</Payload>
-      <Name>timecoordinator broadcasts sim.timestep v000</Name>
-      <FromRole>TimeCoordinator</FromRole>
       <From>timecoordinator</From>
       <PayloadTypeName>sim.timestep</PayloadTypeName>
       <PayloadVersion>000</PayloadVersion>
+      <Name>timecoordinator broadcasts sim.timestep v000</Name>
+      <FromRole>TimeCoordinator</FromRole>
     </Topic>
     <Topic>
       <TopicId>recVOa2DYOtTyarDA</TopicId>
       <createdTime>2022-11-08T16:21:31Z</createdTime>
       <FromId>recrICKb8tuEXHz73</FromId>
       <Payload>recbAMyCyUX2bLKfz</Payload>
-      <Name>atomictnode broadcasts hack.state v000</Name>
-      <FromRole>AtomicTNode</FromRole>
       <From>atomictnode</From>
       <PayloadTypeName>hack.state</PayloadTypeName>
       <PayloadVersion>000</PayloadVersion>
+      <Name>atomictnode broadcasts hack.state v000</Name>
+      <FromRole>AtomicTNode</FromRole>
     </Topic>
     <Topic>
       <TopicId>recnCUFtuRaM9imRG</TopicId>
       <createdTime>2022-11-08T16:21:31Z</createdTime>
       <FromId>reczel9oTcNrweZ1X</FromId>
       <Payload>recd5K0XiAzHsj2Pw</Payload>
-      <Name>marketmaker broadcasts latest.price v000</Name>
-      <FromRole>MarketMaker</FromRole>
       <From>marketmaker</From>
       <PayloadTypeName>latest.price</PayloadTypeName>
       <PayloadVersion>000</PayloadVersion>
+      <Name>marketmaker broadcasts latest.price v000</Name>
+      <FromRole>MarketMaker</FromRole>
     </Topic>
   </Topics>
   <ActorMessages>
@@ -15019,9 +15083,9 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-08-12T13:24:55Z</createdTime>
       <MessageType>recc5qGcZNQPmktbe</MessageType>
       <GNodeRole>recVQaDHYNET3Oim3</GNodeRole>
-      <Name>Scada/gs.pwr</Name>
       <GNodeRoleAlias>Scada</GNodeRoleAlias>
       <MessageTypeAliasRoot>gs.pwr</MessageTypeAliasRoot>
+      <Name>Scada/gs.pwr</Name>
       <MessageStatus>Active</MessageStatus>
       <MessageTypeCurrentSemanticEnd>100</MessageTypeCurrentSemanticEnd>
       <MessageTypeAlias>gs.pwr.100</MessageTypeAlias>
@@ -15031,9 +15095,9 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-08-12T13:20:47Z</createdTime>
       <MessageType>receVdNEfIE1HLnwN</MessageType>
       <GNodeRole>recrICKb8tuEXHz73</GNodeRole>
-      <Name>AtomicTNode/gt.sh.cli.atn.cmd</Name>
       <GNodeRoleAlias>AtomicTNode</GNodeRoleAlias>
       <MessageTypeAliasRoot>gt.sh.cli.atn.cmd</MessageTypeAliasRoot>
+      <Name>AtomicTNode/gt.sh.cli.atn.cmd</Name>
       <MessageStatus>Active</MessageStatus>
       <MessageTypeCurrentSemanticEnd>110</MessageTypeCurrentSemanticEnd>
       <MessageTypeAlias>gt.sh.cli.atn.cmd.110</MessageTypeAlias>
@@ -15043,9 +15107,9 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-08-12T13:20:47Z</createdTime>
       <MessageType>recPnrf8TmF9WBgAm</MessageType>
       <GNodeRole>recVQaDHYNET3Oim3</GNodeRole>
-      <Name>Scada/snapshot.spaceheat</Name>
       <GNodeRoleAlias>Scada</GNodeRoleAlias>
       <MessageTypeAliasRoot>snapshot.spaceheat</MessageTypeAliasRoot>
+      <Name>Scada/snapshot.spaceheat</Name>
       <MessageStatus>Active</MessageStatus>
       <MessageTypeCurrentSemanticEnd>100</MessageTypeCurrentSemanticEnd>
       <MessageTypeAlias>snapshot.spaceheat.100</MessageTypeAlias>
@@ -15055,9 +15119,9 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-08-12T13:25:08Z</createdTime>
       <MessageType>recbbx6wGZEfqP2Kn</MessageType>
       <GNodeRole>recVQaDHYNET3Oim3</GNodeRole>
-      <Name>Scada/gt.sh.status</Name>
       <GNodeRoleAlias>Scada</GNodeRoleAlias>
       <MessageTypeAliasRoot>gt.sh.status</MessageTypeAliasRoot>
+      <Name>Scada/gt.sh.status</Name>
       <MessageStatus>Active</MessageStatus>
       <MessageTypeCurrentSemanticEnd>110</MessageTypeCurrentSemanticEnd>
       <MessageTypeAlias>gt.sh.status.110</MessageTypeAlias>
@@ -15067,9 +15131,9 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-08-12T13:20:47Z</createdTime>
       <MessageType>rechZBY0G1JuNeEuG</MessageType>
       <GNodeRole>recrICKb8tuEXHz73</GNodeRole>
-      <Name>AtomicTNode/gt.dispatch.boolean</Name>
       <GNodeRoleAlias>AtomicTNode</GNodeRoleAlias>
       <MessageTypeAliasRoot>gt.dispatch.boolean</MessageTypeAliasRoot>
+      <Name>AtomicTNode/gt.dispatch.boolean</Name>
       <MessageStatus>Active</MessageStatus>
       <MessageTypeCurrentSemanticEnd>100</MessageTypeCurrentSemanticEnd>
       <MessageTypeAlias>gt.dispatch.boolean.100</MessageTypeAlias>
@@ -15098,22 +15162,22 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-11-08T15:59:25Z</createdTime>
       <ToId>reczel9oTcNrweZ1X</ToId>
       <FromId>recrICKb8tuEXHz73</FromId>
+      <From>atomictnode</From>
+      <To>marketmaker</To>
       <Name>atomictnode says to marketmaker</Name>
       <FromRole>AtomicTNode</FromRole>
-      <From>atomictnode</From>
       <ToRole>MarketMaker</ToRole>
-      <To>marketmaker</To>
     </ConvoPairing>
     <ConvoPairing>
       <ConvoPairingId>recLAk1m0A1lP1qbp</ConvoPairingId>
       <createdTime>2022-11-08T15:59:25Z</createdTime>
       <ToId>recPnosdjBpyg5lVp</ToId>
       <FromId>rectxhMaA0VNuhHQ2</FromId>
+      <From>timecoordinator</From>
+      <To>unknown</To>
       <Name>timecoordinator says to unknown</Name>
       <FromRole>TimeCoordinator</FromRole>
-      <From>timecoordinator</From>
       <ToRole>Unknown</ToRole>
-      <To>unknown</To>
     </ConvoPairing>
     <ConvoPairing>
       <ConvoPairingId>recXoGg7l3r7ZG6Em</ConvoPairingId>
@@ -15121,11 +15185,11 @@ characterized electrical device, using the meter described, at the location desc
       <ToId>rectxhMaA0VNuhHQ2</ToId>
       <FromId>recrICKb8tuEXHz73</FromId>
       <BrokerMessages>recXGRmBBB6Pch163</BrokerMessages>
+      <From>atomictnode</From>
+      <To>timecoordinator</To>
       <Name>atomictnode says to timecoordinator</Name>
       <FromRole>AtomicTNode</FromRole>
-      <From>atomictnode</From>
       <ToRole>TimeCoordinator</ToRole>
-      <To>timecoordinator</To>
     </ConvoPairing>
   </ConvoPairings>
   <ProtocolEnums>

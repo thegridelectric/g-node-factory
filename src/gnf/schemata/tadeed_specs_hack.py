@@ -1,11 +1,9 @@
 """Type tadeed.specs.hack, version 000"""
 import json
-from typing import Any
 from typing import Dict
 from typing import Literal
 
 from pydantic import BaseModel
-from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
@@ -33,7 +31,7 @@ class TadeedSpecsHack(BaseModel):
         "TaDaemonAddr", property_format.is_algo_address_string_format
     )
 
-    def as_dict(self) -> Dict[str, Any]:
+    def as_dict(self) -> Dict:
         d = self.dict()
         return d
 
@@ -78,7 +76,7 @@ class TadeedSpecsHack_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict[str, Any]) -> TadeedSpecsHack:
+    def dict_to_tuple(cls, d: dict) -> TadeedSpecsHack:
         d2 = dict(d)
         if "TerminalAssetAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TerminalAssetAlias")

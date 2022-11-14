@@ -8,7 +8,7 @@ from gnf.errors import SchemaError
 from gnf.schemata import TadeedSpecsHack_Maker as Maker
 
 
-def test_tadeed_specs_hack_generated() -> None:
+def test_tadeed_specs_hack_generated():
 
     d = {
         "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",

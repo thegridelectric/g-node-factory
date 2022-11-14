@@ -18,8 +18,8 @@ from gnf.message import as_enum
 from gnf.property_format import predicate_validator
 
 
-class CoreGNodeRole100SchemaEnum:
-    enum_name: str = "core.g.node.role.100"
+class CoreGNodeRole000SchemaEnum:
+    enum_name: str = "core.g.node.role.000"
     symbols: List[str] = [
         "00000000",
         "0f8872f7",
@@ -37,7 +37,7 @@ class CoreGNodeRole100SchemaEnum:
         return False
 
 
-class CoreGNodeRole100(StrEnum):
+class CoreGNodeRole000(StrEnum):
     Other = auto()
     TerminalAsset = auto()
     AtomicMeteringNode = auto()
@@ -47,7 +47,7 @@ class CoreGNodeRole100(StrEnum):
     InterconnectionComponent = auto()
 
     @classmethod
-    def default(cls) -> "CoreGNodeRole100":
+    def default(cls) -> "CoreGNodeRole000":
         return cls.Other
 
     @classmethod
@@ -58,38 +58,38 @@ class CoreGNodeRole100(StrEnum):
 class CoreGNodeRoleMap:
     @classmethod
     def type_to_local(cls, symbol):
-        if not CoreGNodeRole100SchemaEnum.is_symbol(symbol):
-            raise SchemaError(f"{symbol} must belong to CoreGNodeRole100 symbols")
+        if not CoreGNodeRole000SchemaEnum.is_symbol(symbol):
+            raise SchemaError(f"{symbol} must belong to CoreGNodeRole000 symbols")
         versioned_enum = cls.type_to_versioned_enum_dict[symbol]
         return as_enum(versioned_enum, CoreGNodeRole, CoreGNodeRole.default())
 
     @classmethod
     def local_to_type(cls, core_g_node_role):
-        if not isinstance(core_g_node_role, CoreGNodeRole100):
-            raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole100}")
+        if not isinstance(core_g_node_role, CoreGNodeRole000):
+            raise SchemaError(f"{core_g_node_role} must be of type {CoreGNodeRole000}")
         versioned_enum = as_enum(
-            core_g_node_role, CoreGNodeRole100, CoreGNodeRole100.default()
+            core_g_node_role, CoreGNodeRole000, CoreGNodeRole000.default()
         )
         return cls.versioned_enum_to_type_dict[versioned_enum]
 
-    type_to_versioned_enum_dict: Dict[str, CoreGNodeRole100] = {
-        "00000000": CoreGNodeRole100.Other,
-        "0f8872f7": CoreGNodeRole100.TerminalAsset,
-        "9521af06": CoreGNodeRole100.AtomicMeteringNode,
-        "d9823442": CoreGNodeRole100.AtomicTNode,
-        "86f21dd2": CoreGNodeRole100.MarketMaker,
-        "4502e355": CoreGNodeRole100.ConductorTopologyNode,
-        "d67e564e": CoreGNodeRole100.InterconnectionComponent,
+    type_to_versioned_enum_dict: Dict[str, CoreGNodeRole000] = {
+        "00000000": CoreGNodeRole000.Other,
+        "0f8872f7": CoreGNodeRole000.TerminalAsset,
+        "9521af06": CoreGNodeRole000.AtomicMeteringNode,
+        "d9823442": CoreGNodeRole000.AtomicTNode,
+        "86f21dd2": CoreGNodeRole000.MarketMaker,
+        "4502e355": CoreGNodeRole000.ConductorTopologyNode,
+        "d67e564e": CoreGNodeRole000.InterconnectionComponent,
     }
 
-    versioned_enum_to_type_dict: Dict[CoreGNodeRole100, str] = {
-        CoreGNodeRole100.Other: "00000000",
-        CoreGNodeRole100.TerminalAsset: "0f8872f7",
-        CoreGNodeRole100.AtomicMeteringNode: "9521af06",
-        CoreGNodeRole100.AtomicTNode: "d9823442",
-        CoreGNodeRole100.MarketMaker: "86f21dd2",
-        CoreGNodeRole100.ConductorTopologyNode: "4502e355",
-        CoreGNodeRole100.InterconnectionComponent: "d67e564e",
+    versioned_enum_to_type_dict: Dict[CoreGNodeRole000, str] = {
+        CoreGNodeRole000.Other: "00000000",
+        CoreGNodeRole000.TerminalAsset: "0f8872f7",
+        CoreGNodeRole000.AtomicMeteringNode: "9521af06",
+        CoreGNodeRole000.AtomicTNode: "d9823442",
+        CoreGNodeRole000.MarketMaker: "86f21dd2",
+        CoreGNodeRole000.ConductorTopologyNode: "4502e355",
+        CoreGNodeRole000.InterconnectionComponent: "d67e564e",
     }
 
 
@@ -99,8 +99,8 @@ class DiscoverycertAlgoCreate(BaseModel):
     OldChildAliasList: List[str]
     DiscovererAddr: str  #
     SupportingMaterialHash: str  #
-    MicroLon: Optional[int] = None
     MicroLat: Optional[int] = None
+    MicroLon: Optional[int] = None
     TypeName: Literal["discoverycert.algo.create"] = "discoverycert.algo.create"
     Version: str = "000"
 
@@ -109,8 +109,8 @@ class DiscoverycertAlgoCreate(BaseModel):
     )
 
     @validator("CoreGNodeRole", pre=True)
-    def _validator_core_g_node_role(cls, v: Any) -> CoreGNodeRole100:
-        return as_enum(v, CoreGNodeRole100, CoreGNodeRole100.Other)
+    def _validator_core_g_node_role(cls, v: Any) -> CoreGNodeRole000:
+        return as_enum(v, CoreGNodeRole000, CoreGNodeRole000.Other)
 
     @validator("OldChildAliasList")
     def _validator_old_child_alias_list(cls, v: List) -> List:
@@ -129,7 +129,7 @@ class DiscoverycertAlgoCreate(BaseModel):
         d = self.dict()
         del d["CoreGNodeRole"]
         CoreGNodeRole = as_enum(
-            self.CoreGNodeRole, CoreGNodeRole100, CoreGNodeRole100.default()
+            self.CoreGNodeRole, CoreGNodeRole000, CoreGNodeRole000.default()
         )
         d["CoreGNodeRoleGtEnumSymbol"] = CoreGNodeRoleMap.local_to_type(CoreGNodeRole)
         if d["MicroLat"] is None:
@@ -189,7 +189,7 @@ class DiscoverycertAlgoCreate_Maker:
             raise SchemaError(f"dict {d2} missing GNodeAlias")
         if "CoreGNodeRoleGtEnumSymbol" not in d2.keys():
             raise SchemaError(f"dict {d2} missing CoreGNodeRoleGtEnumSymbol")
-        if d2["CoreGNodeRoleGtEnumSymbol"] in CoreGNodeRole100SchemaEnum.symbols:
+        if d2["CoreGNodeRoleGtEnumSymbol"] in CoreGNodeRole000SchemaEnum.symbols:
             d2["CoreGNodeRole"] = CoreGNodeRoleMap.type_to_local(
                 d2["CoreGNodeRoleGtEnumSymbol"]
             )

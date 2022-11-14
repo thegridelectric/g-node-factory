@@ -6,8 +6,8 @@ from fastapi_utils.enums import StrEnum
 
 class GNodeStatus(StrEnum):
     Unknown = auto()
-    Active = auto()
     Pending = auto()
+    Active = auto()
     PermanentlyDeactivated = auto()
     Suspended = auto()
 

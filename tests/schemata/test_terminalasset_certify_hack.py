@@ -8,7 +8,7 @@ from gnf.errors import SchemaError
 from gnf.schemata import TerminalassetCertifyHack_Maker as Maker
 
 
-def test_terminalasset_certify_hack_generated() -> None:
+def test_terminalasset_certify_hack_generated():
 
     d = {
         "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",
