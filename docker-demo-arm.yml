@@ -18,10 +18,10 @@ networks:
 
 services:
   dev-ta-daemon:
-      container_name: dev-python-ta-daemon
-      image: "jessmillar/python-ta-daemon:chaos__64b7b50__20221114"
-      ports:
-        - 8002:8000
+    container_name: molly
+    image: "jessmillar/ta-validator:chaos__7235243__20221114"
+    ports:
+      - 8001:8000
   dev-registry-broker:
     networks:
       - "dev"
