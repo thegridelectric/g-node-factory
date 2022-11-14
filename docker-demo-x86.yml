@@ -5,12 +5,6 @@
 # a centralized database, inbound calls to the factory happen as rabbit messages.
 #
 # This file will run a local Dockerfile with that python based GNodeFactory
-
-# Stage 2: the factory will be a stateful smart contract. Since we are building on
-# the AlgoShip example for this, that will likely be a node-based Dockerfile instead.
-#  Not sure if we will keep the rabbit-based interface, replace it with a more standard
-# ABI for a smart contract, or perhaps allow for both.
-
 version: "3.5"
 
 networks:
@@ -19,7 +13,7 @@ networks:
 services:
   dev-validator:
     container_name: molly
-    image: "jessmillar/ta-validator:chaos__7235243__20221114"
+    image: "jessmillar/ta-validator:latest"
     ports:
       - 8001:8000
   registry-broker:

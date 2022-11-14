@@ -12,3 +12,6 @@ COPY ./for_docker/docker.env /app/.env
 COPY README.md /app/README.md
 RUN pip install -e /app
 CMD ["uvicorn", "gnf.ta_validator_rest_api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+
+# COPY for_docker/keep_alive.py /app/keep_alive.py
+# ENTRYPOINT python keep_alive.py

@@ -5,7 +5,7 @@ SECOND_DOCKER_NAME_COMPONENT="ta-validator"
 DOCKER_IMAGE_NAME="${FIRST_DOCKER_NAME_COMPONENT}/${SECOND_DOCKER_NAME_COMPONENT}"
 
 set -euo pipefail
-cp PythonTaDaemonDockerFile ../Dockerfile
+cp TaValidatorDockerfile ../Dockerfile
 cd ..
 
 if [[ $(git status --untracked-files=no --porcelain) != '' ]]; then
