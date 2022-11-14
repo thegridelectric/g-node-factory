@@ -40,7 +40,7 @@ def main():
         f"Post to GnfRestAPI/initial-tadeed-algo-create to create a TaDeed for {ta_alias}"
     )
     r = molly.post_initial_tadeed_algo_create(
-        terminal_asset_alias=ta_alias,
+        ta_alias=ta_alias,
     )
     pprint(r)
 

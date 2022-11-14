@@ -1,10 +1,12 @@
 import logging
 from typing import Optional
 
+import dotenv
 import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from asgiref.sync import sync_to_async
 from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
@@ -13,8 +15,6 @@ import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
-
-# Schemata sent by validator
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoCreate_Maker
 from gnf.schemata import InitialTadeedAlgoTransfer
@@ -23,6 +23,7 @@ from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
+from gnf.schemata import TerminalassetCertifyHack
 from gnf.utils import RestfulResponse
 
 
@@ -32,7 +33,12 @@ GNF_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevValidator:
-    def __init__(self, settings: config.ValidatorSettings):
+    def __init__(
+        self,
+        settings: config.ValidatorSettings = config.ValidatorSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
         self.settings = settings
         self.client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
@@ -57,13 +63,22 @@ class DevValidator:
         """
         pass
 
+    #################
+    # Messages received
+    ################
+
+    async def terminalasset_certify_hack_received(
+        self, payload: TerminalassetCertifyHack
+    ) -> RestfulResponse:
+        ta_alias = payload.TerminalAssetAlias
+        r = await self.post_initial_tadeed_algo_create(ta_alias=ta_alias)
+        return r
+
     ###################
     # Messages sent
     ###################
 
-    def post_initial_tadeed_algo_create(
-        self, terminal_asset_alias: str
-    ) -> RestfulResponse:
+    async def post_initial_tadeed_algo_create(self, ta_alias: str) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -71,7 +86,7 @@ class DevValidator:
             decimals=0,
             default_frozen=False,
             manager=self.settings.public.gnf_admin_addr,
-            asset_name=terminal_asset_alias,
+            asset_name=ta_alias,
             unit_name="TADEED",
             sp=self.client.suggested_params(),
         )
@@ -86,16 +101,18 @@ class DevValidator:
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-create/"
         )
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Response from GnfRestAPI:")
-        if r.status_code > 200:
-            if "detail" in r.json().keys():
-                note = r.json()["detail"]
+        async_request = sync_to_async(
+            requests.post(url=api_endpoint, json=payload.as_dict())
+        )
+        request_response = await async_request()
+        if request_response.status_code > 200:
+            if "detail" in request_response.json().keys():
+                note = request_response.json()["detail"]
             else:
-                note = r.reason
+                note = request_response.reason
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
-        r = RestfulResponse(**r.json())
+        r = RestfulResponse(**request_response.json())
         return r
 
     def post_tavalidatorcert_algo_create(self) -> RestfulResponse:

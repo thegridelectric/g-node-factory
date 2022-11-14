@@ -34,12 +34,18 @@ from gnf.schemata.new_tadeed_send import NewTadeedSend
 from gnf.schemata.new_tadeed_send import NewTadeedSend_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
+from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack
+from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack_Maker
+from gnf.schemata.tadeed_specs_private_hack import TadeedSpecsPrivateHack
+from gnf.schemata.tadeed_specs_private_hack import TadeedSpecsPrivateHack_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_transfer import TavalidatorcertAlgoTransfer
 from gnf.schemata.tavalidatorcert_algo_transfer import TavalidatorcertAlgoTransfer_Maker
+from gnf.schemata.terminalasset_certify_hack import TerminalassetCertifyHack
+from gnf.schemata.terminalasset_certify_hack import TerminalassetCertifyHack_Maker
 
 
 __all__ = [
@@ -81,4 +87,10 @@ __all__ = [
     "DiscoverycertAlgoTransfer_Maker",
     "TavalidatorcertAlgoTransfer",
     "TavalidatorcertAlgoTransfer_Maker",
+    "TadeedSpecsHack",
+    "TadeedSpecsHack_Maker",
+    "TadeedSpecsPrivateHack",
+    "TadeedSpecsPrivateHack_Maker",
+    "TerminalassetCertifyHack",
+    "TerminalassetCertifyHack_Maker",
 ]
