@@ -12,10 +12,9 @@ def test_tadeed_specs_hack_generated():
 
     d = {
         "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",
-        "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
-        "TaDaemonAddr": "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA",
         "MicroLat": 45666353,
         "MicroLon": 68691705,
+        "DaemonPort": 8002,
         "TypeName": "tadeed.specs.hack",
         "Version": "000",
     }
@@ -36,10 +35,9 @@ def test_tadeed_specs_hack_generated():
     # test Maker init
     t = Maker(
         terminal_asset_alias=gtuple.TerminalAssetAlias,
-        ta_owner_addr=gtuple.TaOwnerAddr,
-        ta_daemon_addr=gtuple.TaDaemonAddr,
         micro_lat=gtuple.MicroLat,
         micro_lon=gtuple.MicroLon,
+        daemon_port=gtuple.DaemonPort,
     ).tuple
     assert t == gtuple
 
@@ -58,22 +56,17 @@ def test_tadeed_specs_hack_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TaOwnerAddr"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["TaDaemonAddr"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
     del d2["MicroLat"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
     del d2["MicroLon"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["DaemonPort"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -86,6 +79,10 @@ def test_tadeed_specs_hack_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d, MicroLon="68691705.1")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d, DaemonPort="8002.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

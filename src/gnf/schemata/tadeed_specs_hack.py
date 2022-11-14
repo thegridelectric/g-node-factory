@@ -14,23 +14,14 @@ from gnf.property_format import predicate_validator
 
 class TadeedSpecsHack(BaseModel):
     TerminalAssetAlias: str  #
-    TaOwnerAddr: str  #
-    TaDaemonAddr: str  #
     MicroLat: int  #
     MicroLon: int  #
+    DaemonPort: int  #
     TypeName: Literal["tadeed.specs.hack"] = "tadeed.specs.hack"
     Version: str = "000"
 
     _validator_terminal_asset_alias = predicate_validator(
         "TerminalAssetAlias", property_format.is_lrd_alias_format
-    )
-
-    _validator_ta_owner_addr = predicate_validator(
-        "TaOwnerAddr", property_format.is_algo_address_string_format
-    )
-
-    _validator_ta_daemon_addr = predicate_validator(
-        "TaDaemonAddr", property_format.is_algo_address_string_format
     )
 
     def as_dict(self) -> Dict[str, Any]:
@@ -48,18 +39,16 @@ class TadeedSpecsHack_Maker:
     def __init__(
         self,
         terminal_asset_alias: str,
-        ta_owner_addr: str,
-        ta_daemon_addr: str,
         micro_lat: int,
         micro_lon: int,
+        daemon_port: int,
     ):
 
         self.tuple = TadeedSpecsHack(
             TerminalAssetAlias=terminal_asset_alias,
-            TaOwnerAddr=ta_owner_addr,
-            TaDaemonAddr=ta_daemon_addr,
             MicroLat=micro_lat,
             MicroLon=micro_lon,
+            DaemonPort=daemon_port,
             #
         )
 
@@ -82,23 +71,20 @@ class TadeedSpecsHack_Maker:
         d2 = dict(d)
         if "TerminalAssetAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TerminalAssetAlias")
-        if "TaOwnerAddr" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TaOwnerAddr")
-        if "TaDaemonAddr" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing TaDaemonAddr")
         if "MicroLat" not in d2.keys():
             raise SchemaError(f"dict {d2} missing MicroLat")
         if "MicroLon" not in d2.keys():
             raise SchemaError(f"dict {d2} missing MicroLon")
+        if "DaemonPort" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing DaemonPort")
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
         return TadeedSpecsHack(
             TerminalAssetAlias=d2["TerminalAssetAlias"],
-            TaOwnerAddr=d2["TaOwnerAddr"],
-            TaDaemonAddr=d2["TaDaemonAddr"],
             MicroLat=d2["MicroLat"],
             MicroLon=d2["MicroLon"],
+            DaemonPort=d2["DaemonPort"],
             TypeName=d2["TypeName"],
             Version="000",
         )
