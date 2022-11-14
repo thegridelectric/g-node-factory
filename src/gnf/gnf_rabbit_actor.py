@@ -42,7 +42,10 @@ class GnfRabbitActor:
         #     g_node_type_short_alias="gnf",
         # )
         self.settings = settings
-        self.client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
         self.admin_account: BasicAccount = BasicAccount(
             settings.admin_acct_sk.get_secret_value()
         )

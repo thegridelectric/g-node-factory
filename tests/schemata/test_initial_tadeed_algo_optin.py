@@ -1,4 +1,4 @@
-"""Tests initial.tadeed.algo.optin type, version 000"""
+"""Tests initial.tadeed.algo.optin type, version 001"""
 import json
 
 import pytest
@@ -15,8 +15,9 @@ def test_initial_tadeed_algo_optin_generated():
         "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "SignedInitialDaemonFundingTxn": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc=",
+        "TaDaemonPrivateKey": "tQ8ABbLLR96cnRE3Y2tlrj2d/rNPRFkf8FosJ46tVIlub0lPIBPqkJ4yknqibTR4kTV1+ncKT324feI6iSD2bw==",
         "TypeName": "initial.tadeed.algo.optin",
-        "Version": "000",
+        "Version": "001",
     }
 
     with pytest.raises(SchemaError):
@@ -38,6 +39,7 @@ def test_initial_tadeed_algo_optin_generated():
         ta_owner_addr=gtuple.TaOwnerAddr,
         validator_addr=gtuple.ValidatorAddr,
         signed_initial_daemon_funding_txn=gtuple.SignedInitialDaemonFundingTxn,
+        ta_daemon_private_key=gtuple.TaDaemonPrivateKey,
     ).tuple
     assert t == gtuple
 
@@ -67,6 +69,11 @@ def test_initial_tadeed_algo_optin_generated():
 
     d2 = dict(d)
     del d2["SignedInitialDaemonFundingTxn"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["TaDaemonPrivateKey"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 

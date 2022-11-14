@@ -32,11 +32,14 @@ GNF_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevValidator:
-    def __init__(self, settings: config.MollyMetermaidSettings):
+    def __init__(self, settings: config.ValidatorSettings):
         self.settings = settings
-        self.client: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
         self.acct: BasicAccount = BasicAccount(
-            private_key=self.settings.acct_sk.get_secret_value()
+            private_key=self.settings.sk.get_secret_value()
         )
         self.validator_multi: MultisigAccount = (
             api_utils.get_validator_account_with_admin(self.acct.addr)
@@ -67,7 +70,7 @@ class DevValidator:
             total=1,
             decimals=0,
             default_frozen=False,
-            manager=self.settings.algo.gnf_admin_addr,
+            manager=self.settings.public.gnf_admin_addr,
             asset_name=terminal_asset_alias,
             unit_name="TADEED",
             sp=self.client.suggested_params(),
@@ -79,18 +82,15 @@ class DevValidator:
             validator_addr=self.acct.addr,
             half_signed_deed_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
-        LOGGER.info(
-            f"Posting request to GnfRestAPI to create a TaDeed for {terminal_asset_alias}"
-        )
 
-        api_endpoint = f"{self.settings.algo.gnf_api_root}/initial-tadeed-algo-create/"
+        api_endpoint = (
+            f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-create/"
+        )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
         if r.status_code > 200:
-            LOGGER.warning(r.json())
             if "detail" in r.json().keys():
-                note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
+                note = r.json()["detail"]
             else:
                 note = r.reason
             r = RestfulResponse(Note=note, HttpStatusCode=422)
@@ -105,7 +105,7 @@ class DevValidator:
             total=1,
             decimals=0,
             default_frozen=False,
-            manager=self.settings.algo.gnf_admin_addr,
+            manager=self.settings.public.gnf_admin_addr,
             asset_name=self.settings.validator_cert_name,
             unit_name="VLDTR",
             note=self.settings.validator_name,
@@ -121,7 +121,9 @@ class DevValidator:
             half_signed_cert_creation_mtx=encoding.msgpack_encode(mtx),
         ).tuple
         LOGGER.info("Posting request to GnfRestAPI to create new TaValidatorCert")
-        api_endpoint = f"{self.settings.algo.gnf_api_root}/tavalidatorcert-algo-create/"
+        api_endpoint = (
+            f"{self.settings.public.gnf_api_root}/tavalidatorcert-algo-create/"
+        )
 
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info("Response from GnfRestAPI:")
@@ -145,7 +147,7 @@ class DevValidator:
         )
 
         api_endpoint = (
-            f"{self.settings.algo.gnf_api_root}/tavalidatorcert-algo-transfer/"
+            f"{self.settings.public.gnf_api_root}/tavalidatorcert-algo-transfer/"
         )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         LOGGER.info(f"Response from GnfRestAPI: {r.status_code}")
@@ -185,7 +187,7 @@ class DevValidator:
             None if ta_multi does not have ta_deed_consideration_algos
         """
 
-        required_algos = config.Algo().ta_deed_consideration_algos
+        required_algos = config.GnfPublic().ta_deed_consideration_algos
         if algo_utils.algos(ta_daemon_addr) < required_algos:
             Exception(f"ta_daemon_addr not sufficiently funded!")
             return None
@@ -208,7 +210,7 @@ class DevValidator:
         ).tuple
 
         api_endpoint = (
-            f"{self.settings.algo.gnf_api_root}/initial-tadeed-algo-transfer/"
+            f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-transfer/"
         )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
 
@@ -273,11 +275,12 @@ class DevValidator:
     ##########################
     # dev methods
     ########################
+
     def seed_fund_own_account(self):
-        algos = config.Algo().gnf_validator_funding_threshold_algos + 1
+        algos = self.settings.public.gnf_validator_funding_threshold_algos + 1
         if algo_utils.algos(self.acct.addr) < algos:
             algo_setup.dev_fund_account(
-                settings_algo=self.settings.algo,
+                settings=self.settings,
                 to_addr=self.acct.addr,
                 amt_in_micros=10**6 * algos,
             )
@@ -289,7 +292,7 @@ class DevValidator:
         self,
     ) -> Optional[algo_utils.PendingTxnResponse]:
         """Becoming a validator requires this"""
-        required_algos = config.Algo().gnf_validator_funding_threshold_algos
+        required_algos = self.settings.public.gnf_validator_funding_threshold_algos
         current_algos = algo_utils.algos(self.validator_multi.address())
         if current_algos >= required_algos:
             LOGGER.info(

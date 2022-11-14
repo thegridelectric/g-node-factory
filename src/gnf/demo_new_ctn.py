@@ -12,10 +12,10 @@ LOGGER = logging.getLogger(__name__)
 
 
 def main():
-    ada = DevDiscoverer(settings=config.AdaDiscovererSettings())
+    ada = DevDiscoverer(settings=config.DiscovererSettings())
     r = ada.post_discoverycert_algo_create()
     LOGGER.info("Ada received response to discoverycert algo")
-    pprint(r.json())
+    # pprint(r.json())
 
 
 if __name__ == "__main__":

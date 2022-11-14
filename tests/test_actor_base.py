@@ -9,12 +9,10 @@ import pika
 from gnf.actor_base import OnReceiveMessageDiagnostic
 from gnf.actor_base import OnSendMessageDiagnostic
 from gnf.actor_base import RoutingKeyType
-from gnf.config import DevGNodeRegistrySettings
-from gnf.config import GnfSettings
+from gnf.config import VanillaSettings
 from gnf.schemata import HeartbeatA_Maker
 
 from .utils import GNodeFactoryRabbitStubRecorder
-from .utils import GNodeRegistryStubRecorder
 from .utils import wait_for
 
 

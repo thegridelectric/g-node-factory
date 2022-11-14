@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
 
-import gnf.config as config
 from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin
@@ -10,12 +9,7 @@ from gnf.utils import RestfulResponse
 
 
 app = FastAPI()
-
-daemon = PythonTaDaemon(
-    sk=config.HollyTaDaemonSettings().sk.get_secret_value(),
-    ta_owner_addr=config.SandboxDemo().holly_homeowner_addr,
-    algo_settings=config.Algo(),
-)
+daemon = PythonTaDaemon()
 
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)

@@ -1,6 +1,5 @@
 # G Node Factory
 
-
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
@@ -15,65 +14,63 @@ This repo has been developed through the generous funding of a grant provided by
 
 1. Set up python environment
 
-    ```
-    poetry install
+   ```
+   poetry install
 
-    poetry shell
-    ```
+   poetry shell
+   ```
 
-2. Install [docker](https://docs.docker.com/get-docker/) 
+2. Install [docker](https://docs.docker.com/get-docker/)
 
 3. Start docker containers
 
-  - **X86 CPU**:
+- **X86 CPU**:
 
-    ```
-    docker compose -f docker-demo-x86.yml up -d
-    ```
+  ```
+  docker compose -f docker-demo-x86.yml up -d
+  ```
 
-  - **arm CPU**:
+- **arm CPU**:
 
-      ```
-      docker compose -f docker-demo-arm.yml up -d
-      ```
+  ```
+  docker compose -f docker-demo-arm.yml up -d
+  ```
 
 4. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory
 
-    ```
-    ./sandbox up dev
-    ```
+   ```
+   ./sandbox up dev
+   ```
 
-    This starts up a local blockchain on your computer. It can take a couple of minutes for the
-    initial setup.
+   This starts up a local blockchain on your computer. It can take a couple of minutes for the
+   initial setup.
 
-    **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
-
-
+   **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
 
 5. Run before each demo:
 
 - From this repo, **flush database**:
-    ```
-    ./reset-dev-db.sh
+  ```
+  ./reset-dev-db.sh
   ```
 - From sandbox repo, **flush blockchin**:
-    ```
-    ./sandbox reset
-    ```
+  ```
+  ./sandbox reset
+  ```
 
 6. Start the PythonTaDaemon FastAPI:
 
-    ```
-    uvicorn gnf.rest_api:app --reload
-    ```
+   ```
+   uvicorn gnf.rest_api:app --reload
+   ```
 
-    (go to http://127.0.0.1:8000/docs# for inspecting the api)
+   (go to http://127.0.0.1:8000/docs# for inspecting the api)
 
 7. Run the milestone 1 demo from this repo:
 
-    ```
-    python demo.py
-    ```
+   ```
+   python demo.py
+   ```
 
 ## Explaining what the demo does
 

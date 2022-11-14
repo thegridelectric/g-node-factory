@@ -4,8 +4,10 @@ from typing import Any
 from typing import Dict
 from typing import Literal
 
+import dotenv
 from algosdk import encoding
 from algosdk.future.transaction import SignedTransaction
+from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
@@ -58,8 +60,12 @@ class OptinTadeedAlgo(BaseModel):
     def _axiom_2(cls, v) -> Any:
         """Axiom 2 (Valid TaDeed): NewDeedIdx is an active TaDeed created and owned by GnfAdminAccount"""
         NewDeedIdx = v.get("NewDeedIdx", None)
-        client = algo_utils.get_algod_client(settings_algo=config.Algo())
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         try:
             gnf_new_deed_info = client.account_asset_info(
                 address=gnf_admin_addr, asset_id=NewDeedIdx
@@ -79,7 +85,7 @@ class OptinTadeedAlgo(BaseModel):
             property_format.check_is_lrd_alias_format(ta_deed_g_node_alias)
         except SchemaError as e:
             raise ValueError(f"Axiom 6: Optin asset must be a valid TaDeed! {e}")
-        universe = config.Algo().universe
+        universe = config.GnfPublic().universe
         try:
             property_format.check_world_alias_matches_universe(
                 g_node_alias=ta_deed_g_node_alias, universe=universe
@@ -108,7 +114,7 @@ class OptinTadeedAlgo(BaseModel):
         TaDaemonAddr = v.get("TaDaemonAddr", None)
         ValidatorAddr = v.get("ValidatorAddr", None)
 
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         v_multi = algo_utils.Multisig(
             version=1, threshold=2, addresses=[gnf_admin_addr, ValidatorAddr]
         )
@@ -120,7 +126,7 @@ class OptinTadeedAlgo(BaseModel):
         """Axiom 4 (Correctly Signed) SignedTaDeedCreationTxn must be signed by Gnf Admin, and the signature
         must match the txn."""
         mtx = encoding.future_msgpack_decode(v.get("SignedTaDeedCreationTxn", None))
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         # try:
         #     api_utils.check_mtx_subsig(mtx, gnf_admin_addr)
         # except SchemaError as e:

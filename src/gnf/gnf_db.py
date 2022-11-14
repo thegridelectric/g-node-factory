@@ -91,7 +91,11 @@ def tavalidatorcert_algo_create_received(
     │     and 'PayloadAsDict': {'Value': ValidatorCertIdx}
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     if not isinstance(payload, TavalidatorcertAlgoCreate):
         note = f"payload must be type TavalidatorcertAlgoCreate, got {type(payload)}. Ignoring!"
         r = RestfulResponse(
@@ -144,7 +148,10 @@ def tavalidatorcert_algo_transfer_received(
         - HttpStatusCode 200 if successful, note has blockchain transaction id
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     if not isinstance(payload, TavalidatorcertAlgoTransfer):
         note = f"payload must be type TavalidatorcertAlgoTransfer, got {type(payload)}. Ignoring!"
         r = RestfulResponse(Note=note, HttpStatusCode=422)
@@ -202,7 +209,10 @@ async def initial_tadeed_algo_transfer_received(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
 
     # Figure out terminal_asset_alias
@@ -266,7 +276,10 @@ async def initial_tadeed_algo_create_received(
         otherwise the TerminalAsset database object
     """
     admin_sk = settings.admin_acct_sk.get_secret_value()
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
     if not isinstance(payload, InitialTadeedAlgoCreate):
         note = f"payload must be type InitialTadeedAlgoCreate, got {type(payload)}. Ignoring!"
@@ -295,7 +308,7 @@ async def initial_tadeed_algo_create_received(
     ta_deed_idx = response.asset_idx
     LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
     r = await create_pending_atomic_metering_node(
-        ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
+        ta_alias=ta_alias, ta_deed_idx=ta_deed_idx, settings=settings
     )
     return r
 
@@ -314,7 +327,10 @@ async def create_updated_ta_deed(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     txn = transaction.AssetCreateTxn(
         sender=admin_account.addr,
         total=1,
@@ -372,7 +388,7 @@ async def recursively_update_alias(
             ),
         ).tuple
 
-        api_endpoint = f"http://0.0.0.0:8001/new-tadeed-algo-optin/"
+        api_endpoint = f"http://0.0.0.0:8002/new-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         if r.status_code == 200:
             rr = RestfulResponse(**r.json())
@@ -391,7 +407,10 @@ async def new_tadeed_send_received(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     txn = transaction.AssetTransferTxn(
         sender=admin_account.addr,
         receiver=payload.TaDaemonAddr,
@@ -430,7 +449,10 @@ async def post_old_tadeed_algo_return(
     admin_account: BasicAccount = BasicAccount(
         settings.admin_acct_sk.get_secret_value()
     )
-    client: AlgodClient = algo_utils.get_algod_client(settings.algo)
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
     # opt into old tadeed
     txn = transaction.AssetOptInTxn(
@@ -458,7 +480,7 @@ async def post_old_tadeed_algo_return(
             signed_new_deed_transfer_txn
         ),
     ).tuple
-    api_endpoint = f"http://0.0.0.0:8001/old-tadeed-algo-return/"
+    api_endpoint = f"http://0.0.0.0:8002/old-tadeed-algo-return/"
     r = requests.post(url=api_endpoint, json=payload.as_dict())
     if r.status_code > 200:
         if r.status_code == 422:
@@ -518,7 +540,7 @@ async def create_pending_ctn(
         "alias": ctn_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.ConductorTopologyNode.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
         "gps_point_id": gpsdb.gps_point_id,
     }
 
@@ -597,7 +619,7 @@ async def g_node_from_id(g_node_id: str) -> Optional[BasegnodeGt]:
 
 
 async def create_pending_atomic_metering_node(
-    ta_alias: str, ta_deed_idx: int
+    ta_alias: str, ta_deed_idx: int, settings: config.GnfSettings
 ) -> RestfulResponse:
     if not property_format.is_lrd_alias_format(ta_alias):
         r = RestfulResponse(
@@ -624,7 +646,7 @@ async def create_pending_atomic_metering_node(
         "alias": parent_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.AtomicMeteringNode.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
     }
     LOGGER.info(f"About to try and create a new GNode w alias {parent_alias}")
     try:
@@ -645,7 +667,7 @@ async def create_pending_atomic_metering_node(
         "alias": ta_alias,
         "status_value": GNodeStatus.Pending.value,
         "role_value": CoreGNodeRole.TerminalAsset.value,
-        "g_node_registry_addr": config.SandboxDemo().gnr_addr,
+        "g_node_registry_addr": settings.public.gnr_addr,
         "ownership_deed_nft_id": ta_deed_idx,
     }
 

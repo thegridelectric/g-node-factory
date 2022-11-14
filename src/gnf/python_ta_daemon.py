@@ -1,8 +1,11 @@
 import logging
+from typing import Optional
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from pydantic import SecretStr
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -20,21 +23,19 @@ LOGGER = logging.getLogger(__name__)
 
 
 class PythonTaDaemon:
-    def __init__(self, sk: str, ta_owner_addr: str, algo_settings: config.Algo):
-        self.algo_settings = algo_settings
-        self.client: AlgodClient = algo_utils.get_algod_client(algo_settings)
-        self.acct: BasicAccount = BasicAccount(private_key=sk)
-        self.ta_owner_addr = ta_owner_addr
+    def __init__(
+        self,
+        settings: config.TaDaemonSettings = config.TaDaemonSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
+        self.settings = settings
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        self.acct: Optional[BasicAccount] = None
         LOGGER.info("TaOwner Smart Daemon Initialized")
-
-    def send_message_to_gnf(self, payload: NewTadeedSend):
-        """Stub for when there is a mechanism (probably FastAPI) for validators  sending
-        messages to GNodeFactory.
-
-        Args:
-            payload: Any valid payload in the API for sending
-        """
-        pass
 
     ##########################
     # Messages Received
@@ -43,6 +44,15 @@ class PythonTaDaemon:
     def initial_tadeed_algo_optin_received(
         self, payload: InitialTadeedAlgoOptin
     ) -> RestfulResponse:
+        if self.acct is not None:
+            r = RestfulResponse(
+                Note=f"Already initialized. Ignoring {ta_deed_idx} opt in request"
+            )
+            return r
+        self.settings.sk = SecretStr(payload.TaDaemonPrivateKey)
+        self.settings.validator_addr = payload.ValidatorAddr
+        self.settings.ta_owner_addr = payload.TaOwnerAddr
+        self.acct = BasicAccount(private_key=self.settings.sk.get_secret_value())
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,
@@ -133,7 +143,7 @@ class PythonTaDaemon:
 
         txn = transaction.AssetTransferTxn(
             sender=self.acct.addr,
-            receiver=config.Algo().gnf_admin_addr,
+            receiver=config.GnfPublic().gnf_admin_addr,
             amt=1,
             index=payload.OldTaDeedIdx,
             sp=self.client.suggested_params(),

@@ -15,9 +15,9 @@ import pendulum
 import pika
 
 import gnf.api_types as api_types
+import gnf.config as config
 import gnf.property_format as property_format
 import gnf.utils as utils
-from gnf.config import GnfSettings
 from gnf.enums import RegistryGNodeRole
 from gnf.errors import SchemaError
 from gnf.schemata import HeartbeatA
@@ -83,11 +83,11 @@ class ActorBase(ABC):
     def __init__(
         self,
         g_node_type_short_alias: str,
-        settings: GnfSettings,
+        settings: config.GnfSettings,
     ):
         self.settings = settings
         self.agent_shutting_down_part_one = False
-        self.alias = settings.algo.gnf_g_node_alias
+        self.alias = settings.g_node_alias
         self.g_node_type_short_alias = g_node_type_short_alias
         self.actor_main_stopped = False
 
@@ -109,7 +109,7 @@ class ActorBase(ABC):
         # for higher consumer throughput
         self._prefetch_count = 1
         self._reconnect_delay = 0
-        self._url = self.settings.rabbit.url.get_secret_value()
+        self._url = self.settings.rabbit_url.get_secret_value()
 
         self.rmq_consumer = ""
         self.result = None

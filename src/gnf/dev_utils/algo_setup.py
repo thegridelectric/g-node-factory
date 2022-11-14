@@ -3,6 +3,7 @@ from random import choice
 from typing import List
 from typing import Optional
 
+import dotenv
 from algosdk.kmd import KMDClient
 from algosdk.v2client.algod import AlgodClient
 
@@ -12,7 +13,6 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import PendingTxnResponse
 from gnf.algo_utils import get_kmd_client
 from gnf.algo_utils import pay_account
-from gnf.config import GnfSettings
 from gnf.errors import AlgoError
 
 
@@ -33,43 +33,25 @@ LOG_FORMAT = (
 LOGGER = logging.getLogger(__name__)
 
 
-def get_gnf_admin_address() -> str:
-    algoSettings = config.Algo()
-    return algoSettings.gnf_admin_addr
-
-
-def get_gnf_graveyard_address() -> str:
-    algoSettings = config.Algo()
-    return algoSettings.gnf_graveyard_addr
-
-
-def get_molly_metermaid_address() -> str:
-    demoSettings = config.SandboxDemo()
-    return demoSettings.molly_metermaid_addr
-
-
-def get_holly_homeowner_address() -> str:
-    demoSettings = config.SandboxDemo()
-    return demoSettings.holly_homeowner_addr
-
-
 def dev_fund_to_min(addr: str, min_algos: int):
     if algo_utils.algos(addr) is None:
         dev_fund_account(
-            config.Algo(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )
     elif algo_utils.algos(addr) < min_algos:
         dev_fund_account(
-            config.Algo(),
+            config.VanillaSettings(_env_file=dotenv.find_dotenv()),
             to_addr=addr,
             amt_in_micros=min_algos * 10**6,
         )
 
 
 def dev_fund_account(
-    settings_algo: config.Algo, to_addr: str, amt_in_micros: int = FUNDING_AMOUNT
+    settings: config.VanillaSettings,
+    to_addr: str,
+    amt_in_micros: int = FUNDING_AMOUNT,
 ) -> PendingTxnResponse:
     """Funds an adddress in local sandbox mode using a randomly chosen genesis
     account.
@@ -80,10 +62,12 @@ def dev_fund_account(
 
     Returns: PendingTxnResponse
     """
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
 
-    client: AlgodClient = algo_utils.get_algod_client(settings_algo)
-
-    fundingAccount = choice(dev_get_genesis_accounts(settings_algo))
+    fundingAccount = choice(dev_get_genesis_accounts(settings))
     return pay_account(
         client=client,
         sender=fundingAccount,
@@ -92,11 +76,13 @@ def dev_fund_account(
     )
 
 
-def dev_get_genesis_accounts(settings_algo: config.Algo) -> List[BasicAccount]:
+def dev_get_genesis_accounts(
+    settings: config.VanillaSettings,
+) -> List[BasicAccount]:
     global kmdAccounts
 
     if kmdAccounts is None:
-        kmd: KMDClient = get_kmd_client(settings_algo)
+        kmd: KMDClient = get_kmd_client(settings)
 
         try:
             wallets = kmd.list_wallets()
@@ -105,7 +91,7 @@ def dev_get_genesis_accounts(settings_algo: config.Algo) -> List[BasicAccount]:
                 "Algo key management demon failed to connect to chain. Check blockchain access"
             )
         walletID = None
-        walletName = settings_algo.gen_kmd_wallet_name
+        walletName = settings.public.gen_kmd_wallet_name
         for wallet in wallets:
             if wallet["name"] == walletName:
                 walletID = wallet["id"]
@@ -114,7 +100,9 @@ def dev_get_genesis_accounts(settings_algo: config.Algo) -> List[BasicAccount]:
         if walletID is None:
             raise Exception("Wallet not found: {walletName}")
 
-        walletPassword = settings_algo.gen_kmd_wallet_password.get_secret_value()
+        walletPassword = (
+            settings.algo_api_secrets.gen_kmd_wallet_password.get_secret_value()
+        )
         walletHandle = kmd.init_wallet_handle(walletID, walletPassword)
         try:
             addresses = kmd.list_keys(walletHandle)
@@ -128,29 +116,18 @@ def dev_get_genesis_accounts(settings_algo: config.Algo) -> List[BasicAccount]:
     return kmdAccounts
 
 
-def dev_fund_holly_homeowner(sandbox: config.SandboxDemo):
-    settingsAlgo = config.Algo()
-    dev_fund_account(settingsAlgo, acctToFund=sandbox.holly_homeowner_addr)
-    LOGGER.info(f"hollyHomeownerAccount {sandbox.holly_homeowner_addr[-6:]} funded")
-
-
-def dev_fund_admin_and_graveyard(settings: GnfSettings):
+def dev_fund_admin_and_graveyard(settings: config.VanillaSettings):
     """Fund admin account from one of the sandbox
     genesis accounts. Only for the dev universe"""
-
-    adminAccount = algo_utils.BasicAccount(
-        private_key=settings.admin_acct_sk.get_secret_value()
-    )
-    if algo_utils.micro_algos(adminAccount.addr) < 1:
-        dev_fund_account(settings_algo=settings.algo, to_addr=adminAccount.addr)
+    admin_addr = settings.public.gnf_admin_addr
+    graveyard_addr = settings.public.gnf_graveyard_addr
+    if algo_utils.micro_algos(admin_addr) < 1:
+        dev_fund_account(settings=settings, to_addr=admin_addr)
     LOGGER.info(
-        f"gnf admin account {adminAccount.addr_short_hand} balance: {algo_utils.micro_algos(adminAccount.addr)} microAlgos"
+        f"gnf admin account balance: {algo_utils.micro_algos(admin_addr)} microAlgos"
     )
-    graveyardAccount = algo_utils.BasicAccount(
-        private_key=settings.graveyard_acct_sk.get_secret_value()
-    )
-    if algo_utils.micro_algos(graveyardAccount.addr) < 1:
-        dev_fund_account(settings_algo=settings.algo, to_addr=graveyardAccount.addr)
+    if algo_utils.micro_algos(graveyard_addr) < 1:
+        dev_fund_account(settings=settings, to_addr=graveyard_addr)
     LOGGER.info(
-        f"gnf graveyard account {graveyardAccount.addr_short_hand} balance: {algo_utils.micro_algos(adminAccount.addr)} microAlgos"
+        f"gnf graveyard account balance: {algo_utils.micro_algos(graveyard_addr)} microAlgos"
     )
