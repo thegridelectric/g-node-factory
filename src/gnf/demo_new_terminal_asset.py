@@ -20,7 +20,7 @@ def main():
         config.VanillaSettings(_env_file=dotenv.find_dotenv())
     )
 
-    holly = DevTaOwner(settings=config.TaOwnerSettings())
+    # holly = DevTaOwner(settings=config.TaOwnerSettings())
 
     molly = DevValidator(config.ValidatorSettings())
 
@@ -29,15 +29,15 @@ def main():
         raise Exception(
             f"There is already a Validator Certificate for Molly! Please ./sandbox reset and start the demo over."
         )
-    r = molly.post_tavalidatorcert_algo_create()
+    rr = molly.post_tavalidatorcert_algo_create()
+    pprint(rr)
+    if rr.HttpStatusCode > 200:
 
-    if r.HttpStatusCode > 200:
-        pprint(r)
         raise Exception("Stopping demo due to errors")
 
-    # holly.request_ta_certification()
-
-    # if r.HttpStatusCode > 200:
+    # rr = holly.request_ta_certification()
+    # pprint(rr)
+    # if rr.HttpStatusCode > 200:
     #     raise Exception("Stopping demo due to errors")
 
     # atm_gt = BasegnodeGt_Maker.dict_to_tuple(r.PayloadAsDict)

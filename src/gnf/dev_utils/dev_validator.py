@@ -141,8 +141,6 @@ class DevValidator:
         )
 
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
 
         if r.status_code > 200:
             LOGGER.warning(r.json())
@@ -150,32 +148,26 @@ class DevValidator:
                 note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
             else:
                 note = r.reason
-            r = RestfulResponse(Note=note, HttpStatusCode=422)
-            return r
+            return RestfulResponse(Note=note, HttpStatusCode=422)
 
-        r = RestfulResponse(**r.json())
-        cert_idx = r.PayloadAsDict["Value"]
+        rr = RestfulResponse(**r.json())
+        cert_idx = rr.PayloadAsDict["Value"]
 
         payload = self.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
-        LOGGER.info(
-            f"Posting request to GnfRestAPI to transfer TaValidatorCert {cert_idx}"
-        )
 
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/tavalidatorcert-algo-transfer/"
         )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info(f"Response from GnfRestAPI: {r.status_code}")
 
         if r.status_code > 200:
             if r.status_code == 422:
                 note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
             else:
                 note = r.reason
-            r = RestfulResponse(Note=note, HttpStatusCode=422)
-            pprint(r)
-            return r
-        pprint(r.json())
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+
         return RestfulResponse(**r.json())
 
     def certify_terminal_asset(

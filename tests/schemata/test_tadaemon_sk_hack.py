@@ -1,22 +1,19 @@
-"""Tests tadeed.specs.private.hack type, version 000"""
+"""Tests tadaemon.sk.hack type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import TadeedSpecsPrivateHack_Maker as Maker
+from gnf.schemata import TadaemonSkHack_Maker as Maker
 
 
-def test_tadeed_specs_private_hack_generated() -> None:
+def test_tadaemon_sk_hack_generated() -> None:
 
     d = {
-        "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",
-        "TaOwnerSk": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
+        "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
         "TaDaemonSk": "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA",
-        "MicroLat": 45666353,
-        "MicroLon": 68691705,
-        "TypeName": "tadeed.specs.private.hack",
+        "TypeName": "tadaemon.sk.hack",
         "Version": "000",
     }
 
@@ -35,11 +32,8 @@ def test_tadeed_specs_private_hack_generated() -> None:
 
     # test Maker init
     t = Maker(
-        terminal_asset_alias=gtuple.TerminalAssetAlias,
-        ta_owner_sk=gtuple.TaOwnerSk,
+        ta_owner_addr=gtuple.TaOwnerAddr,
         ta_daemon_sk=gtuple.TaDaemonSk,
-        micro_lat=gtuple.MicroLat,
-        micro_lon=gtuple.MicroLon,
     ).tuple
     assert t == gtuple
 
@@ -53,12 +47,7 @@ def test_tadeed_specs_private_hack_generated() -> None:
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TerminalAssetAlias"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["TaOwnerSk"]
+    del d2["TaOwnerAddr"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -67,27 +56,9 @@ def test_tadeed_specs_private_hack_generated() -> None:
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d)
-    del d2["MicroLat"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["MicroLon"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
     ######################################
     # Behavior on incorrect types
     ######################################
-
-    d2 = dict(d, MicroLat="45666353.1")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, MicroLon="68691705.1")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
 
     ######################################
     # SchemaError raised if TypeName is incorrect
@@ -96,13 +67,3 @@ def test_tadeed_specs_private_hack_generated() -> None:
     d2 = dict(d, TypeName="not the type alias")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
-
-    ######################################
-    # SchemaError raised if primitive attributes do not have appropriate property_format
-    ######################################
-
-    d2 = dict(d, TerminalAssetAlias="a.b-h")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    # End of Test

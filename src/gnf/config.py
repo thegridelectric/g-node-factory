@@ -57,7 +57,8 @@ class TaOwnerSettings(BaseSettings):
 
     ta_daemon_addr: str = "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
     validator_addr: str = "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII"
-    ta_daemon_api_root: str = f"http://0.0.0.0:8002"
+    ta_daemon_api_fqdn: str = "http://localhost"
+    ta_daemon_api_port: str = "8002"
     initial_ta_alias: str = "d1.isone.ver.keene.holly.ta"
     micro_lat: int = 45511230
     micro_lon: int = -68354650

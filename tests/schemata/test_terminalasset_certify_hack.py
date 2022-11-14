@@ -12,6 +12,9 @@ def test_terminalasset_certify_hack_generated() -> None:
 
     d = {
         "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",
+        "TaDaemonApiPort": "8002",
+        "TaDaemonApiFqdn": "http://localhost",
+        "TaDaemonAddr": "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA",
         "TypeName": "terminalasset.certify.hack",
         "Version": "000",
     }
@@ -32,6 +35,9 @@ def test_terminalasset_certify_hack_generated() -> None:
     # test Maker init
     t = Maker(
         terminal_asset_alias=gtuple.TerminalAssetAlias,
+        ta_daemon_api_port=gtuple.TaDaemonApiPort,
+        ta_daemon_api_fqdn=gtuple.TaDaemonApiFqdn,
+        ta_daemon_addr=gtuple.TaDaemonAddr,
     ).tuple
     assert t == gtuple
 
@@ -46,6 +52,21 @@ def test_terminalasset_certify_hack_generated() -> None:
 
     d2 = dict(d)
     del d2["TerminalAssetAlias"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["TaDaemonApiPort"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["TaDaemonApiFqdn"]
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d)
+    del d2["TaDaemonAddr"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
