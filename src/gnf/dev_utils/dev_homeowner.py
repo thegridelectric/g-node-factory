@@ -19,6 +19,7 @@ from gnf.algo_utils import MultisigAccount
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
 from gnf.schemata import TerminalassetCertifyHack_Maker
+from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
@@ -57,6 +58,11 @@ class DevTaOwner:
     # Messages Sent
     ##########################
 
+    async def start_ta_daemon(self) -> None:
+        LOGGER.info("Starting ta Daemon")
+        # uvicorn gnf.ta_daemon_rest_api:app --reload  --port 8002
+        pass
+
     async def request_ta_certification(self) -> None:
         ta_alias = self.settings.initial_ta_alias
         payload = TerminalassetCertifyHack_Maker(terminal_asset_alias=ta_alias).tuple
@@ -65,9 +71,11 @@ class DevTaOwner:
             f"{self.settings.public.molly_api_root}/terminalasset-certification/"
         )
         r = await requests.post(url=api_endpoint, json=payload.as_dict())
-        return r
+        await self.start_ta_daemon()
+        rr = await self.post_initial_tadeed_algo_optin()
+        return rr
 
-    def post_initial_tadeed_algo_optin(self) -> InitialTadeedAlgoOptin:
+    async def post_initial_tadeed_algo_optin(self) -> RestfulResponse:
         """
          - Sends 50 algos to TaDaemon acct
          - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
@@ -98,10 +106,16 @@ class DevTaOwner:
             ta_daemon_private_key=self.ta_daemon_sk,
         ).tuple
         api_endpoint = f"{self.settings.ta_daemon_api_root}/initial-tadeed-algo-optin/"
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Sent InitialTadeedAlgoOptin")
-        pprint(r.json())
-        return r
+        r = await requests.post(url=api_endpoint, json=payload.as_dict())
+        if r.status_code > 200:
+            if r.status_code == 422:
+                note = "Issue with InitialTadeedAlgoOptin" + r.json()["detail"]
+            else:
+                note = r.reason
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+        rr = RestfulResponse(**r.json())
+        return rr
 
     ##########################
     # dev methods
