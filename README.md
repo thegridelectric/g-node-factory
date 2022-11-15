@@ -12,9 +12,9 @@ This repo has been developed through the generous funding of a grant provided by
 
 ## Local Demo setup
 
-1. Clone the repo
+1. Clone this repo
 
-2. Create virtual env
+2. Using python 3.10.* or greater, create virtual env inside this repo
 
    ```
    python -m venv venv
@@ -38,7 +38,8 @@ This repo has been developed through the generous funding of a grant provided by
   docker compose -f docker-demo-arm.yml up -d
   ```
 
-5. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into a **sibling repo**
+5. Start the Algorand sandbox in a **sibling directory**
+  a. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into sibling directory
 
    ```
    - YourDemoFolder
@@ -47,8 +48,15 @@ This repo has been developed through the generous funding of a grant provided by
      -- sandbox
    ```
 
-   - The demo will set up a reset sandbox version of an Algorand blockchain each times it runs,
-     but requires the two repos to be siblings for this to work
+    b. Start the Algorand sandbox. From the `YourDemoFolder/sandbox` directory
+
+
+   ```
+   ./sandbox up dev
+   ```
+
+   *(The will set up a  sandbox version of an Algorand blockchain. The demo will reset this
+   sandbox each times it runs, but requires the two repos to be siblings for this to work.)*
 
 6. Start the GNodeFactory FastAPI:
 
@@ -77,10 +85,9 @@ pytest -v
 
 ## Configuration and secrets
 
-For non-dev lifecycle,
-look at `src/gnf/config`. This has the default values, which are overwritten with values from a
+The repo uses dotenv and `.env` files. Look at `src/gnf/config` for default values. These are overwritten with values from a
 git ignored top-level `.env` file. All dev examples are intended to run without needing to create
-a `.env` file. A template `.env-template` is provided.
+a `.env` file.
 
 ## Code derivation tools
 
