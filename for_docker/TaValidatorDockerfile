@@ -8,7 +8,7 @@ FROM $REMOTE_BASE AS app-base
 WORKDIR /app
 
 COPY ./src /app/src
-COPY ./for_docker/docker.env /app/.env
+COPY ./for_docker/validator_docker.env /app/.env
 COPY README.md /app/README.md
 RUN pip install -e /app
 CMD ["uvicorn", "gnf.ta_validator_rest_api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
