@@ -213,3 +213,34 @@ def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[i
         return None
     else:
         return this_ta_deed[0]["index"]
+
+
+def is_ta_deed(asset_idx: int) -> bool:
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    try:
+        info = client.asset_info(asset_idx)
+    except:
+        return False
+    try: 
+        unit_name = info['params']['unit-name']
+    except:
+        return False
+    if unit_name == 'TADEED':
+        return True
+    return False
+
+
+def alias_from_deed_idx(asset_idx: int) -> Optional[str]:
+    if not is_ta_deed(asset_idx):
+        return None
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    info = client.asset_info(asset_idx)
+    return info['params']['name']

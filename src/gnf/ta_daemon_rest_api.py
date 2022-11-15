@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi import HTTPException
 
 from gnf.python_ta_daemon import PythonTaDaemon
@@ -11,6 +12,13 @@ from gnf.utils import RestfulResponse
 app = FastAPI()
 daemon = PythonTaDaemon()
 
+@app.get("/")
+async def main():
+    if not daemon.has_real_acct():
+        return {"TaDaemonAddr": "None Yet"}
+    #return {"TaDaemonAddr": daemon.acct.addr}
+    #return {"Owned deeds": daemon.ta_deed_alias_list()}
+    return FileResponse("docs/wiki/img/terminal-asset-deed-icon.png")
 
 @app.get("/env/")
 async def show_env():

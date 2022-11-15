@@ -102,52 +102,13 @@ If you want to add enums or schema, you will need access to the `ssotme cli` and
 
 What are GNodes and why do we need a factory for them?
 
-GNodes come in several flavors (see [this enum](python_code/enums/core_g_node_role_map.py)), and the first flavor to understand is a [TerminalAsset](docs/wiki/terminal-asset.md). In fact for now the GNodeFactory is really a `TerminalAsset` factory. A `TerminalAsset` is tuple of three things:
+The GNodeFactory stands at the boundary between the physical world and the world of code, maintaining a high fidelity connection between the physical components of real-world electric grids and code objects (GNodes) representing them.
 
-- **An electrical device** connected to the grid that can consume and/or produce electrical power;
-- **An electrical meter** that meters exactly the Terminal Asset and has the accuracy characteristics required to meet existing and pending grid balancing challenges (that is, the challenge of keeping electric supply and electric demand in balance on various timescales as wind and solar electricity become more prevalent); and
-- **A lat/lon pair** that can be used to capture where the electrical device is connected to the topology
+The goal of GNodeFactory is to support transactive devices, especially transactive loads, in taking on the mantle of balancing the electric grid in a renewable future. This requires establishing a link of trust between the the physical reality of a transactive device, and the GNode acting as its online representation. The GNodeFactory does this by issuing NFTs that certify the gps location, metering, and device type of the transactive device prior to activating the corresponding GNode.
 
-Such a triplet in the real world is called a `TransactiveDevice`. So in shorthand, a `TerminalAsset` is a representation in code of a `TransactiveDevice` in the real world.
+This link of trust allows us to [redefine demand response](docs/wiki/redefining-demand-response.md).
 
-The goal of GNode Factory is to support transactive devices, especially transactive loads, in taking on the mantle of balancing the electric grid in a renewable future. In short, we need to [redefine demand response](docs/wiki/redefining-demand-response.md). This requires a solid alignment between the online abstraction of the `TerminalAsset` and the physical reality a transactive device, in particular of the three things listed above. It also requires trust from a variety of players that this alignment is solid - i.e., that a `TerminalAsset` code object claiming a particular grade of metering, a particular kind of device and a particular location on the electric grid does in fact mean that there is a real physical transactive device with these three attributes in the physical world.
-
-The GNodeFactory stands at the boundary between the physical world and the world of code, maintaining a high fidelity connection between Transactive Devices and _digital representations_ of these Transactive Devices as `TerminalAssets.`
-
-## Features
-
-- TODO
-
-## Requirements
-
-- TODO
-
-## Installation
-
-You can install _G Node Factory_ via [pip] from [PyPI]:
-
-```console
-$ pip install g-node-factory
-```
-
-## Usage
-
-Please see the [Command-line Reference] for details.
-
-## Contributing
-
-Contributions are very welcome.
-To learn more, see the [Contributor Guide].
-
-## License
-
-Distributed under the terms of the [MIT license][license],
-_G Node Factory_ is free and open source software.
-
-## Issues
-
-If you encounter any problems,
-please [file an issue] along with a detailed description.
+GNodes come in several flavors (see [this enum](src/gnf/enums/core_g_node_role.py)), and the first flavor to understand is a [TerminalAsset](docs/wiki/terminal-asset.md).
 
 ## Credits
 

@@ -62,9 +62,25 @@ class DevTaOwner:
     def stop(self):
         self.pr.terminate()
 
+    def make_daemon_docker_env(self) -> str:
+        cmd = f"cp for_docker/daemon_docker.env input_data/gitignored/docker_{self.short_alias}.env"
+        subprocess.run(cmd.split())
+        env_lines = ["\n","\n",
+        f"TAD_SK = '{self.ta_daemon_sk}'\n",
+        f"TAD_TA_OWNER_ADDR = '{self.acct.addr}'\n"
+        ]
+        file_name = f"input_data/gitignored/docker_{self.short_alias}.env"
+        with open(file_name, "a") as f:
+            f.writelines(env_lines)
+        return file_name
+
     def start_ta_daemon(self) -> subprocess.Popen:
         LOGGER.info("Starting TaDaemon")
-        cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {self.settings.ta_daemon_api_port}"
+        daemon_env_file = self.make_daemon_docker_env()
+        LOGGER.info(f"daemon env file: {daemon_env_file}")
+        port = self.settings.ta_daemon_api_port
+        cmd = f"docker run jessmillar/python-ta-daemon:latest -p {port}:8000"
+        # cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {port}"
         pr = subprocess.Popen(
             cmd.split(),
             env=dict(
@@ -72,6 +88,9 @@ class DevTaOwner:
             ),
         )
         return pr
+
+    def __repr__(self) -> str:
+        return self.short_alias
 
     ##########################
     # Messages Sent
@@ -163,3 +182,9 @@ class DevTaOwner:
         LOGGER.info(
             f"HollyHomeowner acct {self.acct.addr_short_hand} balance: ~{algo_utils.algos(self.acct.addr)} Algos"
         )
+
+    @property
+    def short_alias(self) -> str:
+        alias = self.settings.initial_ta_alias
+        words = alias.split(".")
+        return ".".join(words[-2:-1])
