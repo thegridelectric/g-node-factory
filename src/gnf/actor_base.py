@@ -35,7 +35,7 @@ RoleByShortAlias: Dict[RegistryGNodeRoleShortAlias, RegistryGNodeRole] = {
     RegistryGNodeRoleShortAlias.GNF: RegistryGNodeRole.GNodeFactory,
     RegistryGNodeRoleShortAlias.GNR: RegistryGNodeRole.GNodeRegistry,
     RegistryGNodeRoleShortAlias.GW: RegistryGNodeRole.GridWorks,
-    RegistryGNodeRoleShortAlias.WC: RegistryGNodeRole.WorldCoordinator,
+    RegistryGNodeRoleShortAlias.WC: RegistryGNodeRole.World,
     RegistryGNodeRoleShortAlias.WIR: RegistryGNodeRole.WorldInstanceRegistry,
 }
 
