@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
 
 from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
@@ -12,17 +12,16 @@ from gnf.utils import RestfulResponse
 app = FastAPI()
 daemon = PythonTaDaemon()
 
-@app.get("/")
+
+@app.get("/owned-tadeeds/")
 async def main():
-    if not daemon.has_real_acct():
-        return {"TaDaemonAddr": "None Yet"}
-    #return {"TaDaemonAddr": daemon.acct.addr}
-    #return {"Owned deeds": daemon.ta_deed_alias_list()}
-    return FileResponse("docs/wiki/img/terminal-asset-deed-icon.png")
+    return {"Owned deeds": daemon.ta_deed_alias_list()}
+
 
 @app.get("/env/")
 async def show_env():
     return daemon.settings
+
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)
 async def initial_tadeed_algo_optin_received(payload: InitialTadeedAlgoOptin):
@@ -32,6 +31,7 @@ async def initial_tadeed_algo_optin_received(payload: InitialTadeedAlgoOptin):
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
         )
     return r
+
 
 @app.post("/new-tadeed-algo-optin/", response_model=RestfulResponse)
 async def new_tadeed_algo_received(payload: NewTadeedAlgoOptin):

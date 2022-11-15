@@ -12,17 +12,19 @@ This repo has been developed through the generous funding of a grant provided by
 
 ## Local Demo setup
 
-1. Set up python environment
+1. Clone the repo
+
+2. Create virtual env
 
    ```
-   poetry install
-
-   poetry shell
+   python -m venv venv
+   source venv/bin/activate
+   pip install -e .
    ```
 
-2. Install [docker](https://docs.docker.com/get-docker/)
+3. Install [docker](https://docs.docker.com/get-docker/)
 
-3. Start docker containers
+4. Start docker containers
 
 - **X86 CPU**:
 
@@ -36,29 +38,19 @@ This repo has been developed through the generous funding of a grant provided by
   docker compose -f docker-demo-arm.yml up -d
   ```
 
-4. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) and from that directory
+5. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into a **sibling repo**
 
    ```
-   ./sandbox up dev
+   - YourDemoFolder
+     |
+     -- g-node-factory
+     -- sandbox
    ```
 
-   This starts up a local blockchain on your computer. It can take a couple of minutes for the
-   initial setup.
+   - The demo will set up a reset sandbox version of an Algorand blockchain each times it runs,
+     but requires the two repos to be siblings for this to work
 
-   **note** running the sandbox in dev mode means the chain instantly creates a block as soon as you send a transaction, instead of once every 4 seconds. This means demos and development go much faster.
-
-5. Run before each demo:
-
-- From this repo, **flush database**:
-  ```
-  ./reset-dev-db.sh
-  ```
-- From sandbox repo, **flush blockchin**:
-  ```
-  ./sandbox reset
-  ```
-
-6. Start the PythonTaDaemon FastAPI:
+6. Start the GNodeFactory FastAPI:
 
    ```
    uvicorn gnf.rest_api:app --reload

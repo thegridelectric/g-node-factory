@@ -1,27 +1,35 @@
-import time
 import os
 import subprocess
 import sys
-import random
-import gnf.demo_methods as demo_methods
+import time
 
-from gnf import load_dev_data
 from rich.pretty import pprint
 
-if len(sys.argv) == 1:
-    sim_size = 5
+import gnf.demo_methods as demo_methods
+from gnf import load_dev_data
 
-try:
-    sim_size = int(sys.argv[1])
-except:
-    raise Exception(f"Please enter an integer number of homes to simulate, not {sys.argv[1]}")
+
+if len(sys.argv) == 1:
+    sim_size = 2
+    print("If you want to simulate n assets, run python demo.py n")
+
+else:
+    try:
+        sim_size = int(sys.argv[1])
+    except:
+        raise Exception(
+            f"Please enter an integer number of homes to simulate, not {sys.argv[1]}"
+        )
 
 full_plant_names = demo_methods.demo_plant_names
-full_plant_names.remove("holly")
-random.shuffle(full_plant_names)
-plant_names = ["holly"] + full_plant_names[0:sim_size - 1]
+plant_names = full_plant_names[0:sim_size]
 
-print(f"Running simulation for {sim_size} TerminalAssets")
+if sim_size == 0:
+    raise Exception("No simulated TerminalAssets. Stopping")
+elif sim_size == 1:
+    print(f"Running simulation for 1 TerminalAsset (molly.ta)")
+else:
+    print(f"Running simulation for {sim_size} TerminalAsset")
 time.sleep(2)
 print("")
 print("")
@@ -70,6 +78,12 @@ rr = demo_methods.create_terminal_assets(ta_owners)
 
 print("Success!")
 
+for owner in ta_owners:
+    print(
+        f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/owned-tadeeds/"
+    )
+
+input("Type any key to terminate daemon docker instances")
 
 for ta_owner in ta_owners:
     ta_owner.stop()
