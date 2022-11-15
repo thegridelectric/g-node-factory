@@ -34,51 +34,59 @@ from gnf.schemata.new_tadeed_send import NewTadeedSend
 from gnf.schemata.new_tadeed_send import NewTadeedSend_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
+from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack
+from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate
 from gnf.schemata.tavalidatorcert_algo_create import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata.tavalidatorcert_algo_transfer import TavalidatorcertAlgoTransfer
 from gnf.schemata.tavalidatorcert_algo_transfer import TavalidatorcertAlgoTransfer_Maker
+from gnf.schemata.terminalasset_certify_hack import TerminalassetCertifyHack
+from gnf.schemata.terminalasset_certify_hack import TerminalassetCertifyHack_Maker
 
 
 __all__ = [
+    "BasegnodeCtnCreate",
+    "BasegnodeCtnCreate_Maker",
+    "BasegnodeGt",
+    "BasegnodeGt_Maker",
+    "BasegnodeMarketmakerCreate",
+    "BasegnodeMarketmakerCreate_Maker",
+    "BasegnodeOtherCreate",
+    "BasegnodeOtherCreate_Maker",
+    "BasegnodeTerminalassetCreate",
+    "BasegnodeTerminalassetCreate_Maker",
     "BasegnodesBroadcast",
     "BasegnodesBroadcast_Maker",
     "BasegnodesGet",
     "BasegnodesGet_Maker",
-    "TavalidatorcertAlgoCreate",
-    "TavalidatorcertAlgoCreate_Maker",
-    "NewTadeedAlgoOptin",
-    "NewTadeedAlgoOptin_Maker",
-    "BasegnodeOtherCreate",
-    "BasegnodeOtherCreate_Maker",
     "DiscoverycertAlgoCreate",
     "DiscoverycertAlgoCreate_Maker",
-    "HeartbeatA",
-    "HeartbeatA_Maker",
-    "OldTadeedAlgoReturn",
-    "OldTadeedAlgoReturn_Maker",
-    "NewTadeedSend",
-    "NewTadeedSend_Maker",
-    "BasegnodeCtnCreate",
-    "BasegnodeCtnCreate_Maker",
-    "InitialTadeedAlgoOptin",
-    "InitialTadeedAlgoOptin_Maker",
-    "BasegnodeTerminalassetCreate",
-    "BasegnodeTerminalassetCreate_Maker",
-    "BasegnodeMarketmakerCreate",
-    "BasegnodeMarketmakerCreate_Maker",
-    "BasegnodeGt",
-    "BasegnodeGt_Maker",
-    "TatradingrightsAlgoCreate",
-    "TatradingrightsAlgoCreate_Maker",
-    "InitialTadeedAlgoTransfer",
-    "InitialTadeedAlgoTransfer_Maker",
-    "InitialTadeedAlgoCreate",
-    "InitialTadeedAlgoCreate_Maker",
     "DiscoverycertAlgoTransfer",
     "DiscoverycertAlgoTransfer_Maker",
+    "HeartbeatA",
+    "HeartbeatA_Maker",
+    "InitialTadeedAlgoCreate",
+    "InitialTadeedAlgoCreate_Maker",
+    "InitialTadeedAlgoOptin",
+    "InitialTadeedAlgoOptin_Maker",
+    "InitialTadeedAlgoTransfer",
+    "InitialTadeedAlgoTransfer_Maker",
+    "NewTadeedAlgoOptin",
+    "NewTadeedAlgoOptin_Maker",
+    "NewTadeedSend",
+    "NewTadeedSend_Maker",
+    "OldTadeedAlgoReturn",
+    "OldTadeedAlgoReturn_Maker",
+    "TadeedSpecsHack",
+    "TadeedSpecsHack_Maker",
+    "TatradingrightsAlgoCreate",
+    "TatradingrightsAlgoCreate_Maker",
+    "TavalidatorcertAlgoCreate",
+    "TavalidatorcertAlgoCreate_Maker",
     "TavalidatorcertAlgoTransfer",
     "TavalidatorcertAlgoTransfer_Maker",
+    "TerminalassetCertifyHack",
+    "TerminalassetCertifyHack_Maker",
 ]

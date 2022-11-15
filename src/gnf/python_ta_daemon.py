@@ -1,4 +1,5 @@
 import logging
+from typing import List
 from typing import Optional
 
 import dotenv
@@ -20,6 +21,7 @@ from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
+DUMMY_ACCT_ADDR = "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
 
 
 class PythonTaDaemon:
@@ -34,7 +36,9 @@ class PythonTaDaemon:
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        self.acct: Optional[BasicAccount] = None
+        self.acct: BasicAccount = BasicAccount(
+            private_key=self.settings.sk.get_secret_value()
+        )
         LOGGER.info("TaOwner Smart Daemon Initialized")
 
     ##########################
@@ -44,9 +48,9 @@ class PythonTaDaemon:
     def initial_tadeed_algo_optin_received(
         self, payload: InitialTadeedAlgoOptin
     ) -> RestfulResponse:
-        if self.acct is not None:
+        if self.has_deed():
             r = RestfulResponse(
-                Note=f"Already initialized. Ignoring {ta_deed_idx} opt in request"
+                Note=f"Ignoring InitialTadeed Optin. Deeds: {self.ta_deed_alias_list}"
             )
             return r
         self.settings.sk = SecretStr(payload.TaDaemonPrivateKey)
@@ -164,3 +168,24 @@ class PythonTaDaemon:
         LOGGER.info(note)
         r = RestfulResponse(Note=note)
         return r
+
+    def ta_deed_alias_list(self) -> List[str]:
+        if self.acct is None:
+            return []
+        try:
+            assets = self.client.account_info(self.acct.addr)["assets"]
+        except:
+            return []
+        owned_assets = list(filter(lambda x: x["amount"] == 1, assets))
+        owned_asset_idx_list = list(map(lambda x: x["asset-id"], owned_assets))
+        deed_alias_list = []
+        for asset_idx in owned_asset_idx_list:
+            alias = api_utils.alias_from_deed_idx(asset_idx)
+            if alias:
+                deed_alias_list.append(alias)
+        return deed_alias_list
+
+    def has_deed(self) -> bool:
+        if len(self.ta_deed_alias_list()) > 0:
+            return True
+        return False

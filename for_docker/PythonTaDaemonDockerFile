@@ -8,9 +8,7 @@ FROM $REMOTE_BASE AS app-base
 WORKDIR /app
 
 COPY ./src /app/src
-COPY ./for_docker/docker_ta_daemon.env /app/.env
+COPY ./for_docker/daemon_docker.env /app/.env
 COPY README.md /app/README.md
 RUN pip install -e /app
 CMD ["uvicorn", "gnf.ta_daemon_rest_api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
-# COPY keep_alive.py /app/keep_alive.py
-# ENTRYPOINT python keep_alive.py

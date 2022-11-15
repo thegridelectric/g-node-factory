@@ -14,11 +14,11 @@ def test_basegnode_gt_generated():
 
     d = {
         "GNodeId": "9405686a-14fd-4aef-945b-cd7c97903f14",
-        "Alias": "d1.iso.me.orange.ta",
+        "Alias": "dw1.iso.me.orange.ta",
         "StatusGtEnumSymbol": "3661506b",
         "RoleGtEnumSymbol": "0f8872f7",
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "PrevAlias": "d1",
+        "PrevAlias": "dw1",
         "GpsPointId": "50f3f6e8-5937-47c2-8d05-06525ef6467d",
         "OwnershipDeedNftId": 5,
         "OwnershipDeedValidatorAddr": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI",

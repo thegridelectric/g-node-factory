@@ -1,13 +1,14 @@
 import logging
+import os
+import subprocess
 
 import requests
+import requests_async
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
-from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
-import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
 import gnf.errors as errors
@@ -17,6 +18,8 @@ from gnf.algo_utils import MultisigAccount
 # Schemata sent by homeowner
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
+from gnf.schemata import TerminalassetCertifyHack_Maker
+from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
@@ -37,6 +40,7 @@ class DevTaOwner:
         self.acct: BasicAccount = BasicAccount(
             private_key=self.settings.sk.get_secret_value()
         )
+        self.seed_fund_own_account()
         self.validator_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -47,37 +51,106 @@ class DevTaOwner:
         )
         ta_daemon_acct: BasicAccount = BasicAccount()
         self.ta_daemon_sk: str = ta_daemon_acct.sk
-        self.ta_daemon_addr: str = ta_daemon_acct.addr
-        self.settings.ta_daemon_addr: str = ta_daemon_acct.addr  # REMOVE!!!
-        self.seed_fund_own_account()
+        self.settings.ta_daemon_addr: str = ta_daemon_acct.addr
+        self.ta_daemon_api_root = (
+            f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
+        )
+
+    def start(self):
+        self.pr: subprocess.Popen = self.start_ta_daemon()
+
+    def stop(self):
+        # self.pr.terminate()
+        cmd = f"docker stop {self.short_alias}-daemon"
+        subprocess.run(cmd.split())
+        cmd = f"docker rm {self.short_alias}-daemon"
+        subprocess.run(cmd.split())
+
+    # def make_daemon_docker_env(self) -> str:
+    #     cmd = f"cp for_docker/daemon_docker.env input_data/gitignored/docker_{self.short_alias}.env"
+    #     subprocess.run(cmd.split())
+    #     env_lines = ["\n","\n",
+    #     f"TAD_SK = '{self.ta_daemon_sk}'\n",
+    #     f"TAD_TA_OWNER_ADDR = '{self.acct.addr}'\n"
+    #     ]
+    #     file_name = f"input_data/gitignored/docker_{self.short_alias}.env"
+    #     with open(file_name, "a") as f:
+    #         f.writelines(env_lines)
+    #     return file_name
+
+    def start_ta_daemon(self) -> subprocess.Popen:
+        LOGGER.info("Starting TaDaemon")
+        # daemon_env_file = self.make_daemon_docker_env()
+        # LOGGER.info(f"daemon env file: {daemon_env_file}")
+        port = self.settings.ta_daemon_api_port
+        cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:chaos__49fc416__20221115 "
+        # cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {port}"
+        pr = subprocess.Popen(
+            cmd.split(),
+        )
+        return pr
+
+    def __repr__(self) -> str:
+        return self.short_alias
 
     ##########################
     # Messages Sent
     ##########################
 
-    def post_initial_tadeed_algo_optin(self) -> InitialTadeedAlgoOptin:
+    def request_ta_certification(self) -> RestfulResponse:
+        ta_alias = self.settings.initial_ta_alias
+        payload = TerminalassetCertifyHack_Maker(
+            terminal_asset_alias=ta_alias,
+            ta_daemon_api_fqdn=self.settings.ta_daemon_api_fqdn,
+            ta_daemon_api_port=self.settings.ta_daemon_api_port,
+            ta_daemon_addr=self.settings.ta_daemon_addr,
+        ).tuple
+
+        LOGGER.info(f"Requesting certification for {ta_alias}")
+        api_endpoint = (
+            f"{self.settings.public.molly_api_root}/terminalasset-certification/"
+        )
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        if r.status_code > 200:
+            if r.status_code == 422:
+                note = (
+                    f"Error posting terminalasset-certification to validator: "
+                    + r.json()["detail"]
+                )
+            else:
+                note = r.reason
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+        rr1 = RestfulResponse(**r.json())
+        rr2 = self.post_initial_tadeed_algo_optin()
+        if rr2.HttpStatusCode > 200:
+            return rr2
+        return rr1
+
+    def post_initial_tadeed_algo_optin(self) -> RestfulResponse:
         """
          - Sends 50 algos to TaDaemon acct
          - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
          funding txn for proof of identity.
 
         Returns:
-            InitialTadeedAlgoOptin:
+            RestfulResponse
         """
+        LOGGER.info("Funding TaDaemon")
         required_algos = config.GnfPublic().ta_deed_consideration_algos
         txn = transaction.PaymentTxn(
             sender=self.acct.addr,
-            receiver=self.ta_daemon_addr,
+            receiver=self.settings.ta_daemon_addr,
             amt=required_algos * 10**6,
             sp=self.client.suggested_params(),
         )
         signed_txn = txn.sign(self.acct.sk)
         try:
             self.client.send_transaction(signed_txn)
-        except:
-            raise errors.AlgoError(f"Failure sending transaction")
+        except Exception as e:
+            note = f"Algorand Failure sending transaction: {e}"
+            raise errors.AlgoError(note)
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-
         payload = InitialTadeedAlgoOptin_Maker(
             terminal_asset_alias=self.settings.initial_ta_alias,
             ta_owner_addr=self.acct.addr,
@@ -85,11 +158,16 @@ class DevTaOwner:
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
             ta_daemon_private_key=self.ta_daemon_sk,
         ).tuple
-        api_endpoint = f"{self.settings.ta_daemon_api_root}/initial-tadeed-algo-optin/"
+        api_endpoint = f"{self.ta_daemon_api_root}/initial-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Sent InitialTadeedAlgoOptin")
-        pprint(r.json())
-        return r
+        if r.status_code > 200:
+            if r.status_code == 422:
+                note = "Issue with InitialTadeedAlgoOptin" + r.json()["detail"]
+            else:
+                note = r.reason
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+        return RestfulResponse(**r.json())
 
     ##########################
     # dev methods
@@ -105,3 +183,9 @@ class DevTaOwner:
         LOGGER.info(
             f"HollyHomeowner acct {self.acct.addr_short_hand} balance: ~{algo_utils.algos(self.acct.addr)} Algos"
         )
+
+    @property
+    def short_alias(self) -> str:
+        alias = self.settings.initial_ta_alias
+        words = alias.split(".")
+        return ".".join(words[-2:-1])

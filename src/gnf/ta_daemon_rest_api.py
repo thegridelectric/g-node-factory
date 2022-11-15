@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
 
 from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
@@ -10,6 +11,16 @@ from gnf.utils import RestfulResponse
 
 app = FastAPI()
 daemon = PythonTaDaemon()
+
+
+@app.get("/owned-tadeeds/")
+async def main():
+    return {"Owned deeds": daemon.ta_deed_alias_list()}
+
+
+@app.get("/env/")
+async def show_env():
+    return daemon.settings
 
 
 @app.post("/initial-tadeed-algo-optin/", response_model=RestfulResponse)

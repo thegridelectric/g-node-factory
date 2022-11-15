@@ -39,3 +39,12 @@ venv.bak/
 # algo related
 *.teal
 *.teal.tok
+
+
+output_data/**
+!output_data/**/
+!output_data/**/__init__.py
+
+input_data/gitignored/**
+!input_data/gitignored/**/
+!input_data/gitignored/**/__init__.py

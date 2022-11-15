@@ -11,7 +11,7 @@ from gnf.schemata import BasegnodeTerminalassetCreate_Maker as Maker
 def test_basegnode_terminalasset_create_generated():
 
     d = {
-        "TaGNodeAlias": "d1.iso.me.orange.ta",
+        "TaGNodeAlias": "dw1.iso.me.orange.ta",
         "MicroLon": -68691705,
         "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
         "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",

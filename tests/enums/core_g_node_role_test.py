@@ -1,4 +1,4 @@
-"""Tests for schema enum core.g.node.role.100"""
+"""Tests for schema enum core.g.node.role.000"""
 from gnf.enums import CoreGNodeRole
 
 
