@@ -39,7 +39,8 @@ This repo has been developed through the generous funding of a grant provided by
   ```
 
 5. Start the Algorand sandbox in a **sibling directory**
-  a. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into sibling directory
+
+    a. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into sibling directory
 
    ```
    - YourDemoFolder
