@@ -13,7 +13,7 @@ networks:
 services:
   dev-validator:
     container_name: molly
-    image: "jessmillar/ta-validator:chaos__81eee74__20221115"
+    image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
     ports:
       - 8001:8000
   registry-broker:
