@@ -1,6 +1,7 @@
 import logging
-import subprocess
 import os
+import subprocess
+
 import requests
 import requests_async
 from algosdk import encoding
@@ -54,19 +55,29 @@ class DevTaOwner:
         self.ta_daemon_api_root = (
             f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
         )
+
+    def start(self):
         self.pr: subprocess.Popen = self.start_ta_daemon()
+
+    def stop(self):
+        self.pr.terminate()
+
+    def start_ta_daemon(self) -> subprocess.Popen:
+        LOGGER.info("Starting TaDaemon")
+        cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {self.settings.ta_daemon_api_port}"
+        pr = subprocess.Popen(
+            cmd.split(),
+            env=dict(
+                os.environ, TAD_SK=self.ta_daemon_sk, TAD_TA_OWNER_ADDR=self.acct.addr
+            ),
+        )
+        return pr
 
     ##########################
     # Messages Sent
     ##########################
 
-    def start_ta_daemon(self) -> subprocess.Popen:
-        LOGGER.info("Starting ta Daemon")
-        cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {self.settings.ta_daemon_api_port}"
-        pr = subprocess.Popen(cmd.split(), env=dict(os.environ, TAD_SK=self.ta_daemon_sk, TAD_TA_OWNER_ADDR=self.acct.addr))
-        return pr
-
-    async def request_ta_certification(self) -> RestfulResponse:
+    def request_ta_certification(self) -> RestfulResponse:
         ta_alias = self.settings.initial_ta_alias
         payload = TerminalassetCertifyHack_Maker(
             terminal_asset_alias=ta_alias,
@@ -79,18 +90,24 @@ class DevTaOwner:
         api_endpoint = (
             f"{self.settings.public.molly_api_root}/terminalasset-certification/"
         )
-        r = await requests_async.post(url=api_endpoint, json=payload.as_dict())
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
         if r.status_code > 200:
             if r.status_code == 422:
-                note = f"Error posting sk to daemon: " + r.json()["detail"]
+                note = (
+                    f"Error posting terminalasset-certification to validator: "
+                    + r.json()["detail"]
+                )
             else:
                 note = r.reason
             rr = RestfulResponse(Note=note, HttpStatusCode=422)
             return rr
-        rr = await self.post_initial_tadeed_algo_optin()
-        return rr
+        rr1 = RestfulResponse(**r.json())
+        rr2 = self.post_initial_tadeed_algo_optin()
+        if rr2.HttpStatusCode > 200:
+            return rr2
+        return rr1
 
-    async def post_initial_tadeed_algo_optin(self) -> RestfulResponse:
+    def post_initial_tadeed_algo_optin(self) -> RestfulResponse:
         """
          - Sends 50 algos to TaDaemon acct
          - Sends InitialTadeedAlgoOptin to TaDaemon, with signed
@@ -99,6 +116,7 @@ class DevTaOwner:
         Returns:
             RestfulResponse
         """
+        LOGGER.info("Funding TaDaemon")
         required_algos = config.GnfPublic().ta_deed_consideration_algos
         txn = transaction.PaymentTxn(
             sender=self.acct.addr,
@@ -110,11 +128,9 @@ class DevTaOwner:
         try:
             self.client.send_transaction(signed_txn)
         except Exception as e:
-            return RestfulResponse(
-                Note=f"Algorand Failure sending transaction: {e}", HttpStatusCode=422
-            )
+            note = f"Algorand Failure sending transaction: {e}"
+            raise errors.AlgoError(note)
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-
         payload = InitialTadeedAlgoOptin_Maker(
             terminal_asset_alias=self.settings.initial_ta_alias,
             ta_owner_addr=self.acct.addr,
@@ -123,7 +139,7 @@ class DevTaOwner:
             ta_daemon_private_key=self.ta_daemon_sk,
         ).tuple
         api_endpoint = f"{self.ta_daemon_api_root}/initial-tadeed-algo-optin/"
-        r = await requests_async.post(url=api_endpoint, json=payload.as_dict())
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
         if r.status_code > 200:
             if r.status_code == 422:
                 note = "Issue with InitialTadeedAlgoOptin" + r.json()["detail"]

@@ -196,8 +196,15 @@ class DevValidator:
 
         required_algos = config.GnfPublic().ta_deed_consideration_algos
         if algo_utils.algos(ta_daemon_addr) < required_algos:
-            Exception(f"ta_daemon_addr not sufficiently funded!")
-            return None
+            note = (
+                "ta_daemon_addr not sufficiently funded! Has "
+                f"{algo_utils.algos(ta_daemon_addr)} Algos and needs "
+                f"{required_algos} Algos"
+            )
+            return RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
         txn = transaction.AssetTransferTxn(
             sender=self.validator_multi.addr,
             receiver=ta_daemon_addr,

@@ -41,6 +41,6 @@ venv.bak/
 *.teal.tok
 
 
-input_data/**
-!input_data/**/
-!input_data/**/__init__.py
+output_data/**
+!output_data/**/
+!output_data/**/__init__.py

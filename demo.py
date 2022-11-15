@@ -1,8 +1,7 @@
-from gnf import demo_new_ctn
-from gnf import demo_new_terminal_asset
+import gnf.demo_methods as demo_methods
 from gnf import load_dev_data
 
 
 load_dev_data.main()
-demo_new_terminal_asset.main()
-# demo_new_ctn.main()
+demo_methods.certify_molly_metermaid()
+demo_methods.create_terminal_asset(plant="holly")
