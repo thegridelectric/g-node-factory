@@ -1,10 +1,12 @@
 import logging
 from typing import Optional
 
+import dotenv
 import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from asgiref.sync import sync_to_async
 from rich.pretty import pprint
 
 import gnf.algo_utils as algo_utils
@@ -13,8 +15,6 @@ import gnf.config as config
 import gnf.dev_utils.algo_setup as algo_setup
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
-
-# Schemata sent by validator
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoCreate_Maker
 from gnf.schemata import InitialTadeedAlgoTransfer
@@ -23,6 +23,7 @@ from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
+from gnf.schemata import TerminalassetCertifyHack
 from gnf.utils import RestfulResponse
 
 
@@ -32,7 +33,12 @@ GNF_API_ROOT = "http://127.0.0.1:8000"
 
 
 class DevValidator:
-    def __init__(self, settings: config.ValidatorSettings):
+    def __init__(
+        self,
+        settings: config.ValidatorSettings = config.ValidatorSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
         self.settings = settings
         self.client: AlgodClient = AlgodClient(
             settings.algo_api_secrets.algod_token.get_secret_value(),
@@ -57,13 +63,22 @@ class DevValidator:
         """
         pass
 
+    #################
+    # Messages received
+    ################
+
+    def terminalasset_certify_hack_received(
+        self, payload: TerminalassetCertifyHack
+    ) -> RestfulResponse:
+        ta_alias = payload.TerminalAssetAlias
+        r = self.post_initial_tadeed_algo_create(ta_alias=ta_alias)
+        return r
+
     ###################
     # Messages sent
     ###################
 
-    def post_initial_tadeed_algo_create(
-        self, terminal_asset_alias: str
-    ) -> RestfulResponse:
+    def post_initial_tadeed_algo_create(self, ta_alias: str) -> RestfulResponse:
 
         txn = transaction.AssetCreateTxn(
             sender=self.validator_multi.address(),
@@ -71,7 +86,7 @@ class DevValidator:
             decimals=0,
             default_frozen=False,
             manager=self.settings.public.gnf_admin_addr,
-            asset_name=terminal_asset_alias,
+            asset_name=ta_alias,
             unit_name="TADEED",
             sp=self.client.suggested_params(),
         )
@@ -86,16 +101,16 @@ class DevValidator:
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-create/"
         )
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Response from GnfRestAPI:")
-        if r.status_code > 200:
-            if "detail" in r.json().keys():
-                note = r.json()["detail"]
+        request_response = requests.post(url=api_endpoint, json=payload.as_dict())
+
+        if request_response.status_code > 200:
+            if "detail" in request_response.json().keys():
+                note = request_response.json()["detail"]
             else:
-                note = r.reason
+                note = request_response.reason
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
-        r = RestfulResponse(**r.json())
+        r = RestfulResponse(**request_response.json())
         return r
 
     def post_tavalidatorcert_algo_create(self) -> RestfulResponse:
@@ -106,10 +121,10 @@ class DevValidator:
             decimals=0,
             default_frozen=False,
             manager=self.settings.public.gnf_admin_addr,
-            asset_name=self.settings.validator_cert_name,
+            asset_name=self.settings.cert_name,
             unit_name="VLDTR",
-            note=self.settings.validator_name,
-            url=self.settings.validator_web_page,
+            note=self.settings.name,
+            url=self.settings.api_root,
             sp=self.client.suggested_params(),
         )
 
@@ -126,8 +141,6 @@ class DevValidator:
         )
 
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info("Response from GnfRestAPI:")
-        pprint(r.json())
 
         if r.status_code > 200:
             LOGGER.warning(r.json())
@@ -135,35 +148,29 @@ class DevValidator:
                 note = "TavalidatorcertAlgoCreate error:" + r.json()["detail"]
             else:
                 note = r.reason
-            r = RestfulResponse(Note=note, HttpStatusCode=422)
-            return r
+            return RestfulResponse(Note=note, HttpStatusCode=422)
 
-        r = RestfulResponse(**r.json())
-        cert_idx = r.PayloadAsDict["Value"]
+        rr = RestfulResponse(**r.json())
+        cert_idx = rr.PayloadAsDict["Value"]
 
         payload = self.generate_transfer_tavalidatorcert_algo(cert_idx=cert_idx)
-        LOGGER.info(
-            f"Posting request to GnfRestAPI to transfer TaValidatorCert {cert_idx}"
-        )
 
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/tavalidatorcert-algo-transfer/"
         )
         r = requests.post(url=api_endpoint, json=payload.as_dict())
-        LOGGER.info(f"Response from GnfRestAPI: {r.status_code}")
 
         if r.status_code > 200:
             if r.status_code == 422:
                 note = "TavalidatorcertAlgoTransfer error:" + r.json()["detail"]
             else:
                 note = r.reason
-            r = RestfulResponse(Note=note, HttpStatusCode=422)
-            pprint(r)
-            return r
-        pprint(r.json())
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+
         return RestfulResponse(**r.json())
 
-    def post_initial_tadeed_algo_transfer(
+    def certify_terminal_asset(
         self,
         ta_deed_idx: int,
         ta_daemon_addr: str,
@@ -189,8 +196,15 @@ class DevValidator:
 
         required_algos = config.GnfPublic().ta_deed_consideration_algos
         if algo_utils.algos(ta_daemon_addr) < required_algos:
-            Exception(f"ta_daemon_addr not sufficiently funded!")
-            return None
+            note = (
+                "ta_daemon_addr not sufficiently funded! Has "
+                f"{algo_utils.algos(ta_daemon_addr)} Algos and needs "
+                f"{required_algos} Algos"
+            )
+            return RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
         txn = transaction.AssetTransferTxn(
             sender=self.validator_multi.addr,
             receiver=ta_daemon_addr,

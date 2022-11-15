@@ -1,25 +1,21 @@
-"""Tests discoverycert.algo.create type, version 000"""
+"""Tests tadeed.specs.hack type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
-from gnf.enums import CoreGNodeRole
 from gnf.errors import SchemaError
-from gnf.schemata import DiscoverycertAlgoCreate_Maker as Maker
+from gnf.schemata import TadeedSpecsHack_Maker as Maker
 
 
-def test_discoverycert_algo_create_generated():
+def test_tadeed_specs_hack_generated():
 
     d = {
-        "GNodeAlias": "d1.isone.ver.keene",
-        "CoreGNodeRoleGtEnumSymbol": "4502e355",
-        "OldChildAliasList": ["d1.isone.ver.keene.holly"],
-        "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
-        "SupportingMaterialHash": "hash of supporting material",
-        "MicroLat": 44838681,
-        "MicroLon": -68705311,
-        "TypeName": "discoverycert.algo.create",
+        "TerminalAssetAlias": "d1.isone.ver.keene.holly.ta",
+        "MicroLat": 45666353,
+        "MicroLon": 68691705,
+        "DaemonPort": 8002,
+        "TypeName": "tadeed.specs.hack",
         "Version": "000",
     }
 
@@ -38,13 +34,10 @@ def test_discoverycert_algo_create_generated():
 
     # test Maker init
     t = Maker(
-        g_node_alias=gtuple.GNodeAlias,
-        core_g_node_role=gtuple.CoreGNodeRole,
-        old_child_alias_list=gtuple.OldChildAliasList,
-        discoverer_addr=gtuple.DiscovererAddr,
-        supporting_material_hash=gtuple.SupportingMaterialHash,
+        terminal_asset_alias=gtuple.TerminalAssetAlias,
         micro_lat=gtuple.MicroLat,
         micro_lon=gtuple.MicroLon,
+        daemon_port=gtuple.DaemonPort,
     ).tuple
     assert t == gtuple
 
@@ -58,56 +51,38 @@ def test_discoverycert_algo_create_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["GNodeAlias"]
+    del d2["TerminalAssetAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["CoreGNodeRoleGtEnumSymbol"]
+    del d2["MicroLat"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["OldChildAliasList"]
+    del d2["MicroLon"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["DiscovererAddr"]
+    del d2["DaemonPort"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["SupportingMaterialHash"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    ######################################
-    # Optional attributes can be removed from type
-    ######################################
-
-    d2 = dict(d)
-    if "MicroLat" in d2.keys():
-        del d2["MicroLat"]
-    Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    if "MicroLon" in d2.keys():
-        del d2["MicroLon"]
-    Maker.dict_to_tuple(d2)
 
     ######################################
     # Behavior on incorrect types
     ######################################
 
-    d2 = dict(d, CoreGNodeRoleGtEnumSymbol="hi")
-    Maker.dict_to_tuple(d2).CoreGNodeRole = CoreGNodeRole.default()
-
-    d2 = dict(d, MicroLat="44838681.1")
+    d2 = dict(d, MicroLat="45666353.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, MicroLon="-68705311.1")
+    d2 = dict(d, MicroLon="68691705.1")
+    with pytest.raises(ValidationError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d, DaemonPort="8002.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
@@ -123,11 +98,7 @@ def test_discoverycert_algo_create_generated():
     # SchemaError raised if primitive attributes do not have appropriate property_format
     ######################################
 
-    d2 = dict(d, GNodeAlias="a.b-h")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, OldChildAliasList=["a.b-h"])
+    d2 = dict(d, TerminalAssetAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

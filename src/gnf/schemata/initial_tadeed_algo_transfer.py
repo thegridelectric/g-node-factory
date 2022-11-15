@@ -1,9 +1,11 @@
 """Type initial.tadeed.algo.transfer, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import Literal
 
 from pydantic import BaseModel
+from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
@@ -36,7 +38,7 @@ class InitialTadeedAlgoTransfer(BaseModel):
         "FirstDeedTransferMtx", property_format.is_algo_msg_pack_encoded
     )
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
         return d
 
@@ -83,7 +85,7 @@ class InitialTadeedAlgoTransfer_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> InitialTadeedAlgoTransfer:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> InitialTadeedAlgoTransfer:
         d2 = dict(d)
         if "MicroLat" not in d2.keys():
             raise SchemaError(f"dict {d2} missing MicroLat")

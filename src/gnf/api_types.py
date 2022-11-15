@@ -18,9 +18,11 @@ from gnf.schemata import InitialTadeedAlgoTransfer_Maker
 from gnf.schemata import NewTadeedAlgoOptin_Maker
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn_Maker
+from gnf.schemata import TadeedSpecsHack_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoTransfer_Maker
+from gnf.schemata import TerminalassetCertifyHack_Maker
 
 
 TypeMakerByName: Dict[str, HeartbeatA_Maker] = {}
@@ -42,9 +44,11 @@ type_makers: List[HeartbeatA_Maker] = [
     NewTadeedAlgoOptin_Maker,
     NewTadeedSend_Maker,
     OldTadeedAlgoReturn_Maker,
+    TadeedSpecsHack_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
     TavalidatorcertAlgoTransfer_Maker,
+    TerminalassetCertifyHack_Maker,
 ]
 
 
@@ -66,14 +70,16 @@ def version_by_type_name() -> List[str]:
         "discoverycert.algo.transfer": "000",
         "heartbeat.a": "000",
         "initial.tadeed.algo.create": "000",
-        "initial.tadeed.algo.optin": "000",
+        "initial.tadeed.algo.optin": "001",
         "initial.tadeed.algo.transfer": "000",
         "new.tadeed.algo.optin": "000",
         "new.tadeed.send": "000",
         "old.tadeed.algo.return": "000",
+        "tadeed.specs.hack": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
         "tavalidatorcert.algo.transfer": "000",
+        "terminalasset.certify.hack": "000",
     }
 
     return v
@@ -93,18 +99,20 @@ def status_by_versioned_type_name() -> List[str]:
         "basegnode.terminalasset.create.000": "Pending",
         "basegnodes.broadcast.000": "Pending",
         "basegnodes.get.000": "Pending",
-        "discoverycert.algo.create.000": "Active",
-        "discoverycert.algo.transfer.000": "Active",
-        "heartbeat.a.000": "Active",
+        "discoverycert.algo.create.000": "Pending",
+        "discoverycert.algo.transfer.000": "Pending",
+        "heartbeat.a.000": "Pending",
         "initial.tadeed.algo.create.000": "Active",
-        "initial.tadeed.algo.optin.000": "Active",
+        "initial.tadeed.algo.optin.001": "Pending",
         "initial.tadeed.algo.transfer.000": "Pending",
         "new.tadeed.algo.optin.000": "Pending",
         "new.tadeed.send.000": "Pending",
         "old.tadeed.algo.return.000": "Pending",
+        "tadeed.specs.hack.000": "Pending",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",
         "tavalidatorcert.algo.transfer.000": "Active",
+        "terminalasset.certify.hack.000": "Pending",
     }
 
     return v

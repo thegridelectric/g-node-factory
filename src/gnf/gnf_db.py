@@ -489,8 +489,8 @@ async def post_old_tadeed_algo_return(
             )
         else:
             note = r.reason
-        r = RestfulResponse(Note=note, HttpStatusCode=422)
-        return r
+        rr = RestfulResponse(Note=note, HttpStatusCode=422)
+        return rr
     ta_alias = utils.get_ta_alias_from_ta_deed_idx(new_ta_deed_idx)
     if ta_alias is None:
         note = (
