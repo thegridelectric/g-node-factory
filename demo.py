@@ -97,7 +97,7 @@ print("They do not yet own any TaDeeds.")
 print("")
 print("")
 time.sleep(2)
-input("Type any key to continue the demo")
+input("Enter return to continue the demo")
 
 print("")
 print("")
@@ -127,7 +127,7 @@ for owner in ta_owners:
 print("")
 print("")
 time.sleep(2)
-input("Type any key to terminate daemon docker instances")
+input("Enter return terminate daemon docker instances")
 
 for ta_owner in ta_owners:
     ta_owner.stop()

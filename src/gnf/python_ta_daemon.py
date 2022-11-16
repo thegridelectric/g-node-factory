@@ -53,10 +53,6 @@ class PythonTaDaemon:
                 Note=f"Ignoring InitialTadeed Optin. Deeds: {self.ta_deed_alias_list}"
             )
             return r
-        self.settings.sk = SecretStr(payload.TaDaemonPrivateKey)
-        self.settings.validator_addr = payload.ValidatorAddr
-        self.settings.ta_owner_addr = payload.TaOwnerAddr
-        self.acct = BasicAccount(private_key=self.settings.sk.get_secret_value())
         ta_deed_idx = api_utils.get_tadeed_cert_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,
@@ -70,6 +66,18 @@ class PythonTaDaemon:
             )
             return r
 
+        # Call a TaDaemonSmartContract method of the same
+        # name (InitialTadeedAlgoOptin, in some format)
+        # args should include :
+        #   - the asset-index
+        #   - the TaOwnerAddress
+        #   - the TaValidatorAddress
+        #
+        # the TaDaemonSmartContract should check that:
+        #
+        #  - That it does not own any assets yet (this is an initial transfer)
+        #  - the TaOwnerAddress is its TaOwnerAddress (which it needs to be initialized with)
+        #  - the TaValidatorAddress is its TaValidatorAddress (which it needs to be initialized with)
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=ta_deed_idx,
@@ -100,7 +108,19 @@ class PythonTaDaemon:
 
             Otherwise, Payload is NewTadeedSend
         """
-
+        # Call a TaDaemonSmartContract method of the same
+        # name (InitialTadeedAlgoOptin, in some format)
+        # args should include :
+        #   - the asset-index
+        #   - the AssetCreatorAddr
+        #
+        #
+        # the TaDaemonSmartContract should check that:
+        #
+        #  - That it does not own any assets yet (this is an initial transfer)
+        #  - the AssetCreatorAddr is "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+        #        (the GNodeFactory)
+        #  - the TaValidatorAddress is its TaValidatorAddress (which it needs to be initialized with)
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=payload.NewTaDeedIdx,
@@ -145,6 +165,18 @@ class PythonTaDaemon:
             payload: OldTadeedAlgoReturn
         """
 
+        # Call a TaDaemonSmartContract method of the same
+        # name (OldTadeedAlgoReturn, in some format)
+        # args should include :
+        #   - the receiver
+        #   - the amount
+        #    - the asset_index
+        # the TaDaemonSmartContract should check
+        # that:
+        #  - The receiver is "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+        #  (The GNodeFactory admin address, which it should be initialized with)
+        #  - The amount is 1
+        #
         txn = transaction.AssetTransferTxn(
             sender=self.acct.addr,
             receiver=config.GnfPublic().gnf_admin_addr,
