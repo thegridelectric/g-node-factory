@@ -21,17 +21,14 @@ logging.basicConfig(level="INFO")
 LOGGER = logging.getLogger(__name__)
 
 
-def certify_molly_metermaid() -> None:
+def certify_molly_metermaid() -> RestfulResponse:
     molly = DevValidator(config.ValidatorSettings())
     cert_idx = api_utils.get_validator_cert_idx(validator_addr=molly.acct.addr)
     if cert_idx is not None:
         raise Exception(
             f"There is already a Validator Certificate for Molly! Please ./sandbox reset and start the demo over."
         )
-    rr = molly.post_tavalidatorcert_algo_create()
-    pprint(rr)
-    if rr.HttpStatusCode > 200:
-        raise Exception("Stopping demo due to errors")
+    return molly.post_tavalidatorcert_algo_create()
 
 
 def create_ta_owner(plant: str) -> DevTaOwner:

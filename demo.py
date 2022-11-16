@@ -1,8 +1,8 @@
-import os
 import subprocess
 import sys
 import time
 
+import requests
 from rich.pretty import pprint
 
 import gnf.demo_methods as demo_methods
@@ -54,12 +54,33 @@ print("")
 time.sleep(2)
 load_dev_data.main()
 
+print("Starting the GNodeFactory RestAPI")
+print("")
+print("")
+time.sleep(2)
+
+cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__3dfb83d__20221116"
+gnf_pr = subprocess.Popen(cmd.split())
+api_endpoint = "http://0.0.0.0:8000/"
+gnf_up: bool = False
+while not gnf_up:
+    try:
+        gnf_up = True
+        requests.get(url=api_endpoint)
+    except:
+        gnf_up = False
+print("")
+print("")
 print("Certifying MollyMetermaid as a TaValidator")
 print("")
 print("")
 time.sleep(2)
 
-demo_methods.certify_molly_metermaid()
+rr = demo_methods.certify_molly_metermaid()
+pprint(rr)
+if rr.HttpStatusCode > 200:
+    gnf_pr.terminate()
+    raise Exception("Stopping demo due to errors")
 
 print("")
 print("")
@@ -97,7 +118,7 @@ print("They do not yet own any TaDeeds.")
 print("")
 print("")
 time.sleep(2)
-input("Enter return to continue the demo")
+input("HIT RETURN TO CONTINUE")
 
 print("")
 print("")
@@ -108,26 +129,33 @@ time.sleep(2)
 
 rr = demo_methods.create_terminal_assets(ta_owners)
 
+if rr.HttpStatusCode == 200:
 
-print("Success!")
-print("")
-print("")
-time.sleep(2)
-print("TaDaemon Algorand addresses now hold TaDeeds on behalf of their TaOwners")
-print("")
-print("")
-time.sleep(2)
-print("Inspect them at:")
+    print("Success!")
+    print("")
+    print("")
+    time.sleep(2)
+    print("TaDaemon Algorand addresses now hold TaDeeds on behalf of their TaOwners")
+    print("")
+    print("")
+    time.sleep(2)
+    print("Inspect them at:")
 
-for owner in ta_owners:
-    print(
-        f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/owned-tadeeds/"
-    )
+    for owner in ta_owners:
+        print(
+            f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/owned-tadeeds/"
+        )
 
-print("")
-print("")
-time.sleep(2)
-input("Enter return terminate daemon docker instances")
+    print("")
+    print("")
+    time.sleep(2)
+else:
+    print("Something went wrong")
+    print("")
+    print("")
 
+input("HIT RETURN TO END")
+
+gnf_pr.terminate()
 for ta_owner in ta_owners:
     ta_owner.stop()

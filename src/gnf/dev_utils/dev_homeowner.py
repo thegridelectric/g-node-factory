@@ -52,6 +52,8 @@ class DevTaOwner:
         self.ta_daemon_api_root = (
             f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
         )
+        LOGGER.info(f"ta_owner_addr = {self.acct.addr}")
+        LOGGER.info(f"ta_daemon_addr = {ta_daemon_acct.addr}")
 
     def start(self):
         LOGGER.info(
@@ -85,7 +87,7 @@ class DevTaOwner:
         # daemon_env_file = self.make_daemon_docker_env()
         # LOGGER.info(f"daemon env file: {daemon_env_file}")
         port = self.settings.ta_daemon_api_port
-        cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:chaos__49fc416__20221115 "
+        cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:chaos__49fc416__20221115"
         pr = subprocess.Popen(
             cmd.split(),
         )

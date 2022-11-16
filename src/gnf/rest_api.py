@@ -9,7 +9,7 @@ from fastapi.responses import FileResponse
 from pydantic import ValidationError
 
 import gnf.config as config
-import gnf.gnf_db as gnf_db
+from gnf.gnf_db import GNodeFactory
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import DiscoverycertAlgoCreate_Maker
@@ -23,6 +23,8 @@ from gnf.utils import RestfulResponse
 # Create FasatAPI instance
 app = FastAPI()
 
+gnf = GNodeFactory()
+
 
 @lru_cache()
 def get_settings():
@@ -31,28 +33,27 @@ def get_settings():
 
 @app.get("/base-g-nodes/{lrh_g_node_alias}", response_model=BasegnodeGt)
 async def get_base_g_node(lrh_g_node_alias: str):
-    gn = await gnf_db.g_node_from_alias(lrh_g_node_alias)
+    gn = await gnf.g_node_from_alias(lrh_g_node_alias)
     return gn
 
 
 @app.get("/base-g-nodes/", response_model=List[BasegnodeGt])
 async def get_base_g_nodes():
-    gns = await gnf_db.retrieve_all_gns()
+    gns = await gnf.retrieve_all_gns()
     return gns
 
 
 @app.get("/base-g-nodes/by-id/{g_node_id}", response_model=BasegnodeGt)
 async def get_base_g_node(g_node_id: str):
-    gn = await gnf_db.g_node_from_id(g_node_id)
+    gn = await gnf.g_node_from_id(g_node_id)
     return gn
 
 
 @app.post("/tavalidatorcert-algo-create/", response_model=RestfulResponse)
 async def tavalidatorcert_algo_create_received(
     payload: TavalidatorcertAlgoCreate,
-    settings: config.GnfSettings = Depends(get_settings),
 ):
-    r = gnf_db.tavalidatorcert_algo_create_received(payload=payload, settings=settings)
+    r = gnf.tavalidatorcert_algo_create_received(payload=payload)
     if r.HttpStatusCode > 200:
         raise HTTPException(
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
@@ -63,11 +64,8 @@ async def tavalidatorcert_algo_create_received(
 @app.post("/tavalidatorcert-algo-transfer/", response_model=RestfulResponse)
 async def tavalidatorcert_algo_transfer_received(
     payload: TavalidatorcertAlgoTransfer,
-    settings: config.GnfSettings = Depends(get_settings),
 ):
-    r = gnf_db.tavalidatorcert_algo_transfer_received(
-        payload=payload, settings=settings
-    )
+    r = gnf.tavalidatorcert_algo_transfer_received(payload=payload)
     if r.HttpStatusCode > 200:
         raise HTTPException(
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
@@ -78,11 +76,9 @@ async def tavalidatorcert_algo_transfer_received(
 @app.post("/initial-tadeed-algo-create/", response_model=RestfulResponse)
 async def initial_tadeed_algo_create_received(
     payload: InitialTadeedAlgoCreate,
-    settings: config.GnfSettings = Depends(get_settings),
 ):
-    r = await gnf_db.initial_tadeed_algo_create_received(
+    r = await gnf.initial_tadeed_algo_create_received(
         payload=payload,
-        settings=settings,
     )
 
     if r.HttpStatusCode > 200:
@@ -102,11 +98,9 @@ async def initial_tadeed_algo_create_received(
 @app.post("/initial-tadeed-algo-transfer/", response_model=RestfulResponse)
 async def initial_tadeed_algo_transfer_received(
     payload: InitialTadeedAlgoTransfer,
-    settings: config.GnfPublic = Depends(get_settings),
 ):
-    r = await gnf_db.initial_tadeed_algo_transfer_received(
+    r = await gnf.initial_tadeed_algo_transfer_received(
         payload=payload,
-        settings=settings,
     )
     if r.HttpStatusCode > 200:
         raise HTTPException(
@@ -118,15 +112,13 @@ async def initial_tadeed_algo_transfer_received(
 @app.post("/discoverycert-algo-create/")
 async def discovercert_algo_create_received(
     payload_dict: Dict,
-    settings: config.GnfSettings = Depends(get_settings),
 ):
     try:
         payload = DiscoverycertAlgoCreate_Maker.dict_to_tuple(payload_dict)
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=f"{e}")
-    r = await gnf_db.discoverycert_algo_create_received(
+    r = await gnf.discoverycert_algo_create_received(
         payload=payload,
-        settings=settings,
     )
     if r is None:
         return None
