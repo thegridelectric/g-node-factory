@@ -59,7 +59,7 @@ print("")
 print("")
 time.sleep(2)
 
-cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:latest"
+cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__3dfb83d__20221116"
 gnf_pr = subprocess.Popen(cmd.split())
 api_endpoint = "http://0.0.0.0:8000/"
 gnf_up: bool = False
