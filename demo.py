@@ -12,7 +12,7 @@ from gnf import load_dev_data
 if len(sys.argv) == 1:
     sim_size = 2
     print("If you want to simulate n assets, run python demo.py n")
-
+    time.sleep(2)
 else:
     try:
         sim_size = int(sys.argv[1])
@@ -29,28 +29,31 @@ if sim_size == 0:
 elif sim_size == 1:
     print(f"Running simulation for 1 TerminalAsset (molly.ta)")
 else:
-    print(f"Running simulation for {sim_size} TerminalAsset")
+    print(f"Running simulation for {sim_size} TerminalAssets")
 time.sleep(2)
 print("")
 print("")
 print("Resetting sandbox and dev database")
-print("")
-print("")
+
 time.sleep(1)
 subprocess.run(["../sandbox/sandbox", "reset"])
 
+print("")
+print("")
+print("Flushing GNodeFactory Database")
+print("")
+print("")
+time.sleep(2)
 subprocess.run("./reset-dev-db.sh")
 
 print("")
 print("")
-print("Initializing GNodeFactory Database")
+print("Initializing GNodeFactory Database with Seed GNodes")
 print("")
 print("")
 time.sleep(2)
 load_dev_data.main()
 
-print("")
-print("")
 print("Certifying MollyMetermaid as a TaValidator")
 print("")
 print("")
@@ -65,13 +68,20 @@ print("")
 print("")
 time.sleep(2)
 ta_owners = demo_methods.create_ta_owners(plant_names)
+print("")
+print("")
+print(f"Creating {sim_size} TaDaemons")
+print("")
+print("")
+time.sleep(2)
 demo_methods.start_ta_owners(ta_owners)
+
 print("")
 print("")
-print("Sleeping a bit for daemon APIs to start up, then creating TerminalAssets")
-time.sleep(5)
+print(f"Creating {sim_size} TerminalAssets")
 print("")
 print("")
+# time.sleep(2)
 
 rr = demo_methods.create_terminal_assets(ta_owners)
 

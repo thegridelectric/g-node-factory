@@ -1,9 +1,7 @@
 import logging
-import os
 import subprocess
 
 import requests
-import requests_async
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
@@ -16,7 +14,6 @@ from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by homeowner
-from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
 from gnf.schemata import TerminalassetCertifyHack_Maker
 from gnf.utils import RestfulResponse
@@ -57,6 +54,9 @@ class DevTaOwner:
         )
 
     def start(self):
+        LOGGER.info(
+            f"Starting {self.short_alias}-daemon on port {self.settings.ta_daemon_api_port}"
+        )
         self.pr: subprocess.Popen = self.start_ta_daemon()
 
     def stop(self):
@@ -66,17 +66,19 @@ class DevTaOwner:
         cmd = f"docker rm {self.short_alias}-daemon"
         subprocess.run(cmd.split())
 
-    # def make_daemon_docker_env(self) -> str:
-    #     cmd = f"cp for_docker/daemon_docker.env input_data/gitignored/docker_{self.short_alias}.env"
-    #     subprocess.run(cmd.split())
-    #     env_lines = ["\n","\n",
-    #     f"TAD_SK = '{self.ta_daemon_sk}'\n",
-    #     f"TAD_TA_OWNER_ADDR = '{self.acct.addr}'\n"
-    #     ]
-    #     file_name = f"input_data/gitignored/docker_{self.short_alias}.env"
-    #     with open(file_name, "a") as f:
-    #         f.writelines(env_lines)
-    #     return file_name
+    def make_daemon_docker_env(self) -> str:
+        cmd = f"cp for_docker/daemon_docker.env input_data/gitignored/docker_{self.short_alias}.env"
+        subprocess.run(cmd.split())
+        env_lines = [
+            "\n",
+            "\n",
+            f"TAD_SK = '{self.ta_daemon_sk}'\n",
+            f"TAD_TA_OWNER_ADDR = '{self.acct.addr}'\n",
+        ]
+        file_name = f"input_data/gitignored/docker_{self.short_alias}.env"
+        with open(file_name, "a") as f:
+            f.writelines(env_lines)
+        return file_name
 
     def start_ta_daemon(self) -> subprocess.Popen:
         LOGGER.info("Starting TaDaemon")
@@ -84,10 +86,27 @@ class DevTaOwner:
         # LOGGER.info(f"daemon env file: {daemon_env_file}")
         port = self.settings.ta_daemon_api_port
         cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:chaos__49fc416__20221115 "
-        # cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {port}"
         pr = subprocess.Popen(
             cmd.split(),
         )
+        # cmd = f"uvicorn gnf.ta_daemon_rest_api:app --reload --port {port}"
+        # pr = subprocess.Popen(
+        #      cmd.split(),
+        #      env=dict(os.environ,
+        #         TAD_SK=self.ta_daemon_sk,
+        #         TAD_TA_OWNER_ADDR={self.acct.addr})
+        # )
+        daemon_api_root = (
+            f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
+        )
+        api_endpoint = f"{daemon_api_root}/"
+        daemon_up: bool = False
+        while not daemon_up:
+            try:
+                daemon_up = True
+                requests.get(url=api_endpoint)
+            except:
+                daemon_up = False
         return pr
 
     def __repr__(self) -> str:
