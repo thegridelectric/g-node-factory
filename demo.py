@@ -54,6 +54,17 @@ print("")
 time.sleep(2)
 load_dev_data.main()
 
+print("Starting the GNodeFactory RestAPI")
+print("")
+print("")
+time.sleep(2)
+
+cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:latest"
+gnf_pr = subprocess.Popen(
+    cmd.split(),
+)
+print("")
+print("")
 print("Certifying MollyMetermaid as a TaValidator")
 print("")
 print("")
@@ -129,5 +140,6 @@ print("")
 time.sleep(2)
 input("Enter return terminate daemon docker instances")
 
+gnf_pr.terminate()
 for ta_owner in ta_owners:
     ta_owner.stop()

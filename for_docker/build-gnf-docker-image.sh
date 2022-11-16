@@ -1,11 +1,11 @@
 #!/bin/bash
 GIT_COMMIT=$(git rev-parse --short HEAD)
 FIRST_DOCKER_NAME_COMPONENT="jessmillar"
-SECOND_DOCKER_NAME_COMPONENT="g-node-factory"
+SECOND_DOCKER_NAME_COMPONENT="gnf"
 DOCKER_IMAGE_NAME="${FIRST_DOCKER_NAME_COMPONENT}/${SECOND_DOCKER_NAME_COMPONENT}"
 
 set -euo pipefail
-cp PythonGNodeFactoryDockerfile ../Dockerfile
+cp GNodeFactoryDockerfile ../Dockerfile
 cd ..
 
 if [[ $(git status --untracked-files=no --porcelain) != '' ]]; then
