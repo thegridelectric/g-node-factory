@@ -33,7 +33,7 @@ else:
 time.sleep(2)
 print("")
 print("")
-print("Resetting sandbox and dev database")
+print("Resetting Algorand sandbox")
 
 time.sleep(1)
 subprocess.run(["../sandbox/sandbox", "reset"])
@@ -78,21 +78,55 @@ demo_methods.start_ta_owners(ta_owners)
 
 print("")
 print("")
+print("TaDaemons are now running, each with their own RestAPI.")
+print("")
+print("")
+time.sleep(2)
+print("Any TaDeeds they own will show up at the following endpoints:")
+print("")
+print("")
+for owner in ta_owners:
+    print(
+        f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/owned-tadeeds/"
+    )
+
+print("")
+print("")
+time.sleep(2)
+print("They do not yet own any TaDeeds.")
+print("")
+print("")
+time.sleep(2)
+input("Type any key to continue the demo")
+
+print("")
+print("")
 print(f"Creating {sim_size} TerminalAssets")
 print("")
 print("")
-# time.sleep(2)
+time.sleep(2)
 
 rr = demo_methods.create_terminal_assets(ta_owners)
 
 
 print("Success!")
+print("")
+print("")
+time.sleep(2)
+print("TaDaemon Algorand addresses now hold TaDeeds on behalf of their TaOwners")
+print("")
+print("")
+time.sleep(2)
+print("Inspect them at:")
 
 for owner in ta_owners:
     print(
         f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/owned-tadeeds/"
     )
 
+print("")
+print("")
+time.sleep(2)
 input("Type any key to terminate daemon docker instances")
 
 for ta_owner in ta_owners:
