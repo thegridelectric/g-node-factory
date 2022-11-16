@@ -226,7 +226,11 @@ class DevValidator:
         api_endpoint = (
             f"{self.settings.public.gnf_api_root}/initial-tadeed-algo-transfer/"
         )
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        LOGGER.info(f"Using api_endpoint of {api_endpoint}")
+        try:
+            r = requests.post(url=api_endpoint, json=payload.as_dict())
+        except Exception as e:
+            raise Exception(f"DevValidator failed to post request! {e}")
 
         LOGGER.info("Response from GnfRestAPI:")
 

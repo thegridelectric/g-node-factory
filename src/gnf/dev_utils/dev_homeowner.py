@@ -52,6 +52,8 @@ class DevTaOwner:
         self.ta_daemon_api_root = (
             f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
         )
+        LOGGER.info(f"ta_owner_addr = {self.acct.addr}")
+        LOGGER.info(f"ta_daemon_addr = {ta_daemon_acct.addr}")
 
     def start(self):
         LOGGER.info(

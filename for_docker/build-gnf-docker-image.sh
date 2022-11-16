@@ -31,4 +31,4 @@ docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 docker push $DOCKER_IMAGE_NAME:latest
 
 rm Dockerfile
-cd docker
+cd for_docker
