@@ -7,82 +7,77 @@ def approval_program():
     # TaValidatorAddress (use "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII")
     # TaOwnerAddress (use "GSXFQJJHSZROXTK262SBGWR6OAO7KC6QQRQWRHYAIHS3KQ4VEXZ5L3DPTY")
 
-    gnode_factory_admin_address_key = Bytes("gnode_factory_admin_address")
-    ta_validator_address_key = Bytes("ta_validator_address")
-    ta_owner_address_key = Bytes("ta_owner_address")
-    asset_creator_address_key = Bytes("asset_creator_address")
-    asset_index_key = Bytes("asset_index")
+    # seller == owner == TaOwner
 
-    op_transfer_deed_back = Bytes("transfer_deed")
-    op_initial_deed_opt_in = Bytes("initial_deed_opt_in")
-    op_new_deed_opt_in = Bytes("new_deed_opt_in")
+    gnode_factory_admin_address_key = Bytes("gnode_factory_admin_address")  # target
+    ta_validator_address_key = Bytes("ta_validator_address")  # funder
+    ta_owner_address_key = Bytes("ta_owner_address")  # owner
+    deed_id_key = Bytes("deed_id")
+
+    op_setup = Bytes("setup")
+    op_transfer_deed_back = Bytes("transfer")
 
     on_create = Seq(
-        App.globalPut(gnode_factory_admin_address_key, Txn.application_args[1]),
-        App.globalPut(ta_validator_address_key, Txn.application_args[2]),
-        App.globalPut(ta_owner_address_key, Txn.application_args[3]),
+        Assert(Txn.application_args.length() == Int(4)),
+
+        App.globalPut(gnode_factory_admin_address_key, Txn.application_args[0]),
+        App.globalPut(ta_validator_address_key, Txn.application_args[1]),
+        App.globalPut(ta_owner_address_key, Txn.application_args[2]),
+        App.globalPut(deed_id_key, Btoi(Txn.application_args[3])),
         Approve()
     )
 
-    initial_deed_opt_in = Seq(
-        Assert(
-            And(
-                App.globalGet(ta_validator_address_key) == Txn.application_args[1],
-                App.globalGet(ta_owner_address_key) == Txn.application_args[2],
-            )
-        ),
+    on_setup_opt_in_to_receive_deed = Seq(
+        Assert(Txn.assets[0] == App.globalGet(deed_id_key)),
+
         InnerTxnBuilder.Begin(),
         InnerTxnBuilder.SetFields(
             {
                 TxnField.type_enum: TxnType.AssetTransfer,
-                TxnField.xfer_asset: Txn.application_args[3],
+                TxnField.xfer_asset: Txn.assets[0],
                 TxnField.asset_receiver: Global.current_application_address(),
+                TxnField.asset_amount: Int(0),
             }
         ),
         InnerTxnBuilder.Submit(),
-        Approve()
-    )
-
-    new_deed_opt_in = Seq(
-        Assert(
-            App.globalGet(gnode_factory_admin_address_key) == Txn.application_args[2],
-        ),
-        Approve()
-    )
-
-    on_opt_in = Cond(
-        [Txn.application_args[0] == op_initial_deed_opt_in, initial_deed_opt_in],
-        [Txn.application_args[0] == op_new_deed_opt_in, new_deed_opt_in],
+        Approve(),
     )
 
     transfer_deed = Seq(
+        # Assert(Txn.assets[0] == App.globalGet(deed_id_key)),
+        # Assert(Txn.accounts[0] == App.globalGet(gnode_factory_admin_address_key)),
+
         # https://developer.algorand.org/docs/get-details/dapps/smart-contracts/apps/#asset-transfer
-        Assert(
-            App.globalGet(gnode_factory_admin_address_key) == Txn.application_args[1]
-        ),
+        # Assert(
+        #     App.globalGet(gnode_factory_admin_address_key) == Txn.application_args[1]
+        # ),
         InnerTxnBuilder.Begin(),
+
         InnerTxnBuilder.SetFields({
             TxnField.type_enum: TxnType.AssetTransfer,
-            TxnField.asset_receiver: App.globalGet(gnode_factory_admin_address_key),
+            TxnField.sender: Global.current_application_address(),
+            TxnField.xfer_asset: Txn.assets[0],
+            TxnField.asset_receiver: Txn.sender(),
             TxnField.asset_amount: Int(1),
-            TxnField.xfer_asset: Txn.application_args[2],
-            # Must be in the assets array sent as part of the application call
         }),
+
         InnerTxnBuilder.Submit(),
         Approve()
     )
 
+    on_call_method = Txn.application_args[0]
     no_op = Cond(
-        [Txn.application_args[0] == op_transfer_deed_back, transfer_deed],
+        [on_call_method == op_setup, on_setup_opt_in_to_receive_deed],
+        [on_call_method == op_transfer_deed_back, transfer_deed],
     )
 
     program = Cond(
         [Txn.application_id() == Int(0), on_create],
+        [Txn.on_completion() == OnComplete.NoOp, no_op],
+        [Txn.on_completion() == OnComplete.OptIn, Reject()],
         [Txn.on_completion() == OnComplete.DeleteApplication, Reject()],
         [Txn.on_completion() == OnComplete.UpdateApplication, Reject()],
-        [Txn.on_completion() == OnComplete.OptIn, on_opt_in],
         [Txn.on_completion() == OnComplete.CloseOut, Reject()],
-        [Txn.on_completion() == OnComplete.NoOp, no_op],
     )
 
     return program
