@@ -120,7 +120,6 @@ class PythonTaDaemon:
         #  - That it does not own any assets yet (this is an initial transfer)
         #  - the AssetCreatorAddr is "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
         #        (the GNodeFactory)
-        #  - the TaValidatorAddress is its TaValidatorAddress (which it needs to be initialized with)
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=payload.NewTaDeedIdx,
