@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.responses import FileResponse
@@ -11,6 +13,13 @@ from gnf.utils import RestfulResponse
 
 app = FastAPI()
 daemon = PythonTaDaemon()
+
+# @app.get("/", response_class=FileResponse)
+# async def root():
+#     if os.path.isfile("docs/wiki/img/mushroom.png"):
+#         return FileResponse("docs/wiki/img/mushroom.png", media_type="image/png")
+#     else:
+#         return FileResponse("docs/wiki/img/mushroom.png", media_type="image/png")
 
 
 @app.get("/owned-tadeeds/")

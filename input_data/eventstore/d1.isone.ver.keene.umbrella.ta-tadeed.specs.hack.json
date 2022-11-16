@@ -1,8 +1,8 @@
 {
   "TerminalAssetAlias": "d1.isone.ver.keene.umbrella.ta",
-  "MicroLat": 45618045,
-  "MicroLon": -68532342,
-  "DaemonPort": 8145,
+  "MicroLat": 45626320,
+  "MicroLon": -68568900,
+  "DaemonPort": 8013,
   "TypeName": "tadeed.specs.hack",
   "Version": "000"
 }

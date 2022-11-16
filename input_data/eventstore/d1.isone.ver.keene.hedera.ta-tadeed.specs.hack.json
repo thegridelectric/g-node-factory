@@ -1,8 +1,8 @@
 {
   "TerminalAssetAlias": "d1.isone.ver.keene.hedera.ta",
-  "MicroLat": 45347970,
-  "MicroLon": -68511810,
-  "DaemonPort": 8047,
+  "MicroLat": 45543830,
+  "MicroLon": -68187030,
+  "DaemonPort": 8029,
   "TypeName": "tadeed.specs.hack",
   "Version": "000"
 }

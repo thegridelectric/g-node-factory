@@ -5,6 +5,7 @@ from typing import List
 from fastapi import Depends
 from fastapi import FastAPI
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
 from pydantic import ValidationError
 
 import gnf.config as config
