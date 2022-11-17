@@ -68,24 +68,8 @@ class DevTaOwner:
         cmd = f"docker rm {self.short_alias}-daemon"
         subprocess.run(cmd.split())
 
-    def make_daemon_docker_env(self) -> str:
-        cmd = f"cp for_docker/daemon_docker.env input_data/gitignored/docker_{self.short_alias}.env"
-        subprocess.run(cmd.split())
-        env_lines = [
-            "\n",
-            "\n",
-            f"TAD_SK = '{self.ta_daemon_sk}'\n",
-            f"TAD_TA_OWNER_ADDR = '{self.acct.addr}'\n",
-        ]
-        file_name = f"input_data/gitignored/docker_{self.short_alias}.env"
-        with open(file_name, "a") as f:
-            f.writelines(env_lines)
-        return file_name
-
     def start_ta_daemon(self) -> subprocess.Popen:
         LOGGER.info("Starting TaDaemon")
-        # daemon_env_file = self.make_daemon_docker_env()
-        # LOGGER.info(f"daemon env file: {daemon_env_file}")
         port = self.settings.ta_daemon_api_port
         cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:chaos__49fc416__20221115"
         pr = subprocess.Popen(

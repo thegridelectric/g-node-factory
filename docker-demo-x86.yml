@@ -16,13 +16,14 @@ services:
     image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
     ports:
       - 8001:8000
-  registry-broker:
+  rabbit:
     networks:
       - "dev"
-    hostname: registrybroker
-    container_name: dev-registry-rabbit
-    image: "jessmillar/dev-registry-rabbit-x86:latest"
+    hostname: devrabbit
+    container_name: dev-rabbit
+    image: "jessmillar/dev-rabbit-x86:chaos__85696ea__20221117"
     ports:
+      - 1885:1885
       - 4369:4369
       - 5672:5672
       - 15672:15672
@@ -33,6 +34,6 @@ services:
       - RABBITMQ_USERNAME=smqPublic
       - RABBITMQ_PASSWORD=smqPublic
       - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_management load_definitions "/tmp/rabbit_definitions.json"
-      - RABBITMQ_PLUGINS=rabbitmq_management,rabbitmq_stomp,rabbitmq_web_stomp
+      - RABBITMQ_PLUGINS=rabbitmq_management,rabbitmq_stomp,rabbitmq_web_stomp,rabbitmq_mqtt
     volumes:
       - ./for_docker/dev_rabbitmq.conf:/opt/bitnami/rabbitmq/etc/rabbitmq/rabbitmq.conf:ro
