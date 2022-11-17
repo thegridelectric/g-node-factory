@@ -156,6 +156,14 @@ else:
 
 input("HIT RETURN TO END")
 
-gnf_pr.terminate()
+cmd = "docker stop gnf-api"
+subprocess.run(cmd.split())
+# This stops the running docker container 
+
+cmd = "docker rm gnf-api"
+subprocess.run(cmd.split())
+# This removes the stopped docker container
+
+
 for ta_owner in ta_owners:
-    ta_owner.stop()
+    ta_owner.stop() # Does the same 
