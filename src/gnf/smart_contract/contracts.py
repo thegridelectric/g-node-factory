@@ -7,15 +7,13 @@ def approval_program():
     # TaValidatorAddress (use "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII")
     # TaOwnerAddress (use "GSXFQJJHSZROXTK262SBGWR6OAO7KC6QQRQWRHYAIHS3KQ4VEXZ5L3DPTY")
 
-    # TODO Txn.sender() who it is in terms of the above
-
     gnode_factory_admin_address_key = Bytes("gnode_factory_admin_address")
     ta_validator_address_key = Bytes("ta_validator_address")
     ta_owner_address_key = Bytes("ta_owner_address")
     asset_creator_address_key = Bytes("asset_creator_address")
     asset_index_key = Bytes("asset_index")
 
-    op_transfer_deed_back = Bytes("transfer_deed_back")
+    op_transfer_deed_back = Bytes("transfer_deed")
     op_initial_deed_opt_in = Bytes("initial_deed_opt_in")
     op_new_deed_opt_in = Bytes("new_deed_opt_in")
 
@@ -29,11 +27,19 @@ def approval_program():
     initial_deed_opt_in = Seq(
         Assert(
             And(
-               App.globalGet(ta_validator_address_key) == Txn.application_args[1],
-               App.globalGet(ta_owner_address_key) == Txn.application_args[2],
+                App.globalGet(ta_validator_address_key) == Txn.application_args[1],
+                App.globalGet(ta_owner_address_key) == Txn.application_args[2],
             )
         ),
-        App.globalPut(asset_index_key, Txn.application_args[3]),
+        InnerTxnBuilder.Begin(),
+        InnerTxnBuilder.SetFields(
+            {
+                TxnField.type_enum: TxnType.AssetTransfer,
+                TxnField.xfer_asset: Txn.application_args[3],
+                TxnField.asset_receiver: Global.current_application_address(),
+            }
+        ),
+        InnerTxnBuilder.Submit(),
         Approve()
     )
 
@@ -49,12 +55,25 @@ def approval_program():
         [Txn.application_args[0] == op_new_deed_opt_in, new_deed_opt_in],
     )
 
-    transfer_deed_back = Seq(
-        Approve()  # TODO Implement
+    transfer_deed = Seq(
+        # https://developer.algorand.org/docs/get-details/dapps/smart-contracts/apps/#asset-transfer
+        Assert(
+            App.globalGet(gnode_factory_admin_address_key) == Txn.application_args[1]
+        ),
+        InnerTxnBuilder.Begin(),
+        InnerTxnBuilder.SetFields({
+            TxnField.type_enum: TxnType.AssetTransfer,
+            TxnField.asset_receiver: App.globalGet(gnode_factory_admin_address_key),
+            TxnField.asset_amount: Int(1),
+            TxnField.xfer_asset: Txn.application_args[2],
+            # Must be in the assets array sent as part of the application call
+        }),
+        InnerTxnBuilder.Submit(),
+        Approve()
     )
 
     no_op = Cond(
-        [Txn.application_args[0] == op_transfer_deed_back, transfer_deed_back],
+        [Txn.application_args[0] == op_transfer_deed_back, transfer_deed],
     )
 
     program = Cond(
