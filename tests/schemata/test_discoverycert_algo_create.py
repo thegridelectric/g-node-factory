@@ -1,25 +1,25 @@
-"""Tests basegnode.terminalasset.create type, version 000"""
+"""Tests discoverycert.algo.create type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
+from gnf.enums import CoreGNodeRole
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeTerminalassetCreate_Maker as Maker
+from gnf.schemata import DiscoverycertAlgoCreate_Maker as Maker
 
 
-def test_basegnode_terminalasset_create_generated():
+def test_discoverycert_algo_create_generated():
 
     d = {
-        "TaGNodeAlias": "d1.iso.me.orange.ta",
-        "MicroLon": -68691705,
-        "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
-        "MicroLat": 45666353,
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
-        "FromGNodeAlias": "dwgps.gnr",
-        "TypeName": "basegnode.terminalasset.create",
+        "GNodeAlias": "d1.isone.ver.keene",
+        "CoreGNodeRoleGtEnumSymbol": "4502e355",
+        "OldChildAliasList": ["d1.isone.ver.keene.holly"],
+        "DiscovererAddr": "KH3K4W3RXDUQNB2PUYSQECSK6RPP25NQUYYX6TYPTQBJAFG3K3O3B7KMZY",
+        "SupportingMaterialHash": "hash of supporting material",
+        "MicroLat": 44838681,
+        "MicroLon": -68705311,
+        "TypeName": "discoverycert.algo.create",
         "Version": "000",
     }
 
@@ -38,14 +38,13 @@ def test_basegnode_terminalasset_create_generated():
 
     # test Maker init
     t = Maker(
-        ta_g_node_alias=gtuple.TaGNodeAlias,
-        micro_lon=gtuple.MicroLon,
-        validator_addr=gtuple.ValidatorAddr,
-        ta_owner_addr=gtuple.TaOwnerAddr,
+        g_node_alias=gtuple.GNodeAlias,
+        core_g_node_role=gtuple.CoreGNodeRole,
+        old_child_alias_list=gtuple.OldChildAliasList,
+        discoverer_addr=gtuple.DiscovererAddr,
+        supporting_material_hash=gtuple.SupportingMaterialHash,
         micro_lat=gtuple.MicroLat,
-        g_node_registry_addr=gtuple.GNodeRegistryAddr,
-        from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-        from_g_node_alias=gtuple.FromGNodeAlias,
+        micro_lon=gtuple.MicroLon,
     ).tuple
     assert t == gtuple
 
@@ -59,54 +58,56 @@ def test_basegnode_terminalasset_create_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TaGNodeAlias"]
+    del d2["GNodeAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["MicroLon"]
+    del d2["CoreGNodeRoleGtEnumSymbol"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["ValidatorAddr"]
+    del d2["OldChildAliasList"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TaOwnerAddr"]
+    del d2["DiscovererAddr"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["MicroLat"]
+    del d2["SupportingMaterialHash"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d)
-    del d2["GNodeRegistryAddr"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
+    ######################################
+    # Optional attributes can be removed from type
+    ######################################
 
     d2 = dict(d)
-    del d2["FromGNodeInstanceId"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
+    if "MicroLat" in d2.keys():
+        del d2["MicroLat"]
+    Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["FromGNodeAlias"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
+    if "MicroLon" in d2.keys():
+        del d2["MicroLon"]
+    Maker.dict_to_tuple(d2)
 
     ######################################
     # Behavior on incorrect types
     ######################################
 
-    d2 = dict(d, MicroLon="-68691705.1")
+    d2 = dict(d, CoreGNodeRoleGtEnumSymbol="hi")
+    Maker.dict_to_tuple(d2).CoreGNodeRole = CoreGNodeRole.default()
+
+    d2 = dict(d, MicroLat="44838681.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, MicroLat="45666353.1")
+    d2 = dict(d, MicroLon="-68705311.1")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
@@ -122,15 +123,11 @@ def test_basegnode_terminalasset_create_generated():
     # SchemaError raised if primitive attributes do not have appropriate property_format
     ######################################
 
-    d2 = dict(d, TaGNodeAlias="a.b-h")
+    d2 = dict(d, GNodeAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, FromGNodeInstanceId="d4be12d5-33ba-4f1f-b9e5")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, FromGNodeAlias="a.b-h")
+    d2 = dict(d, OldChildAliasList=["a.b-h"])
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

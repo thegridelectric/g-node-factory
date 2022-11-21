@@ -25,6 +25,8 @@ location-related data is hashed, even though it belongs to a private database.
 import json
 import logging
 import pprint
+import time
+import uuid
 from typing import List
 from typing import Optional
 
@@ -40,6 +42,7 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
 import gnf.utils as utils
+from gnf.actor_base import ActorBase
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
@@ -48,6 +51,7 @@ from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import BaseGNodeHistory
 from gnf.django_related.models import GpsPointDb
 from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeRole
 from gnf.enums import GNodeStatus
 from gnf.errors import RegistryError
 from gnf.schemata import BasegnodeGt
@@ -61,6 +65,9 @@ from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OldTadeedAlgoReturn_Maker
+from gnf.schemata import PauseTime
+from gnf.schemata import PauseTime_Maker
+from gnf.schemata import ResumeTime_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -71,6 +78,24 @@ LOGGER = logging.getLogger(__name__)
 #####################
 # Messages received
 #####################
+
+
+class BabyRabbit(ActorBase):
+    def __init__(
+        self,
+        settings: config.GnfSettings = config.GnfSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
+        super().__init__(settings=settings)
+
+    def prepare_for_death(self):
+        self.actor_main_stopped = True
+
+    def route_message(
+        self, from_alias: str, from_role: GNodeRole, payload: PauseTime
+    ) -> None:
+        raise NotImplementedError
 
 
 class GNodeFactory:
@@ -90,6 +115,32 @@ class GNodeFactory:
         )
         self.graveyard_acct: BasicAccount = BasicAccount(
             private_key=self.settings.graveyard_acct_sk.get_secret_value()
+        )
+        self.baby_rabbit = BabyRabbit()
+        self.baby_rabbit.start()
+
+    def pause_time(self) -> None:
+        payload = PauseTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
+        )
+
+    def resume_time(self) -> None:
+        payload = ResumeTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
         )
 
     def tavalidatorcert_algo_create_received(
