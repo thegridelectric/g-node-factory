@@ -14,18 +14,20 @@ services:
     image: "jessmillar/gnr:latest"
     ports:
       - 7999:8000
-  marketmaker:
-    container_name: mm
-    image: "jessmillar/marketmaker:chaos__fe2f5dc__20221121"
-    networks:
-      - "dev"
-    ports:
-      - 7997:8000
   rabbitmarketmaker:
     networks:
       - "dev"
     container_name: mmr
+    # depends_on:
+    #   - marketmaker
     image: "jessmillar/mmrabbit:chaos__fe2f5dc__20221121"
+  # marketmaker:
+  #   container_name: mm
+  #   image: "jessmillar/marketmaker:chaos__fe2f5dc__20221121"
+  #   networks:
+  #     - "dev"
+  #   ports:
+  #     - 7997:8000
   timecoordinator:
     networks:
       - "dev"

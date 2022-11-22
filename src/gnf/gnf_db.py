@@ -117,7 +117,7 @@ class GNodeFactory:
             private_key=self.settings.graveyard_acct_sk.get_secret_value()
         )
         self.baby_rabbit = BabyRabbit()
-        self.baby_rabbit.start()
+        # self.baby_rabbit.start()
 
     def pause_time(self) -> None:
         payload = PauseTime_Maker(
@@ -297,10 +297,13 @@ class GNodeFactory:
         try:
             algo_utils.send_signed_mtx(client=self.client, mtx=mtx)
         except Exception as e:
-            note = f"Tried to sign transaction but there was an error.\n {e}"
+            note = (
+                f"Tried to sign initial TADEED transfer but there was an error.\n {e}"
+            )
             LOGGER.info(note)
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
+
         return await self.activate_terminal_asset(payload)
 
     async def initial_tadeed_algo_create_received(
@@ -354,9 +357,33 @@ class GNodeFactory:
             return RestfulResponse(Note=note, HttpStatusCode=422)
 
         ta_deed_idx = response.asset_idx
-        LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
+
+        txn = transaction.AssetCreateTxn(
+            sender=self.admin_acct.addr,
+            total=1,
+            decimals=0,
+            default_frozen=False,
+            manager=self.admin_acct.addr,
+            asset_name=ta_alias,
+            unit_name="TATRADE",
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        ta_trading_rights_idx = algo_utils.wait_for_transaction(
+            self.client, signed_txn.get_txid()
+        ).asset_idx
+
+        LOGGER.info(
+            f"Initial TaDeed {ta_deed_idx} and TaTradingRights {ta_trading_rights_idx} created for {ta_alias} "
+        )
         return await self.create_pending_terminal_asset(
-            ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
+            ta_alias=ta_alias,
+            ta_deed_idx=ta_deed_idx,
+            ta_trading_rights_idx=ta_trading_rights_idx,
         )
 
     async def create_updated_ta_deed(
@@ -641,7 +668,10 @@ class GNodeFactory:
         return gn_gt
 
     async def create_pending_terminal_asset(
-        self, ta_alias: str, ta_deed_idx: int
+        self,
+        ta_alias: str,
+        ta_deed_idx: int,
+        ta_trading_rights_idx: int,
     ) -> RestfulResponse:
         """Creates a pending TerminalAsset. This requries first creating an
         active parent for the TerminalAsset, which is its AtomicMeteringNode.
@@ -701,6 +731,7 @@ class GNodeFactory:
             "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": self.settings.public.gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
+            "trading_rights_nft_id": ta_trading_rights_idx,
         }
 
         try:
@@ -749,6 +780,22 @@ class GNodeFactory:
                 Note=note,
                 HttpStatusCode=422,
             )
+            return r
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.admin_acct.addr,
+            receiver=payload.TaDaemonAddr,
+            amt=1,
+            index=ta_db.trading_rights_nft_id,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except Exception as e:
+            note = f"Tried to do TATRADE transfer transaction but there was an error.\n {e}"
+            LOGGER.info(note)
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
         ta_db.ownership_deed_validator_addr = payload.ValidatorAddr
         ta_db.owner_addr = payload.TaOwnerAddr
