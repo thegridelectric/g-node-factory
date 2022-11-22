@@ -22,7 +22,7 @@ from gnf import load_dev_data
 #             f"Please enter an integer number of homes to simulate, not {sys.argv[1]}"
 #         )
 
-sim_size = 4
+sim_size = 1
 full_plant_names = demo_methods.demo_plant_names
 plant_names = full_plant_names[0:sim_size]
 
@@ -70,7 +70,7 @@ print("")
 print("")
 time.sleep(2)
 
-cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__3dfb83d__20221116"
+cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__2647cc9__20221122"
 gnf_pr = subprocess.Popen(cmd.split())
 api_endpoint = "http://0.0.0.0:8000/"
 gnf_up: bool = False
