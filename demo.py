@@ -65,21 +65,21 @@ print("")
 time.sleep(2)
 load_dev_data.main()
 
-print("Starting the GNodeFactory RestAPI")
-print("")
-print("")
-time.sleep(2)
+# print("Starting the GNodeFactory RestAPI")
+# print("")
+# print("")
+# time.sleep(2)
 
-cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__ed7891f__20221122"
-gnf_pr = subprocess.Popen(cmd.split())
-api_endpoint = "http://0.0.0.0:8000/"
-gnf_up: bool = False
-while not gnf_up:
-    try:
-        gnf_up = True
-        requests.get(url=api_endpoint)
-    except:
-        gnf_up = False
+# cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__b25e5f9__20221122"
+# gnf_pr = subprocess.Popen(cmd.split())
+# api_endpoint = "http://0.0.0.0:8000/"
+# gnf_up: bool = False
+# while not gnf_up:
+#     try:
+#         gnf_up = True
+#         requests.get(url=api_endpoint)
+#     except:
+#         gnf_up = False
 print("")
 print("")
 print("Certifying MollyMetermaid as a TaValidator")
@@ -176,13 +176,13 @@ print("")
 api_endpoint = f"http://0.0.0.0:8000/resume-time/"
 r = requests.post(url=api_endpoint)
 
-cmd = "docker stop gnf-api"
-subprocess.run(cmd.split())
-# This stops the running docker container
+# cmd = "docker stop gnf-api"
+# subprocess.run(cmd.split())
+# # This stops the running docker container
 
-cmd = "docker rm gnf-api"
-subprocess.run(cmd.split())
-# This removes the stopped docker container
+# cmd = "docker rm gnf-api"
+# subprocess.run(cmd.split())
+# # This removes the stopped docker container
 
 
 for ta_owner in ta_owners:
