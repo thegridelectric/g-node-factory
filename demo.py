@@ -154,11 +154,20 @@ else:
     print("")
     print("")
 
-input("HIT RETURN TO END")
+input("HIT RETURN TO CONTINUE")
+
+print("")
+print("")
+print(f"Starting Time")
+print("")
+print("")
+
+api_endpoint = f"http://0.0.0.0:8000/resume-time/"
+r = requests.post(url=api_endpoint)
 
 cmd = "docker stop gnf-api"
 subprocess.run(cmd.split())
-# This stops the running docker container 
+# This stops the running docker container
 
 cmd = "docker rm gnf-api"
 subprocess.run(cmd.split())
@@ -166,4 +175,4 @@ subprocess.run(cmd.split())
 
 
 for ta_owner in ta_owners:
-    ta_owner.stop() # Does the same 
+    ta_owner.stop()  # Does the same
