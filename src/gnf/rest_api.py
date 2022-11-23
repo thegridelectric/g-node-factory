@@ -49,6 +49,16 @@ async def get_base_g_node(g_node_id: str):
     return gn
 
 
+@app.post(f"/pause-time/")
+async def pause_time():
+    gnf.pause_time()
+
+
+@app.post(f"/resume-time/")
+async def resume_time():
+    gnf.resume_time()
+
+
 @app.post("/tavalidatorcert-algo-create/", response_model=RestfulResponse)
 async def tavalidatorcert_algo_create_received(
     payload: TavalidatorcertAlgoCreate,

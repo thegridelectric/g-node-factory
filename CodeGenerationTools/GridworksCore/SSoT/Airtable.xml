@@ -98,10 +98,10 @@
       <ServerRoleId>reczel9oTcNrweZ1X</ServerRoleId>
       <ReturnTypeId>recvGFiTtzXNrhLBm</ReturnTypeId>
       <PostTypeId>recH9GUDdSB7SiwNG</PostTypeId>
-      <Name>Post bid to marketmaker</Name>
+      <Name>Post atn.bid to marketmaker</Name>
       <ServerRole>MarketMaker</ServerRole>
       <ServerShorthand>marketmaker</ServerShorthand>
-      <PostTypeName>bid</PostTypeName>
+      <PostTypeName>atn.bid</PostTypeName>
       <PostTypeVersion>000</PostTypeVersion>
       <ReturnTypeVersion>000</ReturnTypeVersion>
       <ReturnTypeName>bid.ack</ReturnTypeName>
@@ -183,6 +183,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>rec3iTEohsap8GRP8</SchemaRootId>
+      <createdTime>2022-11-17T06:07:40Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>rec3H5b04RB2vmYrk</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>market.price</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>market.price</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>rec430tANcSG2ZavF</SchemaRootId>
       <createdTime>2022-09-19T18:20:13Z</createdTime>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -232,17 +243,6 @@
       <AliasRoot>latest.price</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <Alias>latest.price</Alias>
-      <ConsistencyCheck>1</ConsistencyCheck>
-    </SchemaRoot>
-    <SchemaRoot>
-      <SchemaRootId>rec9vczzxftBbTBvm</SchemaRootId>
-      <createdTime>2022-11-12T08:36:35Z</createdTime>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <SchemaRootscopy>recTKuleOQoZ3n0HH</SchemaRootscopy>
-      <Status>Active</Status>
-      <AliasRoot>tadaemon.sk.hack</AliasRoot>
-      <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>tadaemon.sk.hack</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -372,6 +372,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recF3FhhkKiMKyjJZ</SchemaRootId>
+      <createdTime>2022-11-17T06:13:26Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recacY2b5R2bByiAQ</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>accepted.bid</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>accepted.bid</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>recGPwKi4Sb6sxayy</SchemaRootId>
       <createdTime>2022-08-11T15:25:06Z</createdTime>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -391,6 +402,17 @@
       <AliasRoot>price.quantity</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
       <Alias>price.quantity</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recGf44plaa1jjiWQ</SchemaRootId>
+      <createdTime>2022-11-17T01:54:13Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>rechVGhiKUuIgoWYy</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>market.maker.info</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>market.maker.info</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -459,9 +481,9 @@
       <ProtocolCategory>Json</ProtocolCategory>
       <SchemaRootscopy>recH9GUDdSB7SiwNG</SchemaRootscopy>
       <Status>Active</Status>
-      <AliasRoot>bid</AliasRoot>
+      <AliasRoot>atn.bid</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>bid</Alias>
+      <Alias>atn.bid</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -532,9 +554,9 @@
       <ProtocolCategory>Json</ProtocolCategory>
       <SchemaRootscopy>recbAMyCyUX2bLKfz</SchemaRootscopy>
       <Status>Active</Status>
-      <AliasRoot>hack.state</AliasRoot>
+      <AliasRoot>atn.state.heatpumpwithbooststore</AliasRoot>
       <CurrentSemanticEnd>000</CurrentSemanticEnd>
-      <Alias>hack.state</Alias>
+      <Alias>atn.state.heatpumpwithbooststore</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -690,6 +712,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recblgO1LGjgyHR2Y</SchemaRootId>
+      <createdTime>2022-11-21T05:21:17Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recX2g8OLICXZHuHr</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>resume.time</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>resume.time</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>recc5qGcZNQPmktbe</SchemaRootId>
       <createdTime>2022-05-11T18:08:26Z</createdTime>
       <ProtocolCategory>GridworksSerial</ProtocolCategory>
@@ -781,6 +814,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recdjt7dskJqDJASY</SchemaRootId>
+      <createdTime>2022-11-17T06:20:24Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recbZXiheXqQdc7b6</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>market.book</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>market.book</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>recdmZpmDC9qq3Wz5</SchemaRootId>
       <createdTime>2022-07-03T21:26:12Z</createdTime>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -819,6 +863,17 @@
       <CurrentSemanticEnd>110</CurrentSemanticEnd>
       <InGwProto>true</InGwProto>
       <Alias>gt.sh.cli.atn.cmd</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recfTTPpGH16HQ9aY</SchemaRootId>
+      <createdTime>2022-11-21T22:35:54Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recV0KuDFayH4qGIl</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>gnodeinstance.gt</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>gnodeinstance.gt</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -928,6 +983,17 @@
       <Alias>gt.electric.heater.cac</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
       <ReplaceWithTypeAliasRoot>resistive.heater.cac.gt</ReplaceWithTypeAliasRoot>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>reckliobnY6Igi5Fa</SchemaRootId>
+      <createdTime>2022-11-21T05:20:22Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recf5K0BP9qLabpdS</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>pause.time</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>pause.time</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
       <SchemaRootId>recl00nd7rYLyLDUL</SchemaRootId>
@@ -1109,6 +1175,17 @@
       <AliasRoot>gt.spaceheat.house.config</AliasRoot>
       <CurrentSemanticEnd>100</CurrentSemanticEnd>
       <Alias>gt.spaceheat.house.config</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
+      <SchemaRootId>recwEHKPPTKLK8OFz</SchemaRootId>
+      <createdTime>2022-11-17T06:03:05Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recLufl9jSdsMGsFR</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>market.slot</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>market.slot</Alias>
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
@@ -1330,6 +1407,7 @@
       <TypesThatUse>rec5bEVzI1k5qcXYg</TypesThatUse>
       <Version>000</Version>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
+      <ProtocolEnums>recCEQgAR8tPu4mgu</ProtocolEnums>
       <Default>reclMrRIA4ISmRw6t</Default>
       <LocalName>core.g.node.role</LocalName>
       <AliasRoot>core.g.node.role</AliasRoot>
@@ -1380,16 +1458,19 @@
       <TypesThatUse>recH9GUDdSB7SiwNG</TypesThatUse>
       <TypesThatUse>recDYjXYf8RbWmUFe</TypesThatUse>
       <TypesThatUse>recd5K0XiAzHsj2Pw</TypesThatUse>
+      <TypesThatUse>rec3H5b04RB2vmYrk</TypesThatUse>
       <Version>000</Version>
       <ProtocolEnums>rec8B7NqLQHwAZjcw</ProtocolEnums>
+      <ProtocolEnums>recmNuAp0alwhubds</ProtocolEnums>
       <Default>reczQc8UjfHLBjqBM</Default>
-      <LocalName>bid.price.unit</LocalName>
-      <AliasRoot>bid.price.unit</AliasRoot>
+      <LocalName>market.price.unit</LocalName>
+      <AliasRoot>market.price.unit</AliasRoot>
       <SchemaAttributes>recEPPqtrPd0FeUOQ</SchemaAttributes>
       <SchemaAttributes>recQJb1dVOhb9b4gc</SchemaAttributes>
       <SchemaAttributes>recRU6cvY6FKUwxbv</SchemaAttributes>
       <SchemaAttributes>recSWBVF41HakpB18</SchemaAttributes>
-      <Alias>bid.price.unit.000</Alias>
+      <SchemaAttributes>recRwEFucyvVZaXY2</SchemaAttributes>
+      <Alias>market.price.unit.000</Alias>
       <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
     </GtEnum>
@@ -1429,6 +1510,10 @@
       <Version>000</Version>
       <ProtocolEnums>recaaXWI5JSINnLOx</ProtocolEnums>
       <ProtocolEnums>recaWGhVScY6KXA44</ProtocolEnums>
+      <ProtocolEnums>rec9HtmIiTasYUNy0</ProtocolEnums>
+      <ProtocolEnums>recV9jP0nFcRCDphV</ProtocolEnums>
+      <ProtocolEnums>reczs2uW5OOP1dIaw</ProtocolEnums>
+      <ProtocolEnums>recT6IKeUqmmI7L84</ProtocolEnums>
       <Default>recjlLyMGMXYaff8w</Default>
       <LocalName>message.category</LocalName>
       <AliasRoot>message.category</AliasRoot>
@@ -1465,6 +1550,7 @@
       <Version>000</Version>
       <ProtocolEnums>recVdbIqzBFT6Qpsd</ProtocolEnums>
       <ProtocolEnums>rechPYPk940Fi7Uud</ProtocolEnums>
+      <ProtocolEnums>reck0WsxFdPOoe5ZM</ProtocolEnums>
       <Default>recdZoU45YlNxDBUe</Default>
       <LocalName>recognized.currency.unit</LocalName>
       <AliasRoot>recognized.currency.unit</AliasRoot>
@@ -1582,6 +1668,10 @@
       <Version>000</Version>
       <ProtocolEnums>rec4dIrr33GsfXGEi</ProtocolEnums>
       <ProtocolEnums>recGcb0eH9z0Np8jd</ProtocolEnums>
+      <ProtocolEnums>recihvUJVR6oEfEap</ProtocolEnums>
+      <ProtocolEnums>recfChwtbhGYGwQAx</ProtocolEnums>
+      <ProtocolEnums>rec7riMLKDhllLHJF</ProtocolEnums>
+      <ProtocolEnums>recZKMG3hALXcWQuc</ProtocolEnums>
       <Default>recrqYsXVPagMEhO3</Default>
       <LocalName>universe.type</LocalName>
       <AliasRoot>universe.type</AliasRoot>
@@ -1665,6 +1755,10 @@
       <Version>000</Version>
       <ProtocolEnums>reczplFItDku5AaRa</ProtocolEnums>
       <ProtocolEnums>recpKd5HOmAf37QY5</ProtocolEnums>
+      <ProtocolEnums>rect0T4CM09fP7g2t</ProtocolEnums>
+      <ProtocolEnums>recxchS4k09ivH7vN</ProtocolEnums>
+      <ProtocolEnums>recjOCdfp4V6Ugqfs</ProtocolEnums>
+      <ProtocolEnums>recA0Q62wqmXkzSse</ProtocolEnums>
       <Default>recyZNh6DHD8cSQJs</Default>
       <LocalName>g.node.role</LocalName>
       <AliasRoot>g.node.role</AliasRoot>
@@ -1689,11 +1783,12 @@
       <TypesThatUse>recDYjXYf8RbWmUFe</TypesThatUse>
       <Version>000</Version>
       <ProtocolEnums>recJX40Wt0rcWDFET</ProtocolEnums>
+      <ProtocolEnums>rec8YFBXCvMbO7Fnc</ProtocolEnums>
       <Default>reco5WtUl0pdbMf5Z</Default>
-      <LocalName>market.type.alias</LocalName>
-      <AliasRoot>market.type.alias</AliasRoot>
+      <LocalName>market.type.name</LocalName>
+      <AliasRoot>market.type.name</AliasRoot>
       <SchemaAttributes>recOxmICij5REVdXj</SchemaAttributes>
-      <Alias>market.type.alias.000</Alias>
+      <Alias>market.type.name.000</Alias>
       <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>unknown</DefaultEnumValue>
     </GtEnum>
@@ -1760,6 +1855,7 @@
       <BaseGridworksSchema>true</BaseGridworksSchema>
       <Version>000</Version>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
+      <ProtocolEnums>recmacM072NkqkOW1</ProtocolEnums>
       <Default>recWvHiwQvwKVnBgW</Default>
       <LocalName>registry.g.node.role</LocalName>
       <AliasRoot>registry.g.node.role</AliasRoot>
@@ -1783,6 +1879,10 @@
       <Version>000</Version>
       <ProtocolEnums>rec9bDgohSOum1o1F</ProtocolEnums>
       <ProtocolEnums>recf2bjSGV3D1Ml5i</ProtocolEnums>
+      <ProtocolEnums>recISSyBDybwCsc9S</ProtocolEnums>
+      <ProtocolEnums>recLgjTEHK9NGb3nq</ProtocolEnums>
+      <ProtocolEnums>recesY3Van2qeFjV0</ProtocolEnums>
+      <ProtocolEnums>recsRpVdgR7q3fCML</ProtocolEnums>
       <Default>rechaotHblmyukrn1</Default>
       <LocalName>message.category.symbol</LocalName>
       <AliasRoot>message.category.symbol</AliasRoot>
@@ -1830,13 +1930,14 @@
       <TypesThatUse>recDYjXYf8RbWmUFe</TypesThatUse>
       <Version>000</Version>
       <ProtocolEnums>recy37qKrW01vTt7S</ProtocolEnums>
+      <ProtocolEnums>recGhJkY0Egp6jCRt</ProtocolEnums>
       <Default>recdMV7TkDw8zFcf9</Default>
-      <LocalName>bid.quantity.unit</LocalName>
-      <AliasRoot>bid.quantity.unit</AliasRoot>
+      <LocalName>market.quantity.unit</LocalName>
+      <AliasRoot>market.quantity.unit</AliasRoot>
       <SchemaAttributes>recehDezdvO5nKJJQ</SchemaAttributes>
       <SchemaAttributes>rec5yCVNnWVXBDdMc</SchemaAttributes>
       <SchemaAttributes>recOhTtiANrJcVKgf</SchemaAttributes>
-      <Alias>bid.quantity.unit.000</Alias>
+      <Alias>market.quantity.unit.000</Alias>
       <DefaultSymbol>00000000</DefaultSymbol>
       <DefaultEnumValue>AvgMW</DefaultEnumValue>
     </GtEnum>
@@ -1866,6 +1967,9 @@
       <ProtocolEnums>rec8Ahq8RdNkgPzQN</ProtocolEnums>
       <ProtocolEnums>recOCu54C8gBud4Rp</ProtocolEnums>
       <ProtocolEnums>recZKMmBxWot2RY5F</ProtocolEnums>
+      <ProtocolEnums>recTt38mXlQtJdywQ</ProtocolEnums>
+      <ProtocolEnums>recWkTXMymydxR5UX</ProtocolEnums>
+      <ProtocolEnums>recUiiAdTTH4zmBfJ</ProtocolEnums>
       <Default>recmkdghA4yolcvkz</Default>
       <LocalName>g.node.status</LocalName>
       <AliasRoot>g.node.status</AliasRoot>
@@ -1914,7 +2018,7 @@
       <Idx>2</Idx>
       <LocalValue>rt60gate5</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt60gate5</DisplayName>
+      <DisplayName>market.type.name.000__rt60gate5</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>rec0rH864GSip8TkD</EnumSymbolId>
@@ -1981,7 +2085,7 @@
       <Idx>7</Idx>
       <LocalValue>rt30gate5</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt30gate5</DisplayName>
+      <DisplayName>market.type.name.000__rt30gate5</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>rec46s7o3XEL0nMyc</EnumSymbolId>
@@ -2041,7 +2145,7 @@
       <Idx>4</Idx>
       <LocalValue>rt60gate30</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt60gate30</DisplayName>
+      <DisplayName>market.type.name.000__rt60gate30</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>rec85EIYB2IE3sfFy</EnumSymbolId>
@@ -2367,7 +2471,7 @@
       <Idx>5</Idx>
       <LocalValue>rt15gate5</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt15gate5</DisplayName>
+      <DisplayName>market.type.name.000__rt15gate5</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recHqypHWJo3QHaJm</EnumSymbolId>
@@ -2473,7 +2577,7 @@
       <Idx>1</Idx>
       <LocalValue>rt5gate5</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt5gate5</DisplayName>
+      <DisplayName>market.type.name.000__rt5gate5</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recLgRPx2UGsQFiRr</EnumSymbolId>
@@ -2669,7 +2773,7 @@
       <Idx>1</Idx>
       <LocalValue>AvgkW</LocalValue>
       <Enum>recounhEj97w5SfDm</Enum>
-      <DisplayName>bid.quantity.unit.000__AvgkW</DisplayName>
+      <DisplayName>market.quantity.unit.000__AvgkW</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recRhxuG4B3RCPPqB</EnumSymbolId>
@@ -2764,7 +2868,7 @@
       <Enum>recZB6uJDEaCzvTZX</Enum>
       <DisplayName>g.node.role.000__PriceService</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itraEYJjIE9fKw8Lr/recUtA3HI1KJ6BADP</EnumSymbol>
+    <EnumSymbol>itrZOdqqY4jpivDMi/recUtA3HI1KJ6BADP</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recVVshv4AuJAbuyp</EnumSymbolId>
       <createdTime>2022-08-01T12:19:47Z</createdTime>
@@ -3009,7 +3113,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Idx>0</Idx>
       <LocalValue>AvgMW</LocalValue>
       <Enum>recounhEj97w5SfDm</Enum>
-      <DisplayName>bid.quantity.unit.000__AvgMW</DisplayName>
+      <DisplayName>market.quantity.unit.000__AvgMW</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recdOoocJBLhxafev</EnumSymbolId>
@@ -3077,7 +3181,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Idx>8</Idx>
       <LocalValue>rt60gate30b</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__rt60gate30b</DisplayName>
+      <DisplayName>market.type.name.000__rt60gate30b</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>receYYuzekeRIuXHN</EnumSymbolId>
@@ -3272,7 +3376,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Idx>3</Idx>
       <LocalValue>da60</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__da60</DisplayName>
+      <DisplayName>market.type.name.000__da60</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recmVztwGfJf1x2ba</EnumSymbolId>
@@ -3347,7 +3451,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Idx>0</Idx>
       <LocalValue>unknown</LocalValue>
       <Enum>recZmZP13YV9Rmbnw</Enum>
-      <DisplayName>market.type.alias.000__unknown</DisplayName>
+      <DisplayName>market.type.name.000__unknown</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reco9UaGyf9bBkYcs</EnumSymbolId>
@@ -3664,7 +3768,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recQeMNisJZjsYXTl</Enum>
       <DisplayName>spaceheat.actor.class.000__PrimaryMeter</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itraEYJjIE9fKw8Lr/recyHL0VJtn5jmtIW</EnumSymbol>
+    <EnumSymbol>itrZOdqqY4jpivDMi/recyHL0VJtn5jmtIW</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recyNnqxvxbEGLzhG</EnumSymbolId>
       <createdTime>2022-11-08T22:21:38Z</createdTime>
@@ -3730,7 +3834,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Idx>0</Idx>
       <LocalValue>USDPerMWh</LocalValue>
       <Enum>rec75xMuw0SMkzjVc</Enum>
-      <DisplayName>bid.price.unit.000__USDPerMWh</DisplayName>
+      <DisplayName>market.price.unit.000__USDPerMWh</DisplayName>
     </EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>reczTqGD0AQK8Pt8O</EnumSymbolId>
@@ -3889,7 +3993,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recpwKIE1g7BN8jGg</SchemaAttributes>
       <SchemaAttributes>recCMCD6fLQzuN9RA</SchemaAttributes>
       <SchemaRoot>recEoebL6fHn6xzXL</SchemaRoot>
-      <PreStatus>Active</PreStatus>
+      <PreStatus>Pending</PreStatus>
       <Alias>signandsubmit.mtx.algo.000</Alias>
       <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -3901,6 +4005,30 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>rec3H5b04RB2vmYrk</SchemaId>
+      <createdTime>2022-11-17T06:07:58Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recbWq8Ueg7KgQie0</SchemaAttributes>
+      <SchemaAttributes>recRwEFucyvVZaXY2</SchemaAttributes>
+      <SchemaRoot>rec3iTEohsap8GRP8</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <Enums>rec75xMuw0SMkzjVc</Enums>
+      <ProtocolTypes>recPkFr8lDBRTXq08</ProtocolTypes>
+      <ProtocolTypes>recIoZYIHWRvJnjRa</ProtocolTypes>
+      <Alias>market.price.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>market.price</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -3938,11 +4066,11 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaId>rec3fLb6b0gIeuCTO</SchemaId>
       <createdTime>2022-11-11T00:45:45Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
-      <SchemaAttributes>recwn71nnfdBV252s</SchemaAttributes>
       <SchemaAttributes>recWvVApidAuVFsAP</SchemaAttributes>
       <SchemaAttributes>recwWl6qWsyeh76o4</SchemaAttributes>
       <SchemaAttributes>receaI7kIGQr97TD5</SchemaAttributes>
       <SchemaAttributes>recNujglYpalkIIRN</SchemaAttributes>
+      <SchemaAttributes>reciDBLc8MRRJUFnC</SchemaAttributes>
       <SchemaRoot>recNgGDYcengufuFe</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recfsDYNRW0af16Ol</ProtocolTypes>
@@ -4020,6 +4148,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recmRa74R0GAk0PKx</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>reccfgO8fAUzT3J2W</ProtocolTypes>
+      <ProtocolTypes>recD9RSdxZFlCh0nV</ProtocolTypes>
       <Alias>basegnode.marketmaker.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4078,6 +4207,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Topics>rec5d0mwIHTTqYjC8</Topics>
       <ProtocolTypes>recuetPMCxsDyU0R4</ProtocolTypes>
       <ProtocolTypes>reccuFJPlMliv6yW8</ProtocolTypes>
+      <ProtocolTypes>recOVsu1AQ1nyhMTN</ProtocolTypes>
       <Alias>sim.timestep.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4102,6 +4232,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>reccsb7VI48EdWlGk</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
+      <ProtocolTypes>recs8N9wVyonAKE8y</ProtocolTypes>
       <Alias>basegnodes.get.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4162,6 +4293,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enums>recqx4EqT3OFtnxTG</Enums>
       <Enums>recZB6uJDEaCzvTZX</Enums>
       <ProtocolTypes>recmXImdzdJvIhwRj</ProtocolTypes>
+      <ProtocolTypes>recrWS8cReivzRx92</ProtocolTypes>
       <DataClassIdField>GNodeId</DataClassIdField>
       <Alias>gnode.gt.000</Alias>
       <RootStatus>Active</RootStatus>
@@ -4304,13 +4436,16 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recOhTtiANrJcVKgf</SchemaAttributes>
       <SchemaAttributes>recV7ixIyYTmrGAbL</SchemaAttributes>
       <SchemaRoot>rec6PDgvHMkqnbyOQ</SchemaRoot>
+      <UsedAsSubMessagein>recwDJqmDK7sTdTTC</UsedAsSubMessagein>
+      <UsedAsSubMessagein>recDaxDt8J5MZRx8y</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <Enums>recZmZP13YV9Rmbnw</Enums>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <Enums>recounhEj97w5SfDm</Enums>
       <Enums>recA15Ak50x6bNMx1</Enums>
       <ProtocolTypes>rectD1KxAzqJILPfu</ProtocolTypes>
-      <DataClassIdField>Alias</DataClassIdField>
+      <ProtocolTypes>recMvuzDPwhs257Bs</ProtocolTypes>
+      <DataClassIdField>Name</DataClassIdField>
       <Alias>market.type.gt.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4392,6 +4527,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Axioms>recloTCbAMeQzOIzq</Axioms>
       <Axioms>recehciOce1BjWYzY</Axioms>
       <ProtocolTypes>reccq15mpDgpXGekn</ProtocolTypes>
+      <ProtocolTypes>recHxMHk1Q13AGxQT</ProtocolTypes>
       <DataClassIdField>GNodeId</DataClassIdField>
       <UpdateDescription>New attributes: PrevAlias, OwnerAddr, DaemonAddr, TradingRightsNftId.
 
@@ -4480,20 +4616,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recpgal2oH6WI7vbc</SchemaAttributes>
       <SchemaAttributes>recQJb1dVOhb9b4gc</SchemaAttributes>
       <SchemaAttributes>rec5yCVNnWVXBDdMc</SchemaAttributes>
+      <SchemaAttributes>recOeaCOt6KQeMuNX</SchemaAttributes>
       <SchemaRoot>recLF7qGdmXsqb9M2</SchemaRoot>
       <RestfulPosts>recg6kZdbgxDUXAAh</RestfulPosts>
       <PreStatus>Pending</PreStatus>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <Enums>recounhEj97w5SfDm</Enums>
       <ProtocolTypes>recSNej4i6EwucKbV</ProtocolTypes>
-      <Alias>bid.000</Alias>
+      <ProtocolTypes>recSIwq3BdNSAxp2e</ProtocolTypes>
+      <Alias>atn.bid.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>bid</AliasRoot>
+      <AliasRoot>atn.bid</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4513,6 +4651,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>rect6WA80mNWDt7v0</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recY5s5LoUEwNBowT</ProtocolTypes>
+      <ProtocolTypes>recVyJz6EmMdwDjYy</ProtocolTypes>
       <Alias>basegnode.ctn.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4572,6 +4711,41 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recLZ7LSUlvWKcwWg</SchemaId>
+      <createdTime>2022-11-22T21:19:25Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <PreStatus>Pending</PreStatus>
+      <Alias>.000</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>0</IsCurrent>
+      <Status>Deprecated</Status>
+    </Schema>
+    <Schema>
+      <SchemaId>recLufl9jSdsMGsFR</SchemaId>
+      <createdTime>2022-11-17T06:03:24Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recDaxDt8J5MZRx8y</SchemaAttributes>
+      <SchemaAttributes>rec1hFSN0SKmeE8CV</SchemaAttributes>
+      <SchemaAttributes>recC2OJXewZyxgy8T</SchemaAttributes>
+      <SchemaRoot>recwEHKPPTKLK8OFz</SchemaRoot>
+      <UsedAsSubMessagein>recbnSBQbnHs5KuDy</UsedAsSubMessagein>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>recleupDcbcVTVRQ9</ProtocolTypes>
+      <ProtocolTypes>recLBYNcGvIrpb1nX</ProtocolTypes>
+      <Alias>market.slot.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>market.slot</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recMyDdiQjtfTMAP1</SchemaId>
       <createdTime>2022-11-04T15:04:29Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
@@ -4594,6 +4768,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
       <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recNQK5RMCj2UieZK</SchemaId>
+      <createdTime>2022-11-22T21:18:52Z</createdTime>
+      <Alias>.</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>1</IsCurrent>
     </Schema>
     <Schema>
       <SchemaId>recNbXbJE9rcnLXAs</SchemaId>
@@ -4872,6 +5053,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>reczYInsSYetUcVpZ</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec1Kr8gSWyIe4lG2</ProtocolTypes>
+      <ProtocolTypes>recRLpRImAACQhmSj</ProtocolTypes>
       <Alias>basegnodes.broadcast.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4880,26 +5062,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <AliasRoot>basegnodes.broadcast</AliasRoot>
-      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
-      <IsCurrent>1</IsCurrent>
-      <Status>Pending</Status>
-      <InGwProto />
-    </Schema>
-    <Schema>
-      <SchemaId>recTKuleOQoZ3n0HH</SchemaId>
-      <createdTime>2022-11-12T08:37:00Z</createdTime>
-      <SemanticEnd>000</SemanticEnd>
-      <SchemaRoot>rec9vczzxftBbTBvm</SchemaRoot>
-      <PreStatus>Pending</PreStatus>
-      <ProtocolTypes>recvYKEgKxumNmkih</ProtocolTypes>
-      <Alias>tadaemon.sk.hack.000</Alias>
-      <RootStatus>Active</RootStatus>
-      <ProtocolCategory>Json</ProtocolCategory>
-      <MakeDataClass />
-      <IsCac />
-      <IsComponent />
-      <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>tadaemon.sk.hack</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -4983,6 +5145,25 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recV0KuDFayH4qGIl</SchemaId>
+      <createdTime>2022-11-21T22:36:08Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recfTTPpGH16HQ9aY</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <Alias>gnodeinstance.gt.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>gnodeinstance.gt</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recVIr500A203gkcH</SchemaId>
       <createdTime>2022-07-05T12:55:36Z</createdTime>
       <SemanticEnd>110</SemanticEnd>
@@ -5050,6 +5231,31 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Deprecated</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recX2g8OLICXZHuHr</SchemaId>
+      <createdTime>2022-11-21T05:21:49Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recPw5jcOzArg9D84</SchemaAttributes>
+      <SchemaAttributes>recM33kM7FUIUQYie</SchemaAttributes>
+      <SchemaAttributes>rec4XKd6lO34y5XKU</SchemaAttributes>
+      <SchemaRoot>recblgO1LGjgyHR2Y</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>rec1nKwt8hPeDIqrE</ProtocolTypes>
+      <ProtocolTypes>recTvm4cpEzdavk6J</ProtocolTypes>
+      <ProtocolTypes>recY4ZPVnAi4v6y0i</ProtocolTypes>
+      <Alias>resume.time.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>resume.time</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -5152,6 +5358,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recNShQmJ0F04UlrH</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recA4Y7Iy3elTbyCB</ProtocolTypes>
+      <ProtocolTypes>rec0Uk7vhJUpp68kq</ProtocolTypes>
       <Alias>basegnode.other.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5187,6 +5394,32 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
       <AliasRoot>boolean.actuator.cac.gt</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recacY2b5R2bByiAQ</SchemaId>
+      <createdTime>2022-11-17T06:13:46Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>rec3akDIjr7e9Pb0u</SchemaAttributes>
+      <SchemaAttributes>rec68T9cqrrclsIpW</SchemaAttributes>
+      <SchemaAttributes>recO6984PoYsGyotG</SchemaAttributes>
+      <SchemaAttributes>recTov3rcOqhTWWcf</SchemaAttributes>
+      <SchemaRoot>recF3FhhkKiMKyjJZ</SchemaRoot>
+      <UsedAsSubMessagein>recdUSog9bonuORLH</UsedAsSubMessagein>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>recbV3eBvST23mHgN</ProtocolTypes>
+      <ProtocolTypes>recKs7BOeqelLodrB</ProtocolTypes>
+      <Alias>accepted.bid.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>accepted.bid</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5233,6 +5466,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recb8a2JTfYBmC6v7</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recZiKOMXJ8UCneY9</ProtocolTypes>
+      <ProtocolTypes>recM8DeGDMOPo9ezd</ProtocolTypes>
       <Alias>basegnode.terminalasset.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5257,18 +5491,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>reczTcns2HDnd4l5C</SchemaAttributes>
       <SchemaAttributes>recVDfwQzayL572Ip</SchemaAttributes>
       <SchemaAttributes>rec7Kmzb0rNhgYfq6</SchemaAttributes>
+      <SchemaAttributes>recFVS00yEVtm2sYI</SchemaAttributes>
       <SchemaRoot>recNgwEZ9cfcNmeTI</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <Topics>recVOa2DYOtTyarDA</Topics>
       <ProtocolTypes>recM6At5qFrk4dsir</ProtocolTypes>
-      <Alias>hack.state.000</Alias>
+      <Alias>atn.state.heatpumpwithbooststore.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
       <MakeDataClass />
       <IsCac />
       <IsComponent />
       <ConsistencyCheck>1</ConsistencyCheck>
-      <AliasRoot>hack.state</AliasRoot>
+      <AliasRoot>atn.state.heatpumpwithbooststore</AliasRoot>
       <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
@@ -5300,6 +5535,28 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recbZXiheXqQdc7b6</SchemaId>
+      <createdTime>2022-11-17T06:20:43Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recbnSBQbnHs5KuDy</SchemaAttributes>
+      <SchemaAttributes>recdUSog9bonuORLH</SchemaAttributes>
+      <SchemaRoot>recdjt7dskJqDJASY</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>recvpIR8rXsHiuLTP</ProtocolTypes>
+      <Alias>market.book.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>market.book</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recc2Km1jUViJqVeK</SchemaId>
       <createdTime>2022-11-08T03:22:46Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
@@ -5309,6 +5566,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recB2fok3eH3LnZmw</ProtocolTypes>
       <ProtocolTypes>rec2Gvd8Nt7DvqTpf</ProtocolTypes>
+      <ProtocolTypes>recx5JlRHk2l9zzQK</ProtocolTypes>
       <Alias>ready.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5414,6 +5672,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Topics>recnCUFtuRaM9imRG</Topics>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <ProtocolTypes>recanqppJwatq7fmU</ProtocolTypes>
+      <ProtocolTypes>rec8cREVO03dOhbWy</ProtocolTypes>
       <Alias>latest.price.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5521,6 +5780,31 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recf5K0BP9qLabpdS</SchemaId>
+      <createdTime>2022-11-21T05:21:40Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recU5B4V3aPnvMPZf</SchemaAttributes>
+      <SchemaAttributes>rec6tXwpa0rqEikXW</SchemaAttributes>
+      <SchemaAttributes>recscJlOCJSX2ckU5</SchemaAttributes>
+      <SchemaRoot>reckliobnY6Igi5Fa</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>recOEHxBFFDNPACx1</ProtocolTypes>
+      <ProtocolTypes>recl5eLv36HJnILWJ</ProtocolTypes>
+      <ProtocolTypes>recZCRfLe9nDmrRAU</ProtocolTypes>
+      <Alias>pause.time.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>pause.time</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>recgdLh7RL2N6DtWI</SchemaId>
       <createdTime>2022-06-14T10:57:42Z</createdTime>
       <SemanticEnd>100</SemanticEnd>
@@ -5578,6 +5862,30 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>rechVGhiKUuIgoWYy</SchemaId>
+      <createdTime>2022-11-17T01:54:41Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaAttributes>recvq0MygOUulKFdl</SchemaAttributes>
+      <SchemaAttributes>recwDJqmDK7sTdTTC</SchemaAttributes>
+      <SchemaAttributes>recBw1TvOwQk1gM0K</SchemaAttributes>
+      <SchemaAttributes>recTV2IpdZjy1gFiQ</SchemaAttributes>
+      <SchemaRoot>recGf44plaa1jjiWQ</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <ProtocolTypes>recYts9GI3HDasco4</ProtocolTypes>
+      <Alias>market.maker.info.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>market.maker.info</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <InGwProto />
+    </Schema>
+    <Schema>
       <SchemaId>rechXkF4uGNAulje7</SchemaId>
       <createdTime>2022-11-08T03:38:33Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
@@ -5591,6 +5899,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Enums>recounhEj97w5SfDm</Enums>
       <Enums>rec75xMuw0SMkzjVc</Enums>
       <ProtocolTypes>rec0yahRyau7Mzmzk</ProtocolTypes>
+      <ProtocolTypes>recwv4Bsb1NA1uZxn</ProtocolTypes>
       <Alias>price.quantity.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5880,6 +6189,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>rec0pPcBLkF054gpN</SchemaAttributes>
       <SchemaAttributes>recnhx2TdJmiQyujt</SchemaAttributes>
       <SchemaAttributes>rec24rwap57yNPkVI</SchemaAttributes>
+      <SchemaAttributes>recE1J9oSFyTE5lkp</SchemaAttributes>
+      <SchemaAttributes>recTmaH9Ix1tx009O</SchemaAttributes>
+      <SchemaAttributes>rec4VyYOa9NyxUjui</SchemaAttributes>
+      <SchemaAttributes>recBYlRmPwCbVbTMn</SchemaAttributes>
       <SchemaRoot>recNkT1cGWR3vqFMM</SchemaRoot>
       <UsedAsSubMessagein>recNujglYpalkIIRN</UsedAsSubMessagein>
       <PreStatus>Active</PreStatus>
@@ -5931,8 +6244,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributes>recFZvppIAQBowEAM</SchemaAttributes>
       <SchemaRoot>recaDjX9PV6CUrf6k</SchemaRoot>
       <UsedAsSubMessagein>recb85VFWSeaqaKV0</UsedAsSubMessagein>
+      <UsedAsSubMessagein>rec68T9cqrrclsIpW</UsedAsSubMessagein>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recDST3lwGBFXqsz1</ProtocolTypes>
+      <ProtocolTypes>rec5dH5f6YcOKD0RU</ProtocolTypes>
       <Alias>price.quantity.unitless.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5983,6 +6298,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <RestfulPosts2>recg6kZdbgxDUXAAh</RestfulPosts2>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec40fE823klMVCmv</ProtocolTypes>
+      <ProtocolTypes>recHI1eoqW0ZYKblM</ProtocolTypes>
       <Alias>bid.ack.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -6056,6 +6372,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <ProtocolTypes>recAKcZ5BDHN6JKil</ProtocolTypes>
       <ProtocolTypes>recASxd0yY7a1nWR4</ProtocolTypes>
       <ProtocolTypes>recnBbGAlK4U8sngT</ProtocolTypes>
+      <ProtocolTypes>rec1qAnTlin7a194M</ProtocolTypes>
+      <ProtocolTypes>recianedmKDqWVh0O</ProtocolTypes>
+      <ProtocolTypes>recyENjaG4Mi1n27B</ProtocolTypes>
       <Alias>heartbeat.a.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -6069,6 +6388,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Status>Pending</Status>
       <InGwProto />
     </Schema>
+    <Schema>itrO3LKqUVkzWXlRv/recxNIfCRauFrb57o</Schema>
     <Schema>
       <SchemaId>recyD0ycgUiT7TiH2</SchemaId>
       <createdTime>2022-07-12T18:02:06Z</createdTime>
@@ -6448,6 +6768,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rec1hFSN0SKmeE8CV</SchemaAttributeId>
+      <createdTime>2022-11-17T06:04:05Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recLufl9jSdsMGsFR</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>MarketMakerAlias</Value>
+      <Idx>1</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>'d1.isone.ver.keene'</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rec1k8ewouaBtPAoB</SchemaAttributeId>
       <createdTime>2022-11-12T08:16:50Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -6515,15 +6851,15 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
     <SchemaAttribute>
       <SchemaAttributeId>rec1sA97XqAvz5PmW</SchemaAttributeId>
       <createdTime>2022-11-14T23:44:57Z</createdTime>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <Value>DaemonPort</Value>
-      <Schema>recbGrdqqYGiwVYVK</Schema>
-      <Idx>3</Idx>
       <IsRequired>true</IsRequired>
       <IsPrimitive>true</IsPrimitive>
-      <TestValue>8002</TestValue>
+      <Schema>recbGrdqqYGiwVYVK</Schema>
       <PrimitiveType>Integer</PrimitiveType>
+      <Value>DaemonPort</Value>
+      <Idx>3</Idx>
+      <TestValue>8002</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec1tjyG2fxEVpUYW</SchemaAttributeId>
@@ -6545,7 +6881,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <PrimitiveType>Integer</PrimitiveType>
       <Value>HouseWorstCaseTempF</Value>
-      <Idx>31</Idx>
+      <Idx>33</Idx>
       <TestValue>-7</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6577,7 +6913,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>ChildAliasList</Value>
       <Idx>5</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>['dw1.iso.me.orange', 'dw1.iso.me.almond']</TestValue>
+      <TestValue>['d1.iso.me.orange', 'd1.iso.me.almond']</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6780,7 +7116,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveType>String</PrimitiveType>
       <Value>TaGNodeAlias</Value>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.iso.me.orange.ta'</TestValue>
+      <TestValue>'d1.iso.me.orange.ta'</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec3akDIjr7e9Pb0u</SchemaAttributeId>
+      <createdTime>2022-11-17T06:14:49Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recacY2b5R2bByiAQ</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>BidderAlias</Value>
+      <Idx>1</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6812,6 +7163,38 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>0</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
       <TestValue>'d1.isone.ver.keene'</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec4VyYOa9NyxUjui</SchemaAttributeId>
+      <createdTime>2022-11-18T17:55:37Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recrZz3gmzl97POA1</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>GNodeAlias</Value>
+      <Idx>37</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>'d1.isone.ver.keene.holly'</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec4XKd6lO34y5XKU</SchemaAttributeId>
+      <createdTime>2022-11-21T05:26:08Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recX2g8OLICXZHuHr</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>ToGNodeAlias</Value>
+      <Idx>2</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.time"</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -6907,17 +7290,32 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributeId>rec5yCVNnWVXBDdMc</SchemaAttributeId>
       <createdTime>2022-11-08T04:13:22Z</createdTime>
       <IsRequired>true</IsRequired>
+      <DefaultValue>AvgMW</DefaultValue>
       <Schema>recH9GUDdSB7SiwNG</Schema>
       <Value>QuantityUnit</Value>
       <Idx>6</Idx>
       <Enum>recounhEj97w5SfDm</Enum>
       <TestValue>"c272f3b3"</TestValue>
-      <EnumLocalName>bid.quantity.unit</EnumLocalName>
+      <EnumLocalName>market.quantity.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.quantity.unit.000</EnumName>
+      <EnumName>market.quantity.unit.000</EnumName>
       <DefaultEnumValue>AvgMW</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec68T9cqrrclsIpW</SchemaAttributeId>
+      <createdTime>2022-11-17T06:15:00Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsList>true</IsList>
+      <Schema>recacY2b5R2bByiAQ</Schema>
+      <SubTypeFormat>recsHXkpUxoOF9vYp</SubTypeFormat>
+      <Value>BidList</Value>
+      <Idx>2</Idx>
+      <SubMessageFormatAlias>price.quantity.unitless.000</SubMessageFormatAlias>
+      <IsEnum>false</IsEnum>
+      <IsType>true</IsType>
+      <SubMessageFormatAliasRoot>price.quantity.unitless</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec6F0YzYq2cynuBc</SchemaAttributeId>
@@ -7028,10 +7426,26 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <PrimitiveType>Integer</PrimitiveType>
       <Value>AnnualHvacKwhTh</Value>
-      <Idx>32</Idx>
+      <Idx>34</Idx>
       <TestValue>28125</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>rec6tXwpa0rqEikXW</SchemaAttributeId>
+      <createdTime>2022-11-21T05:24:58Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recf5K0BP9qLabpdS</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>FromGNodeInstanceId</Value>
+      <Idx>1</Idx>
+      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
+      <TestValue>"2858afb7-4ffd-4a10-b3b5-c52ad1f61697"</TestValue>
+      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>rec7Kmzb0rNhgYfq6</SchemaAttributeId>
@@ -7041,9 +7455,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recbAMyCyUX2bLKfz</Schema>
       <PrimitiveType>String</PrimitiveType>
       <Value>AboutTerminalAssetAlias</Value>
-      <Idx>6</Idx>
+      <Idx>7</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>"dw1.isone.ver.keene.holly.ta"</TestValue>
+      <TestValue>"d1.isone.ver.keene.holly.ta"</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -7151,7 +7565,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>reczzIn3wGYrEKtbr</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>StartingIdx</Value>
+      <Value>StartingStoreIdx</Value>
       <Idx>50</Idx>
       <TestValue>50</TestValue>
       <IsEnum>false</IsEnum>
@@ -7226,7 +7640,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>FromGNodeAlias</Value>
       <Idx>0</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.isone.ver.keene'</TestValue>
+      <TestValue>'d1.isone.ver.keene'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -7417,6 +7831,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recBYlRmPwCbVbTMn</SchemaAttributeId>
+      <createdTime>2022-11-19T16:43:43Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recrZz3gmzl97POA1</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>GNodeInstanceId</Value>
+      <Idx>38</Idx>
+      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
+      <TestValue>'c8bb41eb-dad3-4e1d-8069-482f1a464225'</TestValue>
+      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recBbPnDHgnSutafc</SchemaAttributeId>
       <createdTime>2022-11-08T05:03:26Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -7469,6 +7899,35 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <TestValue>"Main power meter for Little orange house garage space heat"</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recBw1TvOwQk1gM0K</SchemaAttributeId>
+      <createdTime>2022-11-17T02:19:08Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>rechVGhiKUuIgoWYy</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>SampleMarketName</Value>
+      <Idx>2</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recBw1TvOwQk1gM0K</SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recC2OJXewZyxgy8T</SchemaAttributeId>
+      <createdTime>2022-11-17T06:04:05Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recLufl9jSdsMGsFR</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>StartUnixS</Value>
+      <Idx>2</Idx>
+      <PrimitiveFormatId>rec13dujLuXXSf5L3</PrimitiveFormatId>
+      <TestValue>1577836800</TestValue>
+      <PrimitiveFormat>ReasonableUnixTimeS</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>32503683600</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recC6ZsLnbPSQByqu</SchemaAttributeId>
@@ -7603,7 +8062,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrL6JzeVsiM6jjty/recD4VpikwJAaTf0c</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recDDR1LciMqVZlgf</SchemaAttributeId>
       <createdTime>2022-11-13T19:55:15Z</createdTime>
@@ -7662,6 +8120,20 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recDaxDt8J5MZRx8y</SchemaAttributeId>
+      <createdTime>2022-11-17T06:03:58Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <Schema>recLufl9jSdsMGsFR</Schema>
+      <SubTypeFormat>recDYjXYf8RbWmUFe</SubTypeFormat>
+      <Value>Type</Value>
+      <Idx>0</Idx>
+      <SubMessageFormatAlias>market.type.gt.000</SubMessageFormatAlias>
+      <IsEnum>false</IsEnum>
+      <IsType>true</IsType>
+      <SubTypeDataClass>MarketType</SubTypeDataClass>
+      <SubMessageFormatAliasRoot>market.type.gt</SubMessageFormatAliasRoot>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recDzW9fuX9MvVvla</SchemaAttributeId>
       <createdTime>2022-10-03T04:46:52Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -7673,6 +8145,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatId>recopFBsq4TmG87Op</PrimitiveFormatId>
       <TestValue>"KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI"</TestValue>
       <PrimitiveFormat>AlgoAddressStringFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recE1J9oSFyTE5lkp</SchemaAttributeId>
+      <createdTime>2022-11-18T15:13:59Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recrZz3gmzl97POA1</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>FloSlices</Value>
+      <Idx>31</Idx>
+      <TestValue>48</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -7739,10 +8224,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>2</Idx>
       <Enum>rec75xMuw0SMkzjVc</Enum>
       <TestValue>"00000000"</TestValue>
-      <EnumLocalName>bid.price.unit</EnumLocalName>
+      <EnumLocalName>market.price.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.price.unit.000</EnumName>
+      <EnumName>market.price.unit.000</EnumName>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -7990,6 +8475,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recFVS00yEVtm2sYI</SchemaAttributeId>
+      <createdTime>2022-11-20T13:39:30Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recbAMyCyUX2bLKfz</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>CopTimes10</Value>
+      <Idx>5</Idx>
+      <TestValue>23</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recFZvppIAQBowEAM</SchemaAttributeId>
@@ -8371,7 +8869,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <PrimitiveType>Integer</PrimitiveType>
       <Value>BetaOt</Value>
-      <Idx>33</Idx>
+      <Idx>35</Idx>
       <TestValue>158</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -8397,7 +8895,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>BidderAlias</Value>
       <Idx>0</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>"dw1.isone.ver.keene.holly.ta"</TestValue>
+      <TestValue>"d1.isone.ver.keene.holly.ta"</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -8730,7 +9228,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>PrevAlias</Value>
       <Idx>5</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1'</TestValue>
+      <TestValue>'d1'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -8788,6 +9286,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recKtxHw3srimaENr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKwPBxJr8R55KlB</SchemaAttributeId>
       <createdTime>2022-05-11T18:23:36Z</createdTime>
@@ -8941,13 +9440,12 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>PrevAlias</Value>
       <Idx>5</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1'</TestValue>
+      <TestValue>'d1'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrL6JzeVsiM6jjty/recLl3tp0CYubBgaU</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recLnMCNd00yOpeVw</SchemaAttributeId>
       <createdTime>2022-07-10T12:50:15Z</createdTime>
@@ -8958,6 +9456,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <TestValue>"First 4.5 kW boost in tank"</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recM33kM7FUIUQYie</SchemaAttributeId>
+      <createdTime>2022-11-21T05:26:06Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recX2g8OLICXZHuHr</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>FromGNodeInstanceId</Value>
+      <Idx>1</Idx>
+      <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
+      <TestValue>"2858afb7-4ffd-4a10-b3b5-c52ad1f61697"</TestValue>
+      <PrimitiveFormat>UuidCanonicalTextual</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recM6VoWcVRIgmS54</SchemaAttributeId>
@@ -9082,7 +9596,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recd5K0XiAzHsj2Pw</Schema>
       <PrimitiveType>String</PrimitiveType>
-      <Value>FroGNodeInstanceId</Value>
+      <Value>FromGNodeInstanceId</Value>
       <Idx>1</Idx>
       <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
       <TestValue>'f0eaf540-94c8-4f85-a671-395ab86d0392'</TestValue>
@@ -9180,6 +9694,18 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recO6984PoYsGyotG</SchemaAttributeId>
+      <createdTime>2022-11-17T06:15:00Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recacY2b5R2bByiAQ</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>ReceivedTimeUnixNs</Value>
+      <Idx>3</Idx>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recOQgTyTBu9JnU1b</SchemaAttributeId>
       <createdTime>2022-07-12T18:13:05Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -9222,6 +9748,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recOeaCOt6KQeMuNX</SchemaAttributeId>
+      <createdTime>2022-11-17T03:06:40Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recH9GUDdSB7SiwNG</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>SignedMarketFeeTxn</Value>
+      <Idx>7</Idx>
+      <PrimitiveFormatId>recvbnpa4cX2nNp9p</PrimitiveFormatId>
+      <TestValue>'gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc='</TestValue>
+      <PrimitiveFormat>AlgoMsgPackEncoded</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recOhTtiANrJcVKgf</SchemaAttributeId>
       <createdTime>2022-11-08T05:04:18Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -9230,10 +9771,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>4</Idx>
       <Enum>recounhEj97w5SfDm</Enum>
       <TestValue>"c272f3b3"</TestValue>
-      <EnumLocalName>bid.quantity.unit</EnumLocalName>
+      <EnumLocalName>market.quantity.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.quantity.unit.000</EnumName>
+      <EnumName>market.quantity.unit.000</EnumName>
       <DefaultEnumValue>AvgMW</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -9255,14 +9796,14 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <createdTime>2022-11-08T05:03:25Z</createdTime>
       <IsRequired>true</IsRequired>
       <Schema>recDYjXYf8RbWmUFe</Schema>
-      <Value>Alias</Value>
+      <Value>Name</Value>
       <Idx>0</Idx>
       <Enum>recZmZP13YV9Rmbnw</Enum>
       <TestValue>"618f9c0a"</TestValue>
-      <EnumLocalName>market.type.alias</EnumLocalName>
+      <EnumLocalName>market.type.name</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>market.type.alias.000</EnumName>
+      <EnumName>market.type.name.000</EnumName>
       <DefaultEnumValue>unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -9368,6 +9909,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recPw5jcOzArg9D84</SchemaAttributeId>
+      <createdTime>2022-11-21T05:26:04Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recX2g8OLICXZHuHr</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>FromGNodeAlias</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recQ0KWVdLt1K1n3U</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:16Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -9376,7 +9933,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <PrimitiveType>Number</PrimitiveType>
       <Value>HouseHeatingCapacity</Value>
-      <Idx>34</Idx>
+      <Idx>36</Idx>
       <TestValue>4</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -9388,7 +9945,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recbAMyCyUX2bLKfz</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>HeatpumpPowerKwTimes10</Value>
+      <Value>HeatpumpPowerKwTimes1000</Value>
       <Idx>3</Idx>
       <TestValue>0</TestValue>
       <IsEnum>false</IsEnum>
@@ -9398,15 +9955,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributeId>recQJb1dVOhb9b4gc</SchemaAttributeId>
       <createdTime>2022-11-08T04:13:19Z</createdTime>
       <IsRequired>true</IsRequired>
+      <DefaultValue>USDPerMWh</DefaultValue>
       <Schema>recH9GUDdSB7SiwNG</Schema>
       <Value>PriceUnit</Value>
       <Idx>5</Idx>
       <Enum>rec75xMuw0SMkzjVc</Enum>
       <TestValue>"00000000"</TestValue>
-      <EnumLocalName>bid.price.unit</EnumLocalName>
+      <EnumLocalName>market.price.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.price.unit.000</EnumName>
+      <EnumName>market.price.unit.000</EnumName>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -9420,7 +9978,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>Alias</Value>
       <Idx>1</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.iso.me.orange.ta'</TestValue>
+      <TestValue>'d1.iso.me.orange.ta'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -9509,10 +10067,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>3</Idx>
       <Enum>rec75xMuw0SMkzjVc</Enum>
       <TestValue>"00000000"</TestValue>
-      <EnumLocalName>bid.price.unit</EnumLocalName>
+      <EnumLocalName>market.price.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.price.unit.000</EnumName>
+      <EnumName>market.price.unit.000</EnumName>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -9589,6 +10147,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recRwEFucyvVZaXY2</SchemaAttributeId>
+      <createdTime>2022-11-17T06:08:40Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <Schema>rec3H5b04RB2vmYrk</Schema>
+      <Value>Unit</Value>
+      <Idx>1</Idx>
+      <Enum>rec75xMuw0SMkzjVc</Enum>
+      <TestValue>'00000000'</TestValue>
+      <EnumLocalName>market.price.unit</EnumLocalName>
+      <IsEnum>true</IsEnum>
+      <IsType>false</IsType>
+      <EnumName>market.price.unit.000</EnumName>
+      <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
+      <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recS9QjJmxGy17MnI</SchemaAttributeId>
       <createdTime>2022-11-06T20:03:48Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -9652,10 +10226,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>3</Idx>
       <Enum>rec75xMuw0SMkzjVc</Enum>
       <TestValue>'00000000'</TestValue>
-      <EnumLocalName>bid.price.unit</EnumLocalName>
+      <EnumLocalName>market.price.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.price.unit.000</EnumName>
+      <EnumName>market.price.unit.000</EnumName>
       <DefaultEnumValue>USDPerMWh</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -9707,7 +10281,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>Alias</Value>
       <Idx>1</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.iso.me.orange.ta'</TestValue>
+      <TestValue>'d1.iso.me.orange.ta'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -9723,7 +10297,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>MarketSlotName</Value>
       <Idx>2</Idx>
       <PrimitiveFormatId>recdsSDIz6EmZCvr9</PrimitiveFormatId>
-      <TestValue>"rt60gate5.dw1.isone.ver.keene.1667880000"</TestValue>
+      <TestValue>"rt60gate5.d1.isone.ver.keene.1667880000"</TestValue>
       <PrimitiveFormat>MarketSlotNameLrdFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -9799,6 +10373,20 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recTV2IpdZjy1gFiQ</SchemaAttributeId>
+      <createdTime>2022-11-17T02:19:53Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>rechVGhiKUuIgoWYy</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>SampleMarketSlotName</Value>
+      <Idx>3</Idx>
+      <PrimitiveFormatId>recdsSDIz6EmZCvr9</PrimitiveFormatId>
+      <PrimitiveFormat>MarketSlotNameLrdFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recTVpMk0yoQ95CTi</SchemaAttributeId>
       <createdTime>2022-08-11T15:30:34Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -9838,6 +10426,49 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <TestValue>"aaaa2222"</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recTmaH9Ix1tx009O</SchemaAttributeId>
+      <createdTime>2022-11-18T15:14:28Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recrZz3gmzl97POA1</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>SliceDurationMinutes</Value>
+      <Idx>32</Idx>
+      <TestValue>60</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recTov3rcOqhTWWcf</SchemaAttributeId>
+      <createdTime>2022-11-21T02:49:05Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recacY2b5R2bByiAQ</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>MarketSlotName</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recdsSDIz6EmZCvr9</PrimitiveFormatId>
+      <PrimitiveFormat>MarketSlotNameLrdFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recU5B4V3aPnvMPZf</SchemaAttributeId>
+      <createdTime>2022-11-21T05:24:55Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recf5K0BP9qLabpdS</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>FromGNodeAlias</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recU7a6o1lmKrFeWj</SchemaAttributeId>
@@ -10054,6 +10685,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recVgR5ZOHi7dvBav</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recViTC1TmtkHrDKI</SchemaAttributeId>
       <createdTime>2022-11-10T14:23:24Z</createdTime>
@@ -10210,9 +10842,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recDYjXYf8RbWmUFe</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>GateClosingMinutes</Value>
+      <Value>GateClosingSeconds</Value>
       <Idx>2</Idx>
-      <TestValue>30</TestValue>
+      <TestValue>60</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -10226,7 +10858,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>MarketSlotName</Value>
       <Idx>4</Idx>
       <PrimitiveFormatId>recdsSDIz6EmZCvr9</PrimitiveFormatId>
-      <TestValue>'rt60gate5.dw1.isone.ver.keene.1577854800'</TestValue>
+      <TestValue>'rt60gate5.d1.isone.ver.keene.1577854800'</TestValue>
       <PrimitiveFormat>MarketSlotNameLrdFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -10254,7 +10886,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveType>String</PrimitiveType>
       <Value>FromGNodeAlias</Value>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.tc'</TestValue>
+      <TestValue>'d1.time'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -10344,7 +10976,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrL6JzeVsiM6jjty/recXEIMX0kmlJ7eWH</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recXVUzIp49WFOFdH</SchemaAttributeId>
       <createdTime>2022-11-10T13:23:44Z</createdTime>
@@ -10572,9 +11203,9 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recbAMyCyUX2bLKfz</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>BoostPowerKwTimes10</Value>
+      <Value>BoostPowerKwTimes1000</Value>
       <Idx>2</Idx>
-      <TestValue>93</TestValue>
+      <TestValue>933</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
@@ -10789,6 +11420,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recbWq8Ueg7KgQie0</SchemaAttributeId>
+      <createdTime>2022-11-17T06:08:35Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>rec3H5b04RB2vmYrk</Schema>
+      <PrimitiveType>Integer</PrimitiveType>
+      <Value>ValueTimes1000</Value>
+      <Idx>0</Idx>
+      <TestValue>35342</TestValue>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recbXWZXIxr7MOnUv</SchemaAttributeId>
       <createdTime>2022-07-10T14:13:49Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -10832,6 +11476,19 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormat>PositiveInteger</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recbnSBQbnHs5KuDy</SchemaAttributeId>
+      <createdTime>2022-11-17T06:21:38Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <Schema>recbZXiheXqQdc7b6</Schema>
+      <SubTypeFormat>recLufl9jSdsMGsFR</SubTypeFormat>
+      <Value>Slot</Value>
+      <Idx>0</Idx>
+      <SubMessageFormatAlias>market.slot.000</SubMessageFormatAlias>
+      <IsEnum>false</IsEnum>
+      <IsType>true</IsType>
+      <SubMessageFormatAliasRoot>market.slot</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recbnmzJKD2TRpfWS</SchemaAttributeId>
@@ -11020,6 +11677,20 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recdUSog9bonuORLH</SchemaAttributeId>
+      <createdTime>2022-11-17T06:21:39Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsList>true</IsList>
+      <Schema>recbZXiheXqQdc7b6</Schema>
+      <SubTypeFormat>recacY2b5R2bByiAQ</SubTypeFormat>
+      <Value>Bids</Value>
+      <Idx>1</Idx>
+      <SubMessageFormatAlias>accepted.bid.000</SubMessageFormatAlias>
+      <IsEnum>false</IsEnum>
+      <IsType>true</IsType>
+      <SubMessageFormatAliasRoot>accepted.bid</SubMessageFormatAliasRoot>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recda7k1BL8wixO1c</SchemaAttributeId>
       <createdTime>2022-07-10T14:13:35Z</createdTime>
       <IsPrimitive>true</IsPrimitive>
@@ -11064,7 +11735,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>CtnGNodeAlias</Value>
       <Idx>2</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>'dw1.iso.me.ghm.orange.ta'</TestValue>
+      <TestValue>'d1.iso.me.ghm.orange.ta'</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -11124,10 +11795,10 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Idx>3</Idx>
       <Enum>recounhEj97w5SfDm</Enum>
       <TestValue>"c272f3b3"</TestValue>
-      <EnumLocalName>bid.quantity.unit</EnumLocalName>
+      <EnumLocalName>market.quantity.unit</EnumLocalName>
       <IsEnum>true</IsEnum>
       <IsType>false</IsType>
-      <EnumName>bid.quantity.unit.000</EnumName>
+      <EnumName>market.quantity.unit.000</EnumName>
       <DefaultEnumValue>AvgMW</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
@@ -11381,6 +12052,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recgb4I6CvYgu6S4D</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recgdJntx0xcLzbqq</SchemaAttributeId>
       <createdTime>2022-09-19T18:21:58Z</createdTime>
@@ -11521,7 +12193,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>MarketSlotName</Value>
       <Idx>2</Idx>
       <PrimitiveFormatId>recdsSDIz6EmZCvr9</PrimitiveFormatId>
-      <TestValue>'rt60gate5.dw1.isone.ver.keene.1577854800'</TestValue>
+      <TestValue>'rt60gate5.d1.isone.ver.keene.1577854800'</TestValue>
       <PrimitiveFormat>MarketSlotNameLrdFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -11580,6 +12252,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <TestValue>"Gridworks Simulated Boolean Actuator"</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>reciDBLc8MRRJUFnC</SchemaAttributeId>
+      <createdTime>2022-11-18T16:05:29Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>rec3fLb6b0gIeuCTO</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>GNodeAlias</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.isone.ver.keene.holly"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>reciGUKC09U7flB6M</SchemaAttributeId>
@@ -11704,7 +12392,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>true</IsType>
       <SubMessageFormatAliasRoot>gt.sh.status.snapshot</SubMessageFormatAliasRoot>
     </SchemaAttribute>
-    <SchemaAttribute>itrL6JzeVsiM6jjty/recjXMbjBpdJFTXBi</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recjdjO1e7eWo3j8T</SchemaAttributeId>
       <createdTime>2022-07-03T21:26:50Z</createdTime>
@@ -12454,6 +13141,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaAttributeId>recpgal2oH6WI7vbc</SchemaAttributeId>
       <createdTime>2022-11-08T04:13:13Z</createdTime>
       <IsRequired>true</IsRequired>
+      <DefaultValue>False</DefaultValue>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recH9GUDdSB7SiwNG</Schema>
       <PrimitiveType>Boolean</PrimitiveType>
@@ -12671,7 +13359,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recbAMyCyUX2bLKfz</Schema>
       <PrimitiveType>Integer</PrimitiveType>
       <Value>MaxStoreKwh</Value>
-      <Idx>5</Idx>
+      <Idx>6</Idx>
       <TestValue>80</TestValue>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -12736,6 +13424,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recrrGZ3RvMBzGjrP</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recs9j9qZr50sugIe</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:21Z</createdTime>
@@ -12796,6 +13485,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>1656245000</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recscJlOCJSX2ckU5</SchemaAttributeId>
+      <createdTime>2022-11-21T05:25:03Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>recf5K0BP9qLabpdS</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>ToGNodeAlias</Value>
+      <Idx>2</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.time"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recstfJ6XtUvbv3Vc</SchemaAttributeId>
@@ -12940,20 +13645,36 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>rec7peRuDqMNa0vlW</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>IrlTimeUnixS</Value>
+      <Value>TimestepCreatedMs</Value>
       <Idx>3</Idx>
-      <PrimitiveFormatId>rec13dujLuXXSf5L3</PrimitiveFormatId>
-      <TestValue>1667852537</TestValue>
-      <PrimitiveFormat>ReasonableUnixTimeS</PrimitiveFormat>
+      <PrimitiveFormatId>recqSXVzLo8RtEjlH</PrimitiveFormatId>
+      <TestValue>1667852537000</TestValue>
+      <PrimitiveFormat>ReasonableUnixTimeMs</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
-      <PrimitiveFormatFail1>32503683600</PrimitiveFormatFail1>
+      <PrimitiveFormatFail1>1656245000</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recvYOPJ5xN3hequZ</SchemaAttributeId>
       <createdTime>2022-09-19T18:26:44Z</createdTime>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
+    </SchemaAttribute>
+    <SchemaAttribute>
+      <SchemaAttributeId>recvq0MygOUulKFdl</SchemaAttributeId>
+      <createdTime>2022-11-17T01:55:36Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <Schema>rechVGhiKUuIgoWYy</Schema>
+      <PrimitiveType>String</PrimitiveType>
+      <Value>GNodeAlias</Value>
+      <Idx>0</Idx>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <TestValue>"d1.isone.ver.keene"</TestValue>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recvtYAI3ds1gFdaM</SchemaAttributeId>
@@ -13014,6 +13735,21 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SubMessageFormatAliasRoot>gt.electric.heater.component</SubMessageFormatAliasRoot>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>recwDJqmDK7sTdTTC</SchemaAttributeId>
+      <createdTime>2022-11-17T02:18:26Z</createdTime>
+      <IsRequired>true</IsRequired>
+      <IsList>true</IsList>
+      <Schema>rechVGhiKUuIgoWYy</Schema>
+      <SubTypeFormat>recDYjXYf8RbWmUFe</SubTypeFormat>
+      <Value>MarketTypeList</Value>
+      <Idx>1</Idx>
+      <SubMessageFormatAlias>market.type.gt.000</SubMessageFormatAlias>
+      <IsEnum>false</IsEnum>
+      <IsType>true</IsType>
+      <SubTypeDataClass>MarketType</SubTypeDataClass>
+      <SubMessageFormatAliasRoot>market.type.gt</SubMessageFormatAliasRoot>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>recwP7nYNSdWeR3vj</SchemaAttributeId>
       <createdTime>2022-07-25T22:45:11Z</createdTime>
       <Schema>recyD0ycgUiT7TiH2</Schema>
@@ -13052,22 +13788,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
     </SchemaAttribute>
     <SchemaAttribute>
-      <SchemaAttributeId>recwn71nnfdBV252s</SchemaAttributeId>
-      <createdTime>2022-11-11T00:46:24Z</createdTime>
-      <IsRequired>true</IsRequired>
-      <IsPrimitive>true</IsPrimitive>
-      <Schema>rec3fLb6b0gIeuCTO</Schema>
-      <PrimitiveType>String</PrimitiveType>
-      <Value>GNodeAlias</Value>
-      <Idx>0</Idx>
-      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>"dw1.isone.ver.keene.holly"</TestValue>
-      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
-      <IsEnum>false</IsEnum>
-      <IsType>false</IsType>
-      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
-    </SchemaAttribute>
-    <SchemaAttribute>
       <SchemaAttributeId>recx4xJLSgpMi1EVN</SchemaAttributeId>
       <createdTime>2022-11-06T20:03:58Z</createdTime>
       <IsPrimitive>true</IsPrimitive>
@@ -13079,7 +13799,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrL6JzeVsiM6jjty/recx4xJLSgpMi1EVN</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recxZawnFBV5tyTsV</SchemaAttributeId>
       <createdTime>2022-11-08T04:13:00Z</createdTime>
@@ -13087,7 +13806,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>recH9GUDdSB7SiwNG</Schema>
       <PrimitiveType>String</PrimitiveType>
-      <Value>BidderGNodeId</Value>
+      <Value>BidderGNodeInstanceId</Value>
       <Idx>1</Idx>
       <PrimitiveFormatId>rec24qjC90m0f4Kvl</PrimitiveFormatId>
       <TestValue>"d4057686-c199-4274-b595-f7e39ce863e2"</TestValue>
@@ -13114,6 +13833,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <Value>EmitterPumpFeedbackModel</Value>
       <Idx>21</Idx>
+      <EnumAbbreviation>pump.model</EnumAbbreviation>
       <Enum>rec57bh9xoIxLUHjY</Enum>
       <TestValue>"00000000"</TestValue>
       <EnumLocalName>emitter.pump.feedback.model</EnumLocalName>
@@ -13172,6 +13892,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Schema>recrZz3gmzl97POA1</Schema>
       <Value>MixingValveFeedbackModel</Value>
       <Idx>22</Idx>
+      <EnumAbbreviation>mixing.valve.model</EnumAbbreviation>
       <Enum>recX0A9nSriRUvl9n</Enum>
       <TestValue>"0397c1df"</TestValue>
       <EnumLocalName>mixing.valve.feedback.model</EnumLocalName>
@@ -13272,7 +13993,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Value>FromGNodeAlias</Value>
       <Idx>0</Idx>
       <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
-      <TestValue>"dw1.isone.ver.keene.holly"</TestValue>
+      <TestValue>"d1.isone.ver.keene.holly"</TestValue>
       <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
@@ -14146,9 +14867,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>reccl6zfh9EN32iFD</MpSchemaAttributes>
       <MpSchemaAttributes>recABBs8u89Tj3Iu2</MpSchemaAttributes>
       <MpSchemaAttributes>recKC523HTZfmLKCA</MpSchemaAttributes>
-      <MpSchemaAttributes>recvEZ0oKpVYcIXNN</MpSchemaAttributes>
       <MpSchemaAttributes>recwWl6qWsyeh76o4</MpSchemaAttributes>
       <MpSchemaAttributes>receaI7kIGQr97TD5</MpSchemaAttributes>
+      <MpSchemaAttributes>recC2OJXewZyxgy8T</MpSchemaAttributes>
       <Name>ReasonableUnixTimeS</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14209,6 +14930,9 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>rechDjfq6buysCo5K</MpSchemaAttributes>
       <MpSchemaAttributes>recDK3v8t65JbIgGo</MpSchemaAttributes>
       <MpSchemaAttributes>recWvVApidAuVFsAP</MpSchemaAttributes>
+      <MpSchemaAttributes>recBYlRmPwCbVbTMn</MpSchemaAttributes>
+      <MpSchemaAttributes>rec6tXwpa0rqEikXW</MpSchemaAttributes>
+      <MpSchemaAttributes>recM33kM7FUIUQYie</MpSchemaAttributes>
       <Name>UuidCanonicalTextual</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14310,9 +15034,17 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recIKbu4rYF1nXhPD</MpSchemaAttributes>
       <MpSchemaAttributes>rec9XARl8tvdTDGbm</MpSchemaAttributes>
       <MpSchemaAttributes>rec7Kmzb0rNhgYfq6</MpSchemaAttributes>
-      <MpSchemaAttributes>recwn71nnfdBV252s</MpSchemaAttributes>
       <MpSchemaAttributes>recJZMdMai2LWeadg</MpSchemaAttributes>
       <MpSchemaAttributes>recsXoFOxudbW1SiS</MpSchemaAttributes>
+      <MpSchemaAttributes>recvq0MygOUulKFdl</MpSchemaAttributes>
+      <MpSchemaAttributes>rec1hFSN0SKmeE8CV</MpSchemaAttributes>
+      <MpSchemaAttributes>rec3akDIjr7e9Pb0u</MpSchemaAttributes>
+      <MpSchemaAttributes>reciDBLc8MRRJUFnC</MpSchemaAttributes>
+      <MpSchemaAttributes>rec4VyYOa9NyxUjui</MpSchemaAttributes>
+      <MpSchemaAttributes>recU5B4V3aPnvMPZf</MpSchemaAttributes>
+      <MpSchemaAttributes>recscJlOCJSX2ckU5</MpSchemaAttributes>
+      <MpSchemaAttributes>recPw5jcOzArg9D84</MpSchemaAttributes>
+      <MpSchemaAttributes>rec4XKd6lO34y5XKU</MpSchemaAttributes>
       <Name>LrdAliasFormat</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14328,6 +15060,8 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recT1nhwCuJiHkC52</MpSchemaAttributes>
       <MpSchemaAttributes>recW7xrCzv88NSkzD</MpSchemaAttributes>
       <MpSchemaAttributes>rechysRxaDzIfMVDw</MpSchemaAttributes>
+      <MpSchemaAttributes>recTV2IpdZjy1gFiQ</MpSchemaAttributes>
+      <MpSchemaAttributes>recTov3rcOqhTWWcf</MpSchemaAttributes>
       <Name>MarketSlotNameLrdFormat</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14400,6 +15134,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>reczfNmiB9hWAkSsY</MpSchemaAttributes>
       <MpSchemaAttributes>recDMDjJ0WR1xxx1F</MpSchemaAttributes>
       <MpSchemaAttributes>recuI66lGgVCVPoNn</MpSchemaAttributes>
+      <MpSchemaAttributes>recvEZ0oKpVYcIXNN</MpSchemaAttributes>
       <Name>ReasonableUnixTimeMs</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14418,6 +15153,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recElgddLa2jgifep</MpSchemaAttributes>
       <MpSchemaAttributes>recTGNe2hCg0CwUye</MpSchemaAttributes>
       <MpSchemaAttributes>rec6n5D0n75iRarhL</MpSchemaAttributes>
+      <MpSchemaAttributes>recOeaCOt6KQeMuNX</MpSchemaAttributes>
       <Name>AlgoMsgPackEncoded</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -14430,6 +15166,56 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
     </PropertyFormat>
   </PropertyFormats>
   <Protocols>
+    <Protocol>
+      <ProtocolId>rec2J6tKssVJwVmFd</ProtocolId>
+      <createdTime>2022-11-21T14:51:34Z</createdTime>
+      <ProtocolTypes>recVyJz6EmMdwDjYy</ProtocolTypes>
+      <ProtocolTypes>recHxMHk1Q13AGxQT</ProtocolTypes>
+      <ProtocolTypes>recD9RSdxZFlCh0nV</ProtocolTypes>
+      <ProtocolTypes>rec0Uk7vhJUpp68kq</ProtocolTypes>
+      <ProtocolTypes>recM8DeGDMOPo9ezd</ProtocolTypes>
+      <ProtocolTypes>recRLpRImAACQhmSj</ProtocolTypes>
+      <ProtocolTypes>recs8N9wVyonAKE8y</ProtocolTypes>
+      <ProtocolTypes>recyENjaG4Mi1n27B</ProtocolTypes>
+      <Name>gnr</Name>
+      <ProtocolEnums>recCEQgAR8tPu4mgu</ProtocolEnums>
+      <ProtocolEnums>recUiiAdTTH4zmBfJ</ProtocolEnums>
+      <ProtocolEnums>recmacM072NkqkOW1</ProtocolEnums>
+      <ProtocolEnums>recT6IKeUqmmI7L84</ProtocolEnums>
+      <ProtocolEnums>recsRpVdgR7q3fCML</ProtocolEnums>
+      <ProtocolEnums>recZKMG3hALXcWQuc</ProtocolEnums>
+      <ProtocolEnums>recA0Q62wqmXkzSse</ProtocolEnums>
+    </Protocol>
+    <Protocol>
+      <ProtocolId>rec3E1mvlkD3mlc6K</ProtocolId>
+      <createdTime>2022-11-16T19:07:38Z</createdTime>
+      <ProtocolTypes>recwv4Bsb1NA1uZxn</ProtocolTypes>
+      <ProtocolTypes>recSIwq3BdNSAxp2e</ProtocolTypes>
+      <ProtocolTypes>recHI1eoqW0ZYKblM</ProtocolTypes>
+      <ProtocolTypes>recrWS8cReivzRx92</ProtocolTypes>
+      <ProtocolTypes>rec1qAnTlin7a194M</ProtocolTypes>
+      <ProtocolTypes>rec8cREVO03dOhbWy</ProtocolTypes>
+      <ProtocolTypes>recMvuzDPwhs257Bs</ProtocolTypes>
+      <ProtocolTypes>rec5dH5f6YcOKD0RU</ProtocolTypes>
+      <ProtocolTypes>recx5JlRHk2l9zzQK</ProtocolTypes>
+      <ProtocolTypes>recOVsu1AQ1nyhMTN</ProtocolTypes>
+      <ProtocolTypes>recYts9GI3HDasco4</ProtocolTypes>
+      <ProtocolTypes>recleupDcbcVTVRQ9</ProtocolTypes>
+      <ProtocolTypes>recPkFr8lDBRTXq08</ProtocolTypes>
+      <ProtocolTypes>recbV3eBvST23mHgN</ProtocolTypes>
+      <ProtocolTypes>recvpIR8rXsHiuLTP</ProtocolTypes>
+      <Description>Gridworks MarketMaker</Description>
+      <Name>gwmm</Name>
+      <ProtocolEnums>rect0T4CM09fP7g2t</ProtocolEnums>
+      <ProtocolEnums>recTt38mXlQtJdywQ</ProtocolEnums>
+      <ProtocolEnums>reck0WsxFdPOoe5ZM</ProtocolEnums>
+      <ProtocolEnums>recGhJkY0Egp6jCRt</ProtocolEnums>
+      <ProtocolEnums>recmNuAp0alwhubds</ProtocolEnums>
+      <ProtocolEnums>rec9HtmIiTasYUNy0</ProtocolEnums>
+      <ProtocolEnums>recISSyBDybwCsc9S</ProtocolEnums>
+      <ProtocolEnums>recihvUJVR6oEfEap</ProtocolEnums>
+      <ProtocolEnums>rec8YFBXCvMbO7Fnc</ProtocolEnums>
+    </Protocol>
     <Protocol>
       <ProtocolId>rec3nJaxOMLIKJoNY</ProtocolId>
       <createdTime>2022-10-24T23:07:49Z</createdTime>
@@ -14448,8 +15234,10 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>recGpv7lXS5nQj5jR</ProtocolTypes>
       <ProtocolTypes>recfsDYNRW0af16Ol</ProtocolTypes>
       <ProtocolTypes>recFreOp8J4dIjXkD</ProtocolTypes>
-      <ProtocolTypes>recvYKEgKxumNmkih</ProtocolTypes>
       <ProtocolTypes>rec5K84S2MN0iMNlE</ProtocolTypes>
+      <ProtocolTypes>recIoZYIHWRvJnjRa</ProtocolTypes>
+      <ProtocolTypes>recLBYNcGvIrpb1nX</ProtocolTypes>
+      <ProtocolTypes>recKs7BOeqelLodrB</ProtocolTypes>
       <Name>atn</Name>
       <ProtocolEnums>recLjDrJSnNnwWD54</ProtocolEnums>
       <ProtocolEnums>recRncRvdA6tysnAt</ProtocolEnums>
@@ -14462,18 +15250,31 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolEnums>reclDWkXtj41G28wW</ProtocolEnums>
       <ProtocolEnums>rec1AjUKBV2cKU0zq</ProtocolEnums>
       <ProtocolEnums>rec9izwc0IQmbp6gf</ProtocolEnums>
-      <ProtocolEnums>recy37qKrW01vTt7S</ProtocolEnums>
       <ProtocolEnums>rec8B7NqLQHwAZjcw</ProtocolEnums>
       <ProtocolEnums>recJX40Wt0rcWDFET</ProtocolEnums>
       <ProtocolEnums>recaWGhVScY6KXA44</ProtocolEnums>
       <ProtocolEnums>recf2bjSGV3D1Ml5i</ProtocolEnums>
       <ProtocolEnums>recGcb0eH9z0Np8jd</ProtocolEnums>
+      <ProtocolEnums>recy37qKrW01vTt7S</ProtocolEnums>
     </Protocol>
     <Protocol>
       <ProtocolId>rec5aZ8ud9lQDmlBu</ProtocolId>
       <createdTime>2022-10-24T23:07:49Z</createdTime>
       <Description>Protocol used by the SCADA repository</Description>
       <Name>gwproto</Name>
+    </Protocol>
+    <Protocol>
+      <ProtocolId>recN6489A2iI0CRXz</ProtocolId>
+      <createdTime>2022-11-21T05:23:07Z</createdTime>
+      <ProtocolTypes>recTvm4cpEzdavk6J</ProtocolTypes>
+      <ProtocolTypes>recl5eLv36HJnILWJ</ProtocolTypes>
+      <ProtocolTypes>recianedmKDqWVh0O</ProtocolTypes>
+      <Name>gworld</Name>
+      <ProtocolEnums>recxchS4k09ivH7vN</ProtocolEnums>
+      <ProtocolEnums>recWkTXMymydxR5UX</ProtocolEnums>
+      <ProtocolEnums>recV9jP0nFcRCDphV</ProtocolEnums>
+      <ProtocolEnums>recLgjTEHK9NGb3nq</ProtocolEnums>
+      <ProtocolEnums>recfChwtbhGYGwQAx</ProtocolEnums>
     </Protocol>
     <Protocol>
       <ProtocolId>recXaQaXNNDyxIlT7</ProtocolId>
@@ -14499,10 +15300,16 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>recQItJExa3ZiV3Jh</ProtocolTypes>
       <ProtocolTypes>reciUjZq6Ym3P59mT</ProtocolTypes>
       <ProtocolTypes>reccEMLYgCyyYLPr2</ProtocolTypes>
+      <ProtocolTypes>recY4ZPVnAi4v6y0i</ProtocolTypes>
+      <ProtocolTypes>recZCRfLe9nDmrRAU</ProtocolTypes>
       <Name>gnf</Name>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
       <ProtocolEnums>rec8Ahq8RdNkgPzQN</ProtocolEnums>
+      <ProtocolEnums>recjOCdfp4V6Ugqfs</ProtocolEnums>
+      <ProtocolEnums>rec7riMLKDhllLHJF</ProtocolEnums>
+      <ProtocolEnums>recesY3Van2qeFjV0</ProtocolEnums>
+      <ProtocolEnums>reczs2uW5OOP1dIaw</ProtocolEnums>
     </Protocol>
     <Protocol>
       <ProtocolId>recre1axpcL8VVuaQ</ProtocolId>
@@ -14510,6 +15317,8 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>recnBbGAlK4U8sngT</ProtocolTypes>
       <ProtocolTypes>reccuFJPlMliv6yW8</ProtocolTypes>
       <ProtocolTypes>rec2Gvd8Nt7DvqTpf</ProtocolTypes>
+      <ProtocolTypes>rec1nKwt8hPeDIqrE</ProtocolTypes>
+      <ProtocolTypes>recOEHxBFFDNPACx1</ProtocolTypes>
       <Name>gwtime</Name>
       <ProtocolEnums>recpKd5HOmAf37QY5</ProtocolEnums>
       <ProtocolEnums>recZKMmBxWot2RY5F</ProtocolEnums>
@@ -14519,6 +15328,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
     </Protocol>
   </Protocols>
   <ProtocolTypes>
+    <ProtocolType>
+      <ProtocolTypeId>rec0Uk7vhJUpp68kq</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:22Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>reca1A5UXpnpmZdiH</Type>
+      <Name>gnr basegnode.other.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.other.create.000</TypeName>
+    </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec0yahRyau7Mzmzk</ProtocolTypeId>
       <createdTime>2022-11-08T04:00:15Z</createdTime>
@@ -14536,6 +15354,24 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gnf basegnodes.broadcast.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>basegnodes.broadcast.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>rec1nKwt8hPeDIqrE</ProtocolTypeId>
+      <createdTime>2022-11-21T05:22:31Z</createdTime>
+      <Protocol>recre1axpcL8VVuaQ</Protocol>
+      <Type>recX2g8OLICXZHuHr</Type>
+      <Name>gwtime resume.time.000</Name>
+      <ProtocolName>gwtime</ProtocolName>
+      <TypeName>resume.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>rec1qAnTlin7a194M</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:23Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recxNIfCRauFrb57o</Type>
+      <Name>gwmm heartbeat.a.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>heartbeat.a.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec2Gvd8Nt7DvqTpf</ProtocolTypeId>
@@ -14581,6 +15417,24 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>atn terminalasset.certify.hack.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>terminalasset.certify.hack.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>rec5dH5f6YcOKD0RU</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:53Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recsHXkpUxoOF9vYp</Type>
+      <Name>gwmm price.quantity.unitless.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>price.quantity.unitless.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>rec8cREVO03dOhbWy</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:31Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recd5K0XiAzHsj2Pw</Type>
+      <Name>gwmm latest.price.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>latest.price.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec9HUzZ3tgJOalLk</ProtocolTypeId>
@@ -14642,6 +15496,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name></Name>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recD9RSdxZFlCh0nV</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:19Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>rec70ndc2atifo8Ri</Type>
+      <Name>gnr basegnode.marketmaker.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.marketmaker.create.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recDST3lwGBFXqsz1</ProtocolTypeId>
       <createdTime>2022-11-08T04:09:15Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
@@ -14658,6 +15521,11 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>atn tadeed.specs.hack.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>tadeed.specs.hack.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recFxZw9Lrr4wrO5U</ProtocolTypeId>
+      <createdTime>2022-11-17T06:20:56Z</createdTime>
+      <Name></Name>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recGRKTWPhlGhVZqf</ProtocolTypeId>
@@ -14678,6 +15546,33 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>flo.params.heatpumpwithbooststore.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recHI1eoqW0ZYKblM</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:01Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recvGFiTtzXNrhLBm</Type>
+      <Name>gwmm bid.ack.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>bid.ack.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recHxMHk1Q13AGxQT</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:17Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recDp8U1jLA9zeEx2</Type>
+      <Name>gnr basegnode.gt.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.gt.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recIoZYIHWRvJnjRa</ProtocolTypeId>
+      <createdTime>2022-11-17T15:43:53Z</createdTime>
+      <Protocol>rec3nJaxOMLIKJoNY</Protocol>
+      <Type>rec3H5b04RB2vmYrk</Type>
+      <Name>atn market.price.000</Name>
+      <ProtocolName>atn</ProtocolName>
+      <TypeName>market.price.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recJyGiKdNEsSmseU</ProtocolTypeId>
       <createdTime>2022-11-10T13:22:55Z</createdTime>
       <Name></Name>
@@ -14688,13 +15583,67 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name></Name>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recKs7BOeqelLodrB</ProtocolTypeId>
+      <createdTime>2022-11-21T02:50:13Z</createdTime>
+      <Protocol>rec3nJaxOMLIKJoNY</Protocol>
+      <Type>recacY2b5R2bByiAQ</Type>
+      <Name>atn accepted.bid.000</Name>
+      <ProtocolName>atn</ProtocolName>
+      <TypeName>accepted.bid.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recLBYNcGvIrpb1nX</ProtocolTypeId>
+      <createdTime>2022-11-17T16:39:07Z</createdTime>
+      <Protocol>rec3nJaxOMLIKJoNY</Protocol>
+      <Type>recLufl9jSdsMGsFR</Type>
+      <Name>atn market.slot.000</Name>
+      <ProtocolName>atn</ProtocolName>
+      <TypeName>market.slot.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recM6At5qFrk4dsir</ProtocolTypeId>
       <createdTime>2022-11-07T18:58:07Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recbAMyCyUX2bLKfz</Type>
-      <Name>atn hack.state.000</Name>
+      <Name>atn atn.state.heatpumpwithbooststore.000</Name>
       <ProtocolName>atn</ProtocolName>
-      <TypeName>hack.state.000</TypeName>
+      <TypeName>atn.state.heatpumpwithbooststore.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recM8DeGDMOPo9ezd</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:25Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recazQb2vEXgbroHd</Type>
+      <Name>gnr basegnode.terminalasset.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.terminalasset.create.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recMvuzDPwhs257Bs</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:40Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recDYjXYf8RbWmUFe</Type>
+      <Name>gwmm market.type.gt.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>market.type.gt.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recOEHxBFFDNPACx1</ProtocolTypeId>
+      <createdTime>2022-11-21T05:22:50Z</createdTime>
+      <Protocol>recre1axpcL8VVuaQ</Protocol>
+      <Type>recf5K0BP9qLabpdS</Type>
+      <Name>gwtime pause.time.000</Name>
+      <ProtocolName>gwtime</ProtocolName>
+      <TypeName>pause.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recOVsu1AQ1nyhMTN</ProtocolTypeId>
+      <createdTime>2022-11-16T19:18:24Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>rec7peRuDqMNa0vlW</Type>
+      <Name>gwmm sim.timestep.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>sim.timestep.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recPRrjd1GyqOVHIZ</ProtocolTypeId>
@@ -14706,6 +15655,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>old.tadeed.algo.return.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recPkFr8lDBRTXq08</ProtocolTypeId>
+      <createdTime>2022-11-17T06:08:11Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>rec3H5b04RB2vmYrk</Type>
+      <Name>gwmm market.price.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>market.price.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recQItJExa3ZiV3Jh</ProtocolTypeId>
       <createdTime>2022-11-04T17:59:59Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
@@ -14715,13 +15673,58 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>new.tadeed.send.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recRLpRImAACQhmSj</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:28Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recT4SSkJ18pz5YoZ</Type>
+      <Name>gnr basegnodes.broadcast.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnodes.broadcast.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recSIwq3BdNSAxp2e</ProtocolTypeId>
+      <createdTime>2022-11-16T19:16:46Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recH9GUDdSB7SiwNG</Type>
+      <Name>gwmm atn.bid.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>atn.bid.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recSNej4i6EwucKbV</ProtocolTypeId>
       <createdTime>2022-11-08T04:42:44Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <Type>recH9GUDdSB7SiwNG</Type>
-      <Name>atn bid.000</Name>
+      <Name>atn atn.bid.000</Name>
       <ProtocolName>atn</ProtocolName>
-      <TypeName>bid.000</TypeName>
+      <TypeName>atn.bid.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recTvm4cpEzdavk6J</ProtocolTypeId>
+      <createdTime>2022-11-21T05:23:19Z</createdTime>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <Type>recX2g8OLICXZHuHr</Type>
+      <Name>gworld resume.time.000</Name>
+      <ProtocolName>gworld</ProtocolName>
+      <TypeName>resume.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recVyJz6EmMdwDjYy</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:12Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recJH4tbXOqVJkMVW</Type>
+      <Name>gnr basegnode.ctn.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.ctn.create.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recY4ZPVnAi4v6y0i</ProtocolTypeId>
+      <createdTime>2022-11-21T07:12:50Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Type>recX2g8OLICXZHuHr</Type>
+      <Name>gnf resume.time.000</Name>
+      <ProtocolName>gnf</ProtocolName>
+      <TypeName>resume.time.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recY5s5LoUEwNBowT</ProtocolTypeId>
@@ -14742,6 +15745,24 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>initial.tadeed.algo.optin.001</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recYts9GI3HDasco4</ProtocolTypeId>
+      <createdTime>2022-11-17T02:17:30Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>rechVGhiKUuIgoWYy</Type>
+      <Name>gwmm market.maker.info.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>market.maker.info.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recZCRfLe9nDmrRAU</ProtocolTypeId>
+      <createdTime>2022-11-21T07:13:02Z</createdTime>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <Type>recf5K0BP9qLabpdS</Type>
+      <Name>gnf pause.time.000</Name>
+      <ProtocolName>gnf</ProtocolName>
+      <TypeName>pause.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recZiKOMXJ8UCneY9</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:12Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
@@ -14758,6 +15779,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>atn latest.price.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>latest.price.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recbV3eBvST23mHgN</ProtocolTypeId>
+      <createdTime>2022-11-17T06:14:01Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recacY2b5R2bByiAQ</Type>
+      <Name>gwmm accepted.bid.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>accepted.bid.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>reccEMLYgCyyYLPr2</ProtocolTypeId>
@@ -14823,6 +15853,33 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>tadeed.specs.hack.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recianedmKDqWVh0O</ProtocolTypeId>
+      <createdTime>2022-11-21T05:23:50Z</createdTime>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <Type>recxNIfCRauFrb57o</Type>
+      <Name>gworld heartbeat.a.000</Name>
+      <ProtocolName>gworld</ProtocolName>
+      <TypeName>heartbeat.a.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recl5eLv36HJnILWJ</ProtocolTypeId>
+      <createdTime>2022-11-21T05:23:30Z</createdTime>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <Type>recf5K0BP9qLabpdS</Type>
+      <Name>gworld pause.time.000</Name>
+      <ProtocolName>gworld</ProtocolName>
+      <TypeName>pause.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recleupDcbcVTVRQ9</ProtocolTypeId>
+      <createdTime>2022-11-17T06:03:37Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recLufl9jSdsMGsFR</Type>
+      <Name>gwmm market.slot.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>market.slot.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recmXImdzdJvIhwRj</ProtocolTypeId>
       <createdTime>2022-11-06T19:58:32Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
@@ -14839,6 +15896,24 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gwtime heartbeat.a.000</Name>
       <ProtocolName>gwtime</ProtocolName>
       <TypeName>heartbeat.a.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recrWS8cReivzRx92</ProtocolTypeId>
+      <createdTime>2022-11-16T19:17:13Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>rec8uTC7GK5qgXzg9</Type>
+      <Name>gwmm gnode.gt.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>gnode.gt.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recs8N9wVyonAKE8y</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:35Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>rec8ILTteHhn4MpGd</Type>
+      <Name>gnr basegnodes.get.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnodes.get.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recsRFfTXSym7gX54</ProtocolTypeId>
@@ -14886,13 +15961,31 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>sim.timestep.000</TypeName>
     </ProtocolType>
     <ProtocolType>
-      <ProtocolTypeId>recvYKEgKxumNmkih</ProtocolTypeId>
-      <createdTime>2022-11-12T08:37:15Z</createdTime>
-      <Protocol>rec3nJaxOMLIKJoNY</Protocol>
-      <Type>recTKuleOQoZ3n0HH</Type>
-      <Name>atn tadaemon.sk.hack.000</Name>
-      <ProtocolName>atn</ProtocolName>
-      <TypeName>tadaemon.sk.hack.000</TypeName>
+      <ProtocolTypeId>recvpIR8rXsHiuLTP</ProtocolTypeId>
+      <createdTime>2022-11-17T06:20:58Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recbZXiheXqQdc7b6</Type>
+      <Name>gwmm market.book.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>market.book.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recwv4Bsb1NA1uZxn</ProtocolTypeId>
+      <createdTime>2022-11-16T19:16:08Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>rechXkF4uGNAulje7</Type>
+      <Name>gwmm price.quantity.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>price.quantity.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recx5JlRHk2l9zzQK</ProtocolTypeId>
+      <createdTime>2022-11-16T19:18:06Z</createdTime>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <Type>recc2Km1jUViJqVeK</Type>
+      <Name>gwmm ready.000</Name>
+      <ProtocolName>gwmm</ProtocolName>
+      <TypeName>ready.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recxtr4LhX2Ixojmg</ProtocolTypeId>
@@ -14902,6 +15995,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gnf tavalidatorcert.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>tavalidatorcert.algo.transfer.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recyENjaG4Mi1n27B</ProtocolTypeId>
+      <createdTime>2022-11-21T15:21:50Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recxNIfCRauFrb57o</Type>
+      <Name>gnr heartbeat.a.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>heartbeat.a.000</TypeName>
     </ProtocolType>
   </ProtocolTypes>
   <GNodeRoles>
@@ -15039,10 +16141,10 @@ characterized electrical device, using the meter described, at the location desc
       <createdTime>2022-11-08T16:21:31Z</createdTime>
       <FromId>recrICKb8tuEXHz73</FromId>
       <Payload>recbAMyCyUX2bLKfz</Payload>
-      <Name>atomictnode broadcasts hack.state v000</Name>
+      <Name>atomictnode broadcasts atn.state.heatpumpwithbooststore v000</Name>
       <FromRole>AtomicTNode</FromRole>
       <From>atomictnode</From>
-      <PayloadTypeName>hack.state</PayloadTypeName>
+      <PayloadTypeName>atn.state.heatpumpwithbooststore</PayloadTypeName>
       <PayloadVersion>000</PayloadVersion>
     </Topic>
     <Topic>
@@ -15195,6 +16297,14 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>universe.type.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>rec7riMLKDhllLHJF</ProtocolEnumId>
+      <createdTime>2022-11-21T07:38:28Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>universe.type.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>rec8Ahq8RdNkgPzQN</ProtocolEnumId>
       <createdTime>2022-10-31T18:31:02Z</createdTime>
       <Enum>recqx4EqT3OFtnxTG</Enum>
@@ -15208,7 +16318,23 @@ characterized electrical device, using the meter described, at the location desc
       <Enum>rec75xMuw0SMkzjVc</Enum>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
-      <EnumName>bid.price.unit.000</EnumName>
+      <EnumName>market.price.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>rec8YFBXCvMbO7Fnc</ProtocolEnumId>
+      <createdTime>2022-11-16T19:40:48Z</createdTime>
+      <Enum>recZmZP13YV9Rmbnw</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>market.type.name.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>rec9HtmIiTasYUNy0</ProtocolEnumId>
+      <createdTime>2022-11-16T19:20:54Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>message.category.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>rec9bDgohSOum1o1F</ProtocolEnumId>
@@ -15227,6 +16353,22 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>recognized.temperature.unit.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recA0Q62wqmXkzSse</ProtocolEnumId>
+      <createdTime>2022-11-21T15:04:10Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recCEQgAR8tPu4mgu</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:31Z</createdTime>
+      <Enum>rec5HXPeyp3jic6FV</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>core.g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recDa8t2QVwfTLzpo</ProtocolEnumId>
       <createdTime>2022-11-06T16:52:31Z</createdTime>
       <Enum>recLQWqTvGwSz2GcN</Enum>
@@ -15243,12 +16385,41 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>universe.type.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recGhJkY0Egp6jCRt</ProtocolEnumId>
+      <createdTime>2022-11-16T19:20:29Z</createdTime>
+      <Enum>recounhEj97w5SfDm</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>market.quantity.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recISSyBDybwCsc9S</ProtocolEnumId>
+      <createdTime>2022-11-16T19:21:02Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>message.category.symbol.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recIqNIyjBeIu6oTe</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:01Z</createdTime>
+      <fields />
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recJX40Wt0rcWDFET</ProtocolEnumId>
       <createdTime>2022-11-08T04:24:21Z</createdTime>
       <Enum>recZmZP13YV9Rmbnw</Enum>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
-      <EnumName>market.type.alias.000</EnumName>
+      <EnumName>market.type.name.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recLgjTEHK9NGb3nq</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:17Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <ProtocolName>gworld</ProtocolName>
+      <EnumName>message.category.symbol.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recLjDrJSnNnwWD54</ProtocolEnumId>
@@ -15283,6 +16454,22 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>spaceheat.telemetry.name.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recT6IKeUqmmI7L84</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:17Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>message.category.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recTt38mXlQtJdywQ</ProtocolEnumId>
+      <createdTime>2022-11-16T19:19:58Z</createdTime>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>g.node.status.100</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recUKBtypJxJFHldg</ProtocolEnumId>
       <createdTime>2022-11-08T00:19:22Z</createdTime>
       <Enum>recX0A9nSriRUvl9n</Enum>
@@ -15291,10 +16478,34 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>mixing.valve.feedback.model.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recUiiAdTTH4zmBfJ</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:44Z</createdTime>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>g.node.status.100</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recV9jP0nFcRCDphV</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:15Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <ProtocolName>gworld</ProtocolName>
+      <EnumName>message.category.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recVdbIqzBFT6Qpsd</ProtocolEnumId>
       <createdTime>2022-11-07T22:58:59Z</createdTime>
       <Enum>recA15Ak50x6bNMx1</Enum>
       <EnumName>recognized.currency.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recWkTXMymydxR5UX</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:11Z</createdTime>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <ProtocolName>gworld</ProtocolName>
+      <EnumName>g.node.status.100</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recX5VXrxWR81za5J</ProtocolEnumId>
@@ -15303,6 +16514,14 @@ characterized electrical device, using the meter described, at the location desc
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
       <EnumName>core.g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recZKMG3hALXcWQuc</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:36Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>universe.type.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recZKMmBxWot2RY5F</ProtocolEnumId>
@@ -15329,12 +16548,28 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>message.category.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recesY3Van2qeFjV0</ProtocolEnumId>
+      <createdTime>2022-11-21T07:38:34Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>message.category.symbol.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recf2bjSGV3D1Ml5i</ProtocolEnumId>
       <createdTime>2022-11-08T22:25:12Z</createdTime>
       <Enum>reclaO4DqpDmwPOIC</Enum>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
       <EnumName>message.category.symbol.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recfChwtbhGYGwQAx</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:20Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <ProtocolName>gworld</ProtocolName>
+      <EnumName>universe.type.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>rechPYPk940Fi7Uud</ProtocolEnumId>
@@ -15345,12 +16580,52 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>recognized.currency.unit.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recihvUJVR6oEfEap</ProtocolEnumId>
+      <createdTime>2022-11-16T19:21:10Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>universe.type.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recjOCdfp4V6Ugqfs</ProtocolEnumId>
+      <createdTime>2022-11-21T07:38:25Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>reck0WsxFdPOoe5ZM</ProtocolEnumId>
+      <createdTime>2022-11-16T19:20:08Z</createdTime>
+      <Enum>recA15Ak50x6bNMx1</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>recognized.currency.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>reclDWkXtj41G28wW</ProtocolEnumId>
       <createdTime>2022-11-08T00:19:28Z</createdTime>
       <Enum>recf9ZTshqRu81HZo</Enum>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
       <EnumName>energy.supply.type.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recmNuAp0alwhubds</ProtocolEnumId>
+      <createdTime>2022-11-16T19:20:37Z</createdTime>
+      <Enum>rec75xMuw0SMkzjVc</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>market.price.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recmacM072NkqkOW1</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:59Z</createdTime>
+      <Enum>rechRk6DjahLATrOI</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>registry.g.node.role.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recpKd5HOmAf37QY5</ProtocolEnumId>
@@ -15369,12 +16644,36 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>registry.g.node.role.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recsRpVdgR7q3fCML</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:25Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>message.category.symbol.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>rect0T4CM09fP7g2t</ProtocolEnumId>
+      <createdTime>2022-11-16T19:19:39Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
+      <Protocol>rec3E1mvlkD3mlc6K</Protocol>
+      <ProtocolName>gwmm</ProtocolName>
+      <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recxchS4k09ivH7vN</ProtocolEnumId>
+      <createdTime>2022-11-21T06:33:08Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
+      <Protocol>recN6489A2iI0CRXz</Protocol>
+      <ProtocolName>gworld</ProtocolName>
+      <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recy37qKrW01vTt7S</ProtocolEnumId>
       <createdTime>2022-11-08T04:00:56Z</createdTime>
       <Enum>recounhEj97w5SfDm</Enum>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
-      <EnumName>bid.quantity.unit.000</EnumName>
+      <EnumName>market.quantity.unit.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>reczplFItDku5AaRa</ProtocolEnumId>
@@ -15383,6 +16682,14 @@ characterized electrical device, using the meter described, at the location desc
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
       <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>reczs2uW5OOP1dIaw</ProtocolEnumId>
+      <createdTime>2022-11-21T07:38:38Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <EnumName>message.category.000</EnumName>
     </ProtocolEnum>
   </ProtocolEnums>
 </Airtable>

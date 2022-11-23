@@ -12,33 +12,24 @@ This repo has been developed through the generous funding of a grant provided by
 
 ## Local Demo setup
 
+**PREP**
+
 1. Clone this repo
 
-2. Using python 3.10.\* or greater, create virtual env inside this repo
+   - Using python 3.10.\* or greater, create virtual env inside this repo
 
-   ```
-   python -m venv venv
-   source venv/bin/activate
-   pip install -e .
-   ```
+     ```
+     python -m venv venv
+     source venv/bin/activate
+     pip install -e .
+     ```
 
-3. Install [docker](https://docs.docker.com/get-docker/)
+2. In sister directories, clone and make virtual envs for these two repos:
 
-4. Start docker containers
+   - [https://github.com/thegridelectric/gridworks-marketmaker](https://github.com/thegridelectric/gridworks-marketmaker) (MarketMaker GNode repo)
+   - [https://github.com/thegridelectric/gridworks-atn-spaceheat](https://github.com/thegridelectric/gridworks-atn-spaceheat) (AtomicTNode GNode repo)
 
-- **X86 CPU**:
-
-  ```
-  docker compose -f docker-demo-x86.yml up -d
-  ```
-
-- **arm CPU**:
-
-  ```
-  docker compose -f docker-demo-arm.yml up -d
-  ```
-
-5. Start the Algorand sandbox in a **sibling directory**
+3. Start the Algorand sandbox in a **sibling directory**
 
    a. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into sibling directory
 
@@ -55,13 +46,60 @@ This repo has been developed through the generous funding of a grant provided by
    ./sandbox up dev
    ```
 
-   _(The will set up a sandbox version of an Algorand blockchain. The demo will reset this
-   sandbox each times it runs, but requires the two repos to be siblings for this to work.)_
+4. Install [docker](https://docs.docker.com/get-docker/)
 
-6. Run the milestone 1 demo from this repo:
+**RUNNING A 2-DAY SIMULATION OF 4 TERMINAL ASSETS**
+
+**Note**: if your machine is x86, substitute `docker-demo-arm.yml` for `docker-demo-x86.yml` in the instructions below. If you are not sure, try one. If rabbit fails to load try the other.
+
+1. In `g-node-factory` repo:
+
+   ```
+   docker-compose -f docker-demo-arm.yml up -d
+   ```
+
+   Wait for containers to initialize. Rabbit will take a minute. Check these web pages:
+
+   - [http://0.0.0.0:15672/#/queues](http://0.0.0.0:15672/#/queues) and wait for the "d1.time-Fxxx" queue to show up. This is the dockerized [TimeCoordinator GNode](https://github.com/thegridelectric/gridworks-timecoordinator).
+
+   - [http://localhost:7997/get-time/](http://localhost:7997/get-time/) is the MarketMaker API. It should show TimeUnixS: 0.
+
+   - [http://localhost:8001/docs](http://localhost:8001/docs) - Api for the dockerized TaValidator
+
+2. In `gridworks-marketmaker` repo:
 
    ```
    python demo.py
+   ```
+
+   Verify MarketMaker `verify d1.isone.ver.keene-Fxxx` shows up in [rabbitmq](http://0.0.0.0:15672/#/queues)
+
+3. In `gridworks-atn-spaceheat` repo:
+
+   ```
+   python demo.py
+   ```
+
+4. In `g-node-factory` repo:
+
+   ```
+   uvicorn  gnf.rest_api:app --reload  --port 8000
+   ```
+
+5. In a new terminal window for `g-node-factory` repo:
+
+   ```
+   python demo.py
+   ```
+
+   If the demo succeeds, it will run for 48 hours, with each of the 4 AtomicTNodes placing a bid for each hour into the MarketMaker. 
+   
+   You will see interesting output in the marketmaker and atn repo screen logs. You can also inspect all the messages that get sent in the demo by selecting `Get Message(s)` at [this rabbit queue](http://0.0.0.0:15672/#/queues/d1__1/dummy_ear_q). The main queue screen also shows message flow rate. 
+
+6. When done, you need to tear down docker in the `g-node-factory` before running again:
+
+   ```
+   docker-compose -f docker-demo-arm.yml down
    ```
 
 ## Testing

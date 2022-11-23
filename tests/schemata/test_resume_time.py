@@ -1,25 +1,20 @@
-"""Tests basegnode.terminalasset.create type, version 000"""
+"""Tests resume.time type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeTerminalassetCreate_Maker as Maker
+from gnf.schemata import ResumeTime_Maker as Maker
 
 
-def test_basegnode_terminalasset_create_generated():
+def test_resume_time_generated():
 
     d = {
-        "TaGNodeAlias": "d1.iso.me.orange.ta",
-        "MicroLon": -68691705,
-        "ValidatorAddr": "7QQT4GN3ZPAQEFCNWF5BMF7NULVK3CWICZVT4GM3BQRISD52YEDLWJ4MII",
-        "TaOwnerAddr": "KXGT6JIRJQR4GCSS647KL2OSSKBZ3FSYJDIXJEGAF7TZLN4JF4DGDDX4BI",
-        "MicroLat": 45666353,
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
-        "FromGNodeAlias": "dwgps.gnr",
-        "TypeName": "basegnode.terminalasset.create",
+        "FromGNodeAlias": "d1",
+        "FromGNodeInstanceId": "2858afb7-4ffd-4a10-b3b5-c52ad1f61697",
+        "ToGNodeAlias": "d1.time",
+        "TypeName": "resume.time",
         "Version": "000",
     }
 
@@ -38,14 +33,9 @@ def test_basegnode_terminalasset_create_generated():
 
     # test Maker init
     t = Maker(
-        ta_g_node_alias=gtuple.TaGNodeAlias,
-        micro_lon=gtuple.MicroLon,
-        validator_addr=gtuple.ValidatorAddr,
-        ta_owner_addr=gtuple.TaOwnerAddr,
-        micro_lat=gtuple.MicroLat,
-        g_node_registry_addr=gtuple.GNodeRegistryAddr,
-        from_g_node_instance_id=gtuple.FromGNodeInstanceId,
         from_g_node_alias=gtuple.FromGNodeAlias,
+        from_g_node_instance_id=gtuple.FromGNodeInstanceId,
+        to_g_node_alias=gtuple.ToGNodeAlias,
     ).tuple
     assert t == gtuple
 
@@ -59,32 +49,7 @@ def test_basegnode_terminalasset_create_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["TaGNodeAlias"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["MicroLon"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["ValidatorAddr"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["TaOwnerAddr"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["MicroLat"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["GNodeRegistryAddr"]
+    del d2["FromGNodeAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -94,21 +59,13 @@ def test_basegnode_terminalasset_create_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["FromGNodeAlias"]
+    del d2["ToGNodeAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     ######################################
     # Behavior on incorrect types
     ######################################
-
-    d2 = dict(d, MicroLon="-68691705.1")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, MicroLat="45666353.1")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
 
     ######################################
     # SchemaError raised if TypeName is incorrect
@@ -122,7 +79,7 @@ def test_basegnode_terminalasset_create_generated():
     # SchemaError raised if primitive attributes do not have appropriate property_format
     ######################################
 
-    d2 = dict(d, TaGNodeAlias="a.b-h")
+    d2 = dict(d, FromGNodeAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
@@ -130,7 +87,7 @@ def test_basegnode_terminalasset_create_generated():
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, FromGNodeAlias="a.b-h")
+    d2 = dict(d, ToGNodeAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

@@ -53,7 +53,7 @@ class PythonTaDaemon:
                 Note=f"Ignoring InitialTadeed Optin. Deeds: {self.ta_deed_alias_list}"
             )
             return r
-        ta_deed_idx = api_utils.get_tadeed_cert_idx(
+        ta_deed_idx = api_utils.get_tadeed_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,
         )
@@ -87,9 +87,32 @@ class PythonTaDaemon:
         try:
             self.client.send_transaction(signed_txn)
         except:
-            raise Exception(f"Failure sending transaction")
+            return RestfulResponse(
+                Note=f"Failure sending transaction to opt into TaDeed {ta_deed_idx}",
+                HttpStatusCode=422,
+            )
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-        note = f"TaDaemon successfully opted in to Initial TaDeed {ta_deed_idx}"
+        ta_trading_rights_idx = api_utils.get_tatrading_rights_idx(
+            terminal_asset_alias=payload.TerminalAssetAlias
+        )
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Failure sending transaction to opt into TaTradingRights {ta_trading_rights_idx}",
+                HttpStatusCode=422,
+            )
+
+        note = (
+            f"TaDaemon successfully opted in to Initial TaDeed {ta_deed_idx}"
+            f" and TaTradingRights {ta_trading_rights_idx}"
+        )
         LOGGER.info(note)
         r = RestfulResponse(Note=note)
         return r

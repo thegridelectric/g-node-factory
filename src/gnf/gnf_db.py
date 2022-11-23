@@ -25,6 +25,8 @@ location-related data is hashed, even though it belongs to a private database.
 import json
 import logging
 import pprint
+import time
+import uuid
 from typing import List
 from typing import Optional
 
@@ -40,6 +42,7 @@ import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
 import gnf.utils as utils
+from gnf.actor_base import ActorBase
 from gnf.algo_utils import BasicAccount
 from gnf.algo_utils import MultisigAccount
 from gnf.algo_utils import PendingTxnResponse
@@ -48,6 +51,7 @@ from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import BaseGNodeHistory
 from gnf.django_related.models import GpsPointDb
 from gnf.enums import CoreGNodeRole
+from gnf.enums import GNodeRole
 from gnf.enums import GNodeStatus
 from gnf.errors import RegistryError
 from gnf.schemata import BasegnodeGt
@@ -61,6 +65,9 @@ from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
 from gnf.schemata import OldTadeedAlgoReturn_Maker
+from gnf.schemata import PauseTime
+from gnf.schemata import PauseTime_Maker
+from gnf.schemata import ResumeTime_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate
 from gnf.schemata import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -71,6 +78,24 @@ LOGGER = logging.getLogger(__name__)
 #####################
 # Messages received
 #####################
+
+
+class BabyRabbit(ActorBase):
+    def __init__(
+        self,
+        settings: config.GnfSettings = config.GnfSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
+        super().__init__(settings=settings)
+
+    def prepare_for_death(self):
+        self.actor_main_stopped = True
+
+    def route_message(
+        self, from_alias: str, from_role: GNodeRole, payload: PauseTime
+    ) -> None:
+        raise NotImplementedError
 
 
 class GNodeFactory:
@@ -90,6 +115,32 @@ class GNodeFactory:
         )
         self.graveyard_acct: BasicAccount = BasicAccount(
             private_key=self.settings.graveyard_acct_sk.get_secret_value()
+        )
+        self.baby_rabbit = BabyRabbit()
+        self.baby_rabbit.start()
+
+    def pause_time(self) -> None:
+        payload = PauseTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
+        )
+
+    def resume_time(self) -> None:
+        payload = ResumeTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
         )
 
     def tavalidatorcert_algo_create_received(
@@ -246,10 +297,13 @@ class GNodeFactory:
         try:
             algo_utils.send_signed_mtx(client=self.client, mtx=mtx)
         except Exception as e:
-            note = f"Tried to sign transaction but there was an error.\n {e}"
+            note = (
+                f"Tried to sign initial TADEED transfer but there was an error.\n {e}"
+            )
             LOGGER.info(note)
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
+
         return await self.activate_terminal_asset(payload)
 
     async def initial_tadeed_algo_create_received(
@@ -303,9 +357,33 @@ class GNodeFactory:
             return RestfulResponse(Note=note, HttpStatusCode=422)
 
         ta_deed_idx = response.asset_idx
-        LOGGER.info(f"Initial TaDeed {ta_deed_idx} created for {ta_alias} ")
+
+        txn = transaction.AssetCreateTxn(
+            sender=self.admin_acct.addr,
+            total=1,
+            decimals=0,
+            default_frozen=False,
+            manager=self.admin_acct.addr,
+            asset_name=ta_alias,
+            unit_name="TATRADE",
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        ta_trading_rights_idx = algo_utils.wait_for_transaction(
+            self.client, signed_txn.get_txid()
+        ).asset_idx
+
+        LOGGER.info(
+            f"Initial TaDeed {ta_deed_idx} and TaTradingRights {ta_trading_rights_idx} created for {ta_alias} "
+        )
         return await self.create_pending_terminal_asset(
-            ta_alias=ta_alias, ta_deed_idx=ta_deed_idx
+            ta_alias=ta_alias,
+            ta_deed_idx=ta_deed_idx,
+            ta_trading_rights_idx=ta_trading_rights_idx,
         )
 
     async def create_updated_ta_deed(
@@ -590,7 +668,10 @@ class GNodeFactory:
         return gn_gt
 
     async def create_pending_terminal_asset(
-        self, ta_alias: str, ta_deed_idx: int
+        self,
+        ta_alias: str,
+        ta_deed_idx: int,
+        ta_trading_rights_idx: int,
     ) -> RestfulResponse:
         """Creates a pending TerminalAsset. This requries first creating an
         active parent for the TerminalAsset, which is its AtomicMeteringNode.
@@ -650,6 +731,7 @@ class GNodeFactory:
             "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": self.settings.public.gnr_addr,
             "ownership_deed_nft_id": ta_deed_idx,
+            "trading_rights_nft_id": ta_trading_rights_idx,
         }
 
         try:
@@ -698,6 +780,22 @@ class GNodeFactory:
                 Note=note,
                 HttpStatusCode=422,
             )
+            return r
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.admin_acct.addr,
+            receiver=payload.TaDaemonAddr,
+            amt=1,
+            index=ta_db.trading_rights_nft_id,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except Exception as e:
+            note = f"Tried to do TATRADE transfer transaction but there was an error.\n {e}"
+            LOGGER.info(note)
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
         ta_db.ownership_deed_validator_addr = payload.ValidatorAddr
         ta_db.owner_addr = payload.TaOwnerAddr

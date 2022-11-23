@@ -9,12 +9,32 @@ services:
     image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
     ports:
       - 8001:8000
-  rabbit:
+  marketmaker:
+    container_name: mm
+    image: "jessmillar/marketmaker:chaos__c421026__20221123"
     networks:
       - "dev"
-    hostname: devrabbit
-    container_name: dev-rabbit
-    image: "jessmillar/dev-rabbit-arm:chaos__85696ea__20221117"
+    ports:
+      - 7997:8000
+  timecoordinator:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: tc
+    image: "jessmillar/timecoordinator:demo"
+  redis:
+    hostname: redis
+    container_name: gnf-redis
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+  rabbit:
+    container_name: gnf-rabbit
+    hostname: rabbit
+    networks:
+      - "dev"
+    image: "jessmillar/dev-rabbit-arm:chaos__f13d33c__20221121"
     ports:
       - 1885:1885
       - 4369:4369

@@ -180,7 +180,31 @@ def is_validator(acct_addr: str) -> bool:
         return True
 
 
-def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[int]:
+def get_tatrading_rights_idx(terminal_asset_alias: str) -> Optional[int]:
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    try:
+        created_assets = client.account_info(settings.public.gnf_admin_addr)[
+            "created-assets"
+        ]
+    except:
+        return None
+    ta_trading_rights = list(
+        filter(lambda x: x["params"]["unit-name"] == "TATRADE", created_assets)
+    )
+    this_ta_trading_rights = list(
+        filter(lambda x: x["params"]["name"] == terminal_asset_alias, ta_trading_rights)
+    )
+    if len(this_ta_trading_rights) == 0:
+        return None
+    else:
+        return this_ta_trading_rights[0]["index"]
+
+
+def get_tadeed_idx(terminal_asset_alias, validator_addr: str) -> Optional[int]:
     """Looks for an asset created in the 2-sig [Gnf Admin, validator_addr] account
      that is a tadeed for terminal_asset_alias.
 
@@ -225,11 +249,11 @@ def is_ta_deed(asset_idx: int) -> bool:
         info = client.asset_info(asset_idx)
     except:
         return False
-    try: 
-        unit_name = info['params']['unit-name']
+    try:
+        unit_name = info["params"]["unit-name"]
     except:
         return False
-    if unit_name == 'TADEED':
+    if unit_name == "TADEED":
         return True
     return False
 
@@ -243,4 +267,4 @@ def alias_from_deed_idx(asset_idx: int) -> Optional[str]:
         settings.public.algod_address,
     )
     info = client.asset_info(asset_idx)
-    return info['params']['name']
+    return info["params"]["name"]

@@ -1,24 +1,50 @@
-"""Tests basegnode.ctn.create type, version 000"""
+"""Tests basegnodes.broadcast type, version 000"""
 import json
 
 import pytest
 from pydantic import ValidationError
 
 from gnf.errors import SchemaError
-from gnf.schemata import BasegnodeCtnCreate_Maker as Maker
+from gnf.schemata import BasegnodesBroadcast_Maker as Maker
 
 
-def test_basegnode_ctn_create_generated():
+def test_basegnodes_broadcast_generated():
 
     d = {
         "FromGNodeAlias": "dwgps.gnr",
         "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
-        "CtnGNodeAlias": "d1.iso.me.ghm.orange.ta",
-        "MicroLat": 44838681,
-        "MicroLon": -68705311,
-        "ChildAliasList": ["d1.iso.me.orange", "d1.iso.me.almond"],
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
-        "TypeName": "basegnode.ctn.create",
+        "ToGNodeAlias": "dwgps.gnf",
+        "IncludeAllDescendants": True,
+        "TopGNode": {
+            "GNodeId": "7b1df82e-10c5-49d9-8d02-1e837e31b87e",
+            "Alias": "d1",
+            "StatusGtEnumSymbol": "153d3475",
+            "RoleGtEnumSymbol": "00000000",
+            "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+            "TypeName": "basegnode.gt",
+            "Version": "020",
+        },
+        "DescendantGNodeList": [
+            {
+                "GNodeId": "7b1df82e-10c5-49d9-8d02-1e837e31b87e",
+                "Alias": "d1",
+                "StatusGtEnumSymbol": "153d3475",
+                "RoleGtEnumSymbol": "00000000",
+                "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+                "TypeName": "basegnode.gt",
+                "Version": "020",
+            },
+            {
+                "GNodeId": "c0119953-a48f-495d-87cc-58fb92eb4cee",
+                "Alias": "d1.isone",
+                "StatusGtEnumSymbol": "153d3475",
+                "RoleGtEnumSymbol": "4502e355",
+                "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+                "TypeName": "basegnode.gt",
+                "Version": "020",
+            },
+        ],
+        "TypeName": "basegnodes.broadcast",
         "Version": "000",
     }
 
@@ -39,11 +65,10 @@ def test_basegnode_ctn_create_generated():
     t = Maker(
         from_g_node_alias=gtuple.FromGNodeAlias,
         from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-        ctn_g_node_alias=gtuple.CtnGNodeAlias,
-        micro_lat=gtuple.MicroLat,
-        micro_lon=gtuple.MicroLon,
-        child_alias_list=gtuple.ChildAliasList,
-        g_node_registry_addr=gtuple.GNodeRegistryAddr,
+        to_g_node_alias=gtuple.ToGNodeAlias,
+        include_all_descendants=gtuple.IncludeAllDescendants,
+        top_g_node=gtuple.TopGNode,
+        descendant_g_node_list=gtuple.DescendantGNodeList,
     ).tuple
     assert t == gtuple
 
@@ -67,27 +92,22 @@ def test_basegnode_ctn_create_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["CtnGNodeAlias"]
+    del d2["ToGNodeAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["MicroLat"]
+    del d2["IncludeAllDescendants"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["MicroLon"]
+    del d2["TopGNode"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d)
-    del d2["ChildAliasList"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["GNodeRegistryAddr"]
+    del d2["DescendantGNodeList"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -95,12 +115,20 @@ def test_basegnode_ctn_create_generated():
     # Behavior on incorrect types
     ######################################
 
-    d2 = dict(d, MicroLat="44838681.1")
+    d2 = dict(d, IncludeAllDescendants="this is not a boolean")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, MicroLon="-68705311.1")
-    with pytest.raises(ValidationError):
+    d2 = dict(d, DescendantGNodeList="Not a list.")
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d, DescendantGNodeList=["Not a list of dicts"])
+    with pytest.raises(SchemaError):
+        Maker.dict_to_tuple(d2)
+
+    d2 = dict(d, DescendantGNodeList=[{"Failed": "Not a GtSimpleSingleStatus"}])
+    with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
     ######################################
@@ -123,11 +151,7 @@ def test_basegnode_ctn_create_generated():
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
-    d2 = dict(d, CtnGNodeAlias="a.b-h")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, ChildAliasList=["a.b-h"])
+    d2 = dict(d, ToGNodeAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 

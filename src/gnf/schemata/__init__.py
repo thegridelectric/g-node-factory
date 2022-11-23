@@ -34,6 +34,10 @@ from gnf.schemata.new_tadeed_send import NewTadeedSend
 from gnf.schemata.new_tadeed_send import NewTadeedSend_Maker
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn
 from gnf.schemata.old_tadeed_algo_return import OldTadeedAlgoReturn_Maker
+from gnf.schemata.pause_time import PauseTime
+from gnf.schemata.pause_time import PauseTime_Maker
+from gnf.schemata.resume_time import ResumeTime
+from gnf.schemata.resume_time import ResumeTime_Maker
 from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack
 from gnf.schemata.tadeed_specs_hack import TadeedSpecsHack_Maker
 from gnf.schemata.tatradingrights_algo_create import TatradingrightsAlgoCreate
@@ -79,6 +83,10 @@ __all__ = [
     "NewTadeedSend_Maker",
     "OldTadeedAlgoReturn",
     "OldTadeedAlgoReturn_Maker",
+    "PauseTime",
+    "PauseTime_Maker",
+    "ResumeTime",
+    "ResumeTime_Maker",
     "TadeedSpecsHack",
     "TadeedSpecsHack_Maker",
     "TatradingrightsAlgoCreate",

@@ -15,7 +15,7 @@ __pycache__/
 .idea
 
 # scratch files and folders
-scratch.ipynb
+scratch*
 cook*
 
 # Code generation airtable
