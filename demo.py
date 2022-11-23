@@ -8,6 +8,7 @@ from rich.pretty import pprint
 import gnf.config as config
 import gnf.demo_methods as demo_methods
 from gnf import load_dev_data
+from gnf.dev_utils.algo_setup import dev_fund_admin_and_graveyard
 
 
 # if len(sys.argv) == 1:
@@ -22,7 +23,7 @@ from gnf import load_dev_data
 #             f"Please enter an integer number of homes to simulate, not {sys.argv[1]}"
 #         )
 
-sim_size = 1
+sim_size = 4
 full_plant_names = demo_methods.demo_plant_names
 plant_names = full_plant_names[0:sim_size]
 
@@ -45,10 +46,9 @@ print("")
 print("Funding the GNodeFactory")
 print("")
 print("")
-from gnf.dev_utils.algo_setup import dev_fund_admin_and_graveyard
 
 
-dev_fund_admin_and_graveyard(config.ValidatorSettings())
+dev_fund_admin_and_graveyard(config.GnfSettings())
 print("")
 print("")
 print("Flushing GNodeFactory Database")

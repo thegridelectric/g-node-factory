@@ -117,7 +117,7 @@ class GNodeFactory:
             private_key=self.settings.graveyard_acct_sk.get_secret_value()
         )
         self.baby_rabbit = BabyRabbit()
-        # self.baby_rabbit.start()
+        self.baby_rabbit.start()
 
     def pause_time(self) -> None:
         payload = PauseTime_Maker(

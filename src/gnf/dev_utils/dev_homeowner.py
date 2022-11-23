@@ -183,7 +183,7 @@ class DevTaOwner:
             algo_setup.dev_fund_account(
                 settings=self.settings,
                 to_addr=self.acct.addr,
-                amt_in_micros=3 * 10**6 * algos,
+                amt_in_micros=10**6 * algos,
             )
         LOGGER.info(
             f"HollyHomeowner acct {self.acct.addr_short_hand} balance: ~{algo_utils.algos(self.acct.addr)} Algos"

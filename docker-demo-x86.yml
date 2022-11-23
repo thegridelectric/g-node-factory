@@ -9,43 +9,53 @@ services:
     image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
     ports:
       - 8001:8000
-  gnr:
-    container_name: gnr
-    image: "jessmillar/gnr:latest"
-    ports:
-      - 7999:8000
-  rabbitmarketmaker:
-    networks:
-      - "dev"
-    container_name: mmr
-    # depends_on:
-    #   - marketmaker
-    image: "jessmillar/mmrabbit:chaos__fe2f5dc__20221121"
-  # marketmaker:
-  #   container_name: mm
-  #   image: "jessmillar/marketmaker:chaos__fe2f5dc__20221121"
+  # gnr:
+  #   container_name: gnr
+  #   image: "jessmillar/gnr:latest"
+  #   ports:
+  #     - 7999:8000
+  # rabbitmarketmaker:
   #   networks:
   #     - "dev"
-  #   ports:
-  #     - 7997:8000
+  #   container_name: mmr
+  #   image: "jessmillar/mmrabbit:chaos__c421026__20221123"
+  #   depends_on:
+  #     - marketmaker
+  #     - rabbit
+  marketmaker:
+    container_name: mm
+    image: "jessmillar/marketmaker:chaos__c421026__20221123"
+    networks:
+      - "dev"
+    ports:
+      - 7997:8000
   timecoordinator:
     networks:
       - "dev"
     depends_on:
       - rabbit
     container_name: tc
-    image: "jessmillar/timecoordinator:chaos__4b20750__20221121"
-  atn:
-    networks:
-      - "dev"
-    depends_on:
-      - rabbit
-    container_name: atn
-    image: "jessmillar/atn:chaos__0a93f19__20221121"
+    image: "jessmillar/timecoordinator:demo"
+  # timecoordinator:
+  #   networks:
+  #     - "dev"
+  #   depends_on:
+  #     - rabbit
+  #   container_name: tc
+  #   image: "jessmillar/timecoordinator:chaos__6adecdd__20221122"
+  # atn:
+  #   networks:
+  #     - "dev"
+  #   depends_on:
+  #     - rabbit
+  #   container_name: atn
+  #   image: "jessmillar/atn:chaos__84f02c8__20221123"
   redis:
     hostname: redis
-    container_name: gnf-redis
+    container_name: mm-redis
     image: redis:6-alpine
+    networks:
+      - "dev"
     ports:
       - "6379:6379"
   rabbit:

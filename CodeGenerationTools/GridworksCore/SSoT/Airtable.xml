@@ -866,6 +866,17 @@
       <ConsistencyCheck>1</ConsistencyCheck>
     </SchemaRoot>
     <SchemaRoot>
+      <SchemaRootId>recfTTPpGH16HQ9aY</SchemaRootId>
+      <createdTime>2022-11-21T22:35:54Z</createdTime>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recV0KuDFayH4qGIl</SchemaRootscopy>
+      <Status>Active</Status>
+      <AliasRoot>gnodeinstance.gt</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Alias>gnodeinstance.gt</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>rechCPLYrkc1asuPJ</SchemaRootId>
       <createdTime>2022-09-14T16:26:22Z</createdTime>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -1396,6 +1407,7 @@
       <TypesThatUse>rec5bEVzI1k5qcXYg</TypesThatUse>
       <Version>000</Version>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
+      <ProtocolEnums>recCEQgAR8tPu4mgu</ProtocolEnums>
       <Default>reclMrRIA4ISmRw6t</Default>
       <LocalName>core.g.node.role</LocalName>
       <AliasRoot>core.g.node.role</AliasRoot>
@@ -1501,6 +1513,7 @@
       <ProtocolEnums>rec9HtmIiTasYUNy0</ProtocolEnums>
       <ProtocolEnums>recV9jP0nFcRCDphV</ProtocolEnums>
       <ProtocolEnums>reczs2uW5OOP1dIaw</ProtocolEnums>
+      <ProtocolEnums>recT6IKeUqmmI7L84</ProtocolEnums>
       <Default>recjlLyMGMXYaff8w</Default>
       <LocalName>message.category</LocalName>
       <AliasRoot>message.category</AliasRoot>
@@ -1658,6 +1671,7 @@
       <ProtocolEnums>recihvUJVR6oEfEap</ProtocolEnums>
       <ProtocolEnums>recfChwtbhGYGwQAx</ProtocolEnums>
       <ProtocolEnums>rec7riMLKDhllLHJF</ProtocolEnums>
+      <ProtocolEnums>recZKMG3hALXcWQuc</ProtocolEnums>
       <Default>recrqYsXVPagMEhO3</Default>
       <LocalName>universe.type</LocalName>
       <AliasRoot>universe.type</AliasRoot>
@@ -1744,6 +1758,7 @@
       <ProtocolEnums>rect0T4CM09fP7g2t</ProtocolEnums>
       <ProtocolEnums>recxchS4k09ivH7vN</ProtocolEnums>
       <ProtocolEnums>recjOCdfp4V6Ugqfs</ProtocolEnums>
+      <ProtocolEnums>recA0Q62wqmXkzSse</ProtocolEnums>
       <Default>recyZNh6DHD8cSQJs</Default>
       <LocalName>g.node.role</LocalName>
       <AliasRoot>g.node.role</AliasRoot>
@@ -1840,6 +1855,7 @@
       <BaseGridworksSchema>true</BaseGridworksSchema>
       <Version>000</Version>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
+      <ProtocolEnums>recmacM072NkqkOW1</ProtocolEnums>
       <Default>recWvHiwQvwKVnBgW</Default>
       <LocalName>registry.g.node.role</LocalName>
       <AliasRoot>registry.g.node.role</AliasRoot>
@@ -1866,6 +1882,7 @@
       <ProtocolEnums>recISSyBDybwCsc9S</ProtocolEnums>
       <ProtocolEnums>recLgjTEHK9NGb3nq</ProtocolEnums>
       <ProtocolEnums>recesY3Van2qeFjV0</ProtocolEnums>
+      <ProtocolEnums>recsRpVdgR7q3fCML</ProtocolEnums>
       <Default>rechaotHblmyukrn1</Default>
       <LocalName>message.category.symbol</LocalName>
       <AliasRoot>message.category.symbol</AliasRoot>
@@ -1952,6 +1969,7 @@
       <ProtocolEnums>recZKMmBxWot2RY5F</ProtocolEnums>
       <ProtocolEnums>recTt38mXlQtJdywQ</ProtocolEnums>
       <ProtocolEnums>recWkTXMymydxR5UX</ProtocolEnums>
+      <ProtocolEnums>recUiiAdTTH4zmBfJ</ProtocolEnums>
       <Default>recmkdghA4yolcvkz</Default>
       <LocalName>g.node.status</LocalName>
       <AliasRoot>g.node.status</AliasRoot>
@@ -2850,7 +2868,7 @@
       <Enum>recZB6uJDEaCzvTZX</Enum>
       <DisplayName>g.node.role.000__PriceService</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrhC7gLdDLhh3UF6/recUtA3HI1KJ6BADP</EnumSymbol>
+    <EnumSymbol>itrZOdqqY4jpivDMi/recUtA3HI1KJ6BADP</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recVVshv4AuJAbuyp</EnumSymbolId>
       <createdTime>2022-08-01T12:19:47Z</createdTime>
@@ -3750,7 +3768,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recQeMNisJZjsYXTl</Enum>
       <DisplayName>spaceheat.actor.class.000__PrimaryMeter</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrhC7gLdDLhh3UF6/recyHL0VJtn5jmtIW</EnumSymbol>
+    <EnumSymbol>itrZOdqqY4jpivDMi/recyHL0VJtn5jmtIW</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recyNnqxvxbEGLzhG</EnumSymbolId>
       <createdTime>2022-11-08T22:21:38Z</createdTime>
@@ -3975,7 +3993,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaAttributes>recpwKIE1g7BN8jGg</SchemaAttributes>
       <SchemaAttributes>recCMCD6fLQzuN9RA</SchemaAttributes>
       <SchemaRoot>recEoebL6fHn6xzXL</SchemaRoot>
-      <PreStatus>Active</PreStatus>
+      <PreStatus>Pending</PreStatus>
       <Alias>signandsubmit.mtx.algo.000</Alias>
       <RootStatus>Deprecated</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4130,6 +4148,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>recmRa74R0GAk0PKx</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>reccfgO8fAUzT3J2W</ProtocolTypes>
+      <ProtocolTypes>recD9RSdxZFlCh0nV</ProtocolTypes>
       <Alias>basegnode.marketmaker.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4213,6 +4232,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <SchemaRoot>reccsb7VI48EdWlGk</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec2QIaMX8gSssv7M</ProtocolTypes>
+      <ProtocolTypes>recs8N9wVyonAKE8y</ProtocolTypes>
       <Alias>basegnodes.get.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4507,6 +4527,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Axioms>recloTCbAMeQzOIzq</Axioms>
       <Axioms>recehciOce1BjWYzY</Axioms>
       <ProtocolTypes>reccq15mpDgpXGekn</ProtocolTypes>
+      <ProtocolTypes>recHxMHk1Q13AGxQT</ProtocolTypes>
       <DataClassIdField>GNodeId</DataClassIdField>
       <UpdateDescription>New attributes: PrevAlias, OwnerAddr, DaemonAddr, TradingRightsNftId.
 
@@ -4630,6 +4651,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>rect6WA80mNWDt7v0</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recY5s5LoUEwNBowT</ProtocolTypes>
+      <ProtocolTypes>recVyJz6EmMdwDjYy</ProtocolTypes>
       <Alias>basegnode.ctn.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -4689,6 +4711,16 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <InGwProto />
     </Schema>
     <Schema>
+      <SchemaId>recLZ7LSUlvWKcwWg</SchemaId>
+      <createdTime>2022-11-22T21:19:25Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <PreStatus>Pending</PreStatus>
+      <Alias>.000</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>0</IsCurrent>
+      <Status>Deprecated</Status>
+    </Schema>
+    <Schema>
       <SchemaId>recLufl9jSdsMGsFR</SchemaId>
       <createdTime>2022-11-17T06:03:24Z</createdTime>
       <SemanticEnd>000</SemanticEnd>
@@ -4736,6 +4768,13 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsCurrent>1</IsCurrent>
       <Status>Pending</Status>
       <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recNQK5RMCj2UieZK</SchemaId>
+      <createdTime>2022-11-22T21:18:52Z</createdTime>
+      <Alias>.</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>1</IsCurrent>
     </Schema>
     <Schema>
       <SchemaId>recNbXbJE9rcnLXAs</SchemaId>
@@ -5014,6 +5053,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>reczYInsSYetUcVpZ</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>rec1Kr8gSWyIe4lG2</ProtocolTypes>
+      <ProtocolTypes>recRLpRImAACQhmSj</ProtocolTypes>
       <Alias>basegnodes.broadcast.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5102,6 +5142,25 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <AliasRoot>spaceheat.node.gt</AliasRoot>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
+      <InGwProto />
+    </Schema>
+    <Schema>
+      <SchemaId>recV0KuDFayH4qGIl</SchemaId>
+      <createdTime>2022-11-21T22:36:08Z</createdTime>
+      <SemanticEnd>000</SemanticEnd>
+      <SchemaRoot>recfTTPpGH16HQ9aY</SchemaRoot>
+      <PreStatus>Pending</PreStatus>
+      <Alias>gnodeinstance.gt.000</Alias>
+      <RootStatus>Active</RootStatus>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <MakeDataClass />
+      <IsCac />
+      <IsComponent />
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <AliasRoot>gnodeinstance.gt</AliasRoot>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
       <InGwProto />
     </Schema>
     <Schema>
@@ -5299,6 +5358,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recNShQmJ0F04UlrH</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recA4Y7Iy3elTbyCB</ProtocolTypes>
+      <ProtocolTypes>rec0Uk7vhJUpp68kq</ProtocolTypes>
       <Alias>basegnode.other.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -5406,6 +5466,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <SchemaRoot>recb8a2JTfYBmC6v7</SchemaRoot>
       <PreStatus>Pending</PreStatus>
       <ProtocolTypes>recZiKOMXJ8UCneY9</ProtocolTypes>
+      <ProtocolTypes>recM8DeGDMOPo9ezd</ProtocolTypes>
       <Alias>basegnode.terminalasset.create.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -6313,6 +6374,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <ProtocolTypes>recnBbGAlK4U8sngT</ProtocolTypes>
       <ProtocolTypes>rec1qAnTlin7a194M</ProtocolTypes>
       <ProtocolTypes>recianedmKDqWVh0O</ProtocolTypes>
+      <ProtocolTypes>recyENjaG4Mi1n27B</ProtocolTypes>
       <Alias>heartbeat.a.000</Alias>
       <RootStatus>Active</RootStatus>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -6326,6 +6388,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Status>Pending</Status>
       <InGwProto />
     </Schema>
+    <Schema>itrO3LKqUVkzWXlRv/recxNIfCRauFrb57o</Schema>
     <Schema>
       <SchemaId>recyD0ycgUiT7TiH2</SchemaId>
       <createdTime>2022-07-12T18:02:06Z</createdTime>
@@ -7849,7 +7912,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrTyosIm54RMOiBc/recBw1TvOwQk1gM0K</SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recBw1TvOwQk1gM0K</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recC2OJXewZyxgy8T</SchemaAttributeId>
       <createdTime>2022-11-17T06:04:05Z</createdTime>
@@ -9223,7 +9286,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrTyosIm54RMOiBc/recKtxHw3srimaENr</SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recKtxHw3srimaENr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKwPBxJr8R55KlB</SchemaAttributeId>
       <createdTime>2022-05-11T18:23:36Z</createdTime>
@@ -10622,7 +10685,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itrTyosIm54RMOiBc/recVgR5ZOHi7dvBav</SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recVgR5ZOHi7dvBav</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recViTC1TmtkHrDKI</SchemaAttributeId>
       <createdTime>2022-11-10T14:23:24Z</createdTime>
@@ -11989,7 +12052,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itrTyosIm54RMOiBc/recgb4I6CvYgu6S4D</SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recgb4I6CvYgu6S4D</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recgdJntx0xcLzbqq</SchemaAttributeId>
       <createdTime>2022-09-19T18:21:58Z</createdTime>
@@ -13361,7 +13424,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
-    <SchemaAttribute>itrTyosIm54RMOiBc/recrrGZ3RvMBzGjrP</SchemaAttribute>
+    <SchemaAttribute>itr0LhKvD6pPStzS2/recrrGZ3RvMBzGjrP</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recs9j9qZr50sugIe</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:21Z</createdTime>
@@ -13582,7 +13645,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsPrimitive>true</IsPrimitive>
       <Schema>rec7peRuDqMNa0vlW</Schema>
       <PrimitiveType>Integer</PrimitiveType>
-      <Value>IrlTimeUnixMs</Value>
+      <Value>TimestepCreatedMs</Value>
       <Idx>3</Idx>
       <PrimitiveFormatId>recqSXVzLo8RtEjlH</PrimitiveFormatId>
       <TestValue>1667852537000</TestValue>
@@ -15104,6 +15167,26 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
   </PropertyFormats>
   <Protocols>
     <Protocol>
+      <ProtocolId>rec2J6tKssVJwVmFd</ProtocolId>
+      <createdTime>2022-11-21T14:51:34Z</createdTime>
+      <ProtocolTypes>recVyJz6EmMdwDjYy</ProtocolTypes>
+      <ProtocolTypes>recHxMHk1Q13AGxQT</ProtocolTypes>
+      <ProtocolTypes>recD9RSdxZFlCh0nV</ProtocolTypes>
+      <ProtocolTypes>rec0Uk7vhJUpp68kq</ProtocolTypes>
+      <ProtocolTypes>recM8DeGDMOPo9ezd</ProtocolTypes>
+      <ProtocolTypes>recRLpRImAACQhmSj</ProtocolTypes>
+      <ProtocolTypes>recs8N9wVyonAKE8y</ProtocolTypes>
+      <ProtocolTypes>recyENjaG4Mi1n27B</ProtocolTypes>
+      <Name>gnr</Name>
+      <ProtocolEnums>recCEQgAR8tPu4mgu</ProtocolEnums>
+      <ProtocolEnums>recUiiAdTTH4zmBfJ</ProtocolEnums>
+      <ProtocolEnums>recmacM072NkqkOW1</ProtocolEnums>
+      <ProtocolEnums>recT6IKeUqmmI7L84</ProtocolEnums>
+      <ProtocolEnums>recsRpVdgR7q3fCML</ProtocolEnums>
+      <ProtocolEnums>recZKMG3hALXcWQuc</ProtocolEnums>
+      <ProtocolEnums>recA0Q62wqmXkzSse</ProtocolEnums>
+    </Protocol>
+    <Protocol>
       <ProtocolId>rec3E1mvlkD3mlc6K</ProtocolId>
       <createdTime>2022-11-16T19:07:38Z</createdTime>
       <ProtocolTypes>recwv4Bsb1NA1uZxn</ProtocolTypes>
@@ -15245,6 +15328,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
     </Protocol>
   </Protocols>
   <ProtocolTypes>
+    <ProtocolType>
+      <ProtocolTypeId>rec0Uk7vhJUpp68kq</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:22Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>reca1A5UXpnpmZdiH</Type>
+      <Name>gnr basegnode.other.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.other.create.000</TypeName>
+    </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>rec0yahRyau7Mzmzk</ProtocolTypeId>
       <createdTime>2022-11-08T04:00:15Z</createdTime>
@@ -15404,6 +15496,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name></Name>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recD9RSdxZFlCh0nV</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:19Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>rec70ndc2atifo8Ri</Type>
+      <Name>gnr basegnode.marketmaker.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.marketmaker.create.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recDST3lwGBFXqsz1</ProtocolTypeId>
       <createdTime>2022-11-08T04:09:15Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
@@ -15454,6 +15555,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>bid.ack.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recHxMHk1Q13AGxQT</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:17Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recDp8U1jLA9zeEx2</Type>
+      <Name>gnr basegnode.gt.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.gt.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recIoZYIHWRvJnjRa</ProtocolTypeId>
       <createdTime>2022-11-17T15:43:53Z</createdTime>
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
@@ -15498,6 +15608,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>atn atn.state.heatpumpwithbooststore.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>atn.state.heatpumpwithbooststore.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recM8DeGDMOPo9ezd</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:25Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recazQb2vEXgbroHd</Type>
+      <Name>gnr basegnode.terminalasset.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.terminalasset.create.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recMvuzDPwhs257Bs</ProtocolTypeId>
@@ -15554,6 +15673,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>new.tadeed.send.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recRLpRImAACQhmSj</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:28Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recT4SSkJ18pz5YoZ</Type>
+      <Name>gnr basegnodes.broadcast.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnodes.broadcast.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recSIwq3BdNSAxp2e</ProtocolTypeId>
       <createdTime>2022-11-16T19:16:46Z</createdTime>
       <Protocol>rec3E1mvlkD3mlc6K</Protocol>
@@ -15579,6 +15707,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gworld resume.time.000</Name>
       <ProtocolName>gworld</ProtocolName>
       <TypeName>resume.time.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recVyJz6EmMdwDjYy</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:12Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recJH4tbXOqVJkMVW</Type>
+      <Name>gnr basegnode.ctn.create.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnode.ctn.create.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recY4ZPVnAi4v6y0i</ProtocolTypeId>
@@ -15770,6 +15907,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <TypeName>gnode.gt.000</TypeName>
     </ProtocolType>
     <ProtocolType>
+      <ProtocolTypeId>recs8N9wVyonAKE8y</ProtocolTypeId>
+      <createdTime>2022-11-21T14:53:35Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>rec8ILTteHhn4MpGd</Type>
+      <Name>gnr basegnodes.get.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>basegnodes.get.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
       <ProtocolTypeId>recsRFfTXSym7gX54</ProtocolTypeId>
       <createdTime>2022-10-31T20:32:30Z</createdTime>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
@@ -15849,6 +15995,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>gnf tavalidatorcert.algo.transfer.000</Name>
       <ProtocolName>gnf</ProtocolName>
       <TypeName>tavalidatorcert.algo.transfer.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recyENjaG4Mi1n27B</ProtocolTypeId>
+      <createdTime>2022-11-21T15:21:50Z</createdTime>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <Type>recxNIfCRauFrb57o</Type>
+      <Name>gnr heartbeat.a.000</Name>
+      <ProtocolName>gnr</ProtocolName>
+      <TypeName>heartbeat.a.000</TypeName>
     </ProtocolType>
   </ProtocolTypes>
   <GNodeRoles>
@@ -16144,9 +16299,9 @@ characterized electrical device, using the meter described, at the location desc
     <ProtocolEnum>
       <ProtocolEnumId>rec7riMLKDhllLHJF</ProtocolEnumId>
       <createdTime>2022-11-21T07:38:28Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
-      <Enum>recPvHsXzCenxLa7v</Enum>
       <EnumName>universe.type.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
@@ -16196,6 +16351,22 @@ characterized electrical device, using the meter described, at the location desc
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
       <EnumName>recognized.temperature.unit.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recA0Q62wqmXkzSse</ProtocolEnumId>
+      <createdTime>2022-11-21T15:04:10Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recCEQgAR8tPu4mgu</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:31Z</createdTime>
+      <Enum>rec5HXPeyp3jic6FV</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>core.g.node.role.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recDa8t2QVwfTLzpo</ProtocolEnumId>
@@ -16283,6 +16454,14 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>spaceheat.telemetry.name.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recT6IKeUqmmI7L84</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:17Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>message.category.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recTt38mXlQtJdywQ</ProtocolEnumId>
       <createdTime>2022-11-16T19:19:58Z</createdTime>
       <Enum>recqx4EqT3OFtnxTG</Enum>
@@ -16297,6 +16476,14 @@ characterized electrical device, using the meter described, at the location desc
       <Protocol>rec3nJaxOMLIKJoNY</Protocol>
       <ProtocolName>atn</ProtocolName>
       <EnumName>mixing.valve.feedback.model.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recUiiAdTTH4zmBfJ</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:44Z</createdTime>
+      <Enum>recqx4EqT3OFtnxTG</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>g.node.status.100</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>recV9jP0nFcRCDphV</ProtocolEnumId>
@@ -16329,6 +16516,14 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>core.g.node.role.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recZKMG3hALXcWQuc</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:36Z</createdTime>
+      <Enum>recPvHsXzCenxLa7v</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>universe.type.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recZKMmBxWot2RY5F</ProtocolEnumId>
       <createdTime>2022-11-08T18:54:07Z</createdTime>
       <Enum>recqx4EqT3OFtnxTG</Enum>
@@ -16355,9 +16550,9 @@ characterized electrical device, using the meter described, at the location desc
     <ProtocolEnum>
       <ProtocolEnumId>recesY3Van2qeFjV0</ProtocolEnumId>
       <createdTime>2022-11-21T07:38:34Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
-      <Enum>reclaO4DqpDmwPOIC</Enum>
       <EnumName>message.category.symbol.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
@@ -16395,9 +16590,9 @@ characterized electrical device, using the meter described, at the location desc
     <ProtocolEnum>
       <ProtocolEnumId>recjOCdfp4V6Ugqfs</ProtocolEnumId>
       <createdTime>2022-11-21T07:38:25Z</createdTime>
+      <Enum>recZB6uJDEaCzvTZX</Enum>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
-      <Enum>recZB6uJDEaCzvTZX</Enum>
       <EnumName>g.node.role.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
@@ -16425,6 +16620,14 @@ characterized electrical device, using the meter described, at the location desc
       <EnumName>market.price.unit.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
+      <ProtocolEnumId>recmacM072NkqkOW1</ProtocolEnumId>
+      <createdTime>2022-11-21T14:51:59Z</createdTime>
+      <Enum>rechRk6DjahLATrOI</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>registry.g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
       <ProtocolEnumId>recpKd5HOmAf37QY5</ProtocolEnumId>
       <createdTime>2022-11-08T18:53:58Z</createdTime>
       <Enum>recZB6uJDEaCzvTZX</Enum>
@@ -16439,6 +16642,14 @@ characterized electrical device, using the meter described, at the location desc
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
       <EnumName>registry.g.node.role.000</EnumName>
+    </ProtocolEnum>
+    <ProtocolEnum>
+      <ProtocolEnumId>recsRpVdgR7q3fCML</ProtocolEnumId>
+      <createdTime>2022-11-21T14:52:25Z</createdTime>
+      <Enum>reclaO4DqpDmwPOIC</Enum>
+      <Protocol>rec2J6tKssVJwVmFd</Protocol>
+      <ProtocolName>gnr</ProtocolName>
+      <EnumName>message.category.symbol.000</EnumName>
     </ProtocolEnum>
     <ProtocolEnum>
       <ProtocolEnumId>rect0T4CM09fP7g2t</ProtocolEnumId>
@@ -16475,9 +16686,9 @@ characterized electrical device, using the meter described, at the location desc
     <ProtocolEnum>
       <ProtocolEnumId>reczs2uW5OOP1dIaw</ProtocolEnumId>
       <createdTime>2022-11-21T07:38:38Z</createdTime>
+      <Enum>rec7pzii3dy9m3jCe</Enum>
       <Protocol>recXaQaXNNDyxIlT7</Protocol>
       <ProtocolName>gnf</ProtocolName>
-      <Enum>rec7pzii3dy9m3jCe</Enum>
       <EnumName>message.category.000</EnumName>
     </ProtocolEnum>
   </ProtocolEnums>
