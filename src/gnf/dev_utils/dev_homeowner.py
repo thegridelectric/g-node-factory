@@ -15,6 +15,7 @@ from gnf.algo_utils import MultisigAccount
 
 # Schemata sent by homeowner
 from gnf.schemata import InitialTadeedAlgoOptin_Maker
+from gnf.schemata import SlaEnter_Maker
 from gnf.schemata import TerminalassetCertifyHack_Maker
 from gnf.utils import RestfulResponse
 
@@ -101,6 +102,22 @@ class DevTaOwner:
     ##########################
     # Messages Sent
     ##########################
+
+    def enter_sla(self) -> RestfulResponse:
+        ta_alias = self.settings.initial_ta_alias
+        payload = SlaEnter_Maker(
+            terminal_asset_alias="d1.isone.ver.keene.holly.ta"
+        ).tuple
+        api_endpoint = f"http://{self.ta_daemon_api_root}/sla-enter/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        if r.status_code > 200:
+            if r.status_code == 422:
+                note = f"Error entering SLA: " + r.json()["detail"]
+            else:
+                note = r.reason
+            rr = RestfulResponse(Note=note, HttpStatusCode=422)
+            return rr
+        return RestfulResponse(**r.json())
 
     def request_ta_certification(self) -> RestfulResponse:
         ta_alias = self.settings.initial_ta_alias

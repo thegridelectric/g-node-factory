@@ -8,6 +8,7 @@ from gnf.python_ta_daemon import PythonTaDaemon
 from gnf.schemata import InitialTadeedAlgoOptin
 from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import SlaEnter
 from gnf.utils import RestfulResponse
 
 
@@ -55,6 +56,16 @@ async def new_tadeed_algo_received(payload: NewTadeedAlgoOptin):
 @app.post("/old-tadeed-algo-return/", response_model=RestfulResponse)
 async def old_tadeed_algo_return_received(payload: OldTadeedAlgoReturn):
     r = daemon.old_tadeed_algo_return_received(payload)
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/sla-enter/", response_model=RestfulResponse)
+async def old_tadeed_algo_return_received(payload: SlaEnter):
+    r = daemon.sla_enter_received(payload)
     if r.HttpStatusCode > 200:
         raise HTTPException(
             status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
