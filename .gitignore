@@ -24,7 +24,7 @@ CodeGenerationTools/GridworksCore/SassyMQ/
 .ssotme
 
 # Django dev db:
-db.sqlite3
+/src/gnf/django_related/db.sqlite3
 
 
 # Environments

@@ -7,7 +7,6 @@ import gnf.enums as enums
 import gnf.errors as errors
 import gnf.message as message
 import gnf.property_format as property_format
-import gnf.rest_api as rest_api
 import gnf.ta_daemon_rest_api as ta_daemon_rest_api
 import gnf.utils as utils
 
@@ -23,5 +22,4 @@ __all__ = [
     "property_format",
     "utils",
     "ta_daemon_rest_api",
-    "rest_api",
 ]

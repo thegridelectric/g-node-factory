@@ -49,7 +49,7 @@ def main():
         "GNodeId": "575f374f-8533-4733-baf7-91146c607445",
         "Alias": "d1.isone.ver.keene",
         "StatusGtEnumSymbol": "153d3475",
-        "RoleGtEnumSymbol": "4502e355",
+        "RoleGtEnumSymbol": "86f21dd2",
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
         "TypeName": "basegnode.gt",
         "Version": "020",

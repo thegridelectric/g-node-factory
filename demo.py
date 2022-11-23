@@ -57,6 +57,13 @@ print("")
 time.sleep(2)
 subprocess.run("./reset-dev-db.sh")
 
+
+print("")
+print("")
+print("Check http://localhost:8000/base-g-nodes/ - shoud be no GNodes.")
+print("If page fails, make sure Gnf API is started up")
+print("uvicorn  gnf.rest_api:app --reload  --port 8000")
+input("HIT RETURN TO CONTINUE")
 print("")
 print("")
 print("Initializing GNodeFactory Database with Seed GNodes")
@@ -64,7 +71,14 @@ print("")
 print("")
 time.sleep(2)
 load_dev_data.main()
-
+print("")
+print("")
+print(
+    "There shoud now be 4 GNodes (including MarketMaker d1.isone.ver.keene, but no AtomicTNodes)"
+)
+input("HIT RETURN TO CONTINUE")
+print("")
+print("")
 # print("Starting the GNodeFactory RestAPI")
 # print("")
 # print("")
@@ -90,7 +104,7 @@ time.sleep(2)
 rr = demo_methods.certify_molly_metermaid()
 pprint(rr)
 if rr.HttpStatusCode > 200:
-    gnf_pr.terminate()
+    # gnf_pr.terminate()
     raise Exception("Stopping demo due to errors")
 
 print("")
@@ -176,6 +190,9 @@ print("")
 api_endpoint = f"http://0.0.0.0:8000/resume-time/"
 r = requests.post(url=api_endpoint)
 
+# api_endpoint = f"http://0.0.0.0:8000/pause-time/"
+# r = requests.post(url=api_endpoint)
+
 # cmd = "docker stop gnf-api"
 # subprocess.run(cmd.split())
 # # This stops the running docker container
@@ -184,6 +201,7 @@ r = requests.post(url=api_endpoint)
 # subprocess.run(cmd.split())
 # # This removes the stopped docker container
 
+input("HIT RETURN TO STOP SIMULATION. TIME WILL STOP AFTER 2 DAYS")
 
 for ta_owner in ta_owners:
     ta_owner.stop()  # Does the same
