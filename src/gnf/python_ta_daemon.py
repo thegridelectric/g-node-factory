@@ -17,6 +17,7 @@ from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import SlaEnter
 from gnf.utils import RestfulResponse
 
 
@@ -243,3 +244,83 @@ class PythonTaDaemon:
         if len(self.ta_deed_alias_list()) > 0:
             return True
         return False
+
+    def sla_enter_received(self, payload: SlaEnter) -> RestfulResponse:
+        ta_alias = payload.TerminalAssetAlias
+        ta_trading_rights_idx = api_utils.get_tatrading_rights_idx(
+            terminal_asset_alias=ta_alias
+        )
+        alias_list: List[str] = [
+            "d1.isone.ver.keene.holly.ta",
+            "d1.isone.ver.keene.juniper.ta",
+            "d1.isone.ver.keene.kale.ta",
+            "d1.isone.ver.keene.lettuce.ta",
+        ]
+
+        sk_list = [
+            "K6iB3AHmzSQ8wDE91QdUfaheDMEtf2WJUMYeeRptKxHiTxG3HC+iKpngXmi82y2r9uVPYwTI5aGiMhdXmPRxcQ==",
+            "QfKe/7kzD71nhYGfITlSV/DFYGvC4sc5IEa8ieGsgirC9sBaSJT0O1+mdPOK3/wzZAqy/dRVIg58Uh3ucSIUSw==",
+            "UHDv5NTx3pz26XZwpbjwKxmdnYzksEuOmbTbvzgkQbYVnLuK+VLwt0QwgJHAUODoluXS8R5InKOS2X1qNqgBeA==",
+            "pMpo89JUKfRE+IvXXW/dsAkns0FXpxagXtQf4m6sXIeO3qH3lHAdbzJvd8gs+xfgnQs3oUs47KD4sWtTARNndw==",
+        ]
+        if ta_alias not in alias_list:
+            return RestfulResponse(
+                Note="Did not transfer TaTradingRights, not one of the first 4 atns"
+            )
+        required_algos = 25
+
+        i = alias_list.index(ta_alias)
+        sk = sk_list[i]
+        atn_acct = BasicAccount(sk)
+
+        txn = transaction.PaymentTxn(
+            sender=self.acct.addr,
+            receiver=atn_acct.addr,
+            amt=required_algos * 10**6,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Failure Funding {ta_alias} atn",
+                HttpStatusCode=422,
+            )
+
+        # Hack opt the Atn into the asset using the ATNS PRIVATE KEY.
+        # Replace when real SLA exists
+        txn = transaction.AssetOptInTxn(
+            sender=atn_acct.addr,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(atn_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Atn for {ta_alias} failed to opt into trading rights {ta_trading_rights_idx}",
+                HttpStatusCode=422,
+            )
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.acct.addr,
+            receiver=atn_acct.addr,
+            amt=1,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            note = (
+                f"Failure sending AssetTransfer for {ta_alias} trading rights"
+                f" {ta_trading_rights_idx}"
+            )
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        return RestfulResponse(
+            Note=f"Successfully entered Service Level Agreement for {ta_alias}"
+        )

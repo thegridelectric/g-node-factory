@@ -109,6 +109,17 @@
   </RestfulPosts>
   <SchemaRoots>
     <SchemaRoot>
+      <SchemaRootId>rec0Od5vGZi8EDj7g</SchemaRootId>
+      <createdTime>2022-11-23T14:01:26Z</createdTime>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <Alias>sla.enter</Alias>
+      <AliasRoot>sla.enter</AliasRoot>
+      <CurrentSemanticEnd>000</CurrentSemanticEnd>
+      <Status>Active</Status>
+      <ProtocolCategory>Json</ProtocolCategory>
+      <SchemaRootscopy>recPxYqZlRvCFlD8p</SchemaRootscopy>
+    </SchemaRoot>
+    <SchemaRoot>
       <SchemaRootId>rec0dMwyxvm5Cx9Hu</SchemaRootId>
       <createdTime>2022-09-19T15:06:21Z</createdTime>
       <ProtocolCategory>Json</ProtocolCategory>
@@ -2868,7 +2879,7 @@
       <Enum>recZB6uJDEaCzvTZX</Enum>
       <DisplayName>g.node.role.000__PriceService</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrZOdqqY4jpivDMi/recUtA3HI1KJ6BADP</EnumSymbol>
+    <EnumSymbol>itr2nAdv9sm0jrv5H/recUtA3HI1KJ6BADP</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recVVshv4AuJAbuyp</EnumSymbolId>
       <createdTime>2022-08-01T12:19:47Z</createdTime>
@@ -3768,7 +3779,7 @@ If a GNode is Active, its parent GNode MUST ALSO be active.</Description>
       <Enum>recQeMNisJZjsYXTl</Enum>
       <DisplayName>spaceheat.actor.class.000__PrimaryMeter</DisplayName>
     </EnumSymbol>
-    <EnumSymbol>itrZOdqqY4jpivDMi/recyHL0VJtn5jmtIW</EnumSymbol>
+    <EnumSymbol>itr2nAdv9sm0jrv5H/recyHL0VJtn5jmtIW</EnumSymbol>
     <EnumSymbol>
       <EnumSymbolId>recyNnqxvxbEGLzhG</EnumSymbolId>
       <createdTime>2022-11-08T22:21:38Z</createdTime>
@@ -4969,6 +4980,27 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <RootCurrentSemanticEnd>100</RootCurrentSemanticEnd>
       <IsCurrent>1</IsCurrent>
       <InGwProto>true</InGwProto>
+    </Schema>
+    <Schema>
+      <SchemaId>recPxYqZlRvCFlD8p</SchemaId>
+      <createdTime>2022-11-23T14:01:41Z</createdTime>
+      <Alias>sla.enter.000</Alias>
+      <ConsistencyCheck>1</ConsistencyCheck>
+      <IsCurrent>1</IsCurrent>
+      <Status>Pending</Status>
+      <SchemaRoot>rec0Od5vGZi8EDj7g</SchemaRoot>
+      <AliasRoot>sla.enter</AliasRoot>
+      <MakeDataClass />
+      <ProtocolCategory>Json</ProtocolCategory>
+      <IsCac />
+      <IsComponent />
+      <RootStatus>Active</RootStatus>
+      <RootCurrentSemanticEnd>000</RootCurrentSemanticEnd>
+      <InGwProto />
+      <SemanticEnd>000</SemanticEnd>
+      <PreStatus>Pending</PreStatus>
+      <SchemaAttributes>rec57uhIFk7eVwvKQ</SchemaAttributes>
+      <ProtocolTypes>recCLW1iXAhVHGoUm</ProtocolTypes>
     </Schema>
     <Schema>
       <SchemaId>recPy6SuizSerb3JG</SchemaId>
@@ -6363,6 +6395,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsCurrent>1</IsCurrent>
       <InGwProto />
     </Schema>
+    <Schema>itr3Zyw2ylvbKAWbX/recwr8WwMjrVGNL7L</Schema>
     <Schema>
       <SchemaId>recxNIfCRauFrb57o</SchemaId>
       <createdTime>2022-06-20T12:49:53Z</createdTime>
@@ -6388,7 +6421,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <Status>Pending</Status>
       <InGwProto />
     </Schema>
-    <Schema>itrO3LKqUVkzWXlRv/recxNIfCRauFrb57o</Schema>
     <Schema>
       <SchemaId>recyD0ycgUiT7TiH2</SchemaId>
       <createdTime>2022-07-12T18:02:06Z</createdTime>
@@ -7229,6 +7261,22 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
     </SchemaAttribute>
     <SchemaAttribute>
+      <SchemaAttributeId>rec57uhIFk7eVwvKQ</SchemaAttributeId>
+      <createdTime>2022-11-23T14:02:10Z</createdTime>
+      <Schema>recPxYqZlRvCFlD8p</Schema>
+      <IsEnum>false</IsEnum>
+      <IsType>false</IsType>
+      <Value>TerminalAssetAlias</Value>
+      <Idx>0</Idx>
+      <IsRequired>true</IsRequired>
+      <IsPrimitive>true</IsPrimitive>
+      <TestValue>'d1.isone.ver.keene.holly.ta'</TestValue>
+      <PrimitiveType>String</PrimitiveType>
+      <PrimitiveFormatId>recb9fI4kRkTYXDzA</PrimitiveFormatId>
+      <PrimitiveFormat>LrdAliasFormat</PrimitiveFormat>
+      <PrimitiveFormatFail1>"a.b-h"</PrimitiveFormatFail1>
+    </SchemaAttribute>
+    <SchemaAttribute>
       <SchemaAttributeId>rec5N3oYOvCWemw2p</SchemaAttributeId>
       <createdTime>2022-11-10T13:23:48Z</createdTime>
       <IsRequired>true</IsRequired>
@@ -7900,6 +7948,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrA6ulaW4g3geDaw/recBvZfLA3CxARt9t</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recBw1TvOwQk1gM0K</SchemaAttributeId>
       <createdTime>2022-11-17T02:19:08Z</createdTime>
@@ -7912,7 +7961,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr0LhKvD6pPStzS2/recBw1TvOwQk1gM0K</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recC2OJXewZyxgy8T</SchemaAttributeId>
       <createdTime>2022-11-17T06:04:05Z</createdTime>
@@ -9274,6 +9322,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrA6ulaW4g3geDaw/recKr9eJbHAgZPAJr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKtxHw3srimaENr</SchemaAttributeId>
       <createdTime>2022-10-02T23:40:15Z</createdTime>
@@ -9286,7 +9335,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr0LhKvD6pPStzS2/recKtxHw3srimaENr</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recKwPBxJr8R55KlB</SchemaAttributeId>
       <createdTime>2022-05-11T18:23:36Z</createdTime>
@@ -10670,6 +10718,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrA6ulaW4g3geDaw/recVdAiysaXLvmg8u</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recVgR5ZOHi7dvBav</SchemaAttributeId>
       <createdTime>2022-07-05T12:49:46Z</createdTime>
@@ -10685,7 +10734,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>"d4be12d5-33ba-4f1f-b9e5"</PrimitiveFormatFail1>
     </SchemaAttribute>
-    <SchemaAttribute>itr0LhKvD6pPStzS2/recVgR5ZOHi7dvBav</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recViTC1TmtkHrDKI</SchemaAttributeId>
       <createdTime>2022-11-10T14:23:24Z</createdTime>
@@ -12038,6 +12086,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsType>false</IsType>
       <PrimitiveFormatFail1>1656245000</PrimitiveFormatFail1>
     </SchemaAttribute>
+    <SchemaAttribute>itrA6ulaW4g3geDaw/recgVLpaOczJX5BCi</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recgb4I6CvYgu6S4D</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:42Z</createdTime>
@@ -12052,7 +12101,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
-    <SchemaAttribute>itr0LhKvD6pPStzS2/recgb4I6CvYgu6S4D</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recgdJntx0xcLzbqq</SchemaAttributeId>
       <createdTime>2022-09-19T18:21:58Z</createdTime>
@@ -13407,6 +13455,7 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <IsEnum>false</IsEnum>
       <IsType>false</IsType>
     </SchemaAttribute>
+    <SchemaAttribute>itrA6ulaW4g3geDaw/recrpGZFYeoLlFiGW</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recrrGZ3RvMBzGjrP</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:49Z</createdTime>
@@ -13424,7 +13473,6 @@ CHANGE to TOPOLOGY Axiom (Joint Axiom 1)</UpdateDescription>
       <DefaultEnumValue>Unknown</DefaultEnumValue>
       <PythonEnumNameStyle>UpperPython</PythonEnumNameStyle>
     </SchemaAttribute>
-    <SchemaAttribute>itr0LhKvD6pPStzS2/recrrGZ3RvMBzGjrP</SchemaAttribute>
     <SchemaAttribute>
       <SchemaAttributeId>recs9j9qZr50sugIe</SchemaAttributeId>
       <createdTime>2022-11-09T23:00:21Z</createdTime>
@@ -15045,6 +15093,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <MpSchemaAttributes>recscJlOCJSX2ckU5</MpSchemaAttributes>
       <MpSchemaAttributes>recPw5jcOzArg9D84</MpSchemaAttributes>
       <MpSchemaAttributes>rec4XKd6lO34y5XKU</MpSchemaAttributes>
+      <MpSchemaAttributes>rec57uhIFk7eVwvKQ</MpSchemaAttributes>
       <Name>LrdAliasFormat</Name>
     </PropertyFormat>
     <PropertyFormat>
@@ -15302,6 +15351,7 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <ProtocolTypes>reccEMLYgCyyYLPr2</ProtocolTypes>
       <ProtocolTypes>recY4ZPVnAi4v6y0i</ProtocolTypes>
       <ProtocolTypes>recZCRfLe9nDmrRAU</ProtocolTypes>
+      <ProtocolTypes>recCLW1iXAhVHGoUm</ProtocolTypes>
       <Name>gnf</Name>
       <ProtocolEnums>recX5VXrxWR81za5J</ProtocolEnums>
       <ProtocolEnums>recr9TyWTi2Ct7iKH</ProtocolEnums>
@@ -15489,6 +15539,15 @@ AtomicMeteringNode can turn into AtomicTNode and vice versa</Description>
       <Name>atn ready.000</Name>
       <ProtocolName>atn</ProtocolName>
       <TypeName>ready.000</TypeName>
+    </ProtocolType>
+    <ProtocolType>
+      <ProtocolTypeId>recCLW1iXAhVHGoUm</ProtocolTypeId>
+      <createdTime>2022-11-23T14:03:08Z</createdTime>
+      <Name>gnf sla.enter.000</Name>
+      <Protocol>recXaQaXNNDyxIlT7</Protocol>
+      <ProtocolName>gnf</ProtocolName>
+      <Type>recPxYqZlRvCFlD8p</Type>
+      <TypeName>sla.enter.000</TypeName>
     </ProtocolType>
     <ProtocolType>
       <ProtocolTypeId>recD3ljiQIeTgIh7G</ProtocolTypeId>
