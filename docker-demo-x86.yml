@@ -24,7 +24,7 @@ services:
   #     - rabbit
   marketmaker:
     container_name: mm
-    image: "jessmillar/marketmaker:chaos__d45cf0b__20221125"
+    image: "jessmillar/marketmaker:chaos__947e33e__20221125"
     networks:
       - "dev"
     ports:
