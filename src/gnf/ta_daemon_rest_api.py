@@ -28,6 +28,14 @@ async def main():
     return {"Owned deeds": daemon.ta_deed_alias_list()}
 
 
+@app.get("/trading-rights/")
+async def main():
+    if daemon.trading_rights_addr == daemon.acct.addr:
+        return {"Address of Trading Rights Owner": "self"}
+    else:
+        return {"Address of Trading Rights Owner": daemon.trading_rights_addr}
+
+
 @app.get("/env/")
 async def show_env():
     return daemon.settings

@@ -40,6 +40,7 @@ class PythonTaDaemon:
         self.acct: BasicAccount = BasicAccount(
             private_key=self.settings.sk.get_secret_value()
         )
+        self.trading_rights_addr: str = self.acct.addr
         LOGGER.info("TaOwner Smart Daemon Initialized")
 
     ##########################
@@ -321,6 +322,7 @@ class PythonTaDaemon:
             )
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
+        self.trading_rights_addr = atn_acct.addr
         return RestfulResponse(
             Note=f"Successfully entered Service Level Agreement for {ta_alias}"
         )

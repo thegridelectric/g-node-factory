@@ -115,6 +115,21 @@ def create_terminal_assets(ta_owners: List[DevTaOwner]) -> RestfulResponse:
     return RestfulResponse(Note="Success with create_terminal_assets")
 
 
+def enter_slas(ta_owners: List[DevTaOwner]) -> RestfulResponse:
+    for ta_owner in ta_owners:
+        if not isinstance(ta_owner, DevTaOwner):
+            return RestfulResponse(
+                Note=f"{ta_owner} is not a DevTaOwner!", HttpStatusCode=422
+            )
+    for ta_owner in ta_owners:
+        rr = ta_owner.enter_sla()
+        if rr.HttpStatusCode > 200:
+            for ta_owner in ta_owners:
+                ta_owner.stop()
+            return rr
+    return RestfulResponse(Note="Success with entering ServiceLevelAgreements")
+
+
 def create_new_ctn():
     ada = DevDiscoverer(settings=config.DiscovererSettings())
     rr = ada.post_discoverycert_algo_create()
