@@ -43,7 +43,7 @@ subprocess.run(["../sandbox/sandbox", "reset"])
 
 print("")
 print("")
-print("Funding the GNodeFactory and the Keene MarketMaker")
+print("Funding the GNodeFactory, the Keene MarketMaker and Atn accts")
 print("")
 print("")
 
@@ -55,6 +55,21 @@ algo_setup.dev_fund_account(
     to_addr=settings.public.keene_addr,
     amt_in_micros=10**6,
 )
+
+atn_address_list = [
+    "4JHRDNY4F6RCVGPALZULZWZNVP3OKT3DATEOLINCGILVPGHUOFY7KCHVIQ",
+    "YL3MAWSIST2DWX5GOTZYVX74GNSAVMX52RKSEDT4KIO644JCCRFTFKM5UM",
+    "CWOLXCXZKLYLORBQQCI4AUHA5CLOLUXRDZEJZI4S3F6WUNVIAF4MX5EW4U",
+    "R3PKD54UOAOW6MTPO7ECZ6YX4COQWN5BJM4OZIHYWFVVGAITM53RGUF6LI",
+]
+
+for addr in atn_address_list:
+    algo_setup.dev_fund_account(
+        settings=settings,
+        to_addr=addr,
+        amt_in_micros=25 * 10**6,
+    )
+
 
 
 print("")
