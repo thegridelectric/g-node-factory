@@ -84,7 +84,7 @@ def create_terminal_asset(ta_owner: DevTaOwner) -> RestfulResponse:
 
     rr = molly.certify_terminal_asset(
         ta_deed_idx=ta_deed_idx,
-        ta_daemon_addr=BasicAccount(ta_owner.ta_daemon_sk).addr,
+        ta_daemon_addr=ta_owner.ta_daemon_acct.addr,
         ta_owner_addr=ta_owner.acct.addr,
         micro_lat=ta_owner.settings.micro_lat,
         micro_lon=ta_owner.settings.micro_lon,
@@ -113,6 +113,21 @@ def create_terminal_assets(ta_owners: List[DevTaOwner]) -> RestfulResponse:
                 ta_owner.stop()
             return rr
     return RestfulResponse(Note="Success with create_terminal_assets")
+
+
+def enter_slas(ta_owners: List[DevTaOwner]) -> RestfulResponse:
+    for ta_owner in ta_owners:
+        if not isinstance(ta_owner, DevTaOwner):
+            return RestfulResponse(
+                Note=f"{ta_owner} is not a DevTaOwner!", HttpStatusCode=422
+            )
+    for ta_owner in ta_owners:
+        rr = ta_owner.enter_sla()
+        if rr.HttpStatusCode > 200:
+            for ta_owner in ta_owners:
+                ta_owner.stop()
+            return rr
+    return RestfulResponse(Note="Success with entering ServiceLevelAgreements")
 
 
 def create_new_ctn():

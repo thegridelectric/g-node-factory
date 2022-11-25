@@ -71,7 +71,6 @@ for addr in atn_address_list:
     )
 
 
-
 print("")
 print("")
 print("Flushing GNodeFactory Database")
@@ -198,15 +197,49 @@ if rr.HttpStatusCode == 200:
     print("")
     time.sleep(2)
 else:
-    print("Something went wrong")
+    # cmd = "docker stop gnf-api"
+    raise Exception("Something went wrong creating TerminalAssets")
     print("")
     print("")
 
-input("HIT RETURN TO CONTINUE")
+print("")
+print("")
+print(
+    "The AtomicTNodes do not yet own trading rights. Inspect trading right owners at:"
+)
+for owner in ta_owners:
+    print(
+        f"Inspect {owner}'s deeds at http://localhost:{owner.settings.ta_daemon_api_port}/trading-rights/"
+    )
 
 print("")
 print("")
-print(f"Starting Time")
+time.sleep(2)
+input("HIT RETURN")
+print("")
+print("")
+
+rr = demo_methods.enter_slas(ta_owners)
+
+if rr.HttpStatusCode == 200:
+    print("")
+    print("")
+    time.sleep(2)
+    print(
+        "Daemons have transferred TradingRights to their AtomicTNodes. Inspect at above pages"
+    )
+    print("")
+    print("")
+else:
+    # cmd = "docker stop gnf-api"
+    raise Exception("Something went wrong entering Service Level Agreements")
+    print("")
+    print("")
+
+input("HIT RETURN TO START SIMULATED TIME")
+
+print("")
+print("")
 print("")
 print("")
 
@@ -233,6 +266,9 @@ print("")
 time.sleep(2)
 
 input("HIT RETURN TO STOP SIMULATION AND TEAR DOWN TADAEMON DOCKER INSTANCES")
+
+api_endpoint = f"http://0.0.0.0:8000/pause-time/"
+r = requests.post(url=api_endpoint)
 
 for ta_owner in ta_owners:
     ta_owner.stop()  # Does the same

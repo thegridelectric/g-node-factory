@@ -20,6 +20,7 @@ from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn_Maker
 from gnf.schemata import PauseTime_Maker
 from gnf.schemata import ResumeTime_Maker
+from gnf.schemata import SlaEnter_Maker
 from gnf.schemata import TadeedSpecsHack_Maker
 from gnf.schemata import TatradingrightsAlgoCreate_Maker
 from gnf.schemata import TavalidatorcertAlgoCreate_Maker
@@ -48,6 +49,7 @@ type_makers: List[HeartbeatA_Maker] = [
     OldTadeedAlgoReturn_Maker,
     PauseTime_Maker,
     ResumeTime_Maker,
+    SlaEnter_Maker,
     TadeedSpecsHack_Maker,
     TatradingrightsAlgoCreate_Maker,
     TavalidatorcertAlgoCreate_Maker,
@@ -81,6 +83,7 @@ def version_by_type_name() -> List[str]:
         "old.tadeed.algo.return": "000",
         "pause.time": "000",
         "resume.time": "000",
+        "sla.enter": "000",
         "tadeed.specs.hack": "000",
         "tatradingrights.algo.create": "000",
         "tavalidatorcert.algo.create": "000",
@@ -116,6 +119,7 @@ def status_by_versioned_type_name() -> List[str]:
         "old.tadeed.algo.return.000": "Pending",
         "pause.time.000": "Pending",
         "resume.time.000": "Pending",
+        "sla.enter.000": "Pending",
         "tadeed.specs.hack.000": "Pending",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",
