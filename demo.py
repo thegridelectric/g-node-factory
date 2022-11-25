@@ -23,7 +23,7 @@ from gnf import load_dev_data
 #             f"Please enter an integer number of homes to simulate, not {sys.argv[1]}"
 #         )
 
-sim_size = 4
+sim_size = 1
 full_plant_names = demo_methods.demo_plant_names
 plant_names = full_plant_names[0:sim_size]
 

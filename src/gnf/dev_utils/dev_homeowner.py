@@ -64,7 +64,7 @@ class DevTaOwner:
         LOGGER.info(
             f"Starting {self.short_alias}-daemon on port {self.settings.ta_daemon_api_port}"
         )
-        # self.pr: subprocess.Popen = self.start_ta_daemon()
+        self.pr: subprocess.Popen = self.start_ta_daemon()
 
     def stop(self):
         # self.pr.terminate()
