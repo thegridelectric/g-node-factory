@@ -7,8 +7,8 @@ from rich.pretty import pprint
 
 import gnf.config as config
 import gnf.demo_methods as demo_methods
+import gnf.dev_utils.algo_setup as algo_setup
 from gnf import load_dev_data
-from gnf.dev_utils.algo_setup import dev_fund_admin_and_graveyard
 
 
 # if len(sys.argv) == 1:
@@ -43,12 +43,20 @@ subprocess.run(["../sandbox/sandbox", "reset"])
 
 print("")
 print("")
-print("Funding the GNodeFactory")
+print("Funding the GNodeFactory and the Keene MarketMaker")
 print("")
 print("")
 
+settings = config.GnfSettings()
 
-dev_fund_admin_and_graveyard(config.GnfSettings())
+algo_setup.dev_fund_admin_and_graveyard(settings)
+algo_setup.dev_fund_account(
+    settings=settings,
+    to_addr=settings.public.keene_addr,
+    amt_in_micros=10**6,
+)
+
+
 print("")
 print("")
 print("Flushing GNodeFactory Database")
@@ -201,7 +209,15 @@ r = requests.post(url=api_endpoint)
 # subprocess.run(cmd.split())
 # # This removes the stopped docker container
 
-input("HIT RETURN TO STOP SIMULATION. TIME WILL STOP AFTER 2 DAYS")
+time.sleep(2)
+print("")
+print("")
+print("In another window, try python pause_time.py (and `python resume_time.py`)")
+print("")
+print("")
+time.sleep(2)
+
+input("HIT RETURN TO STOP SIMULATION AND TEAR DOWN TADAEMON DOCKER INSTANCES")
 
 for ta_owner in ta_owners:
     ta_owner.stop()  # Does the same

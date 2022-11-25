@@ -27,6 +27,7 @@ class GnfPublic(BaseModel):
     molly_api_root: str = "http://localhost:8001"
     molly_cert_name: str = "Molly Metermaid"
     molly_name: str = "Molly Inc Telemetry Surveyors and Purveyors"
+    keene_addr: str = "JMEUH2AXM6UGRJO2DBZXDOA2OMIWQFNQZ54LCVC4GQX6QDOX5Z6JRGMWFA"
 
 
 class AlgoApiSecrets(BaseModel):

@@ -29,6 +29,8 @@ This repo has been developed through the generous funding of a grant provided by
    - [https://github.com/thegridelectric/gridworks-marketmaker](https://github.com/thegridelectric/gridworks-marketmaker) (MarketMaker GNode repo)
    - [https://github.com/thegridelectric/gridworks-atn-spaceheat](https://github.com/thegridelectric/gridworks-atn-spaceheat) (AtomicTNode GNode repo)
 
+   For now, each of these needs a separate virtual env.
+
 3. Start the Algorand sandbox in a **sibling directory**
 
    a. Clone [Algorand Sandbox](https://github.com/algorand/sandbox) into sibling directory
@@ -60,7 +62,11 @@ This repo has been developed through the generous funding of a grant provided by
 
    Wait for containers to initialize. Rabbit will take a minute. Check these web pages:
 
-   - [http://0.0.0.0:15672/#/queues](http://0.0.0.0:15672/#/queues) and wait for the "d1.time-Fxxx" queue to show up. This is the dockerized [TimeCoordinator GNode](https://github.com/thegridelectric/gridworks-timecoordinator).
+   - [http://0.0.0.0:15672/#/queues](http://0.0.0.0:15672/#/queues) and wait for the "d1.time-Fxxx" queue to show up. This is the dockerized [TimeCoordinator GNode](https://github.com/thegridelectric/gridworks-timecoordinator). Username/passwd:
+
+     ```
+     smqPublic
+     ```
 
    - [http://localhost:7997/get-time/](http://localhost:7997/get-time/) is the MarketMaker API. It should show TimeUnixS: 0.
 
@@ -92,9 +98,9 @@ This repo has been developed through the generous funding of a grant provided by
    python demo.py
    ```
 
-   If the demo succeeds, it will run for 48 hours, with each of the 4 AtomicTNodes placing a bid for each hour into the MarketMaker. 
-   
-   You will see interesting output in the marketmaker and atn repo screen logs. You can also inspect all the messages that get sent in the demo by selecting `Get Message(s)` at [this rabbit queue](http://0.0.0.0:15672/#/queues/d1__1/dummy_ear_q). The main queue screen also shows message flow rate. 
+   If the demo succeeds, it will run for 48 hours, with each of the 4 AtomicTNodes placing a bid for each hour into the MarketMaker.
+
+   You will see interesting output in the marketmaker and atn repo screen logs. You can also inspect all the messages that get sent in the demo by selecting `Get Message(s)` at [this rabbit queue](http://0.0.0.0:15672/#/queues/d1__1/dummy_ear_q). The main queue screen also shows message flow rate.
 
 6. When done, you need to tear down docker in the `g-node-factory` before running again:
 

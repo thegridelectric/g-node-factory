@@ -24,7 +24,7 @@ services:
   #     - rabbit
   marketmaker:
     container_name: mm
-    image: "jessmillar/marketmaker:chaos__c421026__20221123"
+    image: "jessmillar/marketmaker:chaos__d45cf0b__20221125"
     networks:
       - "dev"
     ports:
@@ -35,14 +35,7 @@ services:
     depends_on:
       - rabbit
     container_name: tc
-    image: "jessmillar/timecoordinator:demo"
-  # timecoordinator:
-  #   networks:
-  #     - "dev"
-  #   depends_on:
-  #     - rabbit
-  #   container_name: tc
-  #   image: "jessmillar/timecoordinator:chaos__6adecdd__20221122"
+    image: "jessmillar/timecoordinator:chaos__207b20b__20221125"
   # atn:
   #   networks:
   #     - "dev"
