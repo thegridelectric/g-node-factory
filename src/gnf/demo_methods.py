@@ -84,7 +84,7 @@ def create_terminal_asset(ta_owner: DevTaOwner) -> RestfulResponse:
 
     rr = molly.certify_terminal_asset(
         ta_deed_idx=ta_deed_idx,
-        ta_daemon_addr=BasicAccount(ta_owner.ta_daemon_sk).addr,
+        ta_daemon_addr=ta_owner.ta_daemon_acct.addr,
         ta_owner_addr=ta_owner.acct.addr,
         micro_lat=ta_owner.settings.micro_lat,
         micro_lon=ta_owner.settings.micro_lon,

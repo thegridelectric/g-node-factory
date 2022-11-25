@@ -47,20 +47,24 @@ class DevTaOwner:
                 self.settings.validator_addr,
             ],
         )
-        ta_daemon_acct: BasicAccount = BasicAccount()
-        self.ta_daemon_sk: str = ta_daemon_acct.sk
-        self.settings.ta_daemon_addr: str = ta_daemon_acct.addr
+        if self.settings.initial_ta_alias == "d1.isone.ver.keene.holly.ta":
+            ta_daemon_sk = config.TaDaemonSettings().sk.get_secret_value()
+            self.ta_daemon_acct = BasicAccount(ta_daemon_sk)
+        else:
+            self.ta_daemon_acct: BasicAccount = BasicAccount()
+            self.settings.ta_daemon_addr: str = self.ta_daemon_acct.addr
+
         self.ta_daemon_api_root = (
             f"{self.settings.ta_daemon_api_fqdn}:{self.settings.ta_daemon_api_port}"
         )
         LOGGER.info(f"ta_owner_addr = {self.acct.addr}")
-        LOGGER.info(f"ta_daemon_addr = {ta_daemon_acct.addr}")
+        LOGGER.info(f"ta_daemon_addr = {self.ta_daemon_acct.addr}")
 
     def start(self):
         LOGGER.info(
             f"Starting {self.short_alias}-daemon on port {self.settings.ta_daemon_api_port}"
         )
-        self.pr: subprocess.Popen = self.start_ta_daemon()
+        # self.pr: subprocess.Popen = self.start_ta_daemon()
 
     def stop(self):
         # self.pr.terminate()
@@ -72,7 +76,7 @@ class DevTaOwner:
     def start_ta_daemon(self) -> subprocess.Popen:
         LOGGER.info("Starting TaDaemon")
         port = self.settings.ta_daemon_api_port
-        cmd = f"docker run  -e TAD_SK={self.ta_daemon_sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:latest"
+        cmd = f"docker run  -e TAD_SK={self.ta_daemon_acct.sk} -e TAD_TA_OWNER_ADDR={self.acct.addr} -p {port}:8000 --name {self.short_alias}-daemon jessmillar/python-ta-daemon:latest"
         pr = subprocess.Popen(
             cmd.split(),
         )
@@ -80,7 +84,7 @@ class DevTaOwner:
         # pr = subprocess.Popen(
         #      cmd.split(),
         #      env=dict(os.environ,
-        #         TAD_SK=self.ta_daemon_sk,
+        #         TAD_SK=self.ta_daemon_acct.sk,
         #         TAD_TA_OWNER_ADDR={self.acct.addr})
         # )
         daemon_api_root = (
@@ -105,10 +109,8 @@ class DevTaOwner:
 
     def enter_sla(self) -> RestfulResponse:
         ta_alias = self.settings.initial_ta_alias
-        payload = SlaEnter_Maker(
-            terminal_asset_alias="d1.isone.ver.keene.holly.ta"
-        ).tuple
-        api_endpoint = f"http://{self.ta_daemon_api_root}/sla-enter/"
+        payload = SlaEnter_Maker(terminal_asset_alias=ta_alias).tuple
+        api_endpoint = f"{self.ta_daemon_api_root}/sla-enter/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())
         if r.status_code > 200:
             if r.status_code == 422:
@@ -178,7 +180,7 @@ class DevTaOwner:
             ta_owner_addr=self.acct.addr,
             validator_addr=self.settings.validator_addr,
             signed_initial_daemon_funding_txn=encoding.msgpack_encode(signed_txn),
-            ta_daemon_private_key=self.ta_daemon_sk,
+            ta_daemon_private_key=self.ta_daemon_acct.sk,
         ).tuple
         api_endpoint = f"{self.ta_daemon_api_root}/initial-tadeed-algo-optin/"
         r = requests.post(url=api_endpoint, json=payload.as_dict())

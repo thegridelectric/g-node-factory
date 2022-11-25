@@ -71,7 +71,6 @@ for addr in atn_address_list:
     )
 
 
-
 print("")
 print("")
 print("Flushing GNodeFactory Database")
