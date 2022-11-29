@@ -16,13 +16,13 @@ services:
   #     - "dev"
   #   ports:
   #     - 7997:8000
-  # timecoordinator:
-  #   networks:
-  #     - "dev"
-  #   depends_on:
-  #     - rabbit
-  #   container_name: tc
-  #   image: "jessmillar/timecoordinator:chaos__72760fe__20221125"
+  timecoordinator:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: tc
+    image: "jessmillar/timecoordinator:latest"
   atn:
     networks:
       - "dev"
