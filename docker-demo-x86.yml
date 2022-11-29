@@ -29,20 +29,20 @@ services:
   #     - "dev"
   #   ports:
   #     - 7997:8000
-  timecoordinator:
-    networks:
-      - "dev"
-    depends_on:
-      - rabbit
-    container_name: tc
-    image: "jessmillar/timecoordinator:chaos__207b20b__20221125"
-  # atn:
+  # timecoordinator:
   #   networks:
   #     - "dev"
   #   depends_on:
   #     - rabbit
-  #   container_name: atn
-  #   image: "jessmillar/atn:chaos__84f02c8__20221123"
+  #   container_name: tc
+  #   image: "jessmillar/timecoordinator:chaos__207b20b__20221125"
+  atn:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: atn
+    image: "jessmillar/atn:latest"
   redis:
     hostname: redis
     container_name: mm-redis

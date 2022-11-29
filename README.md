@@ -68,7 +68,6 @@ This repo has been developed through the generous funding of a grant provided by
      smqPublic
      ```
 
-
    - [http://localhost:8001/docs](http://localhost:8001/docs) - Api for the dockerized TaValidator
 
 2. In `gridworks-marketmaker` repo:
@@ -76,7 +75,6 @@ This repo has been developed through the generous funding of a grant provided by
    ```
    uvicorn gwmm.rest_api:app --reload  --port 7997
    ```
-
 
    [http://localhost:7997/get-time/](http://localhost:7997/get-time/) is the MarketMaker API. It should show TimeUnixS: 0.
 
@@ -88,19 +86,13 @@ This repo has been developed through the generous funding of a grant provided by
 
    Verify MarketMaker `verify d1.isone.ver.keene-Fxxx` shows up in [rabbitmq](http://0.0.0.0:15672/#/queues)
 
-4. In `gridworks-atn-spaceheat` repo:
-
-   ```
-   python demo.py
-   ```
-
-5. In `g-node-factory` repo:
+4. In `g-node-factory` repo:
 
    ```
    uvicorn  gnf.rest_api:app --reload  --port 8000
    ```
 
-6. In a new terminal window for `g-node-factory` repo:
+5. In a new terminal window for `g-node-factory` repo:
 
    ```
    python demo.py
@@ -110,7 +102,7 @@ This repo has been developed through the generous funding of a grant provided by
 
    You will see interesting output in the marketmaker and atn repo screen logs. You can also inspect all the messages that get sent in the demo by selecting `Get Message(s)` at [this rabbit queue](http://0.0.0.0:15672/#/queues/d1__1/dummy_ear_q). The main queue screen also shows message flow rate.
 
-7. When done, you need to tear down docker in the `g-node-factory` before running again:
+6. When done, you need to tear down docker in the `g-node-factory` before running again:
 
    ```
    docker-compose -f docker-demo-arm.yml down
