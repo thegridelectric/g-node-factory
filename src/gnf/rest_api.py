@@ -59,6 +59,11 @@ async def resume_time():
     gnf.resume_time()
 
 
+@app.post(f"/debug-tc-reinitialize-time/")
+async def debug_tc_reinitialize_time():
+    gnf.debug_tc_reinitialize_time()
+
+
 @app.post("/tavalidatorcert-algo-create/", response_model=RestfulResponse)
 async def tavalidatorcert_algo_create_received(
     payload: TavalidatorcertAlgoCreate,

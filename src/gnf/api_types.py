@@ -9,6 +9,7 @@ from gnf.schemata import BasegnodeOtherCreate_Maker
 from gnf.schemata import BasegnodesBroadcast_Maker
 from gnf.schemata import BasegnodesGet_Maker
 from gnf.schemata import BasegnodeTerminalassetCreate_Maker
+from gnf.schemata import DebugTcReinitializeTime_Maker
 from gnf.schemata import DiscoverycertAlgoCreate_Maker
 from gnf.schemata import DiscoverycertAlgoTransfer_Maker
 from gnf.schemata import HeartbeatA_Maker
@@ -38,6 +39,7 @@ type_makers: List[HeartbeatA_Maker] = [
     BasegnodeTerminalassetCreate_Maker,
     BasegnodesBroadcast_Maker,
     BasegnodesGet_Maker,
+    DebugTcReinitializeTime_Maker,
     DiscoverycertAlgoCreate_Maker,
     DiscoverycertAlgoTransfer_Maker,
     HeartbeatA_Maker,
@@ -72,6 +74,7 @@ def version_by_type_name() -> List[str]:
         "basegnode.terminalasset.create": "000",
         "basegnodes.broadcast": "000",
         "basegnodes.get": "000",
+        "debug.tc.reinitialize.time": "000",
         "discoverycert.algo.create": "000",
         "discoverycert.algo.transfer": "000",
         "heartbeat.a": "000",
@@ -108,6 +111,7 @@ def status_by_versioned_type_name() -> List[str]:
         "basegnode.terminalasset.create.000": "Pending",
         "basegnodes.broadcast.000": "Pending",
         "basegnodes.get.000": "Pending",
+        "debug.tc.reinitialize.time.000": "Pending",
         "discoverycert.algo.create.000": "Pending",
         "discoverycert.algo.transfer.000": "Pending",
         "heartbeat.a.000": "Pending",

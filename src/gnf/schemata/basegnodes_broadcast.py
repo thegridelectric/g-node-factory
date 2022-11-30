@@ -18,7 +18,6 @@ from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
 class BasegnodesBroadcast(BaseModel):
     FromGNodeAlias: str  #
     FromGNodeInstanceId: str  #
-    ToGNodeAlias: str  #
     IncludeAllDescendants: bool  #
     TopGNode: BasegnodeGt  #
     DescendantGNodeList: List[BasegnodeGt]
@@ -31,10 +30,6 @@ class BasegnodesBroadcast(BaseModel):
 
     _validator_from_g_node_instance_id = predicate_validator(
         "FromGNodeInstanceId", property_format.is_uuid_canonical_textual
-    )
-
-    _validator_to_g_node_alias = predicate_validator(
-        "ToGNodeAlias", property_format.is_lrd_alias_format
     )
 
     @validator("DescendantGNodeList")
@@ -69,7 +64,6 @@ class BasegnodesBroadcast_Maker:
         self,
         from_g_node_alias: str,
         from_g_node_instance_id: str,
-        to_g_node_alias: str,
         include_all_descendants: bool,
         top_g_node: BasegnodeGt,
         descendant_g_node_list: List[BasegnodeGt],
@@ -78,7 +72,6 @@ class BasegnodesBroadcast_Maker:
         self.tuple = BasegnodesBroadcast(
             FromGNodeAlias=from_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,
-            ToGNodeAlias=to_g_node_alias,
             IncludeAllDescendants=include_all_descendants,
             TopGNode=top_g_node,
             DescendantGNodeList=descendant_g_node_list,
@@ -106,8 +99,6 @@ class BasegnodesBroadcast_Maker:
             raise SchemaError(f"dict {d2} missing FromGNodeAlias")
         if "FromGNodeInstanceId" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FromGNodeInstanceId")
-        if "ToGNodeAlias" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing ToGNodeAlias")
         if "IncludeAllDescendants" not in d2.keys():
             raise SchemaError(f"dict {d2} missing IncludeAllDescendants")
         if "TopGNode" not in d2.keys():
@@ -135,7 +126,6 @@ class BasegnodesBroadcast_Maker:
         return BasegnodesBroadcast(
             FromGNodeAlias=d2["FromGNodeAlias"],
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
-            ToGNodeAlias=d2["ToGNodeAlias"],
             IncludeAllDescendants=d2["IncludeAllDescendants"],
             TopGNode=d2["TopGNode"],
             DescendantGNodeList=d2["DescendantGNodeList"],

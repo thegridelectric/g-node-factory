@@ -16,6 +16,8 @@ from gnf.schemata.basegnodes_broadcast import BasegnodesBroadcast
 from gnf.schemata.basegnodes_broadcast import BasegnodesBroadcast_Maker
 from gnf.schemata.basegnodes_get import BasegnodesGet
 from gnf.schemata.basegnodes_get import BasegnodesGet_Maker
+from gnf.schemata.debug_tc_reinitialize_time import DebugTcReinitializeTime
+from gnf.schemata.debug_tc_reinitialize_time import DebugTcReinitializeTime_Maker
 from gnf.schemata.discoverycert_algo_create import DiscoverycertAlgoCreate
 from gnf.schemata.discoverycert_algo_create import DiscoverycertAlgoCreate_Maker
 from gnf.schemata.discoverycert_algo_transfer import DiscoverycertAlgoTransfer
@@ -67,6 +69,8 @@ __all__ = [
     "BasegnodesBroadcast_Maker",
     "BasegnodesGet",
     "BasegnodesGet_Maker",
+    "DebugTcReinitializeTime",
+    "DebugTcReinitializeTime_Maker",
     "DiscoverycertAlgoCreate",
     "DiscoverycertAlgoCreate_Maker",
     "DiscoverycertAlgoTransfer",

@@ -56,6 +56,7 @@ from gnf.enums import GNodeStatus
 from gnf.errors import RegistryError
 from gnf.schemata import BasegnodeGt
 from gnf.schemata import BasegnodeGt_Maker
+from gnf.schemata import DebugTcReinitializeTime_Maker
 from gnf.schemata import DiscoverycertAlgoCreate
 from gnf.schemata import InitialTadeedAlgoCreate
 from gnf.schemata import InitialTadeedAlgoTransfer
@@ -133,6 +134,30 @@ class GNodeFactory:
 
     def resume_time(self) -> None:
         payload = ResumeTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
+        )
+
+    def debug_tc_reinitialize_time(self) -> None:
+        payload = ResumeTime_Maker(
+            from_g_node_alias="d1",
+            from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
+            to_g_node_alias="d1.time",
+        ).tuple
+        self.baby_rabbit.send_message(
+            payload=payload,
+            to_role=GNodeRole.TimeCoordinator,
+            to_g_node_alias="d1.time",
+        )
+
+    def debug_tc_reinitialize_time(self) -> None:
+        payload = DebugTcReinitializeTime_Maker(
             from_g_node_alias="d1",
             from_g_node_instance_id="acb29264-7b06-4636-90ff-7c595497cd7c",
             to_g_node_alias="d1.time",

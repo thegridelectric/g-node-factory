@@ -11,9 +11,8 @@ from gnf.schemata import BasegnodesBroadcast_Maker as Maker
 def test_basegnodes_broadcast_generated():
 
     d = {
-        "FromGNodeAlias": "dwgps.gnr",
+        "FromGNodeAlias": "dwgps.gnf",
         "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
-        "ToGNodeAlias": "dwgps.gnf",
         "IncludeAllDescendants": True,
         "TopGNode": {
             "GNodeId": "7b1df82e-10c5-49d9-8d02-1e837e31b87e",
@@ -65,7 +64,6 @@ def test_basegnodes_broadcast_generated():
     t = Maker(
         from_g_node_alias=gtuple.FromGNodeAlias,
         from_g_node_instance_id=gtuple.FromGNodeInstanceId,
-        to_g_node_alias=gtuple.ToGNodeAlias,
         include_all_descendants=gtuple.IncludeAllDescendants,
         top_g_node=gtuple.TopGNode,
         descendant_g_node_list=gtuple.DescendantGNodeList,
@@ -88,11 +86,6 @@ def test_basegnodes_broadcast_generated():
 
     d2 = dict(d)
     del d2["FromGNodeInstanceId"]
-    with pytest.raises(SchemaError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d)
-    del d2["ToGNodeAlias"]
     with pytest.raises(SchemaError):
         Maker.dict_to_tuple(d2)
 
@@ -148,10 +141,6 @@ def test_basegnodes_broadcast_generated():
         Maker.dict_to_tuple(d2)
 
     d2 = dict(d, FromGNodeInstanceId="d4be12d5-33ba-4f1f-b9e5")
-    with pytest.raises(ValidationError):
-        Maker.dict_to_tuple(d2)
-
-    d2 = dict(d, ToGNodeAlias="a.b-h")
     with pytest.raises(ValidationError):
         Maker.dict_to_tuple(d2)
 
