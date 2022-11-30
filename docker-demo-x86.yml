@@ -35,7 +35,7 @@ services:
     depends_on:
       - rabbit
     container_name: tc
-    image: "jessmillar/timecoordinator:chaos__38202d3__20221129"
+    image: "jessmillar/timecoordinator:chaos__78d8300__20221130"
   atn:
     networks:
       - "dev"
