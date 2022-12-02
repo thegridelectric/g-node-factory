@@ -9,7 +9,7 @@ def test_message_category_symbol():
         "rj",
         "rjb",
         "s",
-        "mq",
+        "gw",
         "post",
         "postack",
         "get",
