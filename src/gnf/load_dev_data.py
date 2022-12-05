@@ -21,7 +21,7 @@ def main():
         "GNodeId": "c0119953-a48f-495d-87cc-58fb92eb4cee",
         "Alias": "d1.isone",
         "StatusGtEnumSymbol": "153d3475",
-        "RoleGtEnumSymbol": "4502e355",
+        "RoleGtEnumSymbol": "86f21dd2",
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
         "TypeName": "basegnode.gt",
         "Version": "020",

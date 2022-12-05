@@ -35,7 +35,7 @@ services:
     depends_on:
       - rabbit
     container_name: tc
-    image: "jessmillar/timecoordinator:chaos__d892cc8__20221130"
+    image: "jessmillar/timecoordinator:chaos__63a5a94__20221204"
   atn:
     networks:
       - "dev"
@@ -56,7 +56,7 @@ services:
     hostname: rabbit
     networks:
       - "dev"
-    image: "jessmillar/dev-rabbit-x86:chaos__f13d33c__20221121"
+    image: "jessmillar/dev-rabbit-x86:chaos__e45b8f1__20221205"
     ports:
       - 1885:1885
       - 4369:4369
