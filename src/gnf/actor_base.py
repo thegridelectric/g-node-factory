@@ -1,10 +1,8 @@
 import enum
 import functools
-import json
 import logging
 import threading
 import time
-import traceback
 import uuid
 from abc import ABC
 from abc import abstractmethod
@@ -92,11 +90,10 @@ class ActorBase(ABC):
         settings: Settings,
     ):
         self.latest_routing_key: Optional[str] = None
-        self.settings: Settings = settings
-        self.agent_shutting_down_part_one: bool = False
+        self.shutting_down: bool = False
         self.alias: str = "d1"
         self.g_node_instance_id: str = settings.g_node_instance_id
-        self.g_node_role: GNodeRole = GNodeRole("World")
+        self.g_node_role: GNodeRole = GNodeRole.World
         self.rabbit_role: RabbitRole = RabbitRolebyRole[self.g_node_role]
         self.universe_type: UniverseType = UniverseType("Dev")
         self.actor_main_stopped: bool = False
@@ -119,7 +116,7 @@ class ActorBase(ABC):
         # for higher consumer throughput
         self._prefetch_count: int = 1
         self._reconnect_delay: int = 0
-        self._url: str = self.settings.rabbit_url.get_secret_value()
+        self._url: str = settings.rabbit.url.get_secret_value()
 
         self.is_debug_mode: bool = False
         self.consuming_thread: threading.Thread = threading.Thread(
@@ -138,18 +135,33 @@ class ActorBase(ABC):
 
     def start(self) -> None:
         self.consuming_thread.start()
+        # self.publishing_thread.start()
+        self.local_start()
         self._stopped = False
 
+    def local_start(self) -> None:
+        """This should be overwritten in derived class for additional threads.
+        It cannot assume the rabbit channels are established and that
+        messages can be received or sent."""
+        pass
+
     def stop(self) -> None:
-        self.commence_shutting_down()
+        self.shutting_down = True
+        self.prepare_for_death()
         while self.actor_main_stopped is False:
             time.sleep(self.SHUTDOWN_INTERVAL)
-        self.stop_publisher()
+        # self.stop_publisher()
         self.stop_consumer()
+        self.local_stop()
         self.consuming_thread.join()
         self.publishing_thread.join()
         self._stopping = False
         self._stopped = True
+
+    def local_stop() -> None:
+        """This should be overwritten in derived class if there is a requirement
+        to stop the additional threads started in local_start"""
+        pass
 
     @no_type_check
     def on_message(self, _unused_channel, basic_deliver, properties, body) -> None:
@@ -175,7 +187,7 @@ class ActorBase(ABC):
         """
         self.latest_routing_key = basic_deliver.routing_key
         LOGGER.debug(
-            f"In actor_base on_message. Got {basic_deliver.routing_key} with delivery tag {basic_deliver.delivery_tag}"
+            f"{self.alias}: Got {basic_deliver.routing_key} with delivery tag {basic_deliver.delivery_tag}"
         )
         self.acknowledge_message(basic_deliver.delivery_tag)
         try:
@@ -307,27 +319,39 @@ class ActorBase(ABC):
         else:
             raise Exception(f"Does not handle MessageCategory {message_category}")
 
-        if self._publish_channel is None:
-            LOGGER.error(f"No publish channel so not sending {routing_key}")
+        # if self._publish_channel is None:
+        #     LOGGER.error(f"No publish channel so not sending {routing_key}")
+        #     return OnSendMessageDiagnostic.CHANNEL_NOT_OPEN
+        # if not self._publish_channel.is_open:
+        #     LOGGER.error(f"Publish channel not open so not sending {routing_key}")
+        #     return OnSendMessageDiagnostic.CHANNEL_NOT_OPEN
+
+        if self._consume_channel is None:
+            LOGGER.error(f"No channel so not sending {routing_key}")
             return OnSendMessageDiagnostic.CHANNEL_NOT_OPEN
-        if not self._publish_channel.is_open:
-            LOGGER.error(f"Publish channel not open so not sending {routing_key}")
+        if not self._consume_channel.is_open:
+            LOGGER.error(f"Channel not open so not sending {routing_key}")
             return OnSendMessageDiagnostic.CHANNEL_NOT_OPEN
 
         try:
-            self._publish_channel.basic_publish(
+            self._consume_channel.basic_publish(
                 exchange=self._publish_exchange,
                 routing_key=routing_key,
                 body=payload.as_type(),
                 properties=properties,
             )
+            # self._publish_channel.basic_publish(
+            #     exchange=self._publish_exchange,
+            #     routing_key=routing_key,
+            #     body=payload.as_type(),
+            #     properties=properties,
+            # )
             LOGGER.debug(f" [x] Sent {payload.TypeName} w routing key {routing_key}")
             return OnSendMessageDiagnostic.MESSAGE_SENT
 
-        except BaseException as err:
-            LOGGER.error("Problem w publish channel")
-            LOGGER.error(traceback.format_exc())
-            LOGGER.error(f"{err.args}")
+        except BaseException:
+            LOGGER.exception("Problem publishing w consume channel")
+            # LOGGER.exception("Problem w publish channel")
             return OnSendMessageDiagnostic.UNKNOWN_ERROR
 
     #####################
@@ -346,9 +370,6 @@ class ActorBase(ABC):
     ########################
     # Core Rabbit infrastructure
     ########################
-
-    def on_rabbit_ready(self) -> None:
-        pass
 
     def flush_consumer(self) -> None:
         self.should_reconnect_consumer = False
@@ -594,11 +615,12 @@ class ActorBase(ABC):
         :param pika.frame.Method _unused_frame: The Basic.QosOk response frame
         """
         LOGGER.info("QOS set to: %d", self._prefetch_count)
-        self.additional_start()
+        self.local_rabbit_startup()
         self.start_consuming()
-        self.publishing_thread.start()
 
-    def additional_start(self) -> None:
+    def local_rabbit_startup(self) -> None:
+        """This should be overwritten in derived class for any additional rabbit
+        bindings. DO NOT start queues here"""
         pass
 
     @no_type_check
@@ -611,7 +633,7 @@ class ActorBase(ABC):
         cancel consuming. The on_message method is passed in as a callback pika
         will invoke when a message is fully received.
         """
-        LOGGER.info("Issuing consumer related RPC commands")
+        LOGGER.info("Start consuming")
         self.add_on_cancel_consumer_callback()
         self._consumer_tag = self._consume_channel.basic_consume(
             self.queue_name, self.on_message
@@ -784,7 +806,6 @@ class ActorBase(ABC):
         """
         LOGGER.info("Publish channel opened")
         self._publish_channel = channel
-        self.on_rabbit_ready()
         self.add_on_publish_channel_close_callback()
 
     def add_on_publish_channel_close_callback(self) -> None:
@@ -903,8 +924,8 @@ class ActorBase(ABC):
     ) -> str:
         msg_type = MessageCategorySymbol.rjb.value
         from_alias_lrh = self.alias.replace(".", "-")
-        from_role = self.rabbit_role.value
         type_name_lrh = payload.TypeName.replace(".", "-")
+        from_role = self.rabbit_role.value
         if radio_channel is None:
             return f"{msg_type}.{from_alias_lrh}.{from_role}.{type_name_lrh}"
         else:
@@ -925,7 +946,6 @@ class ActorBase(ABC):
         type_name_lrh = payload.TypeName.replace(".", "-")
 
         direct_routing_key = f"{msg_type}.{from_lrh_alias}.{from_role}.{type_name_lrh}.{to_role_val}.{to_lrh_alias}"
-        LOGGER.debug(direct_routing_key)
         return direct_routing_key
 
     def type_name_from_routing_key(
@@ -1053,7 +1073,3 @@ class ActorBase(ABC):
 
     def __repr__(self) -> str:
         return f"{self.alias}"
-
-    def commence_shutting_down(self) -> None:
-        self.agent_shutting_down_part_one = True
-        self.prepare_for_death()

@@ -89,6 +89,7 @@ class BabyRabbit(ActorBase):
         ),
     ):
         super().__init__(settings=settings)
+        self.settings = settings
 
     def prepare_for_death(self):
         self.actor_main_stopped = True
