@@ -35,8 +35,13 @@ services:
     depends_on:
       - rabbit
     container_name: tc
-    image: "jessmillar/timecoordinator:chaos__63a5a94__20221204"
+    image: "jessmillar/timecoordinator:chaos__845376a__20221206"
   atn:
+    command: tail -F anything
+    volumes:
+      - type: bind
+        source: /Users/jess/Coding/GridWorks/Platform/gridworks-atn-spaceheat
+        target: /app
     networks:
       - "dev"
     depends_on:
