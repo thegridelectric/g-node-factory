@@ -40,6 +40,7 @@ services:
       - "dev"
   marketmaker:
     container_name: mm
+    hostname: marketmaker
     image: "jessmillar/marketmaker:chaos__947e33e__20221125"
     networks:
       - "dev"
