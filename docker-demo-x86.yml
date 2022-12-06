@@ -29,14 +29,15 @@ services:
       - rabbit
     container_name: atn
     image: "jessmillar/atn:latest"
-  # rabbitmarketmaker:
-  #   container_name: mmr
-  #   image: "jessmillar/mmrabbit:chaos__bbd9dc7__20221206"
-  #   depends_on:
-  #     - marketmaker
-  #     - rabbit
-  #   networks:
-  #     - "dev"
+  rabbitmarketmaker:
+    command: tail -F anything
+    container_name: mmr
+    image: "jessmillar/mmrabbit:latest"
+    depends_on:
+      - marketmaker
+      - rabbit
+    networks:
+      - "dev"
   marketmaker:
     container_name: mm
     image: "jessmillar/marketmaker:chaos__947e33e__20221125"
