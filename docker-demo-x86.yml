@@ -4,24 +4,39 @@ networks:
   dev:
 
 services:
-  dev-validator:
-    container_name: molly
-    image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
+  gnf:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: gnf
+    volumes:
+      - type: bind
+        source: /Users/jess/Coding/GridWorks/Platform/g-node-factory/src
+        target: /app/src
+    image: "jessmillar/gnf:latest"
     ports:
-      - 8001:8000
-  # gnr:
-  #   container_name: gnr
-  #   image: "jessmillar/gnr:latest"
-  #   ports:
-  #     - 7999:8000
+      - 8000:8000
+  atn:
+    command: tail -F anything
+    volumes:
+      - type: bind
+        source: /Users/jess/Coding/GridWorks/Platform/gridworks-atn-spaceheat
+        target: /app
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: atn
+    image: "jessmillar/atn:latest"
   # rabbitmarketmaker:
-  #   networks:
-  #     - "dev"
   #   container_name: mmr
-  #   image: "jessmillar/mmrabbit:chaos__c421026__20221123"
+  #   image: "jessmillar/mmrabbit:chaos__bbd9dc7__20221206"
   #   depends_on:
   #     - marketmaker
   #     - rabbit
+  #   networks:
+  #     - "dev"
   marketmaker:
     container_name: mm
     image: "jessmillar/marketmaker:chaos__947e33e__20221125"
@@ -36,18 +51,11 @@ services:
       - rabbit
     container_name: tc
     image: "jessmillar/timecoordinator:chaos__bc4f5df__20221206"
-  atn:
-    command: tail -F anything
-    volumes:
-      - type: bind
-        source: /Users/jess/Coding/GridWorks/Platform/gridworks-atn-spaceheat
-        target: /app
-    networks:
-      - "dev"
-    depends_on:
-      - rabbit
-    container_name: atn
-    image: "jessmillar/atn:latest"
+  dev-validator:
+    container_name: molly
+    image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
+    ports:
+      - 8001:8000
   redis:
     hostname: redis
     container_name: mm-redis
@@ -61,7 +69,7 @@ services:
     hostname: rabbit
     networks:
       - "dev"
-    image: "jessmillar/dev-rabbit-x86:chaos__e45b8f1__20221205"
+    image: "jessmillar/dev-rabbit-x86:chaos__bf5e8a4__20221206"
     ports:
       - 1885:1885
       - 4369:4369
