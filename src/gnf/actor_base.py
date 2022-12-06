@@ -116,7 +116,7 @@ class ActorBase(ABC):
         # for higher consumer throughput
         self._prefetch_count: int = 1
         self._reconnect_delay: int = 0
-        self._url: str = settings.rabbit.url.get_secret_value()
+        self._url: str = settings.rabbit_url.get_secret_value()
 
         self.is_debug_mode: bool = False
         self.consuming_thread: threading.Thread = threading.Thread(
