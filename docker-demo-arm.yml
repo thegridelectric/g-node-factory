@@ -12,7 +12,7 @@ services:
     container_name: gnf
     volumes:
       - type: bind
-        source: /Users/jess/Coding/GridWorks/Platform/g-node-factory/src
+        source: $GRIDWORKS_PATH/g-node-factory/src
         target: /app/src
     image: "jessmillar/gnf:latest"
     ports:
