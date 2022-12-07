@@ -158,7 +158,7 @@ class ActorBase(ABC):
         self._stopping = False
         self._stopped = True
 
-    def local_stop() -> None:
+    def local_stop(self) -> None:
         """This should be overwritten in derived class if there is a requirement
         to stop the additional threads started in local_start"""
         pass

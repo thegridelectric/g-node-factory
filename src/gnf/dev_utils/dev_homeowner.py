@@ -134,7 +134,13 @@ class DevTaOwner:
         api_endpoint = (
             f"{self.settings.public.molly_api_root}/terminalasset-certification/"
         )
-        r = requests.post(url=api_endpoint, json=payload.as_dict())
+        try:
+            r = requests.post(url=api_endpoint, json=payload.as_dict())
+        except:
+            return RestfulResponse(
+                Note=f"Validator address {api_endpoint} does not exist!",
+                HttpStatusCode=422,
+            )
         if r.status_code > 200:
             if r.status_code == 422:
                 note = (

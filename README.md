@@ -54,58 +54,34 @@ This repo has been developed through the generous funding of a grant provided by
 
 **Note**: if your machine is x86, substitute `docker-demo-arm.yml` for `docker-demo-x86.yml` in the instructions below. If you are not sure, try one. If rabbit fails to load try the other.
 
-1. In `g-node-factory` repo:
+1. In a terminal for `g-node-factory`, start the dockerized APIS:
 
    ```
-   docker-compose -f docker-demo-arm.yml up -d
+   ./1prep.sh
    ```
 
-   Wait for containers to initialize. Rabbit will take a minute. Check these web pages:
+   - Check at:
+     - [http://localhost:8001/docs](http://localhost:8001/docs) - Api for the dockerized TaValidator
+     - [http://localhost:7997/get-time/](http://localhost:7997/get-time/) - Api for the dockerized TaValidator
 
-   - [http://0.0.0.0:15672/#/queues](http://0.0.0.0:15672/#/queues) and wait for the "d1.time-Fxxx" queue to show up. This is the dockerized [TimeCoordinator GNode](https://github.com/thegridelectric/gridworks-timecoordinator). Username/passwd:
-
-     ```
-     smqPublic
-     ```
-
-   - [http://localhost:8001/docs](http://localhost:8001/docs) - Api for the dockerized TaValidator
-
-2. In `gridworks-marketmaker` repo:
+2. In that same terminal, start the final gnf API (not in docker yet):
 
    ```
-   uvicorn gwmm.rest_api:app --reload  --port 7997
+   ./2prep.sh
    ```
 
-   [http://localhost:7997/get-time/](http://localhost:7997/get-time/) is the MarketMaker API. It should show TimeUnixS: 0.
-
-3. And in an second terminal for `gridworks-marketmaker`:
+3. In a terminal for `gridworks-marketmaker`:
 
    ```
    python demo.py
    ```
 
-   Verify MarketMaker `verify d1.isone.ver.keene-Fxxx` shows up in [rabbitmq](http://0.0.0.0:15672/#/queues)
+   - Check that `d1.isone.ver.keene-Fxxx` shows up in [rabbitmq](http://d1-1.electricity.works:15672/#/queues) passwd/username: smqPublic
 
-4. In `g-node-factory` repo:
-
-   ```
-   uvicorn  gnf.rest_api:app --reload  --port 8000
-   ```
-
-5. In a new terminal window for `g-node-factory` repo:
+4. In a new terminal window for `g-node-factory` repo:
 
    ```
    python demo.py
-   ```
-
-   If the demo succeeds, it will run for 48 hours, with each of the 4 AtomicTNodes placing a bid for each hour into the MarketMaker.
-
-   You will see interesting output in the marketmaker and atn repo screen logs. You can also inspect all the messages that get sent in the demo by selecting `Get Message(s)` at [this rabbit queue](http://0.0.0.0:15672/#/queues/d1__1/dummy_ear_q). The main queue screen also shows message flow rate.
-
-6. When done, you need to tear down docker in the `g-node-factory` before running again:
-
-   ```
-   docker-compose -f docker-demo-arm.yml down
    ```
 
 ## Testing

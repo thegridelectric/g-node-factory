@@ -4,19 +4,6 @@ networks:
   dev:
 
 services:
-  gnf:
-    networks:
-      - "dev"
-    depends_on:
-      - rabbit
-    container_name: gnf
-    volumes:
-      - type: bind
-        source: $GRIDWORKS_PATH/g-node-factory/src
-        target: /app/src
-    image: "jessmillar/gnf:latest"
-    ports:
-      - 8000:8000
   atn:
     networks:
       - "dev"
@@ -24,15 +11,6 @@ services:
       - rabbit
     container_name: atn
     image: "jessmillar/atn:latest"
-  rabbitmarketmaker:
-    command: tail -F anything
-    networks:
-      - "dev"
-    container_name: mmr
-    image: "jessmillar/mmrabbit:latest"
-    depends_on:
-      - marketmaker
-      - rabbit
   marketmaker:
     container_name: mm
     hostname: marketmaker

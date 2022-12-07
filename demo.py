@@ -79,7 +79,22 @@ print("")
 time.sleep(2)
 subprocess.run("./reset-dev-db.sh")
 
+# print("")
+# print("")
+# print("Starting the GNodeFactory RestAPI")
+# print("")
+# print("")
 
+# cmd = f"uvicorn  gnf.rest_api:app --reload  --port 8000"
+# gnf_pr = subprocess.Popen(cmd.split())
+# api_endpoint = "http://0.0.0.0:8000/"
+# gnf_up: bool = False
+# while not gnf_up:
+#     try:
+#         gnf_up = True
+#         requests.get(url=api_endpoint)
+#     except:
+#         gnf_up = False
 print("")
 print("")
 print("Check http://localhost:8000/base-g-nodes/ - shoud be no GNodes.")
@@ -99,23 +114,8 @@ print(
     "There shoud now be 4 GNodes (including MarketMaker d1.isone.ver.keene, but no AtomicTNodes)"
 )
 input("HIT RETURN TO CONTINUE")
-print("")
-print("")
-# print("Starting the GNodeFactory RestAPI")
-# print("")
-# print("")
-# time.sleep(2)
 
-# cmd = f"docker run -p 8000:8000 --name gnf-api jessmillar/gnf:chaos__b25e5f9__20221122"
-# gnf_pr = subprocess.Popen(cmd.split())
-# api_endpoint = "http://0.0.0.0:8000/"
-# gnf_up: bool = False
-# while not gnf_up:
-#     try:
-#         gnf_up = True
-#         requests.get(url=api_endpoint)
-#     except:
-#         gnf_up = False
+
 print("")
 print("")
 print("Certifying MollyMetermaid as a TaValidator")
@@ -196,11 +196,14 @@ if rr.HttpStatusCode == 200:
     print("")
     print("")
     time.sleep(2)
+
 else:
-    # cmd = "docker stop gnf-api"
-    raise Exception("Something went wrong creating TerminalAssets")
-    print("")
-    print("")
+    for ta_owner in ta_owners:
+        ta_owner.stop()  # Does the same
+    raise Exception(
+        f"Something went wrong creating TerminalAssets: {rr.HttpStatusCode}, {rr.Note}"
+    )
+
 
 print("")
 print("")
@@ -214,11 +217,40 @@ for owner in ta_owners:
 
 print("")
 print("")
-time.sleep(2)
-input("HIT RETURN")
-print("")
-print("")
 
+
+time.sleep(2)
+input("HIT RETURN TO CONTINUE")
+print("")
+print("")
+print(
+    "In fact the AtomicTNodes do not exist yet. Go to http://d1-1.electricity.works:15672/#/queues"
+)
+print("")
+print("")
+time.sleep(1)
+print("Username and password are the same:")
+print("")
+print("smqPublic")
+print("")
+print("")
+time.sleep(1)
+print(
+    "You will only see the dummy queues, the world d1-Fxxx, and the market maker ...keene.F-xxx"
+)
+input("To start the atn actors (and time coordinator) in a docker instance, HIT RETURN")
+
+cmd = "docker compose -f docker-actor.yml up -d"
+subprocess.run(cmd.split())
+time.sleep(2)
+print("")
+print("")
+print("It takes about 5 seconds for them to shop up. Look for them at")
+print("http://d1-1.electricity.works:15672/#/queues")
+print(
+    "Once their queues exist they ready to enter their Service Level Agreements and get their trading rights"
+)
+input("HIT RETURN TO CONTINUE")
 rr = demo_methods.enter_slas(ta_owners)
 
 if rr.HttpStatusCode == 200:
@@ -231,10 +263,32 @@ if rr.HttpStatusCode == 200:
     print("")
     print("")
 else:
-    # cmd = "docker stop gnf-api"
+    cmd = "docker stop gnf-api"
+    subprocess.run(cmd.split())
+    cmd = "docker compose -f docker-actor.yml down"
+    subprocess.run(cmd.split())
     raise Exception("Something went wrong entering Service Level Agreements")
-    print("")
-    print("")
+
+
+print("")
+print("")
+print("The demo is now ready to start the simulated trading.")
+print("")
+time.sleep(2)
+print("The AtomicTNodes have access to simulated weather and price forecasts for 2020")
+print("")
+time.sleep(2)
+print("The MarketMaker has access to 2020 prices for Keene Rd")
+print("")
+time.sleep(2)
+print("Once the simulation starts, time moves forward in hourly timesteps")
+print("You can see time advancing in the marketmaker terminal window")
+print("Or at the marketmaker API: http://localhost:7997/get-time/")
+time.sleep(2)
+print("The rabbit queues will also start to get busy")
+print("http://d1-1.electricity.works:15672/#/queues")
+print("")
+time.sleep(2)
 
 input("HIT RETURN TO START SIMULATED TIME")
 
@@ -269,6 +323,10 @@ input("HIT RETURN TO STOP SIMULATION AND TEAR DOWN TADAEMON DOCKER INSTANCES")
 
 api_endpoint = f"http://0.0.0.0:8000/pause-time/"
 r = requests.post(url=api_endpoint)
+
+# gnf_pr.terminate()
+cmd = "docker compose -f docker-actor.yml down"
+subprocess.run(cmd.split())
 
 for ta_owner in ta_owners:
     ta_owner.stop()  # Does the same

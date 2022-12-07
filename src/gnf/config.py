@@ -99,10 +99,10 @@ class GnfSettings(BaseSettings):
     graveyard_acct_sk: SecretStr = SecretStr(
         "6UKcDTGYg7sU41D3si+VKBQSd5w46Z4mjVkahRfLIQETgelijgk3svUjwQwu3APm4RNupjtbC68WLKUCHHDp0w=="
     )
-    rabbit_url: SecretStr = SecretStr("amqp://smqPublic:smqPublic@localhost:5672/d1__1")
-    rabbit_host: str = "localhost"
-    rabbit_username: str = "smqPublic"
-    rabbit_password: SecretStr = SecretStr("smpPublic")
+    # rabbit_url: SecretStr = SecretStr("amqp://smqPublic:smqPublic@localhost:5672/d1__1")
+    rabbit_url: SecretStr = SecretStr(
+        "amqp://smqPublic:smqPublic@d1-1.electricity.works:5672/d1__1"
+    )
     rabbit_mqtt_port: int = 1885
     django_secret_key: str = "ai#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
 
