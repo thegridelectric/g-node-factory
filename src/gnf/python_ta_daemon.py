@@ -1,8 +1,12 @@
 import logging
+from typing import List
+from typing import Optional
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from pydantic import SecretStr
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
@@ -13,28 +17,31 @@ from gnf.schemata import NewTadeedAlgoOptin
 from gnf.schemata import NewTadeedSend
 from gnf.schemata import NewTadeedSend_Maker
 from gnf.schemata import OldTadeedAlgoReturn
+from gnf.schemata import SlaEnter
 from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
+DUMMY_ACCT_ADDR = "NZXUSTZACPVJBHRSSJ5KE3JUPCITK5P2O4FE67NYPXRDVCJA6ZX4AL62EA"
 
 
 class PythonTaDaemon:
-    def __init__(self, sk: str, ta_owner_addr: str, algo_settings: config.Algo):
-        self.algo_settings = algo_settings
-        self.client: AlgodClient = algo_utils.get_algod_client(algo_settings)
-        self.acct: BasicAccount = BasicAccount(private_key=sk)
-        self.ta_owner_addr = ta_owner_addr
+    def __init__(
+        self,
+        settings: config.TaDaemonSettings = config.TaDaemonSettings(
+            _env_file=dotenv.find_dotenv()
+        ),
+    ):
+        self.settings = settings
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        self.acct: BasicAccount = BasicAccount(
+            private_key=self.settings.sk.get_secret_value()
+        )
+        self.trading_rights_addr: str = self.acct.addr
         LOGGER.info("TaOwner Smart Daemon Initialized")
-
-    def send_message_to_gnf(self, payload: NewTadeedSend):
-        """Stub for when there is a mechanism (probably FastAPI) for validators  sending
-        messages to GNodeFactory.
-
-        Args:
-            payload: Any valid payload in the API for sending
-        """
-        pass
 
     ##########################
     # Messages Received
@@ -43,7 +50,12 @@ class PythonTaDaemon:
     def initial_tadeed_algo_optin_received(
         self, payload: InitialTadeedAlgoOptin
     ) -> RestfulResponse:
-        ta_deed_idx = api_utils.get_tadeed_cert_idx(
+        if self.has_deed():
+            r = RestfulResponse(
+                Note=f"Ignoring InitialTadeed Optin. Deeds: {self.ta_deed_alias_list}"
+            )
+            return r
+        ta_deed_idx = api_utils.get_tadeed_idx(
             terminal_asset_alias=payload.TerminalAssetAlias,
             validator_addr=payload.ValidatorAddr,
         )
@@ -56,6 +68,18 @@ class PythonTaDaemon:
             )
             return r
 
+        # Call a TaDaemonSmartContract method of the same
+        # name (InitialTadeedAlgoOptin, in some format)
+        # args should include :
+        #   - the asset-index
+        #   - the TaOwnerAddress
+        #   - the TaValidatorAddress
+        #
+        # the TaDaemonSmartContract should check that:
+        #
+        #  - That it does not own any assets yet (this is an initial transfer)
+        #  - the TaOwnerAddress is its TaOwnerAddress (which it needs to be initialized with)
+        #  - the TaValidatorAddress is its TaValidatorAddress (which it needs to be initialized with)
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=ta_deed_idx,
@@ -65,9 +89,32 @@ class PythonTaDaemon:
         try:
             self.client.send_transaction(signed_txn)
         except:
-            raise Exception(f"Failure sending transaction")
+            return RestfulResponse(
+                Note=f"Failure sending transaction to opt into TaDeed {ta_deed_idx}",
+                HttpStatusCode=422,
+            )
         algo_utils.wait_for_transaction(self.client, signed_txn.get_txid())
-        note = f"TaDaemon successfully opted in to Initial TaDeed {ta_deed_idx}"
+        ta_trading_rights_idx = api_utils.get_tatrading_rights_idx(
+            terminal_asset_alias=payload.TerminalAssetAlias
+        )
+        txn = transaction.AssetOptInTxn(
+            sender=self.acct.addr,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Failure sending transaction to opt into TaTradingRights {ta_trading_rights_idx}",
+                HttpStatusCode=422,
+            )
+
+        note = (
+            f"TaDaemon successfully opted in to Initial TaDeed {ta_deed_idx}"
+            f" and TaTradingRights {ta_trading_rights_idx}"
+        )
         LOGGER.info(note)
         r = RestfulResponse(Note=note)
         return r
@@ -86,7 +133,18 @@ class PythonTaDaemon:
 
             Otherwise, Payload is NewTadeedSend
         """
-
+        # Call a TaDaemonSmartContract method of the same
+        # name (InitialTadeedAlgoOptin, in some format)
+        # args should include :
+        #   - the asset-index
+        #   - the AssetCreatorAddr
+        #
+        #
+        # the TaDaemonSmartContract should check that:
+        #
+        #  - That it does not own any assets yet (this is an initial transfer)
+        #  - the AssetCreatorAddr is "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+        #        (the GNodeFactory)
         txn = transaction.AssetOptInTxn(
             sender=self.acct.addr,
             index=payload.NewTaDeedIdx,
@@ -131,9 +189,21 @@ class PythonTaDaemon:
             payload: OldTadeedAlgoReturn
         """
 
+        # Call a TaDaemonSmartContract method of the same
+        # name (OldTadeedAlgoReturn, in some format)
+        # args should include :
+        #   - the receiver
+        #   - the amount
+        #    - the asset_index
+        # the TaDaemonSmartContract should check
+        # that:
+        #  - The receiver is "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+        #  (The GNodeFactory admin address, which it should be initialized with)
+        #  - The amount is 1
+        #
         txn = transaction.AssetTransferTxn(
             sender=self.acct.addr,
-            receiver=config.Algo().gnf_admin_addr,
+            receiver=config.GnfPublic().gnf_admin_addr,
             amt=1,
             index=payload.OldTaDeedIdx,
             sp=self.client.suggested_params(),
@@ -154,3 +224,105 @@ class PythonTaDaemon:
         LOGGER.info(note)
         r = RestfulResponse(Note=note)
         return r
+
+    def ta_deed_alias_list(self) -> List[str]:
+        if self.acct is None:
+            return []
+        try:
+            assets = self.client.account_info(self.acct.addr)["assets"]
+        except:
+            return []
+        owned_assets = list(filter(lambda x: x["amount"] == 1, assets))
+        owned_asset_idx_list = list(map(lambda x: x["asset-id"], owned_assets))
+        deed_alias_list = []
+        for asset_idx in owned_asset_idx_list:
+            alias = api_utils.alias_from_deed_idx(asset_idx)
+            if alias:
+                deed_alias_list.append(alias)
+        return deed_alias_list
+
+    def has_deed(self) -> bool:
+        if len(self.ta_deed_alias_list()) > 0:
+            return True
+        return False
+
+    def sla_enter_received(self, payload: SlaEnter) -> RestfulResponse:
+        ta_alias = payload.TerminalAssetAlias
+        ta_trading_rights_idx = api_utils.get_tatrading_rights_idx(
+            terminal_asset_alias=ta_alias
+        )
+        alias_list: List[str] = [
+            "d1.isone.ver.keene.holly.ta",
+            "d1.isone.ver.keene.juniper.ta",
+            "d1.isone.ver.keene.kale.ta",
+            "d1.isone.ver.keene.lettuce.ta",
+        ]
+
+        sk_list = [
+            "K6iB3AHmzSQ8wDE91QdUfaheDMEtf2WJUMYeeRptKxHiTxG3HC+iKpngXmi82y2r9uVPYwTI5aGiMhdXmPRxcQ==",
+            "QfKe/7kzD71nhYGfITlSV/DFYGvC4sc5IEa8ieGsgirC9sBaSJT0O1+mdPOK3/wzZAqy/dRVIg58Uh3ucSIUSw==",
+            "UHDv5NTx3pz26XZwpbjwKxmdnYzksEuOmbTbvzgkQbYVnLuK+VLwt0QwgJHAUODoluXS8R5InKOS2X1qNqgBeA==",
+            "pMpo89JUKfRE+IvXXW/dsAkns0FXpxagXtQf4m6sXIeO3qH3lHAdbzJvd8gs+xfgnQs3oUs47KD4sWtTARNndw==",
+        ]
+        if ta_alias not in alias_list:
+            return RestfulResponse(
+                Note="Did not transfer TaTradingRights, not one of the first 4 atns"
+            )
+        required_algos = 25
+
+        i = alias_list.index(ta_alias)
+        sk = sk_list[i]
+        atn_acct = BasicAccount(sk)
+
+        txn = transaction.PaymentTxn(
+            sender=self.acct.addr,
+            receiver=atn_acct.addr,
+            amt=required_algos * 10**6,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Failure Funding {ta_alias} atn",
+                HttpStatusCode=422,
+            )
+
+        # Hack opt the Atn into the asset using the ATNS PRIVATE KEY.
+        # Replace when real SLA exists
+        txn = transaction.AssetOptInTxn(
+            sender=atn_acct.addr,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(atn_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            return RestfulResponse(
+                Note=f"Atn for {ta_alias} failed to opt into trading rights {ta_trading_rights_idx}",
+                HttpStatusCode=422,
+            )
+
+        txn = transaction.AssetTransferTxn(
+            sender=self.acct.addr,
+            receiver=atn_acct.addr,
+            amt=1,
+            index=ta_trading_rights_idx,
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            note = (
+                f"Failure sending AssetTransfer for {ta_alias} trading rights"
+                f" {ta_trading_rights_idx}"
+            )
+            r = RestfulResponse(Note=note, HttpStatusCode=422)
+            return r
+        self.trading_rights_addr = atn_acct.addr
+        return RestfulResponse(
+            Note=f"Successfully entered Service Level Agreement for {ta_alias}"
+        )

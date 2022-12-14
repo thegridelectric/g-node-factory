@@ -5,6 +5,7 @@ import time
 from typing import Any
 from typing import Optional
 
+import dotenv
 import pendulum
 from algosdk.error import AlgodHTTPError
 from algosdk.v2client.algod import AlgodClient
@@ -36,7 +37,11 @@ snake_add_underscore_to_camel_pattern = re.compile(r"(?<!^)(?=[A-Z])")
 
 
 def get_ta_alias_from_ta_deed_idx(ta_deed_idx: int) -> Optional[str]:
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     try:
         alias = client.asset_info(ta_deed_idx)["params"]["name"]
     except AlgodHTTPError as e:

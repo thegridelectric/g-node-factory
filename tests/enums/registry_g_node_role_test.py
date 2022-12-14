@@ -1,4 +1,4 @@
-"""Tests for schema enum registry.g.node.role.100"""
+"""Tests for schema enum registry.g.node.role.000"""
 from gnf.enums import RegistryGNodeRole
 
 
@@ -9,7 +9,7 @@ def test_registry_g_node_role():
         "GNodeFactory",
         "GNodeRegistry",
         "WorldInstanceRegistry",
-        "WorldCoordinator",
+        "World",
         "GridWorks",
     }
 

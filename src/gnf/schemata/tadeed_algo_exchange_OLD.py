@@ -4,8 +4,10 @@ from typing import Any
 from typing import Dict
 from typing import Literal
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
+from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
@@ -66,8 +68,12 @@ class TadeedAlgoExchange(BaseModel):
         must be GnfAdmin, asset must be a TaDeed"""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
         txn = mtx.transaction
-        client = algo_utils.get_algod_client(settings_algo=config.Algo())
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
         ValidatorAddr = v.get("ValidatorAddr")
@@ -91,7 +97,6 @@ class TadeedAlgoExchange(BaseModel):
         if txn.amount != 1:
             raise ValueError(f"Axiom 3: Transfer total must be 1, not {txn.amount}")
         ta_deed_idx = txn.index
-        client = algo_utils.get_algod_client(settings_algo=config.Algo())
         asset_dict = client.asset_info(ta_deed_idx)["params"]
         if (
             asset_dict["unit-name"] != "TADEED"
@@ -107,7 +112,7 @@ class TadeedAlgoExchange(BaseModel):
             property_format.check_is_lrd_alias_format(old_ta_deed_g_node_alias)
         except SchemaError as e:
             raise ValueError(f"The asset name must have valid GNode format: {e}")
-        universe = config.Algo().universe
+        universe = config.GnfPublic().universe
         try:
             property_format.check_world_alias_matches_universe(
                 g_node_alias=old_ta_deed_g_node_alias, universe=universe
@@ -124,7 +129,7 @@ class TadeedAlgoExchange(BaseModel):
                 f"Validator Multi ..{v_multi.addr[-6:]}. Got {creator_addr[-6:]}"
             )
 
-        gnf_graveyard_addr = config.Algo().gnf_graveyard_addr
+        gnf_graveyard_addr = config.GnfPublic().gnf_graveyard_addr
         manager_addr = asset_dict["manager"]
         if manager_addr not in [gnf_admin_addr, gnf_graveyard_addr]:
             raise ValueError(
@@ -155,7 +160,7 @@ class TadeedAlgoExchange(BaseModel):
         signature must match the txn."""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
 
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         try:
             api_utils.check_mtx_subsig(mtx, gnf_admin_addr)
         except SchemaError as e:

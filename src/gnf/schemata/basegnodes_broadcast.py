@@ -1,22 +1,27 @@
 """Type basegnodes.broadcast, version 000"""
 import json
+from typing import Any
 from typing import Dict
 from typing import List
 from typing import Literal
 
 from pydantic import BaseModel
+from pydantic import validator
 
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
+from gnf.schemata.basegnode_gt import BasegnodeGt
+from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
 
 
 class BasegnodesBroadcast(BaseModel):
     FromGNodeAlias: str  #
     FromGNodeInstanceId: str  #
-    ToGNodeAlias: str  #
     IncludeAllDescendants: bool  #
-    TypeName: Literal["basegnodes.broadcast"] = "basegnodes.broadcast"
+    TopGNode: BasegnodeGt  #
+    DescendantGNodeList: List[BasegnodeGt]
+    # TypeName: Literal["basegnodes.broadcast"] = "basegnodes.broadcast"
     Version: str = "000"
 
     _validator_from_g_node_alias = predicate_validator(
@@ -27,12 +32,24 @@ class BasegnodesBroadcast(BaseModel):
         "FromGNodeInstanceId", property_format.is_uuid_canonical_textual
     )
 
-    _validator_to_g_node_alias = predicate_validator(
-        "ToGNodeAlias", property_format.is_lrd_alias_format
-    )
+    @validator("DescendantGNodeList")
+    def _validator_descendant_g_node_list(cls, v: List) -> List:
+        for elt in v:
+            if not isinstance(elt, BasegnodeGt):
+                raise ValueError(
+                    f"elt {elt} of DescendantGNodeList must have type BasegnodeGt."
+                )
+        return v
 
-    def as_dict(self) -> Dict:
+    def as_dict(self) -> Dict[str, Any]:
         d = self.dict()
+        d["TopGNode"] = self.TopGNode.as_dict()
+
+        # Recursively call as_dict() for the SubTypes
+        descendant_g_node_list = []
+        for elt in self.DescendantGNodeList:
+            descendant_g_node_list.append(elt.as_dict())
+        d["DescendantGNodeList"] = descendant_g_node_list
         return d
 
     def as_type(self) -> str:
@@ -47,14 +64,14 @@ class BasegnodesBroadcast_Maker:
         self,
         from_g_node_alias: str,
         from_g_node_instance_id: str,
-        to_g_node_alias: str,
         include_all_descendants: bool,
+        top_g_node: BasegnodeGt,
+        descendant_g_node_list: List[BasegnodeGt],
     ):
 
         self.tuple = BasegnodesBroadcast(
             FromGNodeAlias=from_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,
-            ToGNodeAlias=to_g_node_alias,
             IncludeAllDescendants=include_all_descendants,
             TopGNode=top_g_node,
             DescendantGNodeList=descendant_g_node_list,
@@ -76,23 +93,39 @@ class BasegnodesBroadcast_Maker:
         return cls.dict_to_tuple(d)
 
     @classmethod
-    def dict_to_tuple(cls, d: dict) -> BasegnodesBroadcast:
+    def dict_to_tuple(cls, d: dict[str, Any]) -> BasegnodesBroadcast:
         d2 = dict(d)
         if "FromGNodeAlias" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FromGNodeAlias")
         if "FromGNodeInstanceId" not in d2.keys():
             raise SchemaError(f"dict {d2} missing FromGNodeInstanceId")
-        if "ToGNodeAlias" not in d2.keys():
-            raise SchemaError(f"dict {d2} missing ToGNodeAlias")
         if "IncludeAllDescendants" not in d2.keys():
             raise SchemaError(f"dict {d2} missing IncludeAllDescendants")
+        if "TopGNode" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing TopGNode")
+        if not isinstance(d2["TopGNode"], dict):
+            raise SchemaError(f"d['TopGNode'] {d2['TopGNode']} must be a BasegnodeGt!")
+        top_g_node = BasegnodeGt_Maker.dict_to_tuple(d2["TopGNode"])
+        d2["TopGNode"] = top_g_node
+        if "DescendantGNodeList" not in d2.keys():
+            raise SchemaError(f"dict {d2} missing DescendantGNodeList")
+        descendant_g_node_list = []
+        if not isinstance(d2["DescendantGNodeList"], List):
+            raise SchemaError("DescendantGNodeList must be a List!")
+        for elt in d2["DescendantGNodeList"]:
+            if not isinstance(elt, dict):
+                raise SchemaError(
+                    f"elt {elt} of DescendantGNodeList must be "
+                    "BasegnodeGt but not even a dict!"
+                )
+            descendant_g_node_list.append(BasegnodeGt_Maker.dict_to_tuple(elt))
+        d2["DescendantGNodeList"] = descendant_g_node_list
         if "TypeName" not in d2.keys():
             raise SchemaError(f"dict {d2} missing TypeName")
 
         return BasegnodesBroadcast(
             FromGNodeAlias=d2["FromGNodeAlias"],
             FromGNodeInstanceId=d2["FromGNodeInstanceId"],
-            ToGNodeAlias=d2["ToGNodeAlias"],
             IncludeAllDescendants=d2["IncludeAllDescendants"],
             TopGNode=d2["TopGNode"],
             DescendantGNodeList=d2["DescendantGNodeList"],

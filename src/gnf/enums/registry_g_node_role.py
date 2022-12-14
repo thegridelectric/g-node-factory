@@ -9,7 +9,7 @@ class RegistryGNodeRole(StrEnum):
     GNodeFactory = auto()
     GNodeRegistry = auto()
     WorldInstanceRegistry = auto()
-    WorldCoordinator = auto()
+    World = auto()
     GridWorks = auto()
 
     @classmethod

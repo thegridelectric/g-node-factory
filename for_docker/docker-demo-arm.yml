@@ -1,0 +1,60 @@
+version: "3.5"
+
+networks:
+  dev:
+
+services:
+  atn:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: atn
+    image: "jessmillar/atn:latest"
+  marketmaker:
+    container_name: mm
+    hostname: marketmaker
+    image: "jessmillar/marketmaker:chaos__947e33e__20221125"
+    networks:
+      - "dev"
+    ports:
+      - 7997:8000
+  timecoordinator:
+    networks:
+      - "dev"
+    depends_on:
+      - rabbit
+    container_name: tc
+    image: "jessmillar/timecoordinator:chaos__bc4f5df__20221206"
+  dev-validator:
+    container_name: molly
+    image: "jessmillar/ta-validator:chaos__257e5a7__20221115"
+    ports:
+      - 8001:8000
+  redis:
+    hostname: redis
+    container_name: gnf-redis
+    image: redis:6-alpine
+    ports:
+      - "6379:6379"
+  rabbit:
+    container_name: gnf-rabbit
+    hostname: rabbit
+    networks:
+      - "dev"
+    image: "jessmillar/dev-rabbit-arm:chaos__bf5e8a4__20221206"
+    ports:
+      - 1885:1885
+      - 4369:4369
+      - 5672:5672
+      - 15672:15672
+      - 15674:15674
+      - 25672:25672
+    env_file: ./for_docker/dev_vhost.env
+    environment:
+      - RABBITMQ_USERNAME=smqPublic
+      - RABBITMQ_PASSWORD=smqPublic
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_management load_definitions "/tmp/rabbit_definitions.json"
+      - RABBITMQ_PLUGINS=rabbitmq_management,rabbitmq_stomp,rabbitmq_web_stomp,rabbitmq_mqtt
+    volumes:
+      - ./for_docker/dev_rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro

@@ -6,9 +6,11 @@ from typing import List
 from typing import Literal
 from typing import NamedTuple
 
+import dotenv
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.future.transaction import AssetTransferTxn
+from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
@@ -72,7 +74,7 @@ class TadeedAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         msig = mtx.multisig
         DeedValidatorAddr = v.get("DeedValidatorAddr", None)
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -93,8 +95,12 @@ class TadeedAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         txn = mtx.transaction
         DeedValidatorAddr = v.get("DeedValidatorAddr", None)
-        client = algo_utils.get_algod_client(config.Algo())
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -124,8 +130,12 @@ class TadeedAlgoTransfer(BaseModel):
         txn = mtx.transaction
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        client = algo_utils.get_algod_client(config.Algo())
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         ta_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -143,12 +153,12 @@ class TadeedAlgoTransfer(BaseModel):
         if multi_algos is None:
             raise ValueError(
                 "Axiom 5: 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr must have at least"
-                f"TaDeed Consideration Algos ({config.Algo().ta_deed_consideration_algos}). Has none"
+                f"TaDeed Consideration Algos ({config.GnfPublic().ta_deed_consideration_algos}). Has none"
             )
-        elif multi_algos < config.Algo().ta_deed_consideration_algos:
+        elif multi_algos < config.GnfPublic().ta_deed_consideration_algos:
             raise ValueError(
                 "Axiom 5: 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr must have at least"
-                f"TaDeed Consideration Algos ({config.Algo().ta_deed_consideration_algos}). Has none"
+                f"TaDeed Consideration Algos ({config.GnfPublic().ta_deed_consideration_algos}). Has none"
             )
         return v
 
@@ -158,8 +168,12 @@ class TadeedAlgoTransfer(BaseModel):
         (specifically because this is the FIRST tadeed and should initialize the multi."""
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
-        client = algo_utils.get_algod_client(config.Algo())
-        gnf_admin_addr = config.Algo().gnf_admin_addr
+        settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+        client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
         ta_multi = MultisigAccount(
             version=1,
             threshold=2,

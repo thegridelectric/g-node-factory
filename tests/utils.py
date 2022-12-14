@@ -5,8 +5,7 @@ from typing import Optional
 
 from gnf.actor_base import ActorBase
 from gnf.actor_base import OnSendMessageDiagnostic
-from gnf.config import DevGNodeRegistrySettings
-from gnf.config import GnfSettings
+from gnf.config import VanillaSettings
 from gnf.enums import RegistryGNodeRole
 from gnf.schemata import HeartbeatA
 from gnf.schemata import HeartbeatA_Maker
@@ -52,7 +51,7 @@ class GNodeFactoryRabbitStubRecorder(ActorBase):
     latest_payload: Optional[HeartbeatA]
     routing_to_gnr__heartbeat_a__worked: bool = False
 
-    def __init__(self, settings: GnfSettings):
+    def __init__(self, settings: VanillaSettings):
         self.messages_received = 0
         self.messages_routed_internally = 0
         self.latest_from_g_node_role_value: Optional[str] = None
@@ -88,40 +87,4 @@ class GNodeFactoryRabbitStubRecorder(ActorBase):
         return (
             f"AbstractActor [{self.alias}] messages_received: {self.messages_received}  "
             f"latest_payload: {self.latest_payload}"
-        )
-
-
-class GNodeRegistryStubRecorder(ActorBase):
-    messages_received: int
-    latest_from_g_node_type_name: Optional[str]
-    latest_from_g_node_alias: Optional[str]
-    latest_payload: Optional[NamedTuple]
-
-    def __init__(self, settings: DevGNodeRegistrySettings):
-        self.messages_received = 0
-        self.latest_from_g_node_type_name: Optional[str] = None
-        self.latest_from_g_node_alias: Optional[str] = None
-        self.latest_payload: Optional[NamedTuple] = None
-
-        super().__init__(settings=settings, g_node_type_short_alias="gnr")
-
-    def route_direct_message(
-        self, from_g_node_type_name: str, from_g_node_alias: str, payload: HeartbeatA
-    ):
-        self.messages_received += 1
-        self.latest_payload = payload
-        self.latest_from_g_node_type_name = from_g_node_type_name
-        self.latest_from_g_node_alias = from_g_node_alias
-
-    def prepare_for_death(self):
-        self.actor_main_stopped = True
-
-    #################################################
-    # Sending messages
-    #################################################
-
-    def send_heartbeat_to_gnf(self) -> OnSendMessageDiagnostic:
-        payload = HeartbeatA_Maker().tuple
-        return self.send_direct_message(
-            payload, to_g_node_type_short_alias="gnf", to_g_node_alias="dwgps.gnf"
         )

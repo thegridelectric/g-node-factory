@@ -13,10 +13,10 @@ def test_basegnode_ctn_create_generated():
     d = {
         "FromGNodeAlias": "dwgps.gnr",
         "FromGNodeInstanceId": "f5de29a7-1e72-4627-818e-dc527a889fda",
-        "CtnGNodeAlias": "dw1.iso.me.ghm.orange.ta",
+        "CtnGNodeAlias": "d1.iso.me.ghm.orange.ta",
         "MicroLat": 44838681,
         "MicroLon": -68705311,
-        "ChildAliasList": ["dw1.iso.me.orange", "dw1.iso.me.almond"],
+        "ChildAliasList": ["d1.iso.me.orange", "d1.iso.me.almond"],
         "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
         "TypeName": "basegnode.ctn.create",
         "Version": "000",

@@ -1,29 +1,28 @@
 import logging
-from re import L
-from typing import Optional
 
-from algosdk import encoding
-from algosdk.future import transaction
+import requests
 from algosdk.v2client.algod import AlgodClient
 
 import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
-import gnf.dev_utils.algo_setup as algo_setup
 from gnf.algo_utils import BasicAccount
-
-# Schemata sent by discoverer
-from gnf.schemata import DiscoverycertAlgoCreate
+from gnf.enums import CoreGNodeRole
+from gnf.schemata import DiscoverycertAlgoCreate_Maker
+from gnf.utils import RestfulResponse
 
 
 LOGGER = logging.getLogger(__name__)
 
 
 class DevDiscoverer:
-    def __init__(self, settings: config.AdaDiscovererSettings):
+    def __init__(self, settings: config.DiscovererSettings):
         self.settings = settings
-        self.client: AlgodClient = algo_utils.get_algod_client(self.settings.algo)
-        self.acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
+        self.client: AlgodClient = AlgodClient(
+            settings.algo_api_secrets.algod_token.get_secret_value(),
+            settings.public.algod_address,
+        )
+        self.acct: BasicAccount = algo_utils.BasicAccount(
             private_key=self.settings.sk.get_secret_value()
         )
         self.multi: algo_utils.MultisigAccount = (
@@ -32,21 +31,15 @@ class DevDiscoverer:
         # self.seed_fund_own_account()
         LOGGER.info("DevDiscoverer Initialized")
 
-    def send_message_to_gnf(self, payload: DiscoverycertAlgoCreate):
-        """Stub for when there is a mechanism (probably FastAPI) for validators  sending
-        messages to GNodeFactory.
-
-        Args:
-            payload: Any valid payload in the API for sending
-        """
-        pass
-
-    ###################
-    # Messages sent
-    ###################
-
-    def generate_create_discoverycert_algo(
-        self, terminal_asset_alias: str
-    ) -> DiscoverycertAlgoCreate:
-
-        pass
+    def post_discoverycert_algo_create(self) -> RestfulResponse:
+        payload = DiscoverycertAlgoCreate_Maker(
+            g_node_alias=config.DiscovererSettings().discovered_ctn_alias,
+            old_child_alias_list=config.DiscovererSettings().original_child_alias_list,
+            discoverer_addr=self.acct.addr,
+            supporting_material_hash="supporting material",
+            core_g_node_role=CoreGNodeRole.ConductorTopologyNode,
+            micro_lon=config.DiscovererSettings().micro_lon,
+            micro_lat=config.DiscovererSettings().micro_lat,
+        ).tuple
+        api_endpoint = f"{config.GnfPublic().gnf_api_root}/discoverycert-algo-create/"
+        r = requests.post(url=api_endpoint, json=payload.as_dict())

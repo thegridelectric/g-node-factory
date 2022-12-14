@@ -6,8 +6,8 @@ def test_g_node_status():
 
     assert set(GNodeStatus.values()) == {
         "Unknown",
-        "Active",
         "Pending",
+        "Active",
         "PermanentlyDeactivated",
         "Suspended",
     }

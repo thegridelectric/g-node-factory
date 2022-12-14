@@ -3,6 +3,7 @@ from typing import Dict
 from typing import Optional
 
 import django
+import dotenv
 from algosdk import encoding
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
@@ -47,7 +48,7 @@ def get_discoverer_account_with_admin(
     return algo_utils.MultisigAccount(
         version=1,
         threshold=2,
-        addresses=[discoverer_addr, config.Algo().gnf_admin_addr],
+        addresses=[discoverer_addr, config.GnfPublic().gnf_admin_addr],
     )
 
 
@@ -65,7 +66,7 @@ def get_validator_account_with_admin(
     return algo_utils.MultisigAccount(
         version=1,
         threshold=2,
-        addresses=[config.Algo().gnf_admin_addr, validatorAddr],
+        addresses=[config.GnfPublic().gnf_admin_addr, validatorAddr],
     )
 
 
@@ -87,7 +88,7 @@ def check_validator_multi_has_enough_algos(validator_addr: str):
         raise Exception(
             f"called with validatorAddr not of AlgoAddressStringFormat: \n{validator_addr}"
         )
-    min_algos = config.Algo().gnf_validator_funding_threshold_algos
+    min_algos = config.GnfPublic().gnf_validator_funding_threshold_algos
     multi: algo_utils.MultisigAccount = get_validator_account_with_admin(validator_addr)
     if algo_utils.algos(multi.addr) is None:
         raise SchemaError(
@@ -129,7 +130,11 @@ def get_validator_cert_idx(validator_addr: str) -> Optional[int]:
         the asset index of the cert
     """
     multi: algo_utils.MultisigAccount = get_validator_account_with_admin(validator_addr)
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     try:
         created_assets = client.account_info(multi.addr)["created-assets"]
     except:
@@ -154,7 +159,11 @@ def is_validator(acct_addr: str) -> bool:
         False otherwise
 
     """
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
     cert_asset_idx = get_validator_cert_idx(acct_addr)
     if cert_asset_idx is None:
         return False
@@ -171,7 +180,31 @@ def is_validator(acct_addr: str) -> bool:
         return True
 
 
-def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[int]:
+def get_tatrading_rights_idx(terminal_asset_alias: str) -> Optional[int]:
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    try:
+        created_assets = client.account_info(settings.public.gnf_admin_addr)[
+            "created-assets"
+        ]
+    except:
+        return None
+    ta_trading_rights = list(
+        filter(lambda x: x["params"]["unit-name"] == "TATRADE", created_assets)
+    )
+    this_ta_trading_rights = list(
+        filter(lambda x: x["params"]["name"] == terminal_asset_alias, ta_trading_rights)
+    )
+    if len(this_ta_trading_rights) == 0:
+        return None
+    else:
+        return this_ta_trading_rights[0]["index"]
+
+
+def get_tadeed_idx(terminal_asset_alias, validator_addr: str) -> Optional[int]:
     """Looks for an asset created in the 2-sig [Gnf Admin, validator_addr] account
      that is a tadeed for terminal_asset_alias.
 
@@ -183,8 +216,13 @@ def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[i
         Optional[int]: returns None if no validatorCert is found, otherwise
         the asset index of the cert
     """
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+
     multi: algo_utils.MultisigAccount = get_validator_account_with_admin(validator_addr)
-    client: AlgodClient = algo_utils.get_algod_client(config.Algo())
     try:
         created_assets = client.account_info(multi.addr)["created-assets"]
     except:
@@ -199,3 +237,34 @@ def get_tadeed_cert_idx(terminal_asset_alias, validator_addr: str) -> Optional[i
         return None
     else:
         return this_ta_deed[0]["index"]
+
+
+def is_ta_deed(asset_idx: int) -> bool:
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    try:
+        info = client.asset_info(asset_idx)
+    except:
+        return False
+    try:
+        unit_name = info["params"]["unit-name"]
+    except:
+        return False
+    if unit_name == "TADEED":
+        return True
+    return False
+
+
+def alias_from_deed_idx(asset_idx: int) -> Optional[str]:
+    if not is_ta_deed(asset_idx):
+        return None
+    settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
+    client: AlgodClient = AlgodClient(
+        settings.algo_api_secrets.algod_token.get_secret_value(),
+        settings.public.algod_address,
+    )
+    info = client.asset_info(asset_idx)
+    return info["params"]["name"]

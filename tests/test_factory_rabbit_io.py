@@ -1,12 +1,12 @@
 import os
 
 import django
+import dotenv
 import pika
 
-from gnf.config import GnfSettings
+from gnf.config import VanillaSettings
 
 from .utils import GNodeFactoryRabbitStubRecorder
-from .utils import GNodeRegistryStubRecorder
 from .utils import wait_for
 
 

@@ -32,7 +32,7 @@
 #         decimals=0,
 #         default_frozen=False,
 #         manager=gnf_admin.addr,
-#         asset_name="dw1.iso.test.ta",
+#         asset_name="d1.iso.test.ta",
 #         unit_name="TADEED",
 #         sp=client.suggested_params(),
 #     )
@@ -71,7 +71,11 @@
 
 
 # def get_sample_dict() -> Dict:
-#     client: AlgodClient = algo_utils.get_algod_client(config.Algo())
+# settings = config.BlahBlahBlahSettings()
+# client: AlgodClient = AlgodClient(
+#         settings.algo_api_secrets.algod_token.get_secret_value(),
+#         settings.public.algod_address
+#     )
 #     test_acct: algo_utils.BasicAccount = algo_utils.BasicAccount(
 #         "LZlZFgStdj2T0otiJTRezerJhys0isRu4e6AM6fJJCRT03r0ziZrA44MFjjh6i6V2ySSQyRiCwvVzthpxjV7xA=="
 #     )

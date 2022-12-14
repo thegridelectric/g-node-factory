@@ -1,0 +1,9 @@
+version: "3.5"
+
+services:
+  atn:
+    container_name: atn
+    image: "jessmillar/atn:chaos__32ef525__20221207"
+  timecoordinator:
+    container_name: tc
+    image: "jessmillar/timecoordinator:chaos__f8da5fe__20221207"

@@ -1,0 +1,13 @@
+
+ARG REMOTE_BASE=jessmillar/g-node-factory-base:latest
+
+FROM $REMOTE_BASE AS app-base
+
+
+WORKDIR /app
+
+COPY ./src /app/src
+COPY ./for_docker/gnf_docker.env /app/.env
+COPY README.md /app/README.md
+RUN pip install -e /app
+CMD ["uvicorn", "gnf.rest_api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
