@@ -55,8 +55,6 @@ Notes.
 
    ## TerminalAsset Creation Flow
 
-
-
 ![alt_text](img/terminal-asset-creation-flow.png)
 
 Notes:
