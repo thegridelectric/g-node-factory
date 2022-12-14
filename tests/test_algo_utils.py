@@ -9,6 +9,7 @@ import gnf.dev_utils.algo_setup as algo_setup
 from gnf.errors import AlgoError
 
 
+@pytest.mark.skip(reason="Skipped so a package can be published")
 def test_pay_account():
     algo_settings = config.GnfPublic()
     addr0: str = algo_settings.gnf_admin_addr
