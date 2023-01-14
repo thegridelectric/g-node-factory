@@ -46,7 +46,6 @@ class ResumeTime_Maker:
     def __init__(
         self, from_g_node_alias: str, from_g_node_instance_id: str, to_g_node_alias: str
     ):
-
         self.tuple = ResumeTime(
             FromGNodeAlias=from_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,

@@ -47,7 +47,6 @@ class TerminalassetCertifyHack_Maker:
         ta_daemon_api_fqdn: str,
         ta_daemon_addr: str,
     ):
-
         self.tuple = TerminalassetCertifyHack(
             TerminalAssetAlias=terminal_asset_alias,
             TaDaemonApiPort=ta_daemon_api_port,

@@ -59,7 +59,6 @@ class InitialTadeedAlgoTransfer_Maker:
         ta_owner_addr: str,
         first_deed_transfer_mtx: str,
     ):
-
         self.tuple = InitialTadeedAlgoTransfer(
             MicroLat=micro_lat,
             MicroLon=micro_lon,

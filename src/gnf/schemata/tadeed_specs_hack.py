@@ -43,7 +43,6 @@ class TadeedSpecsHack_Maker:
         micro_lon: int,
         daemon_port: int,
     ):
-
         self.tuple = TadeedSpecsHack(
             TerminalAssetAlias=terminal_asset_alias,
             MicroLat=micro_lat,

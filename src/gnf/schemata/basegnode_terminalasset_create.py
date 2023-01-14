@@ -73,7 +73,6 @@ class BasegnodeTerminalassetCreate_Maker:
         from_g_node_instance_id: str,
         from_g_node_alias: str,
     ):
-
         self.tuple = BasegnodeTerminalassetCreate(
             TaGNodeAlias=ta_g_node_alias,
             MicroLon=micro_lon,

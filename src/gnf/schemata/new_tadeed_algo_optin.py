@@ -53,7 +53,6 @@ class NewTadeedAlgoOptin_Maker:
         validator_addr: str,
         signed_ta_deed_creation_txn: str,
     ):
-
         self.tuple = NewTadeedAlgoOptin(
             NewTaDeedIdx=new_ta_deed_idx,
             OldTaDeedIdx=old_ta_deed_idx,

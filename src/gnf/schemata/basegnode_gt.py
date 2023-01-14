@@ -295,7 +295,6 @@ class BasegnodeGt_Maker:
         daemon_addr: Optional[str],
         trading_rights_nft_id: Optional[int],
     ):
-
         self.tuple = BasegnodeGt(
             GNodeId=g_node_id,
             Alias=alias,

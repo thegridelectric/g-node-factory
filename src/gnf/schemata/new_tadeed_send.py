@@ -53,7 +53,6 @@ class NewTadeedSend_Maker:
         validator_addr: str,
         signed_tadeed_optin_txn: str,
     ):
-
         self.tuple = NewTadeedSend(
             NewTaDeedIdx=new_ta_deed_idx,
             OldTaDeedIdx=old_ta_deed_idx,

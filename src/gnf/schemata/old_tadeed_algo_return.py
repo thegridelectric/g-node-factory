@@ -51,7 +51,6 @@ class OldTadeedAlgoReturn_Maker:
         validator_addr: str,
         signed_new_deed_transfer_txn: str,
     ):
-
         self.tuple = OldTadeedAlgoReturn(
             OldTaDeedIdx=old_ta_deed_idx,
             TaDaemonAddr=ta_daemon_addr,

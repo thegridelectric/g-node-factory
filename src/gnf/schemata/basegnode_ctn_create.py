@@ -71,7 +71,6 @@ class BasegnodeCtnCreate_Maker:
         child_alias_list: List[str],
         g_node_registry_addr: str,
     ):
-
         self.tuple = BasegnodeCtnCreate(
             FromGNodeAlias=from_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,

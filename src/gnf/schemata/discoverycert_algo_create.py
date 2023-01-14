@@ -156,7 +156,6 @@ class DiscoverycertAlgoCreate_Maker:
         micro_lat: Optional[int],
         micro_lon: Optional[int],
     ):
-
         self.tuple = DiscoverycertAlgoCreate(
             GNodeAlias=g_node_alias,
             CoreGNodeRole=core_g_node_role,

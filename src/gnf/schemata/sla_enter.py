@@ -34,7 +34,6 @@ class SlaEnter_Maker:
     version = "000"
 
     def __init__(self, terminal_asset_alias: str):
-
         self.tuple = SlaEnter(
             TerminalAssetAlias=terminal_asset_alias,
             #

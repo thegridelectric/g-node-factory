@@ -51,7 +51,6 @@ class BasegnodesGet_Maker:
         from_g_node_alias: str,
         from_g_node_instance_id: str,
     ):
-
         self.tuple = BasegnodesGet(
             TopGNodeAlias=top_g_node_alias,
             IncludeAllDescendants=include_all_descendants,

@@ -27,7 +27,6 @@ class HeartbeatA_Maker:
     version = "000"
 
     def __init__(self):
-
         self.tuple = HeartbeatA(
             #
         )

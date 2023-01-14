@@ -39,7 +39,6 @@ class DiscoverycertAlgoTransfer_Maker:
     version = "000"
 
     def __init__(self, g_node_alias: str, discoverer_addr: str):
-
         self.tuple = DiscoverycertAlgoTransfer(
             GNodeAlias=g_node_alias,
             DiscovererAddr=discoverer_addr,

@@ -46,7 +46,6 @@ class DebugTcReinitializeTime_Maker:
     def __init__(
         self, to_g_node_alias: str, from_g_node_instance_id: str, from_g_node_alias: str
     ):
-
         self.tuple = DebugTcReinitializeTime(
             ToGNodeAlias=to_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,

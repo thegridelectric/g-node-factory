@@ -57,7 +57,6 @@ class InitialTadeedAlgoOptin_Maker:
         signed_initial_daemon_funding_txn: str,
         ta_daemon_private_key: str,
     ):
-
         self.tuple = InitialTadeedAlgoOptin(
             TerminalAssetAlias=terminal_asset_alias,
             TaOwnerAddr=ta_owner_addr,

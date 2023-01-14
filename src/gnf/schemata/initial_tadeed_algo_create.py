@@ -37,7 +37,6 @@ class InitialTadeedAlgoCreate_Maker:
     version = "000"
 
     def __init__(self, validator_addr: str, half_signed_deed_creation_mtx: str):
-
         self.tuple = InitialTadeedAlgoCreate(
             ValidatorAddr=validator_addr,
             HalfSignedDeedCreationMtx=half_signed_deed_creation_mtx,
