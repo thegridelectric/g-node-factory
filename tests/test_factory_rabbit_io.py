@@ -10,27 +10,33 @@ from .utils import GNodeFactoryRabbitStubRecorder
 from .utils import wait_for
 
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.settings")
-# django.setup()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.settings")
+django.setup()
 
 
-# def test_pika_types_and_sundry():
-#     gnf = GNodeFactoryRabbitStubRecorder(settings=GnfSettings())
-#     gnf.start()
-#     wait_for(lambda: gnf._consume_connection, 10, "gnf._consume_connection exists")
-#     wait_for(lambda: gnf._consuming, 10, "gnf is consuming")
-#     wait_for(lambda: gnf._publish_connection.is_open, 10, "gnf publish connection is open")
-#     assert gnf._consume_connection.is_open
-#     assert gnf._consuming
-#     assert gnf._publish_connection.is_open
-#     assert isinstance(gnf._publish_connection, pika.adapters.select_connection.SelectConnection)
-#     assert isinstance(gnf._consume_connection, pika.adapters.select_connection.SelectConnection)
-#     assert isinstance(gnf._publish_channel, pika.channel.Channel)
-#     assert isinstance(gnf._consume_channel, pika.channel.Channel)
+def test_pika_types_and_sundry():
+    gnf = GNodeFactoryRabbitStubRecorder(settings=GnfSettings())
+    gnf.start()
+    wait_for(lambda: gnf._consume_connection, 10, "gnf._consume_connection exists")
+    wait_for(lambda: gnf._consuming, 10, "gnf is consuming")
+    wait_for(
+        lambda: gnf._publish_connection.is_open, 10, "gnf publish connection is open"
+    )
+    assert gnf._consume_connection.is_open
+    assert gnf._consuming
+    assert gnf._publish_connection.is_open
+    assert isinstance(
+        gnf._publish_connection, pika.adapters.select_connection.SelectConnection
+    )
+    assert isinstance(
+        gnf._consume_connection, pika.adapters.select_connection.SelectConnection
+    )
+    assert isinstance(gnf._publish_channel, pika.channel.Channel)
+    assert isinstance(gnf._consume_channel, pika.channel.Channel)
 
-#     # Sundry:
-#     assert repr(gnf) == gnf.settings.g_node_alias
-#     gnf.stop()
+    # Sundry:
+    assert repr(gnf) == gnf.settings.g_node_alias
+    gnf.stop()
 
 
 # def test_sample_routing():

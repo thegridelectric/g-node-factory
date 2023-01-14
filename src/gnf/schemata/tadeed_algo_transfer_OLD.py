@@ -7,18 +7,18 @@ from typing import Literal
 from typing import NamedTuple
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.future.transaction import AssetTransferTxn
 from algosdk.v2client.algod import AlgodClient
+from gridworks.algo_utils import MultisigAccount
 from pydantic import BaseModel
 from pydantic import root_validator
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
-from gnf.algo_utils import MultisigAccount
 from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
@@ -74,7 +74,7 @@ class TadeedAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         msig = mtx.multisig
         DeedValidatorAddr = v.get("DeedValidatorAddr", None)
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -100,7 +100,7 @@ class TadeedAlgoTransfer(BaseModel):
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         v_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -125,7 +125,8 @@ class TadeedAlgoTransfer(BaseModel):
 
     def _axiom_5(cls, v) -> Any:
         """Axiom 5: The 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr] account has opted in
-        to the Deed and has enough funding (TaDeed Consideration Algos, publicly set by the Gnf)"""
+        to the Deed and has enough funding (TaDeed Consideration Algos, publicly set by the Gnf)
+        """
         mtx = encoding.future_msgpack_decode(v.get("FirstDeedTransferMtx", None))
         txn = mtx.transaction
         TaDaemonAddr = v.get("TaDaemonAddr")
@@ -135,7 +136,7 @@ class TadeedAlgoTransfer(BaseModel):
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         ta_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -153,19 +154,20 @@ class TadeedAlgoTransfer(BaseModel):
         if multi_algos is None:
             raise ValueError(
                 "Axiom 5: 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr must have at least"
-                f"TaDeed Consideration Algos ({config.GnfPublic().ta_deed_consideration_algos}). Has none"
+                f"TaDeed Consideration Algos ({config.Public().ta_deed_consideration_algos}). Has none"
             )
-        elif multi_algos < config.GnfPublic().ta_deed_consideration_algos:
+        elif multi_algos < config.Public().ta_deed_consideration_algos:
             raise ValueError(
                 "Axiom 5: 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr must have at least"
-                f"TaDeed Consideration Algos ({config.GnfPublic().ta_deed_consideration_algos}). Has none"
+                f"TaDeed Consideration Algos ({config.Public().ta_deed_consideration_algos}). Has none"
             )
         return v
 
     @root_validator
     def _axiom_6(cls, v) -> Any:
         """Axiom 6: The 2-sig [Gnf Admin, TaDaemonAddr, TaOwnerAddr] must not own any assets
-        (specifically because this is the FIRST tadeed and should initialize the multi."""
+        (specifically because this is the FIRST tadeed and should initialize the multi.
+        """
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
         settings = config.VanillaSettings(_env_file=dotenv.find_dotenv())
@@ -173,7 +175,7 @@ class TadeedAlgoTransfer(BaseModel):
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         ta_multi = MultisigAccount(
             version=1,
             threshold=2,
@@ -228,7 +230,6 @@ class TadeedAlgoTransfer_Maker:
         ta_owner_addr: str,
         micro_lon: int,
     ):
-
         self.tuple = TadeedAlgoTransfer(
             FirstDeedTransferMtx=first_deed_transfer_mtx,
             MicroLat=micro_lat,

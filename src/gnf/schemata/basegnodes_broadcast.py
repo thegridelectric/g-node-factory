@@ -11,8 +11,8 @@ from pydantic import validator
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
-from gnf.schemata.basegnode_gt import BasegnodeGt
-from gnf.schemata.basegnode_gt import BasegnodeGt_Maker
+from gnf.types.basegnode_gt import BasegnodeGt
+from gnf.types.basegnode_gt import BasegnodeGt_Maker
 
 
 class BasegnodesBroadcast(BaseModel):
@@ -68,7 +68,6 @@ class BasegnodesBroadcast_Maker:
         top_g_node: BasegnodeGt,
         descendant_g_node_list: List[BasegnodeGt],
     ):
-
         self.tuple = BasegnodesBroadcast(
             FromGNodeAlias=from_g_node_alias,
             FromGNodeInstanceId=from_g_node_instance_id,

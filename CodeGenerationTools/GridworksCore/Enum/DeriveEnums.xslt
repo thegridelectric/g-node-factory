@@ -35,7 +35,7 @@
                     </xsl:variable>
                     <FileSetFile>
                                 <xsl:element name="RelativePath"><xsl:text>../../../src/gnf/enums/</xsl:text>
-                                <xsl:value-of select="translate(AliasRoot,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
+                                <xsl:value-of select="translate(LocalName,'.','_')"/><xsl:text>.py</xsl:text></xsl:element>
 
                         <OverwriteMode>Always</OverwriteMode>
                         <xsl:element name="FileContents">
@@ -49,6 +49,35 @@ from fastapi_utils.enums import StrEnum
 
 class </xsl:text><xsl:value-of select="$local-class-name"/>
 <xsl:text>(StrEnum):
+    """
+    </xsl:text>
+    <xsl:value-of select="normalize-space(Description)"/>
+    <xsl:if test="(normalize-space(Url)!='')">
+    <xsl:text>. [More Info](</xsl:text>
+    <xsl:value-of select="normalize-space(Url)"/>
+    <xsl:text>).</xsl:text>
+    </xsl:if>
+    <xsl:text>
+
+    Choices and descriptions:
+    </xsl:text>
+    <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
+    <xsl:sort select="Idx" data-type="number"/>
+    <xsl:text>
+      * </xsl:text>
+      <xsl:value-of select="LocalValue"/><xsl:text>: </xsl:text>
+      <xsl:value-of select="normalize-space(Description)"/>
+
+    <xsl:if test="(normalize-space(Url)!='')">
+    <xsl:text>. [More Info](</xsl:text>
+    <xsl:value-of select="normalize-space(Url)"/>
+    <xsl:text>).</xsl:text>
+    </xsl:if>
+
+    </xsl:for-each>
+
+    <xsl:text>
+    """
     </xsl:text>
 
 <xsl:for-each select="$airtable//EnumSymbols/EnumSymbol[(Enum = $enum-id)]">
@@ -68,11 +97,31 @@ class </xsl:text><xsl:value-of select="$local-class-name"/>
     def default(cls) -> "</xsl:text>
     <xsl:value-of select="$local-class-name"/>
     <xsl:text>":
-        return cls.</xsl:text><xsl:value-of select="DefaultEnumValue"/>
+        """
+        Returns default value </xsl:text>
+        <xsl:if test="$enum-name-style = 'Upper'">
+            <xsl:value-of select="translate(translate(DefaultEnumValue,'-',''),$lcletters, $ucletters)"/>
+        </xsl:if>
+        <xsl:if test="$enum-name-style ='UpperPython'">
+            <xsl:value-of select="DefaultEnumValue"/>
+        </xsl:if>
+        <xsl:text>
+        """
+        return cls.</xsl:text>
+        <xsl:if test="$enum-name-style = 'Upper'">
+            <xsl:value-of select="translate(translate(DefaultEnumValue,'-',''),$lcletters, $ucletters)"/>
+        </xsl:if>
+        <xsl:if test="$enum-name-style ='UpperPython'">
+            <xsl:value-of select="DefaultEnumValue"/>
+        </xsl:if>
+
     <xsl:text>
 
     @classmethod
     def values(cls) -> List[str]:
+        """
+        Returns enum choices
+        """
         return [elt.value for elt in cls]
 </xsl:text>
 

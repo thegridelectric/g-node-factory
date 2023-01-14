@@ -1,0 +1,20 @@
+{
+  "gwapi": "001",
+  "type_name": "tatradingrights.algo.create",
+  "version": "000",
+  "owner": "gridworks@gridworks-consulting.com",
+  "description": "",
+  "properties": {
+    "TypeName": {
+      "type": "string",
+      "value": "tatradingrights.algo.create.000",
+      "title": "The type name"
+    },
+    "Version": {
+      "type": "string",
+      "title": "The type version",
+      "default": "000",
+      "required": true
+    }
+  }
+}

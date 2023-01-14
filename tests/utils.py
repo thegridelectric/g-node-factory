@@ -7,8 +7,8 @@ from gnf.actor_base import ActorBase
 from gnf.actor_base import OnSendMessageDiagnostic
 from gnf.config import VanillaSettings
 from gnf.enums import RegistryGNodeRole
-from gnf.schemata import HeartbeatA
-from gnf.schemata import HeartbeatA_Maker
+from gnf.types import HeartbeatA
+from gnf.types import HeartbeatA_Maker
 
 
 def wait_for(

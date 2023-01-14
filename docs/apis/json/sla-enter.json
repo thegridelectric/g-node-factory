@@ -1,0 +1,33 @@
+{
+  "gwapi": "001",
+  "type_name": "sla.enter",
+  "version": "000",
+  "owner": "gridworks@gridworks-consulting.com",
+  "description": "",
+  "formats": {
+    "LeftRightDot": {
+      "type": "string",
+      "description": "Lowercase alphanumeric words separated by periods, most significant word (on the left) starting with an alphabet character.",
+      "example": "dw1.isone.me.freedom.apple"
+    }
+  },
+  "properties": {
+    "TerminalAssetAlias": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "",
+      "required": true
+    },
+    "TypeName": {
+      "type": "string",
+      "value": "sla.enter.000",
+      "title": "The type name"
+    },
+    "Version": {
+      "type": "string",
+      "title": "The type version",
+      "default": "000",
+      "required": true
+    }
+  }
+}

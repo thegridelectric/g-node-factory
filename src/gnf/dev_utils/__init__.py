@@ -1,11 +1,7 @@
 """G Node Factory Dev Utils."""
-import gnf.dev_utils.algo_setup as algo_setup
-from gnf.dev_utils.dev_homeowner import DevTaOwner
-from gnf.dev_utils.dev_validator import DevValidator
+import gnf.dev_utils.load_data as load_data
 
 
 __all__ = [
-    "algo_setup",
-    "DevTaOwner",
-    "DevValidator",
+    "load_data",
 ]

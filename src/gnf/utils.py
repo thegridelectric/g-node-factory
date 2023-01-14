@@ -6,12 +6,12 @@ from typing import Any
 from typing import Optional
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 import pendulum
 from algosdk.error import AlgodHTTPError
 from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 
-import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.property_format as property_format
 from gnf.errors import SchemaError

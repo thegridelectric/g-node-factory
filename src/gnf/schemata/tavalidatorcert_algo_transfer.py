@@ -7,6 +7,7 @@ from typing import Literal
 from typing import OrderedDict
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future.transaction import AssetTransferTxn
 from algosdk.future.transaction import MultisigTransaction
@@ -14,7 +15,6 @@ from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
@@ -62,7 +62,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
         mtx = encoding.future_msgpack_decode(v.get("HalfSignedCertTransferMtx", None))
         msig = mtx.multisig
         ValidatorAddr = v.get("ValidatorAddr", None)
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,
@@ -108,7 +108,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
                 "Axiom 5: Receiver should be ValidatorAddr (encoding.decode_address(ValidatorAddress)),"
                 " not {od['arcv']} "
             )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,
@@ -160,7 +160,7 @@ class TavalidatorcertAlgoTransfer(BaseModel):
                 f"Axiom 7: ValidatorAddr {ValidatorAddr} has not opted in to certificate"
                 f" {asset_index}"
             )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         multi = algo_utils.MultisigAccount(
             version=1,
             threshold=2,
@@ -205,7 +205,6 @@ class TavalidatorcertAlgoTransfer_Maker:
     version = "000"
 
     def __init__(self, validator_addr: str, half_signed_cert_transfer_mtx: str):
-
         self.tuple = TavalidatorcertAlgoTransfer(
             ValidatorAddr=validator_addr,
             HalfSignedCertTransferMtx=half_signed_cert_transfer_mtx,

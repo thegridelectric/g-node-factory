@@ -3,13 +3,13 @@ import os
 from typing import Optional
 
 import django
+import gridworks.algo_utils as algo_utils
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from gridworks.algo_utils import BasicAccount
 
-import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.gnf_db as gnf_db
-from gnf.algo_utils import BasicAccount
 from gnf.data_classes import BaseGNode
 from gnf.enums import CoreGNodeRole
 from gnf.enums import GNodeStatus
@@ -23,9 +23,9 @@ LOG_FORMAT = (
 )
 LOGGER = logging.getLogger(__name__)
 
-from gnf.schemata import BasegnodeTerminalassetCreate
-from gnf.schemata import DiscoverycertAlgoTransfer
-from gnf.schemata import HeartbeatA
+from gnf.types import BasegnodeTerminalassetCreate
+from gnf.types import DiscoverycertAlgoTransfer
+from gnf.types import HeartbeatA
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.django_related.settings")

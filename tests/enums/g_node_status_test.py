@@ -2,8 +2,7 @@
 from gnf.enums import GNodeStatus
 
 
-def test_g_node_status():
-
+def test_g_node_status() -> None:
     assert set(GNodeStatus.values()) == {
         "Unknown",
         "Pending",

@@ -1,4 +1,5 @@
 """ GwSchema Enums used in gnf """
+from gnf.enums.algo_cert_type import AlgoCertType
 from gnf.enums.core_g_node_role import CoreGNodeRole
 from gnf.enums.g_node_role import GNodeRole
 from gnf.enums.g_node_status import GNodeStatus
@@ -9,6 +10,7 @@ from gnf.enums.universe_type import UniverseType
 
 
 __all__ = [
+    "AlgoCertType",
     "CoreGNodeRole",
     "GNodeRole",
     "GNodeStatus",

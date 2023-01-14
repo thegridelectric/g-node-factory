@@ -7,12 +7,12 @@ from typing import Literal
 from typing import OrderedDict
 
 import algosdk
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future import transaction
 from pydantic import BaseModel
 from pydantic import root_validator
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
@@ -56,7 +56,7 @@ class TavalidatorcertAlgoCreate(BaseModel):
         """Axiom 3: The HalfSignedCertCreationMtx MultiSig must be the 2-sig Multi [Gnf Admin, payload.ValidatorAddr]"""
         mtx = encoding.future_msgpack_decode(v.get("HalfSignedCertCreationMtx", None))
         msig = mtx.multisig
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         ValidatorAddr = v.get("ValidatorAddr")
         multi = algo_utils.MultisigAccount(
             version=1,
@@ -75,7 +75,7 @@ class TavalidatorcertAlgoCreate(BaseModel):
         """Axiom 4: For the asset getting created: total = 1, unit_name=VLDTR, manager is Gnf Admin, asset_name and url not blank."""
         mtx = encoding.future_msgpack_decode(v.get("HalfSignedCertCreationMtx", None))
         txn = mtx.transaction
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         od = txn.dictify()
         try:
             apar: OrderedDict = od["apar"]
@@ -166,7 +166,6 @@ class TavalidatorcertAlgoCreate_Maker:
     version = "000"
 
     def __init__(self, validator_addr: str, half_signed_cert_creation_mtx: str):
-
         self.tuple = TavalidatorcertAlgoCreate(
             ValidatorAddr=validator_addr,
             HalfSignedCertCreationMtx=half_signed_cert_creation_mtx,

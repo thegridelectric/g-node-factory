@@ -5,17 +5,17 @@ from typing import Dict
 from typing import Literal
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
+from gridworks.algo_utils import MultisigAccount
 from pydantic import BaseModel
 from pydantic import root_validator
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
-from gnf.algo_utils import MultisigAccount
 from gnf.errors import SchemaError
 from gnf.property_format import predicate_validator
 
@@ -73,7 +73,7 @@ class TadeedAlgoExchange(BaseModel):
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         TaDaemonAddr = v.get("TaDaemonAddr")
         TaOwnerAddr = v.get("TaOwnerAddr")
         ValidatorAddr = v.get("ValidatorAddr")
@@ -112,7 +112,7 @@ class TadeedAlgoExchange(BaseModel):
             property_format.check_is_lrd_alias_format(old_ta_deed_g_node_alias)
         except SchemaError as e:
             raise ValueError(f"The asset name must have valid GNode format: {e}")
-        universe = config.GnfPublic().universe
+        universe = config.Public().universe
         try:
             property_format.check_world_alias_matches_universe(
                 g_node_alias=old_ta_deed_g_node_alias, universe=universe
@@ -129,7 +129,7 @@ class TadeedAlgoExchange(BaseModel):
                 f"Validator Multi ..{v_multi.addr[-6:]}. Got {creator_addr[-6:]}"
             )
 
-        gnf_graveyard_addr = config.GnfPublic().gnf_graveyard_addr
+        gnf_graveyard_addr = config.Public().gnf_graveyard_addr
         manager_addr = asset_dict["manager"]
         if manager_addr not in [gnf_admin_addr, gnf_graveyard_addr]:
             raise ValueError(
@@ -160,7 +160,7 @@ class TadeedAlgoExchange(BaseModel):
         signature must match the txn."""
         mtx = encoding.future_msgpack_decode(v.get("OldDeedTransferMtx", None))
 
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         try:
             api_utils.check_mtx_subsig(mtx, gnf_admin_addr)
         except SchemaError as e:
@@ -209,7 +209,6 @@ class TadeedAlgoExchange_Maker:
         new_ta_deed_idx: int,
         old_deed_transfer_mtx: str,
     ):
-
         self.tuple = TadeedAlgoExchange(
             TaDaemonAddr=ta_daemon_addr,
             TaOwnerAddr=ta_owner_addr,

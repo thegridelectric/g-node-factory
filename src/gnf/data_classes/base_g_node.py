@@ -20,7 +20,7 @@ LOG_FORMAT = (
 LOGGER = logging.getLogger(__name__)
 
 
-class BaseGNode(StreamlinedSerializerMixin):
+class BaseGNode:
     by_id: Dict[int, "BaseGNode"] = {}
     by_alias: Dict[str, "BaseGNode"] = {}
 
@@ -46,6 +46,7 @@ class BaseGNode(StreamlinedSerializerMixin):
         owner_addr: Optional[str] = None,
         daemon_addr: Optional[str] = None,
         trading_rights_nft_id: Optional[int] = None,
+        scada_algo_addr: Optional[int] = None,
     ):
         self.g_node_id = g_node_id
         self.alias = alias
@@ -63,6 +64,7 @@ class BaseGNode(StreamlinedSerializerMixin):
         self.owner_addr = owner_addr
         self.daemon_addr = daemon_addr
         self.trading_rights_nft_id = trading_rights_nft_id
+        self.scada_algo_addr = scada_algo_addr
         self.__class__.by_alias[self.alias] = self
 
     def __repr__(self):
@@ -211,7 +213,8 @@ class BaseGNode(StreamlinedSerializerMixin):
           - ROLE
             - If role is Ctn or MarketMaker, the parent must be a root, or have either role Ctn or MarketMaker.
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
-            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode"""
+            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode
+        """
         alias: str = attributes["alias"]
         if len(alias.split(".")) == 1:
             "remaining axioms all have to do with parent-child relationship"
@@ -333,7 +336,8 @@ class BaseGNode(StreamlinedSerializerMixin):
     @classmethod
     def _schema_axiom_4(cls, attributes):
         """Schema Axiom 4: Assume role is TerminalAsset and status is Active. Then the OwnershipDeedNftId
-        must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi"""
+        must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi
+        """
         pass
 
     #####################################
@@ -440,7 +444,8 @@ class BaseGNode(StreamlinedSerializerMixin):
              - If status is NOT Active, all children must have status PermanentlyDeactivated
             - If role is Ctn or MarketMaker, the parent must be a root, or have either role Ctn or MarketMaker.
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
-            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode"""
+            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode
+        """
         alias: str = attributes["alias"]
         role = attributes["role"]
         status = attributes["status"]

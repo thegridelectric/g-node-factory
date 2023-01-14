@@ -1,0 +1,83 @@
+{
+  "gwapi": "001",
+  "type_name": "basegnode.terminalasset.create",
+  "version": "000",
+  "owner": "gridworks@gridworks-consulting.com",
+  "description": "",
+  "formats": {
+    "UuidCanonicalTextual": {
+      "type": "string",
+      "description": "A string of hex words separated by hyphens of length 8-4-4-4-12.",
+      "example": "652ba6b0-c3bf-4f06-8a80-6b9832d60a25"
+    },
+    "LeftRightDot": {
+      "type": "string",
+      "description": "Lowercase alphanumeric words separated by periods, most significant word (on the left) starting with an alphabet character.",
+      "example": "dw1.isone.me.freedom.apple"
+    },
+    "AlgoAddressStringFormat": {
+      "type": "string",
+      "description": "String of length 32, characters are all base32 digits.",
+      "example": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+    }
+  },
+  "properties": {
+    "TaGNodeAlias": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "",
+      "required": true
+    },
+    "MicroLon": {
+      "type": "integer",
+      "title": "",
+      "required": true
+    },
+    "ValidatorAddr": {
+      "type": "string",
+      "format": "AlgoAddressStringFormat",
+      "title": "",
+      "required": true
+    },
+    "TaOwnerAddr": {
+      "type": "string",
+      "format": "AlgoAddressStringFormat",
+      "title": "",
+      "required": true
+    },
+    "MicroLat": {
+      "type": "integer",
+      "title": "",
+      "required": true
+    },
+    "GNodeRegistryAddr": {
+      "type": "string",
+      "format": "AlgoAddressStringFormat",
+      "title": "",
+      "required": true
+    },
+    "FromGNodeInstanceId": {
+      "type": "string",
+      "format": "UuidCanonicalTextual",
+      "title": "",
+      "required": true
+    },
+    "FromGNodeAlias": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "",
+      "required": true
+    },
+    "TypeName": {
+      "type": "string",
+      "value": "basegnode.terminalasset.create.000",
+      "title": "The type name"
+    },
+    "Version": {
+      "type": "string",
+      "title": "The type version",
+      "default": "000",
+      "required": true
+    }
+  }
+}

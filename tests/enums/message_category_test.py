@@ -2,8 +2,7 @@
 from gnf.enums import MessageCategory
 
 
-def test_message_category():
-
+def test_message_category() -> None:
     assert set(MessageCategory.values()) == {
         "Unknown",
         "RabbitJsonDirect",

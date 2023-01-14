@@ -5,13 +5,13 @@ from typing import Dict
 from typing import Literal
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future.transaction import SignedTransaction
 from algosdk.v2client.algod import AlgodClient
 from pydantic import BaseModel
 from pydantic import root_validator
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
@@ -65,7 +65,7 @@ class OptinTadeedAlgo(BaseModel):
             settings.algo_api_secrets.algod_token.get_secret_value(),
             settings.public.algod_address,
         )
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         try:
             gnf_new_deed_info = client.account_asset_info(
                 address=gnf_admin_addr, asset_id=NewDeedIdx
@@ -85,7 +85,7 @@ class OptinTadeedAlgo(BaseModel):
             property_format.check_is_lrd_alias_format(ta_deed_g_node_alias)
         except SchemaError as e:
             raise ValueError(f"Axiom 6: Optin asset must be a valid TaDeed! {e}")
-        universe = config.GnfPublic().universe
+        universe = config.Public().universe
         try:
             property_format.check_world_alias_matches_universe(
                 g_node_alias=ta_deed_g_node_alias, universe=universe
@@ -114,7 +114,7 @@ class OptinTadeedAlgo(BaseModel):
         TaDaemonAddr = v.get("TaDaemonAddr", None)
         ValidatorAddr = v.get("ValidatorAddr", None)
 
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         v_multi = algo_utils.Multisig(
             version=1, threshold=2, addresses=[gnf_admin_addr, ValidatorAddr]
         )
@@ -126,7 +126,7 @@ class OptinTadeedAlgo(BaseModel):
         """Axiom 4 (Correctly Signed) SignedTaDeedCreationTxn must be signed by Gnf Admin, and the signature
         must match the txn."""
         mtx = encoding.future_msgpack_decode(v.get("SignedTaDeedCreationTxn", None))
-        gnf_admin_addr = config.GnfPublic().gnf_admin_addr
+        gnf_admin_addr = config.Public().gnf_admin_addr
         # try:
         #     api_utils.check_mtx_subsig(mtx, gnf_admin_addr)
         # except SchemaError as e:
@@ -155,7 +155,6 @@ class OptinTadeedAlgo_Maker:
         validator_addr: str,
         signed_ta_deed_creation_txn: str,
     ):
-
         self.tuple = OptinTadeedAlgo(
             TaDaemonAddr=ta_daemon_addr,
             NewDeedIdx=new_deed_idx,
