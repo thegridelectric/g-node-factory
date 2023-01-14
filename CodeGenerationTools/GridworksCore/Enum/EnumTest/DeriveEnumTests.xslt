@@ -47,7 +47,7 @@ from gnf.enums import </xsl:text><xsl:value-of select="$local-class-name"/><xsl:
 
 
 def test_</xsl:text> <xsl:value-of select="translate(LocalName,'.','_')"/>
-    <xsl:text>():
+    <xsl:text>() -> None:
 
     assert set(</xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>.values()) == set(
         [
@@ -71,7 +71,12 @@ def test_</xsl:text> <xsl:value-of select="translate(LocalName,'.','_')"/>
 
     assert </xsl:text><xsl:value-of select="$local-class-name"/><xsl:text>.default() == </xsl:text>
     <xsl:value-of select="$local-class-name"/><xsl:text>.</xsl:text>
-    <xsl:value-of select="DefaultEnumValue"/>
+    <xsl:if test="$enum-name-style = 'Upper'">
+        <xsl:value-of select="translate(translate(DefaultEnumValue,'-',''),$lcletters, $ucletters)"/>
+    </xsl:if>
+    <xsl:if test="$enum-name-style ='UpperPython'">
+        <xsl:value-of select="DefaultEnumValue"/>
+    </xsl:if>
 
 
 

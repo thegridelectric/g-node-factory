@@ -2,8 +2,7 @@
 from gnf.enums import RegistryGNodeRole
 
 
-def test_registry_g_node_role():
-
+def test_registry_g_node_role() -> None:
     assert set(RegistryGNodeRole.values()) == {
         "Unknown",
         "GNodeFactory",

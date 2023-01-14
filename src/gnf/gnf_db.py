@@ -31,21 +31,21 @@ from typing import List
 from typing import Optional
 
 import dotenv
+import gridworks.algo_utils as algo_utils
 import requests
 from algosdk import encoding
 from algosdk.future import transaction
 from algosdk.v2client.algod import AlgodClient
 from asgiref.sync import sync_to_async
+from gridworks.algo_utils import BasicAccount
+from gridworks.algo_utils import MultisigAccount
+from gridworks.algo_utils import PendingTxnResponse
 
-import gnf.algo_utils as algo_utils
 import gnf.api_utils as api_utils
 import gnf.config as config
 import gnf.property_format as property_format
 import gnf.utils as utils
 from gnf.actor_base import ActorBase
-from gnf.algo_utils import BasicAccount
-from gnf.algo_utils import MultisigAccount
-from gnf.algo_utils import PendingTxnResponse
 from gnf.data_classes import BaseGNode
 from gnf.django_related.models import BaseGNodeDb
 from gnf.django_related.models import BaseGNodeHistory
@@ -54,23 +54,23 @@ from gnf.enums import CoreGNodeRole
 from gnf.enums import GNodeRole
 from gnf.enums import GNodeStatus
 from gnf.errors import RegistryError
-from gnf.schemata import BasegnodeGt
-from gnf.schemata import BasegnodeGt_Maker
-from gnf.schemata import DebugTcReinitializeTime_Maker
-from gnf.schemata import DiscoverycertAlgoCreate
-from gnf.schemata import InitialTadeedAlgoCreate
-from gnf.schemata import InitialTadeedAlgoTransfer
-from gnf.schemata import NewTadeedAlgoOptin
-from gnf.schemata import NewTadeedAlgoOptin_Maker
-from gnf.schemata import NewTadeedSend
-from gnf.schemata import NewTadeedSend_Maker
-from gnf.schemata import OldTadeedAlgoReturn
-from gnf.schemata import OldTadeedAlgoReturn_Maker
-from gnf.schemata import PauseTime
-from gnf.schemata import PauseTime_Maker
-from gnf.schemata import ResumeTime_Maker
-from gnf.schemata import TavalidatorcertAlgoCreate
-from gnf.schemata import TavalidatorcertAlgoTransfer
+from gnf.types import BaseGNodeGt
+from gnf.types import BaseGNodeGt_Maker
+from gnf.types import DebugTcReinitializeTime_Maker
+from gnf.types import DiscoverycertAlgoCreate
+from gnf.types import InitialTadeedAlgoCreate
+from gnf.types import InitialTadeedAlgoTransfer
+from gnf.types import NewTadeedAlgoOptin
+from gnf.types import NewTadeedAlgoOptin_Maker
+from gnf.types import NewTadeedSend
+from gnf.types import NewTadeedSend_Maker
+from gnf.types import OldTadeedAlgoReturn
+from gnf.types import OldTadeedAlgoReturn_Maker
+from gnf.types import PauseTime
+from gnf.types import PauseTime_Maker
+from gnf.types import ResumeTime_Maker
+from gnf.types import TavalidatorcertAlgoCreate
+from gnf.types import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
 
 
@@ -294,7 +294,7 @@ class GNodeFactory:
 
         Returns RestfulResponse:
             - None if transferring deed does not happen.
-            - BaseGnodeGt for the TerminalAssetotherwise
+            - BaseGNodeGt for the TerminalAssetotherwise
         """
         mtx = encoding.future_msgpack_decode(payload.FirstDeedTransferMtx)
 
@@ -357,7 +357,7 @@ class GNodeFactory:
             SchemaError: if the payload does not have type InitialTadeedAlgoCreate
 
         Returns:
-            Optional[BasegnodeGt]: None if the asset is not created
+            Optional[BaseGNodeGt]: None if the asset is not created
             otherwise the TerminalAsset database object
         """
 
@@ -449,7 +449,6 @@ class GNodeFactory:
         new_parent_alias: str,
         settings: config.GnfSettings,
     ) -> str:
-
         orig_alias = g_node.alias
         final_word = orig_alias.split(".")[-1]
         new_alias = new_parent_alias + "." + final_word
@@ -534,7 +533,6 @@ class GNodeFactory:
         signed_new_deed_transfer_txn: transaction.SignedTransaction,
         settings: config.GnfSettings,
     ) -> RestfulResponse:
-
         # opt into old tadeed
         txn = transaction.AssetOptInTxn(
             sender=self.admin_acct.addr,
@@ -649,7 +647,6 @@ class GNodeFactory:
     async def discoverycert_algo_create_received(
         self, payload: DiscoverycertAlgoCreate, settings: config.GnfSettings
     ) -> RestfulResponse:
-
         role = payload.CoreGNodeRole
         if role != CoreGNodeRole.ConductorTopologyNode:
             raise NotImplementedError(f"Only create CTNS w discovery certs, not {role}")
@@ -665,14 +662,14 @@ class GNodeFactory:
         async for gndb in BaseGNodeDb.objects.all():
             gndb.dc
 
-    async def retrieve_all_gns(self) -> List[BasegnodeGt]:
-        gn_gt_list: List[BasegnodeGt] = []
+    async def retrieve_all_gns(self) -> List[BaseGNodeGt]:
+        gn_gt_list: List[BaseGNodeGt] = []
         async for gn in BaseGNodeDb.objects.all():
-            gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
+            gn_gt = BaseGNodeGt_Maker.dc_to_tuple(gn.dc)
             gn_gt_list.append(gn_gt)
         return gn_gt_list
 
-    async def g_node_from_alias(self, lrh_g_node_alias: str) -> Optional[BasegnodeGt]:
+    async def g_node_from_alias(self, lrh_g_node_alias: str) -> Optional[BaseGNodeGt]:
         if not property_format.is_lrh_alias_format(lrh_g_node_alias):
             raise ValueError(f"{lrh_g_node_alias} must have LRH Alias Format")
         g_node_alias = lrh_g_node_alias.replace("-", ".")
@@ -683,14 +680,14 @@ class GNodeFactory:
                 return None
             gn = await BaseGNodeDb.objects.filter(g_node_id=old_gn.g_node_id).afirst()
 
-        gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
+        gn_gt = BaseGNodeGt_Maker.dc_to_tuple(gn.dc)
         return gn_gt
 
-    async def g_node_from_id(self, g_node_id: str) -> Optional[BasegnodeGt]:
+    async def g_node_from_id(self, g_node_id: str) -> Optional[BaseGNodeGt]:
         gn = await BaseGNodeDb.objects.filter(g_node_id=g_node_id).afirst()
         if not gn:
             return None
-        gn_gt = BasegnodeGt_Maker.dc_to_tuple(gn.dc)
+        gn_gt = BaseGNodeGt_Maker.dc_to_tuple(gn.dc)
         return gn_gt
 
     async def create_pending_terminal_asset(
@@ -771,7 +768,7 @@ class GNodeFactory:
                 Note=note,
                 HttpStatusCode=422,
             )
-        ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta_db.dc)
+        ta_gt = BaseGNodeGt_Maker.dc_to_tuple(ta_db.dc)
         return RestfulResponse(
             Note="Successfully created pending TerminalAsset",
             PayloadTypeName="basegnode.gt",
@@ -835,7 +832,7 @@ class GNodeFactory:
             f" TaDeed {asset_idx} transferred to TaDaemon and Ta {ta_alias} activated"
         )
 
-        ta_gt = BasegnodeGt_Maker.dc_to_tuple(ta_db.dc)
+        ta_gt = BaseGNodeGt_Maker.dc_to_tuple(ta_db.dc)
         r = RestfulResponse(
             Note=note,
             PayloadTypeName="basegnode.gt",

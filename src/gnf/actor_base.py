@@ -23,7 +23,7 @@ from gnf.enums import MessageCategory
 from gnf.enums import MessageCategorySymbol
 from gnf.enums import UniverseType
 from gnf.errors import SchemaError
-from gnf.schemata import HeartbeatA
+from gnf.types import HeartbeatA
 
 
 class RabbitRole(StrEnum):

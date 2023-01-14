@@ -32,7 +32,6 @@ def now_unix_s():
 
 
 class BaseGNodeDb(models.Model):
-
     g_node_id = models.CharField(
         max_length=210, default=rand_guid, null=True, blank=True
     )
@@ -61,6 +60,7 @@ class BaseGNodeDb(models.Model):
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     trading_rights_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -221,6 +221,7 @@ class BaseGNodeHistory(models.Model):
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     trading_rights_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
 
     class Meta:
         db_table = "base_g_node_history"
@@ -230,6 +231,7 @@ class GpsPointDb(models.Model):
     gps_point_id = models.CharField(max_length=210, default=rand_guid)
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lon = models.DecimalField(max_digits=9, decimal_places=6)
+
     # We will address encrypting the location later
     class Meta:
         db_table = "gps_point"

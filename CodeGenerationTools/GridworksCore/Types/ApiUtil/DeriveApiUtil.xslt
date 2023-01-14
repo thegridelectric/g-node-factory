@@ -28,6 +28,7 @@
 """ List of all the types used"""
 from typing import Dict
 from typing import List
+from typing import no_type_check
 </xsl:text>
 <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
 <xsl:sort select="TypeName" data-type="text"/>
@@ -36,7 +37,7 @@ from typing import List
 <xsl:variable name="local-alias" select="AliasRoot" />
 
 <xsl:text>
-from gnf.schemata import </xsl:text>
+from gnf.types import </xsl:text>
 <xsl:call-template name="nt-case">
     <xsl:with-param name="mp-schema-text" select="AliasRoot" />
 </xsl:call-template>
@@ -48,7 +49,10 @@ from gnf.schemata import </xsl:text>
 
 TypeMakerByName: Dict[str, HeartbeatA_Maker] = {}
 
-type_makers: List[HeartbeatA_Maker] = [
+
+@no_type_check
+def type_makers() -> List[HeartbeatA_Maker]:
+    return [
     </xsl:text>
 <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
 <xsl:sort select="TypeName" data-type="text"/>
@@ -66,13 +70,18 @@ type_makers: List[HeartbeatA_Maker] = [
     <xsl:text>
 ]
 
-def version_by_type_name() -> List[str]:
+
+for maker in type_makers():
+    TypeMakerByName[maker.type_name] = maker
+
+
+def version_by_type_name() -> Dict[str, str]:
     """
     Returns:
         Dict[str, str]: Keys are TypeNames, values are versions
     """
 
-    v: Dict = {
+    v: Dict[str, str] = {
         </xsl:text>
     <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
     <xsl:sort select="TypeName" data-type="text"/>
@@ -93,13 +102,13 @@ def version_by_type_name() -> List[str]:
     return v
 
 
-def status_by_versioned_type_name() -> List[str]:
+def status_by_versioned_type_name() ->Dict[str, str]:
     """
     Returns:
         Dict[str, str]: Keys are versioned TypeNames, values are type status
     """
 
-    v: Dict = {
+    v: Dict[str, str] = {
         </xsl:text>
     <xsl:for-each select="$airtable//ProtocolTypes/ProtocolType[(normalize-space(ProtocolName) ='gnf')]">
     <xsl:sort select="TypeName" data-type="text"/>
