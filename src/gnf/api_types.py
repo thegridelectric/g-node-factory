@@ -77,7 +77,7 @@ def version_by_type_name() -> Dict[str, str]:
     """
 
     v: Dict[str, str] = {
-        "base.g.node.gt": "001",
+        "base.g.node.gt": "002",
         "basegnode.ctn.create": "000",
         "basegnode.marketmaker.create": "000",
         "basegnode.other.create": "000",
@@ -115,7 +115,7 @@ def status_by_versioned_type_name() -> Dict[str, str]:
     """
 
     v: Dict[str, str] = {
-        "base.g.node.gt.001": "Pending",
+        "base.g.node.gt.002": "Pending",
         "basegnode.ctn.create.000": "Pending",
         "basegnode.marketmaker.create.000": "Pending",
         "basegnode.other.create.000": "Pending",
@@ -139,7 +139,7 @@ def status_by_versioned_type_name() -> Dict[str, str]:
         "tadeed.specs.hack.000": "Pending",
         "tatradingrights.algo.create.000": "Pending",
         "tavalidatorcert.algo.create.000": "Active",
-        "tavalidatorcert.algo.transfer.000": "Pending",
+        "tavalidatorcert.algo.transfer.000": "Active",
         "terminalasset.certify.hack.000": "Pending",
     }
 
