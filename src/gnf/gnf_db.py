@@ -403,14 +403,36 @@ class GNodeFactory:
             self.client, signed_txn.get_txid()
         ).asset_idx
 
+        txn = transaction.AssetCreateTxn(
+            sender=self.admin_acct.addr,
+            total=1,
+            decimals=0,
+            default_frozen=False,
+            manager=self.admin_acct.addr,
+            asset_name=ta_alias,
+            unit_name="SCADA",
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        scada_cert_idx = algo_utils.wait_for_transaction(
+            self.client, signed_txn.get_txid()
+        ).asset_idx
+
         LOGGER.info(
-            f"Initial TaDeed {ta_deed_idx} and TaTradingRights {ta_trading_rights_idx} created for {ta_alias} "
+            f"Initial TaDeed {ta_deed_idx}, TaTradingRights {ta_trading_rights_idx} "
+            f" and ScadaCert {scada_cert_idx} created for {ta_alias} "
         )
         return await self.create_pending_terminal_asset(
             ta_alias=ta_alias,
             ta_deed_idx=ta_deed_idx,
             ta_trading_rights_idx=ta_trading_rights_idx,
+            scada_cert_idx=scada_cert_idx,
         )
+
 
     async def create_updated_ta_deed(
         self,
@@ -695,6 +717,7 @@ class GNodeFactory:
         ta_alias: str,
         ta_deed_idx: int,
         ta_trading_rights_idx: int,
+        scada_cert_idx: int,
     ) -> RestfulResponse:
         """Creates a pending TerminalAsset. This requries first creating an
         active parent for the TerminalAsset, which is its AtomicMeteringNode.
