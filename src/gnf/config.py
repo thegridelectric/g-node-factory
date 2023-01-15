@@ -38,3 +38,15 @@ class GnfSettings(BaseSettings):
     class Config:
         env_prefix = "GNF_"
         env_nested_delimiter = "__"
+
+
+class GnrSettings(BaseSettings):
+    algo_api_secrets: AlgoApiSecrets = AlgoApiSecrets()
+    public: GnfPublic = GnfPublic()
+    sk: SecretStr = SecretStr(
+        "RvfbAEdn2ADe0pF7984ioBuLTnd+t46cITzcEbE5v2i+gSoCj1dQJhh3hmCgvlexErCDilQ1O9tKs7SYTXjadQ=="
+    )
+
+    class Config:
+        env_prefix = "GNR_"
+        env_nested_delimiter = "__"
