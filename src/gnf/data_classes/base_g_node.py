@@ -41,12 +41,13 @@ class BaseGNode:
         g_node_registry_addr: Optional[str] = None,
         prev_alias: Optional[str] = None,
         gps_point_id: Optional[str] = None,
-        ownership_deed_nft_id: Optional[int] = None,
+        ownership_deed_id: Optional[int] = None,
         ownership_deed_validator_addr: Optional[str] = None,
         owner_addr: Optional[str] = None,
         daemon_addr: Optional[str] = None,
-        trading_rights_nft_id: Optional[int] = None,
-        scada_algo_addr: Optional[int] = None,
+        trading_rights_id: Optional[int] = None,
+        scada_algo_addr: Optional[str] = None,
+        scada_cert_id: Optional[int] = None,
     ):
         self.g_node_id = g_node_id
         self.alias = alias
@@ -59,18 +60,19 @@ class BaseGNode:
         self.g_node_registry_addr = g_node_registry_addr
         self.prev_alias = prev_alias
         self.gps_point_id = gps_point_id
-        self.ownership_deed_nft_id = ownership_deed_nft_id
+        self.ownership_deed_id = ownership_deed_id
         self.ownership_deed_validator_addr = ownership_deed_validator_addr
         self.owner_addr = owner_addr
         self.daemon_addr = daemon_addr
-        self.trading_rights_nft_id = trading_rights_nft_id
+        self.trading_rights_id = trading_rights_id
         self.scada_algo_addr = scada_algo_addr
+        self.scada_cert_id = scada_cert_id
         self.__class__.by_alias[self.alias] = self
 
     def __repr__(self):
         rs = f"GNode Alias: {self.alias}, Role: {self.role.value}, Status: {self.status.value}"
-        if self.ownership_deed_nft_id and self.role == CoreGNodeRole.TerminalAsset:
-            rs += f", TaDeedIdx: {self.ownership_deed_nft_id}"
+        if self.ownership_deed_id and self.role == CoreGNodeRole.TerminalAsset:
+            rs += f", TaDeedIdx: {self.ownership_deed_id}"
         return rs
 
     def gps_point(self) -> Optional[GpsPoint]:
@@ -299,17 +301,17 @@ class BaseGNode:
         - TradingRightsNftId must be an integer"""
 
         g_node_registry_addr = attributes["g_node_registry_addr"]
-        ownership_deed_nft_id = attributes["ownership_deed_nft_id"]
+        ownership_deed_id = attributes["ownership_deed_id"]
         ownership_deed_validator_addr = attributes["ownership_deed_validator_addr"]
         owner_addr = attributes["owner_addr"]
         daemon_addr = attributes["daemon_addr"]
-        trading_rights_nft_id = attributes["trading_rights_nft_id"]
-        if ownership_deed_nft_id:
-            if not isinstance(ownership_deed_nft_id, int):
-                raise DcError("Schema Axiom 2: OwnershipDeedNftId must be an integer")
-        if trading_rights_nft_id:
-            if not isinstance(trading_rights_nft_id, int):
-                raise DcError("Schema Axiom 2: TradingRightsNftId must be an integer ")
+        trading_rights_id = attributes["trading_rights_id"]
+        if ownership_deed_id:
+            if not isinstance(ownership_deed_id, int):
+                raise DcError("Schema Axiom 2: OwnershipDeedId must be an integer")
+        if trading_rights_id:
+            if not isinstance(trading_rights_id, int):
+                raise DcError("Schema Axiom 2: TradingRightsId must be an integer ")
         for addr in [
             ownership_deed_validator_addr,
             owner_addr,

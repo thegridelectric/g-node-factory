@@ -31,7 +31,7 @@ Python pydantic class corresponding to  json type ```base.g.node.gt```.
     - Description:
     - Format: UuidCanonicalTextual
 
-**OwnershipDeedNftId**:
+**OwnershipDeedId**:
     - Description:
 
 **OwnershipDeedValidatorAddr**:
@@ -46,12 +46,15 @@ Python pydantic class corresponding to  json type ```base.g.node.gt```.
     - Description:
     - Format: AlgoAddressStringFormat
 
-**TradingRightsNftId**:
+**TradingRightsId**:
     - Description:
 
 **ScadaAlgoAddr**:
     - Description:
     - Format: AlgoAddressStringFormat
+
+**ScadaCertId**:
+    - Description:
 
 .. autoclass:: gnf.types.base_g_node_gt.check_is_uuid_canonical_textual
     :members:

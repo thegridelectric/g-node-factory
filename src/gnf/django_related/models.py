@@ -53,14 +53,15 @@ class BaseGNodeDb(models.Model):
         max_length=210, default=None, null=True, blank=True
     )
     gps_point_id = models.CharField(max_length=210, default=None, null=True, blank=True)
-    ownership_deed_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    ownership_deed_id = models.IntegerField(default=None, null=True, blank=True)
     ownership_deed_validator_addr = models.CharField(
         max_length=210, default=None, null=True, blank=True
     )
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
-    trading_rights_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    trading_rights_id = models.IntegerField(default=None, null=True, blank=True)
     scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
+    scada_cert_id = models.IntegerField(default=None, null=True, blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -214,14 +215,15 @@ class BaseGNodeHistory(models.Model):
         max_length=210, default=None, null=True, blank=True
     )
     gps_point_id = models.CharField(max_length=210, default=None, null=True, blank=True)
-    ownership_deed_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    ownership_deed_id = models.IntegerField(default=None, null=True, blank=True)
     ownership_deed_validator_addr = models.CharField(
         max_length=210, default=None, null=True, blank=True
     )
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
-    trading_rights_nft_id = models.IntegerField(default=None, null=True, blank=True)
+    trading_rights_id = models.IntegerField(default=None, null=True, blank=True)
     scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
+    scada_cert_id = models.IntegerField(default=None, null=True, blank=True)
 
     class Meta:
         db_table = "base_g_node_history"
