@@ -302,8 +302,9 @@ class </xsl:text><xsl:value-of select="$enum-local-name"/><xsl:text>Map:
 
 def check_is_iso_format(v: str) -> None:
     import datetime
+
     try:
-        datetime.fromisoformat(v.replace("Z", "+00:00"))
+        datetime.datetime.fromisoformat(v.replace("Z", "+00:00"))
     except:
         raise ValueError(f"{v} is not IsoFormat")</xsl:text>
     </xsl:if>

@@ -125,7 +125,7 @@ def status_by_versioned_type_name() -> Dict[str, str]:
         "debug.tc.reinitialize.time.000": "Pending",
         "discoverycert.algo.create.000": "Pending",
         "discoverycert.algo.transfer.000": "Pending",
-        "gw.cert.id.000": "Pending",
+        "gw.cert.id.000": "Active",
         "heartbeat.a.100": "Pending",
         "initial.tadeed.algo.create.000": "Pending",
         "initial.tadeed.algo.optin.002": "Pending",
