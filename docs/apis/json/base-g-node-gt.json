@@ -1,7 +1,7 @@
 {
   "gwapi": "001",
   "type_name": "base.g.node.gt",
-  "version": "001",
+  "version": "002",
   "owner": "gridworks@gridworks-consulting.com",
   "description": ". BaseGNode. Authority is GNodeFactory.",
   "formats": {
@@ -147,7 +147,7 @@
       "title": "",
       "required": false
     },
-    "OwnershipDeedNftId": {
+    "OwnershipDeedId": {
       "type": "integer",
       "minimum": 0,
       "title": "",
@@ -171,7 +171,7 @@
       "title": "",
       "required": false
     },
-    "TradingRightsNftId": {
+    "TradingRightsId": {
       "type": "integer",
       "minimum": 0,
       "title": "",
@@ -183,15 +183,21 @@
       "title": "",
       "required": false
     },
+    "ScadaCertId": {
+      "type": "integer",
+      "minimum": 0,
+      "title": "",
+      "required": false
+    },
     "TypeName": {
       "type": "string",
-      "value": "base.g.node.gt.001",
+      "value": "base.g.node.gt.002",
       "title": "The type name"
     },
     "Version": {
       "type": "string",
       "title": "The type version",
-      "default": "001",
+      "default": "002",
       "required": true
     }
   }

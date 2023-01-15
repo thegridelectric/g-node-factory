@@ -271,13 +271,13 @@ class GNodeFactory:
                 - gn.role = TerminalAsset
                 - gn.status = Pending
                 - gn.lat and gn.lon exist
-                - gn.ownership_deed_nft_id does not exist
+                - gn.ownership_deed_id does not exist
                 - gn.ownership_deed_nft_creator_addr exists and matches
                 2-sig [GnfAdmin, payload.ValidatorAddr]
 
             - Sends TaDeed to the TaDaemon.
             - On confirmation, updates the GNodeDb gn:
-                - gn.ownership_deed_nft_id = ta_asset_id
+                - gn.ownership_deed_id = ta_asset_id
                 - gn.status_value = Active.value
                 - gn parent (the AtomicMeteringNode) status = Active.value
             - Sends a StatusBaseGgnodeAlgo to the correct GNodeRegistry ,
@@ -475,7 +475,7 @@ class GNodeFactory:
 
             payload = NewTadeedAlgoOptin_Maker(
                 new_ta_deed_idx=new_ta_deed_idx,
-                old_ta_deed_idx=g_node.ownership_deed_nft_id,
+                old_ta_deed_idx=g_node.ownership_deed_id,
                 ta_daemon_addr=g_node.daemon_addr,
                 validator_addr=g_node.ownership_deed_validator_addr,
                 signed_ta_deed_creation_txn=encoding.msgpack_encode(
@@ -584,7 +584,7 @@ class GNodeFactory:
                 Note=f"ta_alias {ta_alias} for deed {new_ta_deed_idx} not in GNodeFactory!",
                 HttpStatusCode=422,
             )
-        ta_db.ownership_deed_nft_id = new_ta_deed_idx
+        ta_db.ownership_deed_id = new_ta_deed_idx
         async_ta_save = sync_to_async(ta_db.save)
         await async_ta_save()
 
@@ -753,8 +753,8 @@ class GNodeFactory:
             "status_value": GNodeStatus.Pending.value,
             "role_value": CoreGNodeRole.TerminalAsset.value,
             "g_node_registry_addr": self.settings.public.gnr_addr,
-            "ownership_deed_nft_id": ta_deed_idx,
-            "trading_rights_nft_id": ta_trading_rights_idx,
+            "ownership_deed_id": ta_deed_idx,
+            "trading_rights_id": ta_trading_rights_idx,
         }
 
         try:
@@ -809,7 +809,7 @@ class GNodeFactory:
             sender=self.admin_acct.addr,
             receiver=payload.TaDaemonAddr,
             amt=1,
-            index=ta_db.trading_rights_nft_id,
+            index=ta_db.trading_rights_id,
             sp=self.client.suggested_params(),
         )
         signed_txn = txn.sign(self.admin_acct.sk)

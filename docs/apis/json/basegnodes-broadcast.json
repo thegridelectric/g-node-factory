@@ -35,12 +35,12 @@
       "required": true
     },
     "TopGNode": {
-      "type": "base.g.node.gt.001",
+      "type": "base.g.node.gt.002",
       "title": "",
       "required": true
     },
     "DescendantGNodeList": {
-      "type": "base.g.node.gt.001",
+      "type": "base.g.node.gt.002",
       "title": "",
       "required": true
     },
