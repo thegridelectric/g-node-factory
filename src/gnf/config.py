@@ -42,7 +42,7 @@ class GnfSettings(BaseSettings):
 
 class GnrSettings(BaseSettings):
     algo_api_secrets: AlgoApiSecrets = AlgoApiSecrets()
-    public: GnfPublic = GnfPublic()
+    public: Public = Public()
     sk: SecretStr = SecretStr(
         "RvfbAEdn2ADe0pF7984ioBuLTnd+t46cITzcEbE5v2i+gSoCj1dQJhh3hmCgvlexErCDilQ1O9tKs7SYTXjadQ=="
     )

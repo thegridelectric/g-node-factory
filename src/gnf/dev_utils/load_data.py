@@ -8,7 +8,7 @@ def millinocket():
         "Alias": "d1",
         "StatusGtEnumSymbol": "153d3475",
         "RoleGtEnumSymbol": "00000000",
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
         "Version": "001",
     }
@@ -22,7 +22,7 @@ def millinocket():
         "Alias": "d1.isone",
         "StatusGtEnumSymbol": "153d3475",
         "RoleGtEnumSymbol": "86f21dd2",
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
         "Version": "001",
     }
@@ -36,7 +36,7 @@ def millinocket():
         "Alias": "d1.isone.ver",
         "StatusGtEnumSymbol": "153d3475",
         "RoleGtEnumSymbol": "4502e355",
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
         "Version": "001",
     }
@@ -50,7 +50,7 @@ def millinocket():
         "Alias": "d1.isone.ver.keene",
         "StatusGtEnumSymbol": "153d3475",
         "RoleGtEnumSymbol": "86f21dd2",
-        "GNodeRegistryAddr": "MONSDN5MXG4VMIOHJNCJJBVASG7HEZQSCEIKJAPEPVI5ZJUMQGXQKSOAYU",
+        "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
         "Version": "001",
     }

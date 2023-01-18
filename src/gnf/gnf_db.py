@@ -280,6 +280,7 @@ class GNodeFactory:
                 - gn.ownership_deed_id = ta_asset_id
                 - gn.status_value = Active.value
                 - gn parent (the AtomicMeteringNode) status = Active.value
+            - Creates a SCADA CERT and a pending SCADA
             - Sends a StatusBaseGgnodeAlgo to the correct GNodeRegistry ,
             identified by gn.g_node_registry_addr. Status.TopGNodeAlias = gn parent
             - Returns that StatusBaseGgnodeAlgo payload
@@ -330,7 +331,37 @@ class GNodeFactory:
             r = RestfulResponse(Note=note, HttpStatusCode=422)
             return r
 
-        return await self.activate_terminal_asset(payload)
+        r = await self.activate_terminal_asset(payload)
+        if r.HttpStatusCode != 422:
+            return r
+
+        # now make SCADA CERT
+        txn = transaction.AssetCreateTxn(
+            sender=self.admin_acct.addr,
+            total=1,
+            decimals=0,
+            default_frozen=False,
+            manager=self.admin_acct.addr,
+            asset_name=terminal_asset_alias,
+            unit_name="SCADA",
+            sp=self.client.suggested_params(),
+        )
+        signed_txn = txn.sign(self.admin_acct.sk)
+        try:
+            self.client.send_transaction(signed_txn)
+        except:
+            raise Exception(f"Failure sending transaction")
+        scada_cert_idx = algo_utils.wait_for_transaction(
+            self.client, signed_txn.get_txid()
+        ).asset_idx
+        r = await self.create_pending_scada(
+            ta_alias=terminal_asset_alias, scada_cert_idx=scada_cert_idx
+        )
+        r.Note = (
+            f"TaDeed for {terminal_asset_alias} transferred, TerminalAsset status active, "
+            + r.Note
+        )
+        return r
 
     async def initial_tadeed_algo_create_received(
         self, payload: InitialTadeedAlgoCreate
@@ -403,36 +434,15 @@ class GNodeFactory:
             self.client, signed_txn.get_txid()
         ).asset_idx
 
-        txn = transaction.AssetCreateTxn(
-            sender=self.admin_acct.addr,
-            total=1,
-            decimals=0,
-            default_frozen=False,
-            manager=self.admin_acct.addr,
-            asset_name=ta_alias,
-            unit_name="SCADA",
-            sp=self.client.suggested_params(),
-        )
-        signed_txn = txn.sign(self.admin_acct.sk)
-        try:
-            self.client.send_transaction(signed_txn)
-        except:
-            raise Exception(f"Failure sending transaction")
-        scada_cert_idx = algo_utils.wait_for_transaction(
-            self.client, signed_txn.get_txid()
-        ).asset_idx
-
         LOGGER.info(
             f"Initial TaDeed {ta_deed_idx}, TaTradingRights {ta_trading_rights_idx} "
-            f" and ScadaCert {scada_cert_idx} created for {ta_alias} "
+            f" created for {ta_alias} "
         )
         return await self.create_pending_terminal_asset(
             ta_alias=ta_alias,
             ta_deed_idx=ta_deed_idx,
             ta_trading_rights_idx=ta_trading_rights_idx,
-            scada_cert_idx=scada_cert_idx,
         )
-
 
     async def create_updated_ta_deed(
         self,
@@ -717,7 +727,6 @@ class GNodeFactory:
         ta_alias: str,
         ta_deed_idx: int,
         ta_trading_rights_idx: int,
-        scada_cert_idx: int,
     ) -> RestfulResponse:
         """Creates a pending TerminalAsset. This requries first creating an
         active parent for the TerminalAsset, which is its AtomicMeteringNode.
@@ -794,7 +803,7 @@ class GNodeFactory:
         ta_gt = BaseGNodeGt_Maker.dc_to_tuple(ta_db.dc)
         return RestfulResponse(
             Note="Successfully created pending TerminalAsset",
-            PayloadTypeName="basegnode.gt",
+            PayloadTypeName="base.g.node.gt",
             PayloadAsDict=ta_gt.as_dict(),
         )
 
@@ -858,10 +867,80 @@ class GNodeFactory:
         ta_gt = BaseGNodeGt_Maker.dc_to_tuple(ta_db.dc)
         r = RestfulResponse(
             Note=note,
-            PayloadTypeName="basegnode.gt",
+            PayloadTypeName="base.g.node.gt",
             PayloadAsDict=ta_gt.as_dict(),
         )
         return r
+
+    async def create_pending_scada(
+        self,
+        ta_alias: str,
+        scada_cert_idx: int,
+    ) -> RestfulResponse:
+        """Creates a pending SCADA GNode. The parent
+        TerminalAsset must be active
+
+        Args:
+            ta_alias (str): the Alias for the TerminalAsset.
+            scada_cert_idx (int): the id for the Scada Certificate ASA
+
+        Returns:
+            RestfulResponse: _description_
+        """
+        if not property_format.is_lrd_alias_format(ta_alias):
+            return RestfulResponse(
+                Note=f"{ta_alias} must have LRD Alias Format",
+                HttpStatusCode=422,
+            )
+
+        await self.load_g_nodes_as_data_classes()
+        words = ta_alias.split(".")
+        if words[-1] != "ta":
+            return RestfulResponse(
+                Note=f"{ta_alias} must end in '.ta'",
+                HttpStatusCode=422,
+            )
+
+        if len(words) == 1:
+            return RestfulResponse(
+                Note=f"{ta_alias} does not have a parent; ignoring",
+                HttpStatusCode=422,
+            )
+
+        ta_db: BaseGNodeDb = await BaseGNodeDb.objects.filter(alias=ta_alias).afirst()
+        if ta_db is None:
+            note = f"In create_pending_scada. Could not find {ta_alias}!"
+            r = RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
+            return r
+
+        gn = {
+            "alias": ta_alias + ".scada",
+            "status_value": GNodeStatus.Pending.value,
+            "role_value": CoreGNodeRole.Scada.value,
+            "g_node_registry_addr": self.settings.public.gnr_addr,
+            "scada_cert_id": scada_cert_idx,
+        }
+        LOGGER.info(f"About to try and create a new GNode w alias {ta_alias}.scada")
+        try:
+            scada_db: BaseGNodeDb = await BaseGNodeDb.objects.acreate(**gn)
+        except RegistryError as e:
+            note = f"Not creating pending Scada: {e}"
+            LOGGER.info(note)
+            r = RestfulResponse(
+                Note=note,
+                HttpStatusCode=422,
+            )
+            return r
+
+        scada_gt = BaseGNodeGt_Maker.dc_to_tuple(scada_db.dc)
+        return RestfulResponse(
+            Note="Successfully created pending SCADA",
+            PayloadTypeName="base.g.node.gt",
+            PayloadAsDict=scada_gt.as_dict(),
+        )
 
     async def parent_from_alias(self, alias: str) -> Optional["BaseGNodeDb"]:
         """
