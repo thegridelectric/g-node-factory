@@ -294,11 +294,11 @@ class BaseGNode:
         - Alias must be a string of format LRD Alias
         - PrevAlias must be a string of format LRD Alias
         - GNodeId must be a string of format UuidCanoicalTextual
-        - OwnershipDeedNftId must be an integer,
+        - OwnershipDeedId must be an integer,
         - OwnershipDeedValidatorAddr must be a string of format AlgoAddressStringFormat
         - OwnerAddr must be a string of format AlgoAddressStringFormat
         - DaemonAddr must be a string of format AlgoAddressStringFormat
-        - TradingRightsNftId must be an integer"""
+        - TradingRightsId must be an integer"""
 
         g_node_registry_addr = attributes["g_node_registry_addr"]
         ownership_deed_id = attributes["ownership_deed_id"]

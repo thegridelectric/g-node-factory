@@ -22,6 +22,7 @@ forth between type instances and Python objects.
     BasegnodeCtnCreate  <types/basegnode-ctn-create>
     BasegnodeMarketmakerCreate  <types/basegnode-marketmaker-create>
     BasegnodeOtherCreate  <types/basegnode-other-create>
+    BasegnodeScadaCreate  <types/basegnode-scada-create>
     BasegnodeTerminalassetCreate  <types/basegnode-terminalasset-create>
     BasegnodesBroadcast  <types/basegnodes-broadcast>
     BasegnodesGet  <types/basegnodes-get>
@@ -38,6 +39,7 @@ forth between type instances and Python objects.
     OldTadeedAlgoReturn  <types/old-tadeed-algo-return>
     PauseTime  <types/pause-time>
     ResumeTime  <types/resume-time>
+    ScadaCertTransfer  <types/scada-cert-transfer>
     SlaEnter  <types/sla-enter>
     TadeedSpecsHack  <types/tadeed-specs-hack>
     TatradingrightsAlgoCreate  <types/tatradingrights-algo-create>

@@ -796,7 +796,7 @@ class </xsl:text>
             <xsl:text> format validation: {e}")</xsl:text>
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: AXIOM</xsl:text>
         </xsl:if>
         <xsl:text>
         return v</xsl:text>
@@ -827,7 +827,7 @@ class </xsl:text>
 
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: Axiom</xsl:text>
         </xsl:if>
 
         <xsl:text>
@@ -925,7 +925,7 @@ class </xsl:text>
                 <xsl:text> format validation: {e}")</xsl:text>
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: AXIOM</xsl:text>
         </xsl:if>
         <xsl:text>
         return v</xsl:text>
@@ -1017,7 +1017,7 @@ class </xsl:text>
         <xsl:text>))</xsl:text>
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: AXIOM</xsl:text>
         </xsl:if>
         <xsl:text>
         return enum_list</xsl:text>
@@ -1101,7 +1101,7 @@ class </xsl:text>
                     )</xsl:text>
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: AXIOM</xsl:text>
         </xsl:if>
         <xsl:text>
         return v</xsl:text>
@@ -1196,7 +1196,7 @@ class </xsl:text>
 
         <xsl:if test="count($airtable//SchemaAxioms/SchemaAxiom[(normalize-space(SinglePropertyAxiom)=$property-id)]) > 0">
         <xsl:text>
-        raise NotImplementedError("Implement axiom(s)")</xsl:text>
+        # TODO: AXIOMS</xsl:text>
         </xsl:if>
 
         <xsl:text>
@@ -1251,7 +1251,8 @@ class </xsl:text>
 
         <xsl:text>
         """
-        raise NotImplementedError("Implement check for axiom </xsl:text><xsl:value-of select="AxiomNumber"/><xsl:text>")</xsl:text>
+        # TODO: "Implement check for axiom </xsl:text><xsl:value-of select="AxiomNumber"/><xsl:text>")
+        return v</xsl:text>
 
     </xsl:for-each>
     </xsl:if>

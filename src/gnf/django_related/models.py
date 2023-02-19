@@ -60,7 +60,9 @@ class BaseGNodeDb(models.Model):
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     trading_rights_id = models.IntegerField(default=None, null=True, blank=True)
-    scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
+    scada_algo_addr = models.CharField(
+        max_length=210, default=None, null=True, blank=True
+    )
     scada_cert_id = models.IntegerField(default=None, null=True, blank=True)
 
     def __init__(self, *args, **kwargs):
@@ -222,7 +224,9 @@ class BaseGNodeHistory(models.Model):
     owner_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     daemon_addr = models.CharField(max_length=210, default=None, null=True, blank=True)
     trading_rights_id = models.IntegerField(default=None, null=True, blank=True)
-    scada_algo_addr = models.IntegerField(default=None, null=True, blank=True)
+    scada_algo_addr = models.CharField(
+        max_length=210, default=None, null=True, blank=True
+    )
     scada_cert_id = models.IntegerField(default=None, null=True, blank=True)
 
     class Meta:

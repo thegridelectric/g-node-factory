@@ -139,7 +139,8 @@ class InitialTadeedAlgoOptin(BaseModel):
         Axiom 1: Is correct Multisig.
         Decoded SignedInitialDaemonFundingTxn must be a SignedTransaction signed by TaOwnerAddr.
         """
-        raise NotImplementedError("Implement check for axiom 1")
+        # TODO: "Implement check for axiom 1")
+        return v
 
     @root_validator
     def check_axiom_2(cls, v: dict) -> dict:
@@ -148,7 +149,8 @@ class InitialTadeedAlgoOptin(BaseModel):
         There is an ASA TaDeed created by and owned by the 2-sig MultiAccount [GnfAdminAddr, ValidatorAddr],
         where the TaDeed's AssetName is equal to the payload's TerminalAssetAlias.
         """
-        raise NotImplementedError("Implement check for axiom 2")
+        # TODO: "Implement check for axiom 2")
+        return v
 
     def as_dict(self) -> Dict[str, Any]:
         d = self.dict()

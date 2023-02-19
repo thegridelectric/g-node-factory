@@ -1,0 +1,52 @@
+{
+  "gwapi": "001",
+  "type_name": "scada.cert.transfer",
+  "version": "000",
+  "owner": "gridworks@gridworks-consulting.com",
+  "description": "Scada Certificate Transfer. This is a payload designed to be sent from a SCADA device to the GNodeFactory after the SCADA has opted into its certificate.",
+  "formats": {
+    "LeftRightDot": {
+      "type": "string",
+      "description": "Lowercase alphanumeric words separated by periods, most significant word (on the left) starting with an alphabet character.",
+      "example": "dw1.isone.me.freedom.apple"
+    },
+    "AlgoMsgPackEncoded": {
+      "type": "string",
+      "description": "Error is not thrown with algosdk.encoding.future_msg_decode(candidate)",
+      "example": "gqRtc2lng6ZzdWJzaWeSgaJwa8Qgi1hzb1WaDzF+215cR8xmiRfUQMrnjqHtQV5PiFBAUtmConBrxCD8IT4Zu8vBAhRNsXoWF+2i6q2KyBZrPhmbDCKJD7rBBqFzxEAEp8UcTEJSyTmgw96/mCnNHKfhkdYMCD5jxWejHRmPCrR8U9z/FBVsoCGbjDTTk2L1k7n/eVlumEk/M1KSe48Jo3RocgKhdgGjdHhuiaRhcGFyhaJhbq9Nb2xseSBNZXRlcm1haWSiYXXZKWh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9tb2xseWNvL3doby13ZS1hcmUvoW3EIItYc29Vmg8xftteXEfMZokX1EDK546h7UFeT4hQQFLZoXQBonVupVZMRFRSo2ZlZc0D6KJmdlGjZ2VuqnNhbmRuZXQtdjGiZ2jEIC/iF+bI4LU6UTgG4SIxyD10PS0/vNAEa93OC5SVRFn6omx2zQQ5pG5vdGXEK01vbGx5IEluYyBUZWxlbWV0cnkgU3VydmV5b3JzIGFuZCBQdXJ2ZXlvcnOjc25kxCDHZxhdCT2TxxxZlZ/H5mIku1s4ulDm3EmU6dYKXCWEB6R0eXBlpGFjZmc="
+    }
+  },
+  "properties": {
+    "TaAlias": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "TerminalAsset Alias",
+      "description": "GNodeAlias of the TerminalAsset for which the SCADA certificate is issued. The ScadaCert can be found from this.",
+      "required": true
+    },
+    "SignedProof": {
+      "type": "string",
+      "format": "AlgoMsgPackEncoded",
+      "title": "Signed Proof from the SCADA Actor",
+      "description": "The Scada GNode has a ScadaAlgoAddr in the GNodeFactory database, and the identity of the SCADA actor can be verified by this.",
+      "required": true
+    },
+    "TypeName": {
+      "type": "string",
+      "value": "scada.cert.transfer.000",
+      "title": "The type name"
+    },
+    "Version": {
+      "type": "string",
+      "title": "The type version",
+      "default": "000",
+      "required": true
+    }
+  },
+  "axioms": {
+    "Axiom1": {
+      "title": "Scada is SignedProof signer",
+      "description": "There is a Scada BaseGNode in the GNodeFactory whose alias is TaAlias + '.scada', and the ScadaAlgoAddr for that Scada BaseGNode is the public address of the SignedProof signer. The txn is the OptIn."
+    }
+  }
+}

@@ -18,6 +18,10 @@ BasegnodeOtherCreate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. literalinclude:: json/basegnode-other-create.json
 
+BasegnodeScadaCreate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. literalinclude:: json/basegnode-scada-create.json
+
 BasegnodeTerminalassetCreate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. literalinclude:: json/basegnode-terminalasset-create.json
@@ -81,6 +85,10 @@ PauseTime
 ResumeTime
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. literalinclude:: json/resume-time.json
+
+ScadaCertTransfer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. literalinclude:: json/scada-cert-transfer.json
 
 SlaEnter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

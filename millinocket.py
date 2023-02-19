@@ -55,6 +55,12 @@ print("")
 print(
     "Check http://localhost:8000/base-g-nodes/ - should be 4 GNodes,including MarketMaker d1.isone.ver.keene, but no AtomicTNodes)"
 )
-input("HIT RETURN TO Stop Gnf API")
+
+print("Return to gridworks-atn repo now.")
+print("")
+print("")
+time.sleep(2)
+
+input(" HIT RETURN TO Stop Gnf API")
 
 gnf_pr.terminate()

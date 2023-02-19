@@ -11,10 +11,12 @@ from pydantic import ValidationError
 import gnf.config as config
 from gnf.gnf_db import GNodeFactory
 from gnf.types import BaseGNodeGt
+from gnf.types import BasegnodeScadaCreate
 from gnf.types import DiscoverycertAlgoCreate
 from gnf.types import DiscoverycertAlgoCreate_Maker
 from gnf.types import InitialTadeedAlgoCreate
 from gnf.types import InitialTadeedAlgoTransfer
+from gnf.types import ScadaCertTransfer
 from gnf.types import TavalidatorcertAlgoCreate
 from gnf.types import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
@@ -68,6 +70,30 @@ async def resume_time():
 @app.post(f"/debug-tc-reinitialize-time/")
 async def debug_tc_reinitialize_time():
     gnf.debug_tc_reinitialize_time()
+
+
+@app.post("/scada-cert-transfer/", response_model=RestfulResponse)
+async def scada_cert_transfer_received(
+    payload: ScadaCertTransfer,
+):
+    r = await gnf.scada_cert_transfer_received(payload=payload)
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/basegnode-scada-create/", response_model=RestfulResponse)
+async def basegnode_scada_create_received(
+    payload: BasegnodeScadaCreate,
+):
+    r = await gnf.basegnode_scada_create_received(payload=payload)
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
 
 
 @app.post("/tavalidatorcert-algo-create/", response_model=RestfulResponse)

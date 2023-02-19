@@ -72,7 +72,8 @@ class TavalidatorcertAlgoTransfer(BaseModel):
     def check_validator_addr(cls, v: str) -> str:
         """
         Axiom 4: TaValidator has sufficient Algos.
-        ValidatorAddr must have enough Algos to meet the GNodeFactory criterion.
+        MultiAccount [GnfAdminAddr, ValidatorAddr] must have enough Algos to meet
+        the GNodeFactory criterion.
         """
         try:
             check_is_algo_address_string_format(v)
@@ -81,9 +82,14 @@ class TavalidatorcertAlgoTransfer(BaseModel):
                 f"ValidatorAddr failed AlgoAddressStringFormat format validation: {e}"
             )
 
-        if algo_utils.algos(v) < config.Public().ta_validator_funding_threshold_algos:
+        multi_addr = api_utils.get_validator_account_with_admin(v).addr
+        if (
+            algo_utils.algos(multi_addr)
+            < config.Public().ta_validator_funding_threshold_algos
+        ):
             raise ValueError(
-                f"ValidatorAddr insufficiently funded with {algo_utils.algos(v)} algos. "
+                f"Axiom 4: 2-sig Multi [GnfAdminAddr, ValidatorAddr] insufficiently funded "
+                f" with {algo_utils.algos(v)} algos. "
                 f" Needs {config.Public().ta_validator_funding_threshold_algos} algos. "
             )
 

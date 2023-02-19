@@ -10,7 +10,7 @@ def millinocket():
         "RoleGtEnumSymbol": "00000000",
         "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
-        "Version": "001",
+        "Version": "002",
     }
 
     root = dict_to_db(gn)
@@ -24,7 +24,7 @@ def millinocket():
         "RoleGtEnumSymbol": "86f21dd2",
         "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
-        "Version": "001",
+        "Version": "002",
     }
 
     isone = dict_to_db(gn)
@@ -38,7 +38,7 @@ def millinocket():
         "RoleGtEnumSymbol": "4502e355",
         "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
-        "Version": "001",
+        "Version": "002",
     }
 
     versant = dict_to_db(gn)
@@ -52,7 +52,7 @@ def millinocket():
         "RoleGtEnumSymbol": "86f21dd2",
         "GNodeRegistryAddr": "X2ASUAUPK5ICMGDXQZQKBPSXWEJLBA4KKQ2TXW2KWO2JQTLY3J2Q4S33WE",
         "TypeName": "base.g.node.gt",
-        "Version": "001",
+        "Version": "002",
     }
 
     keene_rd = dict_to_db(gn)

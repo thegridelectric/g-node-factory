@@ -8,6 +8,8 @@ from gnf.types.basegnode_marketmaker_create import BasegnodeMarketmakerCreate
 from gnf.types.basegnode_marketmaker_create import BasegnodeMarketmakerCreate_Maker
 from gnf.types.basegnode_other_create import BasegnodeOtherCreate
 from gnf.types.basegnode_other_create import BasegnodeOtherCreate_Maker
+from gnf.types.basegnode_scada_create import BasegnodeScadaCreate
+from gnf.types.basegnode_scada_create import BasegnodeScadaCreate_Maker
 from gnf.types.basegnode_terminalasset_create import BasegnodeTerminalassetCreate
 from gnf.types.basegnode_terminalasset_create import BasegnodeTerminalassetCreate_Maker
 from gnf.types.basegnodes_broadcast import BasegnodesBroadcast
@@ -40,6 +42,8 @@ from gnf.types.pause_time import PauseTime
 from gnf.types.pause_time import PauseTime_Maker
 from gnf.types.resume_time import ResumeTime
 from gnf.types.resume_time import ResumeTime_Maker
+from gnf.types.scada_cert_transfer import ScadaCertTransfer
+from gnf.types.scada_cert_transfer import ScadaCertTransfer_Maker
 from gnf.types.sla_enter import SlaEnter
 from gnf.types.sla_enter import SlaEnter_Maker
 from gnf.types.tadeed_specs_hack import TadeedSpecsHack
@@ -97,8 +101,12 @@ __all__ = [
     "TatradingrightsAlgoCreate_Maker",
     "TadeedSpecsHack",
     "TadeedSpecsHack_Maker",
+    "BasegnodeScadaCreate",
+    "BasegnodeScadaCreate_Maker",
     "DebugTcReinitializeTime",
     "DebugTcReinitializeTime_Maker",
+    "ScadaCertTransfer",
+    "ScadaCertTransfer_Maker",
     "InitialTadeedAlgoTransfer",
     "InitialTadeedAlgoTransfer_Maker",
     "InitialTadeedAlgoCreate",
