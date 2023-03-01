@@ -28,7 +28,7 @@ class GnfSettings(BaseSettings):
     )
     # rabbit_url: SecretStr = SecretStr("amqp://smqPublic:smqPublic@localhost:5672/d1__1")
     rabbit_url: SecretStr = SecretStr(
-        "amqp://smqPublic:smqPublic@d1-1.electricity.works:5672/d1__1"
+        "amqp://smqPublic:smqPublic@localhost:5672/d1__1"
     )
     rabbit_mqtt_port: int = 1885
     django_secret_key: SecretStr = SecretStr(
