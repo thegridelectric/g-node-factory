@@ -2,16 +2,16 @@
 from gnf.enums import CoreGNodeRole
 
 
-def test_core_g_node_role():
-
+def test_core_g_node_role() -> None:
     assert set(CoreGNodeRole.values()) == {
         "Other",
         "TerminalAsset",
-        "AtomicMeteringNode",
         "AtomicTNode",
         "MarketMaker",
+        "AtomicMeteringNode",
         "ConductorTopologyNode",
         "InterconnectionComponent",
+        "Scada",
     }
 
     assert CoreGNodeRole.default() == CoreGNodeRole.Other

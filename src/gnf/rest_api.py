@@ -10,13 +10,15 @@ from pydantic import ValidationError
 
 import gnf.config as config
 from gnf.gnf_db import GNodeFactory
-from gnf.schemata import BasegnodeGt
-from gnf.schemata import DiscoverycertAlgoCreate
-from gnf.schemata import DiscoverycertAlgoCreate_Maker
-from gnf.schemata import InitialTadeedAlgoCreate
-from gnf.schemata import InitialTadeedAlgoTransfer
-from gnf.schemata import TavalidatorcertAlgoCreate
-from gnf.schemata import TavalidatorcertAlgoTransfer
+from gnf.types import BaseGNodeGt
+from gnf.types import BasegnodeScadaCreate
+from gnf.types import DiscoverycertAlgoCreate
+from gnf.types import DiscoverycertAlgoCreate_Maker
+from gnf.types import InitialTadeedAlgoCreate
+from gnf.types import InitialTadeedAlgoTransfer
+from gnf.types import ScadaCertTransfer
+from gnf.types import TavalidatorcertAlgoCreate
+from gnf.types import TavalidatorcertAlgoTransfer
 from gnf.utils import RestfulResponse
 
 
@@ -28,22 +30,28 @@ gnf = GNodeFactory()
 
 @lru_cache()
 def get_settings():
-    return config.GnfSettings()
+    return config.Public()
 
 
-@app.get("/base-g-nodes/{lrh_g_node_alias}", response_model=BasegnodeGt)
-async def get_base_g_node(lrh_g_node_alias: str):
-    gn = await gnf.g_node_from_alias(lrh_g_node_alias)
+@app.get("/settings/")
+async def settings():
+    settings = get_settings()
+    return settings
+
+
+@app.get("/base-g-nodes/{g_node_alias}", response_model=BaseGNodeGt)
+async def get_base_g_node(g_node_alias: str):
+    gn = await gnf.g_node_from_alias(g_node_alias)
     return gn
 
 
-@app.get("/base-g-nodes/", response_model=List[BasegnodeGt])
+@app.get("/base-g-nodes/", response_model=List[BaseGNodeGt])
 async def get_base_g_nodes():
     gns = await gnf.retrieve_all_gns()
     return gns
 
 
-@app.get("/base-g-nodes/by-id/{g_node_id}", response_model=BasegnodeGt)
+@app.get("/base-g-nodes/by-id/{g_node_id}", response_model=BaseGNodeGt)
 async def get_base_g_node(g_node_id: str):
     gn = await gnf.g_node_from_id(g_node_id)
     return gn
@@ -62,6 +70,30 @@ async def resume_time():
 @app.post(f"/debug-tc-reinitialize-time/")
 async def debug_tc_reinitialize_time():
     gnf.debug_tc_reinitialize_time()
+
+
+@app.post("/scada-cert-transfer/", response_model=RestfulResponse)
+async def scada_cert_transfer_received(
+    payload: ScadaCertTransfer,
+):
+    r = await gnf.scada_cert_transfer_received(payload=payload)
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
+
+
+@app.post("/basegnode-scada-create/", response_model=RestfulResponse)
+async def basegnode_scada_create_received(
+    payload: BasegnodeScadaCreate,
+):
+    r = await gnf.basegnode_scada_create_received(payload=payload)
+    if r.HttpStatusCode > 200:
+        raise HTTPException(
+            status_code=r.HttpStatusCode, detail=f"[{r.HttpStatusCode}]: {r.Note}"
+        )
+    return r
 
 
 @app.post("/tavalidatorcert-algo-create/", response_model=RestfulResponse)

@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = "ii#6hnzekef0l^8f4x$uq*4j4im+hdcax0v^lxca4^#ozgnc+j"
-SECRET_KEY = gnf_settings.django_secret_key
+SECRET_KEY = gnf_settings.django_secret_key.get_secret_value()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

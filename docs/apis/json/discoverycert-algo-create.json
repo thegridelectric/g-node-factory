@@ -1,0 +1,121 @@
+{
+  "gwapi": "001",
+  "type_name": "discoverycert.algo.create",
+  "version": "000",
+  "owner": "gridworks@gridworks-consulting.com",
+  "description": "",
+  "formats": {
+    "LeftRightDot": {
+      "type": "string",
+      "description": "Lowercase alphanumeric words separated by periods, most significant word (on the left) starting with an alphabet character.",
+      "example": "dw1.isone.me.freedom.apple"
+    },
+    "AlgoAddressStringFormat": {
+      "type": "string",
+      "description": "String of length 32, characters are all base32 digits.",
+      "example": "RNMHG32VTIHTC7W3LZOEPTDGREL5IQGK46HKD3KBLZHYQUCAKLMT4G5ALI"
+    }
+  },
+  "enums": {
+    "CoreGNodeRole000": {
+      "type": "string",
+      "name": "core.g.node.role.000",
+      "description": "CoreGNodeRole assigned by GNodeFactory",
+      "url": "https://gridworks.readthedocs.io/en/latest/core-g-node-role.html",
+      "oneOf": [
+        {
+          "const": "00000000",
+          "title": "Other",
+          "description": ""
+        },
+        {
+          "const": "0f8872f7",
+          "title": "TerminalAsset",
+          "description": ""
+        },
+        {
+          "const": "d9823442",
+          "title": "AtomicTNode",
+          "description": ""
+        },
+        {
+          "const": "86f21dd2",
+          "title": "MarketMaker",
+          "description": ""
+        },
+        {
+          "const": "9521af06",
+          "title": "AtomicMeteringNode",
+          "description": ""
+        },
+        {
+          "const": "4502e355",
+          "title": "ConductorTopologyNode",
+          "description": ""
+        },
+        {
+          "const": "d67e564e",
+          "title": "InterconnectionComponent",
+          "description": ""
+        },
+        {
+          "const": "7a8e4046",
+          "title": "Scada",
+          "description": ""
+        }
+      ]
+    }
+  },
+  "properties": {
+    "GNodeAlias": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "",
+      "required": true
+    },
+    "Role": {
+      "type": "string",
+      "format": "CoreGNodeRole000",
+      "title": "",
+      "required": true
+    },
+    "OldChildAliasList": {
+      "type": "string",
+      "format": "LeftRightDot",
+      "title": "",
+      "required": true
+    },
+    "DiscovererAddr": {
+      "type": "string",
+      "format": "AlgoAddressStringFormat",
+      "title": "",
+      "required": true
+    },
+    "SupportingMaterialHash": {
+      "type": "string",
+      "title": "",
+      "required": true
+    },
+    "MicroLat": {
+      "type": "integer",
+      "title": "",
+      "required": false
+    },
+    "MicroLon": {
+      "type": "integer",
+      "title": "",
+      "required": false
+    },
+    "TypeName": {
+      "type": "string",
+      "value": "discoverycert.algo.create.000",
+      "title": "The type name"
+    },
+    "Version": {
+      "type": "string",
+      "title": "The type version",
+      "default": "000",
+      "required": true
+    }
+  }
+}

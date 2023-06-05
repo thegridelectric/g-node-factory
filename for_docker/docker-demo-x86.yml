@@ -45,7 +45,7 @@ services:
   #   hostname: rabbit
   #   networks:
   #     - "dev"
-  #   image: "jessmillar/dev-rabbit-x86:chaos__bf5e8a4__20221206"
+  #   image: "jessmillar/dev-rabbit-x86:chaos__b3edc6e__20230115"
   #   ports:
   #     - 1885:1885
   #     - 4369:4369

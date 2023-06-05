@@ -20,7 +20,7 @@ LOG_FORMAT = (
 LOGGER = logging.getLogger(__name__)
 
 
-class BaseGNode(StreamlinedSerializerMixin):
+class BaseGNode:
     by_id: Dict[int, "BaseGNode"] = {}
     by_alias: Dict[str, "BaseGNode"] = {}
 
@@ -41,11 +41,13 @@ class BaseGNode(StreamlinedSerializerMixin):
         g_node_registry_addr: Optional[str] = None,
         prev_alias: Optional[str] = None,
         gps_point_id: Optional[str] = None,
-        ownership_deed_nft_id: Optional[int] = None,
+        ownership_deed_id: Optional[int] = None,
         ownership_deed_validator_addr: Optional[str] = None,
         owner_addr: Optional[str] = None,
         daemon_addr: Optional[str] = None,
-        trading_rights_nft_id: Optional[int] = None,
+        trading_rights_id: Optional[int] = None,
+        scada_algo_addr: Optional[str] = None,
+        scada_cert_id: Optional[int] = None,
     ):
         self.g_node_id = g_node_id
         self.alias = alias
@@ -58,17 +60,19 @@ class BaseGNode(StreamlinedSerializerMixin):
         self.g_node_registry_addr = g_node_registry_addr
         self.prev_alias = prev_alias
         self.gps_point_id = gps_point_id
-        self.ownership_deed_nft_id = ownership_deed_nft_id
+        self.ownership_deed_id = ownership_deed_id
         self.ownership_deed_validator_addr = ownership_deed_validator_addr
         self.owner_addr = owner_addr
         self.daemon_addr = daemon_addr
-        self.trading_rights_nft_id = trading_rights_nft_id
+        self.trading_rights_id = trading_rights_id
+        self.scada_algo_addr = scada_algo_addr
+        self.scada_cert_id = scada_cert_id
         self.__class__.by_alias[self.alias] = self
 
     def __repr__(self):
         rs = f"GNode Alias: {self.alias}, Role: {self.role.value}, Status: {self.status.value}"
-        if self.ownership_deed_nft_id and self.role == CoreGNodeRole.TerminalAsset:
-            rs += f", TaDeedIdx: {self.ownership_deed_nft_id}"
+        if self.ownership_deed_id and self.role == CoreGNodeRole.TerminalAsset:
+            rs += f", TaDeedIdx: {self.ownership_deed_id}"
         return rs
 
     def gps_point(self) -> Optional[GpsPoint]:
@@ -211,7 +215,8 @@ class BaseGNode(StreamlinedSerializerMixin):
           - ROLE
             - If role is Ctn or MarketMaker, the parent must be a root, or have either role Ctn or MarketMaker.
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
-            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode"""
+            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode
+        """
         alias: str = attributes["alias"]
         if len(alias.split(".")) == 1:
             "remaining axioms all have to do with parent-child relationship"
@@ -289,24 +294,24 @@ class BaseGNode(StreamlinedSerializerMixin):
         - Alias must be a string of format LRD Alias
         - PrevAlias must be a string of format LRD Alias
         - GNodeId must be a string of format UuidCanoicalTextual
-        - OwnershipDeedNftId must be an integer,
+        - OwnershipDeedId must be an integer,
         - OwnershipDeedValidatorAddr must be a string of format AlgoAddressStringFormat
         - OwnerAddr must be a string of format AlgoAddressStringFormat
         - DaemonAddr must be a string of format AlgoAddressStringFormat
-        - TradingRightsNftId must be an integer"""
+        - TradingRightsId must be an integer"""
 
         g_node_registry_addr = attributes["g_node_registry_addr"]
-        ownership_deed_nft_id = attributes["ownership_deed_nft_id"]
+        ownership_deed_id = attributes["ownership_deed_id"]
         ownership_deed_validator_addr = attributes["ownership_deed_validator_addr"]
         owner_addr = attributes["owner_addr"]
         daemon_addr = attributes["daemon_addr"]
-        trading_rights_nft_id = attributes["trading_rights_nft_id"]
-        if ownership_deed_nft_id:
-            if not isinstance(ownership_deed_nft_id, int):
-                raise DcError("Schema Axiom 2: OwnershipDeedNftId must be an integer")
-        if trading_rights_nft_id:
-            if not isinstance(trading_rights_nft_id, int):
-                raise DcError("Schema Axiom 2: TradingRightsNftId must be an integer ")
+        trading_rights_id = attributes["trading_rights_id"]
+        if ownership_deed_id:
+            if not isinstance(ownership_deed_id, int):
+                raise DcError("Schema Axiom 2: OwnershipDeedId must be an integer")
+        if trading_rights_id:
+            if not isinstance(trading_rights_id, int):
+                raise DcError("Schema Axiom 2: TradingRightsId must be an integer ")
         for addr in [
             ownership_deed_validator_addr,
             owner_addr,
@@ -333,7 +338,8 @@ class BaseGNode(StreamlinedSerializerMixin):
     @classmethod
     def _schema_axiom_4(cls, attributes):
         """Schema Axiom 4: Assume role is TerminalAsset and status is Active. Then the OwnershipDeedNftId
-        must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi"""
+        must exist, and must be owned by the 2-sig [GnfAdmin, smart_daemon_addr, owner_addr] multi
+        """
         pass
 
     #####################################
@@ -440,7 +446,8 @@ class BaseGNode(StreamlinedSerializerMixin):
              - If status is NOT Active, all children must have status PermanentlyDeactivated
             - If role is Ctn or MarketMaker, the parent must be a root, or have either role Ctn or MarketMaker.
             - If the role is AtomicMeausurementNode or AtomicTNode, the parent must be either Ctn or MarketMaker.
-            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode"""
+            - If the role is TerminalAsset, the parent must be either AtomicMeasurementNode or AtomicTNode
+        """
         alias: str = attributes["alias"]
         role = attributes["role"]
         status = attributes["status"]

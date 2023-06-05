@@ -14,7 +14,7 @@ services:
   marketmaker:
     container_name: mm
     hostname: marketmaker
-    image: "jessmillar/marketmaker:chaos__947e33e__20221125"
+    image: "jessmillar/marketmaker:chaos__b3edc6e__20230115"
     networks:
       - "dev"
     ports:

@@ -4,11 +4,11 @@ from typing import Optional
 
 import django
 import dotenv
+import gridworks.algo_utils as algo_utils
 from algosdk import encoding
 from algosdk.future.transaction import MultisigTransaction
 from algosdk.v2client.algod import AlgodClient
 
-import gnf.algo_utils as algo_utils
 import gnf.config as config
 import gnf.property_format as property_format
 from gnf.errors import SchemaError
@@ -18,11 +18,11 @@ from gnf.utils import camel_to_snake
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gnf.django_related.settings")
 django.setup()
 from gnf.django_related.models import BaseGNodeDb
-from gnf.schemata import BasegnodeGt_Maker
+from gnf.types import BaseGNodeGt_Maker
 
 
 def dict_to_db(d: Dict) -> BaseGNodeDb:
-    gtuple = BasegnodeGt_Maker.dict_to_tuple(d)
+    gtuple = BaseGNodeGt_Maker.dict_to_tuple(d)
     d = {camel_to_snake(k): v for k, v in d.items()}
     d["status_value"] = gtuple.Status.value
     d["role_value"] = gtuple.Role.value
@@ -48,7 +48,7 @@ def get_discoverer_account_with_admin(
     return algo_utils.MultisigAccount(
         version=1,
         threshold=2,
-        addresses=[discoverer_addr, config.GnfPublic().gnf_admin_addr],
+        addresses=[discoverer_addr, config.Public().gnf_admin_addr],
     )
 
 
@@ -66,20 +66,20 @@ def get_validator_account_with_admin(
     return algo_utils.MultisigAccount(
         version=1,
         threshold=2,
-        addresses=[config.GnfPublic().gnf_admin_addr, validatorAddr],
+        addresses=[config.Public().gnf_admin_addr, validatorAddr],
     )
 
 
 def check_validator_multi_has_enough_algos(validator_addr: str):
     """Raises exception if the 2-sig multi [gnf admin, validator] account does not have
-    gnf_validator_funding_threshold_algos
+    ta_validator_funding_threshold_algos
     (set publicly by the Gnf and available in config.Algo())
 
     Args:
         validatorAddr: the public address of the pending validator
 
     Raises:
-        SchemaError if joint account does not have gnf_validator_funding_threshold_algos.
+        SchemaError if joint account does not have ta_validator_funding_threshold_algos.
 
     """
     try:
@@ -88,7 +88,7 @@ def check_validator_multi_has_enough_algos(validator_addr: str):
         raise Exception(
             f"called with validatorAddr not of AlgoAddressStringFormat: \n{validator_addr}"
         )
-    min_algos = config.GnfPublic().gnf_validator_funding_threshold_algos
+    min_algos = config.Public().ta_validator_funding_threshold_algos
     multi: algo_utils.MultisigAccount = get_validator_account_with_admin(validator_addr)
     if algo_utils.algos(multi.addr) is None:
         raise SchemaError(
